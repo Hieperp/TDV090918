@@ -42,11 +42,11 @@ namespace TotalModel.Models
     
         public virtual Customer Customer { get; set; }
         public virtual GoodsReceiptDetail GoodsReceiptDetail { get; set; }
-        public virtual PlannedOrderDetail PlannedOrderDetail { get; set; }
-        public virtual PlannedOrderMaterial PlannedOrderMaterial { get; set; }
         public virtual Workshift Workshift { get; set; }
         public virtual MaterialIssue MaterialIssue { get; set; }
         public virtual Commodity Commodity { get; set; }
+        public virtual PlannedOrderDetail PlannedOrderDetail { get; set; }
         public virtual ProductionOrderDetail ProductionOrderDetail { get; set; }
+        public virtual PlannedOrderMaterial PlannedOrderMaterial { get; set; }
     }
 }

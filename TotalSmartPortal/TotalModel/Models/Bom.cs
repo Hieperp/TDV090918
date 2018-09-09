@@ -12,33 +12,39 @@ namespace TotalModel.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CommodityMaterial
+    public partial class Bom
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CommodityMaterial()
+        public Bom()
         {
+            this.BomDetails = new HashSet<BomDetail>();
+            this.FirmOrderDetails = new HashSet<FirmOrderDetail>();
             this.PlannedOrderDetails = new HashSet<PlannedOrderDetail>();
-            this.PlannedOrderMaterials = new HashSet<PlannedOrderMaterial>();
             this.ProductionOrderDetails = new HashSet<ProductionOrderDetail>();
+            this.PlannedOrderMaterials = new HashSet<PlannedOrderMaterial>();
         }
     
-        public int CommodityMaterialID { get; set; }
+        public int BomID { get; set; }
         public System.DateTime EntryDate { get; set; }
         public string Reference { get; set; }
         public string Code { get; set; }
+        public string Name { get; set; }
         public int CustomerID { get; set; }
         public int CommodityID { get; set; }
         public string Remarks { get; set; }
         public bool IsDefault { get; set; }
         public bool InActive { get; set; }
-        public string Name { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BomDetail> BomDetails { get; set; }
+        public virtual Commodity Commodity { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FirmOrderDetail> FirmOrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PlannedOrderDetail> PlannedOrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PlannedOrderMaterial> PlannedOrderMaterials { get; set; }
-        public virtual Commodity Commodity { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductionOrderDetail> ProductionOrderDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PlannedOrderMaterial> PlannedOrderMaterials { get; set; }
     }
 }

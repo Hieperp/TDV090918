@@ -30,7 +30,7 @@ namespace TotalModel.Models
         public int CustomerID { get; set; }
         public int CommodityID { get; set; }
         public int CommodityTypeID { get; set; }
-        public int CommodityMaterialID { get; set; }
+        public int BomID { get; set; }
         public int MoldID { get; set; }
         public int ProductionLineID { get; set; }
         public string Remarks { get; set; }
@@ -40,8 +40,8 @@ namespace TotalModel.Models
         public bool InActivePartial { get; set; }
         public Nullable<System.DateTime> InActivePartialDate { get; set; }
     
+        public virtual Bom Bom { get; set; }
         public virtual Commodity Commodity { get; set; }
-        public virtual CommodityMaterial CommodityMaterial { get; set; }
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MaterialIssueDetail> MaterialIssueDetails { get; set; }

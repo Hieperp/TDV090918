@@ -72,11 +72,6 @@ namespace TotalModel.Models
         public virtual DbSet<Workshift> Workshifts { get; set; }
         public virtual DbSet<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
         public virtual DbSet<GoodsReceipt> GoodsReceipts { get; set; }
-        public virtual DbSet<PlannedOrderDetail> PlannedOrderDetails { get; set; }
-        public virtual DbSet<PlannedOrderMaterial> PlannedOrderMaterials { get; set; }
-        public virtual DbSet<PlannedOrder> PlannedOrders { get; set; }
-        public virtual DbSet<CommodityMaterial> CommodityMaterials { get; set; }
-        public virtual DbSet<ProductionOrder> ProductionOrders { get; set; }
         public virtual DbSet<PurchaseRequisitionDetail> PurchaseRequisitionDetails { get; set; }
         public virtual DbSet<PurchaseRequisition> PurchaseRequisitions { get; set; }
         public virtual DbSet<MaterialIssueDetail> MaterialIssueDetails { get; set; }
@@ -92,7 +87,15 @@ namespace TotalModel.Models
         public virtual DbSet<CommodityLine> CommodityLines { get; set; }
         public virtual DbSet<CommodityType> CommodityTypes { get; set; }
         public virtual DbSet<Report> Reports { get; set; }
+        public virtual DbSet<BomDetail> BomDetails { get; set; }
+        public virtual DbSet<Bom> Boms { get; set; }
+        public virtual DbSet<FirmOrderDetail> FirmOrderDetails { get; set; }
+        public virtual DbSet<FirmOrder> FirmOrders { get; set; }
+        public virtual DbSet<PlannedOrderDetail> PlannedOrderDetails { get; set; }
+        public virtual DbSet<PlannedOrder> PlannedOrders { get; set; }
         public virtual DbSet<ProductionOrderDetail> ProductionOrderDetails { get; set; }
+        public virtual DbSet<ProductionOrder> ProductionOrders { get; set; }
+        public virtual DbSet<PlannedOrderMaterial> PlannedOrderMaterials { get; set; }
     
         public virtual ObjectResult<string> AccountInvoicePostSaveValidate(Nullable<int> entityID)
         {
