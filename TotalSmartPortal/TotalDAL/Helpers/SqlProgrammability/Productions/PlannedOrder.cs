@@ -71,7 +71,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "       SELECT      PlannedOrderDetails.PlannedOrderDetailID, PlannedOrderDetails.PlannedOrderID, " + "\r\n";
             queryString = queryString + "                   Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, PlannedOrderDetails.CommodityTypeID, " + "\r\n";
-            queryString = queryString + "                   PlannedOrderDetails.MoldID, Molds.Code AS MoldCode, PlannedOrderDetails.BomID, Boms.Code AS BomCode, Boms.Name AS BomName, " + "\r\n";
+            queryString = queryString + "                   PlannedOrderDetails.CombineIndex, PlannedOrderDetails.MoldID, Molds.Code AS MoldCode, PlannedOrderDetails.BomID, Boms.Code AS BomCode, Boms.Name AS BomName, " + "\r\n";
             queryString = queryString + "                   VoidTypes.VoidTypeID, VoidTypes.Code AS VoidTypeCode, VoidTypes.Name AS VoidTypeName, VoidTypes.VoidClassID, " + "\r\n";
             queryString = queryString + "                   PlannedOrderDetails.Quantity, PlannedOrderDetails.InActivePartial, PlannedOrderDetails.InActivePartialDate, PlannedOrderDetails.Remarks " + "\r\n";
             queryString = queryString + "       FROM        PlannedOrderDetails " + "\r\n";

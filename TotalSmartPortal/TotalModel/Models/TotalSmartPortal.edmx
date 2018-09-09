@@ -1028,6 +1028,7 @@
           <Property Name="CustomerID" Type="int" Nullable="false" />
           <Property Name="CommodityID" Type="int" Nullable="false" />
           <Property Name="CommodityTypeID" Type="int" Nullable="false" />
+          <Property Name="CombineIndex" Type="int" />
           <Property Name="BomID" Type="int" Nullable="false" />
           <Property Name="MoldID" Type="int" Nullable="false" />
           <Property Name="DeliveryDate" Type="datetime" />
@@ -4505,9 +4506,6 @@ warning 6035: The relationship 'FK_SalesReturns_AspNetUsers2' has columns that a
           <Parameter Name="PlannedOrderMaterialIDs" Type="varchar" Mode="In" />
           <Parameter Name="IsReadonly" Type="bit" Mode="In" />
         </Function>
-        <Function Name="GetMaterialIssuePendingPlannedOrders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="LocationID" Type="int" Mode="In" />
-        </Function>
         <Function Name="GetMaterialIssueViewDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MaterialIssueID" Type="int" Mode="In" />
         </Function>
@@ -4621,9 +4619,6 @@ warning 6035: The relationship 'FK_SalesReturns_AspNetUsers2' has columns that a
         </Function>
         <Function Name="GetProductionOrderPendingPlannedOrders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LocationID" Type="int" Mode="In" />
-        </Function>
-        <Function Name="GetProductionOrderViewDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="ProductionOrderID" Type="int" Mode="In" />
         </Function>
         <Function Name="GetPromotionByCustomers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CustomerID" Type="int" Mode="In" />
@@ -11638,10 +11633,11 @@ warning 6035: The relationship 'FK_SalesReturns_AspNetUsers2' has columns that a
           <Property Type="Boolean" Name="InActivePartial" Nullable="false" />
           <Property Type="DateTime" Name="InActivePartialDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="CommodityMaterialID" Nullable="false" />
-          <Property Type="String" Name="CommodityMaterialCode" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="CommodityMaterialName" Nullable="false" MaxLength="200" />
           <Property Type="Decimal" Name="Quantity" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="BomID" Nullable="false" />
+          <Property Type="String" Name="BomCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="BomName" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="CombineIndex" Nullable="true" />
         </ComplexType>
         <ComplexType Name="ProductionOrderPendingCustomer">
           <Property Type="Int32" Name="CustomerID" Nullable="false" />
@@ -12962,6 +12958,7 @@ warning 6035: The relationship 'FK_SalesReturns_AspNetUsers2' has columns that a
           <NavigationProperty Name="PlannedOrder" Relationship="TotalSmartPortalModel.FK_PlannedOrderDetails_PlannedOrders" FromRole="PlannedOrderDetail" ToRole="PlannedOrder" />
           <NavigationProperty Name="VoidType" Relationship="TotalSmartPortalModel.FK_PlannedOrderDetails_VoidTypes" FromRole="PlannedOrderDetail" ToRole="VoidType" />
           <NavigationProperty Name="PlannedOrderMaterials" Relationship="TotalSmartPortalModel.FK_PlannedOrderMaterials_PlannedOrderDetails" FromRole="PlannedOrderDetail" ToRole="PlannedOrderMaterial" />
+          <Property Name="CombineIndex" Type="Int32" />
         </EntityType>
         <EntityType Name="PlannedOrder">
           <Key>
@@ -16382,40 +16379,6 @@ warning 6035: The relationship 'FK_SalesReturns_AspNetUsers2' has columns that a
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetProductionOrderViewDetails" FunctionName="TotalSmartPortalModel.Store.GetProductionOrderViewDetails">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="TotalSmartPortalModel.ProductionOrderViewDetail">
-                <ScalarProperty Name="ProductionOrderDetailID" ColumnName="ProductionOrderDetailID" />
-                <ScalarProperty Name="ProductionOrderID" ColumnName="ProductionOrderID" />
-                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
-                <ScalarProperty Name="CommodityCode" ColumnName="CommodityCode" />
-                <ScalarProperty Name="CommodityName" ColumnName="CommodityName" />
-                <ScalarProperty Name="CommodityTypeID" ColumnName="CommodityTypeID" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="CustomerCode" ColumnName="CustomerCode" />
-                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-                <ScalarProperty Name="ProductionLineID" ColumnName="ProductionLineID" />
-                <ScalarProperty Name="ProductionLineCode" ColumnName="ProductionLineCode" />
-                <ScalarProperty Name="MoldID" ColumnName="MoldID" />
-                <ScalarProperty Name="MoldCode" ColumnName="MoldCode" />
-                <ScalarProperty Name="VoidTypeID" ColumnName="VoidTypeID" />
-                <ScalarProperty Name="VoidTypeCode" ColumnName="VoidTypeCode" />
-                <ScalarProperty Name="VoidTypeName" ColumnName="VoidTypeName" />
-                <ScalarProperty Name="VoidClassID" ColumnName="VoidClassID" />
-                <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
-                <ScalarProperty Name="InActivePartialDate" ColumnName="InActivePartialDate" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="PlannedOrderID" ColumnName="PlannedOrderID" />
-                <ScalarProperty Name="PlannedOrderDetailID" ColumnName="PlannedOrderDetailID" />
-                <ScalarProperty Name="PlannedOrderReference" ColumnName="PlannedOrderReference" />
-                <ScalarProperty Name="PlannedOrderCode" ColumnName="PlannedOrderCode" />
-                <ScalarProperty Name="PlannedOrderEntryDate" ColumnName="PlannedOrderEntryDate" />
-                <ScalarProperty Name="QuantityRemains" ColumnName="QuantityRemains" />
-                <ScalarProperty Name="CommodityMaterialID" ColumnName="CommodityMaterialID" />
-                <ScalarProperty Name="CommodityMaterialCode" ColumnName="CommodityMaterialCode" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ProductionOrderApproved" FunctionName="TotalSmartPortalModel.Store.ProductionOrderApproved" />
           <FunctionImportMapping FunctionImportName="ProductionOrderEditable" FunctionName="TotalSmartPortalModel.Store.ProductionOrderEditable" />
           <FunctionImportMapping FunctionImportName="ProductionOrderPostSaveValidate" FunctionName="TotalSmartPortalModel.Store.ProductionOrderPostSaveValidate" />
@@ -16615,31 +16578,6 @@ warning 6035: The relationship 'FK_SalesReturns_AspNetUsers2' has columns that a
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetMaterialIssuePendingPlannedOrders" FunctionName="TotalSmartPortalModel.Store.GetMaterialIssuePendingPlannedOrders">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="TotalSmartPortalModel.MaterialIssuePendingPlannedOrder">
-                <ScalarProperty Name="MaterialIssueTypeID" ColumnName="MaterialIssueTypeID" />
-                <ScalarProperty Name="PlannedOrderID" ColumnName="PlannedOrderID" />
-                <ScalarProperty Name="PlannedOrderCode" ColumnName="PlannedOrderCode" />
-                <ScalarProperty Name="WorkshiftID" ColumnName="WorkshiftID" />
-                <ScalarProperty Name="WorkshiftCode" ColumnName="WorkshiftCode" />
-                <ScalarProperty Name="ProductionOrderDetailID" ColumnName="ProductionOrderDetailID" />
-                <ScalarProperty Name="ProductionOrderID" ColumnName="ProductionOrderID" />
-                <ScalarProperty Name="PlannedOrderDetailID" ColumnName="PlannedOrderDetailID" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="CustomerCode" ColumnName="CustomerCode" />
-                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
-                <ScalarProperty Name="CommodityCode" ColumnName="CommodityCode" />
-                <ScalarProperty Name="ProductionLineID" ColumnName="ProductionLineID" />
-                <ScalarProperty Name="ProductionLineCode" ColumnName="ProductionLineCode" />
-                <ScalarProperty Name="MoldID" ColumnName="MoldID" />
-                <ScalarProperty Name="MoldCode" ColumnName="MoldCode" />
-                <ScalarProperty Name="PlannedOrderReference" ColumnName="PlannedOrderReference" />
-                <ScalarProperty Name="PlannedOrderEntryDate" ColumnName="PlannedOrderEntryDate" />
-                </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetPlannedOrderIndexes" FunctionName="TotalSmartPortalModel.Store.GetPlannedOrderIndexes">
             <ResultMapping>
               <ComplexTypeMapping TypeName="TotalSmartPortalModel.PlannedOrderIndex">
@@ -16674,10 +16612,11 @@ warning 6035: The relationship 'FK_SalesReturns_AspNetUsers2' has columns that a
                 <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
                 <ScalarProperty Name="InActivePartialDate" ColumnName="InActivePartialDate" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="CommodityMaterialID" ColumnName="CommodityMaterialID" />
-                <ScalarProperty Name="CommodityMaterialCode" ColumnName="CommodityMaterialCode" />
-                <ScalarProperty Name="CommodityMaterialName" ColumnName="CommodityMaterialName" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="BomID" ColumnName="BomID" />
+                <ScalarProperty Name="BomCode" ColumnName="BomCode" />
+                <ScalarProperty Name="BomName" ColumnName="BomName" />
+                <ScalarProperty Name="CombineIndex" ColumnName="CombineIndex" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -17270,6 +17209,7 @@ warning 6035: The relationship 'FK_SalesReturns_AspNetUsers2' has columns that a
           <EntitySetMapping Name="PlannedOrderDetails">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.PlannedOrderDetail">
               <MappingFragment StoreEntitySet="PlannedOrderDetails">
+                <ScalarProperty Name="CombineIndex" ColumnName="CombineIndex" />
                 <ScalarProperty Name="InActivePartialDate" ColumnName="InActivePartialDate" />
                 <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
                 <ScalarProperty Name="InActive" ColumnName="InActive" />

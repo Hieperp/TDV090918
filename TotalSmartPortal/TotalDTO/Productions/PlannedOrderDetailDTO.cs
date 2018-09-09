@@ -22,8 +22,8 @@ namespace TotalDTO.Productions
         public virtual string MoldCode { get; set; }
 
         public int BomID { get; set; }
-        [Display(Name = "Công thức trộn")]
-        [Required(ErrorMessage = "Vui lòng chọn công thức trộn")]
+        [Display(Name = "Nguyên liệu")]
+        [Required(ErrorMessage = "Vui lòng chọn nguyên liệu")]
         [UIHint("AutoCompletes/BomBase")]
         public virtual string BomCode { get; set; }
 
@@ -39,5 +39,9 @@ namespace TotalDTO.Productions
 
         [UIHint("Quantity")]
         public override decimal Quantity { get; set; }
+
+        [Display(Name = "#")]
+        [UIHint("Integer")]
+        public int? CombineIndex { get; set; }
     }
 }
