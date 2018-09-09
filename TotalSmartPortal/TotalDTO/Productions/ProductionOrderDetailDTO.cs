@@ -48,11 +48,11 @@ namespace TotalDTO.Productions
         [UIHint("AutoCompletes/MoldBase")]
         public virtual string MoldCode { get; set; }
 
-        public int CommodityMaterialID { get; set; }
+        public int BomID { get; set; }
         [Display(Name = "Mã khuôn")]
         [Required(ErrorMessage = "Vui lòng chọn mã nguyên liệu")]
         [UIHint("StringReadonly")]
-        public virtual string CommodityMaterialCode { get; set; }
+        public virtual string BomCode { get; set; }
 
         //[Display(Name = "Mã CK")]
         [UIHint("AutoCompletes/CommodityBase")]

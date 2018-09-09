@@ -75,7 +75,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "       SELECT      SemifinishedProductDetails.SemifinishedProductDetailID, SemifinishedProductDetails.SemifinishedProductID, SemifinishedProductDetails.MaterialIssueID, SemifinishedProductDetails.MaterialIssueDetailID, MaterialIssues.Reference AS MaterialIssueReference, MaterialIssues.Code AS MaterialIssueCode, MaterialIssues.EntryDate AS MaterialIssueEntryDate, " + "\r\n";
             queryString = queryString + "                   Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, SemifinishedProductDetails.CommodityTypeID, " + "\r\n";
-            queryString = queryString + "                   SemifinishedProductDetails.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, SemifinishedProductDetails.ProductionLineID, ProductionLines.Code AS ProductionLineCode, SemifinishedProductDetails.MoldID, Molds.Code AS MoldCode, SemifinishedProductDetails.CommodityMaterialID, CommodityMaterials.Code AS CommodityMaterialCode, " + "\r\n";
+            queryString = queryString + "                   SemifinishedProductDetails.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, SemifinishedProductDetails.ProductionLineID, ProductionLines.Code AS ProductionLineCode, SemifinishedProductDetails.MoldID, Molds.Code AS MoldCode, SemifinishedProductDetails.BomID, Boms.Code AS BomCode, " + "\r\n";
             queryString = queryString + "                   VoidTypes.VoidTypeID, VoidTypes.Code AS VoidTypeCode, VoidTypes.Name AS VoidTypeName, VoidTypes.VoidClassID, " + "\r\n";
             queryString = queryString + "                   ROUND(CASE WHEN MaterialIssueDetails.Approved = 1 AND MaterialIssueDetails.InActive = 0 AND MaterialIssueDetails.InActivePartial = 0 THEN MaterialIssueDetails.Quantity - MaterialIssueDetails.QuantitySemifinished ELSE 0 END, " + (int)GlobalEnums.rndQuantity + ") AS QuantityRemains, " + "\r\n";
             queryString = queryString + "                   SemifinishedProductDetails.InActivePartial, SemifinishedProductDetails.InActivePartialDate, SemifinishedProductDetails.Remarks " + "\r\n";
@@ -86,7 +86,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "                   INNER JOIN Customers ON SemifinishedProductDetails.CustomerID = Customers.CustomerID " + "\r\n";
             queryString = queryString + "                   INNER JOIN ProductionLines ON SemifinishedProductDetails.ProductionLineID = ProductionLines.ProductionLineID " + "\r\n";
             queryString = queryString + "                   INNER JOIN Molds ON SemifinishedProductDetails.MoldID = Molds.MoldID " + "\r\n";
-            queryString = queryString + "                   INNER JOIN CommodityMaterials ON SemifinishedProductDetails.CommodityMaterialID = CommodityMaterials.CommodityMaterialID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN Boms ON SemifinishedProductDetails.BomID = Boms.BomID " + "\r\n";
             queryString = queryString + "                   LEFT JOIN VoidTypes ON SemifinishedProductDetails.VoidTypeID = VoidTypes.VoidTypeID " + "\r\n";
 
             queryString = queryString + "    END " + "\r\n";
@@ -217,7 +217,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "       SELECT      MaterialIssues.MaterialIssueID, MaterialIssueDetails.MaterialIssueDetailID, MaterialIssues.Reference AS MaterialIssueReference, MaterialIssues.Code AS MaterialIssueCode, MaterialIssues.EntryDate AS MaterialIssueEntryDate, " + "\r\n";
             queryString = queryString + "                   Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, " + "\r\n";
-            queryString = queryString + "                   MaterialIssueDetails.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, MaterialIssueDetails.MoldID, Molds.Code AS MoldCode, MaterialIssueDetails.CommodityMaterialID, CommodityMaterials.Code AS CommodityMaterialCode, " + "\r\n";
+            queryString = queryString + "                   MaterialIssueDetails.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, MaterialIssueDetails.MoldID, Molds.Code AS MoldCode, MaterialIssueDetails.BomID, Boms.Code AS BomCode, " + "\r\n";
 
             queryString = queryString + "                   ROUND(MaterialIssueDetails.Quantity - MaterialIssueDetails.QuantitySemifinished, 0) AS QuantityRemains, " + "\r\n";
             queryString = queryString + "                   MaterialIssues.Description, MaterialIssueDetails.Remarks, CAST(1 AS bit) AS IsSelected " + "\r\n";
@@ -227,7 +227,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "                   INNER JOIN Commodities ON MaterialIssueDetails.CommodityID = Commodities.CommodityID " + "\r\n";
             queryString = queryString + "                   INNER JOIN Customers ON MaterialIssueDetails.CustomerID = Customers.CustomerID " + "\r\n";
             queryString = queryString + "                   INNER JOIN Molds ON MaterialIssueDetails.MoldID = Molds.MoldID " + "\r\n";
-            queryString = queryString + "                   INNER JOIN CommodityMaterials ON MaterialIssueDetails.CommodityMaterialID = CommodityMaterials.CommodityMaterialID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN Boms ON MaterialIssueDetails.BomID = Boms.BomID " + "\r\n";
 
             return queryString;
         }
@@ -238,7 +238,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "       SELECT      MaterialIssues.MaterialIssueID, MaterialIssueDetails.MaterialIssueDetailID, MaterialIssues.Reference AS MaterialIssueReference, MaterialIssues.Code AS MaterialIssueCode, MaterialIssues.EntryDate AS MaterialIssueEntryDate, " + "\r\n";
             queryString = queryString + "                   Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, " + "\r\n";
-            queryString = queryString + "                   MaterialIssueDetails.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, MaterialIssueDetails.MoldID, Molds.Code AS MoldCode, MaterialIssueDetails.CommodityMaterialID, CommodityMaterials.Code AS CommodityMaterialCode, " + "\r\n";
+            queryString = queryString + "                   MaterialIssueDetails.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, MaterialIssueDetails.MoldID, Molds.Code AS MoldCode, MaterialIssueDetails.BomID, Boms.Code AS BomCode, " + "\r\n";
 
             queryString = queryString + "                   ROUND(MaterialIssueDetails.Quantity - MaterialIssueDetails.QuantitySemifinished, 0) AS QuantityRemains, " + "\r\n";
             queryString = queryString + "                   MaterialIssues.Description, MaterialIssueDetails.Remarks, CAST(1 AS bit) AS IsSelected " + "\r\n";
@@ -249,7 +249,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "                   INNER JOIN MaterialIssues ON MaterialIssueDetails.MaterialIssueID = MaterialIssues.MaterialIssueID " + "\r\n";
             queryString = queryString + "                   INNER JOIN Customers ON MaterialIssueDetails.CustomerID = Customers.CustomerID " + "\r\n";
             queryString = queryString + "                   INNER JOIN Molds ON MaterialIssueDetails.MoldID = Molds.MoldID " + "\r\n";
-            queryString = queryString + "                   INNER JOIN CommodityMaterials ON MaterialIssueDetails.CommodityMaterialID = CommodityMaterials.CommodityMaterialID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN Boms ON MaterialIssueDetails.BomID = Boms.BomID " + "\r\n";
 
             return queryString;
         }

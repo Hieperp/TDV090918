@@ -59,8 +59,8 @@ function handleOKEvent(productionOrderGridDataSource, pendingPlannedOrderDetailG
         dataRow.MoldID = plannedOrderGridDataItem.MoldID;
         dataRow.MoldCode = plannedOrderGridDataItem.MoldCode;
 
-        dataRow.CommodityMaterialID = plannedOrderGridDataItem.CommodityMaterialID;
-        dataRow.CommodityMaterialCode = plannedOrderGridDataItem.CommodityMaterialCode;
+        dataRow.BomID = plannedOrderGridDataItem.BomID;
+        dataRow.BomCode = plannedOrderGridDataItem.BomCode;
 
         dataRow.CommodityID = plannedOrderGridDataItem.CommodityID;
         dataRow.CommodityName = plannedOrderGridDataItem.CommodityName;

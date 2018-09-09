@@ -560,9 +560,9 @@ namespace TotalModel.Models
         public System.DateTime EditedDate { get; set; }
     }
 
-    public partial class CommodityMaterial : IPrimitiveEntity, IBaseEntity
+    public partial class Bom : IPrimitiveEntity, IBaseEntity
     {
-        public int GetID() { return this.CommodityMaterialID; }
+        public int GetID() { return this.BomID; }
 
         public int UserID { get; set; }
         public int PreparedPersonID { get; set; }

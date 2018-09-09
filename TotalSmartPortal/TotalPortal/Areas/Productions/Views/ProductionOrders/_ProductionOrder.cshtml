@@ -131,10 +131,10 @@
                         .ClientTemplate("#= MoldCode #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].MoldCode' value='#= MoldCode #' />");
 
 
-                    columns.Bound(p => p.CommodityMaterialID).DisplayNameTitle().Filterable(false).Hidden()
-                        .ClientTemplate("#= CommodityMaterialID #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].CommodityMaterialID' value='#= CommodityMaterialID #' />");
-                    columns.Bound(p => p.CommodityMaterialCode).DisplayNameTitle().Filterable(false).Width(200)
-                        .ClientTemplate("#= CommodityMaterialCode #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].CommodityMaterialCode' value='#= CommodityMaterialCode #' />");
+                    columns.Bound(p => p.BomID).DisplayNameTitle().Filterable(false).Hidden()
+                        .ClientTemplate("#= BomID #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].BomID' value='#= BomID #' />");
+                    columns.Bound(p => p.BomCode).DisplayNameTitle().Filterable(false).Width(200)
+                        .ClientTemplate("#= BomCode #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].BomCode' value='#= BomCode #' />");
 
                     
                     columns.Bound(p => p.QuantityRemains).DisplayNameTitle().Filterable(false).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" })

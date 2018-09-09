@@ -306,8 +306,8 @@ namespace TotalDAL.Repositories
 
             //return;
 
-            Helpers.SqlProgrammability.Inventories.MaterialIssue materialIssue = new Helpers.SqlProgrammability.Inventories.MaterialIssue(totalSmartPortalEntities);
-            materialIssue.RestoreProcedure();
+            //Helpers.SqlProgrammability.Inventories.MaterialIssue materialIssue = new Helpers.SqlProgrammability.Inventories.MaterialIssue(totalSmartPortalEntities);
+            //materialIssue.RestoreProcedure();
 
             //return;
 
@@ -319,7 +319,10 @@ namespace TotalDAL.Repositories
             Helpers.SqlProgrammability.Productions.PlannedOrder plannedOrder = new Helpers.SqlProgrammability.Productions.PlannedOrder(totalSmartPortalEntities);
             plannedOrder.RestoreProcedure();
 
+            //return;
 
+            //Helpers.SqlProgrammability.Productions.ProductionOrder productionOrder = new Helpers.SqlProgrammability.Productions.ProductionOrder(totalSmartPortalEntities);
+            //productionOrder.RestoreProcedure();
 
             //return;
 
@@ -336,10 +339,7 @@ namespace TotalDAL.Repositories
             Helpers.SqlProgrammability.Commons.Mold mold = new Helpers.SqlProgrammability.Commons.Mold(totalSmartPortalEntities);
             mold.RestoreProcedure();
 
-            //return;
 
-            Helpers.SqlProgrammability.Productions.ProductionOrder productionOrder = new Helpers.SqlProgrammability.Productions.ProductionOrder(totalSmartPortalEntities);
-            productionOrder.RestoreProcedure();
 
 
             //return;

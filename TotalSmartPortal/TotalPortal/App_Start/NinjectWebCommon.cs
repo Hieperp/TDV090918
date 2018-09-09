@@ -304,10 +304,10 @@ namespace TotalPortal.App_Start
                 kernel.Bind<IMoldAPIRepository>().To<MoldAPIRepository>();
                 //kernel.Bind<IMoldSelectListBuilder>().To<MoldSelectListBuilder>();
 
-                //kernel.Bind<ICommodityMaterialService>().To<CommodityMaterialService>();
-                kernel.Bind<ICommodityMaterialRepository>().To<CommodityMaterialRepository>();
-                kernel.Bind<ICommodityMaterialAPIRepository>().To<CommodityMaterialAPIRepository>();
-                //kernel.Bind<ICommodityMaterialSelectListBuilder>().To<CommodityMaterialSelectListBuilder>();
+                //kernel.Bind<IBomService>().To<BomService>();
+                kernel.Bind<IBomRepository>().To<BomRepository>();
+                kernel.Bind<IBomAPIRepository>().To<BomAPIRepository>();
+                //kernel.Bind<IBomSelectListBuilder>().To<BomSelectListBuilder>();
 
                 //kernel.Bind<IProductionLineService>().To<ProductionLineService>();
                 kernel.Bind<IProductionLineRepository>().To<ProductionLineRepository>();

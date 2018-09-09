@@ -220,7 +220,7 @@
     <Compile Include="Areas\Accounts\ViewModels\CreditNoteViewModel.cs" />
     <Compile Include="Areas\Accounts\ViewModels\ReceiptViewModel.cs" />
     <Compile Include="Areas\Commons\APIs\CommodityAPIsController.cs" />
-    <Compile Include="Areas\Commons\APIs\CommodityMaterialAPIsController.cs" />
+    <Compile Include="Areas\Commons\APIs\BomAPIsController.cs" />
     <Compile Include="Areas\Commons\APIs\CommodityPriceAPIsController.cs" />
     <Compile Include="Areas\Commons\APIs\CustomerAPIsController.cs" />
     <Compile Include="Areas\Commons\APIs\EmployeeAPIsController.cs" />
@@ -1501,14 +1501,14 @@
     <Content Include="Scripts\Controllers\Root\Shared\Edits\gridDatasourceReceiptSubscribe.js" />
     <Content Include="Scripts\Controllers\Root\Shared\Edits\gridDatasourceWeight.js" />
     <Content Include="Scripts\Controllers\Root\Shared\Edits\gridDatasourceWeightSubscribe.js" />
+    <Content Include="Scripts\Controllers\Root\Shared\Edits\gridEditorBom.js" />
+    <Content Include="Scripts\Controllers\Root\Shared\Edits\gridEditorBomInvoked.js" />
     <Content Include="Scripts\Controllers\Root\Shared\Edits\gridEditorCommoditiesInGoodsReceipts.js" />
     <Content Include="Scripts\Controllers\Root\Shared\Edits\gridEditorCommoditiesInGoodsReceiptsInvoked.js" />
     <Content Include="Scripts\Controllers\Root\Shared\Edits\gridEditorCommoditiesInWarehouses.js" />
     <Content Include="Scripts\Controllers\Root\Shared\Edits\gridEditorCommoditiesInWarehousesInvoked.js" />
     <Content Include="Scripts\Controllers\Root\Shared\Edits\gridEditorCommodity.js" />
     <Content Include="Scripts\Controllers\Root\Shared\Edits\gridEditorCommodityInvoked.js" />
-    <Content Include="Scripts\Controllers\Root\Shared\Edits\gridEditorCommodityMaterial.js" />
-    <Content Include="Scripts\Controllers\Root\Shared\Edits\gridEditorCommodityMaterialInvoked.js" />
     <Content Include="Scripts\Controllers\Root\Shared\Edits\gridEditorCustomer.js" />
     <Content Include="Scripts\Controllers\Root\Shared\Edits\gridEditorCustomerInvoked.js" />
     <Content Include="Scripts\Controllers\Root\Shared\Edits\gridEditorMold.js" />
@@ -2345,7 +2345,7 @@
     <Content Include="Views\Shared\EditorTemplates\AutoCompletes\ProductionLineBase.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AutoCompletes\MoldBase.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AutoCompletes\CustomerBasic.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\AutoCompletes\CommodityMaterialBase.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AutoCompletes\BomBase.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DropDowns\CommodityBrand.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DropDowns\CommodityCategory.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DropDowns\CommodityType.cshtml" />

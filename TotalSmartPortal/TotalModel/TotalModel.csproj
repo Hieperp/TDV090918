@@ -78,6 +78,9 @@
     <Compile Include="Models\Bom.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BomBase.cs">
+      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BomDetail.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>
@@ -106,9 +109,6 @@
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CommodityLine.cs">
-      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CommodityMaterialBase.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CommodityPrice.cs">

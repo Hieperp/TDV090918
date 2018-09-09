@@ -23,7 +23,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             this.CommodityEditable();
 
             this.GetCommodityBases();
-            this.GetCommodityMaterialBases();
+            this.GetBomBases();
         }
 
 
@@ -75,7 +75,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             this.totalSmartPortalEntities.CreateStoredProcedure("GetCommodityBases", queryString);
         }
 
-        private void GetCommodityMaterialBases()
+        private void GetBomBases()
         {
             string queryString;
 
@@ -84,14 +84,14 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
-            queryString = queryString + "       SELECT      TOP 30 CommodityMaterialID, Code AS CommodityMaterialCode, Name AS CommodityMaterialName, Reference AS CommodityMaterialReference " + " \r\n";
-            queryString = queryString + "       FROM        CommodityMaterials " + "\r\n";
+            queryString = queryString + "       SELECT      TOP 30 BomID, Code AS BomCode, Name AS BomName, Reference AS BomReference " + " \r\n";
+            queryString = queryString + "       FROM        Boms " + "\r\n";
             queryString = queryString + "       WHERE       InActive = 0 AND (1 = 1 OR CommodityID = @CommodityID) AND (@SearchText = '' OR Code LIKE '%' + @SearchText + '%' OR Reference LIKE '%' + @SearchText + '%') " + "\r\n";
             queryString = queryString + "       ORDER BY    IsDefault " + "\r\n";
 
             queryString = queryString + "    END " + "\r\n";
 
-            this.totalSmartPortalEntities.CreateStoredProcedure("GetCommodityMaterialBases", queryString);
+            this.totalSmartPortalEntities.CreateStoredProcedure("GetBomBases", queryString);
         }
 
     }

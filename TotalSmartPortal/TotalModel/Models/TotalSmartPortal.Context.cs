@@ -2729,19 +2729,6 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("PlannedOrderVoidable", entityIDParameter);
         }
     
-        public virtual ObjectResult<CommodityMaterialBase> GetCommodityMaterialBases(string searchText, Nullable<int> commodityID)
-        {
-            var searchTextParameter = searchText != null ?
-                new ObjectParameter("SearchText", searchText) :
-                new ObjectParameter("SearchText", typeof(string));
-    
-            var commodityIDParameter = commodityID.HasValue ?
-                new ObjectParameter("CommodityID", commodityID) :
-                new ObjectParameter("CommodityID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CommodityMaterialBase>("GetCommodityMaterialBases", searchTextParameter, commodityIDParameter);
-        }
-    
         public virtual ObjectResult<ProductionOrderPendingCustomer> GetProductionOrderPendingCustomers(Nullable<int> locationID)
         {
             var locationIDParameter = locationID.HasValue ?
@@ -2975,6 +2962,19 @@ namespace TotalModel.Models
                 new ObjectParameter("EntityID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("CommodityEditable", entityIDParameter);
+        }
+    
+        public virtual ObjectResult<BomBase> GetBomBases(string searchText, Nullable<int> commodityID)
+        {
+            var searchTextParameter = searchText != null ?
+                new ObjectParameter("SearchText", searchText) :
+                new ObjectParameter("SearchText", typeof(string));
+    
+            var commodityIDParameter = commodityID.HasValue ?
+                new ObjectParameter("CommodityID", commodityID) :
+                new ObjectParameter("CommodityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BomBase>("GetBomBases", searchTextParameter, commodityIDParameter);
         }
     }
 }
