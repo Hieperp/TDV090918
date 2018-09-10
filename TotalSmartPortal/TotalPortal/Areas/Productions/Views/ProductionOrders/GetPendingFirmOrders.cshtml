@@ -4,14 +4,14 @@
 @{Layout = "~/Views/Shared/_LayoutPopup.cshtml";}
 
 
-@(Html.Kendo().Grid<ProductionOrderPendingPlannedOrderDetail>()
-    .Name("gridPendingPlannedOrderDetails")
+@(Html.Kendo().Grid<ProductionOrderPendingFirmOrder>()
+    .Name("gridPendingFirmOrders")
     .Columns(columns =>
     {
-        columns.Bound(c => c.PlannedOrderReference).Title("Phiếu ĐH").Width(30);
-        columns.Bound(c => c.PlannedOrderCode).Title("Số đơn hàng").Width(50);
-        columns.Bound(c => c.PlannedOrderEntryDate).Title("Ngày đặt hàng").Width(50).Format("{0:" + Settings.DateTimeFormat + "}");
-        columns.Bound(c => c.CommodityCode).Title("Mã hàng").Width(130);
+        columns.Bound(c => c.FirmOrderReference).Title("Phiếu ĐH").Width(30);
+        columns.Bound(c => c.FirmOrderCode).Title("Số đơn hàng").Width(50);
+        columns.Bound(c => c.FirmOrderEntryDate).Title("Ngày đặt hàng").Width(50).Format("{0:" + Settings.DateTimeFormat + "}");
+        columns.Bound(c => c.Specification).Title("Mã hàng").Width(130);
         columns.Bound(c => c.QuantityRemains).Title("SL").Format(Settings.kfmQuantity).Width(25).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
 
         columns.Template(t => { }).Title("&nbsp;").ClientTemplate("<input class='IsSelected' #= IsSelected ? checked='checked':'' #  type='checkbox' />").Width(15);
@@ -27,7 +27,7 @@
     })
     .Scrollable(s => s.Height(Settings.PopupContentHeightLarge))
     .DataSource(ds => ds.Ajax()
-            .Read(read => read.Action("GetPendingPlannedOrderDetails", "ProductionOrderAPIs", new { area = "Productions" }).Data(@<text>
+            .Read(read => read.Action("GetPendingFirmOrders", "ProductionOrderAPIs", new { area = "Productions" }).Data(@<text>
             function(e) {
 
             var productionOrderJSON = window.parent.$("#kendoGridDetails").data("kendoGrid").dataSource.data().toJSON();
@@ -37,7 +37,7 @@
             productionOrderID: window.parent.$("#ProductionOrderID").val(),
             plannedOrderID: window.parent.$("#PlannedOrderID").val(),
             customerID: window.parent.$("#Customer_CustomerID").val(),
-            plannedOrderDetailIDs : productionOrderJSON.map(function(elem){return elem.PlannedOrderDetailID;}).join(","),
+            plannedOrderDetailIDs : productionOrderJSON.map(function(elem){return elem.FirmOrderID;}).join(","),
             isReadOnly: false
             };}
             </text>))
@@ -53,16 +53,16 @@
     </div>
 </div>
 
-<script src="@Url.Content("~/Scripts/Controllers/Productions/ProductionOrders/AddPendingPlannedOrderDetail.js")"></script>
+<script src="@Url.Content("~/Scripts/Controllers/Productions/ProductionOrders/AddPendingFirmOrder.js")"></script>
 
 <script type="text/javascript">
     function okButton_Click() {
-        handleOKEvent(window.parent.$("#kendoGridDetails").data("kendoGrid").dataSource, $("#gridPendingPlannedOrderDetails").data("kendoGrid").dataSource);
+        handleOKEvent(window.parent.$("#kendoGridDetails").data("kendoGrid").dataSource, $("#gridPendingFirmOrders").data("kendoGrid").dataSource);
     }
 
-    $('#gridPendingPlannedOrderDetails').on('click', '.IsSelected', function () {
+    $('#gridPendingFirmOrders').on('click', '.IsSelected', function () {
         var checked = $(this).is(':checked');
-        var grid = $('#gridPendingPlannedOrderDetails').data().kendoGrid;
+        var grid = $('#gridPendingFirmOrders').data().kendoGrid;
         var dataItem = grid.dataItem($(this).closest('tr'));
         dataItem.set('IsSelected', checked);
     })
@@ -72,14 +72,14 @@
 
 <script>
     function filterText_KeyUp() {
-        var filterText = $("#filterText").val(), gridDetails = $("#gridPendingPlannedOrderDetails").data("kendoGrid");
+        var filterText = $("#filterText").val(), gridDetails = $("#gridPendingFirmOrders").data("kendoGrid");
 
         if (filterText && filterText.length >= "@Settings.AutoCompleteMinLenght") {
             gridDetails.dataSource.filter({
                 logic: "or",
                 filters: [
-                    { field: "PlannedOrderCode", operator: "contains", value: filterText },
-                    { field: "PlannedOrderReference", operator: "contains", value: filterText },
+                    { field: "FirmOrderCode", operator: "contains", value: filterText },
+                    { field: "FirmOrderReference", operator: "contains", value: filterText },
 
                     { field: "CommodityCode", operator: "contains", value: filterText },
                     { field: "CommodityName", operator: "contains", value: filterText }

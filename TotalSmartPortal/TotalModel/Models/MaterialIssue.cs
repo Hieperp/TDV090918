@@ -64,7 +64,7 @@ namespace TotalModel.Models
         public virtual Commodity Commodity { get; set; }
         public virtual PlannedOrderDetail PlannedOrderDetail { get; set; }
         public virtual PlannedOrder PlannedOrder { get; set; }
-        public virtual ProductionOrderDetail ProductionOrderDetail { get; set; }
         public virtual ProductionOrder ProductionOrder { get; set; }
+        public virtual ProductionOrderDetail ProductionOrderDetail { get; set; }
     }
 }

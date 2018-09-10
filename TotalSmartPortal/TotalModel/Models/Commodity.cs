@@ -34,7 +34,6 @@ namespace TotalModel.Models
             this.FirmOrderDetails = new HashSet<FirmOrderDetail>();
             this.FirmOrderMaterials = new HashSet<FirmOrderMaterial>();
             this.PlannedOrderDetails = new HashSet<PlannedOrderDetail>();
-            this.ProductionOrderDetails = new HashSet<ProductionOrderDetail>();
         }
     
         public int CommodityID { get; set; }
@@ -111,7 +110,5 @@ namespace TotalModel.Models
         public virtual ICollection<FirmOrderMaterial> FirmOrderMaterials { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PlannedOrderDetail> PlannedOrderDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductionOrderDetail> ProductionOrderDetails { get; set; }
     }
 }

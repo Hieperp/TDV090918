@@ -129,7 +129,7 @@ namespace TotalModel.Models
 
         public virtual decimal TotalQuantityPositive { get { return this.TotalQuantity; } }
 
-        public virtual decimal TotalQuantityNegative { get { return - this.TotalQuantity; } }
+        public virtual decimal TotalQuantityNegative { get { return -this.TotalQuantity; } }
 
         public virtual Warehouse WarehouseReceipt { get { return this.Warehouse1; } }
 
@@ -172,6 +172,9 @@ namespace TotalModel.Models
     public partial class ProductionOrderDetail : IPrimitiveEntity, IHelperEntryDate, IHelperCommodityID, IHelperCommodityTypeID
     {
         public int GetID() { return this.ProductionOrderDetailID; }
+
+        public int CommodityID { get; set; }
+        public int CommodityTypeID { get; set; }
     }
 
 

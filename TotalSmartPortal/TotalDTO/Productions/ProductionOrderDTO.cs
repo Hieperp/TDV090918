@@ -45,7 +45,7 @@ namespace TotalDTO.Productions
             base.PerformPresaveRule();
 
             string plannedOrderReferences = ""; string plannedOrderCodes = "";
-            this.DtoDetails().ToList().ForEach(e => { e.CustomerID = this.CustomerID; e.WorkshiftID = this.WorkshiftID; if (plannedOrderReferences.IndexOf(e.PlannedOrderReference) < 0) plannedOrderReferences = plannedOrderReferences + (plannedOrderReferences != "" ? ", " : "") + e.PlannedOrderReference; if (e.PlannedOrderCode != null && plannedOrderCodes.IndexOf(e.PlannedOrderCode) < 0) plannedOrderCodes = plannedOrderCodes + (plannedOrderCodes != "" ? ", " : "") + e.PlannedOrderCode; });
+            this.DtoDetails().ToList().ForEach(e => { e.CustomerID = this.CustomerID; e.WorkshiftID = this.WorkshiftID; if (plannedOrderReferences.IndexOf(e.FirmOrderReference) < 0) plannedOrderReferences = plannedOrderReferences + (plannedOrderReferences != "" ? ", " : "") + e.FirmOrderReference; if (e.FirmOrderCode != null && plannedOrderCodes.IndexOf(e.FirmOrderCode) < 0) plannedOrderCodes = plannedOrderCodes + (plannedOrderCodes != "" ? ", " : "") + e.FirmOrderCode; });
             this.PlannedOrderReferences = plannedOrderReferences; this.PlannedOrderCodes = plannedOrderCodes != "" ? plannedOrderCodes : null; 
         }
     }

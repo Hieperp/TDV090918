@@ -25,8 +25,6 @@ namespace TotalModel.Models
         public string CustomerName { get; set; }
         public int ProductionLineID { get; set; }
         public string ProductionLineCode { get; set; }
-        public int MoldID { get; set; }
-        public string MoldCode { get; set; }
         public int BomID { get; set; }
         public string BomCode { get; set; }
         public string Specification { get; set; }

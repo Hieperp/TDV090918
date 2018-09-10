@@ -29,10 +29,7 @@ namespace TotalModel.Models
         public int LocationID { get; set; }
         public int WorkshiftID { get; set; }
         public int CustomerID { get; set; }
-        public int CommodityID { get; set; }
-        public int CommodityTypeID { get; set; }
         public int BomID { get; set; }
-        public int MoldID { get; set; }
         public int ProductionLineID { get; set; }
         public string Remarks { get; set; }
         public Nullable<int> VoidTypeID { get; set; }
@@ -42,13 +39,12 @@ namespace TotalModel.Models
         public Nullable<System.DateTime> InActivePartialDate { get; set; }
     
         public virtual Bom Bom { get; set; }
-        public virtual Commodity Commodity { get; set; }
         public virtual Customer Customer { get; set; }
+        public virtual FirmOrder FirmOrder { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MaterialIssueDetail> MaterialIssueDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MaterialIssue> MaterialIssues { get; set; }
-        public virtual Mold Mold { get; set; }
         public virtual PlannedOrder PlannedOrder { get; set; }
         public virtual ProductionLine ProductionLine { get; set; }
         public virtual ProductionOrder ProductionOrder { get; set; }

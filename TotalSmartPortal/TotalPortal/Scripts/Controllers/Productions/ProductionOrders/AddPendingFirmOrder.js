@@ -2,9 +2,9 @@
     window.parent.$("#myWindow").data("kendoWindow").close();
 }
 
-function handleOKEvent(productionOrderGridDataSource, pendingPlannedOrderDetailGridDataSource) {
-    if (productionOrderGridDataSource != undefined && pendingPlannedOrderDetailGridDataSource != undefined) {
-        var pendingPlannedOrderDetailGridDataItems = pendingPlannedOrderDetailGridDataSource.view();
+function handleOKEvent(productionOrderGridDataSource, pendingFirmOrderGridDataSource) {
+    if (productionOrderGridDataSource != undefined && pendingFirmOrderGridDataSource != undefined) {
+        var pendingPlannedOrderDetailGridDataItems = pendingFirmOrderGridDataSource.view();
         var productionOrderJSON = productionOrderGridDataSource.data().toJSON();
         for (var i = 0; i < pendingPlannedOrderDetailGridDataItems.length; i++) {
             if (pendingPlannedOrderDetailGridDataItems[i].IsSelected === true)
@@ -47,25 +47,19 @@ function handleOKEvent(productionOrderGridDataSource, pendingPlannedOrderDetailG
         dataRow.ProductionOrderID = window.parent.$("#ProductionOrderID").val();
 
         dataRow.PlannedOrderID = plannedOrderGridDataItem.PlannedOrderID;
-        dataRow.PlannedOrderDetailID = plannedOrderGridDataItem.PlannedOrderDetailID;
-        dataRow.PlannedOrderCode = plannedOrderGridDataItem.PlannedOrderCode;
-        dataRow.PlannedOrderReference = plannedOrderGridDataItem.PlannedOrderReference;
-        dataRow.PlannedOrderEntryDate = plannedOrderGridDataItem.PlannedOrderEntryDate;
+        dataRow.FirmOrderID = plannedOrderGridDataItem.FirmOrderID;
+        dataRow.FirmOrderCode = plannedOrderGridDataItem.FirmOrderCode;
+        dataRow.FirmOrderReference = plannedOrderGridDataItem.FirmOrderReference;
+        dataRow.FirmOrderEntryDate = plannedOrderGridDataItem.FirmOrderEntryDate;
 
         dataRow.CustomerID = plannedOrderGridDataItem.CustomerID;
         dataRow.CustomerName = plannedOrderGridDataItem.CustomerName;
         dataRow.CustomerCode = plannedOrderGridDataItem.CustomerCode;
 
-        dataRow.MoldID = plannedOrderGridDataItem.MoldID;
-        dataRow.MoldCode = plannedOrderGridDataItem.MoldCode;
+        dataRow.Specification = plannedOrderGridDataItem.Specification;
 
         dataRow.BomID = plannedOrderGridDataItem.BomID;
         dataRow.BomCode = plannedOrderGridDataItem.BomCode;
-
-        dataRow.CommodityID = plannedOrderGridDataItem.CommodityID;
-        dataRow.CommodityName = plannedOrderGridDataItem.CommodityName;
-        dataRow.CommodityCode = plannedOrderGridDataItem.CommodityCode;
-        dataRow.CommodityTypeID = plannedOrderGridDataItem.CommodityTypeID;
 
         dataRow.QuantityRemains = plannedOrderGridDataItem.QuantityRemains;
         dataRow.Quantity = 0;

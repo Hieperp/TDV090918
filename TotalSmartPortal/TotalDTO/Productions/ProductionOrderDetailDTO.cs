@@ -14,17 +14,17 @@ namespace TotalDTO.Productions
         public int ProductionOrderID { get; set; }
 
         public Nullable<int> PlannedOrderID { get; set; }
-        public Nullable<int> PlannedOrderDetailID { get; set; }
+        public Nullable<int> FirmOrderID { get; set; }
 
-        [Display(Name = "Phiếu ĐH")]
+        [Display(Name = "KHSX")]
         [UIHint("StringReadonly")]
-        public string PlannedOrderReference { get; set; }
-        [Display(Name = "Số ĐH")]
+        public string FirmOrderReference { get; set; }
+        [Display(Name = "Mã CT")]
         [UIHint("StringReadonly")]
-        public string PlannedOrderCode { get; set; }
-        [Display(Name = "Ngày ĐH")]
+        public string FirmOrderCode { get; set; }
+        [Display(Name = "Ngày KH")]
         [UIHint("DateTimeReadonly")]
-        public Nullable<System.DateTime> PlannedOrderEntryDate { get; set; }
+        public Nullable<System.DateTime> FirmOrderEntryDate { get; set; }
 
         public int CustomerID { get; set; }
         [Display(Name = "Mã khách hàng")]
@@ -36,27 +36,21 @@ namespace TotalDTO.Productions
         [UIHint("StringReadonly")]
         public virtual string CustomerName { get; set; }
 
+        [Display(Name = "Mặt hàng")]
+        [UIHint("StringReadonly")]
+        public virtual string Specification { get; set; }
+
         public int ProductionLineID { get; set; }
         [Display(Name = "Dây chuyền")]
         [Required(ErrorMessage = "Vui lòng chọn dây chuyền")]
         [UIHint("AutoCompletes/ProductionLineBase")]
         public virtual string ProductionLineCode { get; set; }
 
-        public int MoldID { get; set; }
-        [Display(Name = "Mã khuôn")]
-        [Required(ErrorMessage = "Vui lòng chọn mã khuôn")]
-        [UIHint("AutoCompletes/MoldBase")]
-        public virtual string MoldCode { get; set; }
-
         public int BomID { get; set; }
         [Display(Name = "Mã khuôn")]
         [Required(ErrorMessage = "Vui lòng chọn mã nguyên liệu")]
         [UIHint("StringReadonly")]
         public virtual string BomCode { get; set; }
-
-        //[Display(Name = "Mã CK")]
-        [UIHint("AutoCompletes/CommodityBase")]
-        public override string CommodityCode { get; set; }
 
         public string VoidTypeCode { get; set; }
         [Display(Name = "Lý do")]
@@ -69,6 +63,15 @@ namespace TotalDTO.Productions
         public decimal QuantityRemains { get; set; }
 
         public virtual int WorkshiftID { get; set; }
+
+
+        #region NO USE
+        public override int CommodityID { get { return 1; } set { } } 
+        public override string CommodityCode { get { return "#"; } set { } } 
+        public override int CommodityTypeID { get { return 1; } set { } } 
+
+        public override decimal Quantity { get { return 0; } set { } } 
+        #endregion NO USE
     }
 }
 

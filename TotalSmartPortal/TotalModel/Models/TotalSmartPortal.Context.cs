@@ -94,8 +94,8 @@ namespace TotalModel.Models
         public virtual DbSet<FirmOrder> FirmOrders { get; set; }
         public virtual DbSet<PlannedOrderDetail> PlannedOrderDetails { get; set; }
         public virtual DbSet<PlannedOrder> PlannedOrders { get; set; }
-        public virtual DbSet<ProductionOrderDetail> ProductionOrderDetails { get; set; }
         public virtual DbSet<ProductionOrder> ProductionOrders { get; set; }
+        public virtual DbSet<ProductionOrderDetail> ProductionOrderDetails { get; set; }
     
         public virtual ObjectResult<string> AccountInvoicePostSaveValidate(Nullable<int> entityID)
         {

@@ -76,7 +76,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "    BEGIN " + "\r\n";
 
             queryString = queryString + "       SELECT      ProductionOrderDetails.ProductionOrderDetailID, ProductionOrderDetails.ProductionOrderID, ProductionOrderDetails.PlannedOrderID, ProductionOrderDetails.FirmOrderID, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FirmOrders.EntryDate AS FirmOrderEntryDate, " + "\r\n";
-            queryString = queryString + "                   ProductionOrderDetails.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, ProductionOrderDetails.ProductionLineID, ProductionLines.Code AS ProductionLineCode, ProductionOrderDetails.MoldID, Molds.Code AS MoldCode, ProductionOrderDetails.BomID, Boms.Code AS BomCode, " + "\r\n";
+            queryString = queryString + "                   ProductionOrderDetails.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, ProductionOrderDetails.ProductionLineID, ProductionLines.Code AS ProductionLineCode, ProductionOrderDetails.BomID, Boms.Code AS BomCode, " + "\r\n";
             queryString = queryString + "                   FirmOrders.Specification, VoidTypes.VoidTypeID, VoidTypes.Code AS VoidTypeCode, VoidTypes.Name AS VoidTypeName, VoidTypes.VoidClassID, " + "\r\n";
             queryString = queryString + "                   ROUND(FirmOrderDetails.QuantityRemains, " + (int)GlobalEnums.rndQuantity + ") AS QuantityRemains, " + "\r\n";
             queryString = queryString + "                   ProductionOrderDetails.InActivePartial, ProductionOrderDetails.InActivePartialDate, ProductionOrderDetails.Remarks " + "\r\n";
@@ -85,7 +85,6 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "                   INNER JOIN (SELECT FirmOrderID, SUM(IIF(Approved = 1 AND InActive = 0 AND InActivePartial = 0, Quantity - QuantitySemifinished, 0)) AS QuantityRemains FROM FirmOrderDetails WHERE FirmOrderID IN (SELECT FirmOrderID FROM ProductionOrderDetails WHERE ProductionOrderID = @ProductionOrderID) GROUP BY FirmOrderID) FirmOrderDetails ON ProductionOrderDetails.FirmOrderID = FirmOrderDetails.FirmOrderID " + "\r\n";
             queryString = queryString + "                   INNER JOIN FirmOrders ON FirmOrderDetails.FirmOrderID = FirmOrders.FirmOrderID " + "\r\n";
             queryString = queryString + "                   INNER JOIN ProductionLines ON ProductionOrderDetails.ProductionLineID = ProductionLines.ProductionLineID " + "\r\n";
-            queryString = queryString + "                   INNER JOIN Molds ON ProductionOrderDetails.MoldID = Molds.MoldID " + "\r\n";
             queryString = queryString + "                   INNER JOIN Boms ON ProductionOrderDetails.BomID = Boms.BomID " + "\r\n";
             queryString = queryString + "                   LEFT JOIN VoidTypes ON ProductionOrderDetails.VoidTypeID = VoidTypes.VoidTypeID " + "\r\n";
 
