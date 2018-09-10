@@ -11,27 +11,22 @@ namespace TotalModel.Models
 {
     using System;
     
-    public partial class ProductionOrderPendingPlannedOrderDetail
+    public partial class ProductionOrderPendingFirmOrder
     {
         public int PlannedOrderID { get; set; }
-        public int PlannedOrderDetailID { get; set; }
-        public string PlannedOrderReference { get; set; }
-        public string PlannedOrderCode { get; set; }
-        public System.DateTime PlannedOrderEntryDate { get; set; }
-        public int CommodityID { get; set; }
-        public string CommodityCode { get; set; }
-        public string CommodityName { get; set; }
-        public int CommodityTypeID { get; set; }
+        public int FirmOrderID { get; set; }
+        public string FirmOrderReference { get; set; }
+        public string FirmOrderCode { get; set; }
+        public System.DateTime FirmOrderEntryDate { get; set; }
         public int CustomerID { get; set; }
         public string CustomerCode { get; set; }
         public string CustomerName { get; set; }
-        public int MoldID { get; set; }
-        public string MoldCode { get; set; }
+        public string Specification { get; set; }
+        public int BomID { get; set; }
+        public string BomCode { get; set; }
         public Nullable<decimal> QuantityRemains { get; set; }
         public string Description { get; set; }
         public string Remarks { get; set; }
         public Nullable<bool> IsSelected { get; set; }
-        public int CommodityMaterialID { get; set; }
-        public string CommodityMaterialCode { get; set; }
     }
 }

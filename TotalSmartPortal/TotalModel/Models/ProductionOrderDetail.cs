@@ -24,6 +24,7 @@ namespace TotalModel.Models
         public int ProductionOrderDetailID { get; set; }
         public int ProductionOrderID { get; set; }
         public int PlannedOrderID { get; set; }
+        public int FirmOrderID { get; set; }
         public System.DateTime EntryDate { get; set; }
         public int LocationID { get; set; }
         public int WorkshiftID { get; set; }

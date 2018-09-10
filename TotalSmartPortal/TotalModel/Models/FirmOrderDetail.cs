@@ -14,9 +14,17 @@ namespace TotalModel.Models
     
     public partial class FirmOrderDetail
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public FirmOrderDetail()
+        {
+            this.FirmOrderMaterials = new HashSet<FirmOrderMaterial>();
+        }
+    
         public int FirmOrderDetailID { get; set; }
         public int FirmOrderID { get; set; }
         public System.DateTime EntryDate { get; set; }
+        public int PlannedOrderID { get; set; }
+        public int PlannedOrderDetailID { get; set; }
         public int LocationID { get; set; }
         public int CustomerID { get; set; }
         public int CommodityID { get; set; }
@@ -26,15 +34,13 @@ namespace TotalModel.Models
         public Nullable<System.DateTime> DeliveryDate { get; set; }
         public decimal Quantity { get; set; }
         public decimal QuantitySemifinished { get; set; }
+        public string Description { get; set; }
         public string Remarks { get; set; }
         public Nullable<int> VoidTypeID { get; set; }
         public bool Approved { get; set; }
         public bool InActive { get; set; }
         public bool InActivePartial { get; set; }
         public Nullable<System.DateTime> InActivePartialDate { get; set; }
-        public int PlannedOrderID { get; set; }
-        public int PlannedOrderDetailID { get; set; }
-        public string Description { get; set; }
     
         public virtual Bom Bom { get; set; }
         public virtual Commodity Commodity { get; set; }
@@ -42,5 +48,7 @@ namespace TotalModel.Models
         public virtual FirmOrder FirmOrder { get; set; }
         public virtual Mold Mold { get; set; }
         public virtual VoidType VoidType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FirmOrderMaterial> FirmOrderMaterials { get; set; }
     }
 }

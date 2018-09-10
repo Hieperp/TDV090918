@@ -77,7 +77,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "       SELECT      ProductionOrderDetails.ProductionOrderDetailID, ProductionOrderDetails.ProductionOrderID, ProductionOrderDetails.PlannedOrderID, ProductionOrderDetails.FirmOrderID, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FirmOrders.EntryDate AS FirmOrderEntryDate, " + "\r\n";
             queryString = queryString + "                   ProductionOrderDetails.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, ProductionOrderDetails.ProductionLineID, ProductionLines.Code AS ProductionLineCode, ProductionOrderDetails.MoldID, Molds.Code AS MoldCode, ProductionOrderDetails.BomID, Boms.Code AS BomCode, " + "\r\n";
-            queryString = queryString + "                   VoidTypes.VoidTypeID, VoidTypes.Code AS VoidTypeCode, VoidTypes.Name AS VoidTypeName, VoidTypes.VoidClassID, " + "\r\n";
+            queryString = queryString + "                   FirmOrders.Specification, VoidTypes.VoidTypeID, VoidTypes.Code AS VoidTypeCode, VoidTypes.Name AS VoidTypeName, VoidTypes.VoidClassID, " + "\r\n";
             queryString = queryString + "                   ROUND(FirmOrderDetails.QuantityRemains, " + (int)GlobalEnums.rndQuantity + ") AS QuantityRemains, " + "\r\n";
             queryString = queryString + "                   ProductionOrderDetails.InActivePartial, ProductionOrderDetails.InActivePartialDate, ProductionOrderDetails.Remarks " + "\r\n";
             queryString = queryString + "       FROM        ProductionOrderDetails " + "\r\n";
@@ -184,23 +184,23 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "       IF (@ProductionOrderID <= 0) " + "\r\n";
             queryString = queryString + "               BEGIN " + "\r\n";
             queryString = queryString + "                   " + this.BuildSQLNew(isPlannedOrderID, isCustomerID, isFirmOrderIDs) + "\r\n";
-            queryString = queryString + "                   ORDER BY PlannedOrders.EntryDate, PlannedOrders.PlannedOrderID, PlannedOrderDetails.PlannedOrderDetailID " + "\r\n";
+            queryString = queryString + "                   ORDER BY FirmOrders.EntryDate, FirmOrders.FirmOrderID " + "\r\n";
             queryString = queryString + "               END " + "\r\n";
             queryString = queryString + "       ELSE " + "\r\n";
 
             queryString = queryString + "               IF (@IsReadonly = 1) " + "\r\n";
             queryString = queryString + "                   BEGIN " + "\r\n";
             queryString = queryString + "                       " + this.BuildSQLEdit(isPlannedOrderID, isCustomerID, isFirmOrderIDs) + "\r\n";
-            queryString = queryString + "                       ORDER BY PlannedOrders.EntryDate, PlannedOrders.PlannedOrderID, PlannedOrderDetails.PlannedOrderDetailID " + "\r\n";
+            queryString = queryString + "                       ORDER BY FirmOrders.EntryDate, FirmOrders.FirmOrderID " + "\r\n";
             queryString = queryString + "                   END " + "\r\n";
 
             queryString = queryString + "               ELSE " + "\r\n"; //FULL SELECT FOR EDIT MODE
 
             queryString = queryString + "                   BEGIN " + "\r\n";
-            queryString = queryString + "                       " + this.BuildSQLNew(isPlannedOrderID, isCustomerID, isFirmOrderIDs) + " WHERE PlannedOrderDetails.PlannedOrderDetailID NOT IN (SELECT PlannedOrderDetailID FROM ProductionOrderDetails WHERE ProductionOrderID = @ProductionOrderID) " + "\r\n";
+            queryString = queryString + "                       " + this.BuildSQLNew(isPlannedOrderID, isCustomerID, isFirmOrderIDs) + " WHERE FirmOrders.FirmOrderID NOT IN (SELECT FirmOrderID FROM ProductionOrderDetails WHERE ProductionOrderID = @ProductionOrderID) " + "\r\n";
             queryString = queryString + "                       UNION ALL " + "\r\n";
             queryString = queryString + "                       " + this.BuildSQLEdit(isPlannedOrderID, isCustomerID, isFirmOrderIDs) + "\r\n";
-            queryString = queryString + "                       ORDER BY PlannedOrders.EntryDate, PlannedOrders.PlannedOrderID, PlannedOrderDetails.PlannedOrderDetailID " + "\r\n";
+            queryString = queryString + "                       ORDER BY FirmOrders.EntryDate, FirmOrders.FirmOrderID " + "\r\n";
             queryString = queryString + "                   END " + "\r\n";
 
             queryString = queryString + "   END " + "\r\n";
@@ -212,8 +212,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         {
             string queryString = "";
 
-            queryString = queryString + "       SELECT      FirmOrders.PlannedOrderID, FirmOrders.Reference AS PlannedOrderReference, FirmOrders.Code AS PlannedOrderCode, FirmOrders.EntryDate AS PlannedOrderEntryDate, " + "\r\n";
-            queryString = queryString + "                   FirmOrders.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, FirmOrders.BomID, Boms.Code AS BomCode, " + "\r\n";
+            queryString = queryString + "       SELECT      FirmOrders.PlannedOrderID, FirmOrders.FirmOrderID, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FirmOrders.EntryDate AS FirmOrderEntryDate, " + "\r\n";
+            queryString = queryString + "                   FirmOrders.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, FirmOrders.Specification, FirmOrders.BomID, Boms.Code AS BomCode, " + "\r\n";
 
             queryString = queryString + "                   ROUND(FirmOrderDetails.QuantityRemains, " + (int)GlobalEnums.rndQuantity + ") AS QuantityRemains, " + "\r\n";
             queryString = queryString + "                   FirmOrders.Description, FirmOrders.Remarks, CAST(1 AS bit) AS IsSelected " + "\r\n";
@@ -230,15 +230,15 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         {
             string queryString = "";
 
-            queryString = queryString + "       SELECT      FirmOrders.PlannedOrderID, FirmOrders.Reference AS PlannedOrderReference, FirmOrders.Code AS PlannedOrderCode, FirmOrders.EntryDate AS PlannedOrderEntryDate, " + "\r\n";
-            queryString = queryString + "                   FirmOrders.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, FirmOrders.BomID, Boms.Code AS BomCode, " + "\r\n";
+            queryString = queryString + "       SELECT      FirmOrders.PlannedOrderID, FirmOrders.FirmOrderID, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FirmOrders.EntryDate AS FirmOrderEntryDate, " + "\r\n";
+            queryString = queryString + "                   FirmOrders.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, FirmOrders.Specification, FirmOrders.BomID, Boms.Code AS BomCode, " + "\r\n";
 
             queryString = queryString + "                   ROUND(FirmOrderDetails.QuantityRemains, " + (int)GlobalEnums.rndQuantity + ") AS QuantityRemains, " + "\r\n";
             queryString = queryString + "                   FirmOrders.Description, FirmOrders.Remarks, CAST(1 AS bit) AS IsSelected " + "\r\n";
 
             queryString = queryString + "       FROM        ProductionOrderDetails " + "\r\n";
-            queryString = queryString + "                   INNER JOIN (SELECT FirmOrderID, SUM(IIF(Approved = 1 AND InActive = 0 AND InActivePartial = 0, Quantity - QuantitySemifinished, 0)) AS QuantityRemains FROM FirmOrderDetails WHERE FirmOrderID IN (SELECT FirmOrderID FROM ProductionOrderDetails WHERE ProductionOrderID = @ProductionOrderID) GROUP BY FirmOrderID) FirmOrderDetails ON ProductionOrderDetails.ProductionOrderID = @ProductionOrderID AND ProductionOrderDetails.FirmOrderID = FirmOrderDetails.FirmOrderID" + (isFirmOrderIDs ? " AND PlannedOrderDetails.FirmOrderID NOT IN (SELECT Id FROM dbo.SplitToIntList (@FirmOrderIDs))" : "") + "\r\n";
-            queryString = queryString + "                   INNER JOIN FirmOrders ON PlannedOrderDetails.PlannedOrderID = FirmOrders.PlannedOrderID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN (SELECT FirmOrderID, SUM(IIF(Approved = 1 AND InActive = 0 AND InActivePartial = 0, Quantity - QuantitySemifinished, 0)) AS QuantityRemains FROM FirmOrderDetails WHERE FirmOrderID IN (SELECT FirmOrderID FROM ProductionOrderDetails WHERE ProductionOrderID = @ProductionOrderID) GROUP BY FirmOrderID) FirmOrderDetails ON ProductionOrderDetails.ProductionOrderID = @ProductionOrderID AND ProductionOrderDetails.FirmOrderID = FirmOrderDetails.FirmOrderID" + (isFirmOrderIDs ? " AND ProductionOrderDetails.FirmOrderID NOT IN (SELECT Id FROM dbo.SplitToIntList (@FirmOrderIDs))" : "") + "\r\n";
+            queryString = queryString + "                   INNER JOIN FirmOrders ON ProductionOrderDetails.PlannedOrderID = FirmOrders.PlannedOrderID " + "\r\n";
 
             queryString = queryString + "                   INNER JOIN Customers ON ProductionOrderDetails.CustomerID = Customers.CustomerID " + "\r\n";
             queryString = queryString + "                   INNER JOIN Boms ON ProductionOrderDetails.BomID = Boms.BomID " + "\r\n";

@@ -183,6 +183,9 @@
     <Compile Include="Models\FirmOrderDetail.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FirmOrderMaterial.cs">
+      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GoodsDelivery.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>
@@ -351,9 +354,6 @@
     <Compile Include="Models\PlannedOrderIndex.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\PlannedOrderMaterial.cs">
-      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\PlannedOrderViewDetail.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>
@@ -378,10 +378,10 @@
     <Compile Include="Models\ProductionOrderPendingCustomer.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProductionOrderPendingPlannedOrder.cs">
+    <Compile Include="Models\ProductionOrderPendingFirmOrder.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProductionOrderPendingPlannedOrderDetail.cs">
+    <Compile Include="Models\ProductionOrderPendingPlannedOrder.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductionOrderViewDetail.cs">

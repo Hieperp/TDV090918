@@ -21,13 +21,15 @@ namespace TotalModel.Models
             this.PlannedOrderDetails = new HashSet<PlannedOrderDetail>();
             this.ProductionOrderDetails = new HashSet<ProductionOrderDetail>();
             this.ProductionOrders = new HashSet<ProductionOrder>();
-            this.PlannedOrderMaterials = new HashSet<PlannedOrderMaterial>();
         }
     
         public int PlannedOrderID { get; set; }
         public System.DateTime EntryDate { get; set; }
         public string Reference { get; set; }
         public string Code { get; set; }
+        public Nullable<System.DateTime> VoucherDate { get; set; }
+        public Nullable<System.DateTime> DeliveryDate { get; set; }
+        public string Purposes { get; set; }
         public int CustomerID { get; set; }
         public int UserID { get; set; }
         public int PreparedPersonID { get; set; }
@@ -36,7 +38,6 @@ namespace TotalModel.Models
         public int ApproverID { get; set; }
         public decimal TotalQuantity { get; set; }
         public decimal TotalQuantitySemifinished { get; set; }
-        public string DetailDescription { get; set; }
         public string Description { get; set; }
         public string Remarks { get; set; }
         public System.DateTime CreatedDate { get; set; }
@@ -47,9 +48,6 @@ namespace TotalModel.Models
         public bool InActive { get; set; }
         public bool InActivePartial { get; set; }
         public Nullable<System.DateTime> InActiveDate { get; set; }
-        public Nullable<System.DateTime> VoucherDate { get; set; }
-        public Nullable<System.DateTime> DeliveryDate { get; set; }
-        public string Purposes { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Location Location { get; set; }
@@ -62,7 +60,5 @@ namespace TotalModel.Models
         public virtual ICollection<ProductionOrderDetail> ProductionOrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductionOrder> ProductionOrders { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PlannedOrderMaterial> PlannedOrderMaterials { get; set; }
     }
 }

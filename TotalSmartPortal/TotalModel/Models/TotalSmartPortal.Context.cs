@@ -90,12 +90,12 @@ namespace TotalModel.Models
         public virtual DbSet<BomDetail> BomDetails { get; set; }
         public virtual DbSet<Bom> Boms { get; set; }
         public virtual DbSet<FirmOrderDetail> FirmOrderDetails { get; set; }
+        public virtual DbSet<FirmOrderMaterial> FirmOrderMaterials { get; set; }
         public virtual DbSet<FirmOrder> FirmOrders { get; set; }
         public virtual DbSet<PlannedOrderDetail> PlannedOrderDetails { get; set; }
         public virtual DbSet<PlannedOrder> PlannedOrders { get; set; }
         public virtual DbSet<ProductionOrderDetail> ProductionOrderDetails { get; set; }
         public virtual DbSet<ProductionOrder> ProductionOrders { get; set; }
-        public virtual DbSet<PlannedOrderMaterial> PlannedOrderMaterials { get; set; }
     
         public virtual ObjectResult<string> AccountInvoicePostSaveValidate(Nullable<int> entityID)
         {
@@ -2347,15 +2347,6 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductionOrderIndex>("GetProductionOrderIndexes", aspUserIDParameter, fromDateParameter, toDateParameter);
         }
     
-        public virtual ObjectResult<ProductionOrderViewDetail> GetProductionOrderViewDetails(Nullable<int> productionOrderID)
-        {
-            var productionOrderIDParameter = productionOrderID.HasValue ?
-                new ObjectParameter("ProductionOrderID", productionOrderID) :
-                new ObjectParameter("ProductionOrderID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductionOrderViewDetail>("GetProductionOrderViewDetails", productionOrderIDParameter);
-        }
-    
         public virtual ObjectResult<string> ProductionOrderApproved(Nullable<int> entityID)
         {
             var entityIDParameter = entityID.HasValue ?
@@ -2738,35 +2729,6 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductionOrderPendingCustomer>("GetProductionOrderPendingCustomers", locationIDParameter);
         }
     
-        public virtual ObjectResult<ProductionOrderPendingPlannedOrderDetail> GetProductionOrderPendingPlannedOrderDetails(Nullable<int> locationID, Nullable<int> productionOrderID, Nullable<int> plannedOrderID, Nullable<int> customerID, string plannedOrderDetailIDs, Nullable<bool> isReadonly)
-        {
-            var locationIDParameter = locationID.HasValue ?
-                new ObjectParameter("LocationID", locationID) :
-                new ObjectParameter("LocationID", typeof(int));
-    
-            var productionOrderIDParameter = productionOrderID.HasValue ?
-                new ObjectParameter("ProductionOrderID", productionOrderID) :
-                new ObjectParameter("ProductionOrderID", typeof(int));
-    
-            var plannedOrderIDParameter = plannedOrderID.HasValue ?
-                new ObjectParameter("PlannedOrderID", plannedOrderID) :
-                new ObjectParameter("PlannedOrderID", typeof(int));
-    
-            var customerIDParameter = customerID.HasValue ?
-                new ObjectParameter("CustomerID", customerID) :
-                new ObjectParameter("CustomerID", typeof(int));
-    
-            var plannedOrderDetailIDsParameter = plannedOrderDetailIDs != null ?
-                new ObjectParameter("PlannedOrderDetailIDs", plannedOrderDetailIDs) :
-                new ObjectParameter("PlannedOrderDetailIDs", typeof(string));
-    
-            var isReadonlyParameter = isReadonly.HasValue ?
-                new ObjectParameter("IsReadonly", isReadonly) :
-                new ObjectParameter("IsReadonly", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductionOrderPendingPlannedOrderDetail>("GetProductionOrderPendingPlannedOrderDetails", locationIDParameter, productionOrderIDParameter, plannedOrderIDParameter, customerIDParameter, plannedOrderDetailIDsParameter, isReadonlyParameter);
-        }
-    
         public virtual ObjectResult<ProductionOrderPendingPlannedOrder> GetProductionOrderPendingPlannedOrders(Nullable<int> locationID)
         {
             var locationIDParameter = locationID.HasValue ?
@@ -2975,6 +2937,44 @@ namespace TotalModel.Models
                 new ObjectParameter("CommodityID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BomBase>("GetBomBases", searchTextParameter, commodityIDParameter);
+        }
+    
+        public virtual ObjectResult<ProductionOrderPendingFirmOrder> GetProductionOrderPendingFirmOrders(Nullable<int> locationID, Nullable<int> productionOrderID, Nullable<int> plannedOrderID, Nullable<int> customerID, string firmOrderIDs, Nullable<bool> isReadonly)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            var productionOrderIDParameter = productionOrderID.HasValue ?
+                new ObjectParameter("ProductionOrderID", productionOrderID) :
+                new ObjectParameter("ProductionOrderID", typeof(int));
+    
+            var plannedOrderIDParameter = plannedOrderID.HasValue ?
+                new ObjectParameter("PlannedOrderID", plannedOrderID) :
+                new ObjectParameter("PlannedOrderID", typeof(int));
+    
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            var firmOrderIDsParameter = firmOrderIDs != null ?
+                new ObjectParameter("FirmOrderIDs", firmOrderIDs) :
+                new ObjectParameter("FirmOrderIDs", typeof(string));
+    
+            var isReadonlyParameter = isReadonly.HasValue ?
+                new ObjectParameter("IsReadonly", isReadonly) :
+                new ObjectParameter("IsReadonly", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductionOrderPendingFirmOrder>("GetProductionOrderPendingFirmOrders", locationIDParameter, productionOrderIDParameter, plannedOrderIDParameter, customerIDParameter, firmOrderIDsParameter, isReadonlyParameter);
+        }
+    
+        public virtual ObjectResult<ProductionOrderViewDetail> GetProductionOrderViewDetails(Nullable<int> productionOrderID)
+        {
+            var productionOrderIDParameter = productionOrderID.HasValue ?
+                new ObjectParameter("ProductionOrderID", productionOrderID) :
+                new ObjectParameter("ProductionOrderID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductionOrderViewDetail>("GetProductionOrderViewDetails", productionOrderIDParameter);
         }
     }
 }

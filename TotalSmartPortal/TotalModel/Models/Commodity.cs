@@ -32,9 +32,9 @@ namespace TotalModel.Models
             this.BomDetails1 = new HashSet<BomDetail>();
             this.Boms = new HashSet<Bom>();
             this.FirmOrderDetails = new HashSet<FirmOrderDetail>();
+            this.FirmOrderMaterials = new HashSet<FirmOrderMaterial>();
             this.PlannedOrderDetails = new HashSet<PlannedOrderDetail>();
             this.ProductionOrderDetails = new HashSet<ProductionOrderDetail>();
-            this.PlannedOrderMaterials = new HashSet<PlannedOrderMaterial>();
         }
     
         public int CommodityID { get; set; }
@@ -108,10 +108,10 @@ namespace TotalModel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FirmOrderDetail> FirmOrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FirmOrderMaterial> FirmOrderMaterials { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PlannedOrderDetail> PlannedOrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductionOrderDetail> ProductionOrderDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PlannedOrderMaterial> PlannedOrderMaterials { get; set; }
     }
 }
