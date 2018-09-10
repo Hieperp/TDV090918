@@ -31,7 +31,7 @@ namespace TotalDTO.Productions
         {
             base.PerformPresaveRule();
 
-            this.DtoDetails().ToList().ForEach(e => { e.CustomerID = this.CustomerID; e.Description = e.CombineIndex == null ? e.CommodityCode + " [" + e.Quantity.ToString("N" + GlobalEnums.rndQuantity.ToString()) + "] " : string.Join(", ", this.DtoDetails().Where(w => w.CombineIndex == e.CombineIndex).Select(o => o.CommodityCode + " [" + o.Quantity.ToString("N" + GlobalEnums.rndQuantity.ToString()) + "] ")); });
+            this.DtoDetails().ToList().ForEach(e => { e.CustomerID = this.CustomerID; e.Description = e.CombineIndex == null ? e.GetDescription() : string.Join(", ", this.DtoDetails().Where(w => w.CombineIndex == e.CombineIndex).Select(o => o.GetDescription())); });
         }
     }
 

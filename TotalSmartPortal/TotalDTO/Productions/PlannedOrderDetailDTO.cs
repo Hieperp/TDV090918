@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 using TotalModel;
 using TotalDTO.Helpers;
+using TotalBase.Enums;
 
 namespace TotalDTO.Productions
 {
@@ -45,5 +46,8 @@ namespace TotalDTO.Productions
         public int? CombineIndex { get; set; }
 
         public string Description { get; set; }
+
+        public string GetDescription() { return this.CommodityCode + " [" + this.Quantity.ToString("N" + GlobalEnums.rndQuantity.ToString()) + "] ";
+        }
     }
 }
