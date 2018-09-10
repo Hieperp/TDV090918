@@ -25,10 +25,7 @@ namespace TotalDTO.Productions
         public string Code { get; set; }
 
         //public virtual int  CustomerID { get; set; }
-        public virtual int CustomerID { get { return 1; } }
-
-
-        public string DetailDescription { get { return string.Join(", ", this.DtoDetails().Select(o => o.CommodityCode + " [" + o.Quantity.ToString("N" + GlobalEnums.rndQuantity.ToString()) + "] ")); } }
+        public virtual int CustomerID { get { return 1; } }        
 
         public override void PerformPresaveRule()
         {
