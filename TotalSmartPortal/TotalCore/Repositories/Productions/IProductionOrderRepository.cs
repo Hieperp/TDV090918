@@ -14,6 +14,6 @@ namespace TotalCore.Repositories.Productions
         IEnumerable<ProductionOrderPendingCustomer> GetCustomers(int? locationID);
         IEnumerable<ProductionOrderPendingPlannedOrder> GetPlannedOrders(int? locationID);
 
-        IEnumerable<ProductionOrderPendingPlannedOrderDetail> GetPendingPlannedOrderDetails(int? locationID, int? productionOrderID, int? plannedOrderID, int? customerID, string plannedOrderDetailIDs, bool isReadonly);
+        IEnumerable<ProductionOrderPendingFirmOrder> GetPendingFirmOrders(int? locationID, int? productionOrderID, int? plannedOrderID, int? customerID, string firmOrderIDs, bool isReadonly);
     }
 }

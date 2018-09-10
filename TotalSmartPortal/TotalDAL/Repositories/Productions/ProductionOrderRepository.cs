@@ -50,10 +50,10 @@ namespace TotalDAL.Repositories.Productions
             return pendingPlannedOrders;
         }
 
-        public IEnumerable<ProductionOrderPendingPlannedOrderDetail> GetPendingPlannedOrderDetails(int? locationID, int? productionOrderID, int? plannedOrderID, int? customerID, string plannedOrderDetailIDs, bool isReadonly)
+        public IEnumerable<ProductionOrderPendingFirmOrder> GetPendingFirmOrders(int? locationID, int? productionOrderID, int? plannedOrderID, int? customerID, string firmOrderIDs, bool isReadonly)
         {
             this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = false;
-            IEnumerable<ProductionOrderPendingPlannedOrderDetail> pendingPlannedOrderDetails = base.TotalSmartPortalEntities.GetProductionOrderPendingPlannedOrderDetails(locationID, productionOrderID, plannedOrderID, customerID, plannedOrderDetailIDs, isReadonly).ToList();
+            IEnumerable<ProductionOrderPendingFirmOrder> pendingPlannedOrderDetails = base.TotalSmartPortalEntities.GetProductionOrderPendingFirmOrders(locationID, productionOrderID, plannedOrderID, customerID, firmOrderIDs, isReadonly).ToList();
             this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = true;
 
             return pendingPlannedOrderDetails;
