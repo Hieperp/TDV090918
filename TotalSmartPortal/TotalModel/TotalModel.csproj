@@ -518,6 +518,9 @@
     <Compile Include="Models\Workshift.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\WorkshiftBase.cs">
+      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validations\DatabaseConcurrencyException.cs" />
     <Compile Include="Validations\DatabaseValidationErrors.cs" />

@@ -4760,6 +4760,9 @@ warning 6035: The relationship 'FK_SalesReturns_AspNetUsers2' has columns that a
           <Parameter Name="SearchText" Type="nvarchar" Mode="In" />
           <Parameter Name="WarehouseTaskIDList" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="GetWorkshiftBases" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SearchText" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="GoodsDeliveryPostSaveValidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
@@ -10086,6 +10089,9 @@ warning 6035: The relationship 'FK_SalesReturns_AspNetUsers2' has columns that a
             <End Role="Workshift" EntitySet="Workshifts" />
             <End Role="ProductionOrderDetail" EntitySet="ProductionOrderDetails" />
           </AssociationSet>
+          <FunctionImport Name="GetWorkshiftBases" ReturnType="Collection(TotalSmartPortalModel.WorkshiftBase)">
+            <Parameter Name="SearchText" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="AccountInvoiceIndex">
           <Property Type="Int32" Name="AccountInvoiceID" Nullable="false" />
@@ -13688,6 +13694,11 @@ warning 6035: The relationship 'FK_SalesReturns_AspNetUsers2' has columns that a
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="WorkshiftBase">
+          <Property Type="Int32" Name="WorkshiftID" Nullable="false" />
+          <Property Type="String" Name="WorkshiftCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="WorkshiftName" Nullable="false" MaxLength="50" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -17368,6 +17379,15 @@ warning 6035: The relationship 'FK_SalesReturns_AspNetUsers2' has columns that a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetWorkshiftBases" FunctionName="TotalSmartPortalModel.Store.GetWorkshiftBases">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartPortalModel.WorkshiftBase">
+                <ScalarProperty Name="WorkshiftID" ColumnName="WorkshiftID" />
+                <ScalarProperty Name="WorkshiftCode" ColumnName="WorkshiftCode" />
+                <ScalarProperty Name="WorkshiftName" ColumnName="WorkshiftName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

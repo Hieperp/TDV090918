@@ -2976,5 +2976,14 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductionOrderViewDetail>("GetProductionOrderViewDetails", productionOrderIDParameter);
         }
+    
+        public virtual ObjectResult<WorkshiftBase> GetWorkshiftBases(string searchText)
+        {
+            var searchTextParameter = searchText != null ?
+                new ObjectParameter("SearchText", searchText) :
+                new ObjectParameter("SearchText", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WorkshiftBase>("GetWorkshiftBases", searchTextParameter);
+        }
     }
 }
