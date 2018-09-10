@@ -43,6 +43,10 @@ namespace TotalModel.Models
         public bool InActive { get; set; }
         public bool InActivePartial { get; set; }
         public Nullable<System.DateTime> InActiveDate { get; set; }
+        public Nullable<System.DateTime> VoucherDate { get; set; }
+        public Nullable<System.DateTime> DeliveryDate { get; set; }
+        public string Purposes { get; set; }
+        public int PlannedOrderID { get; set; }
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
