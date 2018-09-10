@@ -26,11 +26,25 @@
             </div>
 
             <div class="form-group">
+                @Html.LabelFor(model => model.ViewDetails[0].MoldCode)
+                <div class="div-input">
+                    @Html.Kendo().MaskedTextBoxFor(model => model.ViewDetails[0].MoldCode).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ViewDetails[0].BomCode)
+                <div class="div-input">
+                    @Html.Kendo().MaskedTextBoxFor(model => model.ViewDetails[0].BomCode).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
+                </div>
+            </div>
+
+            <div class="form-group">
                 @Html.LabelFor(model => model.ViewDetails[0].Quantity)
                 <div class="div-input">
                     @Html.Kendo().MaskedTextBoxFor(model => model.ViewDetails[0].Quantity).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
                 </div>
-            </div>
+            </div>        
 
             <div class="form-group">
                 @Html.EditorFor(d => d.VoidType)

@@ -7,10 +7,10 @@
         .DataTextField("BomCode")
         .Filter("contains")
         .MinLength(Settings.AutoCompleteMinLenght)
-        .Placeholder("Chọn mã khuôn...")
+        .Placeholder("Chọn nguyên liệu...")
         .HeaderTemplate("<div class=\"dropdown-header general-custom-header bom-custom-header\">" +
                 "<span class=\"k-widget k-header\">Mã</span>" +
-                "<span class=\"k-widget k-header\">Tên khuôn</span>" +
+                "<span class=\"k-widget k-header\">Tên nguyên liệu</span>" +
                 "</div>")
         .Template("<div class=\"dropdown-body general-custom-body bom-custom-body\">" +
                 "<span class=\"k-state-default\"><p>#: data.BomCode #</p></span>" +
@@ -63,12 +63,12 @@
 
 
     .bom-custom-header > span:first-child {
-        width: 85px;
+        width: 105px;
     }
 
 
     .bom-custom-header > span:last-child {
-        width: 297px;
+        width: 277px;
     }
 
 
@@ -77,12 +77,12 @@
 
 
     .k-item > .bom-custom-body > span:first-child {
-        width: 84px;
+        width: 104px;
     }
 
 
     .k-item > .bom-custom-body > span:last-child {
-        width: 270px;
+        width: 250px;
     }
 
     /*#endregion */

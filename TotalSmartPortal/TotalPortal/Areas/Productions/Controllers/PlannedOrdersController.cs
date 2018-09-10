@@ -19,7 +19,7 @@ namespace TotalPortal.Areas.Productions.Controllers
     public class PlannedOrdersController : GenericViewDetailController<PlannedOrder, PlannedOrderDetail, PlannedOrderViewDetail, PlannedOrderDTO, PlannedOrderPrimitiveDTO, PlannedOrderDetailDTO, PlannedOrderViewModel>
     {
         public PlannedOrdersController(IPlannedOrderService plannedOrderService, IPlannedOrderViewModelSelectListBuilder plannedOrderViewModelSelectListBuilder)
-            : base(plannedOrderService, plannedOrderViewModelSelectListBuilder)
+            : base(plannedOrderService, plannedOrderViewModelSelectListBuilder, true)
         {
         }
 

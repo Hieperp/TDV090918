@@ -29,6 +29,26 @@
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.VoucherDate)
+            <div class="div-input">
+                @Html.Kendo().DateTimePickerFor(model => model.VoucherDate).HtmlAttributes(new { @class = "left-panel-input" })
+            </div>
+            <div class="div-validation-message">
+                @Html.ValidationMessageFor(model => model.VoucherDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DeliveryDate)
+            <div class="div-input">
+                @Html.Kendo().DateTimePickerFor(model => model.DeliveryDate).HtmlAttributes(new { @class = "left-panel-input" })
+            </div>
+            <div class="div-validation-message">
+                @Html.ValidationMessageFor(model => model.DeliveryDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
 
         @if (@Model.Voidable || @Model.UnVoidable || @Model.VoidTypeID > 0)
         { //Don't render when in Edit Mode, so: do not add VoidType.VoidTypeID [Required] DataAnnotations to the view to submit to controller when edit
@@ -41,10 +61,22 @@
 
     <div class="right-panel">
 
-        @*<div class="right-top-panel right-top-panel-H1">
+        <div class="right-top-panel right-top-panel-H2">
+            @Html.EditorFor(d => d.Customer, new { CustomerDescriptionHidden = "false", CustomerDisplayName = @Model.GetDisplayName(m => m.Customer) })
 
-                @Html.EditorFor(d => d.Customer, new { CustomerDescriptionHidden = "true", CustomerDisplayName = @Model.GetDisplayName(m => m.Customer) })
-            </div>*@
+            <div class="form-group">
+                <div class="right-panel-label right-panel-label-whole-width">
+                    @Html.LabelFor(model => model.Purposes)
+                </div>
+                <div class="div-input">
+                    @Html.Kendo().MaskedTextBoxFor(model => model.Purposes).HtmlAttributes(new { @class = "right-panel-input" })
+                </div>
+                <div class="div-validation-message">
+                    @Html.ValidationMessageFor(model => model.Purposes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
 
         <div class="div-k-grid-detail">
             @(Html.Kendo().Grid(Model.PlannedOrderViewDetails)
@@ -60,19 +92,19 @@
 
                     columns.Bound(p => p.CommodityID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= CommodityID #" + "<input type='hidden' name='PlannedOrderViewDetails[#= index(data) #].CommodityID' value='#= CommodityID #' />");
-                    columns.Bound(p => p.CommodityName).DisplayNameTitle().Width(90).HtmlAttributes(new { style = "" }).Hidden()
-                        .ClientTemplate("#= CommodityName #" + "<input type='hidden' name='PlannedOrderViewDetails[#= index(data) #].CommodityName' value='#= CommodityName #' />");
                     columns.Bound(p => p.CommodityCode).DisplayNameTitle().Width(200)
                         .ClientFooterTemplate("Tổng cộng (#= kendo.format('{0:n0}', count) # dòng)")
                         .ClientTemplate("<div> #= CommodityCode #</div>" +
                         //"<div> #= '[' ##= WarehouseCode ##= ']' #</div>" +
                                 "<div> #= (VoidTypeName == null)? '' : VoidTypeName #</div>" +
                                 "<input type='hidden' name='PlannedOrderViewDetails[#= index(data) #].CommodityCode' value='#= CommodityCode #' />");
+                    columns.Bound(p => p.CommodityName).DisplayNameTitle().Width(250).HtmlAttributes(new { style = "" })
+                     .ClientTemplate("#= CommodityName #" + "<input type='hidden' name='PlannedOrderViewDetails[#= index(data) #].CommodityName' value='#= CommodityName #' />");
 
                     columns.Bound(p => p.CommodityTypeID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= CommodityTypeID #" + "<input type='hidden' name='PlannedOrderViewDetails[#= index(data) #].CommodityTypeID' value='#= CommodityTypeID #' />");
 
-                    columns.Bound(p => p.CombineIndex).DisplayNameTitle().HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(39)
+                    columns.Bound(p => p.CombineIndex).DisplayNameTitle().HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(70)
                         .ClientTemplate("#= (CombineIndex == null)? '' : CombineIndex #" + "<input type='hidden' name='PlannedOrderViewDetails[#= index(data) #].CombineIndex' value='#= (CombineIndex == null) ? '' : CombineIndex #' />");
 
                     columns.Bound(p => p.MoldID).DisplayNameTitle().Hidden()
@@ -83,16 +115,16 @@
                     columns.Bound(p => p.BomID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= BomID #" + "<input type='hidden' name='PlannedOrderViewDetails[#= index(data) #].BomID' value='#= BomID #' />");
                     columns.Bound(p => p.BomCode).DisplayNameTitle().Width(200)
-                        .ClientTemplate("#= BomCode #" + "<input type='hidden' name='PlannedOrderViewDetails[#= index(data) #].BomCode' value='#= BomCode #' />");
+                        .ClientTemplate("#= (BomCode == null)? '' : BomCode #" + "<input type='hidden' name='PlannedOrderViewDetails[#= index(data) #].BomCode' value='#= BomCode #' />");
 
 
-                    columns.Bound(p => p.Quantity).DisplayNameTitle().HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(50)
+                    columns.Bound(p => p.Quantity).DisplayNameTitle().HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(70)
                         .Format(Settings.kfmQuantity)
                         .ClientFooterTemplate("#= kendo.format('" + Settings.kfmQuantity + "', sum) #")
                         .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', Quantity) #" + "<input type='hidden' name='PlannedOrderViewDetails[#= index(data) #].Quantity' value='#= Quantity #' />");
 
 
-                    columns.Bound(p => p.Remarks).DisplayNameTitle().Hidden()
+                    columns.Bound(p => p.Remarks).DisplayNameTitle().Width(200)
                         .ClientTemplate("#= (Remarks == null)? '' : Remarks #" + "<input type='hidden' name='PlannedOrderViewDetails[#= index(data) #].Remarks' value='#= (Remarks == null) ? '' : Remarks #' />");
 
                     columns.Bound(p => p.InActivePartial).DisplayNameTitle().Hidden()
@@ -115,6 +147,10 @@
                         {
                             toolbar.Template(@<text>
                                 <button type="button" class="k-button" onclick="$('#kendoGridDetails').data('kendoGrid').addRow()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Thêm mặt hàng </button>
+
+                                <span style="float:right">
+                                    @Html.Partial("~/Views/Helpers/Commons/_Import.cshtml")
+                                </span>
 
                             </text>);
                         }
@@ -155,22 +191,22 @@
                             }
                         </text>);
                     }).DataSource(dataSource => dataSource
-                                                            .Ajax()
-                                                            .Batch(true)
-                                                            .ServerOperation(false)
-                                                            .Model(model =>
-                                                            {
-                                                                model.Id(x => x.PlannedOrderDetailID);
-                                                                model.Field(m => m.PlannedOrderDetailID).DefaultValue(0);
-                                                                model.Field(m => m.PlannedOrderID).DefaultValue(@Model.PlannedOrderID);
-                                                            })
-                                                            .Events(events =>
-                                                            {
-                                                                events.Error("kendGrid_ErrorHandler");
-                                                            })
-                                                            .Aggregates(a => a.Add(x => x.CommodityCode).Count())
-                                                            .Aggregates(a => a.Add(x => x.Quantity).Sum())
-                                                        )
+                                                                                                .Ajax()
+                                                                                                .Batch(true)
+                                                                                                .ServerOperation(false)
+                                                                                                .Model(model =>
+                                                                                                {
+                                                                                                    model.Id(x => x.PlannedOrderDetailID);
+                                                                                                    model.Field(m => m.PlannedOrderDetailID).DefaultValue(0);
+                                                                                                    model.Field(m => m.PlannedOrderID).DefaultValue(@Model.PlannedOrderID);
+                                                                                                })
+                                                                                                .Events(events =>
+                                                                                                {
+                                                                                                    events.Error("kendGrid_ErrorHandler");
+                                                                                                })
+                                                                                                .Aggregates(a => a.Add(x => x.CommodityCode).Count())
+                                                                                                .Aggregates(a => a.Add(x => x.Quantity).Sum())
+                                                                                            )
             )
         </div>
 
@@ -222,10 +258,10 @@
 
         @Html.Partial("~/Views/Helpers/Bases/_BaseSubmit.cshtml")
 
-        @if (Model.Editable)
-        {
-            <div><input style="font-size: 11px;" type="file" name="xlfile" id="xlf" /></div>
-        }
+        @*@if (Model.Editable)
+            {
+                <div><input style="font-size: 11px;" type="file" name="xlfile" id="xlf" /></div>
+            }*@
 
     </div>
 }
@@ -237,8 +273,13 @@
     function callVoidDetail(plannedOrderDetailID) {
         require(["kpopupWindow"], function (kpopupWindow) {
             var voidDetailWindow = new kpopupWindow();
-            voidDetailWindow.openWindow($("#popupWindow"), "@Url.Action("VoidDetail", "PlannedOrders")" + "/" + $("#PlannedOrderID").val() + "/" + plannedOrderDetailID, "Hủy/ phục hồi một phần đơn hàng", @Settings.PopupWidthVoid,  @Settings.PopupHeightVoid);
+            voidDetailWindow.openWindow($("#popupWindow"), "@Url.Action("VoidDetail", "PlannedOrders")" + "/" + $("#PlannedOrderID").val() + "/" + plannedOrderDetailID, "Hủy/ phục hồi một phần đơn hàng", @Settings.PopupWidthVoid,  @Settings.PopupHeightSmall);
         });
     }
 </script>
 
+<style type="text/css">
+    .k-grid td {
+        white-space: nowrap;
+    }
+</style>

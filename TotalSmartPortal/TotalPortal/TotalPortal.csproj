@@ -1176,7 +1176,6 @@
     <Content Include="Areas\Inventories\Views\MaterialIssues\_MaterialIssue.cshtml" />
     <Content Include="Areas\Inventories\Views\MaterialIssues\Approve.cshtml" />
     <Content Include="Areas\Productions\Views\PlannedOrders\Approve.cshtml" />
-    <Content Include="Areas\Productions\Views\PlannedOrders\Create.cshtml" />
     <Content Include="Areas\Productions\Views\PlannedOrders\Delete.cshtml" />
     <Content Include="Areas\Productions\Views\PlannedOrders\Edit.cshtml" />
     <Content Include="Areas\Productions\Views\PlannedOrders\Index.cshtml" />
@@ -1274,6 +1273,7 @@
     <Content Include="Areas\Inventories\Views\OtherItemReceipts\Index.cshtml" />
     <Content Include="Areas\Inventories\Views\OtherItemReceipts\Print.cshtml" />
     <Content Include="Areas\Purchases\Views\PurchaseRequisitions\CreateWizard.cshtml" />
+    <Content Include="Areas\Productions\Views\PlannedOrders\CreateWizard.cshtml" />
     <None Include="Properties\PublishProfiles\TDV.pubxml" />
     <None Include="Properties\PublishProfiles\VCP.pubxml">
       <SubType>Designer</SubType>
@@ -1445,7 +1445,7 @@
     <Content Include="Scripts\Controllers\Inventories\WarehouseAdjustments\Open.js" />
     <Content Include="Scripts\Controllers\Inventories\WarehouseAdjustments\Print.js" />
     <Content Include="Scripts\Controllers\Productions\PlannedOrders\Approve.js" />
-    <Content Include="Scripts\Controllers\Productions\PlannedOrders\Create.js" />
+    <Content Include="Scripts\Controllers\Productions\PlannedOrders\CreateWizard.js" />
     <Content Include="Scripts\Controllers\Productions\PlannedOrders\Delete.js" />
     <Content Include="Scripts\Controllers\Productions\PlannedOrders\Edit.js" />
     <Content Include="Scripts\Controllers\Productions\PlannedOrders\Index.js" />
