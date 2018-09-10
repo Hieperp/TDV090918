@@ -319,10 +319,10 @@ namespace TotalDAL.Repositories
             Helpers.SqlProgrammability.Productions.PlannedOrder plannedOrder = new Helpers.SqlProgrammability.Productions.PlannedOrder(totalSmartPortalEntities);
             plannedOrder.RestoreProcedure();
 
-            //return;
+            return;
 
-            //Helpers.SqlProgrammability.Productions.ProductionOrder productionOrder = new Helpers.SqlProgrammability.Productions.ProductionOrder(totalSmartPortalEntities);
-            //productionOrder.RestoreProcedure();
+            Helpers.SqlProgrammability.Productions.ProductionOrder productionOrder = new Helpers.SqlProgrammability.Productions.ProductionOrder(totalSmartPortalEntities);
+            productionOrder.RestoreProcedure();
 
             //return;
 
