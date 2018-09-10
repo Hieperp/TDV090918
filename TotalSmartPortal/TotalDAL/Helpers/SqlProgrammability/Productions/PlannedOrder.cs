@@ -137,7 +137,6 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.totalSmartPortalEntities.CreateProcedureToCheckExisting("PlannedOrderVoidable", queryArray);
         }
 
-
         private void PlannedOrderToggleApproved()
         {
             string queryString = " @EntityID int, @Approved bit " + "\r\n";
@@ -150,13 +149,51 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "           BEGIN " + "\r\n";
             queryString = queryString + "               UPDATE          PlannedOrderDetails  SET Approved = @Approved WHERE PlannedOrderID = @EntityID ; " + "\r\n";
             queryString = queryString + "               IF (@Approved = 1) " + "\r\n";
-            queryString = queryString + "                   INSERT INTO     PlannedOrderMaterials (PlannedOrderDetailID, PlannedOrderID, EntryDate, LocationID, CustomerID, CommodityID, CommodityTypeID, BomID, MaterialID, MoldID, DeliveryDate, BlockUnit, BlockQuantity, Quantity, QuantityIssued, Remarks, VoidTypeID, Approved, InActive, InActivePartial, InActivePartialDate) " + "\r\n";
-            queryString = queryString + "                   SELECT          PlannedOrderDetails.PlannedOrderDetailID, PlannedOrderDetails.PlannedOrderID, PlannedOrderDetails.EntryDate, PlannedOrderDetails.LocationID, PlannedOrderDetails.CustomerID, PlannedOrderDetails.CommodityID, PlannedOrderDetails.CommodityTypeID, PlannedOrderDetails.BomID, BomDetails.MaterialID, PlannedOrderDetails.MoldID, PlannedOrderDetails.DeliveryDate, BomDetails.BlockUnit, BomDetails.BlockQuantity, ROUND(PlannedOrderDetails.Quantity * BomDetails.BlockQuantity / BomDetails.BlockUnit, " + (int)GlobalEnums.rndQuantity + ") AS Quantity, 0 AS QuantityIssued, PlannedOrderDetails.Remarks, PlannedOrderDetails.VoidTypeID, PlannedOrderDetails.Approved, PlannedOrderDetails.InActive, PlannedOrderDetails.InActivePartial, PlannedOrderDetails.InActivePartialDate " + "\r\n";
-            queryString = queryString + "                   FROM            PlannedOrderDetails INNER JOIN BomDetails ON PlannedOrderDetails.PlannedOrderID = @EntityID AND PlannedOrderDetails.BomID = BomDetails.BomID " + "\r\n";
-            queryString = queryString + "                   ORDER BY        PlannedOrderDetails.PlannedOrderDetailID, BomDetails.BomDetailID ; " + "\r\n";
+
+            queryString = queryString + "                   BEGIN " + "\r\n";
+
+            queryString = queryString + "                       DECLARE         @CombineIndex int, @PriorCombineIndex int, @PlannedOrderDetailID int, @FirmOrderID int; " + "\r\n";
+
+            queryString = queryString + "                       DECLARE         CURSORPlannedOrderDetails CURSOR LOCAL FOR SELECT CombineIndex, PlannedOrderDetailID FROM PlannedOrderDetails WHERE PlannedOrderID = @EntityID ORDER BY CombineIndex, PlannedOrderDetailID; " + "\r\n";
+            queryString = queryString + "                       OPEN            CURSORPlannedOrderDetails; " + "\r\n";
+            queryString = queryString + "                       FETCH NEXT FROM CURSORPlannedOrderDetails INTO @CombineIndex, @PlannedOrderDetailID; " + "\r\n";
+
+            queryString = queryString + "                       WHILE @@FETCH_STATUS = 0   " + "\r\n";
+            queryString = queryString + "                           BEGIN " + "\r\n";
+            queryString = queryString + "                               IF (@PriorCombineIndex <> @CombineIndex OR @CombineIndex IS NULL OR (NOT @CombineIndex IS NULL AND @PriorCombineIndex IS NULL)) " + "\r\n";
+            queryString = queryString + "                                   BEGIN " + "\r\n";
+            queryString = queryString + "                                       INSERT INTO     FirmOrders         (EntryDate, Reference, Code, PlannedOrderID, CustomerID, UserID, PreparedPersonID, OrganizationalUnitID, LocationID, ApproverID, TotalQuantity, TotalQuantitySemifinished, DetailDescription, Description, Remarks, CreatedDate, EditedDate, Approved, ApprovedDate, VoidTypeID, InActive, InActivePartial, InActiveDate) " + "\r\n";
+            queryString = queryString + "                                       SELECT                              EntryDate, Reference, Code, PlannedOrderID, CustomerID, UserID, PreparedPersonID, OrganizationalUnitID, LocationID, ApproverID, TotalQuantity, TotalQuantitySemifinished, DetailDescription, Description, Remarks, CreatedDate, EditedDate, Approved, ApprovedDate, VoidTypeID, InActive, InActivePartial, InActiveDate FROM PlannedOrders WHERE PlannedOrderID = @EntityID; " + "\r\n";
+            queryString = queryString + "                                       SELECT          @FirmOrderID    =   SCOPE_IDENTITY(); " + "\r\n";
+            queryString = queryString + "                                       SET             @PriorCombineIndex = @CombineIndex; " + "\r\n";
+            queryString = queryString + "                                   END " + "\r\n";
+
+            queryString = queryString + "                               INSERT INTO     FirmOrderDetails   (FirmOrderID, EntryDate, PlannedOrderID, PlannedOrderDetailID, LocationID, CustomerID, CommodityID, CommodityTypeID, BomID, MoldID, DeliveryDate, Quantity, QuantitySemifinished, Remarks, VoidTypeID, Approved, InActive, InActivePartial, InActivePartialDate) " + "\r\n";
+            queryString = queryString + "                               SELECT                              @FirmOrderID, EntryDate, PlannedOrderID, PlannedOrderDetailID, LocationID, CustomerID, CommodityID, CommodityTypeID, BomID, MoldID, DeliveryDate, Quantity, QuantitySemifinished, Remarks, VoidTypeID, Approved, InActive, InActivePartial, InActivePartialDate FROM PlannedOrderDetails WHERE PlannedOrderDetailID = @PlannedOrderDetailID; " + "\r\n";
+
+            queryString = queryString + "                               FETCH NEXT FROM CURSORPlannedOrderDetails INTO @CombineIndex, @PlannedOrderDetailID; " + "\r\n";
+            queryString = queryString + "                           END " + "\r\n";
+
+            queryString = queryString + "                       UPDATE          FirmOrders SET FirmOrders.TotalQuantity = FirmOrderDetails.TotalQuantity, FirmOrders.TotalQuantitySemifinished = FirmOrderDetails.TotalQuantitySemifinished " + "\r\n";
+            queryString = queryString + "                       FROM            FirmOrders " + "\r\n";
+            queryString = queryString + "                                       INNER JOIN (SELECT FirmOrderID, SUM(Quantity) AS TotalQuantity, SUM(QuantitySemifinished) AS TotalQuantitySemifinished FROM FirmOrderDetails WHERE PlannedOrderID = @EntityID GROUP BY FirmOrderID) FirmOrderDetails ON FirmOrders.PlannedOrderID = @EntityID AND FirmOrders.FirmOrderID = FirmOrderDetails.FirmOrderID; " + "\r\n";
             
+
+            //    queryString = queryString + "                   INSERT INTO     PlannedOrderMaterials (PlannedOrderDetailID, PlannedOrderID, EntryDate, LocationID, CustomerID, CommodityID, CommodityTypeID, BomID, MaterialID, MoldID, DeliveryDate, BlockUnit, BlockQuantity, Quantity, QuantityIssued, Remarks, VoidTypeID, Approved, InActive, InActivePartial, InActivePartialDate) " + "\r\n";
+            //    queryString = queryString + "                   SELECT          PlannedOrderDetails.PlannedOrderDetailID, PlannedOrderDetails.PlannedOrderID, PlannedOrderDetails.EntryDate, PlannedOrderDetails.LocationID, PlannedOrderDetails.CustomerID, PlannedOrderDetails.CommodityID, PlannedOrderDetails.CommodityTypeID, PlannedOrderDetails.BomID, BomDetails.MaterialID, PlannedOrderDetails.MoldID, PlannedOrderDetails.DeliveryDate, BomDetails.BlockUnit, BomDetails.BlockQuantity, ROUND(PlannedOrderDetails.Quantity * BomDetails.BlockQuantity / BomDetails.BlockUnit, " + (int)GlobalEnums.rndQuantity + ") AS Quantity, 0 AS QuantityIssued, PlannedOrderDetails.Remarks, PlannedOrderDetails.VoidTypeID, PlannedOrderDetails.Approved, PlannedOrderDetails.InActive, PlannedOrderDetails.InActivePartial, PlannedOrderDetails.InActivePartialDate " + "\r\n";
+            //    queryString = queryString + "                   FROM            PlannedOrderDetails INNER JOIN BomDetails ON PlannedOrderDetails.PlannedOrderID = @EntityID AND PlannedOrderDetails.BomID = BomDetails.BomID " + "\r\n";
+            //    queryString = queryString + "                   ORDER BY        PlannedOrderDetails.PlannedOrderDetailID, BomDetails.BomDetailID ; " + "\r\n";
+
+            queryString = queryString + "                   END " + "\r\n";
+
             queryString = queryString + "               ELSE " + "\r\n";
-            queryString = queryString + "                   DELETE FROM     PlannedOrderMaterials WHERE PlannedOrderID = @EntityID ; " + "\r\n";
+            queryString = queryString + "                   BEGIN " + "\r\n";
+            queryString = queryString + "                       DELETE FROM     FirmOrderDetails WHERE PlannedOrderID = @EntityID ; " + "\r\n";
+            queryString = queryString + "                       DELETE FROM     FirmOrders WHERE PlannedOrderID = @EntityID ; " + "\r\n";
+
+            queryString = queryString + "                       DELETE FROM     PlannedOrderMaterials WHERE PlannedOrderID = @EntityID ; " + "\r\n";
+            queryString = queryString + "                   END " + "\r\n";
+
             queryString = queryString + "           END " + "\r\n";
             queryString = queryString + "       ELSE " + "\r\n";
             queryString = queryString + "           BEGIN " + "\r\n";
@@ -166,6 +203,35 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             this.totalSmartPortalEntities.CreateStoredProcedure("PlannedOrderToggleApproved", queryString);
         }
+
+        //private void PlannedOrderToggleApproved()
+        //{
+        //    string queryString = " @EntityID int, @Approved bit " + "\r\n";
+        //    queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+        //    queryString = queryString + " AS " + "\r\n";
+
+        //    queryString = queryString + "       UPDATE      PlannedOrders  SET Approved = @Approved, ApprovedDate = GetDate() WHERE PlannedOrderID = @EntityID AND Approved = ~@Approved" + "\r\n";
+
+        //    queryString = queryString + "       IF @@ROWCOUNT = 1 " + "\r\n";
+        //    queryString = queryString + "           BEGIN " + "\r\n";
+        //    queryString = queryString + "               UPDATE          PlannedOrderDetails  SET Approved = @Approved WHERE PlannedOrderID = @EntityID ; " + "\r\n";
+        //    queryString = queryString + "               IF (@Approved = 1) " + "\r\n";
+        //    queryString = queryString + "                   INSERT INTO     PlannedOrderMaterials (PlannedOrderDetailID, PlannedOrderID, EntryDate, LocationID, CustomerID, CommodityID, CommodityTypeID, BomID, MaterialID, MoldID, DeliveryDate, BlockUnit, BlockQuantity, Quantity, QuantityIssued, Remarks, VoidTypeID, Approved, InActive, InActivePartial, InActivePartialDate) " + "\r\n";
+        //    queryString = queryString + "                   SELECT          PlannedOrderDetails.PlannedOrderDetailID, PlannedOrderDetails.PlannedOrderID, PlannedOrderDetails.EntryDate, PlannedOrderDetails.LocationID, PlannedOrderDetails.CustomerID, PlannedOrderDetails.CommodityID, PlannedOrderDetails.CommodityTypeID, PlannedOrderDetails.BomID, BomDetails.MaterialID, PlannedOrderDetails.MoldID, PlannedOrderDetails.DeliveryDate, BomDetails.BlockUnit, BomDetails.BlockQuantity, ROUND(PlannedOrderDetails.Quantity * BomDetails.BlockQuantity / BomDetails.BlockUnit, " + (int)GlobalEnums.rndQuantity + ") AS Quantity, 0 AS QuantityIssued, PlannedOrderDetails.Remarks, PlannedOrderDetails.VoidTypeID, PlannedOrderDetails.Approved, PlannedOrderDetails.InActive, PlannedOrderDetails.InActivePartial, PlannedOrderDetails.InActivePartialDate " + "\r\n";
+        //    queryString = queryString + "                   FROM            PlannedOrderDetails INNER JOIN BomDetails ON PlannedOrderDetails.PlannedOrderID = @EntityID AND PlannedOrderDetails.BomID = BomDetails.BomID " + "\r\n";
+        //    queryString = queryString + "                   ORDER BY        PlannedOrderDetails.PlannedOrderDetailID, BomDetails.BomDetailID ; " + "\r\n";
+            
+        //    queryString = queryString + "               ELSE " + "\r\n";
+        //    queryString = queryString + "                   DELETE FROM     PlannedOrderMaterials WHERE PlannedOrderID = @EntityID ; " + "\r\n";
+        //    queryString = queryString + "           END " + "\r\n";
+        //    queryString = queryString + "       ELSE " + "\r\n";
+        //    queryString = queryString + "           BEGIN " + "\r\n";
+        //    queryString = queryString + "               DECLARE     @msg NVARCHAR(300) = N'Dữ liệu không tồn tại hoặc đã ' + iif(@Approved = 0, 'hủy', '')  + ' duyệt' ; " + "\r\n";
+        //    queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
+        //    queryString = queryString + "           END " + "\r\n";
+
+        //    this.totalSmartPortalEntities.CreateStoredProcedure("PlannedOrderToggleApproved", queryString);
+        //}
 
         private void PlannedOrderToggleVoid()
         {
