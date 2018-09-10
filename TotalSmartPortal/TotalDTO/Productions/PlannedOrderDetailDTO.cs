@@ -43,5 +43,7 @@ namespace TotalDTO.Productions
         [Display(Name = "#")]
         [UIHint("Integer")]
         public int? CombineIndex { get; set; }
+
+        public string Description { get; set; }
     }
 }

@@ -28,13 +28,13 @@ namespace TotalDTO.Productions
         public virtual int CustomerID { get { return 1; } }
 
 
-        public string DetailDescription { get { return string.Join(", ", this.DtoDetails().Select(o => o.CommodityCode + " [" + o.Quantity.ToString("N" + GlobalEnums.rndQuantity.ToString()))); } }
+        public string DetailDescription { get { return string.Join(", ", this.DtoDetails().Select(o => o.CommodityCode + " [" + o.Quantity.ToString("N" + GlobalEnums.rndQuantity.ToString()) + "] ")); } }
 
         public override void PerformPresaveRule()
         {
             base.PerformPresaveRule();
 
-            this.DtoDetails().ToList().ForEach(e => { e.CustomerID = this.CustomerID; });
+            this.DtoDetails().ToList().ForEach(e => { e.CustomerID = this.CustomerID; e.Description = e.CombineIndex == null ? e.CommodityCode + " [" + e.Quantity.ToString("N" + GlobalEnums.rndQuantity.ToString()) + "] " : string.Join(", ", this.DtoDetails().Where(w => w.CombineIndex == e.CombineIndex).Select(o => o.CommodityCode + " [" + o.Quantity.ToString("N" + GlobalEnums.rndQuantity.ToString()) + "] ")); });
         }
     }
 
