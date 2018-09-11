@@ -23,5 +23,9 @@ namespace TotalModel.Models
         public string CustomerCode { get; set; }
         public string CustomerName { get; set; }
         public string CustomerOfficialName { get; set; }
+        public string CustomerVATCode { get; set; }
+        public string CustomerAttentionName { get; set; }
+        public int CustomerTerritoryID { get; set; }
+        public string CustomerEntireTerritoryEntireName { get; set; }
     }
 }

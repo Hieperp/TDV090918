@@ -11664,6 +11664,10 @@ warning 6035: The relationship 'FK_SalesReturns_AspNetUsers2' has columns that a
           <Property Type="String" Name="CustomerCode" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="CustomerOfficialName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="CustomerVATCode" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="CustomerAttentionName" Nullable="true" MaxLength="60" />
+          <Property Type="Int32" Name="CustomerTerritoryID" Nullable="false" />
+          <Property Type="String" Name="CustomerEntireTerritoryEntireName" Nullable="false" MaxLength="508" />
         </ComplexType>
         <EntityType Name="PurchaseRequisitionDetail">
           <Key>
@@ -16707,6 +16711,10 @@ warning 6035: The relationship 'FK_SalesReturns_AspNetUsers2' has columns that a
                 <ScalarProperty Name="CustomerCode" ColumnName="CustomerCode" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
                 <ScalarProperty Name="CustomerOfficialName" ColumnName="CustomerOfficialName" />
+                <ScalarProperty Name="CustomerVATCode" ColumnName="CustomerVATCode" />
+                <ScalarProperty Name="CustomerAttentionName" ColumnName="CustomerAttentionName" />
+                <ScalarProperty Name="CustomerTerritoryID" ColumnName="CustomerTerritoryID" />
+                <ScalarProperty Name="CustomerEntireTerritoryEntireName" ColumnName="CustomerEntireTerritoryEntireName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
