@@ -23,6 +23,7 @@ namespace TotalDTO.Productions
         public int ProductionOrderID { get; set; }
 
         public virtual int CustomerID { get; set; }
+        public virtual int ShiftID { get; set; }
         public virtual int WorkshiftID { get; set; }
 
         public Nullable<int> PlannedOrderID { get; set; }
@@ -44,8 +45,10 @@ namespace TotalDTO.Productions
         {
             base.PerformPresaveRule();
 
+            this.WorkshiftID = this.ShiftID;// JUST INIT A VALUE. THE REAL VALUE OF WorkshiftID WILL BE UPDATE BY ProductionOrderSaveRelative
+
             string plannedOrderReferences = ""; string plannedOrderCodes = "";
-            this.DtoDetails().ToList().ForEach(e => { e.CustomerID = this.CustomerID; e.WorkshiftID = this.WorkshiftID; if (plannedOrderReferences.IndexOf(e.FirmOrderReference) < 0) plannedOrderReferences = plannedOrderReferences + (plannedOrderReferences != "" ? ", " : "") + e.FirmOrderReference; if (e.FirmOrderCode != null && plannedOrderCodes.IndexOf(e.FirmOrderCode) < 0) plannedOrderCodes = plannedOrderCodes + (plannedOrderCodes != "" ? ", " : "") + e.FirmOrderCode; });
+            this.DtoDetails().ToList().ForEach(e => { e.CustomerID = this.CustomerID; e.ShiftID = this.ShiftID; if (plannedOrderReferences.IndexOf(e.FirmOrderReference) < 0) plannedOrderReferences = plannedOrderReferences + (plannedOrderReferences != "" ? ", " : "") + e.FirmOrderReference; if (e.FirmOrderCode != null && plannedOrderCodes.IndexOf(e.FirmOrderCode) < 0) plannedOrderCodes = plannedOrderCodes + (plannedOrderCodes != "" ? ", " : "") + e.FirmOrderCode; });
             this.PlannedOrderReferences = plannedOrderReferences; this.PlannedOrderCodes = plannedOrderCodes != "" ? plannedOrderCodes : null; 
         }
     }

@@ -193,7 +193,7 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseAdjustments_Customers" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.Commodity" Width="1.5" PointX="3" PointY="14.25" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.CommodityBrand" Width="1.5" PointX="0.75" PointY="15.5" />
-        <EntityTypeShape EntityType="TotalSmartPortalModel.CommodityCategory" Width="1.5" PointX="6" PointY="5.875" />
+        <EntityTypeShape EntityType="TotalSmartPortalModel.CommodityCategory" Width="1.5" PointX="7.75" PointY="4.75" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.CommodityClass" Width="1.5" PointX="6" PointY="54.25" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.CommodityLine" Width="1.5" PointX="6" PointY="24.875" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.CommodityType" Width="1.5" PointX="6" PointY="51.5" />
@@ -275,6 +275,8 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_ProductionOrderDetails_ProductionOrders" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_ProductionOrderDetails_VoidTypes" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_ProductionOrderDetails_Workshifts" />
+        <EntityTypeShape EntityType="TotalSmartPortalModel.Shift" Width="1.5" PointX="13.875" PointY="7.375" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_Workshifts_Shifts" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
