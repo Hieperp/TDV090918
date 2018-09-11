@@ -22,7 +22,7 @@ namespace TotalDTO.Productions
 
         public int ProductionOrderID { get; set; }
 
-        public virtual int CustomerID { get; set; }
+        public virtual Nullable<int> CustomerID { get; set; }
         public virtual int ShiftID { get; set; }        
         public virtual int WorkshiftID { get; set; }
         
@@ -50,7 +50,7 @@ namespace TotalDTO.Productions
             this.WorkshiftID = this.ShiftID;// JUST INIT A VALUE. THE REAL VALUE OF WorkshiftID WILL BE UPDATE BY ProductionOrderSaveRelative
 
             string plannedOrderReferences = ""; string plannedOrderCodes = "";
-            this.DtoDetails().ToList().ForEach(e => { e.CustomerID = this.CustomerID; e.ShiftID = this.ShiftID; if (plannedOrderReferences.IndexOf(e.FirmOrderReference) < 0) plannedOrderReferences = plannedOrderReferences + (plannedOrderReferences != "" ? ", " : "") + e.FirmOrderReference; if (e.FirmOrderCode != null && plannedOrderCodes.IndexOf(e.FirmOrderCode) < 0) plannedOrderCodes = plannedOrderCodes + (plannedOrderCodes != "" ? ", " : "") + e.FirmOrderCode; e.WorkshiftID = this.ShiftID; });
+            this.DtoDetails().ToList().ForEach(e => { e.ShiftID = this.ShiftID; if (plannedOrderReferences.IndexOf(e.FirmOrderReference) < 0) plannedOrderReferences = plannedOrderReferences + (plannedOrderReferences != "" ? ", " : "") + e.FirmOrderReference; if (e.FirmOrderCode != null && plannedOrderCodes.IndexOf(e.FirmOrderCode) < 0) plannedOrderCodes = plannedOrderCodes + (plannedOrderCodes != "" ? ", " : "") + e.FirmOrderCode; e.WorkshiftID = this.ShiftID; });
             this.PlannedOrderReferences = plannedOrderReferences; this.PlannedOrderCodes = plannedOrderCodes != "" ? plannedOrderCodes : null; 
         }
     }
@@ -62,7 +62,8 @@ namespace TotalDTO.Productions
             this.ProductionOrderViewDetails = new List<ProductionOrderDetailDTO>();
         }
 
-        public override int CustomerID { get { return (this.Customer != null ? this.Customer.CustomerID : 0); } }
+        //public override int CustomerID { get { return (this.Customer != null ? this.Customer.CustomerID : 0); } }
+        public override Nullable<int> CustomerID { get { return (this.Customer != null ? (this.Customer.CustomerID > 0 ? (Nullable<int>)this.Customer.CustomerID : null) : null); } }
         [Display(Name = "Khách hàng")]
         [UIHint("Commons/CustomerBase")]
         public CustomerBaseDTO Customer { get; set; }
