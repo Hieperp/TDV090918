@@ -245,6 +245,7 @@
     <Compile Include="Areas\Commons\Builders\IPackingMaterialSelectListBuilder.cs" />
     <Compile Include="Areas\Commons\Builders\IPriceCategorySelectListBuilder.cs" />
     <Compile Include="Areas\Commons\Builders\IPromotionViewModelSelectListBuilder.cs" />
+    <Compile Include="Areas\Commons\Builders\IShiftSelectListBuilder.cs" />
     <Compile Include="Areas\Commons\Builders\ITerritorySelectListBuilder.cs" />
     <Compile Include="Areas\Commons\Builders\IVehicleSelectListBuilder.cs" />
     <Compile Include="Areas\Commons\Builders\IWarehouseAdjustmentTypeSelectListBuilder.cs" />
@@ -264,6 +265,7 @@
     <Compile Include="Areas\Commons\ViewModels\Helpers\IMonetaryAccountDropDownViewModel.cs" />
     <Compile Include="Areas\Commons\ViewModels\Helpers\IPackingMaterialDropDownViewModel.cs" />
     <Compile Include="Areas\Commons\ViewModels\Helpers\IPriceCategoryDropDownViewModel.cs" />
+    <Compile Include="Areas\Commons\ViewModels\Helpers\IShiftDropDownViewModel.cs" />
     <Compile Include="Areas\Commons\ViewModels\Helpers\ITerritoryDropDownViewModel.cs" />
     <Compile Include="Areas\Commons\ViewModels\Helpers\IVehicleDropDownViewModel.cs" />
     <Compile Include="Areas\Commons\ViewModels\Helpers\IWarehouseAdjustmentTypeDropDownViewModel.cs" />
@@ -2368,6 +2370,7 @@
     <Content Include="Views\Helpers\Commons\_Import.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DropDowns\CommodityClass.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DropDowns\CommodityLine.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DropDowns\Shift.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

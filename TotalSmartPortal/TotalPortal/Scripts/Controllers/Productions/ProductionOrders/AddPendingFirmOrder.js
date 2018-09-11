@@ -10,7 +10,7 @@ function handleOKEvent(productionOrderGridDataSource, pendingFirmOrderGridDataSo
             if (pendingPlannedOrderDetailGridDataItems[i].IsSelected === true)
                 _setParentInput(productionOrderJSON, pendingPlannedOrderDetailGridDataItems[i]);
         }
-
+        
         productionOrderJSON.push(new Object()); //Add a temporary empty row
 
         productionOrderGridDataSource.data(productionOrderJSON);
@@ -63,8 +63,8 @@ function handleOKEvent(productionOrderGridDataSource, pendingFirmOrderGridDataSo
 
         dataRow.QuantityRemains = plannedOrderGridDataItem.QuantityRemains;
         dataRow.Quantity = 0;
-
-        dataRow.ProductionLineID = null;
+        
+        dataRow.ProductionLineID = 0;
         dataRow.ProductionLineCode = null;
 
         dataRow.Remarks = null;

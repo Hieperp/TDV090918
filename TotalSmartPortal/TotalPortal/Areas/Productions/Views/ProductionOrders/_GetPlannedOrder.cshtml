@@ -5,16 +5,18 @@
     .Name("productionOrderPendingPlannedOrderGrid")
     .Columns(columns =>
     {
-        columns.Bound(c => c.PlannedOrderCode).Title("Số ĐH").Width(50);
-        columns.Bound(c => c.PlannedOrderEntryDate).Title("Ngày ĐH").Width(55).Format("{0:" + Settings.DateFormat + "}");
-        columns.Bound(c => c.CustomerName).Title("khách hàng").Width(140);
-        columns.Bound(c => c.Description).Title("Diễn giải").Width(80);
-    })
+        columns.Bound(c => c.PlannedOrderCode).Title("Số KHSX").Width(50);
+        columns.Bound(c => c.PlannedOrderEntryDate).Title("Ngày chứng từ").Width(55).Format("{0:" + Settings.DateFormat + "}");
+        columns.Bound(c => c.CustomerCode).Title("Mã khách hàng").Width(90);
+        columns.Bound(c => c.CustomerName).Title("Tên khách hàng").Width(140);
+        columns.Bound(c => c.CustomerVATCode).Title("MST").Width(60);
+        columns.Bound(c => c.Description).Title("Diễn giải").Width(80);              
+    })    
     .ToolBar(toolbar =>
     {
         toolbar.Template(@<text>
             <div class="toolbar" style="float: right;">
-                <label>Nhập số đơn hàng/ hoặc mã, tên, MST khách hàng hay đơn vị, người nhận hàng, hoặc mã kho</label>
+                <label>Nhập số KHSX, diễn giải hoặc mã, MST, tên khách hàng</label>
                 <input id="productionOrderPendingPlannedOrderFilter" class="k-textbox" style="text-align: center; margin-right: 13px;" onkeyup="productionOrderPendingPlannedOrderFilter_KeyUp()" />
             </div>
         </text>);
@@ -42,8 +44,8 @@
                 logic: "or",
                 filters: [
                     { field: "PlannedOrderCode", operator: "contains", value: productionOrderPendingPlannedOrderFilter },
-
                     { field: "CustomerName", operator: "contains", value: productionOrderPendingPlannedOrderFilter },
+                    { field: "Description", operator: "contains", value: productionOrderPendingPlannedOrderFilter }
                 ]
             });
 

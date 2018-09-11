@@ -64,6 +64,8 @@ namespace TotalDTO.Productions
 
         public virtual int ShiftID { get; set; }
 
+        public virtual int WorkshiftID { get; set; }
+
 
         #region NO USE
         public override int CommodityID { get { return 1; } set { } } 

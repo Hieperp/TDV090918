@@ -23,8 +23,10 @@ namespace TotalDTO.Productions
         public int ProductionOrderID { get; set; }
 
         public virtual int CustomerID { get; set; }
-        public virtual int ShiftID { get; set; }
+        public virtual int ShiftID { get; set; }        
         public virtual int WorkshiftID { get; set; }
+        
+        public string ShiftName { get; set; }
 
         public Nullable<int> PlannedOrderID { get; set; }
         public string PlannedOrderReference { get; set; }
@@ -48,7 +50,7 @@ namespace TotalDTO.Productions
             this.WorkshiftID = this.ShiftID;// JUST INIT A VALUE. THE REAL VALUE OF WorkshiftID WILL BE UPDATE BY ProductionOrderSaveRelative
 
             string plannedOrderReferences = ""; string plannedOrderCodes = "";
-            this.DtoDetails().ToList().ForEach(e => { e.CustomerID = this.CustomerID; e.ShiftID = this.ShiftID; if (plannedOrderReferences.IndexOf(e.FirmOrderReference) < 0) plannedOrderReferences = plannedOrderReferences + (plannedOrderReferences != "" ? ", " : "") + e.FirmOrderReference; if (e.FirmOrderCode != null && plannedOrderCodes.IndexOf(e.FirmOrderCode) < 0) plannedOrderCodes = plannedOrderCodes + (plannedOrderCodes != "" ? ", " : "") + e.FirmOrderCode; });
+            this.DtoDetails().ToList().ForEach(e => { e.CustomerID = this.CustomerID; e.ShiftID = this.ShiftID; if (plannedOrderReferences.IndexOf(e.FirmOrderReference) < 0) plannedOrderReferences = plannedOrderReferences + (plannedOrderReferences != "" ? ", " : "") + e.FirmOrderReference; if (e.FirmOrderCode != null && plannedOrderCodes.IndexOf(e.FirmOrderCode) < 0) plannedOrderCodes = plannedOrderCodes + (plannedOrderCodes != "" ? ", " : "") + e.FirmOrderCode; e.WorkshiftID = this.ShiftID; });
             this.PlannedOrderReferences = plannedOrderReferences; this.PlannedOrderCodes = plannedOrderCodes != "" ? plannedOrderCodes : null; 
         }
     }
@@ -67,7 +69,7 @@ namespace TotalDTO.Productions
 
         public override Nullable<int> VoidTypeID { get { return (this.VoidType != null ? this.VoidType.VoidTypeID : null); } }
         [UIHint("AutoCompletes/VoidType")]
-        public VoidTypeBaseDTO VoidType { get; set; }
+        public VoidTypeBaseDTO VoidType { get; set; }    
 
         public List<ProductionOrderDetailDTO> ProductionOrderViewDetails { get; set; }
         public List<ProductionOrderDetailDTO> ViewDetails { get { return this.ProductionOrderViewDetails; } set { this.ProductionOrderViewDetails = value; } }

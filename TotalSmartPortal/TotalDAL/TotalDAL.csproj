@@ -91,6 +91,7 @@
     <Compile Include="Repositories\Commons\PriceCategoryRepository.cs" />
     <Compile Include="Repositories\Commons\ProductionLineRepository.cs" />
     <Compile Include="Repositories\Commons\SearchRepository.cs" />
+    <Compile Include="Repositories\Commons\ShiftRepository.cs" />
     <Compile Include="Repositories\Commons\TerritoryRepository.cs" />
     <Compile Include="Repositories\Commons\VehicleRepository.cs" />
     <Compile Include="Repositories\Commons\VoidTypeRepository.cs" />
