@@ -390,6 +390,9 @@ namespace TotalDAL.Repositories
             Helpers.SqlProgrammability.Sales.DeliveryAdvice deliveryAdvice = new Helpers.SqlProgrammability.Sales.DeliveryAdvice(totalSmartPortalEntities);
             deliveryAdvice.RestoreProcedure();
 
+            Helpers.SqlProgrammability.Commons.Bom bom = new Helpers.SqlProgrammability.Commons.Bom(totalSmartPortalEntities);
+            bom.RestoreProcedure();
+
             return;
 
             Helpers.SqlProgrammability.Generals.UserReference userReference = new Helpers.SqlProgrammability.Generals.UserReference(totalSmartPortalEntities);
@@ -499,7 +502,8 @@ namespace TotalDAL.Repositories
 
             //return;
             Helpers.SqlProgrammability.Inventories.GoodsDelivery goodsDelivery = new Helpers.SqlProgrammability.Inventories.GoodsDelivery(totalSmartPortalEntities);
-            goodsDelivery.RestoreProcedure();
+            goodsDelivery.RestoreProcedure();          
+            
 
         }
 
