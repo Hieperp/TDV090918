@@ -118,7 +118,7 @@
 
 
                     columns.Bound(p => p.FirmOrderMaterialID).DisplayNameTitle().Filterable(false).Hidden()
-                        .ClientTemplate("#= (PlannedOrderMaterialID == null)? '' : PlannedOrderMaterialID #" + "<input type='hidden' name='MaterialIssueViewDetails[#= index(data) #].PlannedOrderMaterialID' value='#= (PlannedOrderMaterialID == null) ? '' : PlannedOrderMaterialID #' />");
+                        .ClientTemplate("#= (FirmOrderMaterialID == null)? '' : FirmOrderMaterialID #" + "<input type='hidden' name='MaterialIssueViewDetails[#= index(data) #].FirmOrderMaterialID' value='#= (FirmOrderMaterialID == null) ? '' : FirmOrderMaterialID #' />");
 
 
                     columns.Bound(p => p.CommodityID).DisplayNameTitle().Filterable(false).Hidden()
@@ -188,7 +188,7 @@
                             //toolbar.Create().HtmlAttributes(new { @class = "fa fa-map-marker" }).Text("Add new aa le ea1");
                             if (Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.FirmOrders)
                                 toolbar.Template(@<text>
-                                    <button type="button" class="k-button" onclick="GetPendingPlannedOrderDetails()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Chọn mặt hàng từ đơn đặt hàng </button>
+                                    <button type="button" class="k-button" onclick="GetPendingFirmOrderDetails()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Chọn mặt hàng từ đơn đặt hàng </button>
                                     <button type="button" class="k-button" onclick="copyRemainsToQuantity()"> <img src="~/Content/Images/Mains/Size24/Borderlands-Select-icon-24.png" /> Giao hàng toàn bộ đơn hàng </button>
                                 </text>);
                             else
@@ -317,10 +317,10 @@
 <script src="@Url.Content("~/Scripts/Helpers/KendoGrid/gridHelper.js")"></script>
 
 <script type="text/javascript">
-    function GetPendingPlannedOrderDetails() {
+    function GetPendingFirmOrderDetails() {
         require(["kpopupWindow"], function (kpopupWindow) {
             var createWizardWindow = new kpopupWindow();
-            createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("GetPendingPlannedOrderDetails", "MaterialIssues", new { area = "Inventories" })", "Chọn mặt hàng từ đơn đặt hàng", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
+            createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("GetPendingFirmOrderDetails", "MaterialIssues", new { area = "Inventories" })", "Chọn mặt hàng từ đơn đặt hàng", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
         });
     }
 

@@ -4386,6 +4386,10 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Parameter Name="EntityID" Type="int" Mode="In" />
           <Parameter Name="SaveRelativeOption" Type="int" Mode="In" />
         </Function>
+        <Function Name="AddCommodityBom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CommodityID" Type="int" Mode="In" />
+          <Parameter Name="BomID" Type="int" Mode="In" />
+        </Function>
         <Function Name="AddPromotionCustomerCategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PromotionID" Type="int" Mode="In" />
           <Parameter Name="CustomerCategoryID" Type="int" Mode="In" />
@@ -4477,6 +4481,9 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
         <Function Name="GetBomBases" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SearchText" Type="nvarchar" Mode="In" />
           <Parameter Name="CommodityID" Type="int" Mode="In" />
+          <Parameter Name="CommodityCategoryID" Type="int" Mode="In" />
+          <Parameter Name="CommodityClassID" Type="int" Mode="In" />
+          <Parameter Name="CommodityLineID" Type="int" Mode="In" />
         </Function>
         <Function Name="GetCommodityAvailables" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LocationID" Type="int" Mode="In" />
@@ -4491,6 +4498,9 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
         <Function Name="GetCommodityBases" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CommodityTypeIDList" Type="varchar" Mode="In" />
           <Parameter Name="SearchText" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetCommodityBoms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CommodityID" Type="int" Mode="In" />
         </Function>
         <Function Name="GetCommodityCodePartA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SearchText" Type="nvarchar" Mode="In" />
@@ -5137,6 +5147,9 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
         <Function Name="ReceiptSaveRelative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
           <Parameter Name="SaveRelativeOption" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RemoveCommodityBom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CommodityBomID" Type="int" Mode="In" />
         </Function>
         <Function Name="RemovePromotionCustomerCategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PromotionID" Type="int" Mode="In" />
@@ -10039,6 +10052,9 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <FunctionImport Name="GetBomBases" ReturnType="Collection(TotalSmartPortalModel.BomBase)">
             <Parameter Name="SearchText" Mode="In" Type="String" />
             <Parameter Name="CommodityID" Mode="In" Type="Int32" />
+            <Parameter Name="CommodityCategoryID" Mode="In" Type="Int32" />
+            <Parameter Name="CommodityClassID" Mode="In" Type="Int32" />
+            <Parameter Name="CommodityLineID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetProductionOrderPendingFirmOrders" ReturnType="Collection(TotalSmartPortalModel.ProductionOrderPendingFirmOrder)">
             <Parameter Name="LocationID" Mode="In" Type="Int32" />
@@ -10388,6 +10404,16 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             <End Role="MaterialIssueDetail" EntitySet="MaterialIssueDetails" />
             <End Role="SemifinishedProduct" EntitySet="SemifinishedProducts" />
           </AssociationSet>
+          <FunctionImport Name="AddCommodityBom">
+            <Parameter Name="CommodityID" Mode="In" Type="Int32" />
+            <Parameter Name="BomID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetCommodityBoms" ReturnType="Collection(TotalSmartPortalModel.CommodityBom)">
+            <Parameter Name="CommodityID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RemoveCommodityBom">
+            <Parameter Name="CommodityBomID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="AccountInvoiceIndex">
           <Property Type="Int32" Name="AccountInvoiceID" Nullable="false" />
@@ -14198,6 +14224,16 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="CommodityBom">
+          <Property Type="Int32" Name="CommodityBomID" Nullable="false" />
+          <Property Type="Int32" Name="BomID" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="200" />
+          <Property Type="DateTime" Name="EntryDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Remarks" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="IsDefault" Nullable="false" />
+          <Property Type="Boolean" Name="InActive" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -18025,6 +18061,22 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddCommodityBom" FunctionName="TotalSmartPortalModel.Store.AddCommodityBom" />
+          <FunctionImportMapping FunctionImportName="GetCommodityBoms" FunctionName="TotalSmartPortalModel.Store.GetCommodityBoms">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartPortalModel.CommodityBom">
+                <ScalarProperty Name="CommodityBomID" ColumnName="CommodityBomID" />
+                <ScalarProperty Name="BomID" ColumnName="BomID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RemoveCommodityBom" FunctionName="TotalSmartPortalModel.Store.RemoveCommodityBom" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

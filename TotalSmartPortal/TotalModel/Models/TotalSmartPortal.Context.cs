@@ -2883,7 +2883,7 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("CommodityEditable", entityIDParameter);
         }
     
-        public virtual ObjectResult<BomBase> GetBomBases(string searchText, Nullable<int> commodityID)
+        public virtual ObjectResult<BomBase> GetBomBases(string searchText, Nullable<int> commodityID, Nullable<int> commodityCategoryID, Nullable<int> commodityClassID, Nullable<int> commodityLineID)
         {
             var searchTextParameter = searchText != null ?
                 new ObjectParameter("SearchText", searchText) :
@@ -2893,7 +2893,19 @@ namespace TotalModel.Models
                 new ObjectParameter("CommodityID", commodityID) :
                 new ObjectParameter("CommodityID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BomBase>("GetBomBases", searchTextParameter, commodityIDParameter);
+            var commodityCategoryIDParameter = commodityCategoryID.HasValue ?
+                new ObjectParameter("CommodityCategoryID", commodityCategoryID) :
+                new ObjectParameter("CommodityCategoryID", typeof(int));
+    
+            var commodityClassIDParameter = commodityClassID.HasValue ?
+                new ObjectParameter("CommodityClassID", commodityClassID) :
+                new ObjectParameter("CommodityClassID", typeof(int));
+    
+            var commodityLineIDParameter = commodityLineID.HasValue ?
+                new ObjectParameter("CommodityLineID", commodityLineID) :
+                new ObjectParameter("CommodityLineID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BomBase>("GetBomBases", searchTextParameter, commodityIDParameter, commodityCategoryIDParameter, commodityClassIDParameter, commodityLineIDParameter);
         }
     
         public virtual ObjectResult<ProductionOrderPendingFirmOrder> GetProductionOrderPendingFirmOrders(Nullable<int> locationID, Nullable<int> productionOrderID, Nullable<int> plannedOrderID, Nullable<int> customerID, string firmOrderIDs, Nullable<bool> isReadonly)
@@ -3071,6 +3083,37 @@ namespace TotalModel.Models
                 new ObjectParameter("LocationID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SemifinishedProductPendingMaterialIssueDetail>("GetSemifinishedProductPendingMaterialIssueDetails", locationIDParameter);
+        }
+    
+        public virtual int AddCommodityBom(Nullable<int> commodityID, Nullable<int> bomID)
+        {
+            var commodityIDParameter = commodityID.HasValue ?
+                new ObjectParameter("CommodityID", commodityID) :
+                new ObjectParameter("CommodityID", typeof(int));
+    
+            var bomIDParameter = bomID.HasValue ?
+                new ObjectParameter("BomID", bomID) :
+                new ObjectParameter("BomID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddCommodityBom", commodityIDParameter, bomIDParameter);
+        }
+    
+        public virtual ObjectResult<CommodityBom> GetCommodityBoms(Nullable<int> commodityID)
+        {
+            var commodityIDParameter = commodityID.HasValue ?
+                new ObjectParameter("CommodityID", commodityID) :
+                new ObjectParameter("CommodityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CommodityBom>("GetCommodityBoms", commodityIDParameter);
+        }
+    
+        public virtual int RemoveCommodityBom(Nullable<int> commodityBomID)
+        {
+            var commodityBomIDParameter = commodityBomID.HasValue ?
+                new ObjectParameter("CommodityBomID", commodityBomID) :
+                new ObjectParameter("CommodityBomID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RemoveCommodityBom", commodityBomIDParameter);
         }
     }
 }

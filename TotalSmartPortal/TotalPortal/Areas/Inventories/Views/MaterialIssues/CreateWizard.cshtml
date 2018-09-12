@@ -102,7 +102,7 @@
         //    _setModelInput();
         //}
         //else {
-        //    var selectedGrid = $($("#tabStrip").data("kendoTabStrip").select().index() === 1 ? "#materialIssuePendingPlannedOrderGrid" : "#materialIssuePendingWorkshiftGrid").data("kendoGrid");
+        //    var selectedGrid = $($("#tabStrip").data("kendoTabStrip").select().index() === 1 ? "#materialIssuePendingFirmOrderGrid" : "#materialIssuePendingWorkshiftGrid").data("kendoGrid");
         //    var selectedDataItem = selectedGrid.dataItem(selectedGrid.select());
         //    if (selectedDataItem === undefined || selectedDataItem === null)
         //        return false;
@@ -113,7 +113,7 @@
 
 
 
-        var selectedGrid = $("#materialIssuePendingPlannedOrderGrid").data("kendoGrid");
+        var selectedGrid = $("#materialIssuePendingFirmOrderGrid").data("kendoGrid");
         var selectedDataItem = selectedGrid.dataItem(selectedGrid.select());
         if (selectedDataItem === undefined || selectedDataItem === null)
             return false;

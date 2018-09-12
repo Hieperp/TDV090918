@@ -24,12 +24,20 @@
                 read.Action("GetBomBases", "BomAPIs", new { area = "Commons" }).Data(@<text>
 
                     function(e) {
-                    return {
-                    searchText: $("#BomCode").data("kendoAutoComplete").value(),
-                    warehouseTaskID: 0
-                    };}
+                        var kendoGrid = $("#kendoGridDetails").data("kendoGrid");
+alert($(e.container));
+                        var selectedItem = kendoGrid != undefined? kendoGrid.dataItem($(e.container).closest("tr")) : undefined ;
 
-                </text>);//Send parameter to controller search action
+                        return {
+                            searchText: $("#BomCode").data("kendoAutoComplete").value(),
+                            commodityID: selectedItem != undefined? selectedItem.CommodityID: 0,
+                            commodityCategoryID: $("#CommodityCategoryID").val() != undefined ? $("#CommodityCategoryID").val() : 0,
+                            commodityClassID: $("#CommodityClassID").val() != undefined ? $("#CommodityClassID").val() : 0,
+                            commodityLineID: $("#CommodityLineID").val() != undefined ? $("#CommodityLineID").val() : 0
+                        };
+                    }
+
+                </text>);//VERY IMPORTANT: CONSIDER $("#kendoGridDetails"), $("#CommodityCategoryID"), $("#CommodityClassID"), $("#CommodityLineID") WHEN USING THIS TEMPLATE
             })
             .ServerFiltering(true);
         })

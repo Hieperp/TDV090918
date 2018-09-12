@@ -10,6 +10,6 @@ namespace TotalCore.Repositories.Commons
 
     public interface IBomAPIRepository : IGenericAPIRepository
     {
-        IList<BomBase> GetBomBases(string searchText, int commodityID);
+        IList<BomBase> GetBomBases(string searchText, int commodityID, int commodityCategoryID, int commodityClassID, int commodityLineID);
     }
 }

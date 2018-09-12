@@ -24,9 +24,9 @@ namespace TotalDAL.Repositories.Commons
         {
         }
 
-        public IList<BomBase> GetBomBases(string searchText, int commodityID)
+        public IList<BomBase> GetBomBases(string searchText, int commodityID, int commodityCategoryID, int commodityClassID, int commodityLineID)
         {
-            return this.TotalSmartPortalEntities.GetBomBases(searchText, commodityID).ToList();
+            return this.TotalSmartPortalEntities.GetBomBases(searchText, commodityID, commodityCategoryID, commodityClassID, commodityLineID).ToList();
         }
     }
 
