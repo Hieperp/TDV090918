@@ -94,8 +94,8 @@ namespace TotalModel.Models
         {
             get
             {
-                Nullable<decimal> workshiftQuantity = (this.WorkingHours * this.CyclePerHours * this.MoldQuantity) * this.BlockQuantity / this.BlockUnit;
-                return this.PlannedOrderRemains < workshiftQuantity ? this.PlannedOrderRemains : workshiftQuantity;
+                Nullable<decimal> workshiftQuantity = 0;// (this.WorkingHours * this.CyclePerHours * this.MoldQuantity) * this.BlockQuantity / this.BlockUnit;
+                return 0;// this.PlannedOrderRemains < workshiftQuantity ? this.PlannedOrderRemains : workshiftQuantity;
             }
         }
         public Nullable<decimal> QuantityRemains { get { return this.WorkshiftPlannedOrderRemains < this.QuantityAvailables ? this.WorkshiftPlannedOrderRemains : this.QuantityAvailables; } }
@@ -107,11 +107,11 @@ namespace TotalModel.Models
         {
             get
             {
-                Nullable<decimal> workshiftQuantity = (this.WorkingHours * this.CyclePerHours * this.MoldQuantity) * this.BlockQuantity / this.BlockUnit;
-                return this.PlannedOrderRemains < workshiftQuantity ? this.PlannedOrderRemains : workshiftQuantity;
+                Nullable<decimal> workshiftQuantity = 0;// (this.WorkingHours * this.CyclePerHours * this.MoldQuantity) * this.BlockQuantity / this.BlockUnit;
+                return 0;// this.PlannedOrderRemains < workshiftQuantity ? this.PlannedOrderRemains : workshiftQuantity;
             }
         }
-        public Nullable<decimal> QuantityRemains { get { return this.WorkshiftPlannedOrderRemains < this.QuantityAvailables ? this.WorkshiftPlannedOrderRemains : this.QuantityAvailables; } }
+        public Nullable<decimal> QuantityRemains {get{return 0; }} //{ get { return this.WorkshiftPlannedOrderRemains < this.QuantityAvailables ? this.WorkshiftPlannedOrderRemains : this.QuantityAvailables; } }
     }
 
 

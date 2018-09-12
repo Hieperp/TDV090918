@@ -17,7 +17,6 @@ namespace TotalModel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Mold()
         {
-            this.MaterialIssues = new HashSet<MaterialIssue>();
             this.FirmOrderDetails = new HashSet<FirmOrderDetail>();
             this.FirmOrderMaterials = new HashSet<FirmOrderMaterial>();
             this.PlannedOrderDetails = new HashSet<PlannedOrderDetail>();
@@ -32,8 +31,6 @@ namespace TotalModel.Models
         public string Remarks { get; set; }
         public decimal CyclePerHours { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MaterialIssue> MaterialIssues { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FirmOrderDetail> FirmOrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

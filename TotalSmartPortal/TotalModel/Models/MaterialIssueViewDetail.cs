@@ -21,18 +21,13 @@ namespace TotalModel.Models
         public int CommodityTypeID { get; set; }
         public decimal Quantity { get; set; }
         public string Remarks { get; set; }
-        public int PlannedOrderMaterialID { get; set; }
         public int GoodsReceiptID { get; set; }
         public int GoodsReceiptDetailID { get; set; }
         public System.DateTime GoodsReceiptEntryDate { get; set; }
         public string GoodsReceiptReference { get; set; }
         public string GoodsReceiptCode { get; set; }
-        public Nullable<decimal> PlannedOrderRemains { get; set; }
-        public decimal WorkingHours { get; set; }
-        public decimal CyclePerHours { get; set; }
-        public decimal MoldQuantity { get; set; }
-        public decimal BlockUnit { get; set; }
-        public decimal BlockQuantity { get; set; }
         public Nullable<decimal> QuantityAvailables { get; set; }
+        public int FirmOrderMaterialID { get; set; }
+        public Nullable<decimal> FirmOrderRemains { get; set; }
     }
 }

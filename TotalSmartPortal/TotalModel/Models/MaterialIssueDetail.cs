@@ -14,6 +14,13 @@ namespace TotalModel.Models
     
     public partial class MaterialIssueDetail
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MaterialIssueDetail()
+        {
+            this.SemifinishedProductDetails = new HashSet<SemifinishedProductDetail>();
+            this.SemifinishedProducts = new HashSet<SemifinishedProduct>();
+        }
+    
         public int MaterialIssueDetailID { get; set; }
         public int MaterialIssueID { get; set; }
         public System.DateTime EntryDate { get; set; }
@@ -21,11 +28,11 @@ namespace TotalModel.Models
         public int MaterialIssueTypeID { get; set; }
         public int WorkshiftID { get; set; }
         public int CustomerID { get; set; }
-        public int PlannedOrderID { get; set; }
-        public int PlannedOrderDetailID { get; set; }
-        public int PlannedOrderMaterialID { get; set; }
         public int ProductionOrderID { get; set; }
         public int ProductionOrderDetailID { get; set; }
+        public int PlannedOrderID { get; set; }
+        public int FirmOrderID { get; set; }
+        public int FirmOrderMaterialID { get; set; }
         public int ProductionLineID { get; set; }
         public int MoldID { get; set; }
         public int GoodsReceiptID { get; set; }
@@ -40,12 +47,17 @@ namespace TotalModel.Models
         public string Remarks { get; set; }
         public bool Approved { get; set; }
     
-        public virtual Customer Customer { get; set; }
-        public virtual GoodsReceiptDetail GoodsReceiptDetail { get; set; }
-        public virtual Workshift Workshift { get; set; }
-        public virtual MaterialIssue MaterialIssue { get; set; }
         public virtual Commodity Commodity { get; set; }
-        public virtual PlannedOrderDetail PlannedOrderDetail { get; set; }
+        public virtual Customer Customer { get; set; }
+        public virtual FirmOrderMaterial FirmOrderMaterial { get; set; }
+        public virtual FirmOrder FirmOrder { get; set; }
+        public virtual GoodsReceiptDetail GoodsReceiptDetail { get; set; }
+        public virtual MaterialIssue MaterialIssue { get; set; }
         public virtual ProductionOrderDetail ProductionOrderDetail { get; set; }
+        public virtual Workshift Workshift { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SemifinishedProduct> SemifinishedProducts { get; set; }
     }
 }

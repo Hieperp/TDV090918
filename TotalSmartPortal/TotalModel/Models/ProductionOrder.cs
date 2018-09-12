@@ -19,6 +19,7 @@ namespace TotalModel.Models
         {
             this.MaterialIssues = new HashSet<MaterialIssue>();
             this.ProductionOrderDetails = new HashSet<ProductionOrderDetail>();
+            this.SemifinishedProductDetails = new HashSet<SemifinishedProductDetail>();
         }
     
         public int ProductionOrderID { get; set; }
@@ -29,6 +30,7 @@ namespace TotalModel.Models
         public string PlannedOrderCodes { get; set; }
         public string PlannedOrderReferences { get; set; }
         public Nullable<int> CustomerID { get; set; }
+        public int ShiftID { get; set; }
         public int WorkshiftID { get; set; }
         public int UserID { get; set; }
         public int PreparedPersonID { get; set; }
@@ -45,16 +47,17 @@ namespace TotalModel.Models
         public bool InActive { get; set; }
         public bool InActivePartial { get; set; }
         public Nullable<System.DateTime> InActiveDate { get; set; }
-        public int ShiftID { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Location Location { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MaterialIssue> MaterialIssues { get; set; }
         public virtual PlannedOrder PlannedOrder { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductionOrderDetail> ProductionOrderDetails { get; set; }
         public virtual VoidType VoidType { get; set; }
         public virtual Workshift Workshift { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductionOrderDetail> ProductionOrderDetails { get; set; }
+        public virtual ICollection<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
     }
 }

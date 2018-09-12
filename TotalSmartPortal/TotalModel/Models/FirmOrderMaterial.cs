@@ -14,6 +14,12 @@ namespace TotalModel.Models
     
     public partial class FirmOrderMaterial
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public FirmOrderMaterial()
+        {
+            this.MaterialIssueDetails = new HashSet<MaterialIssueDetail>();
+        }
+    
         public int FirmOrderMaterialID { get; set; }
         public int FirmOrderDetailID { get; set; }
         public int FirmOrderID { get; set; }
@@ -46,5 +52,7 @@ namespace TotalModel.Models
         public virtual FirmOrder FirmOrder { get; set; }
         public virtual Mold Mold { get; set; }
         public virtual VoidType VoidType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MaterialIssueDetail> MaterialIssueDetails { get; set; }
     }
 }

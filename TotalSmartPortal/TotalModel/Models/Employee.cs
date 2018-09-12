@@ -28,6 +28,7 @@ namespace TotalModel.Models
             this.SalesOrders = new HashSet<SalesOrder>();
             this.SalesReturns = new HashSet<SalesReturn>();
             this.MaterialIssues = new HashSet<MaterialIssue>();
+            this.SemifinishedProducts = new HashSet<SemifinishedProduct>();
         }
     
         public int EmployeeID { get; set; }
@@ -64,5 +65,7 @@ namespace TotalModel.Models
         public virtual ICollection<SalesReturn> SalesReturns { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MaterialIssue> MaterialIssues { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SemifinishedProduct> SemifinishedProducts { get; set; }
     }
 }

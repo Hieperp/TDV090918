@@ -22,7 +22,7 @@ namespace TotalDTO.Inventories
 
         public int MaterialIssueID { get; set; }
 
-        public int MaterialIssueTypeID { get { return (int)GlobalEnums.MaterialIssueTypeID.PlannedOrder; } }
+        public int MaterialIssueTypeID { get { return (int)GlobalEnums.MaterialIssueTypeID.FirmOrders; } }
         //public int MaterialIssueTypeID { get; set; }
 
         public virtual int CustomerID { get; set; }

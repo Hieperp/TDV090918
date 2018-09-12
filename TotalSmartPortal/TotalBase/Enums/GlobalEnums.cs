@@ -137,7 +137,7 @@ namespace TotalBase.Enums
         public enum MaterialIssueTypeID
         {
             AllMaterialIssue = 999,
-            PlannedOrder = 6
+            FirmOrders = 6
         };
 
         public enum WarehouseAdjustmentTypeID

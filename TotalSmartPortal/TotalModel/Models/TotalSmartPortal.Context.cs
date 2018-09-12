@@ -74,8 +74,6 @@ namespace TotalModel.Models
         public virtual DbSet<GoodsReceipt> GoodsReceipts { get; set; }
         public virtual DbSet<PurchaseRequisitionDetail> PurchaseRequisitionDetails { get; set; }
         public virtual DbSet<PurchaseRequisition> PurchaseRequisitions { get; set; }
-        public virtual DbSet<MaterialIssueDetail> MaterialIssueDetails { get; set; }
-        public virtual DbSet<MaterialIssue> MaterialIssues { get; set; }
         public virtual DbSet<WarehouseAdjustmentType> WarehouseAdjustmentTypes { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
         public virtual DbSet<WarehouseAdjustmentDetail> WarehouseAdjustmentDetails { get; set; }
@@ -89,14 +87,18 @@ namespace TotalModel.Models
         public virtual DbSet<Report> Reports { get; set; }
         public virtual DbSet<BomDetail> BomDetails { get; set; }
         public virtual DbSet<Bom> Boms { get; set; }
+        public virtual DbSet<Shift> Shifts { get; set; }
         public virtual DbSet<FirmOrderDetail> FirmOrderDetails { get; set; }
         public virtual DbSet<FirmOrderMaterial> FirmOrderMaterials { get; set; }
         public virtual DbSet<FirmOrder> FirmOrders { get; set; }
+        public virtual DbSet<MaterialIssueDetail> MaterialIssueDetails { get; set; }
+        public virtual DbSet<MaterialIssue> MaterialIssues { get; set; }
         public virtual DbSet<PlannedOrderDetail> PlannedOrderDetails { get; set; }
         public virtual DbSet<PlannedOrder> PlannedOrders { get; set; }
-        public virtual DbSet<ProductionOrder> ProductionOrders { get; set; }
         public virtual DbSet<ProductionOrderDetail> ProductionOrderDetails { get; set; }
-        public virtual DbSet<Shift> Shifts { get; set; }
+        public virtual DbSet<ProductionOrder> ProductionOrders { get; set; }
+        public virtual DbSet<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
+        public virtual DbSet<SemifinishedProduct> SemifinishedProducts { get; set; }
     
         public virtual ObjectResult<string> AccountInvoicePostSaveValidate(Nullable<int> entityID)
         {
@@ -2549,52 +2551,6 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MaterialIssueToggleApproved", entityIDParameter, approvedParameter);
         }
     
-        public virtual ObjectResult<MaterialIssuePendingPlannedOrderDetail> GetMaterialIssuePendingPlannedOrderDetails(Nullable<int> locationID, Nullable<int> materialIssueID, Nullable<int> plannedOrderDetailID, Nullable<int> workshiftID, Nullable<int> moldID, Nullable<int> warehouseID, string plannedOrderMaterialIDs, Nullable<bool> isReadonly)
-        {
-            var locationIDParameter = locationID.HasValue ?
-                new ObjectParameter("LocationID", locationID) :
-                new ObjectParameter("LocationID", typeof(int));
-    
-            var materialIssueIDParameter = materialIssueID.HasValue ?
-                new ObjectParameter("MaterialIssueID", materialIssueID) :
-                new ObjectParameter("MaterialIssueID", typeof(int));
-    
-            var plannedOrderDetailIDParameter = plannedOrderDetailID.HasValue ?
-                new ObjectParameter("PlannedOrderDetailID", plannedOrderDetailID) :
-                new ObjectParameter("PlannedOrderDetailID", typeof(int));
-    
-            var workshiftIDParameter = workshiftID.HasValue ?
-                new ObjectParameter("WorkshiftID", workshiftID) :
-                new ObjectParameter("WorkshiftID", typeof(int));
-    
-            var moldIDParameter = moldID.HasValue ?
-                new ObjectParameter("MoldID", moldID) :
-                new ObjectParameter("MoldID", typeof(int));
-    
-            var warehouseIDParameter = warehouseID.HasValue ?
-                new ObjectParameter("WarehouseID", warehouseID) :
-                new ObjectParameter("WarehouseID", typeof(int));
-    
-            var plannedOrderMaterialIDsParameter = plannedOrderMaterialIDs != null ?
-                new ObjectParameter("PlannedOrderMaterialIDs", plannedOrderMaterialIDs) :
-                new ObjectParameter("PlannedOrderMaterialIDs", typeof(string));
-    
-            var isReadonlyParameter = isReadonly.HasValue ?
-                new ObjectParameter("IsReadonly", isReadonly) :
-                new ObjectParameter("IsReadonly", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MaterialIssuePendingPlannedOrderDetail>("GetMaterialIssuePendingPlannedOrderDetails", locationIDParameter, materialIssueIDParameter, plannedOrderDetailIDParameter, workshiftIDParameter, moldIDParameter, warehouseIDParameter, plannedOrderMaterialIDsParameter, isReadonlyParameter);
-        }
-    
-        public virtual ObjectResult<MaterialIssuePendingPlannedOrder> GetMaterialIssuePendingPlannedOrders(Nullable<int> locationID)
-        {
-            var locationIDParameter = locationID.HasValue ?
-                new ObjectParameter("LocationID", locationID) :
-                new ObjectParameter("LocationID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MaterialIssuePendingPlannedOrder>("GetMaterialIssuePendingPlannedOrders", locationIDParameter);
-        }
-    
         public virtual ObjectResult<PlannedOrderIndex> GetPlannedOrderIndexes(string aspUserID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
         {
             var aspUserIDParameter = aspUserID != null ?
@@ -2985,6 +2941,89 @@ namespace TotalModel.Models
                 new ObjectParameter("SearchText", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WorkshiftBase>("GetWorkshiftBases", searchTextParameter);
+        }
+    
+        public virtual ObjectResult<SemifinishedProductIndex> GetSemifinishedProductIndexes(string aspUserID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var aspUserIDParameter = aspUserID != null ?
+                new ObjectParameter("AspUserID", aspUserID) :
+                new ObjectParameter("AspUserID", typeof(string));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SemifinishedProductIndex>("GetSemifinishedProductIndexes", aspUserIDParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<SemifinishedProductViewDetail> GetSemifinishedProductViewDetails(Nullable<int> semifinishedProductID, Nullable<int> firmOrderID)
+        {
+            var semifinishedProductIDParameter = semifinishedProductID.HasValue ?
+                new ObjectParameter("SemifinishedProductID", semifinishedProductID) :
+                new ObjectParameter("SemifinishedProductID", typeof(int));
+    
+            var firmOrderIDParameter = firmOrderID.HasValue ?
+                new ObjectParameter("FirmOrderID", firmOrderID) :
+                new ObjectParameter("FirmOrderID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SemifinishedProductViewDetail>("GetSemifinishedProductViewDetails", semifinishedProductIDParameter, firmOrderIDParameter);
+        }
+    
+        public virtual ObjectResult<string> SemifinishedProductApproved(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SemifinishedProductApproved", entityIDParameter);
+        }
+    
+        public virtual ObjectResult<string> SemifinishedProductEditable(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SemifinishedProductEditable", entityIDParameter);
+        }
+    
+        public virtual ObjectResult<string> SemifinishedProductPostSaveValidate(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SemifinishedProductPostSaveValidate", entityIDParameter);
+        }
+    
+        public virtual int SemifinishedProductSaveRelative(Nullable<int> entityID, Nullable<int> saveRelativeOption)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var saveRelativeOptionParameter = saveRelativeOption.HasValue ?
+                new ObjectParameter("SaveRelativeOption", saveRelativeOption) :
+                new ObjectParameter("SaveRelativeOption", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SemifinishedProductSaveRelative", entityIDParameter, saveRelativeOptionParameter);
+        }
+    
+        public virtual int SemifinishedProductToggleApproved(Nullable<int> entityID, Nullable<bool> approved)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var approvedParameter = approved.HasValue ?
+                new ObjectParameter("Approved", approved) :
+                new ObjectParameter("Approved", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SemifinishedProductToggleApproved", entityIDParameter, approvedParameter);
         }
     }
 }

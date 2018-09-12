@@ -19,8 +19,8 @@ namespace TotalModel.Models
         {
             this.MaterialIssueDetails = new HashSet<MaterialIssueDetail>();
             this.MaterialIssues = new HashSet<MaterialIssue>();
-            this.ProductionOrders = new HashSet<ProductionOrder>();
             this.ProductionOrderDetails = new HashSet<ProductionOrderDetail>();
+            this.ProductionOrders = new HashSet<ProductionOrder>();
         }
     
         public int WorkshiftID { get; set; }
@@ -31,14 +31,14 @@ namespace TotalModel.Models
         public decimal WorkingHours { get; set; }
         public string Remarks { get; set; }
     
+        public virtual Shift Shift { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MaterialIssueDetail> MaterialIssueDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MaterialIssue> MaterialIssues { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductionOrder> ProductionOrders { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductionOrderDetail> ProductionOrderDetails { get; set; }
-        public virtual Shift Shift { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductionOrder> ProductionOrders { get; set; }
     }
 }
