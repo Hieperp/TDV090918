@@ -46,15 +46,15 @@ namespace TotalPortal.Areas.Inventories.APIs
 
 
 
-        public JsonResult GetPlannedOrders([DataSourceRequest] DataSourceRequest dataSourceRequest, int? locationID)
+        public JsonResult GetFirmOrders([DataSourceRequest] DataSourceRequest dataSourceRequest, int? locationID)
         {
-            var result = this.materialIssueAPIRepository.GetPlannedOrders(locationID);
+            var result = this.materialIssueAPIRepository.GetFirmOrders(locationID);
             return Json(result.ToDataSourceResult(dataSourceRequest), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetPendingPlannedOrderDetails([DataSourceRequest] DataSourceRequest dataSourceRequest, int? locationID, int? materialIssueID, int? plannedOrderDetailID, int? workshiftID, int? moldID, int? warehouseID, string plannedOrderMaterialIDs, bool isReadonly)
+        public JsonResult GetPendingFirmOrderDetails([DataSourceRequest] DataSourceRequest dataSourceRequest, int? locationID, int? materialIssueID, int? firmOrderID, int? warehouseID, string firmOrderMaterialIDs, bool isReadonly)
         {
-            var result = this.materialIssueAPIRepository.GetPendingPlannedOrderDetails(locationID, materialIssueID, plannedOrderDetailID, workshiftID, moldID, warehouseID, plannedOrderMaterialIDs, isReadonly);
+            var result = this.materialIssueAPIRepository.GetPendingFirmOrderDetails(locationID, materialIssueID, firmOrderID, warehouseID, firmOrderMaterialIDs, isReadonly);
             return Json(result.ToDataSourceResult(dataSourceRequest), JsonRequestBehavior.AllowGet);
         }
 

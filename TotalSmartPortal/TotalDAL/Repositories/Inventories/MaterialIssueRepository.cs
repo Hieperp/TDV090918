@@ -32,22 +32,22 @@ namespace TotalDAL.Repositories.Inventories
         {
         }
 
-        public IEnumerable<MaterialIssuePendingPlannedOrder> GetPlannedOrders(int? locationID)
+        public IEnumerable<MaterialIssuePendingFirmOrder> GetFirmOrders(int? locationID)
         {
             this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = false;
-            IEnumerable<MaterialIssuePendingPlannedOrder> pendingPlannedOrders = base.TotalSmartPortalEntities.GetMaterialIssuePendingPlannedOrders(locationID).ToList();
+            IEnumerable<MaterialIssuePendingFirmOrder> pendingFirmOrders = base.TotalSmartPortalEntities.GetMaterialIssuePendingFirmOrders(locationID).ToList();
             this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = true;
 
-            return pendingPlannedOrders;
+            return pendingFirmOrders;
         }
 
-        public IEnumerable<MaterialIssuePendingPlannedOrderDetail> GetPendingPlannedOrderDetails(int? locationID, int? materialIssueID, int? plannedOrderDetailID, int? workshiftID, int? moldID, int? warehouseID, string plannedOrderMaterialIDs, bool isReadonly)
+        public IEnumerable<MaterialIssuePendingFirmOrderDetail> GetPendingFirmOrderDetails(int? locationID, int? materialIssueID, int? firmOrderID, int? warehouseID, string firmOrderMaterialIDs, bool isReadonly)
         {
             this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = false;
-            IEnumerable<MaterialIssuePendingPlannedOrderDetail> pendingPlannedOrderDetails = base.TotalSmartPortalEntities.GetMaterialIssuePendingPlannedOrderDetails(locationID, materialIssueID, plannedOrderDetailID, workshiftID, moldID, warehouseID, plannedOrderMaterialIDs, isReadonly).ToList();
+            IEnumerable<MaterialIssuePendingFirmOrderDetail> pendingFirmOrderDetails = base.TotalSmartPortalEntities.GetMaterialIssuePendingFirmOrderDetails(locationID, materialIssueID, firmOrderID, warehouseID, firmOrderMaterialIDs, isReadonly).ToList();
             this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = true;
 
-            return pendingPlannedOrderDetails;
+            return pendingFirmOrderDetails;
         }
 
     }

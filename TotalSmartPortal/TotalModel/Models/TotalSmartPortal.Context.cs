@@ -3025,5 +3025,52 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SemifinishedProductToggleApproved", entityIDParameter, approvedParameter);
         }
+    
+        public virtual ObjectResult<MaterialIssuePendingFirmOrderDetail> GetMaterialIssuePendingFirmOrderDetails(Nullable<int> locationID, Nullable<int> materialIssueID, Nullable<int> firmOrderID, Nullable<int> warehouseID, string firmOrderMaterialIDs, Nullable<bool> isReadonly)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            var materialIssueIDParameter = materialIssueID.HasValue ?
+                new ObjectParameter("MaterialIssueID", materialIssueID) :
+                new ObjectParameter("MaterialIssueID", typeof(int));
+    
+            var firmOrderIDParameter = firmOrderID.HasValue ?
+                new ObjectParameter("FirmOrderID", firmOrderID) :
+                new ObjectParameter("FirmOrderID", typeof(int));
+    
+            var warehouseIDParameter = warehouseID.HasValue ?
+                new ObjectParameter("WarehouseID", warehouseID) :
+                new ObjectParameter("WarehouseID", typeof(int));
+    
+            var firmOrderMaterialIDsParameter = firmOrderMaterialIDs != null ?
+                new ObjectParameter("FirmOrderMaterialIDs", firmOrderMaterialIDs) :
+                new ObjectParameter("FirmOrderMaterialIDs", typeof(string));
+    
+            var isReadonlyParameter = isReadonly.HasValue ?
+                new ObjectParameter("IsReadonly", isReadonly) :
+                new ObjectParameter("IsReadonly", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MaterialIssuePendingFirmOrderDetail>("GetMaterialIssuePendingFirmOrderDetails", locationIDParameter, materialIssueIDParameter, firmOrderIDParameter, warehouseIDParameter, firmOrderMaterialIDsParameter, isReadonlyParameter);
+        }
+    
+        public virtual ObjectResult<MaterialIssuePendingFirmOrder> GetMaterialIssuePendingFirmOrders(Nullable<int> locationID)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MaterialIssuePendingFirmOrder>("GetMaterialIssuePendingFirmOrders", locationIDParameter);
+        }
+    
+        public virtual ObjectResult<SemifinishedProductPendingMaterialIssueDetail> GetSemifinishedProductPendingMaterialIssueDetails(Nullable<int> locationID)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SemifinishedProductPendingMaterialIssueDetail>("GetSemifinishedProductPendingMaterialIssueDetails", locationIDParameter);
+        }
     }
 }

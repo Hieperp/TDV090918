@@ -90,28 +90,28 @@ namespace TotalModel.Models
 
     public partial class MaterialIssueViewDetail
     {
-        public Nullable<decimal> WorkshiftPlannedOrderRemains
+        public Nullable<decimal> WorkshiftFirmOrderRemains
         {
             get
             {
-                Nullable<decimal> workshiftQuantity = 0;// (this.WorkingHours * this.CyclePerHours * this.MoldQuantity) * this.BlockQuantity / this.BlockUnit;
-                return 0;// this.PlannedOrderRemains < workshiftQuantity ? this.PlannedOrderRemains : workshiftQuantity;
+                Nullable<decimal> workshiftQuantity = this.FirmOrderRemains; // (this.WorkingHours * this.CyclePerHours * this.MoldQuantity) * this.BlockQuantity / this.BlockUnit;
+                return this.FirmOrderRemains < workshiftQuantity ? this.FirmOrderRemains : workshiftQuantity;
             }
         }
-        public Nullable<decimal> QuantityRemains { get { return this.WorkshiftPlannedOrderRemains < this.QuantityAvailables ? this.WorkshiftPlannedOrderRemains : this.QuantityAvailables; } }
+        public Nullable<decimal> QuantityRemains { get { return this.WorkshiftFirmOrderRemains < this.QuantityAvailables ? this.WorkshiftFirmOrderRemains : this.QuantityAvailables; } }
     }
 
-    public partial class MaterialIssuePendingPlannedOrderDetail
+    public partial class MaterialIssuePendingFirmOrderDetail
     {
-        public Nullable<decimal> WorkshiftPlannedOrderRemains
+        public Nullable<decimal> WorkshiftFirmOrderRemains
         {
             get
             {
-                Nullable<decimal> workshiftQuantity = 0;// (this.WorkingHours * this.CyclePerHours * this.MoldQuantity) * this.BlockQuantity / this.BlockUnit;
-                return 0;// this.PlannedOrderRemains < workshiftQuantity ? this.PlannedOrderRemains : workshiftQuantity;
+                Nullable<decimal> workshiftQuantity = this.FirmOrderRemains;// (this.WorkingHours * this.CyclePerHours * this.MoldQuantity) * this.BlockQuantity / this.BlockUnit;
+                return this.FirmOrderRemains < workshiftQuantity ? this.FirmOrderRemains : workshiftQuantity;
             }
         }
-        public Nullable<decimal> QuantityRemains {get{return 0; }} //{ get { return this.WorkshiftPlannedOrderRemains < this.QuantityAvailables ? this.WorkshiftPlannedOrderRemains : this.QuantityAvailables; } }
+        public Nullable<decimal> QuantityRemains { get { return this.WorkshiftFirmOrderRemains < this.QuantityAvailables ? this.WorkshiftFirmOrderRemains : this.QuantityAvailables; } }
     }
 
 

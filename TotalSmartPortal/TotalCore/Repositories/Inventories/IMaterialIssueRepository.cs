@@ -11,9 +11,9 @@ namespace TotalCore.Repositories.Inventories
 
     public interface IMaterialIssueAPIRepository : IGenericAPIRepository
     {
-        IEnumerable<MaterialIssuePendingPlannedOrder> GetPlannedOrders(int? locationID);
+        IEnumerable<MaterialIssuePendingFirmOrder> GetFirmOrders(int? locationID);
 
-        IEnumerable<MaterialIssuePendingPlannedOrderDetail> GetPendingPlannedOrderDetails(int? locationID, int? materialIssueID, int? plannedOrderDetailID, int? workshiftID, int? moldID, int? warehouseID, string plannedOrderMaterialIDs, bool isReadonly);
+        IEnumerable<MaterialIssuePendingFirmOrderDetail> GetPendingFirmOrderDetails(int? locationID, int? materialIssueID, int? firmOrderID, int? warehouseID, string firmOrderMaterialIDs, bool isReadonly);
     }
 
 }

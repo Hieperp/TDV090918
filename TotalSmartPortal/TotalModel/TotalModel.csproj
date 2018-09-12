@@ -273,6 +273,12 @@
     <Compile Include="Models\MaterialIssueIndex.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MaterialIssuePendingFirmOrder.cs">
+      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MaterialIssuePendingFirmOrderDetail.cs">
+      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MaterialIssueViewDetail.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>
@@ -457,6 +463,9 @@
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SemifinishedProductIndex.cs">
+      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SemifinishedProductPendingMaterialIssueDetail.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SemifinishedProductViewDetail.cs">
