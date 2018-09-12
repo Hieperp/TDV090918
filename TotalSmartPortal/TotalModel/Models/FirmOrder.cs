@@ -18,11 +18,11 @@ namespace TotalModel.Models
         public FirmOrder()
         {
             this.FirmOrderDetails = new HashSet<FirmOrderDetail>();
-            this.FirmOrderMaterials = new HashSet<FirmOrderMaterial>();
             this.MaterialIssues = new HashSet<MaterialIssue>();
             this.ProductionOrderDetails = new HashSet<ProductionOrderDetail>();
             this.SemifinishedProducts = new HashSet<SemifinishedProduct>();
             this.MaterialIssueDetails = new HashSet<MaterialIssueDetail>();
+            this.FirmOrderMaterials = new HashSet<FirmOrderMaterial>();
         }
     
         public int FirmOrderID { get; set; }
@@ -57,8 +57,6 @@ namespace TotalModel.Models
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FirmOrderDetail> FirmOrderDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FirmOrderMaterial> FirmOrderMaterials { get; set; }
         public virtual Location Location { get; set; }
         public virtual VoidType VoidType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -70,5 +68,7 @@ namespace TotalModel.Models
         public virtual Bom Bom { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MaterialIssueDetail> MaterialIssueDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FirmOrderMaterial> FirmOrderMaterials { get; set; }
     }
 }

@@ -49,7 +49,6 @@ namespace TotalModel.Models
     
         public virtual Commodity Commodity { get; set; }
         public virtual Customer Customer { get; set; }
-        public virtual FirmOrderMaterial FirmOrderMaterial { get; set; }
         public virtual FirmOrder FirmOrder { get; set; }
         public virtual GoodsReceiptDetail GoodsReceiptDetail { get; set; }
         public virtual MaterialIssue MaterialIssue { get; set; }
@@ -59,5 +58,6 @@ namespace TotalModel.Models
         public virtual ICollection<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemifinishedProduct> SemifinishedProducts { get; set; }
+        public virtual FirmOrderMaterial FirmOrderMaterial { get; set; }
     }
 }

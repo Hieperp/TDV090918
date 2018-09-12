@@ -1380,7 +1380,7 @@
     <Content Include="Scripts\Controllers\Inventories\MaterialAdjustments\Index.js" />
     <Content Include="Scripts\Controllers\Inventories\MaterialAdjustments\Open.js" />
     <Content Include="Scripts\Controllers\Inventories\MaterialAdjustments\Print.js" />
-    <Content Include="Scripts\Controllers\Inventories\MaterialIssues\AddPendingFirmOrderDetail.js" />
+    <Content Include="Scripts\Controllers\Inventories\MaterialIssues\AddPendingFirmOrderMaterial.js" />
     <Content Include="Scripts\Controllers\Inventories\MaterialIssues\Approve.js" />
     <Content Include="Scripts\Controllers\Inventories\MaterialIssues\CreateWizard.js" />
     <Content Include="Scripts\Controllers\Inventories\MaterialIssues\Delete.js" />

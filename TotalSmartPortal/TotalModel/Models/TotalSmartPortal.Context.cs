@@ -87,7 +87,6 @@ namespace TotalModel.Models
         public virtual DbSet<Report> Reports { get; set; }
         public virtual DbSet<Shift> Shifts { get; set; }
         public virtual DbSet<FirmOrderDetail> FirmOrderDetails { get; set; }
-        public virtual DbSet<FirmOrderMaterial> FirmOrderMaterials { get; set; }
         public virtual DbSet<FirmOrder> FirmOrders { get; set; }
         public virtual DbSet<MaterialIssue> MaterialIssues { get; set; }
         public virtual DbSet<PlannedOrderDetail> PlannedOrderDetails { get; set; }
@@ -99,6 +98,7 @@ namespace TotalModel.Models
         public virtual DbSet<BomDetail> BomDetails { get; set; }
         public virtual DbSet<Bom> Boms { get; set; }
         public virtual DbSet<MaterialIssueDetail> MaterialIssueDetails { get; set; }
+        public virtual DbSet<FirmOrderMaterial> FirmOrderMaterials { get; set; }
     
         public virtual ObjectResult<string> AccountInvoicePostSaveValidate(Nullable<int> entityID)
         {
@@ -3038,35 +3038,6 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SemifinishedProductToggleApproved", entityIDParameter, approvedParameter);
         }
     
-        public virtual ObjectResult<MaterialIssuePendingFirmOrderDetail> GetMaterialIssuePendingFirmOrderDetails(Nullable<int> locationID, Nullable<int> materialIssueID, Nullable<int> firmOrderID, Nullable<int> warehouseID, string firmOrderMaterialIDs, Nullable<bool> isReadonly)
-        {
-            var locationIDParameter = locationID.HasValue ?
-                new ObjectParameter("LocationID", locationID) :
-                new ObjectParameter("LocationID", typeof(int));
-    
-            var materialIssueIDParameter = materialIssueID.HasValue ?
-                new ObjectParameter("MaterialIssueID", materialIssueID) :
-                new ObjectParameter("MaterialIssueID", typeof(int));
-    
-            var firmOrderIDParameter = firmOrderID.HasValue ?
-                new ObjectParameter("FirmOrderID", firmOrderID) :
-                new ObjectParameter("FirmOrderID", typeof(int));
-    
-            var warehouseIDParameter = warehouseID.HasValue ?
-                new ObjectParameter("WarehouseID", warehouseID) :
-                new ObjectParameter("WarehouseID", typeof(int));
-    
-            var firmOrderMaterialIDsParameter = firmOrderMaterialIDs != null ?
-                new ObjectParameter("FirmOrderMaterialIDs", firmOrderMaterialIDs) :
-                new ObjectParameter("FirmOrderMaterialIDs", typeof(string));
-    
-            var isReadonlyParameter = isReadonly.HasValue ?
-                new ObjectParameter("IsReadonly", isReadonly) :
-                new ObjectParameter("IsReadonly", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MaterialIssuePendingFirmOrderDetail>("GetMaterialIssuePendingFirmOrderDetails", locationIDParameter, materialIssueIDParameter, firmOrderIDParameter, warehouseIDParameter, firmOrderMaterialIDsParameter, isReadonlyParameter);
-        }
-    
         public virtual ObjectResult<MaterialIssuePendingFirmOrder> GetMaterialIssuePendingFirmOrders(Nullable<int> locationID)
         {
             var locationIDParameter = locationID.HasValue ?
@@ -3114,6 +3085,35 @@ namespace TotalModel.Models
                 new ObjectParameter("CommodityBomID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RemoveCommodityBom", commodityBomIDParameter);
+        }
+    
+        public virtual ObjectResult<MaterialIssuePendingFirmOrderMaterial> GetMaterialIssuePendingFirmOrderMaterials(Nullable<int> locationID, Nullable<int> materialIssueID, Nullable<int> firmOrderID, Nullable<int> warehouseID, string firmOrderMaterialIDs, Nullable<bool> isReadonly)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            var materialIssueIDParameter = materialIssueID.HasValue ?
+                new ObjectParameter("MaterialIssueID", materialIssueID) :
+                new ObjectParameter("MaterialIssueID", typeof(int));
+    
+            var firmOrderIDParameter = firmOrderID.HasValue ?
+                new ObjectParameter("FirmOrderID", firmOrderID) :
+                new ObjectParameter("FirmOrderID", typeof(int));
+    
+            var warehouseIDParameter = warehouseID.HasValue ?
+                new ObjectParameter("WarehouseID", warehouseID) :
+                new ObjectParameter("WarehouseID", typeof(int));
+    
+            var firmOrderMaterialIDsParameter = firmOrderMaterialIDs != null ?
+                new ObjectParameter("FirmOrderMaterialIDs", firmOrderMaterialIDs) :
+                new ObjectParameter("FirmOrderMaterialIDs", typeof(string));
+    
+            var isReadonlyParameter = isReadonly.HasValue ?
+                new ObjectParameter("IsReadonly", isReadonly) :
+                new ObjectParameter("IsReadonly", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MaterialIssuePendingFirmOrderMaterial>("GetMaterialIssuePendingFirmOrderMaterials", locationIDParameter, materialIssueIDParameter, firmOrderIDParameter, warehouseIDParameter, firmOrderMaterialIDsParameter, isReadonlyParameter);
         }
     }
 }

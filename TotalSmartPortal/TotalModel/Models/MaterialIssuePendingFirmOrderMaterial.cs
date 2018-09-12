@@ -11,7 +11,7 @@ namespace TotalModel.Models
 {
     using System;
     
-    public partial class MaterialIssuePendingFirmOrderDetail
+    public partial class MaterialIssuePendingFirmOrderMaterial
     {
         public int FirmOrderMaterialID { get; set; }
         public int CommodityID { get; set; }

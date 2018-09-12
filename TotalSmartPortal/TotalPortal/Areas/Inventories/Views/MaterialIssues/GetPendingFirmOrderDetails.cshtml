@@ -4,8 +4,8 @@
 @{Layout = "~/Views/Shared/_LayoutPopup.cshtml";}
 
 
-@(Html.Kendo().Grid<MaterialIssuePendingFirmOrderDetail>()
-    .Name("gridPendingFirmOrderDetails")
+@(Html.Kendo().Grid<MaterialIssuePendingFirmOrderMaterial>()
+    .Name("gridPendingFirmOrderMaterials")
     .Columns(columns =>
     {
         columns.Bound(c => c.CommodityCode).Title("Mã NVL").Width(30);
@@ -27,7 +27,7 @@
     })
     .Scrollable(s => s.Height(Settings.PopupContentHeightLarge))
     .DataSource(ds => ds.Ajax()
-            .Read(read => read.Action("GetPendingFirmOrderDetails", "MaterialIssueAPIs", new { area = "Inventories" }).Data(@<text>
+            .Read(read => read.Action("GetPendingFirmOrderMaterials", "MaterialIssueAPIs", new { area = "Inventories" }).Data(@<text>
             function(e) {
 
             var materialIssueJSON = window.parent.$("#kendoGridDetails").data("kendoGrid").dataSource.data().toJSON();
@@ -55,16 +55,16 @@
     </div>
 </div>
 
-<script src="@Url.Content("~/Scripts/Controllers/Inventories/MaterialIssues/AddPendingFirmOrderDetail.js")"></script>
+<script src="@Url.Content("~/Scripts/Controllers/Inventories/MaterialIssues/AddPendingFirmOrderMaterial.js")"></script>
 
 <script type="text/javascript">
     function okButton_Click() {
-        handleOKEvent(window.parent.$("#kendoGridDetails").data("kendoGrid").dataSource, $("#gridPendingFirmOrderDetails").data("kendoGrid").dataSource);
+        handleOKEvent(window.parent.$("#kendoGridDetails").data("kendoGrid").dataSource, $("#gridPendingFirmOrderMaterials").data("kendoGrid").dataSource);
     }
 
-    $('#gridPendingFirmOrderDetails').on('click', '.IsSelected', function () {
+    $('#gridPendingFirmOrderMaterials').on('click', '.IsSelected', function () {
         var checked = $(this).is(':checked');
-        var grid = $('#gridPendingFirmOrderDetails').data().kendoGrid;
+        var grid = $('#gridPendingFirmOrderMaterials').data().kendoGrid;
         var dataItem = grid.dataItem($(this).closest('tr'));
         dataItem.set('IsSelected', checked);
     })
@@ -74,7 +74,7 @@
 
 <script>
     function filterText_KeyUp() {
-        var filterText = $("#filterText").val(), gridDetails = $("#gridPendingFirmOrderDetails").data("kendoGrid");
+        var filterText = $("#filterText").val(), gridDetails = $("#gridPendingFirmOrderMaterials").data("kendoGrid");
 
         if (filterText && filterText.length >= "@Settings.AutoCompleteMinLenght") {
             gridDetails.dataSource.filter({

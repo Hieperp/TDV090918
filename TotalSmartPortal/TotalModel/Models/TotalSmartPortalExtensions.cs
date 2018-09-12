@@ -101,7 +101,7 @@ namespace TotalModel.Models
         public Nullable<decimal> QuantityRemains { get { return this.WorkshiftFirmOrderRemains < this.QuantityAvailables ? this.WorkshiftFirmOrderRemains : this.QuantityAvailables; } }
     }
 
-    public partial class MaterialIssuePendingFirmOrderDetail
+    public partial class MaterialIssuePendingFirmOrderMaterial
     {
         public Nullable<decimal> WorkshiftFirmOrderRemains
         {

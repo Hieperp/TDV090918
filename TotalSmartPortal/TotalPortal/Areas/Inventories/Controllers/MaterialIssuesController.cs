@@ -45,7 +45,7 @@ namespace TotalPortal.Areas.Inventories.Controllers
             ViewBag.WarehouseTaskIDList = warehouseTaskIDList.ToString();
         }
 
-        public virtual ActionResult GetPendingFirmOrderDetails()
+        public virtual ActionResult GetPendingFirmOrderMaterials()
         {
             this.AddRequireJsOptions();
             return View();

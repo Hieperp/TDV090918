@@ -13,7 +13,7 @@ namespace TotalCore.Repositories.Inventories
     {
         IEnumerable<MaterialIssuePendingFirmOrder> GetFirmOrders(int? locationID);
 
-        IEnumerable<MaterialIssuePendingFirmOrderDetail> GetPendingFirmOrderDetails(int? locationID, int? materialIssueID, int? firmOrderID, int? warehouseID, string firmOrderMaterialIDs, bool isReadonly);
+        IEnumerable<MaterialIssuePendingFirmOrderMaterial> GetPendingFirmOrderMaterials(int? locationID, int? materialIssueID, int? firmOrderID, int? warehouseID, string firmOrderMaterialIDs, bool isReadonly);
     }
 
 }

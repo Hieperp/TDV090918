@@ -23,7 +23,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             this.GetMaterialIssueViewDetails();
 
             this.GetMaterialIssuePendingFirmOrders();
-            this.GetMaterialIssuePendingFirmOrderDetails();
+            this.GetMaterialIssuePendingFirmOrderMaterials();
 
             this.MaterialIssueSaveRelative();
             this.MaterialIssuePostSaveValidate();
@@ -107,7 +107,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             this.totalSmartPortalEntities.CreateStoredProcedure("GetMaterialIssuePendingFirmOrders", queryString);
         }
 
-        private void GetMaterialIssuePendingFirmOrderDetails()
+        private void GetMaterialIssuePendingFirmOrderMaterials()
         {
             string queryString;
 
@@ -124,7 +124,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
 
             queryString = queryString + "   END " + "\r\n";
 
-            this.totalSmartPortalEntities.CreateStoredProcedure("GetMaterialIssuePendingFirmOrderDetails", queryString);
+            this.totalSmartPortalEntities.CreateStoredProcedure("GetMaterialIssuePendingFirmOrderMaterials", queryString);
         }
 
         private string BuildSQLPendingDetails(bool isFirmOrderMaterialIDs)
