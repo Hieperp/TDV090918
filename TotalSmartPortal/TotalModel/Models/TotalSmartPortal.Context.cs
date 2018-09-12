@@ -85,13 +85,10 @@ namespace TotalModel.Models
         public virtual DbSet<CommodityLine> CommodityLines { get; set; }
         public virtual DbSet<CommodityType> CommodityTypes { get; set; }
         public virtual DbSet<Report> Reports { get; set; }
-        public virtual DbSet<BomDetail> BomDetails { get; set; }
-        public virtual DbSet<Bom> Boms { get; set; }
         public virtual DbSet<Shift> Shifts { get; set; }
         public virtual DbSet<FirmOrderDetail> FirmOrderDetails { get; set; }
         public virtual DbSet<FirmOrderMaterial> FirmOrderMaterials { get; set; }
         public virtual DbSet<FirmOrder> FirmOrders { get; set; }
-        public virtual DbSet<MaterialIssueDetail> MaterialIssueDetails { get; set; }
         public virtual DbSet<MaterialIssue> MaterialIssues { get; set; }
         public virtual DbSet<PlannedOrderDetail> PlannedOrderDetails { get; set; }
         public virtual DbSet<PlannedOrder> PlannedOrders { get; set; }
@@ -99,6 +96,9 @@ namespace TotalModel.Models
         public virtual DbSet<ProductionOrder> ProductionOrders { get; set; }
         public virtual DbSet<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
         public virtual DbSet<SemifinishedProduct> SemifinishedProducts { get; set; }
+        public virtual DbSet<BomDetail> BomDetails { get; set; }
+        public virtual DbSet<Bom> Boms { get; set; }
+        public virtual DbSet<MaterialIssueDetail> MaterialIssueDetails { get; set; }
     
         public virtual ObjectResult<string> AccountInvoicePostSaveValidate(Nullable<int> entityID)
         {

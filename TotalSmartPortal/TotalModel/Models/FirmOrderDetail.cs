@@ -42,7 +42,6 @@ namespace TotalModel.Models
         public bool InActivePartial { get; set; }
         public Nullable<System.DateTime> InActivePartialDate { get; set; }
     
-        public virtual Bom Bom { get; set; }
         public virtual Commodity Commodity { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual FirmOrder FirmOrder { get; set; }
@@ -50,5 +49,6 @@ namespace TotalModel.Models
         public virtual VoidType VoidType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FirmOrderMaterial> FirmOrderMaterials { get; set; }
+        public virtual Bom Bom { get; set; }
     }
 }

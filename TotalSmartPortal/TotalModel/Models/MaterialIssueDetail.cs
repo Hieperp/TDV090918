@@ -34,7 +34,6 @@ namespace TotalModel.Models
         public int FirmOrderID { get; set; }
         public int FirmOrderMaterialID { get; set; }
         public int ProductionLineID { get; set; }
-        public int MoldID { get; set; }
         public int GoodsReceiptID { get; set; }
         public int GoodsReceiptDetailID { get; set; }
         public int CommodityID { get; set; }
@@ -43,6 +42,7 @@ namespace TotalModel.Models
         public decimal Quantity { get; set; }
         public decimal QuantitySemifinished { get; set; }
         public decimal QuantityWastage { get; set; }
+        public decimal QuantityFailure { get; set; }
         public decimal QuantityRejected { get; set; }
         public string Remarks { get; set; }
         public bool Approved { get; set; }

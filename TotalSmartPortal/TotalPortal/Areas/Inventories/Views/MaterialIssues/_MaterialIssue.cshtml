@@ -11,15 +11,6 @@
 
     @Html.Partial("~/Views/Helpers/Bases/_BaseSectionTop.cshtml")
     @Html.Partial("~/Views/Helpers/Bases/_BaseSectionTopB.cshtml")
-
-    
-    
-    @Html.HiddenFor(model => model.CustomerID)
-    @Html.Hidden("Customer_CustomerID", 1); //JUST SET RANNDOMLY, NOT USE FOR ANY, EXCEPT: GetWarehouses()
-
-    
-    
-    
     
     @Html.Hidden("WarehouseTaskID", (int)@ViewBag.WarehouseTaskID);
     @Html.Hidden("WarehouseTaskIDList", (string)@ViewBag.WarehouseTaskIDList);
@@ -35,8 +26,10 @@
         @Html.HiddenFor(model => model.ProductionOrderDetailID)
 
         @Html.HiddenFor(model => model.PlannedOrderID)
-        @Html.HiddenFor(model => model.PlannedOrderDetailID)
-        @if (Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.PlannedOrder)
+
+        @Html.HiddenFor(model => model.FirmOrderID)
+        
+        @if (Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.FirmOrders)
         {
             <div class="form-group">
                 @Html.LabelFor(model => model.PlannedOrderReference)
@@ -81,28 +74,6 @@
         </div>
 
 
-        @Html.HiddenFor(model => model.CommodityID)
-        <div class="form-group">
-            @Html.LabelFor(model => model.CommodityCode)
-            <div class="div-input">
-                @Html.Kendo().MaskedTextBoxFor(model => model.CommodityCode).HtmlAttributes(new { @class = "left-panel-input" })
-            </div>
-            <div class="div-validation-message">
-                @Html.ValidationMessageFor(model => model.CommodityCode, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CommodityName)
-            <div class="div-input">
-                @Html.Kendo().MaskedTextBoxFor(model => model.CommodityName).HtmlAttributes(new { @class = "left-panel-input" })
-            </div>
-            <div class="div-validation-message">
-                @Html.ValidationMessageFor(model => model.CommodityName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
         @Html.HiddenFor(model => model.ProductionLineID)
         <div class="form-group">
             @Html.LabelFor(model => model.ProductionLineCode)
@@ -111,17 +82,6 @@
             </div>
             <div class="div-validation-message">
                 @Html.ValidationMessageFor(model => model.ProductionLineCode, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @Html.HiddenFor(model => model.MoldID)
-        <div class="form-group">
-            @Html.LabelFor(model => model.MoldCode)
-            <div class="div-input">
-                @Html.Kendo().MaskedTextBoxFor(model => model.MoldCode).HtmlAttributes(new { @class = "left-panel-input" })
-            </div>
-            <div class="div-validation-message">
-                @Html.ValidationMessageFor(model => model.MoldCode, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -136,14 +96,14 @@
 
     <div class="right-panel">
 
-        <div class="right-top-panel right-top-panel-H1">
+        <div class="right-top-panel right-top-panel-H2">
+
+            @Html.EditorFor(d => d.Customer, new { CustomerDisplayName = @Model.GetDisplayName(m => m.Customer), CustomerIcon = "Customer Red 24.png", NullCustomer = (Model.CustomerID > 0 ? null : "Lệnh sản xuất tổng hợp của nhiều khách hàng"), CustomerInfo = (Model.CustomerID > 0 ? null : "#") })
 
             @Html.Kendo().NumericTextBoxFor(p => p.WorkshiftID)
-            @*@Html.EditorFor(d => d.Workshift, new { WorkshiftDescriptionHidden = "true", WorkshiftDisplayName = @Model.GetDisplayName(m => m.Workshift) })*@
-
-            @*@Html.DisplayFor(d => d.Warehouse, "Commons/WarehouseBase")*@
-
+            @Html.Kendo().TextBoxFor(p => p.WorkshiftCode)
         </div>
+
 
         <div class="div-k-grid-detail">
             @(Html.Kendo().Grid(Model.MaterialIssueViewDetails)
@@ -157,7 +117,7 @@
                         .ClientTemplate("#= MaterialIssueID #" + "<input type='hidden' name='MaterialIssueViewDetails[#= index(data) #].MaterialIssueID' value='#= MaterialIssueID #' />");
 
 
-                    columns.Bound(p => p.PlannedOrderMaterialID).DisplayNameTitle().Filterable(false).Hidden()
+                    columns.Bound(p => p.FirmOrderMaterialID).DisplayNameTitle().Filterable(false).Hidden()
                         .ClientTemplate("#= (PlannedOrderMaterialID == null)? '' : PlannedOrderMaterialID #" + "<input type='hidden' name='MaterialIssueViewDetails[#= index(data) #].PlannedOrderMaterialID' value='#= (PlannedOrderMaterialID == null) ? '' : PlannedOrderMaterialID #' />");
 
 
@@ -165,7 +125,7 @@
                         .ClientTemplate("#= CommodityID #" + "<input type='hidden' name='MaterialIssueViewDetails[#= index(data) #].CommodityID' value='#= CommodityID #' />");
                     columns.Bound(p => p.CommodityName).DisplayNameTitle().Filterable(false).Width(90).HtmlAttributes(new { style = "" }).Hidden()
                         .ClientTemplate("#= CommodityName #" + "<input type='hidden' name='MaterialIssueViewDetails[#= index(data) #].CommodityName' value='#= CommodityName #' />");
-                    columns.Bound(p => p.CommodityCode).DisplayNameTitle().Filterable(false).Width(200).EditorTemplateName(Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.PlannedOrder ? "StringReadonly" : "AutoCompletes/CommodityAvailable")
+                    columns.Bound(p => p.CommodityCode).DisplayNameTitle().Filterable(false).Width(200).EditorTemplateName(Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.FirmOrders ? "StringReadonly" : "AutoCompletes/CommodityAvailable")
                         .ClientTemplate("#= CommodityCode #" + "<input type='hidden' name='MaterialIssueViewDetails[#= index(data) #].CommodityCode' value='#= CommodityCode #' />");
 
                     columns.Bound(p => p.CommodityTypeID).DisplayNameTitle().Filterable(false).Hidden()
@@ -180,19 +140,19 @@
 
                     columns.Bound(p => p.GoodsReceiptCode).DisplayNameTitle().Filterable(false).Width(60).Hidden()
                         .ClientTemplate("#= (GoodsReceiptCode == null)? '' : GoodsReceiptCode #" + "<input type='hidden' name='MaterialIssueViewDetails[#= index(data) #].GoodsReceiptCode' value='#= (GoodsReceiptCode == null) ? '' : GoodsReceiptCode #' />");
-                    columns.Bound(p => p.GoodsReceiptReference).DisplayNameTitle().Filterable(false).Width(60).Hidden(Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.PlannedOrder && @Model.PlannedOrderID == null ? false : true)
+                    columns.Bound(p => p.GoodsReceiptReference).DisplayNameTitle().Filterable(false).Width(60).Hidden(Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.FirmOrders && @Model.PlannedOrderID == null ? false : true)
                         .ClientTemplate("#= (GoodsReceiptReference == null)? '' : GoodsReceiptReference #" + "<input type='hidden' name='MaterialIssueViewDetails[#= index(data) #].GoodsReceiptReference' value='#= (GoodsReceiptReference == null) ? '' : GoodsReceiptReference #' />");
-                    columns.Bound(p => p.GoodsReceiptEntryDate).DisplayNameTitle().Filterable(false).Width(80).Hidden(Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.PlannedOrder && @Model.PlannedOrderID == null ? false : true)
+                    columns.Bound(p => p.GoodsReceiptEntryDate).DisplayNameTitle().Filterable(false).Width(80).Hidden(Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.FirmOrders && @Model.PlannedOrderID == null ? false : true)
                         .Format("{0:" + @Settings.DateFormat + "}")
                         .ClientTemplate("#= (GoodsReceiptEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', GoodsReceiptEntryDate) #" + "<input type='hidden' name='MaterialIssueViewDetails[#= index(data) #].GoodsReceiptEntryDate' value='#= (GoodsReceiptEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', GoodsReceiptEntryDate) #' />");
 
 
-                    columns.Bound(p => p.WorkshiftPlannedOrderRemains).DisplayNameTitle().Filterable(false).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Hidden(Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.PlannedOrder ? false : true)
+                    columns.Bound(p => p.WorkshiftFirmOrderRemains).DisplayNameTitle().Filterable(false).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Hidden(Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.FirmOrders ? false : true)
                         .Format(Settings.kfmQuantity)
                         .ClientFooterTemplate("#= kendo.format('" + Settings.kfmQuantity + "', sum) #")
-                        .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', WorkshiftPlannedOrderRemains) #" + "<input type='hidden' name='MaterialIssueViewDetails[#= index(data) #].WorkshiftPlannedOrderRemains' value='#= WorkshiftPlannedOrderRemains #' />");
+                        .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', WorkshiftFirmOrderRemains) #" + "<input type='hidden' name='MaterialIssueViewDetails[#= index(data) #].WorkshiftFirmOrderRemains' value='#= WorkshiftFirmOrderRemains #' />");
 
-                    columns.Bound(p => p.QuantityAvailables).DisplayNameTitle().Filterable(false).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Hidden(Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.PlannedOrder ? false : true)
+                    columns.Bound(p => p.QuantityAvailables).DisplayNameTitle().Filterable(false).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Hidden(Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.FirmOrders ? false : true)
                         .Format(Settings.kfmQuantity)
                         .ClientFooterTemplate("#= kendo.format('" + Settings.kfmQuantity + "', sum) #")
                         .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', QuantityAvailables) #" + "<input type='hidden' name='MaterialIssueViewDetails[#= index(data) #].QuantityAvailables' value='#= QuantityAvailables #' />");
@@ -226,7 +186,7 @@
                         if (Model.Editable)
                         {
                             //toolbar.Create().HtmlAttributes(new { @class = "fa fa-map-marker" }).Text("Add new aa le ea1");
-                            if (Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.PlannedOrder)
+                            if (Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.FirmOrders)
                                 toolbar.Template(@<text>
                                     <button type="button" class="k-button" onclick="GetPendingPlannedOrderDetails()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Chọn mặt hàng từ đơn đặt hàng </button>
                                     <button type="button" class="k-button" onclick="copyRemainsToQuantity()"> <img src="~/Content/Images/Mains/Size24/Borderlands-Select-icon-24.png" /> Giao hàng toàn bộ đơn hàng </button>
@@ -286,7 +246,7 @@
                                                                                                 {
                                                                                                     events.Error("kendGrid_ErrorHandler");
                                                                                                 })
-                                                                                                .Aggregates(a => a.Add(x => x.WorkshiftPlannedOrderRemains).Sum())
+                                                                                                .Aggregates(a => a.Add(x => x.WorkshiftFirmOrderRemains).Sum())
                                                                                                 .Aggregates(a => a.Add(x => x.QuantityAvailables).Sum())
                                                                                                 .Aggregates(a => a.Add(x => x.QuantityRemains).Sum())
                                                                                                 .Aggregates(a => a.Add(x => x.Quantity).Sum())

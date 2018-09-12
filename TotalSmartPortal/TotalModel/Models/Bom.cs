@@ -30,15 +30,15 @@ namespace TotalModel.Models
         public string Reference { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
-        public int CustomerID { get; set; }
-        public int CommodityID { get; set; }
+        public int CommodityCategoryID { get; set; }
+        public int CommodityClassID { get; set; }
+        public int CommodityLineID { get; set; }
+        public Nullable<int> CustomerID { get; set; }
         public string Remarks { get; set; }
-        public bool IsDefault { get; set; }
         public bool InActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BomDetail> BomDetails { get; set; }
-        public virtual Commodity Commodity { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FirmOrderDetail> FirmOrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

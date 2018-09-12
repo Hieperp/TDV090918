@@ -70,8 +70,8 @@
 
     <div class="right-panel">
 
-        <div class="right-top-panel right-top-panel-H1">
-            
+        <div class="right-top-panel right-top-panel-H2">
+
             @Html.EditorFor(d => d.Customer, new { CustomerDisplayName = @Model.GetDisplayName(m => m.Customer), CustomerIcon = "Customer Red 24.png", NullCustomer = (Model.CustomerID > 0 ? null : "Lệnh sản xuất tổng hợp của nhiều khách hàng"), CustomerInfo = (Model.CustomerID > 0 ? null : "#") })
 
             @*@Html.Kendo().NumericTextBoxFor(p => p.ShiftID);*@

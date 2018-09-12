@@ -45,8 +45,8 @@ namespace TotalModel.Models
         public virtual FirmOrder FirmOrder { get; set; }
         public virtual GoodsReceiptDetail GoodsReceiptDetail { get; set; }
         public virtual Location Location { get; set; }
-        public virtual MaterialIssueDetail MaterialIssueDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
+        public virtual MaterialIssueDetail MaterialIssueDetail { get; set; }
     }
 }

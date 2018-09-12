@@ -16,7 +16,6 @@ namespace TotalModel.Models
     {
         public int BomDetailID { get; set; }
         public int BomID { get; set; }
-        public int CommodityID { get; set; }
         public int MaterialID { get; set; }
         public decimal BlockUnit { get; set; }
         public decimal BlockQuantity { get; set; }
@@ -25,6 +24,5 @@ namespace TotalModel.Models
     
         public virtual Bom Bom { get; set; }
         public virtual Commodity Commodity { get; set; }
-        public virtual Commodity Commodity1 { get; set; }
     }
 }

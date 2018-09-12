@@ -38,9 +38,9 @@ namespace TotalModel.Models
         public bool Approved { get; set; }
     
         public virtual Commodity Commodity { get; set; }
-        public virtual MaterialIssueDetail MaterialIssueDetail { get; set; }
         public virtual ProductionOrderDetail ProductionOrderDetail { get; set; }
         public virtual ProductionOrder ProductionOrder { get; set; }
         public virtual SemifinishedProduct SemifinishedProduct { get; set; }
+        public virtual MaterialIssueDetail MaterialIssueDetail { get; set; }
     }
 }

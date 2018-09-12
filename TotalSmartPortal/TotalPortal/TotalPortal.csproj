@@ -1174,7 +1174,7 @@
     <Content Include="Areas\Inventories\Views\MaterialIssues\GetPendingPlannedOrderDetails.cshtml" />
     <Content Include="Areas\Inventories\Views\MaterialIssues\Index.cshtml" />
     <Content Include="Areas\Inventories\Views\MaterialIssues\Print.cshtml" />
-    <Content Include="Areas\Inventories\Views\MaterialIssues\_GetProductionOrder.cshtml" />
+    <Content Include="Areas\Inventories\Views\MaterialIssues\_GetFirmOrders.cshtml" />
     <Content Include="Areas\Inventories\Views\MaterialIssues\_MaterialIssue.cshtml" />
     <Content Include="Areas\Inventories\Views\MaterialIssues\Approve.cshtml" />
     <Content Include="Areas\Productions\Views\PlannedOrders\Approve.cshtml" />

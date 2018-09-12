@@ -86,8 +86,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
 
             queryString = queryString + "       SELECT      TOP 30 BomID, Code AS BomCode, Name AS BomName, Reference AS BomReference " + " \r\n";
             queryString = queryString + "       FROM        Boms " + "\r\n";
-            queryString = queryString + "       WHERE       InActive = 0 AND (1 = 1 OR CommodityID = @CommodityID) AND (@SearchText = '' OR Code LIKE '%' + @SearchText + '%' OR Reference LIKE '%' + @SearchText + '%') " + "\r\n";
-            queryString = queryString + "       ORDER BY    IsDefault " + "\r\n";
+            queryString = queryString + "       WHERE       InActive = 0 AND BomID IN (SELECT BomID FROM CommodityBoms WHERE CommodityID = @CommodityID) AND (@SearchText = '' OR Code LIKE '%' + @SearchText + '%' OR Reference LIKE '%' + @SearchText + '%') " + "\r\n";
 
             queryString = queryString + "    END " + "\r\n";
 

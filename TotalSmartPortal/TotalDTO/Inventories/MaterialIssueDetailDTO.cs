@@ -16,21 +16,21 @@ namespace TotalDTO.Inventories
         public int MaterialIssueDetailID { get; set; }
         public int MaterialIssueID { get; set; }
 
-        public int PlannedOrderID { get; set; }
-        public int PlannedOrderDetailID { get; set; }
-        public int PlannedOrderMaterialID { get; set; }
-
         public int ProductionOrderID { get; set; }
         public int ProductionOrderDetailID { get; set; }
 
+        public int PlannedOrderID { get; set; }
+        public int FirmOrderID { get; set; }
+        public int FirmOrderMaterialID { get; set; }
+
         public int MaterialIssueTypeID { get; set; }
 
-        public int CustomerID { get; set; }
+        public Nullable<int> CustomerID { get; set; }
         public int WorkshiftID { get; set; }
-        public int ProductionLineID { get; set; }
-        public int MoldID { get; set; }
 
-        
+        public int ProductionLineID { get; set; }
+
+
         public Nullable<int> WarehouseID { get; set; }
 
         public int GoodsReceiptID { get; set; }
@@ -49,7 +49,7 @@ namespace TotalDTO.Inventories
 
         [Display(Name = "Tồn đơn")]
         [UIHint("QuantityReadonly")]
-        public decimal WorkshiftPlannedOrderRemains { get; set; }
+        public decimal WorkshiftFirmOrderRemains { get; set; }
 
         [Display(Name = "Tồn kho")]
         [UIHint("QuantityReadonly")]
