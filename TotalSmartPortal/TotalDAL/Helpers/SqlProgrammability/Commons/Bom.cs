@@ -23,6 +23,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             this.AddCommodityBom();
             this.RemoveCommodityBom();
 
+            this.SetCommodityBomDefault();
+
             this.GetBomBases();
         }
 
@@ -77,13 +79,30 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
 
         }
 
+        private void SetCommodityBomDefault()
+        {
+            string queryString = " @CommodityBomID int, @CommodityID int, @IsDefault bit " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "       BEGIN " + "\r\n";
+
+            queryString = queryString + "           UPDATE          CommodityBoms " + "\r\n";
+            queryString = queryString + "           SET             IsDefault = IIF(CommodityBomID = @CommodityBomID, @IsDefault, ~@IsDefault) " + "\r\n";
+            queryString = queryString + "           WHERE           CommodityID = @CommodityID " + "\r\n";
+
+            queryString = queryString + "       END " + "\r\n";
+
+            this.totalSmartPortalEntities.CreateStoredProcedure("SetCommodityBomDefault", queryString);
+        }
+
         private void GetBomBases()
         {
             string queryString;
 
             string querySQL = "             SELECT      BomID, Code, Name, Reference AS Reference " + " \r\n";
             querySQL = querySQL + "         FROM        Boms " + "\r\n";
-            querySQL = querySQL + "         WHERE       InActive = 0 AND (@SearchText = '' OR Code LIKE '%' + @SearchText + '%' OR Reference LIKE '%' + @SearchText + '%') " + "\r\n";
+            querySQL = querySQL + "         WHERE       InActive = 0 AND (@SearchText = '' OR Code LIKE '%' + @SearchText + '%' OR OfficialCode LIKE '%' + @SearchText + '%' OR Name LIKE '%' + @SearchText + '%' OR Reference LIKE '%' + @SearchText + '%') " + "\r\n";
 
             queryString = " @SearchText nvarchar(60), @CommodityID int, @CommodityCategoryID int, @CommodityClassID int, @CommodityLineID int " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";

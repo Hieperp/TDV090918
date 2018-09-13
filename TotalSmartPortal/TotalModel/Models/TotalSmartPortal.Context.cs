@@ -3115,5 +3115,22 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MaterialIssuePendingFirmOrderMaterial>("GetMaterialIssuePendingFirmOrderMaterials", locationIDParameter, materialIssueIDParameter, firmOrderIDParameter, warehouseIDParameter, goodsReceiptDetailIDsParameter, isReadonlyParameter);
         }
+    
+        public virtual int SetCommodityBomDefault(Nullable<int> commodityBomID, Nullable<int> commodityID, Nullable<bool> isDefault)
+        {
+            var commodityBomIDParameter = commodityBomID.HasValue ?
+                new ObjectParameter("CommodityBomID", commodityBomID) :
+                new ObjectParameter("CommodityBomID", typeof(int));
+    
+            var commodityIDParameter = commodityID.HasValue ?
+                new ObjectParameter("CommodityID", commodityID) :
+                new ObjectParameter("CommodityID", typeof(int));
+    
+            var isDefaultParameter = isDefault.HasValue ?
+                new ObjectParameter("IsDefault", isDefault) :
+                new ObjectParameter("IsDefault", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SetCommodityBomDefault", commodityBomIDParameter, commodityIDParameter, isDefaultParameter);
+        }
     }
 }

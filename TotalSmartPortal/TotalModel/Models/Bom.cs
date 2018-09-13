@@ -36,6 +36,7 @@ namespace TotalModel.Models
         public Nullable<int> CustomerID { get; set; }
         public string Remarks { get; set; }
         public bool InActive { get; set; }
+        public string OfficialCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BomDetail> BomDetails { get; set; }

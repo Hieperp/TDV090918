@@ -20,39 +20,19 @@
 <div class="right-panel">
     <div class="right-first-panel">
         <div class="form-group">
-            @Html.LabelFor(model => (model as ICommodityPrimitiveDTO).Code)
+            @Html.LabelFor(model => (model as ICommodityPrimitiveDTO).CodePartA)
             <div class="div-input">
-                @Html.Kendo().MaskedTextBoxFor(model => (model as ICommodityPrimitiveDTO).Code).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
+                @Html.Kendo().MaskedTextBoxFor(model => (model as ICommodityPrimitiveDTO).CodePartA).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
             </div>
             <div class="div-validation-message">
-                @Html.ValidationMessageFor(model => (model as ICommodityPrimitiveDTO).Code, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => (model as ICommodityPrimitiveDTO).CodePartA, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => (model as ICommodityPrimitiveDTO).Name)
-            <div class="div-input">
-                @Html.Kendo().MaskedTextBoxFor(model => (model as ICommodityPrimitiveDTO).Name).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
-            </div>
-            <div class="div-validation-message">
-                @Html.ValidationMessageFor(model => (model as ICommodityPrimitiveDTO).Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => (model as ICommodityPrimitiveDTO).OfficialName)
-            <div class="div-input">
-                @Html.Kendo().MaskedTextBoxFor(model => (model as ICommodityPrimitiveDTO).OfficialName).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
-            </div>
-            <div class="div-validation-message">
-                @Html.ValidationMessageFor(model => (model as ICommodityPrimitiveDTO).OfficialName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
+        @Html.Partial("~/Views/Shared/EditorTemplates/DropDowns/CommodityCategory.cshtml", @Model, new ViewDataDictionary { { "CommodityCategoryReadonly", true } })
 
 
         <div class="form-group" style="padding-top: 16px;">
-            @Html.EditorFor(d => (d as ICommodityPrimitiveDTO).Bom, new { BomDisplayName = "Vui lòng chọn màng, sau đó nhấn 'Thêm màng vào khay'", VoidTypeBaseLeftPanelInput = "left-panel-input" })
+            @Html.EditorFor(d => (d as ICommodityPrimitiveDTO).Bom, new { BomDisplayName = "Vui lòng chọn loại màng, sau đó nhấn 'Thêm vào khay'", VoidTypeBaseLeftPanelInput = "left-panel-input" })
         </div>
 
 
@@ -60,14 +40,13 @@
     </div>
 
     <div class="right-second-panel">
-        @Html.Partial("~/Views/Shared/EditorTemplates/DropDowns/CommodityCategory.cshtml", @Model, new ViewDataDictionary { { "CommodityCategoryReadonly", true } })
         @Html.Partial("~/Views/Shared/EditorTemplates/DropDowns/CommodityLine.cshtml", @Model, new ViewDataDictionary { { "CommodityLineReadonly", true } })
         @Html.Partial("~/Views/Shared/EditorTemplates/DropDowns/CommodityClass.cshtml", @Model, new ViewDataDictionary { { "CommodityClassReadonly", true } })
 
         <div class="form-group" style="padding-top: 17px;">
             @Html.Label(" ")
             <div class="div-input">
-                <button type="button" class="k-button left-panel-input" onclick="AddCommodityBom()"> <img src="~/Content/Images/New/2017/sale-off-icon-24.png" /> Thêm màng vào khay </button>
+                <button type="button" class="k-button left-panel-input" onclick="AddCommodityBom()"> <img src="~/Content/Images/New/2017/sale-off-icon-24.png" /> Thêm vào khay: @(@Model.Name.Length <= 26? @Model.Name: @Model.Name.Substring(0, 25)) </button>
             </div>
         </div>
     </div>
@@ -86,13 +65,13 @@
 
         columns.Bound(c => c.EntryDate).Title("Ngày thêm").Width(70).Format("{0:" + Settings.DateTimeFormat + "}").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" });
         columns.Bound(c => c.Remarks).Title("Ghi chú").Width(100);
-        columns.Template(t => { }).Title("").ClientTemplate("<input class='IsSelected' #= IsDefault ? checked='checked':'' #  type='checkbox' />").HtmlAttributes(new { @class = "grid-column-center", @readonly = "readonly" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(40);
+        columns.Template(t => { }).Title("Mặc định").ClientTemplate("<input class='IsSelected' #= IsDefault ? checked='checked':'' #  type='checkbox' />").HtmlAttributes(new { @class = "grid-column-center", @readonly = "readonly" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(40);
 
         columns.Template(model => null).Width(40)
             .ClientTemplate("<a class='k-button' style='padding-left:5px; min-width:28px; width:28px' onclick='RemoveCommodityBom(#=CommodityBomID#)'><span class='k-icon k-delete'></span></a>");
     })
 
-    .Scrollable(s => s.Height(200))
+    .Scrollable(s => s.Height(217))
     .DataSource(ds => ds.Ajax()
             .Read(read => read.Action("GetCommodityBoms", "BomAPIs", new { area = "Commons" }).Data("onGetCommodityBoms"))
     .ServerOperation(true))
@@ -112,7 +91,7 @@
 @*<script src="~/Scripts/Controllers/Commons/Products/Boms.js"></script>*@
 
 <script type="text/javascript">
-    function onGetCommodityBoms(e) {        
+    function onGetCommodityBoms(e) {
         return {
             commodityID: $("#CommodityID").val()
         };
@@ -120,7 +99,7 @@
 
     function AddCommodityBom(e) {
         if ($("#Editable").val() != 'True')
-            return;        
+            return;
 
         return $.ajax({
             url: '@Url.Action("AddCommodityBom", "BomAPIs", new { area = "Commons" })',
