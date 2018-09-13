@@ -76,9 +76,7 @@ namespace TotalDTO.Commons
         bool Discontinue { get; set; }
                 
         [UIHint("AutoCompletes/Bom")]
-        BomBaseDTO BomNMVN { get; set; }
-        [UIHint("AutoCompletes/VoidType")]
-        VoidTypeBaseDTO VoidType { get; set; }
+        BomBaseDTO Bom { get; set; }
 
         string HSCode { get; set; }
 
@@ -141,9 +139,8 @@ namespace TotalDTO.Commons
         public bool IsRegularCheckUps { get; set; }
         public bool Discontinue { get; set; }
 
-        public Nullable<int> BomID { get { return (this.BomNMVN != null ? this.BomNMVN.BomID : null); } }        
-        public BomBaseDTO BomNMVN { get; set; }
-        public VoidTypeBaseDTO VoidType { get; set; }
+        public Nullable<int> BomID { get { return (this.Bom != null ? this.Bom.BomID : null); } }        
+        public BomBaseDTO Bom { get; set; }
 
         public string HSCode { get; set; }
 

@@ -3,7 +3,6 @@
 @model string
 
 @(Html.Kendo().AutoCompleteFor(m => m)
-        .Name("BomCode")
         .DataTextField("BomCode")
         .Filter("contains")
         .MinLength(Settings.AutoCompleteMinLenght)
