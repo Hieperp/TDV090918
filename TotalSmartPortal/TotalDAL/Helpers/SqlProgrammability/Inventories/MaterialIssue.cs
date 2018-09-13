@@ -111,13 +111,13 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
         {
             string queryString;
 
-            queryString = " @LocationID Int, @MaterialIssueID Int, @FirmOrderID Int, @WarehouseID Int, @FirmOrderMaterialIDs varchar(3999), @IsReadonly bit " + "\r\n";
+            queryString = " @LocationID Int, @MaterialIssueID Int, @FirmOrderID Int, @WarehouseID Int, @GoodsReceiptDetailIDs varchar(3999), @IsReadonly bit " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
             queryString = queryString + "   BEGIN " + "\r\n";
 
-            queryString = queryString + "       IF  (@FirmOrderMaterialIDs <> '') " + "\r\n";
+            queryString = queryString + "       IF  (@GoodsReceiptDetailIDs <> '') " + "\r\n";
             queryString = queryString + "           " + this.BuildSQLPendingDetails(true) + "\r\n";
             queryString = queryString + "       ELSE " + "\r\n";
             queryString = queryString + "           " + this.BuildSQLPendingDetails(false) + "\r\n";
@@ -127,30 +127,30 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             this.totalSmartPortalEntities.CreateStoredProcedure("GetMaterialIssuePendingFirmOrderMaterials", queryString);
         }
 
-        private string BuildSQLPendingDetails(bool isFirmOrderMaterialIDs)
+        private string BuildSQLPendingDetails(bool isGoodsReceiptDetailIDs)
         {
             string queryString = "";
             queryString = queryString + "   BEGIN " + "\r\n";
 
             queryString = queryString + "       IF (@MaterialIssueID <= 0) " + "\r\n";
             queryString = queryString + "               BEGIN " + "\r\n";
-            queryString = queryString + "                   " + this.BuildSQLNew(isFirmOrderMaterialIDs) + "\r\n";
+            queryString = queryString + "                   " + this.BuildSQLNew(isGoodsReceiptDetailIDs) + "\r\n";
             queryString = queryString + "                   ORDER BY FirmOrderMaterials.FirmOrderMaterialID " + "\r\n";
             queryString = queryString + "               END " + "\r\n";
             queryString = queryString + "       ELSE " + "\r\n";
 
             queryString = queryString + "               IF (@IsReadonly = 1) " + "\r\n";
             queryString = queryString + "                   BEGIN " + "\r\n";
-            queryString = queryString + "                       " + this.BuildSQLEdit(isFirmOrderMaterialIDs) + "\r\n";
+            queryString = queryString + "                       " + this.BuildSQLEdit(isGoodsReceiptDetailIDs) + "\r\n";
             queryString = queryString + "                       ORDER BY FirmOrderMaterials.FirmOrderMaterialID " + "\r\n";
             queryString = queryString + "                   END " + "\r\n";
 
             queryString = queryString + "               ELSE " + "\r\n"; //FULL SELECT FOR EDIT MODE
 
             queryString = queryString + "                   BEGIN " + "\r\n";
-            queryString = queryString + "                       " + this.BuildSQLNew(isFirmOrderMaterialIDs) + " WHERE FirmOrderMaterials.FirmOrderMaterialID NOT IN (SELECT FirmOrderMaterialID FROM MaterialIssueDetails WHERE MaterialIssueID = @MaterialIssueID) " + "\r\n";
+            queryString = queryString + "                       " + this.BuildSQLNew(isGoodsReceiptDetailIDs) + " WHERE FirmOrderMaterials.FirmOrderMaterialID NOT IN (SELECT FirmOrderMaterialID FROM MaterialIssueDetails WHERE MaterialIssueID = @MaterialIssueID) " + "\r\n";
             queryString = queryString + "                       UNION ALL " + "\r\n";
-            queryString = queryString + "                       " + this.BuildSQLEdit(isFirmOrderMaterialIDs) + "\r\n";
+            queryString = queryString + "                       " + this.BuildSQLEdit(isGoodsReceiptDetailIDs) + "\r\n";
             queryString = queryString + "                       ORDER BY FirmOrderMaterials.FirmOrderMaterialID " + "\r\n";
             queryString = queryString + "                   END " + "\r\n";
 
@@ -159,7 +159,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             return queryString;
         }
 
-        private string BuildSQLNew(bool isFirmOrderMaterialIDs)
+        private string BuildSQLNew(bool isGoodsReceiptDetailIDs)
         {
             string queryString = "";
 
@@ -168,27 +168,28 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + "                   ROUND(FirmOrderMaterials.Quantity - FirmOrderMaterials.QuantityIssued, " + (int)GlobalEnums.rndQuantity + ") AS FirmOrderRemains, ROUND(GoodsReceiptDetails.Quantity - GoodsReceiptDetails.QuantityIssued, " + (int)GlobalEnums.rndQuantity + ") AS QuantityAvailables, 0 AS Quantity, CAST(0 AS bit) AS IsSelected " + "\r\n";
 
             queryString = queryString + "       FROM        FirmOrderMaterials " + "\r\n";
-            queryString = queryString + "                   INNER JOIN Commodities ON FirmOrderMaterials.FirmOrderID = @FirmOrderID AND FirmOrderMaterials.Approved = 1 AND FirmOrderMaterials.InActive = 0 AND FirmOrderMaterials.InActivePartial = 0 AND ROUND(FirmOrderMaterials.Quantity - FirmOrderMaterials.QuantityIssued, " + (int)GlobalEnums.rndQuantity + ") > 0 AND FirmOrderMaterials.MaterialID = Commodities.CommodityID " + (isFirmOrderMaterialIDs ? " AND FirmOrderMaterials.FirmOrderMaterialID NOT IN (SELECT Id FROM dbo.SplitToIntList (@FirmOrderMaterialIDs))" : "") + "\r\n";
+            queryString = queryString + "                   INNER JOIN Commodities ON FirmOrderMaterials.FirmOrderID = @FirmOrderID AND FirmOrderMaterials.Approved = 1 AND FirmOrderMaterials.InActive = 0 AND FirmOrderMaterials.InActivePartial = 0 AND ROUND(FirmOrderMaterials.Quantity - FirmOrderMaterials.QuantityIssued, " + (int)GlobalEnums.rndQuantity + ") > 0 AND FirmOrderMaterials.MaterialID = Commodities.CommodityID " + "\r\n";
 
-            queryString = queryString + "                   LEFT JOIN GoodsReceiptDetails ON GoodsReceiptDetails.WarehouseID = @WarehouseID AND FirmOrderMaterials.MaterialID = GoodsReceiptDetails.CommodityID AND GoodsReceiptDetails.Approved = 1 AND ROUND(GoodsReceiptDetails.Quantity - GoodsReceiptDetails.QuantityIssued, " + (int)GlobalEnums.rndQuantity + ") > 0 " + "\r\n";
+            queryString = queryString + "                   LEFT JOIN GoodsReceiptDetails ON GoodsReceiptDetails.WarehouseID = @WarehouseID AND FirmOrderMaterials.MaterialID = GoodsReceiptDetails.CommodityID AND GoodsReceiptDetails.Approved = 1 AND ROUND(GoodsReceiptDetails.Quantity - GoodsReceiptDetails.QuantityIssued, " + (int)GlobalEnums.rndQuantity + ") > 0 " + (isGoodsReceiptDetailIDs ? " AND GoodsReceiptDetails.GoodsReceiptDetailID NOT IN (SELECT Id FROM dbo.SplitToIntList (@GoodsReceiptDetailIDs))" : "") + "\r\n";
             queryString = queryString + "                   LEFT JOIN GoodsReceipts ON GoodsReceiptDetails.GoodsReceiptID = GoodsReceipts.GoodsReceiptID " + "\r\n";
 
             return queryString;
         }
 
-        private string BuildSQLEdit(bool isFirmOrderMaterialIDs)
+        private string BuildSQLEdit(bool isGoodsReceiptDetailIDs)
         {
             string queryString = "";
 
             queryString = queryString + "       SELECT      FirmOrderMaterials.FirmOrderMaterialID, Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, " + "\r\n";
             queryString = queryString + "                   GoodsReceiptDetails.GoodsReceiptID, GoodsReceiptDetails.GoodsReceiptDetailID, GoodsReceipts.EntryDate AS GoodsReceiptEntryDate, GoodsReceipts.Reference AS GoodsReceiptReference, GoodsReceipts.Code AS GoodsReceiptCode, " + "\r\n";
-            queryString = queryString + "                   ROUND(FirmOrderMaterials.Quantity - FirmOrderMaterials.QuantityIssued + MaterialIssueDetails.Quantity, " + (int)GlobalEnums.rndQuantity + ") AS FirmOrderRemains, ROUND(GoodsReceiptDetails.Quantity - GoodsReceiptDetails.QuantityIssued + MaterialIssueDetails.Quantity, " + (int)GlobalEnums.rndQuantity + ") AS QuantityAvailables, 0 AS Quantity, CAST(0 AS bit) AS IsSelected " + "\r\n";
+            queryString = queryString + "                   ROUND(FirmOrderMaterials.Quantity - FirmOrderMaterials.QuantityIssued + MaterialIssueDetails.Quantity, " + (int)GlobalEnums.rndQuantity + ") AS FirmOrderRemains, ROUND(GoodsReceiptDetails.Quantity - GoodsReceiptDetails.QuantityIssued + ISNULL(IssuedGoodsReceiptDetails.Quantity, 0), " + (int)GlobalEnums.rndQuantity + ") AS QuantityAvailables, 0 AS Quantity, CAST(0 AS bit) AS IsSelected " + "\r\n";
 
             queryString = queryString + "       FROM        FirmOrderMaterials " + "\r\n";
-            queryString = queryString + "                   INNER JOIN MaterialIssueDetails ON MaterialIssueDetails.MaterialIssueID = @MaterialIssueID AND FirmOrderMaterials.FirmOrderMaterialID = MaterialIssueDetails.FirmOrderMaterialID " + (isFirmOrderMaterialIDs ? " AND FirmOrderMaterials.FirmOrderMaterialID NOT IN (SELECT Id FROM dbo.SplitToIntList (@FirmOrderMaterialIDs))" : "") + "\r\n";
+            queryString = queryString + "                   INNER JOIN (SELECT FirmOrderMaterialID, SUM(Quantity) AS Quantity FROM MaterialIssueDetails WHERE MaterialIssueID = @MaterialIssueID GROUP BY FirmOrderMaterialID) AS MaterialIssueDetails ON FirmOrderMaterials.FirmOrderMaterialID = MaterialIssueDetails.FirmOrderMaterialID " + "\r\n";
             queryString = queryString + "                   INNER JOIN Commodities ON FirmOrderMaterials.MaterialID = Commodities.CommodityID " + "\r\n";
 
-            queryString = queryString + "                   LEFT JOIN GoodsReceiptDetails ON GoodsReceiptDetails.WarehouseID = @WarehouseID AND FirmOrderMaterials.MaterialID = GoodsReceiptDetails.CommodityID AND GoodsReceiptDetails.Approved = 1 AND ROUND(GoodsReceiptDetails.Quantity - GoodsReceiptDetails.QuantityIssued, " + (int)GlobalEnums.rndQuantity + ") > 0 " + "\r\n";
+            queryString = queryString + "                   LEFT JOIN GoodsReceiptDetails ON GoodsReceiptDetails.WarehouseID = @WarehouseID AND FirmOrderMaterials.MaterialID = GoodsReceiptDetails.CommodityID AND GoodsReceiptDetails.Approved = 1 AND (ROUND(GoodsReceiptDetails.Quantity - GoodsReceiptDetails.QuantityIssued, " + (int)GlobalEnums.rndQuantity + ") > 0 OR GoodsReceiptDetails.GoodsReceiptDetailID IN (SELECT GoodsReceiptDetailID FROM MaterialIssueDetails WHERE MaterialIssueID = @MaterialIssueID)) " + (isGoodsReceiptDetailIDs ? " AND GoodsReceiptDetails.GoodsReceiptDetailID NOT IN (SELECT Id FROM dbo.SplitToIntList (@GoodsReceiptDetailIDs))" : "") + "\r\n";
+            queryString = queryString + "                   LEFT JOIN (SELECT GoodsReceiptDetailID, SUM(Quantity) AS Quantity FROM MaterialIssueDetails WHERE MaterialIssueID = @MaterialIssueID GROUP BY GoodsReceiptDetailID) AS IssuedGoodsReceiptDetails ON GoodsReceiptDetails.GoodsReceiptDetailID = IssuedGoodsReceiptDetails.GoodsReceiptDetailID " + "\r\n"; 
             queryString = queryString + "                   LEFT JOIN GoodsReceipts ON GoodsReceiptDetails.GoodsReceiptID = GoodsReceipts.GoodsReceiptID " + "\r\n";
 
             return queryString;

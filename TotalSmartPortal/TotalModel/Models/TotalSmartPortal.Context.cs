@@ -3087,7 +3087,7 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RemoveCommodityBom", commodityBomIDParameter);
         }
     
-        public virtual ObjectResult<MaterialIssuePendingFirmOrderMaterial> GetMaterialIssuePendingFirmOrderMaterials(Nullable<int> locationID, Nullable<int> materialIssueID, Nullable<int> firmOrderID, Nullable<int> warehouseID, string firmOrderMaterialIDs, Nullable<bool> isReadonly)
+        public virtual ObjectResult<MaterialIssuePendingFirmOrderMaterial> GetMaterialIssuePendingFirmOrderMaterials(Nullable<int> locationID, Nullable<int> materialIssueID, Nullable<int> firmOrderID, Nullable<int> warehouseID, string goodsReceiptDetailIDs, Nullable<bool> isReadonly)
         {
             var locationIDParameter = locationID.HasValue ?
                 new ObjectParameter("LocationID", locationID) :
@@ -3105,15 +3105,15 @@ namespace TotalModel.Models
                 new ObjectParameter("WarehouseID", warehouseID) :
                 new ObjectParameter("WarehouseID", typeof(int));
     
-            var firmOrderMaterialIDsParameter = firmOrderMaterialIDs != null ?
-                new ObjectParameter("FirmOrderMaterialIDs", firmOrderMaterialIDs) :
-                new ObjectParameter("FirmOrderMaterialIDs", typeof(string));
+            var goodsReceiptDetailIDsParameter = goodsReceiptDetailIDs != null ?
+                new ObjectParameter("GoodsReceiptDetailIDs", goodsReceiptDetailIDs) :
+                new ObjectParameter("GoodsReceiptDetailIDs", typeof(string));
     
             var isReadonlyParameter = isReadonly.HasValue ?
                 new ObjectParameter("IsReadonly", isReadonly) :
                 new ObjectParameter("IsReadonly", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MaterialIssuePendingFirmOrderMaterial>("GetMaterialIssuePendingFirmOrderMaterials", locationIDParameter, materialIssueIDParameter, firmOrderIDParameter, warehouseIDParameter, firmOrderMaterialIDsParameter, isReadonlyParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MaterialIssuePendingFirmOrderMaterial>("GetMaterialIssuePendingFirmOrderMaterials", locationIDParameter, materialIssueIDParameter, firmOrderIDParameter, warehouseIDParameter, goodsReceiptDetailIDsParameter, isReadonlyParameter);
         }
     }
 }

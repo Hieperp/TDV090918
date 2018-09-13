@@ -7,7 +7,7 @@ function handleOKEvent(materialIssueGridDataSource, pendingProductionOrderDetail
         var pendingProductionOrderDetailGridDataItems = pendingProductionOrderDetailGridDataSource.view();
         var materialIssueJSON = materialIssueGridDataSource.data().toJSON();
         for (var i = 0; i < pendingProductionOrderDetailGridDataItems.length; i++) {
-            if (pendingProductionOrderDetailGridDataItems[i].IsSelected === true)
+            if (pendingProductionOrderDetailGridDataItems[i].IsSelected === true && pendingProductionOrderDetailGridDataItems[i].GoodsReceiptDetailID != null)
                 _setParentInput(materialIssueJSON, pendingProductionOrderDetailGridDataItems[i]);
         }
 

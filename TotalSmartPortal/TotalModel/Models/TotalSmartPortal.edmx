@@ -4632,7 +4632,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Parameter Name="MaterialIssueID" Type="int" Mode="In" />
           <Parameter Name="FirmOrderID" Type="int" Mode="In" />
           <Parameter Name="WarehouseID" Type="int" Mode="In" />
-          <Parameter Name="FirmOrderMaterialIDs" Type="varchar" Mode="In" />
+          <Parameter Name="GoodsReceiptDetailIDs" Type="varchar" Mode="In" />
           <Parameter Name="IsReadonly" Type="bit" Mode="In" />
         </Function>
         <Function Name="GetMaterialIssuePendingFirmOrders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -10342,7 +10342,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             <Parameter Name="MaterialIssueID" Mode="In" Type="Int32" />
             <Parameter Name="FirmOrderID" Mode="In" Type="Int32" />
             <Parameter Name="WarehouseID" Mode="In" Type="Int32" />
-            <Parameter Name="FirmOrderMaterialIDs" Mode="In" Type="String" />
+            <Parameter Name="GoodsReceiptDetailIDs" Mode="In" Type="String" />
             <Parameter Name="IsReadonly" Mode="In" Type="Boolean" />
           </FunctionImport>
           </EntityContainer>

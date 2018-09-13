@@ -1171,7 +1171,7 @@
     <Content Include="Areas\Inventories\Views\MaterialIssues\CreateWizard.cshtml" />
     <Content Include="Areas\Inventories\Views\MaterialIssues\Delete.cshtml" />
     <Content Include="Areas\Inventories\Views\MaterialIssues\Edit.cshtml" />
-    <Content Include="Areas\Inventories\Views\MaterialIssues\GetPendingFirmOrderDetails.cshtml" />
+    <Content Include="Areas\Inventories\Views\MaterialIssues\GetPendingFirmOrderMaterials.cshtml" />
     <Content Include="Areas\Inventories\Views\MaterialIssues\Index.cshtml" />
     <Content Include="Areas\Inventories\Views\MaterialIssues\Print.cshtml" />
     <Content Include="Areas\Inventories\Views\MaterialIssues\_GetFirmOrders.cshtml" />
