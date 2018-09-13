@@ -7,10 +7,10 @@
     {
         columns.Bound(c => c.FirmOrderCode).Title("Số ĐH").Width(50);
         columns.Bound(c => c.FirmOrderReference).Title("Số ĐH").Width(50);
-        columns.Bound(c => c.CustomerCode).Title("khách hàng").Width(140);
         columns.Bound(c => c.CustomerName).Title("khách hàng").Width(140);
-        columns.Bound(c => c.WorkshiftCode).Title("khách hàng").Width(140);
-        columns.Bound(c => c.ProductionLineCode).Title("khách hàng").Width(140);
+        columns.Bound(c => c.WorkshiftCode).Title("Ca SX").Width(140);
+        columns.Bound(c => c.ProductionLineCode).Title("Máy").Width(140);
+        columns.Bound(c => c.FirmOrderSpecification).Title("Mặt hàng").Width(140);
     })
     .ToolBar(toolbar =>
     {

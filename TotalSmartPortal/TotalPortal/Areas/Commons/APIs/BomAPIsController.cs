@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using System.Collections.Generic;
 
@@ -7,11 +8,11 @@ using Microsoft.AspNet.Identity;
 using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 
-using TotalCore.Repositories.Commons;
-using TotalModel.Models;
 using TotalDTO.Commons;
+using TotalModel.Models;
+using TotalCore.Repositories.Commons;
 using TotalPortal.APIs.Sessions;
-using System;
+
 
 namespace TotalPortal.Areas.Commons.APIs
 {
@@ -43,26 +44,25 @@ namespace TotalPortal.Areas.Commons.APIs
         }
 
         [HttpPost]
-        public JsonResult AddCommodityBoms(int? bomID, int? commodityID)
+        public JsonResult AddCommodityBom(int? bomID, int? commodityID)
         {
             try
             {
-                this.bomAPIRepository.AddCommodityBoms(bomID, commodityID);
+                this.bomAPIRepository.AddCommodityBom(bomID, commodityID);
                 return Json(new { AddResult = "Successfully" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                return Json(new { AddResult = "Trùng màng, hoặc " + ex.Message }, JsonRequestBehavior.AllowGet);
+                return Json(new { AddResult = "Trùng dữ liệu, hoặc " + ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
 
-
         [HttpPost]
-        public JsonResult RemoveCommodityBoms(int? commodityBomID)
+        public JsonResult RemoveCommodityBom(int? commodityBomID)
         {
             try
             {
-                this.bomAPIRepository.RemoveCommodityBoms(commodityBomID);
+                this.bomAPIRepository.RemoveCommodityBom(commodityBomID);
                 return Json(new { RemoveResult = "Successfully" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

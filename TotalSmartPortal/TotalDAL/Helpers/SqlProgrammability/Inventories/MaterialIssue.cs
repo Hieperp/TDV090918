@@ -93,7 +93,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
-            queryString = queryString + "       SELECT          " + (int)@GlobalEnums.MaterialIssueTypeID.FirmOrders + " AS MaterialIssueTypeID, ProductionOrderDetails.ProductionOrderDetailID, ProductionOrderDetails.ProductionOrderID, ProductionOrderDetails.PlannedOrderID, ProductionOrderDetails.FirmOrderID, FirmOrders.Code AS FirmOrderCode, FirmOrders.Reference AS FirmOrderReference, FirmOrders.EntryDate AS FirmOrderEntryDate, FirmOrders.Specification, " + "\r\n";
+            queryString = queryString + "       SELECT          " + (int)@GlobalEnums.MaterialIssueTypeID.FirmOrders + " AS MaterialIssueTypeID, ProductionOrderDetails.ProductionOrderDetailID, ProductionOrderDetails.ProductionOrderID, ProductionOrderDetails.PlannedOrderID, ProductionOrderDetails.FirmOrderID, FirmOrders.Code AS FirmOrderCode, FirmOrders.Reference AS FirmOrderReference, FirmOrders.EntryDate AS FirmOrderEntryDate, FirmOrders.Specification AS FirmOrderSpecification, " + "\r\n";
             queryString = queryString + "                       ProductionOrderDetails.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, ProductionOrderDetails.WorkshiftID, Workshifts.Code AS WorkshiftCode, ProductionOrderDetails.ProductionLineID, ProductionLines.Code AS ProductionLineCode " + "\r\n";
 
             queryString = queryString + "       FROM            ProductionOrderDetails " + "\r\n";

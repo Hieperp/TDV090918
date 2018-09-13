@@ -21,7 +21,6 @@ namespace TotalModel.Models
         public string FirmOrderCode { get; set; }
         public string FirmOrderReference { get; set; }
         public System.DateTime FirmOrderEntryDate { get; set; }
-        public string Specification { get; set; }
         public int CustomerID { get; set; }
         public string CustomerCode { get; set; }
         public string CustomerName { get; set; }
@@ -29,5 +28,6 @@ namespace TotalModel.Models
         public string WorkshiftCode { get; set; }
         public int ProductionLineID { get; set; }
         public string ProductionLineCode { get; set; }
+        public string FirmOrderSpecification { get; set; }
     }
 }

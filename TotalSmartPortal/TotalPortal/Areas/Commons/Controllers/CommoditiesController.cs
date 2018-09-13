@@ -61,13 +61,5 @@ namespace TotalPortal.Areas.Commons.Controllers
             : base(productService, productSelectListBuilder)
         {
         }
-
-        //public virtual ActionResult Bom(int id)
-        //{
-        //    ProductViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable);            
-        //    if (simpleViewModel == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
-        //    return View(this.InitViewModel(simpleViewModel));
-        //}
     }
 }

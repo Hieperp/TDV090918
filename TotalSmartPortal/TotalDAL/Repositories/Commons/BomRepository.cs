@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 
 using TotalModel.Models;
 using TotalCore.Repositories.Commons;
-using System.Data.Entity.Core.Objects;
 
 namespace TotalDAL.Repositories.Commons
 {
@@ -35,16 +35,16 @@ namespace TotalDAL.Repositories.Commons
             return this.TotalSmartPortalEntities.GetCommodityBoms(commodityID).ToList();
         }
 
-        public void AddCommodityBoms(int? bomID, int? commodityID)
+        public void AddCommodityBom(int? bomID, int? commodityID)
         {
             ObjectParameter[] parameters = new ObjectParameter[] { new ObjectParameter("BomID", bomID), new ObjectParameter("CommodityID", commodityID) };
-            this.ExecuteFunction("AddCommodityBoms", parameters);
+            this.ExecuteFunction("AddCommodityBom", parameters);
         }
 
-        public void RemoveCommodityBoms(int? commodityBomID)
+        public void RemoveCommodityBom(int? commodityBomID)
         {
             ObjectParameter[] parameters = new ObjectParameter[] { new ObjectParameter("CommodityBomID", commodityBomID) };
-            this.ExecuteFunction("RemoveCommodityBoms", parameters);
+            this.ExecuteFunction("RemoveCommodityBom", parameters);
         }
     }
 

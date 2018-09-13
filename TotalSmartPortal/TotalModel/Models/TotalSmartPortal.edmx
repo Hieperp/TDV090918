@@ -13721,7 +13721,6 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="String" Name="FirmOrderCode" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="FirmOrderReference" Nullable="true" MaxLength="10" />
           <Property Type="DateTime" Name="FirmOrderEntryDate" Nullable="false" Precision="23" />
-          <Property Type="String" Name="Specification" Nullable="true" MaxLength="800" />
           <Property Type="Int32" Name="CustomerID" Nullable="false" />
           <Property Type="String" Name="CustomerCode" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="100" />
@@ -13729,6 +13728,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="String" Name="WorkshiftCode" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="ProductionLineID" Nullable="false" />
           <Property Type="String" Name="ProductionLineCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="FirmOrderSpecification" Nullable="true" MaxLength="800" />
         </ComplexType>
         <ComplexType Name="SemifinishedProductPendingMaterialIssueDetail">
           <Property Type="Int32" Name="MaterialIssueDetailID" Nullable="false" />
@@ -17798,7 +17798,6 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="FirmOrderCode" ColumnName="FirmOrderCode" />
                 <ScalarProperty Name="FirmOrderReference" ColumnName="FirmOrderReference" />
                 <ScalarProperty Name="FirmOrderEntryDate" ColumnName="FirmOrderEntryDate" />
-                <ScalarProperty Name="Specification" ColumnName="Specification" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="CustomerCode" ColumnName="CustomerCode" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
@@ -17806,6 +17805,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="WorkshiftCode" ColumnName="WorkshiftCode" />
                 <ScalarProperty Name="ProductionLineID" ColumnName="ProductionLineID" />
                 <ScalarProperty Name="ProductionLineCode" ColumnName="ProductionLineCode" />
+                <ScalarProperty Name="FirmOrderSpecification" ColumnName="FirmOrderSpecification" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

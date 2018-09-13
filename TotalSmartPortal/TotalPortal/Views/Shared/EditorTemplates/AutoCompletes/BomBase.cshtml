@@ -9,13 +9,13 @@
         .MinLength(Settings.AutoCompleteMinLenght)
         .Placeholder("Chọn nguyên liệu...")
         .HeaderTemplate("<div class=\"dropdown-header general-custom-header bom-custom-header\">" +
-                "<span class=\"k-widget k-header\">Mã</span>" +
-                "<span class=\"k-widget k-header\">Tên nguyên liệu</span>" +
-                "</div>")
+                            "<span class=\"k-widget k-header\">Mã</span>" +
+                            "<span class=\"k-widget k-header\">Tên nguyên liệu</span>" +
+                        "</div>")
         .Template("<div class=\"dropdown-body general-custom-body bom-custom-body\">" +
-                "<span class=\"k-state-default\"><p>#: data.BomCode #</p></span>" +
+                    "<span class=\"k-state-default\"><p>#: data.BomCode #</p></span>" +
                     "<span class=\"k-state-default\"><p>#: data.BomName #</p></span>" +
-                "</div>")
+                  "</div>")
 
         .DataSource(source =>
         {
@@ -32,7 +32,7 @@
             e.DataBound("gridEditorBomDataBound");
         })
         .Value(Model)
-                .HtmlAttributes(new { @class = (ViewData["LeftPanelInput"] != null ? ViewData["LeftPanelInput"] : "right-panel-input") })        
+        .HtmlAttributes(new { @class = "bomBase_AutoComplete" + (ViewData["VoidTypeBaseLeftPanelInput"] != null ? ViewData["VoidTypeBaseLeftPanelInput"] : "right-panel-input") })
 )
 
 <script type="text/javascript">

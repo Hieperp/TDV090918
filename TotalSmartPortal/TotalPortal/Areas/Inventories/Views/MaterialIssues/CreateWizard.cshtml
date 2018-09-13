@@ -17,11 +17,13 @@
     @Html.HiddenFor(model => model.ProductionOrderDetailID)
 
     @Html.HiddenFor(model => model.PlannedOrderID)
-    @Html.HiddenFor(model => model.PlannedOrderCode)
-    @Html.HiddenFor(model => model.PlannedOrderReference)
-    @Html.HiddenFor(model => model.PlannedOrderEntryDate)
-
+    
     @Html.HiddenFor(model => model.FirmOrderID)
+    @Html.HiddenFor(model => model.FirmOrderCode)
+    @Html.HiddenFor(model => model.FirmOrderReference)
+    @Html.HiddenFor(model => model.FirmOrderEntryDate)
+    @Html.HiddenFor(model => model.FirmOrderSpecification)
+        
 
     @Html.HiddenFor(model => model.CustomerID)
 
@@ -132,12 +134,13 @@
             $("#ProductionOrderID").val(selectedDataItem === undefined || selectedDataItem.ProductionOrderID === undefined ? null : selectedDataItem.ProductionOrderID);
 
             $("#PlannedOrderID").val(selectedDataItem === undefined || selectedDataItem.PlannedOrderID === undefined ? null : selectedDataItem.PlannedOrderID);
-            $("#PlannedOrderCode").val(selectedDataItem === undefined || selectedDataItem.PlannedOrderCode === undefined ? null : selectedDataItem.PlannedOrderCode);
-            $("#PlannedOrderReference").val(selectedDataItem === undefined || selectedDataItem.PlannedOrderReference === undefined ? null : selectedDataItem.PlannedOrderReference);
-            $("#PlannedOrderEntryDate").val(selectedDataItem === undefined || selectedDataItem.PlannedOrderEntryDate === undefined ? null : kendo.toString(selectedDataItem.PlannedOrderEntryDate, Settings.DateTimeFormat));
 
             $("#FirmOrderID").val(selectedDataItem === undefined || selectedDataItem.FirmOrderID === undefined ? null : selectedDataItem.FirmOrderID);
-
+            $("#FirmOrderCode").val(selectedDataItem === undefined || selectedDataItem.FirmOrderCode === undefined ? null : selectedDataItem.FirmOrderCode);
+            $("#FirmOrderReference").val(selectedDataItem === undefined || selectedDataItem.FirmOrderReference === undefined ? null : selectedDataItem.FirmOrderReference);
+            $("#FirmOrderEntryDate").val(selectedDataItem === undefined || selectedDataItem.FirmOrderEntryDate === undefined ? null : kendo.toString(selectedDataItem.FirmOrderEntryDate, Settings.DateTimeFormat));
+            $("#FirmOrderSpecification").val(selectedDataItem === undefined || selectedDataItem.FirmOrderSpecification === undefined ? null : selectedDataItem.FirmOrderSpecification);
+            
             $("#Customer_CustomerID").val(selectedDataItem === undefined || selectedDataItem.CustomerID === undefined ? null : selectedDataItem.CustomerID);
             $("#Customer_Code").val(selectedDataItem === undefined || selectedDataItem.CustomerCode === undefined ? null : selectedDataItem.CustomerCode);
             $("#Customer_Name").val(selectedDataItem === undefined || selectedDataItem.CustomerName === undefined ? null : selectedDataItem.CustomerName);

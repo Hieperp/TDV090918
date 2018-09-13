@@ -4,17 +4,13 @@
 
 @Html.HiddenFor(model => model.BomID)
 @Html.HiddenFor(model => model.Name)
-@Html.HiddenFor(model => model.CustomerID)
-@Html.HiddenFor(model => model.CommodityCategoryID)
-@Html.HiddenFor(model => model.CommodityClassID)
-@Html.HiddenFor(model => model.CommodityLineID)
 
-@Html.Hidden("TempName", (@Model != null ? @Model.Name : ""))
+@Html.Hidden("TempCode", (@Model != null ? @Model.Code : ""))
 
 
 @Html.Label((ViewData["BomDisplayName"] != null ? (ViewData["BomDisplayName"]).ToString() : @Model.GetDisplayName(m => m.Code)))
 <div class="div-input">
-    @Html.EditorFor(d => d.Code, new { LeftPanelInput = ViewData["LeftPanelInput"] != null ? (ViewData["LeftPanelInput"]).ToString() : null })
+    @Html.EditorFor(d => d.Code, new { VoidTypeBaseLeftPanelInput = ViewData["VoidTypeBaseLeftPanelInput"] != null ? (ViewData["VoidTypeBaseLeftPanelInput"]).ToString() : null })
 </div>
 <div class="div-validation-message">
     @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
@@ -23,23 +19,21 @@
 <script type="text/javascript">
 
     getBomModelID = function (modelID) {
-        return modelID.substring(0, modelID.length - 4) + "_"; //At first: Pass: modelID = this.element.attr('id') = 'Bom_Name', Then: Return: ('Bom_Name').substring(0, modelID.length - 4) = 'Bom_'
+        alert(modelID);
+        alert(modelID.substring(0, modelID.length - 4));
+        return modelID.substring(0, modelID.length - 4); //At first: Pass: modelID = this.element.attr('id') = 'Bom_Name', Then: Return: ('Bom_Name').substring(0, modelID.length - 4) = 'Bom_'
     }
 
     gridEditorBomSelect = function (e) {
         var modelID = getBomModelID(this.element.attr('id'));
 
-        var dataItem = e.sender.dataItem(e.item.index());      
+        var dataItem = e.sender.dataItem(e.item.index());
 
-        $("#" + modelID + "BomID").val(dataItem.BomID);        
-        $("#" + modelID + "Code").val(dataItem.Code);
-        $("#" + modelID + "CustomerID").val(dataItem.CustomerID);        
-        $("#" + modelID + "CommodityCategoryID").val(dataItem.CommodityCategoryID);
-        $("#" + modelID + "CommodityClassID").val(dataItem.CommodityClassID);
-        $("#" + modelID + "CommodityLineID").val(dataItem.CommodityLineID);
-        
+        $("#" + modelID + "BomID").val(dataItem.BomID);
+        $("#" + modelID + "Name").val(dataItem.Name);
+
         //Remember last AutoComplete value
-        $("#" + modelID + "TempName").val(dataItem.Name);
+        $("#" + modelID + "TempCode").val(dataItem.Code);
         //Trigger change event. This event is not used in this editor template. It will be catch out side of this editor template
         $("#" + modelID + "BomID").trigger("change");
     }
@@ -48,12 +42,12 @@
 
     gridEditorBomDataBound = function (e) {
         $(".k-animation-container:has(#BomCode-list)").css("width", "382");
-        $("#BomCode-list").css("width", "382");        
+        $("#BomCode-list").css("width", "382");
     }
 
-    $(".BomBase_AutoComplete").focusout(function (e) { //Keep old selected value. This is used in master mode
+    $(".bomBase_AutoComplete").focusout(function (e) { //Keep old selected value. This is used in master mode
         var modelID = getBomModelID(this.id);
-        $(this).val($("#" + modelID + "TempName").val());        
+        $(this).val($("#" + modelID + "TempCode").val());
     });
 
 </script>

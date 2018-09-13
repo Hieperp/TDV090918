@@ -14,8 +14,8 @@ namespace TotalCore.Repositories.Commons
 
         IList<CommodityBom> GetCommodityBoms(int commodityID);
 
-        void AddCommodityBoms(int? bomID, int? commodityID);
+        void AddCommodityBom(int? bomID, int? commodityID);
 
-        void RemoveCommodityBoms(int? commodityBomID);
+        void RemoveCommodityBom(int? commodityBomID);
     }
 }

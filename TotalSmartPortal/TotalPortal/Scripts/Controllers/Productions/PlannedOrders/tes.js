@@ -9,7 +9,7 @@
 
     return {        
         searchText: $("#BomCode").data("kendoAutoComplete").value(),
-        commodityID: selectedItem != undefined ? selectedItem.CommodityID : $("#CommodityID").val() != undefined ? $("#CommodityID").val() : 0,
+        commodityID: selectedItem != undefined ? selectedItem.CommodityID : 0,
         //commodityID: $("#CommodityID").val() != undefined ? $("#CommodityID").val() : 0,
         commodityCategoryID: $("#CommodityCategoryID").val() != undefined ? $("#CommodityCategoryID").val() : 0,
         commodityClassID: $("#CommodityClassID").val() != undefined ? $("#CommodityClassID").val() : 0,

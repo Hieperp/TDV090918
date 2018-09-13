@@ -30,14 +30,15 @@ namespace TotalDTO.Inventories
         public int ProductionOrderDetailID { get; set; }
 
         public int PlannedOrderID { get; set; }
-        public string PlannedOrderReference { get; set; }
-        public string PlannedOrderCode { get; set; }
-        public DateTime PlannedOrderEntryDate { get; set; }
 
         public int FirmOrderID { get; set; }
+        public string FirmOrderReference { get; set; }
+        public string FirmOrderCode { get; set; }
+        public DateTime FirmOrderEntryDate { get; set; }
+        public string FirmOrderSpecification { get; set; }
         
 
-        [Display(Name = "Số đơn hàng")]
+        [Display(Name = "Số chứng từ")]
         [UIHint("Commons/SOCode")]
         public string Code { get; set; }
 
