@@ -88,7 +88,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             queryString = queryString + "       BEGIN " + "\r\n";
 
             queryString = queryString + "           UPDATE          CommodityBoms " + "\r\n";
-            queryString = queryString + "           SET             IsDefault = IIF(CommodityBomID = @CommodityBomID, @IsDefault, ~@IsDefault) " + "\r\n";
+            queryString = queryString + "           SET             IsDefault = IIF(CommodityBomID = @CommodityBomID, ~@IsDefault, 0) " + "\r\n";
             queryString = queryString + "           WHERE           CommodityID = @CommodityID " + "\r\n";
 
             queryString = queryString + "       END " + "\r\n";
