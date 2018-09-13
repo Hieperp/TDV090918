@@ -176,6 +176,10 @@
             {
                 <button type="submit" id="btnSave" class="@(Model.CommodityID > 0 ? "k-button custom-button SubmitTypeOption-Closed" : "k-button custom-button SubmitTypeOption-Closed")" formaction="@Url.Action("Edit", Model.ControllerName)"> <img src="~/Content/Images/New/save-icon.png" /> Lưu </button>
             }
+            @if (Model.CommodityID > 0 && Model.IsProduct)
+            {
+                <button type="button" class="k-button custom-button" onclick="ShowBoms()"> <img src="~/Content/Images/New/2017/sale-off-icon-32.png" /> Danh mục màng sản xuất khay </button>
+            }
         </div>
 
         @Html.Partial("~/Views/Helpers/Bases/_BaseSubmit.cshtml")
@@ -189,12 +193,18 @@
     </div>
 }
 
-<script type="text/javascript">      
+<script type="text/javascript">
 
     $("#btnSave").click(function (e) {
         $("#CommodityCategoryName").val($("#CommodityCategoryID").data("kendoDropDownList").text());
-        $("#CommodityLineName").val($("#CommodityLineID").data("kendoDropDownList").text());                
-        $("#CommodityClassName").val($("#CommodityClassID").data("kendoDropDownList").text());            
+        $("#CommodityLineName").val($("#CommodityLineID").data("kendoDropDownList").text());
+        $("#CommodityClassName").val($("#CommodityClassID").data("kendoDropDownList").text());
     });
 
+    function ShowBoms() {
+        require(["kpopupWindow"], function (kpopupWindow) {
+            var createWizardWindow = new kpopupWindow();                        
+            createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("Boms", Model.ControllerName, new { area = "Commons", id = Model.CommodityID })", "Danh mục màng sản xuất khay", "@Settings.PopupWidth", "@Settings.PopupHeightWithTab");
+        });
+    }
 </script>

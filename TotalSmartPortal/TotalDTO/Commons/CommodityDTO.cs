@@ -74,6 +74,9 @@ namespace TotalDTO.Commons
 
         bool IsRegularCheckUps { get; set; }
         bool Discontinue { get; set; }
+                
+        [UIHint("AutoCompletes/Bom")]
+        BomBaseDTO Bom { get; set; }
 
         string HSCode { get; set; }
 
@@ -94,9 +97,9 @@ namespace TotalDTO.Commons
         public string Code { get { return ((!String.IsNullOrWhiteSpace(this.CodePartA) ? this.CodePartA + " " : "") + (!String.IsNullOrWhiteSpace(this.CodePartB) ? this.CodePartB + " " : "") + (!String.IsNullOrWhiteSpace(this.CodePartC) ? this.CodePartC + " " : "") + (!String.IsNullOrWhiteSpace(this.CodePartD) ? this.CodePartD + " " : "") + (!String.IsNullOrWhiteSpace(this.CodePartE) ? this.CodePartE + " x " : "") + (!String.IsNullOrWhiteSpace(this.CodePartF) ? this.CodePartF : "")).Trim(); } }
         public string OfficialCode { get { return TotalBase.CommonExpressions.AlphaNumericString(this.Code); } }
         public string CodePartA { get; set; }
-        public string CodePartB { get { return this.CommodityCategoryName.Remove(this.CommodityCategoryName.IndexOf("[")).Trim(); } }
-        public string CodePartC { get { return this.CommodityLineName.Remove(this.CommodityLineName.IndexOf("[")).Trim(); } }
-        public string CodePartD { get { return !this.IsMaterial && this.CommodityClassName != null ? this.CommodityClassName.Remove(this.CommodityClassName.IndexOf("[")).Trim() : null; } }
+        public string CodePartB { get { return this.CommodityCategoryName.IndexOf("[") >= 0 ? this.CommodityCategoryName.Remove(this.CommodityCategoryName.IndexOf("[")).Trim() : this.CommodityCategoryName; } }
+        public string CodePartC { get { return this.CommodityLineName.IndexOf("[") >= 0 ? this.CommodityLineName.Remove(this.CommodityLineName.IndexOf("[")).Trim() : this.CommodityLineName; } }
+        public string CodePartD { get { return !this.IsMaterial && this.CommodityClassName != null ? this.CommodityClassName.IndexOf("[") >= 0 ? this.CommodityClassName.Remove(this.CommodityClassName.IndexOf("[")).Trim() : this.CommodityClassName : null; } }  
         public string CodePartE { get; set; }
         public string CodePartF { get; set; }
 
@@ -136,6 +139,9 @@ namespace TotalDTO.Commons
         public bool IsRegularCheckUps { get; set; }
         public bool Discontinue { get; set; }
 
+        public Nullable<int> BomID { get { return (this.Bom != null ? this.Bom.BomID : null); } }        
+        public BomBaseDTO Bom { get; set; }
+
         public string HSCode { get; set; }
 
         public override int PreparedPersonID { get { return 1; } }
@@ -164,5 +170,6 @@ namespace TotalDTO.Commons
         where TCommodityOption : ICMDOption, new()
     {
         public string ControllerName { get { return this.NMVNTaskID.ToString() + "s"; } }
+       
     }
 }

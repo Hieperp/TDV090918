@@ -32,7 +32,7 @@
             e.DataBound("gridEditorBomDataBound");
         })
         .Value(Model)
-        .HtmlAttributes(new { @class = "custom-control" })
+                .HtmlAttributes(new { @class = (ViewData["LeftPanelInput"] != null ? ViewData["LeftPanelInput"] : "right-panel-input") })        
 )
 
 <script type="text/javascript">

@@ -6,6 +6,7 @@ using TotalPortal.ViewModels.Helpers;
 
 using TotalPortal.Areas.Commons.Builders;
 using TotalPortal.Areas.Commons.ViewModels.Helpers;
+using System.ComponentModel.DataAnnotations;
 
 namespace TotalPortal.Areas.Commons.ViewModels
 {
@@ -35,7 +36,7 @@ namespace TotalPortal.Areas.Commons.ViewModels
         public IEnumerable<SelectListItem> CommodityBrandSelectList { get; set; }
         public IEnumerable<SelectListItem> CommodityCategorySelectList { get; set; }                
         public IEnumerable<SelectListItem> CommodityClassSelectList { get; set; }
-        public IEnumerable<SelectListItem> CommodityLineSelectList { get; set; }
+        public IEnumerable<SelectListItem> CommodityLineSelectList { get; set; }      
     }
 
 }

@@ -1276,6 +1276,7 @@
     <Content Include="Areas\Inventories\Views\OtherItemReceipts\Print.cshtml" />
     <Content Include="Areas\Purchases\Views\PurchaseRequisitions\CreateWizard.cshtml" />
     <Content Include="Areas\Productions\Views\PlannedOrders\CreateWizard.cshtml" />
+    <Content Include="Areas\Commons\Views\Products\Boms.cshtml" />
     <None Include="Properties\PublishProfiles\TDV.pubxml" />
     <None Include="Properties\PublishProfiles\VCP.pubxml">
       <SubType>Designer</SubType>
@@ -2372,6 +2373,7 @@
     <Content Include="Views\Shared\EditorTemplates\DropDowns\CommodityClass.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DropDowns\CommodityLine.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DropDowns\Shift.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AutoCompletes\Bom.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

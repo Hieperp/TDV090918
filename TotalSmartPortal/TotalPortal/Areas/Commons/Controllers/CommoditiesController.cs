@@ -30,6 +30,14 @@ namespace TotalPortal.Areas.Commons.Controllers
             : base(commodityService, commodityViewModelSelectListBuilder)
         {
         }
+
+        public virtual ActionResult Boms(int id)
+        {
+            TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable);            
+            if (simpleViewModel == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            return View(this.InitViewModel(simpleViewModel));
+        }
     }
 
     public class MaterialsController : CommoditiesController<CommodityDTO<CMDMaterial>, CommodityPrimitiveDTO<CMDMaterial>, MaterialViewModel>
@@ -53,5 +61,13 @@ namespace TotalPortal.Areas.Commons.Controllers
             : base(productService, productSelectListBuilder)
         {
         }
+
+        //public virtual ActionResult Bom(int id)
+        //{
+        //    ProductViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable);            
+        //    if (simpleViewModel == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+        //    return View(this.InitViewModel(simpleViewModel));
+        //}
     }
 }
