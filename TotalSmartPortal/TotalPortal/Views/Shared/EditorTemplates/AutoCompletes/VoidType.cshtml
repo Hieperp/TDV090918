@@ -20,6 +20,8 @@
 <script type="text/javascript">
 
     getVoidTypeModelID = function (modelID) {
+        alert(modelID);
+        alert(modelID.substring(0, modelID.length - 4));
         return modelID.substring(0, modelID.length - 4); //At first: Pass: modelID = this.element.attr('id') = 'VoidType_Name', Then: Return: ('VoidType_Name').substring(0, modelID.length - 4) = 'VoidType_'
     }
 

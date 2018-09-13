@@ -77,6 +77,8 @@ namespace TotalDTO.Commons
                 
         [UIHint("AutoCompletes/Bom")]
         BomBaseDTO BomNMVN { get; set; }
+        [UIHint("AutoCompletes/VoidType")]
+        VoidTypeBaseDTO VoidType { get; set; }
 
         string HSCode { get; set; }
 
@@ -141,6 +143,7 @@ namespace TotalDTO.Commons
 
         public Nullable<int> BomID { get { return (this.BomNMVN != null ? this.BomNMVN.BomID : null); } }        
         public BomBaseDTO BomNMVN { get; set; }
+        public VoidTypeBaseDTO VoidType { get; set; }
 
         public string HSCode { get; set; }
 
