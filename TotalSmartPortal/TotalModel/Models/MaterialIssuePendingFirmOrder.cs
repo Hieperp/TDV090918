@@ -29,5 +29,8 @@ namespace TotalModel.Models
         public int ProductionLineID { get; set; }
         public string ProductionLineCode { get; set; }
         public string FirmOrderSpecification { get; set; }
+        public int WarehouseID { get; set; }
+        public string WarehouseCode { get; set; }
+        public string WarehouseName { get; set; }
     }
 }
