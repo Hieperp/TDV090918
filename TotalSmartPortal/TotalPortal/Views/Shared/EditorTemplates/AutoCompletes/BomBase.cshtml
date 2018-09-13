@@ -3,7 +3,7 @@
 @model string
 
 @(Html.Kendo().AutoCompleteFor(m => m)
-        .DataTextField("BomCode")
+        .DataTextField("Code")
         .Filter("contains")
         .MinLength(Settings.AutoCompleteMinLenght)
         .Placeholder("Chọn nguyên liệu...")
@@ -12,8 +12,8 @@
                             "<span class=\"k-widget k-header\">Tên nguyên liệu</span>" +
                         "</div>")
         .Template("<div class=\"dropdown-body general-custom-body bom-custom-body\">" +
-                    "<span class=\"k-state-default\"><p>#: data.BomCode #</p></span>" +
-                    "<span class=\"k-state-default\"><p>#: data.BomName #</p></span>" +
+                    "<span class=\"k-state-default\"><p>#: data.Code #</p></span>" +
+                    "<span class=\"k-state-default\"><p>#: data.Name #</p></span>" +
                   "</div>")
 
         .DataSource(source =>
@@ -31,7 +31,7 @@
             e.DataBound("gridEditorBomDataBound");
         })
         .Value(Model)
-        .HtmlAttributes(new { @class = "bomBase_AutoComplete" + (ViewData["VoidTypeBaseLeftPanelInput"] != null ? ViewData["VoidTypeBaseLeftPanelInput"] : "right-panel-input") })
+        .HtmlAttributes(new { @class = "bomBase_AutoComplete " + (ViewData["VoidTypeBaseLeftPanelInput"] != null ? ViewData["VoidTypeBaseLeftPanelInput"] : "right-panel-input") })
 )
 
 <script type="text/javascript">
@@ -54,12 +54,12 @@
 
 
     .bom-custom-header > span:first-child {
-        width: 105px;
+        width: 205px;
     }
 
 
     .bom-custom-header > span:last-child {
-        width: 277px;
+        width: 177px;
     }
 
 
@@ -68,22 +68,22 @@
 
 
     .k-item > .bom-custom-body > span:first-child {
-        width: 104px;
+        width: 204px;
     }
 
 
     .k-item > .bom-custom-body > span:last-child {
-        width: 250px;
+        width: 150px;
     }
 
     /*#endregion */
 
 
     /*#region styles for each use of the Editor tenplate BomAvailable.cshtml*/
-    #BomCode-list .k-item {
+    #Code-list .k-item {
         white-space: nowrap;
     }
-    /*CURRENT: Editor tenplate BomAvailable.cshtml bind with model BomCode => the autocomplete editor ID will be #BomCode */
+    /*CURRENT: Editor tenplate BomAvailable.cshtml bind with model Code => the autocomplete editor ID will be #Code */
     /*LATER: if this Editor tenplate BomAvailable.cshtml is used for another model, Ex model: XyzName => the ID will be #XyzName, then new css will be add. for this example #XyzName-list .k-item {padding: 0px; white-space: nowrap;} */
 
     /*#endregion */

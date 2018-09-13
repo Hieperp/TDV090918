@@ -12741,10 +12741,10 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
         </EntityType>
         <ComplexType Name="BomBase">
           <Property Type="Int32" Name="BomID" Nullable="false" />
-          <Property Type="String" Name="BomCode" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="BomName" Nullable="false" MaxLength="200" />
-          <Property Type="String" Name="BomReference" Nullable="false" MaxLength="10" />
-        </ComplexType>
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Reference" Nullable="false" MaxLength="10" />
+          </ComplexType>
         <ComplexType Name="ProductionOrderPendingFirmOrder">
           <Property Type="Int32" Name="PlannedOrderID" Nullable="false" />
           <Property Type="Int32" Name="FirmOrderID" Nullable="false" />
@@ -17414,10 +17414,10 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             <ResultMapping>
               <ComplexTypeMapping TypeName="TotalSmartPortalModel.BomBase">
                 <ScalarProperty Name="BomID" ColumnName="BomID" />
-                <ScalarProperty Name="BomCode" ColumnName="BomCode" />
-                <ScalarProperty Name="BomName" ColumnName="BomName" />
-                <ScalarProperty Name="BomReference" ColumnName="BomReference" />
-              </ComplexTypeMapping>
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetProductionOrderPendingFirmOrders" FunctionName="TotalSmartPortalModel.Store.GetProductionOrderPendingFirmOrders">

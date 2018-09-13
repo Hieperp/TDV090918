@@ -14,8 +14,8 @@ namespace TotalModel.Models
     public partial class BomBase
     {
         public int BomID { get; set; }
-        public string BomCode { get; set; }
-        public string BomName { get; set; }
-        public string BomReference { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public string Reference { get; set; }
     }
 }

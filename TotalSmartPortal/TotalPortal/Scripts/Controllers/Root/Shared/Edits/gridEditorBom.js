@@ -16,10 +16,10 @@
             var dataItem = e.sender.dataItem(e.item.index());
 
             currentDataSourceRow.set("BomID", dataItem.BomID);
-            currentDataSourceRow.set("BomCode", dataItem.BomCode);
+            currentDataSourceRow.set("BomCode", dataItem.Code);
         }
 
-        window.bomCodeBeforeChange = dataItem.BomCode;
+        window.bomCodeBeforeChange = dataItem.Code;
     };
 
 

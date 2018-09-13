@@ -19,8 +19,6 @@
 <script type="text/javascript">
 
     getBomModelID = function (modelID) {
-        alert(modelID);
-        alert(modelID.substring(0, modelID.length - 4));
         return modelID.substring(0, modelID.length - 4); //At first: Pass: modelID = this.element.attr('id') = 'Bom_Name', Then: Return: ('Bom_Name').substring(0, modelID.length - 4) = 'Bom_'
     }
 
@@ -41,8 +39,8 @@
     gridEditorBomChange = function (e) { } //Keep old selected value. This function is used in detail mode (In conjuction with grid)
 
     gridEditorBomDataBound = function (e) {
-        $(".k-animation-container:has(#BomCode-list)").css("width", "382");
-        $("#BomCode-list").css("width", "382");
+        $(".k-animation-container:has(#Code-list)").css("width", "382");
+        $("#Code-list").css("width", "382");
     }
 
     $(".bomBase_AutoComplete").focusout(function (e) { //Keep old selected value. This is used in master mode

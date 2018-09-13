@@ -81,7 +81,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
         {
             string queryString;
 
-            string querySQL = "             SELECT      BomID, Code AS BomCode, Name AS BomName, Reference AS BomReference " + " \r\n";
+            string querySQL = "             SELECT      BomID, Code, Name, Reference AS Reference " + " \r\n";
             querySQL = querySQL + "         FROM        Boms " + "\r\n";
             querySQL = querySQL + "         WHERE       InActive = 0 AND (@SearchText = '' OR Code LIKE '%' + @SearchText + '%' OR Reference LIKE '%' + @SearchText + '%') " + "\r\n";
 
