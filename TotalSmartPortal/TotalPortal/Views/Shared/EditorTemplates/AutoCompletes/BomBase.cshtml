@@ -31,7 +31,7 @@
             e.DataBound("gridEditorBomDataBound");
         })
         .Value(Model)
-        .HtmlAttributes(new { @class = "bomBase_AutoComplete " + (ViewData["VoidTypeBaseLeftPanelInput"] != null ? ViewData["VoidTypeBaseLeftPanelInput"] : "right-panel-input") })
+        .HtmlAttributes(new { @class = "bomBase_AutoComplete " + (ViewData["BomLeftPanelInput"] != null ? ViewData["BomLeftPanelInput"] : "right-panel-input") })
 )
 
 <script type="text/javascript">

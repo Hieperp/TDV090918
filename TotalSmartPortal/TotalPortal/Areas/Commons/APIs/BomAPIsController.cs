@@ -70,5 +70,19 @@ namespace TotalPortal.Areas.Commons.APIs
                 return Json(new { RemoveResult = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
+
+        [HttpPost]
+        public JsonResult SetCommodityBomDefault(int? commodityBomID, int commodityID, bool? isDefault)
+        {
+            try
+            {
+                this.bomAPIRepository.SetCommodityBomDefault(commodityBomID, commodityID, isDefault);
+                return Json(new { SetResult = "Successfully" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { SetResult = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

@@ -17,5 +17,7 @@ namespace TotalCore.Repositories.Commons
         void AddCommodityBom(int? bomID, int? commodityID);
 
         void RemoveCommodityBom(int? commodityBomID);
+
+        void SetCommodityBomDefault(int? commodityBomID, int commodityID, bool? isDefault);
     }
 }

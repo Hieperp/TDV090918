@@ -46,6 +46,12 @@ namespace TotalDAL.Repositories.Commons
             ObjectParameter[] parameters = new ObjectParameter[] { new ObjectParameter("CommodityBomID", commodityBomID) };
             this.ExecuteFunction("RemoveCommodityBom", parameters);
         }
+
+        public void SetCommodityBomDefault(int? commodityBomID, int commodityID, bool? isDefault)
+        {
+            ObjectParameter[] parameters = new ObjectParameter[] { new ObjectParameter("CommodityBomID", commodityBomID), new ObjectParameter("CommodityID", commodityID), new ObjectParameter("IsDefault", isDefault) };
+            this.ExecuteFunction("SetCommodityBomDefault", parameters);
+        }
     }
 
 }
