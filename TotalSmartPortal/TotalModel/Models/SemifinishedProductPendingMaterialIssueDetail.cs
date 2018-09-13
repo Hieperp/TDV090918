@@ -19,7 +19,6 @@ namespace TotalModel.Models
         public System.DateTime FirmOrderEntryDate { get; set; }
         public string FirmOrderReference { get; set; }
         public string FirmOrderCode { get; set; }
-        public string Specification { get; set; }
         public int CustomerID { get; set; }
         public string CustomerCode { get; set; }
         public string CustomerName { get; set; }
@@ -28,5 +27,12 @@ namespace TotalModel.Models
         public int ProductionLineID { get; set; }
         public string ProductionLineCode { get; set; }
         public Nullable<decimal> QuantityRemains { get; set; }
+        public string FirmOrderSpecification { get; set; }
+        public int GoodsReceiptID { get; set; }
+        public string GoodsReceiptReference { get; set; }
+        public string GoodsReceiptCode { get; set; }
+        public System.DateTime GoodsReceiptEntryDate { get; set; }
+        public int GoodsReceiptDetailID { get; set; }
+        public int WorkshiftID { get; set; }
     }
 }

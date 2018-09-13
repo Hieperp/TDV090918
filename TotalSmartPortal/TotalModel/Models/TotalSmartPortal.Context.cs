@@ -93,12 +93,12 @@ namespace TotalModel.Models
         public virtual DbSet<PlannedOrder> PlannedOrders { get; set; }
         public virtual DbSet<ProductionOrderDetail> ProductionOrderDetails { get; set; }
         public virtual DbSet<ProductionOrder> ProductionOrders { get; set; }
-        public virtual DbSet<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
-        public virtual DbSet<SemifinishedProduct> SemifinishedProducts { get; set; }
         public virtual DbSet<BomDetail> BomDetails { get; set; }
         public virtual DbSet<Bom> Boms { get; set; }
         public virtual DbSet<MaterialIssueDetail> MaterialIssueDetails { get; set; }
         public virtual DbSet<FirmOrderMaterial> FirmOrderMaterials { get; set; }
+        public virtual DbSet<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
+        public virtual DbSet<SemifinishedProduct> SemifinishedProducts { get; set; }
     
         public virtual ObjectResult<string> AccountInvoicePostSaveValidate(Nullable<int> entityID)
         {

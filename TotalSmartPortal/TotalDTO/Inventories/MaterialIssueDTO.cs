@@ -45,6 +45,7 @@ namespace TotalDTO.Inventories
         public virtual int WorkshiftID { get; set; }
         [Display(Name = "Ca sản xuất")]
         public string WorkshiftCode { get; set; }
+        public DateTime WorkshiftEntryDate { get; set; }
 
         public virtual int ProductionLineID { get; set; }
         [Display(Name = "Line")]

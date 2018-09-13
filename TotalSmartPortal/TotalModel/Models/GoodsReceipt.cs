@@ -18,6 +18,7 @@ namespace TotalModel.Models
         public GoodsReceipt()
         {
             this.GoodsReceiptDetails = new HashSet<GoodsReceiptDetail>();
+            this.SemifinishedProducts = new HashSet<SemifinishedProduct>();
         }
     
         public int GoodsReceiptID { get; set; }
@@ -52,5 +53,7 @@ namespace TotalModel.Models
         public virtual PurchaseRequisition PurchaseRequisition { get; set; }
         public virtual Warehouse Warehouse { get; set; }
         public virtual WarehouseAdjustment WarehouseAdjustment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SemifinishedProduct> SemifinishedProducts { get; set; }
     }
 }

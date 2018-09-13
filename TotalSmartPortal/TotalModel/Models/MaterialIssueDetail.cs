@@ -54,10 +54,10 @@ namespace TotalModel.Models
         public virtual MaterialIssue MaterialIssue { get; set; }
         public virtual ProductionOrderDetail ProductionOrderDetail { get; set; }
         public virtual Workshift Workshift { get; set; }
+        public virtual FirmOrderMaterial FirmOrderMaterial { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemifinishedProduct> SemifinishedProducts { get; set; }
-        public virtual FirmOrderMaterial FirmOrderMaterial { get; set; }
     }
 }

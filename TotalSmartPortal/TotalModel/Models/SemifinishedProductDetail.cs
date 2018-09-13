@@ -18,12 +18,13 @@ namespace TotalModel.Models
         public int SemifinishedProductID { get; set; }
         public System.DateTime EntryDate { get; set; }
         public int LocationID { get; set; }
-        public int ProductionOrderID { get; set; }
-        public int ProductionOrderDetailID { get; set; }
+        public int CustomerID { get; set; }
         public int MaterialIssueID { get; set; }
         public int MaterialIssueDetailID { get; set; }
-        public int FirmOrderDetailID { get; set; }
         public int FirmOrderID { get; set; }
+        public int FirmOrderDetailID { get; set; }
+        public int PlannedOrderDetailID { get; set; }
+        public int GoodsReceiptID { get; set; }
         public int GoodsReceiptDetailID { get; set; }
         public Nullable<int> SemifinishedHandoverID { get; set; }
         public int CommodityID { get; set; }
@@ -38,9 +39,11 @@ namespace TotalModel.Models
         public bool Approved { get; set; }
     
         public virtual Commodity Commodity { get; set; }
-        public virtual ProductionOrderDetail ProductionOrderDetail { get; set; }
-        public virtual ProductionOrder ProductionOrder { get; set; }
-        public virtual SemifinishedProduct SemifinishedProduct { get; set; }
+        public virtual FirmOrderDetail FirmOrderDetail { get; set; }
+        public virtual FirmOrder FirmOrder { get; set; }
         public virtual MaterialIssueDetail MaterialIssueDetail { get; set; }
+        public virtual MaterialIssue MaterialIssue { get; set; }
+        public virtual PlannedOrderDetail PlannedOrderDetail { get; set; }
+        public virtual SemifinishedProduct SemifinishedProduct { get; set; }
     }
 }

@@ -23,9 +23,14 @@ namespace TotalModel.Models
         public int SemifinishedProductID { get; set; }
         public System.DateTime EntryDate { get; set; }
         public string Reference { get; set; }
+        public int CustomerID { get; set; }
+        public int MaterialIssueID { get; set; }
         public int MaterialIssueDetailID { get; set; }
         public int FirmOrderID { get; set; }
+        public int GoodsReceiptID { get; set; }
         public int GoodsReceiptDetailID { get; set; }
+        public int WorkshiftID { get; set; }
+        public int ProductionLineID { get; set; }
         public int SalespersonID { get; set; }
         public int UserID { get; set; }
         public int PreparedPersonID { get; set; }
@@ -41,12 +46,16 @@ namespace TotalModel.Models
         public bool Approved { get; set; }
         public Nullable<System.DateTime> ApprovedDate { get; set; }
     
+        public virtual Customer Customer { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual FirmOrder FirmOrder { get; set; }
         public virtual GoodsReceiptDetail GoodsReceiptDetail { get; set; }
+        public virtual GoodsReceipt GoodsReceipt { get; set; }
         public virtual Location Location { get; set; }
+        public virtual MaterialIssueDetail MaterialIssueDetail { get; set; }
+        public virtual ProductionLine ProductionLine { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
-        public virtual MaterialIssueDetail MaterialIssueDetail { get; set; }
+        public virtual Workshift Workshift { get; set; }
     }
 }

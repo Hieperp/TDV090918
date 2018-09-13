@@ -14,6 +14,12 @@ namespace TotalModel.Models
     
     public partial class FirmOrderDetail
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public FirmOrderDetail()
+        {
+            this.SemifinishedProductDetails = new HashSet<SemifinishedProductDetail>();
+        }
+    
         public int FirmOrderDetailID { get; set; }
         public int FirmOrderID { get; set; }
         public System.DateTime EntryDate { get; set; }
@@ -42,5 +48,7 @@ namespace TotalModel.Models
         public virtual Mold Mold { get; set; }
         public virtual VoidType VoidType { get; set; }
         public virtual Bom Bom { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
     }
 }

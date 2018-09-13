@@ -299,20 +299,20 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
         private void ProductionOrderEditable()
         {
-            string[] queryArray = new string[2];
+            string[] queryArray = new string[1];
 
             queryArray[0] = " SELECT TOP 1 @FoundEntity = ProductionOrderID FROM ProductionOrders WHERE ProductionOrderID = @EntityID AND (InActive = 1 OR InActivePartial = 1)"; //Don't allow approve after void
-            queryArray[1] = " SELECT TOP 1 @FoundEntity = ProductionOrderID FROM SemifinishedProductDetails WHERE ProductionOrderID = @EntityID ";
+            //queryArray[1] = " SELECT TOP 1 @FoundEntity = ProductionOrderID FROM SemifinishedProductDetails WHERE ProductionOrderID = @EntityID ";
 
             this.totalSmartPortalEntities.CreateProcedureToCheckExisting("ProductionOrderEditable", queryArray);
         }
 
         private void ProductionOrderVoidable()
         {
-            string[] queryArray = new string[2];
+            string[] queryArray = new string[1];
 
             queryArray[0] = " SELECT TOP 1 @FoundEntity = ProductionOrderID FROM ProductionOrders WHERE ProductionOrderID = @EntityID AND Approved = 0"; //Must approve in order to allow void
-            queryArray[1] = " SELECT TOP 1 @FoundEntity = ProductionOrderID FROM SemifinishedProductDetails WHERE ProductionOrderID = @EntityID ";
+            //queryArray[1] = " SELECT TOP 1 @FoundEntity = ProductionOrderID FROM SemifinishedProductDetails WHERE ProductionOrderID = @EntityID ";
 
             this.totalSmartPortalEntities.CreateProcedureToCheckExisting("ProductionOrderVoidable", queryArray);
         }

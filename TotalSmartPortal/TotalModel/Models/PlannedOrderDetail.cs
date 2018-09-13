@@ -14,6 +14,12 @@ namespace TotalModel.Models
     
     public partial class PlannedOrderDetail
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PlannedOrderDetail()
+        {
+            this.SemifinishedProductDetails = new HashSet<SemifinishedProductDetail>();
+        }
+    
         public int PlannedOrderDetailID { get; set; }
         public int PlannedOrderID { get; set; }
         public System.DateTime EntryDate { get; set; }
@@ -41,5 +47,7 @@ namespace TotalModel.Models
         public virtual PlannedOrder PlannedOrder { get; set; }
         public virtual VoidType VoidType { get; set; }
         public virtual Bom Bom { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
     }
 }
