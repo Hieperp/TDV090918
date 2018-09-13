@@ -32,5 +32,6 @@ namespace TotalModel.Models
         public int WarehouseID { get; set; }
         public string WarehouseCode { get; set; }
         public string WarehouseName { get; set; }
+        public System.DateTime WorkshiftEntryDate { get; set; }
     }
 }
