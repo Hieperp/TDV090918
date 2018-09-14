@@ -302,13 +302,17 @@
     <Compile Include="Areas\Inventories\ViewModels\WarehouseAdjustmentViewModel.cs" />
     <Compile Include="Areas\Productions\APIs\PlannedOrderAPIsController.cs" />
     <Compile Include="Areas\Productions\APIs\ProductionOrderAPIsController.cs" />
+    <Compile Include="Areas\Productions\APIs\SemifinishedProductAPIsController.cs" />
     <Compile Include="Areas\Productions\Builders\PlannedOrderViewModelSelectListBuilder.cs" />
     <Compile Include="Areas\Productions\Builders\ProductionOrderViewModelSelectListBuilder.cs" />
+    <Compile Include="Areas\Productions\Builders\SemifinishedProductViewModelSelectListBuilder.cs" />
     <Compile Include="Areas\Productions\Controllers\PlannedOrdersController.cs" />
     <Compile Include="Areas\Productions\Controllers\ProductionOrdersController.cs" />
+    <Compile Include="Areas\Productions\Controllers\SemifinishedProductsController.cs" />
     <Compile Include="Areas\Productions\ProductionsAreaRegistration.cs" />
     <Compile Include="Areas\Productions\ViewModels\PlannedOrderViewModel.cs" />
     <Compile Include="Areas\Productions\ViewModels\ProductionOrderViewModel.cs" />
+    <Compile Include="Areas\Productions\ViewModels\SemifinishedProductViewModel.cs" />
     <Compile Include="Areas\Purchases\APIs\PurchaseRequisitionAPIsController.cs" />
     <Compile Include="Areas\Purchases\Builders\PurchaseRequisitionViewModelSelectListBuilder.cs" />
     <Compile Include="Areas\Purchases\Controllers\PurchaseRequisitionsController.cs" />
@@ -1276,6 +1280,14 @@
     <Content Include="Areas\Purchases\Views\PurchaseRequisitions\CreateWizard.cshtml" />
     <Content Include="Areas\Productions\Views\PlannedOrders\CreateWizard.cshtml" />
     <Content Include="Areas\Commons\Views\Products\Boms.cshtml" />
+    <Content Include="Areas\Productions\Views\SemifinishedProducts\Approve.cshtml" />
+    <Content Include="Areas\Productions\Views\SemifinishedProducts\CreateWizard.cshtml" />
+    <Content Include="Areas\Productions\Views\SemifinishedProducts\Delete.cshtml" />
+    <Content Include="Areas\Productions\Views\SemifinishedProducts\Edit.cshtml" />
+    <Content Include="Areas\Productions\Views\SemifinishedProducts\GetPendingMaterialIssueDetails.cshtml" />
+    <Content Include="Areas\Productions\Views\SemifinishedProducts\Index.cshtml" />
+    <Content Include="Areas\Productions\Views\SemifinishedProducts\Print.cshtml" />
+    <Content Include="Areas\Productions\Views\SemifinishedProducts\_SemifinishedProduct.cshtml" />
     <None Include="Properties\PublishProfiles\TDV.pubxml" />
     <None Include="Properties\PublishProfiles\VCP.pubxml">
       <SubType>Designer</SubType>
@@ -1464,6 +1476,14 @@
     <Content Include="Scripts\Controllers\Productions\ProductionOrders\Open.js" />
     <Content Include="Scripts\Controllers\Productions\ProductionOrders\Print.js" />
     <Content Include="Scripts\Controllers\Productions\ProductionOrders\Void.js" />
+    <Content Include="Scripts\Controllers\Productions\SemifinishedProducts\AddPendingMaterialIssueDetail.js" />
+    <Content Include="Scripts\Controllers\Productions\SemifinishedProducts\Approve.js" />
+    <Content Include="Scripts\Controllers\Productions\SemifinishedProducts\CreateWizard.js" />
+    <Content Include="Scripts\Controllers\Productions\SemifinishedProducts\Delete.js" />
+    <Content Include="Scripts\Controllers\Productions\SemifinishedProducts\Edit.js" />
+    <Content Include="Scripts\Controllers\Productions\SemifinishedProducts\Index.js" />
+    <Content Include="Scripts\Controllers\Productions\SemifinishedProducts\Open.js" />
+    <Content Include="Scripts\Controllers\Productions\SemifinishedProducts\Print.js" />
     <Content Include="Scripts\Controllers\Purchases\PurchaseRequisitions\Approve.js" />
     <Content Include="Scripts\Controllers\Purchases\PurchaseRequisitions\CreateWizard.js" />
     <Content Include="Scripts\Controllers\Purchases\PurchaseRequisitions\Delete.js" />

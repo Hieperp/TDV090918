@@ -178,8 +178,21 @@ namespace TotalModel.Models
     }
 
 
+    public partial class SemifinishedProduct : IPrimitiveEntity, IBaseEntity, IBaseDetailEntity<SemifinishedProductDetail>
+    {
+        public int GetID() { return this.SemifinishedProductID; }
+
+        public virtual Employee Salesperson { get { return this.Employee; } }
+
+        public ICollection<SemifinishedProductDetail> GetDetails() { return this.SemifinishedProductDetails; }
+    }
 
 
+    public partial class SemifinishedProductDetail : IPrimitiveEntity, IHelperEntryDate, IHelperCommodityID, IHelperCommodityTypeID
+    {
+        public int GetID() { return this.SemifinishedProductDetailID; }
+    }
+    
 
 
 

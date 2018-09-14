@@ -10,7 +10,7 @@ namespace TotalDTO.Productions
 {
     public class SemifinishedProductDetailDTO : QuantityDetailDTO, IPrimitiveEntity
     {
-        public int GetID() { return this.SemifinishedProductDetailID; }
+        public int GetID() { return this.SemifinishedProductDetailID; }        
 
         public int SemifinishedProductDetailID { get; set; }
         public int SemifinishedProductID { get; set; }
@@ -28,16 +28,22 @@ namespace TotalDTO.Productions
         public Nullable<int> CustomerID { get; set; }
         public int SalespersonID { get; set; }
 
+        public Nullable<int> SemifinishedHandoverID { get; set; }      
+        public decimal QuantityRejectedReturned { get; set; }
 
-
+        [Display(Name = "Tồn đơn")]
         [UIHint("QuantityReadonly")]
         public decimal QuantityRemains { get; set; }
+        [Display(Name = "SL")]
         [UIHint("Quantity")]
         public override decimal Quantity { get; set; }
+        [Display(Name = "Hao hụt")]
         [UIHint("Quantity")]
         public decimal QuantityWastage { get; set; }
+        [Display(Name = "Hư hỏng")]
         [UIHint("Quantity")]
         public decimal QuantityFailure { get; set; }
+        [Display(Name = "Trả lại")]
         [UIHint("Quantity")]
         public decimal QuantityRejected { get; set; }
 

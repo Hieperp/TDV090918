@@ -36,15 +36,15 @@ namespace TotalDTO.Inventories
         public int GoodsReceiptID { get; set; }
         public int GoodsReceiptDetailID { get; set; }
 
-        [Display(Name = "Kế Hoạch")]
+        [Display(Name = "Lô SX")]
         [UIHint("StringReadonly")]
         public string GoodsReceiptReference { get; set; }
-        [Display(Name = "Mã KH")]
+        [Display(Name = "Mã NK")]
         [UIHint("StringReadonly")]
         public string GoodsReceiptCode { get; set; }
-        [Display(Name = "Ngày KH")]
+        [Display(Name = "Ngày NK")]
         [UIHint("DateTimeReadonly")]
-        public Nullable<System.DateTime> GoodsReceiptEntryDate { get; set; }
+        public Nullable<System.DateTime> GoodsReceiptEntryDate { get; set; }   
 
 
         [Display(Name = "Tồn đơn")]

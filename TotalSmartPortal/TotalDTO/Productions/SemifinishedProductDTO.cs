@@ -19,7 +19,7 @@ namespace TotalDTO.Productions
 
         public int GetID() { return this.SemifinishedProductID; }
         public void SetID(int id) { this.SemifinishedProductID = id; }
-
+                               
         public int SemifinishedProductID { get; set; }
 
         public virtual Nullable<int> CustomerID { get; set; }
@@ -28,19 +28,23 @@ namespace TotalDTO.Productions
         public int MaterialIssueDetailID { get; set; }
 
         public int FirmOrderID { get; set; }
+        [Display(Name = "Số KHSX")]
         public string FirmOrderReference { get; set; }
+        [Display(Name = "Mã KHSX")]
         public string FirmOrderCode { get; set; }
+        [Display(Name = "Ngày KHSX")]
         public DateTime FirmOrderEntryDate { get; set; }
+        [Display(Name = "Thành phẩm khay")]
         public string FirmOrderSpecification { get; set; }
 
         public int GoodsReceiptID { get; set; }
-        [Display(Name = "Kế Hoạch")]
+        [Display(Name = "Số KHSX")]
         [UIHint("StringReadonly")]
         public string GoodsReceiptReference { get; set; }
-        [Display(Name = "Mã KH")]
+        [Display(Name = "Mã KHSX")]
         [UIHint("StringReadonly")]
         public string GoodsReceiptCode { get; set; }
-        [Display(Name = "Ngày KH")]
+        [Display(Name = "Ngày KHSX")]
         [UIHint("DateTimeReadonly")]
         public Nullable<System.DateTime> GoodsReceiptEntryDate { get; set; }
         public int GoodsReceiptDetailID { get; set; }
@@ -53,13 +57,16 @@ namespace TotalDTO.Productions
         public virtual int WorkshiftID { get; set; }
         [Display(Name = "Ca sản xuất")]
         public string WorkshiftCode { get; set; }
+        [Display(Name = "Ngày sản xuất")]
         public DateTime WorkshiftEntryDate { get; set; }
 
         public virtual int ProductionLineID { get; set; }
-        [Display(Name = "Line")]
+        [Display(Name = "Mã số máy")]
         public string ProductionLineCode { get; set; }
 
         public virtual int SalespersonID { get; set; }
+
+        public decimal TotalQuantityIssue { get; set; }
 
         public override void PerformPresaveRule()
         {

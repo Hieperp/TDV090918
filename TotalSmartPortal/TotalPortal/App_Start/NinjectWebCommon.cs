@@ -167,6 +167,10 @@ namespace TotalPortal.App_Start
                 kernel.Bind<IProductionOrderAPIRepository>().To<ProductionOrderAPIRepository>();
                 kernel.Bind<IProductionOrderViewModelSelectListBuilder>().To<ProductionOrderViewModelSelectListBuilder>();
 
+                kernel.Bind<ISemifinishedProductService>().To<SemifinishedProductService>();
+                kernel.Bind<ISemifinishedProductRepository>().To<SemifinishedProductRepository>();
+                kernel.Bind<ISemifinishedProductAPIRepository>().To<SemifinishedProductAPIRepository>();
+                kernel.Bind<ISemifinishedProductViewModelSelectListBuilder>().To<SemifinishedProductViewModelSelectListBuilder>();
 
 
 

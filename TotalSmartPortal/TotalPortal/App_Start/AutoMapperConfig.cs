@@ -115,6 +115,12 @@ namespace TotalPortal.App_Start
                 cfg.CreateMap<ProductionOrderViewDetail, ProductionOrderDetailDTO>();
                 cfg.CreateMap<ProductionOrderDetailDTO, ProductionOrderDetail>();
 
+                cfg.CreateMap<SemifinishedProduct, SemifinishedProductViewModel>();
+                cfg.CreateMap<SemifinishedProduct, SemifinishedProductDTO>();
+                cfg.CreateMap<SemifinishedProductPrimitiveDTO, SemifinishedProduct>();
+                cfg.CreateMap<SemifinishedProductViewDetail, SemifinishedProductDetailDTO>();
+                cfg.CreateMap<SemifinishedProductDetailDTO, SemifinishedProductDetail>();
+
 
 
 

@@ -32,9 +32,13 @@ namespace TotalDTO.Inventories
         public int PlannedOrderID { get; set; }
 
         public int FirmOrderID { get; set; }
+        [Display(Name = "Số KHSX")]
         public string FirmOrderReference { get; set; }
+        [Display(Name = "Mã KHSX")]
         public string FirmOrderCode { get; set; }
+        [Display(Name = "Ngày KHSX")]
         public DateTime FirmOrderEntryDate { get; set; }
+        [Display(Name = "Thành phẩm khay")]
         public string FirmOrderSpecification { get; set; }
         
 
@@ -45,10 +49,11 @@ namespace TotalDTO.Inventories
         public virtual int WorkshiftID { get; set; }
         [Display(Name = "Ca sản xuất")]
         public string WorkshiftCode { get; set; }
+        [Display(Name = "Ngày sản xuất")]
         public DateTime WorkshiftEntryDate { get; set; }
 
         public virtual int ProductionLineID { get; set; }
-        [Display(Name = "Line")]
+        [Display(Name = "Mã số máy")]
         public string ProductionLineCode { get; set; }
 
         public virtual Nullable<int> WarehouseID { get; set; }

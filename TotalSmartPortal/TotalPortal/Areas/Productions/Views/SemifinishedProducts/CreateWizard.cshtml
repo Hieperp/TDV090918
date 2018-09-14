@@ -5,20 +5,19 @@
 
 @{Layout = "~/Views/Shared/_LayoutPopup.cshtml";}
 
-@model TotalPortal.Areas.Inventories.ViewModels.MaterialIssueViewModel
+@model TotalPortal.Areas.Productions.ViewModels.SemifinishedProductViewModel
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    @Html.Partial("~/Views/Helpers/Bases/_BaseSectionTop.cshtml")
+    @Html.Partial("~/Views/Helpers/Bases/_BaseSectionTop.cshtml")    
 
-    @Html.HiddenFor(model => model.MaterialIssueTypeID)
+    @Html.HiddenFor(model => model.MaterialIssueID)
+    @Html.HiddenFor(model => model.MaterialIssueDetailID)
 
-    @Html.HiddenFor(model => model.ProductionOrderID)
-    @Html.HiddenFor(model => model.ProductionOrderDetailID)
-
-    @Html.HiddenFor(model => model.PlannedOrderID)
+    @Html.HiddenFor(model => model.GoodsReceiptID)
+    @Html.HiddenFor(model => model.GoodsReceiptDetailID)
 
     @Html.HiddenFor(model => model.FirmOrderID)
     @Html.HiddenFor(model => model.FirmOrderCode)
@@ -47,37 +46,36 @@
     @Html.HiddenFor(model => model.ProductionLineID)
     @Html.HiddenFor(model => model.ProductionLineCode)
 
-    @Html.HiddenFor(model => model.Warehouse.WarehouseID)
-    @Html.HiddenFor(model => model.Warehouse.Code)
-    @Html.HiddenFor(model => model.Warehouse.Name)
 
     @Html.HiddenFor(model => model.Description);
 
-    @(Html.Kendo().Grid<MaterialIssuePendingFirmOrder>()
-        .Name("materialIssuePendingFirmOrderGrid")
+    @(Html.Kendo().Grid<SemifinishedProductPendingMaterialIssueDetail>()
+           .Name("semifinishedProductPendingMaterialIssueDetailGrid")
         .Columns(columns =>
-        {
+        {                       
             columns.Bound(c => c.FirmOrderCode).Title("Mã CT").Width(50);
             columns.Bound(c => c.FirmOrderReference).Title("Số KHSX").Width(50);
-            columns.Bound(c => c.FirmOrderEntryDate).Title("Ngày KHSX").Format("{0:dd/MM/yyyy}").Width(60).Filterable(false);            
-            columns.Bound(c => c.CustomerName).Title("Khách hàng").Width(100);
+            columns.Bound(c => c.FirmOrderEntryDate).Title("Ngày KHSX").Format("{0:dd/MM/yyyy}").Width(60).Filterable(false);
+            columns.Bound(c => c.CustomerName).Title("Khách hàng").Width(100);            
             columns.Bound(c => c.WorkshiftCode).Title("Ca SX").Width(50);
             columns.Bound(c => c.ProductionLineCode).Title("Mã số máy").Width(50);
             columns.Bound(c => c.FirmOrderSpecification).Title("Thành phẩm khay").Width(140);
-            columns.Bound(c => c.WorkshiftEntryDate).Title("Ngày SX").Format("{0:dd/MM/yyyy}").Width(60).Filterable(false); 
+            columns.Bound(c => c.WorkshiftEntryDate).Title("Ngày SX").Format("{0:dd/MM/yyyy}").Width(60).Filterable(false);            
+            columns.Bound(c => c.QuantityRemains).Title("Tồn đơn").Format(Settings.kfmQuantity).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
+            columns.Bound(c => c.GoodsReceiptEntryDate).Format("{0:dd/MM/yyyy}").Width(60).Filterable(false).Hidden();
         })
         .ToolBar(toolbar =>
         {
             toolbar.Template(@<text>
                 <div class="toolbar" style="float: right;">
                     <label>Nhập mã chừng từ, số KHSX, khách hàng, ca sx, mã số máy hoặc mặt hàng</label>
-                    <input id="materialIssuePendingFirmOrderFilter" class="k-textbox" style="text-align: center; margin-right: 13px;" onkeyup="materialIssuePendingFirmOrderFilter_KeyUp()" />
+                    <input id="semifinishedProductPendingMaterialIssueDetailFilter" class="k-textbox" style="text-align: center; margin-right: 13px;" onkeyup="semifinishedProductPendingMaterialIssueDetailFilter_KeyUp()" />
                 </div>
             </text>);
         })
         .Scrollable(s => s.Height(Settings.PopupContentHeight))
         .DataSource(ds => ds.Ajax()
-            .Read(read => read.Action("GetFirmOrders", "MaterialIssueAPIs", new { area = "Inventories" }).Data(@<text>
+                .Read(read => read.Action("GetMaterialIssueDetails", "SemifinishedProductAPIs", new { area = "Productions" }).Data(@<text>
                 function (e) {
                     return {
                         locationID: window.parent.requireConfig.pageOptions.LocationID
@@ -92,9 +90,9 @@
 
     <div class="background-bar" style="height: 45px;">
         <div class="popup-button-bar">
-            <input id="submitCreateWizard" type="submit" formaction="@Url.Action("CreateWizard", "MaterialIssues")" formtarget="_top" style="display:none" />
+            <input id="submitCreateWizard" type="submit" formaction="@Url.Action("CreateWizard", "SemifinishedProducts")" formtarget="_top" style="display:none" />
 
-            <button type="button" class="k-button" onclick="okWOSelectButton_Click()"> <img src="~/Content/Images/Mains/Size24/Accept-Total.png" /> Xuất kho </button>
+            <button type="button" class="k-button" onclick="okButton_Click()"> <img src="~/Content/Images/Mains/Size24/Accept-Total.png" /> Nhập kho </button>
             <button type="button" class="k-button" onclick="window.parent.$('#myWindow').data('kendoWindow').close()"> <img src="~/Content/Images/Mains/Size24/Users-Exit-icon-24.png" /> Thoát </button>
         </div>
     </div>
@@ -104,43 +102,32 @@
 <link href="@Url.Content("~/Content/CustomCss/GeneralPopup.css")" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
-    $("#materialIssuePendingFirmOrderGrid").dblclick(function (e) {
+    $("#semifinishedProductPendingFirmOrderGrid").dblclick(function (e) {
         okButton_Click();
-    })
+    })   
 
     function okButton_Click() {
-        if ($("#tabStrip").data("kendoTabStrip").select().index() === 0)
-            handleOKEvent($("#gridPromotion").data("kendoGrid"));
-        else //BY FirmOrder
-            handleOKEvent();
-    }
-
-    function okWOSelectButton_Click() {
         handleOKEvent();
     }
 
     function handleOKEvent(promotionGrid) { //This javascript is now used only here. Later, if it is used somewhere else, it should be break into a standalone js file, and then just only add a link here
 
-        var selectedGrid = $("#materialIssuePendingFirmOrderGrid").data("kendoGrid");
+        var selectedGrid = $("#semifinishedProductPendingMaterialIssueDetailGrid").data("kendoGrid");
         var selectedDataItem = selectedGrid.dataItem(selectedGrid.select());
         if (selectedDataItem === undefined || selectedDataItem === null)
             return false;
-
+        debugger;
         _setModelInput(selectedDataItem);
 
 
         $("#submitCreateWizard").trigger("click");
 
 
-        function _setModelInput(selectedDataItem) {
+        function _setModelInput(selectedDataItem) {            
 
-            $("#MaterialIssueTypeID").val(selectedDataItem === undefined || selectedDataItem.MaterialIssueTypeID === undefined ? null : selectedDataItem.MaterialIssueTypeID);
-
-            $("#ProductionOrderDetailID").val(selectedDataItem === undefined || selectedDataItem.ProductionOrderDetailID === undefined ? null : selectedDataItem.ProductionOrderDetailID);
-            $("#ProductionOrderID").val(selectedDataItem === undefined || selectedDataItem.ProductionOrderID === undefined ? null : selectedDataItem.ProductionOrderID);
-
-            $("#PlannedOrderID").val(selectedDataItem === undefined || selectedDataItem.PlannedOrderID === undefined ? null : selectedDataItem.PlannedOrderID);
-
+            $("#MaterialIssueDetailID").val(selectedDataItem === undefined || selectedDataItem.MaterialIssueDetailID === undefined ? null : selectedDataItem.MaterialIssueDetailID);
+            $("#MaterialIssueID").val(selectedDataItem === undefined || selectedDataItem.MaterialIssueID === undefined ? null : selectedDataItem.MaterialIssueID);
+            
             $("#FirmOrderID").val(selectedDataItem === undefined || selectedDataItem.FirmOrderID === undefined ? null : selectedDataItem.FirmOrderID);
             $("#FirmOrderCode").val(selectedDataItem === undefined || selectedDataItem.FirmOrderCode === undefined ? null : selectedDataItem.FirmOrderCode);
             $("#FirmOrderReference").val(selectedDataItem === undefined || selectedDataItem.FirmOrderReference === undefined ? null : selectedDataItem.FirmOrderReference);
@@ -164,34 +151,34 @@
             $("#Customer_PriceCategoryID").val(selectedDataItem === undefined || selectedDataItem.CustomerPriceCategoryID === undefined ? null : selectedDataItem.CustomerPriceCategoryID);
             $("#Customer_PriceCategoryCode").val(selectedDataItem === undefined || selectedDataItem.CustomerPriceCategoryCode === undefined ? null : selectedDataItem.CustomerPriceCategoryCode);
 
-
+            $("#WorkshiftEntryDate").val(selectedDataItem === undefined || selectedDataItem.WorkshiftEntryDate === undefined ? null : kendo.toString(selectedDataItem.WorkshiftEntryDate, Settings.DateTimeFormat));
             $("#WorkshiftID").val(selectedDataItem === undefined || selectedDataItem.WorkshiftID === undefined ? null : selectedDataItem.WorkshiftID);
             $("#WorkshiftCode").val(selectedDataItem === undefined || selectedDataItem.WorkshiftCode === undefined ? null : selectedDataItem.WorkshiftCode);
+
             $("#ProductionLineID").val(selectedDataItem === undefined || selectedDataItem.ProductionLineID === undefined ? null : selectedDataItem.ProductionLineID);
             $("#ProductionLineCode").val(selectedDataItem === undefined || selectedDataItem.ProductionLineCode === undefined ? null : selectedDataItem.ProductionLineCode);
 
-            $("#Warehouse_WarehouseID").val(selectedDataItem === undefined || selectedDataItem.WarehouseID === undefined ? null : selectedDataItem.WarehouseID);
-            $("#Warehouse_Code").val(selectedDataItem === undefined || selectedDataItem.WarehouseCode === undefined ? null : selectedDataItem.WarehouseCode);
-            $("#Warehouse_Name").val(selectedDataItem === undefined || selectedDataItem.WarehouseName === undefined ? null : selectedDataItem.WarehouseName);
-
-            $("#Description").val(selectedDataItem === undefined || selectedDataItem.Description === undefined ? null : selectedDataItem.Description);
+            $("#QuantityRemains").val(selectedDataItem === undefined || selectedDataItem.QuantityRemains === undefined ? null : selectedDataItem.QuantityRemains);
+            
+            $("#GoodsReceiptID").val(selectedDataItem === undefined || selectedDataItem.GoodsReceiptID === undefined ? null : selectedDataItem.GoodsReceiptID);
+            $("#GoodsReceiptDetailID").val(selectedDataItem === undefined || selectedDataItem.GoodsReceiptDetailID === undefined ? null : selectedDataItem.GoodsReceiptDetailID);
         }
     }
 
 
-    function materialIssuePendingFirmOrderFilter_KeyUp() {
-        var materialIssuePendingFirmOrderFilter = $("#materialIssuePendingFirmOrderFilter").val(), gridDetails = $("#materialIssuePendingFirmOrderGrid").data("kendoGrid");
+    function semifinishedProductPendingMaterialIssueDetailFilter_KeyUp() {
+        var semifinishedProductPendingMaterialIssueDetailFilter = $("#semifinishedProductPendingMaterialIssueDetailFilter").val(), gridDetails = $("#semifinishedProductPendingFirmOrderGrid").data("kendoGrid");
 
-        if (materialIssuePendingFirmOrderFilter && materialIssuePendingFirmOrderFilter.length >= "@Settings.AutoCompleteMinLenght") {
+        if (semifinishedProductPendingMaterialIssueDetailFilter && semifinishedProductPendingMaterialIssueDetailFilter.length >= "@Settings.AutoCompleteMinLenght") {
             gridDetails.dataSource.filter({
                 logic: "or",
                 filters: [
-                    { field: "FirmOrderCode", operator: "contains", value: materialIssuePendingFirmOrderFilter },
-                    { field: "FirmOrderReference", operator: "contains", value: materialIssuePendingFirmOrderFilter },
-                    { field: "CustomerName", operator: "contains", value: materialIssuePendingFirmOrderFilter },
-                    { field: "WorkshiftCode", operator: "contains", value: materialIssuePendingFirmOrderFilter },
-                    { field: "ProductionLineCode", operator: "contains", value: materialIssuePendingFirmOrderFilter },
-                    { field: "FirmOrderSpecification", operator: "contains", value: materialIssuePendingFirmOrderFilter }
+                    { field: "FirmOrderCode", operator: "contains", value: semifinishedProductPendingMaterialIssueDetailFilter },
+                    { field: "FirmOrderReference", operator: "contains", value: semifinishedProductPendingMaterialIssueDetailFilter },
+                    { field: "CustomerName", operator: "contains", value: semifinishedProductPendingMaterialIssueDetailFilter },
+                    { field: "WorkshiftCode", operator: "contains", value: semifinishedProductPendingMaterialIssueDetailFilter },
+                    { field: "ProductionLineCode", operator: "contains", value: semifinishedProductPendingMaterialIssueDetailFilter },
+                    { field: "FirmOrderSpecification", operator: "contains", value: semifinishedProductPendingMaterialIssueDetailFilter }
                 ]
             });
 
