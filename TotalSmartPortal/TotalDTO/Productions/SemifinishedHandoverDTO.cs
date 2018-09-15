@@ -21,37 +21,21 @@ namespace TotalDTO.Productions
         public void SetID(int id) { this.SemifinishedHandoverID = id; }
 
         public int SemifinishedHandoverID { get; set; }
-                                                    
+
 
         public virtual int WorkshiftID { get; set; }
-        public virtual Nullable<int> CustomerID { get; set; }                
+        [Display(Name = "Ca sản xuất")]
+        public string WorkshiftCode { get; set; }
+        [Display(Name = "Ngày sản xuất")]
+        public DateTime WorkshiftEntryDate { get; set; }
 
-        public string ShiftName { get; set; }
-        
-        public int FinishedLeaderID { get; set; }
+        public virtual Nullable<int> CustomerID { get; set; }
 
-        public Nullable<int> SemifinishedLeaderID { get; set; }
-        public string SemifinishedLeaderReference { get; set; }
-        public string SemifinishedLeaderReferences { get; set; }
-        public string SemifinishedLeaderCode { get; set; }
-        public string SemifinishedLeaderCodes { get; set; }
-        [Display(Name = "Phiếu")]
-        public string SemifinishedLeaderReferenceNote { get { return this.SemifinishedLeaderID != null ? this.SemifinishedLeaderReference : (this.SemifinishedLeaderReferences != "" ? this.SemifinishedLeaderReferences : "Giao hàng tổng hợp của nhiều ĐH"); } }
-        [Display(Name = "Số")]
-        public string SemifinishedLeaderCodeNote { get { return this.SemifinishedLeaderID != null ? this.SemifinishedLeaderCode : (this.SemifinishedLeaderCodes != "" ? this.SemifinishedLeaderCodes : ""); } }
-        [Display(Name = "Ngày")]
-        public Nullable<System.DateTime> SemifinishedLeaderEntryDate { get; set; }
-
-
-        public override void PerformPresaveRule()
-        {
-            base.PerformPresaveRule();
-                       
-            this.DtoDetails().ToList().ForEach(e => {  });            
-        }
+        public virtual int FinishedLeaderID { get; set; }
+        public virtual int SemifinishedLeaderID { get; set; }
     }
 
-    public class SemifinishedHandoverDTO : SemifinishedHandoverPrimitiveDTO, IBaseDetailEntity<SemifinishedHandoverDetailDTO>, ISearchCustomer, IPriceCategory
+    public class SemifinishedHandoverDTO : SemifinishedHandoverPrimitiveDTO, IBaseDetailEntity<SemifinishedHandoverDetailDTO>
     {
         public SemifinishedHandoverDTO()
         {
@@ -62,7 +46,16 @@ namespace TotalDTO.Productions
         [Display(Name = "Khách hàng")]
         [UIHint("Commons/CustomerBase")]
         public CustomerBaseDTO Customer { get; set; }
-     
+
+        public override int SemifinishedLeaderID { get { return (this.SemifinishedLeader != null ? this.SemifinishedLeader.EmployeeID : 0); } }
+        [Display(Name = "Nhân viên kho")]
+        [UIHint("AutoCompletes/EmployeeBase")]
+        public EmployeeBaseDTO SemifinishedLeader { get; set; }
+
+        public override int FinishedLeaderID { get { return (this.FinishedLeader != null ? this.FinishedLeader.EmployeeID : 0); } }
+        [Display(Name = "Nhân viên kho")]
+        [UIHint("AutoCompletes/EmployeeBase")]
+        public EmployeeBaseDTO FinishedLeader { get; set; }
 
         public List<SemifinishedHandoverDetailDTO> SemifinishedHandoverViewDetails { get; set; }
         public List<SemifinishedHandoverDetailDTO> ViewDetails { get { return this.SemifinishedHandoverViewDetails; } set { this.SemifinishedHandoverViewDetails = value; } }
@@ -70,8 +63,5 @@ namespace TotalDTO.Productions
         public ICollection<SemifinishedHandoverDetailDTO> GetDetails() { return this.SemifinishedHandoverViewDetails; }
 
         protected override IEnumerable<SemifinishedHandoverDetailDTO> DtoDetails() { return this.SemifinishedHandoverViewDetails; }
-       
-
-     
     }
 }

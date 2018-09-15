@@ -34,16 +34,14 @@ namespace TotalDTO.Productions
         [UIHint("StringReadonly")]
         public string CustomerName { get; set; }
 
+        public int ProductionLineID { get; set; }
+        [Display(Name = "Máy")]
+        [UIHint("StringReadonly")]
+        public virtual string ProductionLineCode { get; set; }
+
         public int CrucialWorkerID { get; set; }
-
-
-        [Display(Name = "SL xuất")]
-        [UIHint("QuantityReadonly")]
-        public decimal QuantityIssue { get; set; }
-
-        public virtual int ShiftID { get; set; }
-
-        public virtual int WorkshiftID { get; set; }
-     
+        [Display(Name = "Công nhân")]
+        [UIHint("StringReadonly")]
+        public int CrucialWorkerName { get; set; }
     }
 }

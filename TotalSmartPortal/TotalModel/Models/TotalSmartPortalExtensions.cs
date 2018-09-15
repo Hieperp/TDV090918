@@ -192,7 +192,24 @@ namespace TotalModel.Models
     {
         public int GetID() { return this.SemifinishedProductDetailID; }
     }
-    
+
+
+    public partial class SemifinishedHandover : IPrimitiveEntity, IBaseEntity, IBaseDetailEntity<SemifinishedHandoverDetail>
+    {
+        public int GetID() { return this.SemifinishedHandoverID; }
+
+        public virtual Employee SemifinishedLeader { get { return this.Employee; } }
+        public virtual Employee FinishedLeader { get { return this.Employee1; } }
+
+        public ICollection<SemifinishedHandoverDetail> GetDetails() { return this.SemifinishedHandoverDetails; }
+    }
+
+
+    public partial class SemifinishedHandoverDetail : IPrimitiveEntity, IHelperEntryDate
+    {
+        public int GetID() { return this.SemifinishedHandoverDetailID; }
+    }
+
 
 
 

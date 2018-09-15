@@ -25,5 +25,7 @@ namespace TotalModel.Models
         public string ProductionLineCode { get; set; }
         public decimal Quantity { get; set; }
         public Nullable<bool> IsSelected { get; set; }
+        public int CrucialWorkerID { get; set; }
+        public string CrucialWorkerName { get; set; }
     }
 }
