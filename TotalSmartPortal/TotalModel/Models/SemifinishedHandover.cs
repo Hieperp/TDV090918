@@ -23,6 +23,7 @@ namespace TotalModel.Models
         public int SemifinishedHandoverID { get; set; }
         public System.DateTime EntryDate { get; set; }
         public string Reference { get; set; }
+        public int WorkshiftID { get; set; }
         public Nullable<int> CustomerID { get; set; }
         public int SemifinishedLeaderID { get; set; }
         public int FinishedLeaderID { get; set; }

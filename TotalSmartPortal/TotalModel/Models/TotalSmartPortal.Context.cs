@@ -97,10 +97,10 @@ namespace TotalModel.Models
         public virtual DbSet<MaterialIssueDetail> MaterialIssueDetails { get; set; }
         public virtual DbSet<FirmOrderMaterial> FirmOrderMaterials { get; set; }
         public virtual DbSet<Mold> Molds { get; set; }
-        public virtual DbSet<SemifinishedProduct> SemifinishedProducts { get; set; }
         public virtual DbSet<SemifinishedHandoverDetail> SemifinishedHandoverDetails { get; set; }
         public virtual DbSet<SemifinishedHandover> SemifinishedHandovers { get; set; }
         public virtual DbSet<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
+        public virtual DbSet<SemifinishedProduct> SemifinishedProducts { get; set; }
     
         public virtual ObjectResult<string> AccountInvoicePostSaveValidate(Nullable<int> entityID)
         {
@@ -3211,6 +3211,97 @@ namespace TotalModel.Models
                 new ObjectParameter("IsDefault", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCommodityMold", commodityMoldIDParameter, commodityIDParameter, quantityParameter, isDefaultParameter);
+        }
+    
+        public virtual ObjectResult<SemifinishedHandoverIndex> GetSemifinishedHandoverIndexes(string aspUserID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var aspUserIDParameter = aspUserID != null ?
+                new ObjectParameter("AspUserID", aspUserID) :
+                new ObjectParameter("AspUserID", typeof(string));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SemifinishedHandoverIndex>("GetSemifinishedHandoverIndexes", aspUserIDParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<SemifinishedHandoverViewDetail> GetSemifinishedHandoverViewDetails(Nullable<int> semifinishedHandoverID)
+        {
+            var semifinishedHandoverIDParameter = semifinishedHandoverID.HasValue ?
+                new ObjectParameter("SemifinishedHandoverID", semifinishedHandoverID) :
+                new ObjectParameter("SemifinishedHandoverID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SemifinishedHandoverViewDetail>("GetSemifinishedHandoverViewDetails", semifinishedHandoverIDParameter);
+        }
+    
+        public virtual ObjectResult<string> SemifinishedHandoverPostSaveValidate(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SemifinishedHandoverPostSaveValidate", entityIDParameter);
+        }
+    
+        public virtual int SemifinishedHandoverSaveRelative(Nullable<int> entityID, Nullable<int> saveRelativeOption)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var saveRelativeOptionParameter = saveRelativeOption.HasValue ?
+                new ObjectParameter("SaveRelativeOption", saveRelativeOption) :
+                new ObjectParameter("SaveRelativeOption", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SemifinishedHandoverSaveRelative", entityIDParameter, saveRelativeOptionParameter);
+        }
+    
+        public virtual ObjectResult<SemifinishedHandoverPendingCustomer> GetSemifinishedHandoverPendingCustomers(Nullable<int> locationID)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SemifinishedHandoverPendingCustomer>("GetSemifinishedHandoverPendingCustomers", locationIDParameter);
+        }
+    
+        public virtual ObjectResult<SemifinishedHandoverPendingDetail> GetSemifinishedHandoverPendingDetails(Nullable<int> semifinishedHandoverID, Nullable<int> workshiftID, Nullable<int> customerID, string semifinishedProductDetailIDs, Nullable<bool> isReadonly)
+        {
+            var semifinishedHandoverIDParameter = semifinishedHandoverID.HasValue ?
+                new ObjectParameter("SemifinishedHandoverID", semifinishedHandoverID) :
+                new ObjectParameter("SemifinishedHandoverID", typeof(int));
+    
+            var workshiftIDParameter = workshiftID.HasValue ?
+                new ObjectParameter("WorkshiftID", workshiftID) :
+                new ObjectParameter("WorkshiftID", typeof(int));
+    
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            var semifinishedProductDetailIDsParameter = semifinishedProductDetailIDs != null ?
+                new ObjectParameter("SemifinishedProductDetailIDs", semifinishedProductDetailIDs) :
+                new ObjectParameter("SemifinishedProductDetailIDs", typeof(string));
+    
+            var isReadonlyParameter = isReadonly.HasValue ?
+                new ObjectParameter("IsReadonly", isReadonly) :
+                new ObjectParameter("IsReadonly", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SemifinishedHandoverPendingDetail>("GetSemifinishedHandoverPendingDetails", semifinishedHandoverIDParameter, workshiftIDParameter, customerIDParameter, semifinishedProductDetailIDsParameter, isReadonlyParameter);
+        }
+    
+        public virtual ObjectResult<SemifinishedHandoverPendingWorkshift> GetSemifinishedHandoverPendingWorkshifts(Nullable<int> locationID)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SemifinishedHandoverPendingWorkshift>("GetSemifinishedHandoverPendingWorkshifts", locationIDParameter);
         }
     }
 }
