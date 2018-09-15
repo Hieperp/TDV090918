@@ -39,7 +39,7 @@
             e.DataBound("gridEditorMoldDataBound");
         })
         .Value(Model)
-        .HtmlAttributes(new { @class = "custom-control" })
+        .HtmlAttributes(new { @class = "moldBase_AutoComplete " + (ViewData["MoldLeftPanelInput"] != null ? ViewData["MoldLeftPanelInput"] : "right-panel-input") })
 )
 
 <script type="text/javascript">

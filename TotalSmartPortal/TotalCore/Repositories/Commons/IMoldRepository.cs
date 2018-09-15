@@ -11,5 +11,13 @@ namespace TotalCore.Repositories.Commons
     public interface IMoldAPIRepository : IGenericAPIRepository
     {
         IList<MoldBase> GetMoldBases(string searchText, int commodityID);
+
+        IList<CommodityMold> GetCommodityMolds(int commodityID);
+
+        void AddCommodityMold(int? moldID, int? commodityID);
+
+        void RemoveCommodityMold(int? commodityMoldID);
+
+        void UpdateCommodityMold(int? commodityMoldID, int commodityID, decimal Quantity, bool? isDefault);
     }
 }

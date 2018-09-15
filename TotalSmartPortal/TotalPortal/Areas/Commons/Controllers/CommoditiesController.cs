@@ -33,11 +33,14 @@ namespace TotalPortal.Areas.Commons.Controllers
 
         public virtual ActionResult Boms(int id)
         {
-            //TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable);            
-            //if (simpleViewModel == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable);
+            if (simpleViewModel == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            //return View(this.InitViewModel(simpleViewModel));
+            return View(simpleViewModel);
+        }
 
+        public virtual ActionResult Molds(int id)
+        {           
             TSimpleViewModel simpleViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable);
             if (simpleViewModel == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 

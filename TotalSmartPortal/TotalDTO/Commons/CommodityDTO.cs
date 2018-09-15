@@ -78,6 +78,9 @@ namespace TotalDTO.Commons
         [UIHint("AutoCompletes/Bom")]
         BomBaseDTO Bom { get; set; }
 
+        [UIHint("AutoCompletes/Mold")]
+        MoldBaseDTO Mold { get; set; }
+
         string HSCode { get; set; }
 
         bool IsMaterial { get; }
@@ -141,6 +144,9 @@ namespace TotalDTO.Commons
 
         public Nullable<int> BomID { get { return (this.Bom != null ? this.Bom.BomID : null); } }        
         public BomBaseDTO Bom { get; set; }
+
+        public Nullable<int> MoldID { get { return (this.Mold != null ? this.Mold.MoldID : null); } }
+        public MoldBaseDTO Mold { get; set; }
 
         public string HSCode { get; set; }
 

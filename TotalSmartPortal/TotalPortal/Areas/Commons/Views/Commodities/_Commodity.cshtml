@@ -178,7 +178,8 @@
             }
             @if (Model.CommodityID > 0 && Model.IsProduct)
             {
-                <button type="button" class="k-button custom-button" onclick="ShowBoms()"> <img src="~/Content/Images/New/2017/sale-off-icon-32.png" /> Danh mục màng sản xuất khay </button>
+                <button type="button" class="k-button custom-button" onclick="ShowBoms()"> <img src="~/Content/Images/New/2017/sale-off-icon-32.png" /> Danh mục màng sx khay </button>
+                <button type="button" class="k-button custom-button" onclick="ShowMolds()"> <img src="~/Content/Images/New/2017/sale-off-icon-32.png" /> Danh mục khuôn sx khay </button>
             }
         </div>
 
@@ -203,8 +204,15 @@
 
     function ShowBoms() {
         require(["kpopupWindow"], function (kpopupWindow) {
-            var createWizardWindow = new kpopupWindow();                        
+            var createWizardWindow = new kpopupWindow();
             createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("Boms", Model.ControllerName, new { area = "Commons", id = Model.CommodityID })", "Danh mục màng sản xuất khay", "@Settings.PopupWidth", "@Settings.PopupHeightWithTab");
+        });
+    }
+
+    function ShowMolds() {
+        require(["kpopupWindow"], function (kpopupWindow) {
+            var createWizardWindow = new kpopupWindow();
+            createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("Molds", Model.ControllerName, new { area = "Commons", id = Model.CommodityID })", "Danh mục khuôn sản xuất khay", "@Settings.PopupWidth", "@Settings.PopupHeightWithTab");
         });
     }
 </script>

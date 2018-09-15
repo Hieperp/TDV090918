@@ -4,6 +4,7 @@ using System.Data.Entity;
 
 using TotalModel.Models;
 using TotalCore.Repositories.Commons;
+using System.Data.Entity.Core.Objects;
 
 namespace TotalDAL.Repositories.Commons
 {
@@ -29,6 +30,29 @@ namespace TotalDAL.Repositories.Commons
             List<MoldBase> moldBases = this.TotalSmartPortalEntities.GetMoldBases(searchText, commodityID).ToList();
 
             return moldBases;
+        }
+
+        public IList<CommodityMold> GetCommodityMolds(int commodityID)
+        {
+            return this.TotalSmartPortalEntities.GetCommodityMolds(commodityID).ToList();
+        }
+
+        public void AddCommodityMold(int? moldID, int? commodityID)
+        {
+            ObjectParameter[] parameters = new ObjectParameter[] { new ObjectParameter("MoldID", moldID), new ObjectParameter("CommodityID", commodityID) };
+            this.ExecuteFunction("AddCommodityMold", parameters);
+        }
+
+        public void RemoveCommodityMold(int? commodityMoldID)
+        {
+            ObjectParameter[] parameters = new ObjectParameter[] { new ObjectParameter("CommodityMoldID", commodityMoldID) };
+            this.ExecuteFunction("RemoveCommodityMold", parameters);
+        }
+
+        public void UpdateCommodityMold(int? commodityMoldID, int commodityID, decimal quantity, bool? isDefault)
+        {
+            ObjectParameter[] parameters = new ObjectParameter[] { new ObjectParameter("CommodityMoldID", commodityMoldID), new ObjectParameter("CommodityID", commodityID), new ObjectParameter("Quantity", quantity), new ObjectParameter("IsDefault", isDefault) };
+            this.ExecuteFunction("UpdateCommodityMold", parameters);
         }
     }
 

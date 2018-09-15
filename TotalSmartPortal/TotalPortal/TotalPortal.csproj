@@ -1288,6 +1288,7 @@
     <Content Include="Areas\Productions\Views\SemifinishedProducts\Index.cshtml" />
     <Content Include="Areas\Productions\Views\SemifinishedProducts\Print.cshtml" />
     <Content Include="Areas\Productions\Views\SemifinishedProducts\_SemifinishedProduct.cshtml" />
+    <Content Include="Areas\Commons\Views\Products\Molds.cshtml" />
     <None Include="Properties\PublishProfiles\TDV.pubxml" />
     <None Include="Properties\PublishProfiles\VCP.pubxml">
       <SubType>Designer</SubType>
@@ -2392,6 +2393,7 @@
     <Content Include="Views\Shared\EditorTemplates\DropDowns\CommodityLine.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DropDowns\Shift.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AutoCompletes\Bom.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\AutoCompletes\Mold.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
