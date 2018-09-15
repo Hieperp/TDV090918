@@ -64,7 +64,7 @@ namespace TotalDTO.Productions
         [Display(Name = "Mã số máy")]
         public string ProductionLineCode { get; set; }
 
-        public virtual int SalespersonID { get; set; }
+        public virtual int CrucialWorkerID { get; set; }
 
         public decimal TotalQuantityIssue { get; set; }
 
@@ -72,7 +72,7 @@ namespace TotalDTO.Productions
         {
             base.PerformPresaveRule();
 
-            this.DtoDetails().ToList().ForEach(e => { e.MaterialIssueID = this.MaterialIssueID; e.MaterialIssueDetailID = this.MaterialIssueDetailID; e.FirmOrderID = this.FirmOrderID; e.GoodsReceiptID = this.GoodsReceiptID; e.GoodsReceiptDetailID = this.GoodsReceiptDetailID; e.CustomerID = this.CustomerID; e.SalespersonID = this.SalespersonID; });
+            this.DtoDetails().ToList().ForEach(e => { e.MaterialIssueID = this.MaterialIssueID; e.MaterialIssueDetailID = this.MaterialIssueDetailID; e.FirmOrderID = this.FirmOrderID; e.GoodsReceiptID = this.GoodsReceiptID; e.GoodsReceiptDetailID = this.GoodsReceiptDetailID; e.CustomerID = this.CustomerID; e.SalespersonID = this.CrucialWorkerID; });
         }
     }
 
@@ -89,10 +89,10 @@ namespace TotalDTO.Productions
         [UIHint("Commons/CustomerBase")]
         public CustomerBaseDTO Customer { get; set; }
 
-        public override int SalespersonID { get { return (this.Salesperson != null ? this.Salesperson.EmployeeID : 0); } }
+        public override int CrucialWorkerID { get { return (this.CrucialWorker != null ? this.CrucialWorker.EmployeeID : 0); } }
         [Display(Name = "Nhân viên kho")]
         [UIHint("AutoCompletes/EmployeeBase")]
-        public EmployeeBaseDTO Salesperson { get; set; }
+        public EmployeeBaseDTO CrucialWorker { get; set; }
 
 
         public List<SemifinishedProductDetailDTO> SemifinishedProductViewDetails { get; set; }
