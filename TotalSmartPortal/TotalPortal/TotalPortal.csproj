@@ -1465,7 +1465,6 @@
     <Content Include="Scripts\Controllers\Productions\PlannedOrders\Index.js" />
     <Content Include="Scripts\Controllers\Productions\PlannedOrders\Open.js" />
     <Content Include="Scripts\Controllers\Productions\PlannedOrders\Print.js" />
-    <Content Include="Scripts\Controllers\Productions\PlannedOrders\tes.js" />
     <Content Include="Scripts\Controllers\Productions\PlannedOrders\Void.js" />
     <Content Include="Scripts\Controllers\Productions\ProductionOrders\AddPendingFirmOrder.js" />
     <Content Include="Scripts\Controllers\Productions\ProductionOrders\Approve.js" />
