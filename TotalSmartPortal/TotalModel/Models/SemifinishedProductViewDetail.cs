@@ -26,5 +26,6 @@ namespace TotalModel.Models
         public decimal QuantityFailure { get; set; }
         public decimal QuantityRejected { get; set; }
         public string Remarks { get; set; }
+        public int SemifinishedProductID { get; set; }
     }
 }

@@ -51,6 +51,9 @@
     @Html.HiddenFor(model => model.Warehouse.Code)
     @Html.HiddenFor(model => model.Warehouse.Name)
 
+    @Html.HiddenFor(model => model.Storekeeper.EmployeeID);
+    @Html.HiddenFor(model => model.Storekeeper.Name);
+    
     @Html.HiddenFor(model => model.Description);
 
     @(Html.Kendo().Grid<MaterialIssuePendingFirmOrder>()

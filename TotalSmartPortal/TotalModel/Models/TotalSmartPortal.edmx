@@ -13707,6 +13707,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="Decimal" Name="QuantityFailure" Nullable="false" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="QuantityRejected" Nullable="false" Precision="18" Scale="2" />
           <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="SemifinishedProductID" Nullable="false" />
         </ComplexType>
         <ComplexType Name="MaterialIssuePendingFirmOrder">
           <Property Type="Int32" Name="MaterialIssueTypeID" Nullable="false" />
@@ -18026,6 +18027,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="QuantityFailure" ColumnName="QuantityFailure" />
                 <ScalarProperty Name="QuantityRejected" ColumnName="QuantityRejected" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="SemifinishedProductID" ColumnName="SemifinishedProductID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
