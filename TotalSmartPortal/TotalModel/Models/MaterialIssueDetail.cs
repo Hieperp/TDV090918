@@ -17,8 +17,8 @@ namespace TotalModel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MaterialIssueDetail()
         {
-            this.SemifinishedProductDetails = new HashSet<SemifinishedProductDetail>();
             this.SemifinishedProducts = new HashSet<SemifinishedProduct>();
+            this.SemifinishedProductDetails = new HashSet<SemifinishedProductDetail>();
         }
     
         public int MaterialIssueDetailID { get; set; }
@@ -56,8 +56,8 @@ namespace TotalModel.Models
         public virtual Workshift Workshift { get; set; }
         public virtual FirmOrderMaterial FirmOrderMaterial { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemifinishedProduct> SemifinishedProducts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
     }
 }

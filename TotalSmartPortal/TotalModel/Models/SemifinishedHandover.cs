@@ -23,8 +23,7 @@ namespace TotalModel.Models
         public int SemifinishedHandoverID { get; set; }
         public System.DateTime EntryDate { get; set; }
         public string Reference { get; set; }
-        public Nullable<int> SemifinishedProductID { get; set; }
-        public string SemifinishedProductReferences { get; set; }
+        public Nullable<int> CustomerID { get; set; }
         public int SemifinishedLeaderID { get; set; }
         public int FinishedLeaderID { get; set; }
         public int UserID { get; set; }
@@ -46,6 +45,5 @@ namespace TotalModel.Models
         public virtual Location Location { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemifinishedHandoverDetail> SemifinishedHandoverDetails { get; set; }
-        public virtual SemifinishedProduct SemifinishedProduct { get; set; }
     }
 }

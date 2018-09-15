@@ -28,7 +28,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             this.AddCommodityMold();
             this.RemoveCommodityMold();
 
-            this.SetCommodityMoldDefault();
+            this.UpdateCommodityMold();
 
             this.GetMoldBases();
         }
@@ -118,21 +118,25 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             this.totalSmartPortalEntities.CreateStoredProcedure("RemoveCommodityMold", queryString);
         }
 
-        private void SetCommodityMoldDefault()
+        private void UpdateCommodityMold()
         {
-            string queryString = " @CommodityMoldID int, @CommodityID int, @IsDefault bit " + "\r\n";
+            string queryString = " @CommodityMoldID int, @CommodityID int, @Quantity decimal(18, 2), @IsDefault bit " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
             queryString = queryString + "       BEGIN " + "\r\n";
 
             queryString = queryString + "           UPDATE          CommodityMolds " + "\r\n";
-            queryString = queryString + "           SET             IsDefault = IIF(CommodityMoldID = @CommodityMoldID, ~@IsDefault, 0) " + "\r\n";
+            queryString = queryString + "           SET             Quantity = @Quantity " + "\r\n";
+            queryString = queryString + "           WHERE           CommodityMoldID = @CommodityMoldID " + "\r\n";
+
+            queryString = queryString + "           UPDATE          CommodityMolds " + "\r\n";
+            queryString = queryString + "           SET             IsDefault = IIF(CommodityMoldID = @CommodityMoldID, @IsDefault, 0) " + "\r\n";
             queryString = queryString + "           WHERE           CommodityID = @CommodityID " + "\r\n";
 
             queryString = queryString + "       END " + "\r\n";
 
-            this.totalSmartPortalEntities.CreateStoredProcedure("SetCommodityMoldDefault", queryString);
+            this.totalSmartPortalEntities.CreateStoredProcedure("UpdateCommodityMold", queryString);
         }
 
         private void GetMoldBases()
@@ -146,7 +150,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
 
             queryString = queryString + "       SELECT      MoldID, Code, Name, Reference, Quantity " + " \r\n";
             queryString = queryString + "       FROM        Molds " + "\r\n";
-            queryString = queryString + "       WHERE       InActive = 0 AND MoldID IN (SELECT MoldID FROM CommodityMolds WHERE CommodityID = @CommodityID) AND (@SearchText = '' OR Code LIKE '%' + @SearchText + '%' OR OfficialCode LIKE '%' + @SearchText + '%' OR Name LIKE '%' + @SearchText + '%' OR Reference LIKE '%' + @SearchText + '%') " + "\r\n";
+            queryString = queryString + "       WHERE       InActive = 0 AND (@SearchText = '' OR Code LIKE '%' + @SearchText + '%' OR OfficialCode LIKE '%' + @SearchText + '%' OR Name LIKE '%' + @SearchText + '%' OR Reference LIKE '%' + @SearchText + '%') AND (@CommodityID = 0 OR MoldID IN (SELECT MoldID FROM CommodityMolds WHERE CommodityID = @CommodityID)) " + "\r\n";
 
             queryString = queryString + "    END " + "\r\n";
 

@@ -26,7 +26,10 @@ namespace TotalDTO.Productions
         public int GoodsReceiptID { get; set; }
         public int GoodsReceiptDetailID { get; set; }
         public Nullable<int> CustomerID { get; set; }
-        public int SalespersonID { get; set; }
+
+        public int WorkshiftID { get; set; }
+        public int ProductionLineID { get; set; }
+        public int CrucialWorkerID { get; set; }
 
         public Nullable<int> SemifinishedHandoverID { get; set; }      
         public decimal QuantityRejectedReturned { get; set; }

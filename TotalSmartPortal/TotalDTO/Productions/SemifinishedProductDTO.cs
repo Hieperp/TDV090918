@@ -72,7 +72,7 @@ namespace TotalDTO.Productions
         {
             base.PerformPresaveRule();
 
-            this.DtoDetails().ToList().ForEach(e => { e.MaterialIssueID = this.MaterialIssueID; e.MaterialIssueDetailID = this.MaterialIssueDetailID; e.FirmOrderID = this.FirmOrderID; e.GoodsReceiptID = this.GoodsReceiptID; e.GoodsReceiptDetailID = this.GoodsReceiptDetailID; e.CustomerID = this.CustomerID; e.SalespersonID = this.CrucialWorkerID; });
+            this.DtoDetails().ToList().ForEach(e => { e.MaterialIssueID = this.MaterialIssueID; e.MaterialIssueDetailID = this.MaterialIssueDetailID; e.FirmOrderID = this.FirmOrderID; e.GoodsReceiptID = this.GoodsReceiptID; e.GoodsReceiptDetailID = this.GoodsReceiptDetailID; e.CustomerID = this.CustomerID; e.WorkshiftID = this.WorkshiftID; e.ProductionLineID = this.ProductionLineID; e.CrucialWorkerID = this.CrucialWorkerID; });
         }
     }
 

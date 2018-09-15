@@ -97,10 +97,10 @@ namespace TotalModel.Models
         public virtual DbSet<MaterialIssueDetail> MaterialIssueDetails { get; set; }
         public virtual DbSet<FirmOrderMaterial> FirmOrderMaterials { get; set; }
         public virtual DbSet<Mold> Molds { get; set; }
+        public virtual DbSet<SemifinishedProduct> SemifinishedProducts { get; set; }
         public virtual DbSet<SemifinishedHandoverDetail> SemifinishedHandoverDetails { get; set; }
         public virtual DbSet<SemifinishedHandover> SemifinishedHandovers { get; set; }
         public virtual DbSet<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
-        public virtual DbSet<SemifinishedProduct> SemifinishedProducts { get; set; }
     
         public virtual ObjectResult<string> AccountInvoicePostSaveValidate(Nullable<int> entityID)
         {
@@ -3179,23 +3179,6 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RemoveCommodityMold", commodityMoldIDParameter);
         }
     
-        public virtual int SetCommodityMoldDefault(Nullable<int> commodityMoldID, Nullable<int> commodityID, Nullable<bool> isDefault)
-        {
-            var commodityMoldIDParameter = commodityMoldID.HasValue ?
-                new ObjectParameter("CommodityMoldID", commodityMoldID) :
-                new ObjectParameter("CommodityMoldID", typeof(int));
-    
-            var commodityIDParameter = commodityID.HasValue ?
-                new ObjectParameter("CommodityID", commodityID) :
-                new ObjectParameter("CommodityID", typeof(int));
-    
-            var isDefaultParameter = isDefault.HasValue ?
-                new ObjectParameter("IsDefault", isDefault) :
-                new ObjectParameter("IsDefault", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SetCommodityMoldDefault", commodityMoldIDParameter, commodityIDParameter, isDefaultParameter);
-        }
-    
         public virtual int AddCommodityMold(Nullable<int> commodityID, Nullable<int> moldID)
         {
             var commodityIDParameter = commodityID.HasValue ?
@@ -3207,6 +3190,27 @@ namespace TotalModel.Models
                 new ObjectParameter("MoldID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddCommodityMold", commodityIDParameter, moldIDParameter);
+        }
+    
+        public virtual int UpdateCommodityMold(Nullable<int> commodityMoldID, Nullable<int> commodityID, Nullable<decimal> quantity, Nullable<bool> isDefault)
+        {
+            var commodityMoldIDParameter = commodityMoldID.HasValue ?
+                new ObjectParameter("CommodityMoldID", commodityMoldID) :
+                new ObjectParameter("CommodityMoldID", typeof(int));
+    
+            var commodityIDParameter = commodityID.HasValue ?
+                new ObjectParameter("CommodityID", commodityID) :
+                new ObjectParameter("CommodityID", typeof(int));
+    
+            var quantityParameter = quantity.HasValue ?
+                new ObjectParameter("Quantity", quantity) :
+                new ObjectParameter("Quantity", typeof(decimal));
+    
+            var isDefaultParameter = isDefault.HasValue ?
+                new ObjectParameter("IsDefault", isDefault) :
+                new ObjectParameter("IsDefault", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCommodityMold", commodityMoldIDParameter, commodityIDParameter, quantityParameter, isDefaultParameter);
         }
     }
 }

@@ -32,10 +32,12 @@ namespace TotalModel.Models
         public int PlannedOrderDetailID { get; set; }
         public int GoodsReceiptID { get; set; }
         public int GoodsReceiptDetailID { get; set; }
+        public int WorkshiftID { get; set; }
+        public int ProductionLineID { get; set; }
+        public int CrucialWorkerID { get; set; }
         public Nullable<int> SemifinishedHandoverID { get; set; }
         public int CommodityID { get; set; }
         public int CommodityTypeID { get; set; }
-        public int CrucialWorkerID { get; set; }
         public decimal Quantity { get; set; }
         public decimal QuantityWastage { get; set; }
         public decimal QuantityFailure { get; set; }
