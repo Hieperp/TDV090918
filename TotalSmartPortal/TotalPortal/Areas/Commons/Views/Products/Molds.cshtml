@@ -56,17 +56,18 @@
     {
         columns.Bound(c => c.CommodityMoldID).Hidden();
         columns.Bound(c => c.MoldID).Hidden();
-        columns.Bound(c => c.MoldCode).Title("Mã").Width(80).HtmlAttributes(new { @readonly = "readonly" }).EditorTemplateName("StringReadonly");
-        columns.Bound(c => c.MoldName).Title("Tên").Width(120).HtmlAttributes(new { @readonly = "readonly" }).EditorTemplateName("StringReadonly");
+        columns.Bound(c => c.MoldCode).Title("Mã").Width(68).HtmlAttributes(new { @readonly = "readonly" }).EditorTemplateName("StringReadonly");
+        columns.Bound(c => c.MoldName).Title("Tên").Width(128).HtmlAttributes(new { @readonly = "readonly" }).EditorTemplateName("StringReadonly");
 
-        columns.Bound(c => c.EntryDate).Title("Ngày thêm").Width(70).Format("{0:" + Settings.DateTimeFormat + "}").HtmlAttributes(new { @class = "grid-column-center", @readonly = "readonly" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).EditorTemplateName("DateTimeReadonly");
-        columns.Bound(c => c.Remarks).Title("Ghi chú").Width(100).HtmlAttributes(new { @readonly = "readonly" }).EditorTemplateName("StringReadonly");
-        columns.Bound(c => c.Quantity).Title("Số lượng").HtmlAttributes(new { @class = "grid-number-column", @readonly = "" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(60)
+        columns.Bound(c => c.EntryDate).Title("Ngày thêm").Width(60).Format("{0:" + Settings.DateTimeFormat + "}").HtmlAttributes(new { @class = "grid-column-center", @readonly = "readonly" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).EditorTemplateName("DateTimeReadonly");
+        
+        columns.Bound(c => c.Quantity).Title("SL").HtmlAttributes(new { @class = "grid-number-column"}).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(27)
             .Format(Settings.kfmQuantity)
             .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', Quantity) #" + "<input type='hidden' name='CommodityMold.Quantity' value='#= Quantity #' />")
             .EditorTemplateName("Quantity");
 
-        columns.Template(t => { }).Title("Mặc định").ClientTemplate("<input id = 'IsDefault' class='GridCheckbox' #= IsDefault ? checked='checked':'' #  type='checkbox' />").HtmlAttributes(new { @class = "grid-column-center", @readonly = "readonly" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(40);
+        columns.Bound(c => c.Remarks).Title("Ghi chú").Width(96);
+        columns.Template(t => { }).Title("Mặc định").ClientTemplate("<input id = 'IsDefault' class='GridCheckbox' #= IsDefault ? checked='checked':'' #  type='checkbox' />").HtmlAttributes(new { @class = "grid-column-center", @readonly = "readonly" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(32);
 
         columns.Template(model => null).HtmlAttributes(new { @class = "grid-column-center" }).Width(20)
             .ClientTemplate("<a class='k-button' style='padding-left:5px; min-width:28px; width:28px' onclick='RemoveCommodityMold(#=CommodityMoldID#)'><span class='k-icon k-delete'></span></a>");
@@ -77,17 +78,14 @@
         .Model(model => model.Id(x => x.CommodityMoldID))
         .Read(read => read.Action("GetCommodityMolds", "MoldAPIs", new { area = "Commons" }).Data(@<text>
             function (e) {
-                return {
-                    commodityID: $("#CommodityID").val()
-                };}
+            return {
+            commodityID: $("#CommodityID").val()
+            };}
         </text>))
         .ServerOperation(true))
         .Editable(editable => { editable.Enabled(Model.Editable); editable.Mode(GridEditMode.InCell); })
         .Selectable()
-            .Events(events =>
-                {
-                    events.Save("SaveCommodityMold");
-                })
+        .Events(events => { events.Save("SaveCommodityMold"); })
     )
 
 </div>
@@ -148,8 +146,8 @@
     }
 
     function SaveCommodityMold(e) {
-        if (e.values.Quantity != undefined)
-            UpdateCommodityMold(e.model.CommodityMoldID, $("#CommodityID").val(), e.values.Quantity, e.model.IsDefault)
+        if (e.values.Quantity != undefined || e.values.Remarks != undefined)
+            UpdateCommodityMold(e.model.CommodityMoldID, $("#CommodityID").val(), e.values.Quantity != undefined ? e.values.Quantity : e.model.Quantity, e.values.Remarks != undefined ? e.values.Remarks : e.model.Remarks, e.model.IsDefault)
     }
 
     $('#gridMolds').on('click', '.GridCheckbox', function () {
@@ -158,16 +156,16 @@
 
         var checked = $(this).is(':checked');
 
-        UpdateCommodityMold(dataItem.CommodityMoldID, $("#CommodityID").val(), dataItem.Quantity, (this.id === "IsDefault" ? checked : dataItem.IsDefault))
+        UpdateCommodityMold(dataItem.CommodityMoldID, $("#CommodityID").val(), dataItem.Quantity, dataItem.Remarks, (this.id === "IsDefault" ? checked : dataItem.IsDefault))
     })
 
-    function UpdateCommodityMold(commodityMoldID, commodityID, quantity, isDefault) {
+    function UpdateCommodityMold(commodityMoldID, commodityID, quantity, remarks, isDefault) {
         if ($("#Editable").val() != 'True')
             return;
 
         return $.ajax({
             url: '@Url.Action("UpdateCommodityMold", "MoldAPIs", new { area = "Commons" })',
-            data: JSON.stringify({ "commodityMoldID": commodityMoldID, "commodityID": commodityID, "quantity": quantity, "isDefault": isDefault }),
+            data: JSON.stringify({ "commodityMoldID": commodityMoldID, "commodityID": commodityID, "quantity": quantity, "remarks": remarks, "isDefault": isDefault }),
 
             type: 'POST',
             contentType: 'application/json;',

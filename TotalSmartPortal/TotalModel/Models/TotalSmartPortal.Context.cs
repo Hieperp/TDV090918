@@ -3118,23 +3118,6 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MaterialIssuePendingFirmOrderMaterial>("GetMaterialIssuePendingFirmOrderMaterials", locationIDParameter, materialIssueIDParameter, firmOrderIDParameter, warehouseIDParameter, goodsReceiptDetailIDsParameter, isReadonlyParameter);
         }
     
-        public virtual int SetCommodityBomDefault(Nullable<int> commodityBomID, Nullable<int> commodityID, Nullable<bool> isDefault)
-        {
-            var commodityBomIDParameter = commodityBomID.HasValue ?
-                new ObjectParameter("CommodityBomID", commodityBomID) :
-                new ObjectParameter("CommodityBomID", typeof(int));
-    
-            var commodityIDParameter = commodityID.HasValue ?
-                new ObjectParameter("CommodityID", commodityID) :
-                new ObjectParameter("CommodityID", typeof(int));
-    
-            var isDefaultParameter = isDefault.HasValue ?
-                new ObjectParameter("IsDefault", isDefault) :
-                new ObjectParameter("IsDefault", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SetCommodityBomDefault", commodityBomIDParameter, commodityIDParameter, isDefaultParameter);
-        }
-    
         public virtual ObjectResult<CommodityMold> GetCommodityMolds(Nullable<int> commodityID)
         {
             var commodityIDParameter = commodityID.HasValue ?
@@ -3192,7 +3175,7 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddCommodityMold", commodityIDParameter, moldIDParameter);
         }
     
-        public virtual int UpdateCommodityMold(Nullable<int> commodityMoldID, Nullable<int> commodityID, Nullable<decimal> quantity, Nullable<bool> isDefault)
+        public virtual int UpdateCommodityMold(Nullable<int> commodityMoldID, Nullable<int> commodityID, Nullable<decimal> quantity, string remarks, Nullable<bool> isDefault)
         {
             var commodityMoldIDParameter = commodityMoldID.HasValue ?
                 new ObjectParameter("CommodityMoldID", commodityMoldID) :
@@ -3206,11 +3189,15 @@ namespace TotalModel.Models
                 new ObjectParameter("Quantity", quantity) :
                 new ObjectParameter("Quantity", typeof(decimal));
     
+            var remarksParameter = remarks != null ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(string));
+    
             var isDefaultParameter = isDefault.HasValue ?
                 new ObjectParameter("IsDefault", isDefault) :
                 new ObjectParameter("IsDefault", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCommodityMold", commodityMoldIDParameter, commodityIDParameter, quantityParameter, isDefaultParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCommodityMold", commodityMoldIDParameter, commodityIDParameter, quantityParameter, remarksParameter, isDefaultParameter);
         }
     
         public virtual ObjectResult<SemifinishedHandoverIndex> GetSemifinishedHandoverIndexes(string aspUserID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
@@ -3302,6 +3289,35 @@ namespace TotalModel.Models
                 new ObjectParameter("LocationID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SemifinishedHandoverPendingWorkshift>("GetSemifinishedHandoverPendingWorkshifts", locationIDParameter);
+        }
+    
+        public virtual int UpdateCommodityBom(Nullable<int> commodityBomID, Nullable<int> commodityID, Nullable<decimal> blockUnit, Nullable<decimal> blockQuantity, string remarks, Nullable<bool> isDefault)
+        {
+            var commodityBomIDParameter = commodityBomID.HasValue ?
+                new ObjectParameter("CommodityBomID", commodityBomID) :
+                new ObjectParameter("CommodityBomID", typeof(int));
+    
+            var commodityIDParameter = commodityID.HasValue ?
+                new ObjectParameter("CommodityID", commodityID) :
+                new ObjectParameter("CommodityID", typeof(int));
+    
+            var blockUnitParameter = blockUnit.HasValue ?
+                new ObjectParameter("BlockUnit", blockUnit) :
+                new ObjectParameter("BlockUnit", typeof(decimal));
+    
+            var blockQuantityParameter = blockQuantity.HasValue ?
+                new ObjectParameter("BlockQuantity", blockQuantity) :
+                new ObjectParameter("BlockQuantity", typeof(decimal));
+    
+            var remarksParameter = remarks != null ?
+                new ObjectParameter("Remarks", remarks) :
+                new ObjectParameter("Remarks", typeof(string));
+    
+            var isDefaultParameter = isDefault.HasValue ?
+                new ObjectParameter("IsDefault", isDefault) :
+                new ObjectParameter("IsDefault", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCommodityBom", commodityBomIDParameter, commodityIDParameter, blockUnitParameter, blockQuantityParameter, remarksParameter, isDefaultParameter);
         }
     }
 }

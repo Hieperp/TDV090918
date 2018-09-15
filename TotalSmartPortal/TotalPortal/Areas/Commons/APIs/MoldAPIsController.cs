@@ -71,11 +71,11 @@ namespace TotalPortal.Areas.Commons.APIs
         }
 
         [HttpPost]
-        public JsonResult UpdateCommodityMold(int? commodityMoldID, int commodityID, decimal quantity, bool? isDefault)
+        public JsonResult UpdateCommodityMold(int? commodityMoldID, int commodityID, decimal quantity, string remarks, bool? isDefault)
         {
             try
             {
-                this.moldAPIRepository.UpdateCommodityMold(commodityMoldID, commodityID, quantity, isDefault);
+                this.moldAPIRepository.UpdateCommodityMold(commodityMoldID, commodityID, quantity, remarks, isDefault);
                 return Json(new { SetResult = "Successfully" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

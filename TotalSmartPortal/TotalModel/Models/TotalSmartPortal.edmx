@@ -5456,15 +5456,19 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Parameter Name="EntityID" Type="int" Mode="In" />
           <Parameter Name="Approved" Type="bit" Mode="In" />
         </Function>
-        <Function Name="SetCommodityBomDefault" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="UpdateCommodityBom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CommodityBomID" Type="int" Mode="In" />
           <Parameter Name="CommodityID" Type="int" Mode="In" />
+          <Parameter Name="BlockUnit" Type="decimal" Mode="In" />
+          <Parameter Name="BlockQuantity" Type="decimal" Mode="In" />
+          <Parameter Name="Remarks" Type="nvarchar" Mode="In" />
           <Parameter Name="IsDefault" Type="bit" Mode="In" />
         </Function>
         <Function Name="UpdateCommodityMold" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CommodityMoldID" Type="int" Mode="In" />
           <Parameter Name="CommodityID" Type="int" Mode="In" />
           <Parameter Name="Quantity" Type="decimal" Mode="In" />
+          <Parameter Name="Remarks" Type="nvarchar" Mode="In" />
           <Parameter Name="IsDefault" Type="bit" Mode="In" />
         </Function>
         <Function Name="UpdateLockedDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -10613,11 +10617,6 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             <Parameter Name="GoodsReceiptDetailIDs" Mode="In" Type="String" />
             <Parameter Name="IsReadonly" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="SetCommodityBomDefault">
-            <Parameter Name="CommodityBomID" Mode="In" Type="Int32" />
-            <Parameter Name="CommodityID" Mode="In" Type="Int32" />
-            <Parameter Name="IsDefault" Mode="In" Type="Boolean" />
-          </FunctionImport>
           <EntitySet Name="Molds" EntityType="TotalSmartPortalModel.Mold" />
           <AssociationSet Name="FK_FirmOrderDetails_Molds" Association="TotalSmartPortalModel.FK_FirmOrderDetails_Molds">
             <End Role="Mold" EntitySet="Molds" />
@@ -10649,6 +10648,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             <Parameter Name="CommodityMoldID" Mode="In" Type="Int32" />
             <Parameter Name="CommodityID" Mode="In" Type="Int32" />
             <Parameter Name="Quantity" Mode="In" Type="Decimal" />
+            <Parameter Name="Remarks" Mode="In" Type="String" />
             <Parameter Name="IsDefault" Mode="In" Type="Boolean" />
           </FunctionImport>
           <EntitySet Name="SemifinishedHandoverDetails" EntityType="TotalSmartPortalModel.SemifinishedHandoverDetail" />
@@ -10770,6 +10770,14 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           </FunctionImport>
           <FunctionImport Name="GetSemifinishedHandoverPendingWorkshifts" ReturnType="Collection(TotalSmartPortalModel.SemifinishedHandoverPendingWorkshift)">
           <Parameter Name="LocationID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateCommodityBom">
+            <Parameter Name="CommodityBomID" Mode="In" Type="Int32" />
+            <Parameter Name="CommodityID" Mode="In" Type="Int32" />
+            <Parameter Name="BlockUnit" Mode="In" Type="Decimal" />
+            <Parameter Name="BlockQuantity" Mode="In" Type="Decimal" />
+            <Parameter Name="Remarks" Mode="In" Type="String" />
+            <Parameter Name="IsDefault" Mode="In" Type="Boolean" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="AccountInvoiceIndex">
@@ -14236,6 +14244,8 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="Boolean" Name="InActive" Nullable="false" />
           <Property Type="String" Name="BomCode" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="BomName" Nullable="false" MaxLength="200" />
+          <Property Type="Decimal" Name="BlockUnit" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="BlockQuantity" Nullable="false" Precision="18" Scale="2" />
         </ComplexType>
         <EntityType Name="FirmOrderMaterial">
           <Key>
@@ -18586,6 +18596,8 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="InActive" ColumnName="InActive" />
                 <ScalarProperty Name="BomCode" ColumnName="BomCode" />
                 <ScalarProperty Name="BomName" ColumnName="BomName" />
+                <ScalarProperty Name="BlockUnit" ColumnName="BlockUnit" />
+                <ScalarProperty Name="BlockQuantity" ColumnName="BlockQuantity" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -18631,7 +18643,6 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SetCommodityBomDefault" FunctionName="TotalSmartPortalModel.Store.SetCommodityBomDefault" />
           <EntitySetMapping Name="Molds">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.Mold">
               <MappingFragment StoreEntitySet="Molds">
@@ -18869,6 +18880,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateCommodityBom" FunctionName="TotalSmartPortalModel.Store.UpdateCommodityBom" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

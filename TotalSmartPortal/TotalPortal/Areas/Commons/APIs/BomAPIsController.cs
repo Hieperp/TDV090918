@@ -72,11 +72,11 @@ namespace TotalPortal.Areas.Commons.APIs
         }
 
         [HttpPost]
-        public JsonResult SetCommodityBomDefault(int? commodityBomID, int commodityID, bool? isDefault)
+        public JsonResult UpdateCommodityBom(int? commodityBomID, int commodityID, decimal blockUnit, decimal blockQuantity, string remarks, bool? isDefault)
         {
             try
             {
-                this.bomAPIRepository.SetCommodityBomDefault(commodityBomID, commodityID, isDefault);
+                this.bomAPIRepository.UpdateCommodityBom(commodityBomID, commodityID, blockUnit, blockQuantity, remarks, isDefault);
                 return Json(new { SetResult = "Successfully" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

@@ -21,5 +21,7 @@ namespace TotalModel.Models
         public bool InActive { get; set; }
         public string BomCode { get; set; }
         public string BomName { get; set; }
+        public decimal BlockUnit { get; set; }
+        public decimal BlockQuantity { get; set; }
     }
 }

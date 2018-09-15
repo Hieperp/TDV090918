@@ -5,6 +5,7 @@ using System.Data.Entity;
 using TotalModel.Models;
 using TotalCore.Repositories.Commons;
 using System.Data.Entity.Core.Objects;
+using System;
 
 namespace TotalDAL.Repositories.Commons
 {
@@ -49,9 +50,9 @@ namespace TotalDAL.Repositories.Commons
             this.ExecuteFunction("RemoveCommodityMold", parameters);
         }
 
-        public void UpdateCommodityMold(int? commodityMoldID, int commodityID, decimal quantity, bool? isDefault)
+        public void UpdateCommodityMold(int? commodityMoldID, int commodityID, decimal quantity, string remarks, bool? isDefault)
         {
-            ObjectParameter[] parameters = new ObjectParameter[] { new ObjectParameter("CommodityMoldID", commodityMoldID), new ObjectParameter("CommodityID", commodityID), new ObjectParameter("Quantity", quantity), new ObjectParameter("IsDefault", isDefault) };
+            ObjectParameter[] parameters = new ObjectParameter[] { new ObjectParameter("CommodityMoldID", commodityMoldID), new ObjectParameter("CommodityID", commodityID), new ObjectParameter("Quantity", quantity), new ObjectParameter("Remarks", remarks != null ? remarks : ""), new ObjectParameter("IsDefault", isDefault) };
             this.ExecuteFunction("UpdateCommodityMold", parameters);
         }
     }

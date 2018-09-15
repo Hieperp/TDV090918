@@ -18,6 +18,6 @@ namespace TotalCore.Repositories.Commons
 
         void RemoveCommodityBom(int? commodityBomID);
 
-        void SetCommodityBomDefault(int? commodityBomID, int commodityID, bool? isDefault);
+        void UpdateCommodityBom(int? commodityBomID, int commodityID, decimal blockUnit, decimal blockQuantity, string remarks, bool? isDefault);
     }
 }

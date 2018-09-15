@@ -18,6 +18,6 @@ namespace TotalCore.Repositories.Commons
 
         void RemoveCommodityMold(int? commodityMoldID);
 
-        void UpdateCommodityMold(int? commodityMoldID, int commodityID, decimal Quantity, bool? isDefault);
+        void UpdateCommodityMold(int? commodityMoldID, int commodityID, decimal Quantity, string remarks, bool? isDefault);
     }
 }

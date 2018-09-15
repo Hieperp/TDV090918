@@ -128,14 +128,14 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
 
         private void UpdateCommodityMold()
         {
-            string queryString = " @CommodityMoldID int, @CommodityID int, @Quantity decimal(18, 2), @IsDefault bit " + "\r\n";
+            string queryString = " @CommodityMoldID int, @CommodityID int, @Quantity decimal(18, 2), @Remarks nvarchar(50), @IsDefault bit " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
             queryString = queryString + "       BEGIN " + "\r\n";
 
             queryString = queryString + "           UPDATE          CommodityMolds " + "\r\n";
-            queryString = queryString + "           SET             Quantity = @Quantity " + "\r\n";
+            queryString = queryString + "           SET             Quantity = @Quantity, Remarks = @Remarks " + "\r\n";
             queryString = queryString + "           WHERE           CommodityMoldID = @CommodityMoldID " + "\r\n";
 
             queryString = queryString + "           IF (@IsDefault = 1) " + "\r\n"; //ONLY CHANGE WHEN @IsDefault = true: THIS WILL KEEP AT LEAST 1 ROW IS DEFAULT

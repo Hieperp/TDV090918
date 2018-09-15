@@ -47,10 +47,10 @@ namespace TotalDAL.Repositories.Commons
             this.ExecuteFunction("RemoveCommodityBom", parameters);
         }
 
-        public void SetCommodityBomDefault(int? commodityBomID, int commodityID, bool? isDefault)
+        public void UpdateCommodityBom(int? commodityBomID, int commodityID, decimal blockUnit, decimal blockQuantity, string remarks, bool? isDefault)
         {
-            ObjectParameter[] parameters = new ObjectParameter[] { new ObjectParameter("CommodityBomID", commodityBomID), new ObjectParameter("CommodityID", commodityID), new ObjectParameter("IsDefault", isDefault) };
-            this.ExecuteFunction("SetCommodityBomDefault", parameters);
+            ObjectParameter[] parameters = new ObjectParameter[] { new ObjectParameter("CommodityBomID", commodityBomID), new ObjectParameter("CommodityID", commodityID), new ObjectParameter("BlockUnit", blockUnit), new ObjectParameter("BlockQuantity", blockQuantity), new ObjectParameter("Remarks", remarks != null ? remarks : ""), new ObjectParameter("IsDefault", isDefault) };
+            this.ExecuteFunction("UpdateCommodityBom", parameters);
         }
     }
 

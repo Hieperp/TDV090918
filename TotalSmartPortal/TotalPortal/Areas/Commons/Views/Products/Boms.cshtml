@@ -56,12 +56,22 @@
     {
         columns.Bound(c => c.CommodityBomID).Hidden();
         columns.Bound(c => c.BomID).Hidden();
-        columns.Bound(c => c.BomCode).Title("Mã").Width(80);
-        columns.Bound(c => c.BomName).Title("Tên").Width(120);
+        columns.Bound(c => c.BomCode).Title("Mã").Width(82).HtmlAttributes(new { @readonly = "readonly" }).EditorTemplateName("StringReadonly");
+        columns.Bound(c => c.BomName).Title("Tên").Width(96).HtmlAttributes(new { @readonly = "readonly" }).EditorTemplateName("StringReadonly");
 
-        columns.Bound(c => c.EntryDate).Title("Ngày thêm").Width(60).Format("{0:" + Settings.DateTimeFormat + "}").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" });
-        columns.Bound(c => c.Remarks).Title("Ghi chú").Width(100);
-        columns.Template(t => { }).Title("Mặc định").ClientTemplate("<input id = 'IsDefault' class='GridCheckbox' #= IsDefault ? checked='checked':'' #  type='checkbox' />").HtmlAttributes(new { @class = "grid-column-center", @readonly = "readonly" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(40);
+        columns.Bound(c => c.EntryDate).Title("Ngày thêm").Width(60).Format("{0:" + Settings.DateTimeFormat + "}").HtmlAttributes(new { @class = "grid-column-center", @readonly = "readonly" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).EditorTemplateName("DateTimeReadonly");
+
+        columns.Bound(c => c.BlockUnit).Title("SL").HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(27)
+            .Format(Settings.kfmQuantity)
+            .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', BlockUnit) #" + "<input type='hidden' name='CommodityBom.BlockUnit' value='#= BlockUnit #' />")
+            .EditorTemplateName("Quantity");
+        columns.Bound(c => c.BlockQuantity).Title("TL").HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(27)
+            .Format(Settings.kfmQuantity)
+            .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', BlockQuantity) #" + "<input type='hidden' name='CommodityBom.BlockQuantity' value='#= BlockQuantity #' />")
+            .EditorTemplateName("Quantity");
+
+        columns.Bound(c => c.Remarks).Title("Ghi chú").Width(60);
+        columns.Template(t => { }).Title("Mặc định").ClientTemplate("<input id = 'IsDefault' class='GridCheckbox' #= IsDefault ? checked='checked':'' #  type='checkbox' />").HtmlAttributes(new { @class = "grid-column-center", @readonly = "readonly" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(30);
 
         columns.Template(model => null).HtmlAttributes(new { @class = "grid-column-center" }).Width(20)
             .ClientTemplate("<a class='k-button' style='padding-left:5px; min-width:28px; width:28px' onclick='RemoveCommodityBom(#=CommodityBomID#)'><span class='k-icon k-delete'></span></a>");
@@ -69,14 +79,17 @@
 
     .Scrollable(s => s.Height(219))
     .DataSource(ds => ds.Ajax()
-            .Read(read => read.Action("GetCommodityBoms", "BomAPIs", new { area = "Commons" }).Data(@<text>
-                function (e) {
-                    return {
-                        commodityID: $("#CommodityID").val()
-                        };}
-            </text>))
-            .ServerOperation(true))
-            .Selectable()
+        .Model(model => model.Id(x => x.CommodityBomID))
+        .Read(read => read.Action("GetCommodityBoms", "BomAPIs", new { area = "Commons" }).Data(@<text>
+            function (e) {
+                return {
+                    commodityID: $("#CommodityID").val()
+                    };}
+        </text>))
+        .ServerOperation(true))
+        .Editable(editable => { editable.Enabled(Model.Editable); editable.Mode(GridEditMode.InCell); })
+        .Selectable()
+        .Events(events => { events.Save("SaveCommodityBom"); })
     )
 
 </div>
@@ -136,18 +149,27 @@
         });
     }
 
+    function SaveCommodityBom(e) {
+        if (e.values.BlockUnit != undefined || e.values.BlockQuantity != undefined || e.values.Remarks != undefined)
+            UpdateCommodityBom(e.model.CommodityBomID, $("#CommodityID").val(), e.values.BlockUnit != undefined ? e.values.BlockUnit : e.model.BlockUnit, e.values.BlockQuantity != undefined ? e.values.BlockQuantity : e.model.BlockQuantity, e.values.Remarks != undefined ? e.values.Remarks : e.model.Remarks, e.model.IsDefault)
+    }
+
     $('#gridBoms').on('click', '.GridCheckbox', function () {
+        var grid = $('#gridBoms').data().kendoGrid;
+        var dataItem = grid.dataItem($(this).closest('tr'));
+
+        var checked = $(this).is(':checked');
+
+        UpdateCommodityBom(dataItem.CommodityBomID, $("#CommodityID").val(), dataItem.BlockUnit, dataItem.BlockQuantity, dataItem.Remarks, (this.id === "IsDefault" ? checked : dataItem.IsDefault))
+    })
+
+    function UpdateCommodityBom(commodityBomID, commodityID, blockUnit, blockQuantity, remarks, isDefault) {
         if ($("#Editable").val() != 'True')
             return;
 
-        var grid = $('#gridBoms').data().kendoGrid;
-        var dataItem = grid.dataItem($(this).closest('tr'));
-        
-        var checked = $(this).is(':checked');        
-        
         return $.ajax({
-            url: '@Url.Action("SetCommodityBomDefault", "BomAPIs", new { area = "Commons" })',
-            data: JSON.stringify({ "commodityBomID": dataItem.CommodityBomID, "commodityID": $("#CommodityID").val(), "isDefault": (this.id === "IsDefault" ? checked : dataItem.IsDefault) }),
+            url: '@Url.Action("UpdateCommodityBom", "BomAPIs", new { area = "Commons" })',
+            data: JSON.stringify({ "commodityBomID": commodityBomID, "commodityID": commodityID, "blockUnit": blockUnit, "blockQuantity": blockQuantity, "remarks": remarks, "isDefault": isDefault }),
 
             type: 'POST',
             contentType: 'application/json;',
@@ -163,7 +185,7 @@
                 alert(textStatus);
             }
         });
-    })
+    }
 
 </script>
 
