@@ -25,12 +25,17 @@ namespace TotalDTO.Productions
         public string SemifinishedProductCode { get; set; }
         [Display(Name = "Ngày BTP")]
         [UIHint("DateTimeReadonly")]
-        public Nullable<System.DateTime> SemifinishedProductEntryDate { get; set; }     
+        public Nullable<System.DateTime> SemifinishedProductEntryDate { get; set; }
 
-        public override int CrucialWorkerID { get { return (this.CrucialWorker != null ? this.CrucialWorker.EmployeeID : 0); } }
-        [Display(Name = "Nhân viên kho")]
-        [UIHint("AutoCompletes/EmployeeBase")]
-        public EmployeeBaseDTO CrucialWorker { get; set; }
+        public int CustomerID { get; set; }
+        [Display(Name = "Mã khách hàng")]
+        public string CustomerCode { get; set; }
+        [Display(Name = "Tên khách hàng")]
+        [UIHint("StringReadonly")]
+        public string CustomerName { get; set; }
+
+        public int CrucialWorkerID { get; set; }
+
 
         [Display(Name = "SL xuất")]
         [UIHint("QuantityReadonly")]
