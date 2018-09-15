@@ -22,13 +22,16 @@ namespace TotalModel.Models
         }
     
         public int MoldID { get; set; }
+        public System.DateTime EntryDate { get; set; }
+        public string Reference { get; set; }
         public string Code { get; set; }
+        public string OfficialCode { get; set; }
         public string Name { get; set; }
         public decimal Quantity { get; set; }
         public decimal Weight { get; set; }
+        public decimal CyclePerHours { get; set; }
         public bool InActive { get; set; }
         public string Remarks { get; set; }
-        public decimal CyclePerHours { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FirmOrderDetail> FirmOrderDetails { get; set; }

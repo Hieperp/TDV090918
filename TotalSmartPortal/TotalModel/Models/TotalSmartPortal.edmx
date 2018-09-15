@@ -985,7 +985,10 @@
             <PropertyRef Name="MoldID" />
           </Key>
           <Property Name="MoldID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EntryDate" Type="datetime" Nullable="false" />
+          <Property Name="Reference" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OfficialCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Weight" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -4424,6 +4427,10 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Parameter Name="CommodityID" Type="int" Mode="In" />
           <Parameter Name="BomID" Type="int" Mode="In" />
         </Function>
+        <Function Name="AddCommodityMold" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CommodityID" Type="int" Mode="In" />
+          <Parameter Name="MoldID" Type="int" Mode="In" />
+        </Function>
         <Function Name="AddPromotionCustomerCategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PromotionID" Type="int" Mode="In" />
           <Parameter Name="CustomerCategoryID" Type="int" Mode="In" />
@@ -4550,6 +4557,9 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Parameter Name="AspUserID" Type="nvarchar" Mode="In" />
           <Parameter Name="FromDate" Type="datetime" Mode="In" />
           <Parameter Name="ToDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="GetCommodityMolds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CommodityID" Type="int" Mode="In" />
         </Function>
         <Function Name="GetCommodityPriceIndexes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="AspUserID" Type="nvarchar" Mode="In" />
@@ -4723,6 +4733,11 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
         <Function Name="GetMoldBases" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SearchText" Type="nvarchar" Mode="In" />
           <Parameter Name="CommodityID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetMoldIndexes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AspUserID" Type="nvarchar" Mode="In" />
+          <Parameter Name="FromDate" Type="datetime" Mode="In" />
+          <Parameter Name="ToDate" Type="datetime" Mode="In" />
         </Function>
         <Function Name="GetOverStockItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="lSKUActionDate" Type="datetime" Mode="In" />
@@ -5055,6 +5070,9 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Parameter Name="EntityID" Type="int" Mode="In" />
           <Parameter Name="Approved" Type="bit" Mode="In" />
         </Function>
+        <Function Name="MoldEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+        </Function>
         <Function Name="PlannedOrderApproved" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
@@ -5185,6 +5203,9 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
         <Function Name="RemoveCommodityBom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CommodityBomID" Type="int" Mode="In" />
         </Function>
+        <Function Name="RemoveCommodityMold" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CommodityMoldID" Type="int" Mode="In" />
+        </Function>
         <Function Name="RemovePromotionCustomerCategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PromotionID" Type="int" Mode="In" />
           <Parameter Name="CustomerCategoryID" Type="int" Mode="In" />
@@ -5283,6 +5304,11 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
         </Function>
         <Function Name="SetCommodityBomDefault" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CommodityBomID" Type="int" Mode="In" />
+          <Parameter Name="CommodityID" Type="int" Mode="In" />
+          <Parameter Name="IsDefault" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SetCommodityMoldDefault" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CommodityMoldID" Type="int" Mode="In" />
           <Parameter Name="CommodityID" Type="int" Mode="In" />
           <Parameter Name="IsDefault" Type="bit" Mode="In" />
         </Function>
@@ -9777,7 +9803,6 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <FunctionImport Name="GetProductionLineBases" ReturnType="Collection(TotalSmartPortalModel.ProductionLineBase)">
           <Parameter Name="SearchText" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="Molds" EntityType="TotalSmartPortalModel.Mold" />
           <EntitySet Name="ProductionLines" EntityType="TotalSmartPortalModel.ProductionLine" />
           <EntitySet Name="Workshifts" EntityType="TotalSmartPortalModel.Workshift" />
           <FunctionImport Name="GetMaterialIssueIndexes" ReturnType="Collection(TotalSmartPortalModel.MaterialIssueIndex)">
@@ -10178,10 +10203,6 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             <End Role="FirmOrder" EntitySet="FirmOrders" />
             <End Role="FirmOrderDetail" EntitySet="FirmOrderDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_FirmOrderDetails_Molds" Association="TotalSmartPortalModel.FK_FirmOrderDetails_Molds">
-            <End Role="Mold" EntitySet="Molds" />
-            <End Role="FirmOrderDetail" EntitySet="FirmOrderDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_FirmOrderDetails_VoidTypes" Association="TotalSmartPortalModel.FK_FirmOrderDetails_VoidTypes">
             <End Role="VoidType" EntitySet="VoidTypes" />
             <End Role="FirmOrderDetail" EntitySet="FirmOrderDetails" />
@@ -10237,10 +10258,6 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <AssociationSet Name="FK_MaterialIssues_Workshifts" Association="TotalSmartPortalModel.FK_MaterialIssues_Workshifts">
             <End Role="Workshift" EntitySet="Workshifts" />
             <End Role="MaterialIssue" EntitySet="MaterialIssues" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PlannedOrderDetails_Molds" Association="TotalSmartPortalModel.FK_PlannedOrderDetails_Molds">
-            <End Role="Mold" EntitySet="Molds" />
-            <End Role="PlannedOrderDetail" EntitySet="PlannedOrderDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_PlannedOrderDetails_PlannedOrders" Association="TotalSmartPortalModel.FK_PlannedOrderDetails_PlannedOrders">
             <End Role="PlannedOrder" EntitySet="PlannedOrders" />
@@ -10483,6 +10500,38 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             <End Role="Workshift" EntitySet="Workshifts" />
             <End Role="SemifinishedProduct" EntitySet="SemifinishedProducts" />
           </AssociationSet>
+          <EntitySet Name="Molds" EntityType="TotalSmartPortalModel.Mold" />
+          <AssociationSet Name="FK_FirmOrderDetails_Molds" Association="TotalSmartPortalModel.FK_FirmOrderDetails_Molds">
+            <End Role="Mold" EntitySet="Molds" />
+            <End Role="FirmOrderDetail" EntitySet="FirmOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlannedOrderDetails_Molds" Association="TotalSmartPortalModel.FK_PlannedOrderDetails_Molds">
+            <End Role="Mold" EntitySet="Molds" />
+            <End Role="PlannedOrderDetail" EntitySet="PlannedOrderDetails" />
+          </AssociationSet>
+          <FunctionImport Name="GetCommodityMolds" ReturnType="Collection(TotalSmartPortalModel.CommodityMold)">
+          <Parameter Name="CommodityID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetMoldIndexes" ReturnType="Collection(TotalSmartPortalModel.MoldIndex)">
+            <Parameter Name="AspUserID" Mode="In" Type="String" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="MoldEditable" ReturnType="Collection(String)">
+          <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RemoveCommodityMold">
+          <Parameter Name="CommodityMoldID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SetCommodityMoldDefault">
+            <Parameter Name="CommodityMoldID" Mode="In" Type="Int32" />
+            <Parameter Name="CommodityID" Mode="In" Type="Int32" />
+            <Parameter Name="IsDefault" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="AddCommodityMold">
+            <Parameter Name="CommodityID" Mode="In" Type="Int32" />
+            <Parameter Name="MoldID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="AccountInvoiceIndex">
           <Property Type="Int32" Name="AccountInvoiceID" Nullable="false" />
@@ -11726,29 +11775,16 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
         </ComplexType>
         <ComplexType Name="MoldBase">
           <Property Type="Int32" Name="MoldID" Nullable="false" />
-          <Property Type="String" Name="MoldCode" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="MoldName" Nullable="false" MaxLength="50" />
-        </ComplexType>
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Reference" Nullable="false" MaxLength="10" />
+          <Property Type="Decimal" Name="Quantity" Nullable="false" Precision="18" Scale="2" />
+          </ComplexType>
         <ComplexType Name="ProductionLineBase">
           <Property Type="Int32" Name="ProductionLineID" Nullable="false" />
           <Property Type="String" Name="ProductionLineCode" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="ProductionLineName" Nullable="false" MaxLength="50" />
         </ComplexType>
-        <EntityType Name="Mold">
-          <Key>
-            <PropertyRef Name="MoldID" />
-          </Key>
-          <Property Name="MoldID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Weight" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="InActive" Type="Boolean" Nullable="false" />
-          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CyclePerHours" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <NavigationProperty Name="FirmOrderDetails" Relationship="TotalSmartPortalModel.FK_FirmOrderDetails_Molds" FromRole="Mold" ToRole="FirmOrderDetail" />
-          <NavigationProperty Name="PlannedOrderDetails" Relationship="TotalSmartPortalModel.FK_PlannedOrderDetails_Molds" FromRole="Mold" ToRole="PlannedOrderDetail" />
-        </EntityType>
         <EntityType Name="ProductionLine">
           <Key>
             <PropertyRef Name="ProductionLineID" />
@@ -12984,10 +13020,10 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <NavigationProperty Name="Commodity" Relationship="TotalSmartPortalModel.FK_FirmOrderDetails_Commodities" FromRole="FirmOrderDetail" ToRole="Commodity" />
           <NavigationProperty Name="Customer" Relationship="TotalSmartPortalModel.FK_FirmOrderDetails_Customers" FromRole="FirmOrderDetail" ToRole="Customer" />
           <NavigationProperty Name="FirmOrder" Relationship="TotalSmartPortalModel.FK_FirmOrderDetails_FirmOrders" FromRole="FirmOrderDetail" ToRole="FirmOrder" />
-          <NavigationProperty Name="Mold" Relationship="TotalSmartPortalModel.FK_FirmOrderDetails_Molds" FromRole="FirmOrderDetail" ToRole="Mold" />
           <NavigationProperty Name="VoidType" Relationship="TotalSmartPortalModel.FK_FirmOrderDetails_VoidTypes" FromRole="FirmOrderDetail" ToRole="VoidType" />
           <NavigationProperty Name="Bom" Relationship="TotalSmartPortalModel.FK_FirmOrderDetails_Boms" FromRole="FirmOrderDetail" ToRole="Bom" />
           <NavigationProperty Name="SemifinishedProductDetails" Relationship="TotalSmartPortalModel.FK_SemifinishedProductDetails_FirmOrderDetails" FromRole="FirmOrderDetail" ToRole="SemifinishedProductDetail" />
+          <NavigationProperty Name="Mold" Relationship="TotalSmartPortalModel.FK_FirmOrderDetails_Molds" FromRole="FirmOrderDetail" ToRole="Mold" />
         </EntityType>
         <EntityType Name="FirmOrder">
           <Key>
@@ -13105,11 +13141,11 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Name="InActivePartialDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Commodity" Relationship="TotalSmartPortalModel.FK_PlannedOrderDetails_Commodities" FromRole="PlannedOrderDetail" ToRole="Commodity" />
           <NavigationProperty Name="Customer" Relationship="TotalSmartPortalModel.FK_PlannedOrderDetails_Customers" FromRole="PlannedOrderDetail" ToRole="Customer" />
-          <NavigationProperty Name="Mold" Relationship="TotalSmartPortalModel.FK_PlannedOrderDetails_Molds" FromRole="PlannedOrderDetail" ToRole="Mold" />
           <NavigationProperty Name="PlannedOrder" Relationship="TotalSmartPortalModel.FK_PlannedOrderDetails_PlannedOrders" FromRole="PlannedOrderDetail" ToRole="PlannedOrder" />
           <NavigationProperty Name="VoidType" Relationship="TotalSmartPortalModel.FK_PlannedOrderDetails_VoidTypes" FromRole="PlannedOrderDetail" ToRole="VoidType" />
           <NavigationProperty Name="Bom" Relationship="TotalSmartPortalModel.FK_PlannedOrderDetails_Boms" FromRole="PlannedOrderDetail" ToRole="Bom" />
           <NavigationProperty Name="SemifinishedProductDetails" Relationship="TotalSmartPortalModel.FK_SemifinishedProductDetails_PlannedOrderDetails" FromRole="PlannedOrderDetail" ToRole="SemifinishedProductDetail" />
+          <NavigationProperty Name="Mold" Relationship="TotalSmartPortalModel.FK_PlannedOrderDetails_Molds" FromRole="PlannedOrderDetail" ToRole="Mold" />
         </EntityType>
         <EntityType Name="PlannedOrder">
           <Key>
@@ -13349,18 +13385,6 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FirmOrderDetails_Molds">
-          <End Type="TotalSmartPortalModel.Mold" Role="Mold" Multiplicity="1" />
-          <End Type="TotalSmartPortalModel.FirmOrderDetail" Role="FirmOrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Mold">
-              <PropertyRef Name="MoldID" />
-            </Principal>
-            <Dependent Role="FirmOrderDetail">
-              <PropertyRef Name="MoldID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_FirmOrderDetails_VoidTypes">
           <End Type="TotalSmartPortalModel.VoidType" Role="VoidType" Multiplicity="0..1" />
           <End Type="TotalSmartPortalModel.FirmOrderDetail" Role="FirmOrderDetail" Multiplicity="*" />
@@ -13526,18 +13550,6 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             </Principal>
             <Dependent Role="MaterialIssue">
               <PropertyRef Name="WorkshiftID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PlannedOrderDetails_Molds">
-          <End Type="TotalSmartPortalModel.Mold" Role="Mold" Multiplicity="1" />
-          <End Type="TotalSmartPortalModel.PlannedOrderDetail" Role="PlannedOrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Mold">
-              <PropertyRef Name="MoldID" />
-            </Principal>
-            <Dependent Role="PlannedOrderDetail">
-              <PropertyRef Name="MoldID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -14352,6 +14364,69 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Mold">
+          <Key>
+            <PropertyRef Name="MoldID" />
+          </Key>
+          <Property Name="MoldID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Reference" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OfficialCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Weight" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CyclePerHours" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="InActive" Type="Boolean" Nullable="false" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FirmOrderDetails" Relationship="TotalSmartPortalModel.FK_FirmOrderDetails_Molds" FromRole="Mold" ToRole="FirmOrderDetail" />
+          <NavigationProperty Name="PlannedOrderDetails" Relationship="TotalSmartPortalModel.FK_PlannedOrderDetails_Molds" FromRole="Mold" ToRole="PlannedOrderDetail" />
+        </EntityType>
+        <Association Name="FK_FirmOrderDetails_Molds">
+          <End Type="TotalSmartPortalModel.Mold" Role="Mold" Multiplicity="1" />
+          <End Type="TotalSmartPortalModel.FirmOrderDetail" Role="FirmOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mold">
+              <PropertyRef Name="MoldID" />
+            </Principal>
+            <Dependent Role="FirmOrderDetail">
+              <PropertyRef Name="MoldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlannedOrderDetails_Molds">
+          <End Type="TotalSmartPortalModel.Mold" Role="Mold" Multiplicity="1" />
+          <End Type="TotalSmartPortalModel.PlannedOrderDetail" Role="PlannedOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mold">
+              <PropertyRef Name="MoldID" />
+            </Principal>
+            <Dependent Role="PlannedOrderDetail">
+              <PropertyRef Name="MoldID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="CommodityMold">
+          <Property Type="Int32" Name="CommodityMoldID" Nullable="false" />
+          <Property Type="Int32" Name="MoldID" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="EntryDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Remarks" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="Quantity" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Boolean" Name="IsDefault" Nullable="false" />
+          <Property Type="Boolean" Name="InActive" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="MoldIndex">
+          <Property Type="Int32" Name="MoldID" Nullable="false" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Quantity" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Weight" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="CyclePerHours" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Boolean" Name="InActive" Nullable="false" />
+          <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -17036,9 +17111,11 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             <ResultMapping>
               <ComplexTypeMapping TypeName="TotalSmartPortalModel.MoldBase">
                 <ScalarProperty Name="MoldID" ColumnName="MoldID" />
-                <ScalarProperty Name="MoldCode" ColumnName="MoldCode" />
-                <ScalarProperty Name="MoldName" ColumnName="MoldName" />
-              </ComplexTypeMapping>
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetProductionLineBases" FunctionName="TotalSmartPortalModel.Store.GetProductionLineBases" >
@@ -17050,20 +17127,6 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="Molds">
-            <EntityTypeMapping TypeName="TotalSmartPortalModel.Mold">
-              <MappingFragment StoreEntitySet="Molds">
-                <ScalarProperty Name="CyclePerHours" ColumnName="CyclePerHours" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="InActive" ColumnName="InActive" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="MoldID" ColumnName="MoldID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ProductionLines">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.ProductionLine">
               <MappingFragment StoreEntitySet="ProductionLines">
@@ -18204,6 +18267,56 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Molds">
+            <EntityTypeMapping TypeName="TotalSmartPortalModel.Mold">
+              <MappingFragment StoreEntitySet="Molds">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="CyclePerHours" ColumnName="CyclePerHours" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="OfficialCode" ColumnName="OfficialCode" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="MoldID" ColumnName="MoldID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetCommodityMolds" FunctionName="TotalSmartPortalModel.Store.GetCommodityMolds">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartPortalModel.CommodityMold">
+                <ScalarProperty Name="CommodityMoldID" ColumnName="CommodityMoldID" />
+                <ScalarProperty Name="MoldID" ColumnName="MoldID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetMoldIndexes" FunctionName="TotalSmartPortalModel.Store.GetMoldIndexes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartPortalModel.MoldIndex">
+                <ScalarProperty Name="MoldID" ColumnName="MoldID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="CyclePerHours" ColumnName="CyclePerHours" />
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MoldEditable" FunctionName="TotalSmartPortalModel.Store.MoldEditable" />
+          <FunctionImportMapping FunctionImportName="RemoveCommodityMold" FunctionName="TotalSmartPortalModel.Store.RemoveCommodityMold" />
+          <FunctionImportMapping FunctionImportName="SetCommodityMoldDefault" FunctionName="TotalSmartPortalModel.Store.SetCommodityMoldDefault" />
+          <FunctionImportMapping FunctionImportName="AddCommodityMold" FunctionName="TotalSmartPortalModel.Store.AddCommodityMold" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

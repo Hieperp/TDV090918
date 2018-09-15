@@ -3,8 +3,7 @@
 @model string
 
 @(Html.Kendo().AutoCompleteFor(m => m)
-        .Name("MoldCode")
-        .DataTextField("MoldCode")
+        .DataTextField("Code")
         .Filter("contains")
         .MinLength(Settings.AutoCompleteMinLenght)
         .Placeholder("Chọn mã khuôn...")
@@ -13,8 +12,8 @@
                 "<span class=\"k-widget k-header\">Tên khuôn</span>" +
                 "</div>")
         .Template("<div class=\"dropdown-body general-custom-body mold-custom-body\">" +
-                "<span class=\"k-state-default\"><p>#: data.MoldCode #</p></span>" +
-                    "<span class=\"k-state-default\"><p>#: data.MoldName #</p></span>" +
+                "<span class=\"k-state-default\"><p>#: data.Code #</p></span>" +
+                    "<span class=\"k-state-default\"><p>#: data.Name #</p></span>" +
                 "</div>")
 
         .DataSource(source =>
@@ -24,9 +23,9 @@
                 read.Action("GetMoldBases", "MoldAPIs", new { area = "Commons" }).Data(@<text>
 
                     function(e) {
-                    return {
-                    searchText: $("#MoldCode").data("kendoAutoComplete").value(),
-                    warehouseTaskID: 0
+                        return {
+                        searchText: e.filter.filters[0].value,
+                        commodityID: window.moldCommodityID != undefined ? window.moldCommodityID : 0
                     };}
 
                 </text>);//Send parameter to controller search action
@@ -89,10 +88,10 @@
 
 
     /*#region styles for each use of the Editor tenplate MoldAvailable.cshtml*/
-    #MoldCode-list .k-item {
+    #Code-list .k-item {
         white-space: nowrap;
     }
-    /*CURRENT: Editor tenplate MoldAvailable.cshtml bind with model MoldCode => the autocomplete editor ID will be #MoldCode */
+    /*CURRENT: Editor tenplate MoldAvailable.cshtml bind with model Code => the autocomplete editor ID will be #Code */
     /*LATER: if this Editor tenplate MoldAvailable.cshtml is used for another model, Ex model: XyzName => the ID will be #XyzName, then new css will be add. for this example #XyzName-list .k-item {padding: 0px; white-space: nowrap;} */
 
     /*#endregion */

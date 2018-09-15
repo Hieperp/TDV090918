@@ -67,7 +67,6 @@ namespace TotalModel.Models
         public virtual DbSet<Territory> Territories { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
         public virtual DbSet<VoidType> VoidTypes { get; set; }
-        public virtual DbSet<Mold> Molds { get; set; }
         public virtual DbSet<ProductionLine> ProductionLines { get; set; }
         public virtual DbSet<Workshift> Workshifts { get; set; }
         public virtual DbSet<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
@@ -99,6 +98,7 @@ namespace TotalModel.Models
         public virtual DbSet<FirmOrderMaterial> FirmOrderMaterials { get; set; }
         public virtual DbSet<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
         public virtual DbSet<SemifinishedProduct> SemifinishedProducts { get; set; }
+        public virtual DbSet<Mold> Molds { get; set; }
     
         public virtual ObjectResult<string> AccountInvoicePostSaveValidate(Nullable<int> entityID)
         {
@@ -3131,6 +3131,80 @@ namespace TotalModel.Models
                 new ObjectParameter("IsDefault", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SetCommodityBomDefault", commodityBomIDParameter, commodityIDParameter, isDefaultParameter);
+        }
+    
+        public virtual ObjectResult<CommodityMold> GetCommodityMolds(Nullable<int> commodityID)
+        {
+            var commodityIDParameter = commodityID.HasValue ?
+                new ObjectParameter("CommodityID", commodityID) :
+                new ObjectParameter("CommodityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CommodityMold>("GetCommodityMolds", commodityIDParameter);
+        }
+    
+        public virtual ObjectResult<MoldIndex> GetMoldIndexes(string aspUserID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var aspUserIDParameter = aspUserID != null ?
+                new ObjectParameter("AspUserID", aspUserID) :
+                new ObjectParameter("AspUserID", typeof(string));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MoldIndex>("GetMoldIndexes", aspUserIDParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<string> MoldEditable(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("MoldEditable", entityIDParameter);
+        }
+    
+        public virtual int RemoveCommodityMold(Nullable<int> commodityMoldID)
+        {
+            var commodityMoldIDParameter = commodityMoldID.HasValue ?
+                new ObjectParameter("CommodityMoldID", commodityMoldID) :
+                new ObjectParameter("CommodityMoldID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RemoveCommodityMold", commodityMoldIDParameter);
+        }
+    
+        public virtual int SetCommodityMoldDefault(Nullable<int> commodityMoldID, Nullable<int> commodityID, Nullable<bool> isDefault)
+        {
+            var commodityMoldIDParameter = commodityMoldID.HasValue ?
+                new ObjectParameter("CommodityMoldID", commodityMoldID) :
+                new ObjectParameter("CommodityMoldID", typeof(int));
+    
+            var commodityIDParameter = commodityID.HasValue ?
+                new ObjectParameter("CommodityID", commodityID) :
+                new ObjectParameter("CommodityID", typeof(int));
+    
+            var isDefaultParameter = isDefault.HasValue ?
+                new ObjectParameter("IsDefault", isDefault) :
+                new ObjectParameter("IsDefault", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SetCommodityMoldDefault", commodityMoldIDParameter, commodityIDParameter, isDefaultParameter);
+        }
+    
+        public virtual int AddCommodityMold(Nullable<int> commodityID, Nullable<int> moldID)
+        {
+            var commodityIDParameter = commodityID.HasValue ?
+                new ObjectParameter("CommodityID", commodityID) :
+                new ObjectParameter("CommodityID", typeof(int));
+    
+            var moldIDParameter = moldID.HasValue ?
+                new ObjectParameter("MoldID", moldID) :
+                new ObjectParameter("MoldID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddCommodityMold", commodityIDParameter, moldIDParameter);
         }
     }
 }

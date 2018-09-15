@@ -16,10 +16,10 @@
             var dataItem = e.sender.dataItem(e.item.index());
 
             currentDataSourceRow.set("MoldID", dataItem.MoldID);
-            currentDataSourceRow.set("MoldCode", dataItem.MoldCode);
+            currentDataSourceRow.set("MoldCode", dataItem.Code);
         }
 
-        window.moldCodeBeforeChange = dataItem.MoldCode;
+        window.moldCodeBeforeChange = dataItem.Code;
     };
 
 

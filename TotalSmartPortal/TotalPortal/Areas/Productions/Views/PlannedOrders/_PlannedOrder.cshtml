@@ -192,22 +192,22 @@
                         </text>);
                         events.Edit("kendoGridDetailsEdit");
                     }).DataSource(dataSource => dataSource
-                            .Ajax()
-                            .Batch(true)
-                            .ServerOperation(false)
-                            .Model(model =>
-                            {
-                                model.Id(x => x.PlannedOrderDetailID);
-                                model.Field(m => m.PlannedOrderDetailID).DefaultValue(0);
-                                model.Field(m => m.PlannedOrderID).DefaultValue(@Model.PlannedOrderID);
-                            })
-                            .Events(events =>
-                            {
-                                events.Error("kendGrid_ErrorHandler");
-                            })
-                            .Aggregates(a => a.Add(x => x.CommodityCode).Count())
-                            .Aggregates(a => a.Add(x => x.Quantity).Sum())
-                        )
+                                                                .Ajax()
+                                                                .Batch(true)
+                                                                .ServerOperation(false)
+                                                                .Model(model =>
+                                                                {
+                                                                    model.Id(x => x.PlannedOrderDetailID);
+                                                                    model.Field(m => m.PlannedOrderDetailID).DefaultValue(0);
+                                                                    model.Field(m => m.PlannedOrderID).DefaultValue(@Model.PlannedOrderID);
+                                                                })
+                                                                .Events(events =>
+                                                                {
+                                                                    events.Error("kendGrid_ErrorHandler");
+                                                                })
+                                                                .Aggregates(a => a.Add(x => x.CommodityCode).Count())
+                                                                .Aggregates(a => a.Add(x => x.Quantity).Sum())
+                                                            )
             )
         </div>
 
@@ -278,8 +278,9 @@
         });
     }
 
-    kendoGridDetailsEdit = function(e){        
-        window.PlannedOrderCommodityID = e.model.CommodityID;        
+    kendoGridDetailsEdit = function(e){
+        window.bomCommodityID = e.model.CommodityID;
+        window.moldCommodityID = e.model.CommodityID;
     }
 </script>
 

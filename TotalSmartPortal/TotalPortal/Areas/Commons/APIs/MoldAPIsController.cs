@@ -24,10 +24,10 @@ namespace TotalPortal.Areas.Commons.APIs
             this.moldAPIRepository = moldAPIRepository;
         }
 
-       
-        public JsonResult GetMoldBases(string searchText, int warehouseTaskID)
+
+        public JsonResult GetMoldBases(string searchText, int commodityID)
         {
-            var result = this.moldAPIRepository.GetMoldBases(searchText, warehouseTaskID);
+            var result = this.moldAPIRepository.GetMoldBases(searchText, commodityID);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

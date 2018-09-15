@@ -20,7 +20,19 @@
         {
             source.Read(read =>
             {
-                read.Action("GetBomBases", "BomAPIs", new { area = "Commons" }).Data("ontestt");//VERY IMPORTANT: CONSIDER $("#kendoGridDetails"), $("#CommodityCategoryID"), $("#CommodityClassID"), $("#CommodityLineID") WHEN USING THIS TEMPLATE
+                read.Action("GetBomBases", "BomAPIs", new { area = "Commons" }).Data(@<text>
+
+                    function ontestt(e) {
+                        return {
+                            searchText: e.filter.filters[0].value,
+                            commodityID: window.bomCommodityID != undefined ? window.bomCommodityID : 0,
+                            commodityCategoryID: $("#CommodityCategoryID").val() != undefined ? $("#CommodityCategoryID").val() : 0,
+                            commodityClassID: $("#CommodityClassID").val() != undefined ? $("#CommodityClassID").val() : 0,
+                            commodityLineID: $("#CommodityLineID").val() != undefined ? $("#CommodityLineID").val() : 0
+                        };
+                    }};}
+
+                </text>); //VERY IMPORTANT: CONSIDER window.bomCommodityID, $("#CommodityCategoryID"), $("#CommodityClassID"), $("#CommodityLineID") WHEN USING THIS TEMPLATE
             })
             .ServerFiltering(true);
         })

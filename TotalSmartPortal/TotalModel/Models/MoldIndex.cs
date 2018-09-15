@@ -11,12 +11,15 @@ namespace TotalModel.Models
 {
     using System;
     
-    public partial class MoldBase
+    public partial class MoldIndex
     {
         public int MoldID { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
-        public string Reference { get; set; }
         public decimal Quantity { get; set; }
+        public decimal Weight { get; set; }
+        public decimal CyclePerHours { get; set; }
+        public bool InActive { get; set; }
+        public string Remarks { get; set; }
     }
 }
