@@ -30,13 +30,9 @@
         </div>
         @Html.Partial("~/Views/Shared/EditorTemplates/DropDowns/CommodityCategory.cshtml", @Model, new ViewDataDictionary { { "CommodityCategoryReadonly", true } })
 
-
         <div class="form-group" style="padding-top: 16px;">
             @Html.EditorFor(d => (d as ICommodityPrimitiveDTO).Bom, new { BomDisplayName = "Vui lòng chọn loại màng, sau đó nhấn 'Thêm vào khay'", BomLeftPanelInput = "left-panel-input" })
         </div>
-
-
-
     </div>
 
     <div class="right-second-panel">
@@ -60,12 +56,12 @@
     {
         columns.Bound(c => c.CommodityBomID).Hidden();
         columns.Bound(c => c.BomID).Hidden();
-        columns.Bound(c => c.Code).Title("Mã").Width(80);
-        columns.Bound(c => c.Name).Title("Tên").Width(120);
+        columns.Bound(c => c.BomCode).Title("Mã").Width(80);
+        columns.Bound(c => c.BomName).Title("Tên").Width(120);
 
         columns.Bound(c => c.EntryDate).Title("Ngày thêm").Width(60).Format("{0:" + Settings.DateTimeFormat + "}").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" });
         columns.Bound(c => c.Remarks).Title("Ghi chú").Width(100);
-        columns.Template(t => { }).Title("Mặc định").ClientTemplate("<input class='GridCheckbox' #= IsDefault ? checked='checked':'' #  type='checkbox' />").HtmlAttributes(new { @class = "grid-column-center", @readonly = "readonly" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(40);
+        columns.Template(t => { }).Title("Mặc định").ClientTemplate("<input id = 'IsDefault' class='GridCheckbox' #= IsDefault ? checked='checked':'' #  type='checkbox' />").HtmlAttributes(new { @class = "grid-column-center", @readonly = "readonly" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(40);
 
         columns.Template(model => null).HtmlAttributes(new { @class = "grid-column-center" }).Width(20)
             .ClientTemplate("<a class='k-button' style='padding-left:5px; min-width:28px; width:28px' onclick='RemoveCommodityBom(#=CommodityBomID#)'><span class='k-icon k-delete'></span></a>");
@@ -73,9 +69,14 @@
 
     .Scrollable(s => s.Height(219))
     .DataSource(ds => ds.Ajax()
-            .Read(read => read.Action("GetCommodityBoms", "BomAPIs", new { area = "Commons" }).Data("onGetCommodityBoms"))
-    .ServerOperation(true))
-    .Selectable()
+            .Read(read => read.Action("GetCommodityBoms", "BomAPIs", new { area = "Commons" }).Data(@<text>
+                function (e) {
+                    return {
+                        commodityID: $("#CommodityID").val()
+                        };}
+            </text>))
+            .ServerOperation(true))
+            .Selectable()
     )
 
 </div>
@@ -87,15 +88,7 @@
     </div>
 </div>
 
-@*<script src="~/Scripts/Controllers/Commons/Products/Boms.js"></script>*@
-
 <script type="text/javascript">
-    function onGetCommodityBoms(e) {
-        return {
-            commodityID: $("#CommodityID").val()
-        };
-    }
-
     function AddCommodityBom(e) {
         if ($("#Editable").val() != 'True')
             return;

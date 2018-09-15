@@ -38,7 +38,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
-            queryString = queryString + "       SELECT      CommodityBoms.CommodityBomID, CommodityBoms.BomID, Boms.Code, Boms.Name, CommodityBoms.EntryDate, CommodityBoms.Remarks, CommodityBoms.IsDefault, CommodityBoms.InActive " + "\r\n";
+            queryString = queryString + "       SELECT      CommodityBoms.CommodityBomID, CommodityBoms.BomID, Boms.Code AS BomCode, Boms.Name AS BomName, CommodityBoms.EntryDate, CommodityBoms.Remarks, CommodityBoms.IsDefault, CommodityBoms.InActive " + "\r\n";
             queryString = queryString + "       FROM        CommodityBoms INNER JOIN Boms ON CommodityBoms.CommodityID = @CommodityID AND CommodityBoms.BomID = Boms.BomID " + "\r\n";
             queryString = queryString + "       ORDER BY    CommodityBoms.EntryDate, CommodityBoms.CommodityBomID " + "\r\n";
 
@@ -57,8 +57,10 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
+            queryString = queryString + "       DECLARE         @COUNTCommodityBomID int = (SELECT COUNT(CommodityBomID) FROM CommodityBoms WHERE CommodityID = @CommodityID) " + "\r\n";
+
             queryString = queryString + "       INSERT INTO     CommodityBoms   (CommodityID, BomID, EntryDate, Remarks, IsDefault, InActive) " + "\r\n";
-            queryString = queryString + "       VALUES                          (@CommodityID, @BomID, GETDATE(), NULL, 0, 0) " + "\r\n";
+            queryString = queryString + "       VALUES                          (@CommodityID, @BomID, GETDATE(), NULL, IIF(@COUNTCommodityBomID = 0, 1, 0), 0) " + "\r\n";
             queryString = queryString + "    END " + "\r\n";
 
             this.totalSmartPortalEntities.CreateStoredProcedure("AddCommodityBom", queryString);
@@ -72,7 +74,13 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
+            queryString = queryString + "       DECLARE         @CommodityID int, @MINCommodityBomID int, @COUNTCommodityBomID int, @IsDefault bit " + "\r\n";
+            queryString = queryString + "       SELECT          @CommodityID = CommodityID, @IsDefault = IsDefault FROM CommodityBoms WHERE CommodityBomID = @CommodityBomID " + "\r\n";
+
             queryString = queryString + "       DELETE FROM     CommodityBoms WHERE CommodityBomID = @CommodityBomID" + "\r\n";
+
+            queryString = queryString + "       SELECT          @MINCommodityBomID = MIN(CommodityBomID), @COUNTCommodityBomID = COUNT(CommodityBomID) FROM CommodityBoms WHERE CommodityID = @CommodityID " + "\r\n";
+            queryString = queryString + "       IF (@IsDefault = 1 OR @COUNTCommodityBomID = 1) UPDATE CommodityBoms SET IsDefault = 1 WHERE CommodityBomID = @MINCommodityBomID" + "\r\n";
             queryString = queryString + "    END " + "\r\n";
 
             this.totalSmartPortalEntities.CreateStoredProcedure("RemoveCommodityBom", queryString);
@@ -87,9 +95,10 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
 
             queryString = queryString + "       BEGIN " + "\r\n";
 
-            queryString = queryString + "           UPDATE          CommodityBoms " + "\r\n";
-            queryString = queryString + "           SET             IsDefault = IIF(CommodityBomID = @CommodityBomID, ~@IsDefault, 0) " + "\r\n";
-            queryString = queryString + "           WHERE           CommodityID = @CommodityID " + "\r\n";
+            queryString = queryString + "           IF (@IsDefault = 1) " + "\r\n"; //ONLY CHANGE WHEN @IsDefault = true: THIS WILL KEEP AT LEAST 1 ROW IS DEFAULT
+            queryString = queryString + "               UPDATE      CommodityBoms " + "\r\n";
+            queryString = queryString + "               SET         IsDefault = IIF(CommodityBomID = @CommodityBomID, 1, 0) " + "\r\n"; //IIF(CommodityBomID = @CommodityBomID, @IsDefault, 0)
+            queryString = queryString + "               WHERE       CommodityID = @CommodityID " + "\r\n";
 
             queryString = queryString + "       END " + "\r\n";
 

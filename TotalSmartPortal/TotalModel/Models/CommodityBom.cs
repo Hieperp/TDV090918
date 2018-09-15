@@ -15,11 +15,11 @@ namespace TotalModel.Models
     {
         public int CommodityBomID { get; set; }
         public int BomID { get; set; }
-        public string Code { get; set; }
-        public string Name { get; set; }
         public System.DateTime EntryDate { get; set; }
         public string Remarks { get; set; }
         public bool IsDefault { get; set; }
         public bool InActive { get; set; }
+        public string BomCode { get; set; }
+        public string BomName { get; set; }
     }
 }
