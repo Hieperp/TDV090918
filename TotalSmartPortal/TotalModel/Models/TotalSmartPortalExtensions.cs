@@ -182,7 +182,7 @@ namespace TotalModel.Models
     {
         public int GetID() { return this.SemifinishedProductID; }
 
-        public virtual Employee Salesperson { get { return this.Employee; } }
+        public virtual Employee CrucialWorker { get { return this.Employee; } }
 
         public ICollection<SemifinishedProductDetail> GetDetails() { return this.SemifinishedProductDetails; }
     }

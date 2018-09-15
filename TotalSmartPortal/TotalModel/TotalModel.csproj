@@ -465,6 +465,12 @@
     <Compile Include="Models\SalesReturnViewDetail.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SemifinishedHandover.cs">
+      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SemifinishedHandoverDetail.cs">
+      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SemifinishedProduct.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>
