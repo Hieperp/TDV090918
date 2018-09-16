@@ -77,8 +77,6 @@ function handleOKEvent(semifinishedHandoverGridDataSource, pendingDetailGridData
         dataRow.InActivePartial = false;
         dataRow.InActiveIssue = false;
 
-        debugger;
-
         semifinishedHandoverJSON.push(dataRow);
     }
 }
