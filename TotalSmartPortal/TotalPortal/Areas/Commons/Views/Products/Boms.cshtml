@@ -15,7 +15,7 @@
 @Html.HiddenFor(model => (model as IBaseDTO).Editable)
 
 <div class="left-panel">
-    <div style="padding-left: 48px; padding-top: 16px; "> <img src="~/Content/Images/New/2017/sale-off-icon-64.png" /> </div>
+    <div style="padding-left: 48px; padding-top: 16px; "> <img src="~/Content/Images/New/2017/bom-64.png" /> </div>
 </div>
 <div class="right-panel">
     <div class="right-first-panel">
@@ -42,7 +42,7 @@
         <div class="form-group" style="padding-top: 16px;">
             @Html.Label(" ")
             <div class="div-input">
-                <button type="button" class="k-button left-panel-input" onclick="AddCommodityBom()"> <img src="~/Content/Images/New/2017/sale-off-icon-24.png" /> Thêm vào khay: @(@Model.Name.Length <= 26? @Model.Name: @Model.Name.Substring(0, 25)) </button>
+                <button type="button" class="k-button left-panel-input" onclick="AddCommodityBom()"> <img src="~/Content/Images/New/2017/bom-24.png" /> Thêm vào khay: @(@Model.Name.Length <= 26? @Model.Name: @Model.Name.Substring(0, 25)) </button>
             </div>
         </div>
     </div>
