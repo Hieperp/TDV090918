@@ -43,6 +43,16 @@
             }
 
             currentDataSourceRow.set("DiscountPercent", dataItem.DiscountPercent);
+
+            if (currentDataSourceRow.BomID != undefined)
+            {
+                currentDataSourceRow.set("BomID", dataItem.BomID);
+                currentDataSourceRow.set("BomCode", dataItem.BomCode);
+            }
+            if (currentDataSourceRow.MoldID != undefined) {
+                currentDataSourceRow.set("MoldID", dataItem.MoldID);
+                currentDataSourceRow.set("MoldCode", dataItem.MoldCode);
+            }
         }
 
         window.commodityCodeBeforeChange = dataItem.CommodityCode;

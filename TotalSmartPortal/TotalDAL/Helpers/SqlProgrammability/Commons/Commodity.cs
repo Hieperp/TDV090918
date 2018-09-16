@@ -59,15 +59,26 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
         private void GetCommodityBases()
         {
             string queryString;
+            string querySELECT = "                              Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, Commodities.ListedPrice, Commodities.GrossPrice, 0.0 AS DiscountPercent, 0.0 AS TradeDiscountRate, CommodityCategories.VATPercent " + " \r\n";
 
-            queryString = " @CommodityTypeIDList varchar(200), @SearchText nvarchar(60) " + "\r\n";
+            queryString = " @CommodityTypeIDList varchar(200), @NmvnTaskID int, @SearchText nvarchar(60) " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
-            queryString = queryString + "       SELECT      TOP 60 Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, Commodities.ListedPrice, Commodities.GrossPrice, 0.0 AS DiscountPercent, 0.0 AS TradeDiscountRate, CommodityCategories.VATPercent " + " \r\n";
-            queryString = queryString + "       FROM        Commodities " + "\r\n";
-            queryString = queryString + "                   INNER JOIN CommodityCategories ON Commodities.InActive = 0 AND (@SearchText = '' OR Commodities.Code = @SearchText OR Commodities.Code LIKE '%' + @SearchText + '%' OR Commodities.OfficialCode LIKE '%' + @SearchText + '%' OR Commodities.Name LIKE '%' + @SearchText + '%') AND Commodities.CommodityTypeID IN (SELECT Id FROM dbo.SplitToIntList (@CommodityTypeIDList)) AND Commodities.CommodityCategoryID = CommodityCategories.CommodityCategoryID " + "\r\n";
+            queryString = queryString + "       DECLARE         @Commodities TABLE (CommodityID int NOT NULL, Code nvarchar(50) NOT NULL, Name nvarchar(200) NOT NULL, ListedPrice decimal(18, 2) NOT NULL, GrossPrice decimal(18, 2) NOT NULL, DiscountPercent decimal(18, 2) NOT NULL, TradeDiscountRate decimal(18, 2) NOT NULL, CommodityTypeID int NOT NULL, CommodityCategoryID int NOT NULL)" + "\r\n";
+            queryString = queryString + "       INSERT INTO     @Commodities SELECT TOP 30 CommodityID, Code, Name, ListedPrice, GrossPrice, 0.0 AS DiscountPercent, 0.0 AS TradeDiscountRate, CommodityTypeID, CommodityCategoryID FROM Commodities WHERE InActive = 0 AND (@SearchText = '' OR Code = @SearchText OR Code LIKE '%' + @SearchText + '%' OR OfficialCode LIKE '%' + @SearchText + '%' OR Name LIKE '%' + @SearchText + '%') AND CommodityTypeID IN (SELECT Id FROM dbo.SplitToIntList (@CommodityTypeIDList)) " + "\r\n";
+
+            queryString = queryString + "       IF (@NmvnTaskID = " + (int)GlobalEnums.NmvnTaskID.PlannedOrder + ") " + " \r\n";
+            queryString = queryString + "           SELECT      " + querySELECT + ", CommodityBoms.BomID, CommodityBoms.Code AS BomCode, CommodityBoms.Name AS BomName, CommodityBoms.BlockUnit, CommodityBoms.BlockQuantity, CommodityMolds.MoldID, CommodityMolds.Code AS MoldCode, CommodityMolds.Name AS MoldName, CommodityMolds.Quantity AS MoldQuantity " + " \r\n";
+            queryString = queryString + "           FROM        @Commodities Commodities " + "\r\n";
+            queryString = queryString + "                       INNER JOIN CommodityCategories ON Commodities.CommodityCategoryID = CommodityCategories.CommodityCategoryID " + "\r\n";
+            queryString = queryString + "                       LEFT JOIN (SELECT CommodityBoms.CommodityID, CommodityBoms.BomID, Boms.Code, Boms.Name, CommodityBoms.BlockUnit, CommodityBoms.BlockQuantity FROM CommodityBoms INNER JOIN Boms ON CommodityBoms.CommodityID IN (SELECT CommodityID FROM @Commodities) AND CommodityBoms.IsDefault = 1 AND CommodityBoms.BomID = Boms.BomID) CommodityBoms ON Commodities.CommodityID = CommodityBoms.CommodityID " + "\r\n";
+            queryString = queryString + "                       LEFT JOIN (SELECT CommodityMolds.CommodityID, CommodityMolds.MoldID, Molds.Code, Molds.Name, CommodityMolds.Quantity FROM CommodityMolds INNER JOIN Molds ON CommodityMolds.CommodityID IN (SELECT CommodityID FROM @Commodities) AND CommodityMolds.IsDefault = 1 AND CommodityMolds.MoldID = Molds.MoldID) CommodityMolds ON Commodities.CommodityID = CommodityMolds.CommodityID " + "\r\n";
+            queryString = queryString + "       ELSE " + " \r\n";
+            queryString = queryString + "           SELECT      " + querySELECT + ", NULL AS BomID, NULL AS BomCode, NULL AS BomName, NULL AS BlockUnit, NULL AS BlockQuantity, NULL AS MoldID, NULL AS MoldCode, NULL AS MoldName, NULL AS MoldQuantity " + " \r\n";
+            queryString = queryString + "           FROM        @Commodities Commodities " + "\r\n";
+            queryString = queryString + "                       INNER JOIN CommodityCategories ON Commodities.CommodityCategoryID = CommodityCategories.CommodityCategoryID " + "\r\n";
 
             queryString = queryString + "    END " + "\r\n";
 

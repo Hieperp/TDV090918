@@ -4664,6 +4664,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
         </Function>
         <Function Name="GetCommodityBases" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CommodityTypeIDList" Type="varchar" Mode="In" />
+          <Parameter Name="NmvnTaskID" Type="int" Mode="In" />
           <Parameter Name="SearchText" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetCommodityBoms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -9396,6 +9397,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           </FunctionImport>
           <FunctionImport Name="GetCommodityBases" ReturnType="Collection(TotalSmartPortalModel.CommodityBase)">
             <Parameter Name="CommodityTypeIDList" Mode="In" Type="String" />
+            <Parameter Name="NmvnTaskID" Mode="In" Type="Int32" />
             <Parameter Name="SearchText" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetCommodityCodePartA" ReturnType="Collection(TotalSmartPortalModel.CommodityCodePart)">
@@ -10843,6 +10845,15 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="Decimal" Name="DiscountPercent" Nullable="false" Precision="1" Scale="1" />
           <Property Type="Decimal" Name="TradeDiscountRate" Nullable="false" Precision="1" Scale="1" />
           <Property Type="Decimal" Name="VATPercent" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="BomID" Nullable="true" />
+          <Property Type="String" Name="BomCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="BomName" Nullable="true" MaxLength="200" />
+          <Property Type="Decimal" Name="BlockUnit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="BlockQuantity" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="MoldID" Nullable="true" />
+          <Property Type="String" Name="MoldCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MoldName" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="MoldQuantity" Nullable="true" Precision="18" Scale="2" />
         </ComplexType>
         <ComplexType Name="CommodityPriceIndex">
           <Property Type="Int32" Name="CommodityPriceID" Nullable="false" />
@@ -16070,6 +16081,15 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="DiscountPercent" ColumnName="DiscountPercent" />
                 <ScalarProperty Name="TradeDiscountRate" ColumnName="TradeDiscountRate" />
                 <ScalarProperty Name="VATPercent" ColumnName="VATPercent" />
+                <ScalarProperty Name="BomID" ColumnName="BomID" />
+                <ScalarProperty Name="BomCode" ColumnName="BomCode" />
+                <ScalarProperty Name="BomName" ColumnName="BomName" />
+                <ScalarProperty Name="BlockUnit" ColumnName="BlockUnit" />
+                <ScalarProperty Name="BlockQuantity" ColumnName="BlockQuantity" />
+                <ScalarProperty Name="MoldID" ColumnName="MoldID" />
+                <ScalarProperty Name="MoldCode" ColumnName="MoldCode" />
+                <ScalarProperty Name="MoldName" ColumnName="MoldName" />
+                <ScalarProperty Name="MoldQuantity" ColumnName="MoldQuantity" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
