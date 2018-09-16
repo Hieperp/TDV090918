@@ -3,18 +3,17 @@
 
 @{Layout = "~/Views/Shared/_LayoutPopup.cshtml";}
 
-@model TotalPortal.Areas.Productions.ViewModels.ProductionOrderViewModel
+@model TotalPortal.Areas.Productions.ViewModels.SemifinishedHandoverViewModel
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     @Html.Partial("~/Views/Helpers/Bases/_BaseSectionTop.cshtml")
-
-    @Html.HiddenFor(model => model.PlannedOrderID)
-    @Html.HiddenFor(model => model.PlannedOrderCode)
-    @Html.HiddenFor(model => model.PlannedOrderReference)
-    @Html.HiddenFor(model => model.PlannedOrderEntryDate)
+    
+    @Html.HiddenFor(model => model.WorkshiftID)
+    @Html.HiddenFor(model => model.WorkshiftCode)
+    @Html.HiddenFor(model => model.WorkshiftEntryDate)
 
     @Html.HiddenFor(model => model.CustomerID)
     
@@ -30,6 +29,12 @@
     @Html.HiddenFor(model => model.Customer.PaymentTermID)
     @Html.HiddenFor(model => model.Customer.PriceCategoryID)
     @Html.HiddenFor(model => model.Customer.PriceCategoryCode)
+    
+    @Html.HiddenFor(model => model.SemifinishedLeader.EmployeeID);
+    @Html.HiddenFor(model => model.SemifinishedLeader.Name);
+
+    @Html.HiddenFor(model => model.FinishedLeader.EmployeeID);
+    @Html.HiddenFor(model => model.FinishedLeader.Name);
 
     @Html.HiddenFor(model => model.Description);
 
@@ -38,13 +43,13 @@
         .Name("tabStrip")
         .Items(tabStrip =>
         {
-            tabStrip.Add().Text("Lệnh sản xuất theo kế hoạch sản xuất")
+            tabStrip.Add().Text("Tồn phiếu bán thành phẩm")
                 .Content(@<text>
-                    @Html.Partial("~/Areas/Productions/Views/ProductionOrders/_GetPlannedOrder.cshtml")
+                    @Html.Partial("~/Areas/Productions/Views/SemifinishedHandovers/_GetWorkshift.cshtml")
                 </text>);
-            tabStrip.Add().Text("Lệnh sản xuất tổng hợp theo khách hàng")
+            tabStrip.Add().Text("Tồn phiếu bán thành phẩm theo khách hàng")
                     .Content(@<text>
-                    @Html.Partial("~/Areas/Productions/Views/ProductionOrders/_GetCustomer.cshtml")
+                    @Html.Partial("~/Areas/Productions/Views/SemifinishedHandovers/_GetCustomer.cshtml")
                     </text>);
         }).SelectedIndex(0)
     )
@@ -52,10 +57,9 @@
 
     <div class="background-bar" style="height: 45px;">
         <div class="popup-button-bar">
-            <input id="submitCreateWizard" type="submit" formaction="@Url.Action("CreateWizard", "ProductionOrders")" formtarget="_top" style="display:none" />
+            <input id="submitCreateWizard" type="submit" formaction="@Url.Action("CreateWizard", "SemifinishedHandovers")" formtarget="_top" style="display:none" />
             
-            <button type="button" class="k-button" onclick="okButton_Click()"> <img src="~/Content/Images/Mains/Size24/Ok-1.png" /> Áp dụng khách hàng/KHSX đang chọn </button>
-            <button type="button" class="k-button" onclick="okWOSelectButton_Click()"> <img src="~/Content/Images/Mains/Size24/Accept-Total.png" /> Lập lệnh sản xuất tổng hợp </button>
+            <button type="button" class="k-button" onclick="okButton_Click()"> <img src="~/Content/Images/Mains/Size24/Ok-1.png" /> Áp dụng </button>            
             <button type="button" class="k-button" onclick="window.parent.$('#myWindow').data('kendoWindow').close()"> <img src="~/Content/Images/Mains/Size24/Users-Exit-icon-24.png" /> Thoát </button>
         </div>
     </div>
@@ -66,7 +70,7 @@
 
 <script type="text/javascript">
     function okButton_Click() {      
-        handleOKEvent($($("#tabStrip").data("kendoTabStrip").select().index() === 0 ? "#productionOrderPendingPlannedOrderGrid" : "#productionOrderPendingCustomerGrid").data("kendoGrid"));
+        handleOKEvent($($("#tabStrip").data("kendoTabStrip").select().index() === 0 ? "#semifinishedHandoverPendingWorkshiftGrid" : "#semifinishedHandoverPendingCustomerGrid").data("kendoGrid"));
     }
 
     function okWOSelectButton_Click() {
@@ -108,12 +112,12 @@
             $("#Customer_PriceCategoryID").val(selectedDataItem === undefined || selectedDataItem.CustomerPriceCategoryID === undefined ? null : selectedDataItem.CustomerPriceCategoryID);
             $("#Customer_PriceCategoryCode").val(selectedDataItem === undefined || selectedDataItem.CustomerPriceCategoryCode === undefined ? null : selectedDataItem.CustomerPriceCategoryCode);
 
-            $("#PlannedOrderID").val(selectedDataItem === undefined || selectedDataItem.PlannedOrderID === undefined ? null : selectedDataItem.PlannedOrderID);
-            $("#PlannedOrderCode").val(selectedDataItem === undefined || selectedDataItem.PlannedOrderCode === undefined ? null : selectedDataItem.PlannedOrderCode);
-            $("#PlannedOrderReference").val(selectedDataItem === undefined || selectedDataItem.PlannedOrderReference === undefined ? null : selectedDataItem.PlannedOrderReference);
-            $("#PlannedOrderEntryDate").val(selectedDataItem === undefined || selectedDataItem.PlannedOrderEntryDate === undefined ? null : kendo.toString(selectedDataItem.PlannedOrderEntryDate, Settings.DateTimeFormat));
+            $("#WorkshiftID").val(selectedDataItem === undefined || selectedDataItem.WorkshiftID === undefined ? null : selectedDataItem.WorkshiftID);
+            $("#WorkshiftCode").val(selectedDataItem === undefined || selectedDataItem.Code === undefined ? null : selectedDataItem.Code);
+            $("#WorkshiftEntryDate").val(selectedDataItem === undefined || selectedDataItem.EntryDate === undefined ? null : kendo.toString(selectedDataItem.EntryDate, Settings.DateTimeFormat));
 
-            $("#Description").val(selectedDataItem === undefined || selectedDataItem.Description === undefined ? null : selectedDataItem.Description);        
+            $("#Description").val(selectedDataItem === undefined || selectedDataItem.Description === undefined ? null : selectedDataItem.Description);
+          
         }
     }
 

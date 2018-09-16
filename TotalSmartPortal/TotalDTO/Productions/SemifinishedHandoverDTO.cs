@@ -48,12 +48,12 @@ namespace TotalDTO.Productions
         public CustomerBaseDTO Customer { get; set; }
 
         public override int SemifinishedLeaderID { get { return (this.SemifinishedLeader != null ? this.SemifinishedLeader.EmployeeID : 0); } }
-        [Display(Name = "Nhân viên kho")]
+        [Display(Name = "Tổ trưởng BTP")]
         [UIHint("AutoCompletes/EmployeeBase")]
         public EmployeeBaseDTO SemifinishedLeader { get; set; }
 
         public override int FinishedLeaderID { get { return (this.FinishedLeader != null ? this.FinishedLeader.EmployeeID : 0); } }
-        [Display(Name = "Nhân viên kho")]
+        [Display(Name = "Tổ trưởng TP")]
         [UIHint("AutoCompletes/EmployeeBase")]
         public EmployeeBaseDTO FinishedLeader { get; set; }
 

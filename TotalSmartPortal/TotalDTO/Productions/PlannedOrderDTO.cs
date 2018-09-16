@@ -59,9 +59,6 @@ namespace TotalDTO.Productions
             //var a = this.DtoDetails().Where(w => w.CombineIndex != null).GroupBy(g => new { g.CombineIndex, g.BomID }).ToLookup(g => g.Key, g => g.Count());
             var a = this.DtoDetails().Where(w => w.CombineIndex != null).GroupBy(g => g.BomID);
 
-
-            int c = 0;
-
             this.DtoDetails().ToList().ForEach(e => { e.CustomerID = this.CustomerID; e.Description = e.CombineIndex == null ? e.GetDescription() : string.Join(", ", this.DtoDetails().Where(w => w.CombineIndex == e.CombineIndex).Select(o => o.GetDescription())); });
         }
     }

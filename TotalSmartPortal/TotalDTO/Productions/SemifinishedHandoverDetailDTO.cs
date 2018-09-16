@@ -42,6 +42,6 @@ namespace TotalDTO.Productions
         public int CrucialWorkerID { get; set; }
         [Display(Name = "Công nhân")]
         [UIHint("StringReadonly")]
-        public int CrucialWorkerName { get; set; }
+        public string CrucialWorkerName { get; set; }
     }
 }
