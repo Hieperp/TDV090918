@@ -23,5 +23,7 @@ namespace TotalModel.Models
         public bool Approved { get; set; }
         public bool InActive { get; set; }
         public bool InActivePartial { get; set; }
+        public string CustomerName { get; set; }
+        public Nullable<System.DateTime> DeliveryDate { get; set; }
     }
 }

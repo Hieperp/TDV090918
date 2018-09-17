@@ -12257,6 +12257,8 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="Boolean" Name="Approved" Nullable="false" />
           <Property Type="Boolean" Name="InActive" Nullable="false" />
           <Property Type="Boolean" Name="InActivePartial" Nullable="false" />
+          <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="DeliveryDate" Nullable="true" Precision="23" />
         </ComplexType>
         <ComplexType Name="PlannedOrderViewDetail">
           <Property Type="Int32" Name="PlannedOrderDetailID" Nullable="false" />
@@ -17780,6 +17782,8 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="InActive" ColumnName="InActive" />
                 <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
