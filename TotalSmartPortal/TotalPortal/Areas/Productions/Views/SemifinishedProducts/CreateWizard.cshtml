@@ -135,8 +135,7 @@
             $("#FirmOrderID").val(selectedDataItem === undefined || selectedDataItem.FirmOrderID === undefined ? null : selectedDataItem.FirmOrderID);
             $("#FirmOrderCode").val(selectedDataItem === undefined || selectedDataItem.FirmOrderCode === undefined ? null : selectedDataItem.FirmOrderCode);
             $("#FirmOrderReference").val(selectedDataItem === undefined || selectedDataItem.FirmOrderReference === undefined ? null : selectedDataItem.FirmOrderReference);
-            $("#FirmOrderEntryDate").val(selectedDataItem === undefined || selectedDataItem.FirmOrderEntryDate === undefined ? null : kendo.toString(selectedDataItem.FirmOrderEntryDate, Settings.DateTimeFormat));
-            $("#FirmOrderSpecification").val(selectedDataItem === undefined || selectedDataItem.FirmOrderSpecification === undefined ? null : selectedDataItem.FirmOrderSpecification);
+            $("#FirmOrderEntryDate").val(selectedDataItem === undefined || selectedDataItem.FirmOrderEntryDate === undefined ? null : kendo.toString(selectedDataItem.FirmOrderEntryDate, Settings.DateTimeFormat));            
 
             $("#Customer_CustomerID").val(selectedDataItem === undefined || selectedDataItem.CustomerID === undefined ? null : selectedDataItem.CustomerID);
             $("#Customer_Code").val(selectedDataItem === undefined || selectedDataItem.CustomerCode === undefined ? null : selectedDataItem.CustomerCode);
@@ -166,6 +165,9 @@
             $("#MaterialName").val(selectedDataItem === undefined || selectedDataItem.MaterialName === undefined ? null : selectedDataItem.MaterialName);
             $("#MaterialQuantity").val(selectedDataItem === undefined || selectedDataItem.MaterialQuantity === undefined ? null : selectedDataItem.MaterialQuantity);
             $("#MaterialQuantityRemains").val(selectedDataItem === undefined || selectedDataItem.MaterialQuantityRemains === undefined ? null : selectedDataItem.MaterialQuantityRemains);
+
+            $("#GoodsReceiptReference").val(selectedDataItem === undefined || selectedDataItem.GoodsReceiptReference === undefined ? null : selectedDataItem.GoodsReceiptReference);
+            $("#GoodsReceiptEntryDate").val(selectedDataItem === undefined || selectedDataItem.GoodsReceiptEntryDate === undefined ? null : kendo.toString(selectedDataItem.GoodsReceiptEntryDate, Settings.DateTimeFormat));
             
             $("#GoodsReceiptID").val(selectedDataItem === undefined || selectedDataItem.GoodsReceiptID === undefined ? null : selectedDataItem.GoodsReceiptID);
             $("#GoodsReceiptDetailID").val(selectedDataItem === undefined || selectedDataItem.GoodsReceiptDetailID === undefined ? null : selectedDataItem.GoodsReceiptDetailID);

@@ -27,11 +27,16 @@
     @Html.HiddenFor(model => model.ProductionLineID)
     @Html.HiddenFor(model => model.ProductionLineCode)
     @Html.HiddenFor(model => model.WorkshiftCode)
+    @Html.HiddenFor(model => model.WorkshiftEntryDate)
     
+
     @Html.HiddenFor(model => model.MaterialCode)
     @Html.HiddenFor(model => model.MaterialName)
     @Html.HiddenFor(model => model.MaterialQuantity)
     @Html.HiddenFor(model => model.MaterialQuantityRemains)
+
+    @Html.HiddenFor(model => model.GoodsReceiptReference)
+    @Html.HiddenFor(model => model.GoodsReceiptEntryDate)
 
 
     <div class="left-panel">
