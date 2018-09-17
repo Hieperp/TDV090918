@@ -104,7 +104,7 @@
 
         return $.ajax({
             url: '@Url.Action("AddCommodityMold", "MoldAPIs", new { area = "Commons" })',
-            data: JSON.stringify({ "moldID": $("#Mold_MoldID").val(), "commodityID": $("#CommodityID").val() }),
+            data: JSON.stringify({ "moldID": $("#Mold_MoldID").val(), "commodityID": $("#CommodityID").val(), "quantity": $("#Mold_Quantity").val() }),
 
             type: 'POST',
             contentType: 'application/json;',

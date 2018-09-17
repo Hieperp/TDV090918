@@ -4594,6 +4594,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
         <Function Name="AddCommodityMold" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CommodityID" Type="int" Mode="In" />
           <Parameter Name="MoldID" Type="int" Mode="In" />
+          <Parameter Name="Quantity" Type="decimal" Mode="In" />
         </Function>
         <Function Name="AddPromotionCustomerCategories" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PromotionID" Type="int" Mode="In" />
@@ -10692,6 +10693,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <FunctionImport Name="AddCommodityMold">
             <Parameter Name="CommodityID" Mode="In" Type="Int32" />
             <Parameter Name="MoldID" Mode="In" Type="Int32" />
+            <Parameter Name="Quantity" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="UpdateCommodityMold">
             <Parameter Name="CommodityMoldID" Mode="In" Type="Int32" />
@@ -12092,7 +12094,6 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Reference" Nullable="false" MaxLength="10" />
           <Property Type="Decimal" Name="Quantity" Nullable="false" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="MoldQuantity" Nullable="false" Precision="18" Scale="2" />
           </ComplexType>
         <ComplexType Name="ProductionLineBase">
           <Property Type="Int32" Name="ProductionLineID" Nullable="false" />
@@ -14441,6 +14442,13 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="Boolean" Name="IsSelected" Nullable="true" />
           <Property Type="Int32" Name="BatchID" Nullable="true" />
           <Property Type="DateTime" Name="BatchEntryDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="OfficialCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CodePartA" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="CodePartB" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="CodePartC" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="CodePartD" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="CodePartE" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="CodePartF" Nullable="true" MaxLength="20" />
         </ComplexType>
         <EntityType Name="Mold">
           <Key>
@@ -17677,7 +17685,6 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Reference" ColumnName="Reference" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="MoldQuantity" ColumnName="MoldQuantity" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -18794,6 +18801,13 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
                 <ScalarProperty Name="BatchID" ColumnName="BatchID" />
                 <ScalarProperty Name="BatchEntryDate" ColumnName="BatchEntryDate" />
+                <ScalarProperty Name="OfficialCode" ColumnName="OfficialCode" />
+                <ScalarProperty Name="CodePartA" ColumnName="CodePartA" />
+                <ScalarProperty Name="CodePartB" ColumnName="CodePartB" />
+                <ScalarProperty Name="CodePartC" ColumnName="CodePartC" />
+                <ScalarProperty Name="CodePartD" ColumnName="CodePartD" />
+                <ScalarProperty Name="CodePartE" ColumnName="CodePartE" />
+                <ScalarProperty Name="CodePartF" ColumnName="CodePartF" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -14,7 +14,7 @@ namespace TotalCore.Repositories.Commons
 
         IList<CommodityMold> GetCommodityMolds(int commodityID);
 
-        void AddCommodityMold(int? moldID, int? commodityID);
+        void AddCommodityMold(int? moldID, int? commodityID, decimal quantity);
 
         void RemoveCommodityMold(int? commodityMoldID);
 

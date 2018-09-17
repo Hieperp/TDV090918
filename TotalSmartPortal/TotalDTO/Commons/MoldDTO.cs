@@ -11,6 +11,7 @@ namespace TotalDTO.Commons
         [Required(ErrorMessage = "Vui lòng nhập khuôn")]
         string Code { get; set; }
         string Name { get; set; }
+        decimal Quantity { get; set; }
     }
 
     public class MoldBaseDTO : BaseDTO, IMoldBaseDTO
@@ -18,6 +19,7 @@ namespace TotalDTO.Commons
         public Nullable<int> MoldID { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
+        public decimal Quantity { get; set; }
     }
 
     public class MoldDTO

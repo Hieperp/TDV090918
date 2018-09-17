@@ -93,14 +93,14 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
         {
             string queryString;
 
-            queryString = " @CommodityID int, @MoldID int " + "\r\n";
+            queryString = " @CommodityID int, @MoldID int, @Quantity decimal(18, 2)" + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
             queryString = queryString + "       DECLARE         @COUNTCommodityMoldID int = (SELECT COUNT(CommodityMoldID) FROM CommodityMolds WHERE CommodityID = @CommodityID) " + "\r\n";
 
             queryString = queryString + "       INSERT INTO     CommodityMolds  (CommodityID, MoldID, EntryDate, Quantity, Remarks, IsDefault, InActive) " + "\r\n";
-            queryString = queryString + "       VALUES                          (@CommodityID, @MoldID, GETDATE(), 1, NULL, IIF(@COUNTCommodityMoldID = 0, 1, 0), 0) " + "\r\n";
+            queryString = queryString + "       VALUES                          (@CommodityID, @MoldID, GETDATE(), @Quantity, NULL, IIF(@COUNTCommodityMoldID = 0, 1, 0), 0) " + "\r\n";
             queryString = queryString + "    END " + "\r\n";
 
             this.totalSmartPortalEntities.CreateStoredProcedure("AddCommodityMold", queryString);
@@ -152,7 +152,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
         {
             string queryString;
 
-            string querySELECT = "              SELECT      Molds.MoldID, Molds.Code, Molds.Name, Molds.Reference, Molds.Quantity " + " \r\n";
+            string querySELECT = "              SELECT      Molds.MoldID, Molds.Code, Molds.Name, Molds.Reference " + " \r\n";
             string queryFROM = "                FROM        Molds " + "\r\n";
             string queryWHERE = "               WHERE       Molds.InActive = 0 AND (@SearchText = '' OR Molds.Code LIKE '%' + @SearchText + '%' OR Molds.OfficialCode LIKE '%' + @SearchText + '%' OR Molds.Name LIKE '%' + @SearchText + '%' OR Molds.Reference LIKE '%' + @SearchText + '%')  " + "\r\n";
 
@@ -162,11 +162,11 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             queryString = queryString + "    BEGIN " + "\r\n";
 
             queryString = queryString + "       IF (@CommodityID > 0) " + "\r\n"; //GET ALL MOLDS BY @CommodityID
-            queryString = queryString + "           " + querySELECT + ", CommodityMolds.Quantity AS MoldQuantity " + "\r\n";
+            queryString = queryString + "           " + querySELECT + ", CommodityMolds.Quantity " + "\r\n";
             queryString = queryString + "           " + queryFROM + " INNER JOIN CommodityMolds ON CommodityMolds.CommodityID = @CommodityID AND Molds.MoldID = CommodityMolds.MoldID " + "\r\n";
             queryString = queryString + "           " + queryWHERE + "\r\n";
             queryString = queryString + "       ELSE " + "\r\n"; //GET ALL MOLDS
-            queryString = queryString + "           " + querySELECT + ", 0.0 AS MoldQuantity " + "\r\n";
+            queryString = queryString + "           " + querySELECT + ", Molds.Quantity " + "\r\n";
             queryString = queryString + "           " + queryFROM + "\r\n";
             queryString = queryString + "           " + queryWHERE + "\r\n";
 

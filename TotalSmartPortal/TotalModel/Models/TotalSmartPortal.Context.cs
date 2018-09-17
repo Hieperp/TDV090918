@@ -3166,7 +3166,7 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RemoveCommodityMold", commodityMoldIDParameter);
         }
     
-        public virtual int AddCommodityMold(Nullable<int> commodityID, Nullable<int> moldID)
+        public virtual int AddCommodityMold(Nullable<int> commodityID, Nullable<int> moldID, Nullable<decimal> quantity)
         {
             var commodityIDParameter = commodityID.HasValue ?
                 new ObjectParameter("CommodityID", commodityID) :
@@ -3176,7 +3176,11 @@ namespace TotalModel.Models
                 new ObjectParameter("MoldID", moldID) :
                 new ObjectParameter("MoldID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddCommodityMold", commodityIDParameter, moldIDParameter);
+            var quantityParameter = quantity.HasValue ?
+                new ObjectParameter("Quantity", quantity) :
+                new ObjectParameter("Quantity", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AddCommodityMold", commodityIDParameter, moldIDParameter, quantityParameter);
         }
     
         public virtual int UpdateCommodityMold(Nullable<int> commodityMoldID, Nullable<int> commodityID, Nullable<decimal> quantity, string remarks, Nullable<bool> isDefault)

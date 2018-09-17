@@ -29,5 +29,12 @@ namespace TotalModel.Models
         public Nullable<bool> IsSelected { get; set; }
         public Nullable<int> BatchID { get; set; }
         public Nullable<System.DateTime> BatchEntryDate { get; set; }
+        public string OfficialCode { get; set; }
+        public string CodePartA { get; set; }
+        public string CodePartB { get; set; }
+        public string CodePartC { get; set; }
+        public string CodePartD { get; set; }
+        public string CodePartE { get; set; }
+        public string CodePartF { get; set; }
     }
 }

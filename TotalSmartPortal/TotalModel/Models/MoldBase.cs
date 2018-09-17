@@ -18,6 +18,5 @@ namespace TotalModel.Models
         public string Name { get; set; }
         public string Reference { get; set; }
         public decimal Quantity { get; set; }
-        public decimal MoldQuantity { get; set; }
     }
 }

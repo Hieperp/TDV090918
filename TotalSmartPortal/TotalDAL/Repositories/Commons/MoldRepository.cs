@@ -38,9 +38,9 @@ namespace TotalDAL.Repositories.Commons
             return this.TotalSmartPortalEntities.GetCommodityMolds(commodityID).ToList();
         }
 
-        public void AddCommodityMold(int? moldID, int? commodityID)
+        public void AddCommodityMold(int? moldID, int? commodityID, decimal quantity)
         {
-            ObjectParameter[] parameters = new ObjectParameter[] { new ObjectParameter("MoldID", moldID), new ObjectParameter("CommodityID", commodityID) };
+            ObjectParameter[] parameters = new ObjectParameter[] { new ObjectParameter("MoldID", moldID), new ObjectParameter("CommodityID", commodityID), new ObjectParameter("Quantity", quantity) };
             this.ExecuteFunction("AddCommodityMold", parameters);
         }
 
