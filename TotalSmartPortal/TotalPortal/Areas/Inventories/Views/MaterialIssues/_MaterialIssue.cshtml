@@ -30,30 +30,15 @@
 
         @Html.HiddenFor(model => model.FirmOrderID)
 
-
         @Html.HiddenFor(model => model.ProductionLineID)
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProductionLineCode)
-            <div class="div-input">
-                @Html.Kendo().MaskedTextBoxFor(model => model.ProductionLineCode).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
-            </div>
-            <div class="div-validation-message">
-                @Html.ValidationMessageFor(model => model.ProductionLineCode, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.WorkshiftCode)
-            <div class="div-input">
-                @Html.Kendo().TextBoxFor(p => p.WorkshiftCode).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
-            </div>
-        </div>    
+        @Html.HiddenFor(model => model.ProductionLineCode)
+        @Html.HiddenFor(model => model.WorkshiftCode)
+               
 
         <div class="SBT-Hidden">
             @Html.EditorFor(d => d.Warehouse, new { WarehouseDisplayName = @Model.GetDisplayName(m => m.Warehouse) })
         </div>
         
-
 
         @if (Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.FirmOrders)
         {
@@ -93,32 +78,47 @@
             @Html.EditorFor(d => d.Storekeeper, new { EmployeeDisplayName = @Model.GetDisplayName(m => m.Storekeeper) })
         </div>
 
+        <div class="form-group">
+            @Html.EditorFor(d => d.CrucialWorker, new { EmployeeDisplayName = @Model.GetDisplayName(m => m.CrucialWorker) })
+        </div>
+
     </div>
 
     <div class="right-panel">
 
-        <div class="right-top-panel right-top-panel-H2">
+        <div class="right-top-panel right-top-panel-H1">
 
             @Html.EditorFor(d => d.Customer, new { CustomerDisplayName = @Model.GetDisplayName(m => m.Customer), CustomerIcon = "Customer Red 24.png", NullCustomer = (Model.CustomerID > 0 ? null : "Lệnh sản xuất tổng hợp của nhiều khách hàng"), CustomerInfo = (Model.CustomerID > 0 ? null : "#") })
 
             <div class="form-group">
                 <div class="right-panel-label right-panel-label-whole-width">
+                    @Html.LabelFor(model => model.WorkDescription)
+                </div>
+                <div class="div-input">
+                    @Html.Kendo().MaskedTextBoxFor(model => model.WorkDescription).HtmlAttributes(new { @class = "right-panel-input", @readonly = "readonly" })
+                </div>
+                <div class="div-validation-message">
+                    @Html.ValidationMessageFor(model => model.WorkDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>                              
+            
+            <div class="form-group">
+                <div class="right-panel-label right-panel-label-whole-width">
                     @Html.LabelFor(model => model.FirmOrderSpecification)
                 </div>
                 <div class="div-input">
-                    @Html.Kendo().MaskedTextBoxFor(model => model.FirmOrderSpecification).HtmlAttributes(new { @class = "right-panel-input", @readonly = "readonly" })
+                    @Html.Kendo().MaskedTextBoxFor(model => model.FirmOrderSpecification).HtmlAttributes(new { @class = "right-panel-input-whole-width", @readonly = "readonly" })
                 </div>
                 <div class="div-validation-message">
                     @Html.ValidationMessageFor(model => model.FirmOrderSpecification, "", new { @class = "text-danger" })
                 </div>
-            </div>   
+            </div>      
             
-
-            <div id="show-current-PriceCategory" style="float: right; margin-top: -120px; text-align: center; width: 110px; height: 110px; " title="Kho hàng">
+            <div id="show-current-PriceCategory" style="float: right; margin-top: -170px; text-align: center; width: 110px; height: 110px; " title="Kho hàng">
                 <div style="height: 90px; padding-left: 22px; padding-right: 22px; padding-top: 32px;">                    
                      <span style="color:blue;" id="label_WarehouseCode"> @Html.Label(@Model.Warehouse.Code) </span>
                 </div>
-            </div>                         
+            </div>                 
         </div>
 
 
@@ -140,10 +140,10 @@
 
                     columns.Bound(p => p.CommodityID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= CommodityID #" + "<input type='hidden' name='MaterialIssueViewDetails[#= index(data) #].CommodityID' value='#= CommodityID #' />");                    
-                    columns.Bound(p => p.CommodityCode).DisplayNameTitle().Width(100).EditorTemplateName(Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.FirmOrders ? "StringReadonly" : "AutoCompletes/CommodityAvailable")
+                    columns.Bound(p => p.CommodityCode).DisplayNameTitle().Width(200).EditorTemplateName(Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.FirmOrders ? "StringReadonly" : "AutoCompletes/CommodityAvailable")
                         .ClientTemplate("#= CommodityCode #" + "<input type='hidden' name='MaterialIssueViewDetails[#= index(data) #].CommodityCode' value='#= CommodityCode #' />")
                         .ClientFooterTemplate("Tổng cộng (#= kendo.format('{0:n0}', count) # dòng)");
-                    columns.Bound(p => p.CommodityName).DisplayNameTitle().Width(130).HtmlAttributes(new { style = "" })
+                    columns.Bound(p => p.CommodityName).DisplayNameTitle().Width(280).HtmlAttributes(new { style = "" })
                         .ClientTemplate("#= CommodityName #" + "<input type='hidden' name='MaterialIssueViewDetails[#= index(data) #].CommodityName' value='#= CommodityName #' />");
 
                     columns.Bound(p => p.CommodityTypeID).DisplayNameTitle().Hidden()
@@ -156,13 +156,19 @@
                     columns.Bound(p => p.GoodsReceiptDetailID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= (GoodsReceiptDetailID == null)? '' : GoodsReceiptDetailID #" + "<input type='hidden' name='MaterialIssueViewDetails[#= index(data) #].GoodsReceiptDetailID' value='#= (GoodsReceiptDetailID == null) ? '' : GoodsReceiptDetailID #' />");
 
-                    columns.Bound(p => p.GoodsReceiptCode).DisplayNameTitle().Width(40).Hidden()
+                    columns.Bound(p => p.GoodsReceiptCode).DisplayNameTitle().Width(60).Hidden()
                         .ClientTemplate("#= (GoodsReceiptCode == null)? '' : GoodsReceiptCode #" + "<input type='hidden' name='MaterialIssueViewDetails[#= index(data) #].GoodsReceiptCode' value='#= (GoodsReceiptCode == null) ? '' : GoodsReceiptCode #' />");
-                    columns.Bound(p => p.GoodsReceiptReference).DisplayNameTitle().Width(40)//.Hidden(Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.FirmOrders && @Model.PlannedOrderID == null ? false : true)
+                    columns.Bound(p => p.GoodsReceiptReference).DisplayNameTitle().Width(60)//.Hidden(Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.FirmOrders && @Model.PlannedOrderID == null ? false : true)
                         .ClientTemplate("#= (GoodsReceiptReference == null)? '' : GoodsReceiptReference #" + "<input type='hidden' name='MaterialIssueViewDetails[#= index(data) #].GoodsReceiptReference' value='#= (GoodsReceiptReference == null) ? '' : GoodsReceiptReference #' />");
-                    columns.Bound(p => p.GoodsReceiptEntryDate).DisplayNameTitle().Width(50)//.Hidden(Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.FirmOrders && @Model.PlannedOrderID == null ? false : true)
+                    columns.Bound(p => p.GoodsReceiptEntryDate).DisplayNameTitle().Width(80)//.Hidden(Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.FirmOrders && @Model.PlannedOrderID == null ? false : true)
                         .Format("{0:" + @Settings.DateFormat + "}")
-                        .ClientTemplate("#= (GoodsReceiptEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', GoodsReceiptEntryDate) #" + "<input type='hidden' name='MaterialIssueViewDetails[#= index(data) #].GoodsReceiptEntryDate' value='#= (GoodsReceiptEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', GoodsReceiptEntryDate) #' />");              
+                        .ClientTemplate("#= (GoodsReceiptEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', GoodsReceiptEntryDate) #" + "<input type='hidden' name='MaterialIssueViewDetails[#= index(data) #].GoodsReceiptEntryDate' value='#= (GoodsReceiptEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', GoodsReceiptEntryDate) #' />");
+
+                    columns.Bound(p => p.BatchID).DisplayNameTitle().Filterable(false).Hidden()
+                        .ClientTemplate("#= BatchID #" + "<input type='hidden' name='WarehouseAdjustmentViewDetails[#= index(data) #].BatchID' value='#= BatchID #' />");
+                    columns.Bound(p => p.BatchEntryDate).DisplayNameTitle().Filterable(false).Width(80)
+                        .Format("{0:" + @Settings.DateFormat + "}")
+                        .ClientTemplate("#= (BatchEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', BatchEntryDate) #" + "<input type='hidden' name='WarehouseAdjustmentViewDetails[#= index(data) #].BatchEntryDate' value='#= (BatchEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', BatchEntryDate) #' />");
 
                     columns.Bound(p => p.WorkshiftFirmOrderRemains).DisplayNameTitle().Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Hidden(Model.MaterialIssueTypeID == (int)GlobalEnums.MaterialIssueTypeID.FirmOrders ? false : true)
                         .Format(Settings.kfmQuantity)

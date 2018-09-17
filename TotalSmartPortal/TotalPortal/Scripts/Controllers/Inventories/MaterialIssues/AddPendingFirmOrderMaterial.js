@@ -64,6 +64,9 @@ function handleOKEvent(materialIssueGridDataSource, pendingProductionOrderDetail
         dataRow.QuantityRemains = productionOrderGridDataItem.QuantityRemains;
         dataRow.Quantity = productionOrderGridDataItem.Quantity;
 
+        dataRow.BatchID = productionOrderGridDataItem.BatchID;
+        dataRow.BatchEntryDate = productionOrderGridDataItem.BatchEntryDate;
+
         dataRow.Remarks = null;
 
 

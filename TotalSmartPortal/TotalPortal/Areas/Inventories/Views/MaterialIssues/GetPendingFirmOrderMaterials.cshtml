@@ -16,6 +16,7 @@
         //columns.Bound(p => p.CodePartF).Title("Chiều rộng").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(12);
         columns.Bound(c => c.GoodsReceiptReference).Title("Lô").Width(30);
         columns.Bound(c => c.GoodsReceiptEntryDate).Title("Ngày").Width(30).Format("{0:" + Settings.DateFormat + "}");
+        columns.Bound(c => c.BatchEntryDate).Title("Ngày lô hàng").Width(30).Format("{0:" + Settings.DateFormat + "}");
         columns.Bound(c => c.WorkshiftFirmOrderRemains).Title("Tồn Đơn").Format(Settings.kfmQuantity).Width(20).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
         columns.Bound(c => c.QuantityAvailables).Title("Tồn Kho").Format(Settings.kfmQuantity).Width(20).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
 

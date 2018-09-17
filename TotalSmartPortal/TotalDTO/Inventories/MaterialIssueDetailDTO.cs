@@ -44,8 +44,12 @@ namespace TotalDTO.Inventories
         public string GoodsReceiptCode { get; set; }
         [Display(Name = "Ngày NK")]
         [UIHint("DateTimeReadonly")]
-        public Nullable<System.DateTime> GoodsReceiptEntryDate { get; set; }   
+        public Nullable<System.DateTime> GoodsReceiptEntryDate { get; set; }
 
+        public int BatchID { get; set; }
+        [Display(Name = "Ngày lô hàng")]
+        [UIHint("DateTimeReadonly")]
+        public System.DateTime BatchEntryDate { get; set; }
 
         [Display(Name = "Tồn LSX")]
         [UIHint("QuantityReadonly")]

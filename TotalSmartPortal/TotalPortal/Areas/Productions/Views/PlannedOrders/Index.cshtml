@@ -9,11 +9,13 @@
             {
                 columns.Bound(p => p.PlannedOrderID).DisplayNameTitle().Hidden();
                 columns.Bound(p => p.LocationCode).Title("CN").Hidden().Width(1);
-                columns.Bound(p => p.EntryDate).Title("Ngày").Format("{0:dd/MM/yyyy}").Width(90).Filterable(false);
-
-                columns.Bound(p => p.Reference).Title("Số phiếu").Width(10).Filterable(false).ClientTemplate("<a href='" + Url.RouteUrl("Default", new { controller = "Productions/PlannedOrders", action = "Edit" }) + "/#= PlannedOrderID #'>#=Reference#</a>");                
-                columns.Bound(p => p.Code).Title("Số ĐH").Width(10).Filterable(false);
-                columns.Bound(p => p.Description).Title("Diễn giải").Width(120);
+                columns.Bound(p => p.EntryDate).Title("Ngày").Format("{0:dd/MM/yyyy}").Width(20).Filterable(false);
+                
+                columns.Bound(p => p.Reference).Title("Số phiếu").Width(40).Filterable(false).ClientTemplate("<a href='" + Url.RouteUrl("Default", new { controller = "Productions/PlannedOrders", action = "Edit" }) + "/#= PlannedOrderID #'>#=Reference#</a>");
+                columns.Bound(p => p.DeliveryDate).Title("Ngày giao hàng").Format("{0:dd/MM/yyyy}").Width(40).Filterable(false);
+                columns.Bound(p => p.CustomerName).Title("Tên KH").Width(200).Filterable(false);
+                columns.Bound(p => p.Code).Title("Số chứng từ").Width(20).Filterable(false);
+                columns.Bound(p => p.Description).Title("Diễn giải").Width(200);
                 columns.Bound(p => p.VoidTypeName).Title("Hủy đh").Width(80);
 
                 columns.Template(model => null).HtmlAttributes(new { @class = "grid-column-center" }).Width(92)
@@ -24,7 +26,7 @@
                 toolbar.Template(@<text>                    
                     <button type="button" class="k-button" onclick="createWizard()"> <img src="~/Content/Images/Mains/Size24/folder-documents-icon-24.png" />  Lập phiếu kế hoạch sản xuất  </button>
                     <div class="toolbar" style="float: right;">
-                        <label>Nhập số đơn hàng hoặc tên khách hàng để tìm</label>
+                        <label>Nhập số phiếu, số chừng từ, hoặc tên khách hàng, diễn giải để tìm</label>
                         <input id="indexFilterText" class="k-textbox" style="text-align: center; " onkeyup="indexFilterText_KeyUp()" />
                     </div>
                 </text>);
@@ -105,10 +107,11 @@
                 logic: "or",
                 filters: [
                     { field: "Code", operator: "contains", value: indexFilterText },
-                    { field: "Reference", operator: "contains", value: indexFilterText }
+                    { field: "Reference", operator: "contains", value: indexFilterText },
+                    { field: "CustomerName", operator: "contains", value: indexFilterText },
+                    { field: "Description", operator: "contains", value: indexFilterText }
                 ]
-            });
-
+            });                                    
 
         } else {
             if (gridDetails.dataSource.filter() != undefined)

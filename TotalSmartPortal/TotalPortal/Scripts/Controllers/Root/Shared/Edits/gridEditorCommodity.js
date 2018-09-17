@@ -43,18 +43,18 @@
             }
 
             currentDataSourceRow.set("DiscountPercent", dataItem.DiscountPercent);
-
+            
             if (currentDataSourceRow.BomID != undefined)
             {
                 currentDataSourceRow.set("BomID", dataItem.BomID);
                 currentDataSourceRow.set("BomCode", dataItem.BomCode);
-                currentDataSourceRow.set("BlockUnit", dataItem.BlockUnit);
-                currentDataSourceRow.set("BlockQuantity", dataItem.BlockQuantity);
+                currentDataSourceRow.set("BlockUnit", dataItem.BlockUnit === null ? 0 : dataItem.BlockUnit);
+                currentDataSourceRow.set("BlockQuantity", dataItem.BlockQuantity === null ? 0 : dataItem.BlockQuantity);
             }
             if (currentDataSourceRow.MoldID != undefined) {
                 currentDataSourceRow.set("MoldID", dataItem.MoldID);
                 currentDataSourceRow.set("MoldCode", dataItem.MoldCode);
-                currentDataSourceRow.set("MoldQuantity", dataItem.MoldQuantity);
+                currentDataSourceRow.set("MoldQuantity", dataItem.MoldQuantity === null ? 0 : dataItem.MoldQuantity);
             }
         }
 

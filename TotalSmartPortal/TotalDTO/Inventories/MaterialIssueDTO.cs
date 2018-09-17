@@ -32,11 +32,11 @@ namespace TotalDTO.Inventories
         public int PlannedOrderID { get; set; }
 
         public int FirmOrderID { get; set; }
-        [Display(Name = "Số KHSX")]
+        [Display(Name = "Số chứng từ KHSX")]
         public string FirmOrderReference { get; set; }
-        [Display(Name = "Mã KHSX")]
+        [Display(Name = "Mã chứng từ KHSX")]
         public string FirmOrderCode { get; set; }
-        [Display(Name = "Ngày KHSX")]
+        [Display(Name = "Ngày chứng từ KHSX")]
         public DateTime FirmOrderEntryDate { get; set; }
         [Display(Name = "Thành phẩm khay")]
         public string FirmOrderSpecification { get; set; }
@@ -59,6 +59,8 @@ namespace TotalDTO.Inventories
         public virtual Nullable<int> WarehouseID { get; set; }
 
         public virtual int StorekeeperID { get; set; }
+
+        public virtual int CrucialWorkerID { get; set; }        
 
         public override void PerformPresaveRule()
         {
@@ -91,6 +93,13 @@ namespace TotalDTO.Inventories
         [UIHint("AutoCompletes/EmployeeBase")]
         public EmployeeBaseDTO Storekeeper { get; set; }
 
+        public override int CrucialWorkerID { get { return (this.CrucialWorker != null ? this.CrucialWorker.EmployeeID : 0); } }
+        [Display(Name = "Công nhân đứng máy")]
+        [UIHint("AutoCompletes/EmployeeBase")]
+        public EmployeeBaseDTO CrucialWorker { get; set; }
+
+        [Display(Name = "Mã số máy, ca sx")]
+        public string WorkDescription { get { return this.ProductionLineCode + ", " + this.WorkshiftCode + " [" + this.WorkshiftEntryDate.ToString("dd/MM/yyyy") + "]"; } }
 
         public List<MaterialIssueDetailDTO> MaterialIssueViewDetails { get; set; }
         public List<MaterialIssueDetailDTO> ViewDetails { get { return this.MaterialIssueViewDetails; } set { this.MaterialIssueViewDetails = value; } }
