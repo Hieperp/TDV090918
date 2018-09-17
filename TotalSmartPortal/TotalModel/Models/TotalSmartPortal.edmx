@@ -14430,6 +14430,8 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="Decimal" Name="QuantityAvailables" Nullable="true" Precision="19" Scale="2" />
           <Property Type="Int32" Name="Quantity" Nullable="false" />
           <Property Type="Boolean" Name="IsSelected" Nullable="true" />
+          <Property Type="Int32" Name="BatchID" Nullable="true" />
+          <Property Type="DateTime" Name="BatchEntryDate" Nullable="true" Precision="23" />
         </ComplexType>
         <EntityType Name="Mold">
           <Key>
@@ -18774,6 +18776,8 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="QuantityAvailables" ColumnName="QuantityAvailables" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+                <ScalarProperty Name="BatchEntryDate" ColumnName="BatchEntryDate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

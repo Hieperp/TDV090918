@@ -169,7 +169,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             string queryString = "";
 
             queryString = queryString + "       SELECT      FirmOrderMaterials.FirmOrderMaterialID, Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, " + "\r\n";
-            queryString = queryString + "                   GoodsReceiptDetails.GoodsReceiptID, GoodsReceiptDetails.GoodsReceiptDetailID, GoodsReceipts.EntryDate AS GoodsReceiptEntryDate, GoodsReceipts.Reference AS GoodsReceiptReference, GoodsReceipts.Code AS GoodsReceiptCode, " + "\r\n";
+            queryString = queryString + "                   GoodsReceiptDetails.GoodsReceiptID, GoodsReceiptDetails.GoodsReceiptDetailID, GoodsReceipts.Reference AS GoodsReceiptReference, GoodsReceipts.Code AS GoodsReceiptCode, GoodsReceipts.EntryDate AS GoodsReceiptEntryDate, GoodsReceiptDetails.BatchID, GoodsReceiptDetails.BatchEntryDate, " + "\r\n";
             queryString = queryString + "                   ROUND(FirmOrderMaterials.Quantity - FirmOrderMaterials.QuantityIssued, " + (int)GlobalEnums.rndQuantity + ") AS FirmOrderRemains, ROUND(GoodsReceiptDetails.Quantity - GoodsReceiptDetails.QuantityIssued, " + (int)GlobalEnums.rndQuantity + ") AS QuantityAvailables, 0 AS Quantity, CAST(0 AS bit) AS IsSelected " + "\r\n";
 
             queryString = queryString + "       FROM        FirmOrderMaterials " + "\r\n";
@@ -186,7 +186,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             string queryString = "";
 
             queryString = queryString + "       SELECT      FirmOrderMaterials.FirmOrderMaterialID, Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, " + "\r\n";
-            queryString = queryString + "                   GoodsReceiptDetails.GoodsReceiptID, GoodsReceiptDetails.GoodsReceiptDetailID, GoodsReceipts.EntryDate AS GoodsReceiptEntryDate, GoodsReceipts.Reference AS GoodsReceiptReference, GoodsReceipts.Code AS GoodsReceiptCode, " + "\r\n";
+            queryString = queryString + "                   GoodsReceiptDetails.GoodsReceiptID, GoodsReceiptDetails.GoodsReceiptDetailID, GoodsReceipts.Reference AS GoodsReceiptReference, GoodsReceipts.Code AS GoodsReceiptCode, GoodsReceipts.EntryDate AS GoodsReceiptEntryDate, GoodsReceiptDetails.BatchID, GoodsReceiptDetails.BatchEntryDate, " + "\r\n";
             queryString = queryString + "                   ROUND(FirmOrderMaterials.Quantity - FirmOrderMaterials.QuantityIssued + MaterialIssueDetails.Quantity, " + (int)GlobalEnums.rndQuantity + ") AS FirmOrderRemains, ROUND(GoodsReceiptDetails.Quantity - GoodsReceiptDetails.QuantityIssued + ISNULL(IssuedGoodsReceiptDetails.Quantity, 0), " + (int)GlobalEnums.rndQuantity + ") AS QuantityAvailables, 0 AS Quantity, CAST(0 AS bit) AS IsSelected " + "\r\n";
 
             queryString = queryString + "       FROM        FirmOrderMaterials " + "\r\n";
