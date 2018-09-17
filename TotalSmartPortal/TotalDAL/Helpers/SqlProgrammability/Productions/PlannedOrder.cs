@@ -45,10 +45,11 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
-            queryString = queryString + "       SELECT      PlannedOrders.PlannedOrderID, CAST(PlannedOrders.EntryDate AS DATE) AS EntryDate, PlannedOrders.Reference, PlannedOrders.Code, Locations.Code AS LocationCode, ISNULL(VoidTypes.Name, CASE PlannedOrders.InActivePartial WHEN 1 THEN N'Hủy một phần đh' ELSE N'' END) AS VoidTypeName, PlannedOrders.Description, PlannedOrders.Approved, PlannedOrders.InActive, PlannedOrders.InActivePartial " + "\r\n";
+            queryString = queryString + "       SELECT      PlannedOrders.PlannedOrderID, CAST(PlannedOrders.EntryDate AS DATE) AS EntryDate, PlannedOrders.Reference, PlannedOrders.Code, Customers.Name AS CustomerName, PlannedOrders.DeliveryDate, Locations.Code AS LocationCode, ISNULL(VoidTypes.Name, CASE PlannedOrders.InActivePartial WHEN 1 THEN N'Hủy một phần đh' ELSE N'' END) AS VoidTypeName, PlannedOrders.Description, PlannedOrders.Approved, PlannedOrders.InActive, PlannedOrders.InActivePartial " + "\r\n";
             queryString = queryString + "       FROM        PlannedOrders " + "\r\n";
             queryString = queryString + "                   INNER JOIN Locations ON PlannedOrders.EntryDate >= @FromDate AND PlannedOrders.EntryDate <= @ToDate AND PlannedOrders.OrganizationalUnitID IN (SELECT AccessControls.OrganizationalUnitID FROM AccessControls INNER JOIN AspNetUsers ON AccessControls.UserID = AspNetUsers.UserID WHERE AspNetUsers.Id = @AspUserID AND AccessControls.NMVNTaskID = " + (int)TotalBase.Enums.GlobalEnums.NmvnTaskID.PlannedOrder + " AND AccessControls.AccessLevel > 0) AND Locations.LocationID = PlannedOrders.LocationID " + "\r\n";
             queryString = queryString + "                   LEFT JOIN VoidTypes ON PlannedOrders.VoidTypeID = VoidTypes.VoidTypeID" + "\r\n";
+            queryString = queryString + "                   LEFT JOIN Customers ON PlannedOrders.CustomerID = Customers.CustomerID " + "\r\n";
             queryString = queryString + "       " + "\r\n";
 
             queryString = queryString + "    END " + "\r\n";
