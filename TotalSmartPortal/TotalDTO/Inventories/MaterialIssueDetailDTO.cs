@@ -47,7 +47,7 @@ namespace TotalDTO.Inventories
         public Nullable<System.DateTime> GoodsReceiptEntryDate { get; set; }   
 
 
-        [Display(Name = "Tồn đơn")]
+        [Display(Name = "Tồn LSX")]
         [UIHint("QuantityReadonly")]
         public decimal WorkshiftFirmOrderRemains { get; set; }
 

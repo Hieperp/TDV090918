@@ -77,6 +77,7 @@ namespace TotalModel.Models
         public int GetID() { return this.MaterialIssueID; }
 
         public virtual Employee Storekeeper { get { return this.Employee; } }
+        public virtual Employee CrucialWorker { get { return this.Employee1; } }
 
         public ICollection<MaterialIssueDetail> GetDetails() { return this.MaterialIssueDetails; }
     }
@@ -111,7 +112,7 @@ namespace TotalModel.Models
                 return this.FirmOrderRemains < workshiftQuantity ? this.FirmOrderRemains : workshiftQuantity;
             }
         }
-        public Nullable<decimal> QuantityRemains { get { return this.WorkshiftFirmOrderRemains < this.QuantityAvailables ? this.WorkshiftFirmOrderRemains : this.QuantityAvailables; } }
+        public Nullable<decimal> QuantityRemains { get { return this.QuantityAvailables; } } //NOW: ALLOW TO ISSUE A WHOLE ROLL OF TAPE        { get { return this.WorkshiftFirmOrderRemains < this.QuantityAvailables ? this.WorkshiftFirmOrderRemains : this.QuantityAvailables; } }
     }
 
 

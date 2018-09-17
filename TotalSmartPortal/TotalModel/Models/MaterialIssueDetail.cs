@@ -46,6 +46,7 @@ namespace TotalModel.Models
         public decimal QuantityRejected { get; set; }
         public string Remarks { get; set; }
         public bool Approved { get; set; }
+        public int CrucialWorkerID { get; set; }
     
         public virtual Commodity Commodity { get; set; }
         public virtual Customer Customer { get; set; }

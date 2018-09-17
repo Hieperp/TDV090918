@@ -298,6 +298,7 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_SemifinishedProductDetails_SemifinishedProducts" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_SemifinishedProducts_Workshifts" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_SemifinishedHandovers_Workshifts" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_MaterialIssues_Employees1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
