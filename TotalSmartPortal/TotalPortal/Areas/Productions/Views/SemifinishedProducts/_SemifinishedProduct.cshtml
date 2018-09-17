@@ -24,6 +24,16 @@
     @Html.HiddenFor(model => model.GoodsReceiptID)
     @Html.HiddenFor(model => model.GoodsReceiptDetailID)
 
+    @Html.HiddenFor(model => model.ProductionLineID)
+    @Html.HiddenFor(model => model.ProductionLineCode)
+    @Html.HiddenFor(model => model.WorkshiftCode)
+    
+    @Html.HiddenFor(model => model.MaterialCode)
+    @Html.HiddenFor(model => model.MaterialName)
+    @Html.HiddenFor(model => model.MaterialQuantity)
+    @Html.HiddenFor(model => model.MaterialQuantityRemains)
+
+
     <div class="left-panel">
 
         @Html.Partial("~/Views/Helpers/Bases/_BaseSectionLeftA.cshtml")
@@ -39,27 +49,7 @@
                 @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
             </div>
         </div>
-
-
-        @Html.HiddenFor(model => model.ProductionLineID)
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProductionLineCode)
-            <div class="div-input">
-                @Html.Kendo().MaskedTextBoxFor(model => model.ProductionLineCode).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
-            </div>
-            <div class="div-validation-message">
-                @Html.ValidationMessageFor(model => model.ProductionLineCode, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.WorkshiftCode)
-            <div class="div-input">
-                @Html.Kendo().TextBoxFor(p => p.WorkshiftCode).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
-            </div>
-        </div>
-
-
+    
 
         <div class="form-group">
             @Html.LabelFor(model => model.FirmOrderReference)
@@ -99,24 +89,36 @@
 
     <div class="right-panel">
 
-        <div class="right-top-panel right-top-panel-H2">
+        <div class="right-top-panel right-top-panel-H1">
 
             @Html.EditorFor(d => d.Customer, new { CustomerDisplayName = @Model.GetDisplayName(m => m.Customer), CustomerIcon = "Customer Red 24.png", NullCustomer = (Model.CustomerID > 0 ? null : "Lệnh sản xuất tổng hợp của nhiều khách hàng"), CustomerInfo = (Model.CustomerID > 0 ? null : "#") })
 
             <div class="form-group">
                 <div class="right-panel-label right-panel-label-whole-width">
-                    @Html.LabelFor(model => model.FirmOrderSpecification)
+                    @Html.LabelFor(model => model.WorkDescription)
                 </div>
                 <div class="div-input">
-                    @Html.Kendo().MaskedTextBoxFor(model => model.FirmOrderSpecification).HtmlAttributes(new { @class = "right-panel-input", @readonly = "readonly" })
+                    @Html.Kendo().MaskedTextBoxFor(model => model.WorkDescription).HtmlAttributes(new { @class = "right-panel-input", @readonly = "readonly" })
                 </div>
                 <div class="div-validation-message">
-                    @Html.ValidationMessageFor(model => model.FirmOrderSpecification, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.WorkDescription, "", new { @class = "text-danger" })
                 </div>
             </div>
 
+            <div class="form-group">
+                <div class="right-panel-label right-panel-label-whole-width">
+                    @Html.LabelFor(model => model.GoodsReceiptDescription)
+                </div>
+                <div class="div-input">
+                    @Html.Kendo().MaskedTextBoxFor(model => model.GoodsReceiptDescription).HtmlAttributes(new { @class = "right-panel-input-whole-width", @readonly = "readonly" })
+                </div>
+                <div class="div-validation-message">
+                    @Html.ValidationMessageFor(model => model.GoodsReceiptDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>      
 
-            <div id="show-current-PriceCategory" style="float: right; margin-top: -120px; text-align: center; width: 110px; height: 110px; " title="Kho hàng">
+
+            <div id="show-current-PriceCategory" style="float: right; margin-top: -170px; text-align: center; width: 110px; height: 110px; " title="Kho hàng">
                 <div style="height: 90px; padding-left: 22px; padding-right: 22px; padding-top: 32px;">
                     <span style="color:blue;" id=""> </span>
                 </div>

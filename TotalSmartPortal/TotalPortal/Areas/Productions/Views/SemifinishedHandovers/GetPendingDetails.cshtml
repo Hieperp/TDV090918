@@ -73,7 +73,7 @@
 
 <script>
     function filterText_KeyUp() {
-        var filterText = $("#filterText").val(), gridDetails = $("#gridPendingFirmOrders").data("kendoGrid");
+        var filterText = $("#filterText").val(), gridDetails = $("#gridPendingDetails").data("kendoGrid");
 
         if (filterText && filterText.length >= "@Settings.AutoCompleteMinLenght") {
             gridDetails.dataSource.filter({

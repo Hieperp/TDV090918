@@ -57,13 +57,15 @@
         {                       
             columns.Bound(c => c.FirmOrderCode).Title("Mã CT").Width(50);
             columns.Bound(c => c.FirmOrderReference).Title("Số KHSX").Width(50);
-            columns.Bound(c => c.FirmOrderEntryDate).Title("Ngày KHSX").Format("{0:dd/MM/yyyy}").Width(60).Filterable(false);
+            columns.Bound(c => c.FirmOrderEntryDate).Title("Ngày KHSX").Format("{0:dd/MM/yyyy}").Width(70).Filterable(false);
             columns.Bound(c => c.CustomerName).Title("Khách hàng").Width(100);            
             columns.Bound(c => c.WorkshiftCode).Title("Ca SX").Width(50);
             columns.Bound(c => c.ProductionLineCode).Title("Mã số máy").Width(50);
             columns.Bound(c => c.FirmOrderSpecification).Title("Thành phẩm khay").Width(140);
-            columns.Bound(c => c.WorkshiftEntryDate).Title("Ngày SX").Format("{0:dd/MM/yyyy}").Width(60).Filterable(false);            
-            columns.Bound(c => c.QuantityRemains).Title("Tồn đơn").Format(Settings.kfmQuantity).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
+            columns.Bound(c => c.WorkshiftEntryDate).Title("Ngày SX").Format("{0:dd/MM/yyyy}").Width(70).Filterable(false);
+            columns.Bound(c => c.MaterialCode).Title("Mã NVL").Width(80);            
+            columns.Bound(c => c.MaterialQuantityRemains).Title("Tồn NVL").Format(Settings.kfmQuantity).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
+            columns.Bound(c => c.MaterialQuantity).Title("SL").Format(Settings.kfmQuantity).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
             columns.Bound(c => c.GoodsReceiptEntryDate).Format("{0:dd/MM/yyyy}").Width(60).Filterable(false).Hidden();
         })
         .ToolBar(toolbar =>
@@ -160,7 +162,10 @@
             $("#ProductionLineID").val(selectedDataItem === undefined || selectedDataItem.ProductionLineID === undefined ? null : selectedDataItem.ProductionLineID);
             $("#ProductionLineCode").val(selectedDataItem === undefined || selectedDataItem.ProductionLineCode === undefined ? null : selectedDataItem.ProductionLineCode);
 
-            $("#QuantityRemains").val(selectedDataItem === undefined || selectedDataItem.QuantityRemains === undefined ? null : selectedDataItem.QuantityRemains);
+            $("#MaterialCode").val(selectedDataItem === undefined || selectedDataItem.MaterialCode === undefined ? null : selectedDataItem.MaterialCode);
+            $("#MaterialName").val(selectedDataItem === undefined || selectedDataItem.MaterialName === undefined ? null : selectedDataItem.MaterialName);
+            $("#MaterialQuantity").val(selectedDataItem === undefined || selectedDataItem.MaterialQuantity === undefined ? null : selectedDataItem.MaterialQuantity);
+            $("#MaterialQuantityRemains").val(selectedDataItem === undefined || selectedDataItem.MaterialQuantityRemains === undefined ? null : selectedDataItem.MaterialQuantityRemains);
             
             $("#GoodsReceiptID").val(selectedDataItem === undefined || selectedDataItem.GoodsReceiptID === undefined ? null : selectedDataItem.GoodsReceiptID);
             $("#GoodsReceiptDetailID").val(selectedDataItem === undefined || selectedDataItem.GoodsReceiptDetailID === undefined ? null : selectedDataItem.GoodsReceiptDetailID);
@@ -169,7 +174,7 @@
 
 
     function semifinishedProductPendingMaterialIssueDetailFilter_KeyUp() {
-        var semifinishedProductPendingMaterialIssueDetailFilter = $("#semifinishedProductPendingMaterialIssueDetailFilter").val(), gridDetails = $("#semifinishedProductPendingFirmOrderGrid").data("kendoGrid");
+        var semifinishedProductPendingMaterialIssueDetailFilter = $("#semifinishedProductPendingMaterialIssueDetailFilter").val(), gridDetails = $("#semifinishedProductPendingMaterialIssueDetailGrid").data("kendoGrid");
 
         if (semifinishedProductPendingMaterialIssueDetailFilter && semifinishedProductPendingMaterialIssueDetailFilter.length >= "@Settings.AutoCompleteMinLenght") {
             gridDetails.dataSource.filter({
@@ -180,7 +185,8 @@
                     { field: "CustomerName", operator: "contains", value: semifinishedProductPendingMaterialIssueDetailFilter },
                     { field: "WorkshiftCode", operator: "contains", value: semifinishedProductPendingMaterialIssueDetailFilter },
                     { field: "ProductionLineCode", operator: "contains", value: semifinishedProductPendingMaterialIssueDetailFilter },
-                    { field: "FirmOrderSpecification", operator: "contains", value: semifinishedProductPendingMaterialIssueDetailFilter }
+                    { field: "FirmOrderSpecification", operator: "contains", value: semifinishedProductPendingMaterialIssueDetailFilter },
+                    { field: "MaterialName", operator: "contains", value: semifinishedProductPendingMaterialIssueDetailFilter }
                 ]
             });
 

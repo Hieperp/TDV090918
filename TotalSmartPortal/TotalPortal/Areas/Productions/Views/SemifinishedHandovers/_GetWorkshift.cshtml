@@ -13,7 +13,7 @@
         toolbar.Template(@<text>
             <div class="toolbar" style="float: right;">
                 <label>Nhập mã</label>
-                <input id="semifinishedHandoverPendingPlannedOrderFilter" class="k-textbox" style="text-align: center; margin-right: 13px;" onkeyup="semifinishedHandoverPendingPlannedOrderFilter_KeyUp()" />
+                <input id="semifinishedHandoverPendingWorkshiftFilter" class="k-textbox" style="text-align: center; margin-right: 13px;" onkeyup="semifinishedHandoverPendingPlannedOrderFilter_KeyUp()" />
             </div>
         </text>);
     })
@@ -33,7 +33,7 @@
     }
 
     function semifinishedHandoverPendingPlannedOrderFilter_KeyUp() {
-        var semifinishedHandoverPendingPlannedOrderFilter = $("#semifinishedHandoverPendingPlannedOrderFilter").val(), gridDetails = $("#semifinishedHandoverPendingPlannedOrderGrid").data("kendoGrid");
+        var semifinishedHandoverPendingPlannedOrderFilter = $("#semifinishedHandoverPendingWorkshiftFilter").val(), gridDetails = $("#semifinishedHandoverPendingWorkshiftGrid").data("kendoGrid");
 
         if (semifinishedHandoverPendingPlannedOrderFilter && semifinishedHandoverPendingPlannedOrderFilter.length >= "@Settings.AutoCompleteMinLenght") {
             gridDetails.dataSource.filter({

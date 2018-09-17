@@ -105,8 +105,9 @@
             gridDetails.dataSource.filter({
                 logic: "or",
                 filters: [
-                    { field: "Code", operator: "contains", value: indexFilterText },
-                    { field: "Reference", operator: "contains", value: indexFilterText }
+                    { field: "Reference", operator: "contains", value: indexFilterText },
+                    { field: "WorkshiftCode", operator: "contains", value: indexFilterText },
+                    { field: "CustomerDescription", operator: "contains", value: indexFilterText }                                    
                 ]
             });
 

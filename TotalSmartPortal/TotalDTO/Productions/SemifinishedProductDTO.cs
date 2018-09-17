@@ -64,6 +64,12 @@ namespace TotalDTO.Productions
         [Display(Name = "Mã số máy")]
         public string ProductionLineCode { get; set; }
 
+        [Display(Name = "Mã số máy, ca sx")]
+        public string WorkDescription { get { return this.ProductionLineCode + ", " + this.WorkshiftCode + " [" + this.WorkshiftEntryDate.ToString("dd/MM/yyyy") + "]"; } }
+
+        [Display(Name = "Cuộn màng")]
+        public string GoodsReceiptDescription { get { return this.MaterialCode + ", " + this.GoodsReceiptReference + (this.GoodsReceiptEntryDate != null ? " [" + this.GoodsReceiptEntryDate.Value.ToString("dd/MM/yyyy") + "]" : "") + ", " + this.MaterialQuantity.ToString("N2"); } }
+
         public virtual int CrucialWorkerID { get; set; }
 
         public decimal TotalQuantityIssue { get; set; }
