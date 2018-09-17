@@ -268,9 +268,6 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_FirmOrderMaterials_FirmOrders" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_FirmOrderMaterials_VoidTypes" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_MaterialIssueDetails_FirmOrderMaterials" />
-        <EntityTypeShape EntityType="TotalSmartPortalModel.Mold" Width="1.5" PointX="3.375" PointY="5" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_FirmOrderDetails_Molds" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_PlannedOrderDetails_Molds" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.SemifinishedHandoverDetail" Width="1.5" PointX="56.625" PointY="21" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.SemifinishedHandover" Width="1.5" PointX="10.25" PointY="17" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.SemifinishedProductDetail" Width="1.5" PointX="54.375" PointY="24.5" />
@@ -299,6 +296,9 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_SemifinishedProducts_Workshifts" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_SemifinishedHandovers_Workshifts" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_MaterialIssues_Employees1" />
+        <EntityTypeShape EntityType="TotalSmartPortalModel.Mold" Width="1.5" PointX="3.375" PointY="5" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_FirmOrderDetails_Molds" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_PlannedOrderDetails_Molds" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

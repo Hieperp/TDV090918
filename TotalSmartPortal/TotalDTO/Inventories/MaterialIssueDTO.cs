@@ -32,13 +32,13 @@ namespace TotalDTO.Inventories
         public int PlannedOrderID { get; set; }
 
         public int FirmOrderID { get; set; }
-        [Display(Name = "Số chứng từ KHSX")]
+        [Display(Name = "Số KHSX")]
         public string FirmOrderReference { get; set; }
-        [Display(Name = "Mã chứng từ KHSX")]
+        [Display(Name = "Mã chứng từ")]
         public string FirmOrderCode { get; set; }
-        [Display(Name = "Ngày chứng từ KHSX")]
+        [Display(Name = "Ngày KHSX")]
         public DateTime FirmOrderEntryDate { get; set; }
-        [Display(Name = "Thành phẩm khay")]
+        [Display(Name = "Mã thành phẩm")]
         public string FirmOrderSpecification { get; set; }
         
 
@@ -55,11 +55,12 @@ namespace TotalDTO.Inventories
         public virtual int ProductionLineID { get; set; }
         [Display(Name = "Mã số máy")]
         public string ProductionLineCode { get; set; }
+        
+        [Display(Name = "Mã số máy, ca sx")]
+        public string Caption { get { return this.ProductionLineCode + ", " + this.WorkshiftCode + " [" + this.WorkshiftEntryDate.ToString("dd/MM/yyyy") + "]"; } }
 
         public virtual Nullable<int> WarehouseID { get; set; }
-
         public virtual int StorekeeperID { get; set; }
-
         public virtual int CrucialWorkerID { get; set; }        
 
         public override void PerformPresaveRule()
@@ -94,12 +95,9 @@ namespace TotalDTO.Inventories
         public EmployeeBaseDTO Storekeeper { get; set; }
 
         public override int CrucialWorkerID { get { return (this.CrucialWorker != null ? this.CrucialWorker.EmployeeID : 0); } }
-        [Display(Name = "Công nhân đứng máy")]
+        [Display(Name = "Công nhân ĐHCK")]
         [UIHint("AutoCompletes/EmployeeBase")]
         public EmployeeBaseDTO CrucialWorker { get; set; }
-
-        [Display(Name = "Mã số máy, ca sx")]
-        public string WorkDescription { get { return this.ProductionLineCode + ", " + this.WorkshiftCode + " [" + this.WorkshiftEntryDate.ToString("dd/MM/yyyy") + "]"; } }
 
         public List<MaterialIssueDetailDTO> MaterialIssueViewDetails { get; set; }
         public List<MaterialIssueDetailDTO> ViewDetails { get { return this.MaterialIssueViewDetails; } set { this.MaterialIssueViewDetails = value; } }

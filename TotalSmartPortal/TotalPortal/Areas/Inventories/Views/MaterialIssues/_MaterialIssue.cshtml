@@ -73,15 +73,12 @@
             </div>                   
         }
 
-        
-        <div class="form-group">
-            @Html.EditorFor(d => d.Storekeeper, new { EmployeeDisplayName = @Model.GetDisplayName(m => m.Storekeeper) })
-        </div>
-
         <div class="form-group">
             @Html.EditorFor(d => d.CrucialWorker, new { EmployeeDisplayName = @Model.GetDisplayName(m => m.CrucialWorker) })
         </div>
-
+        <div class="form-group">
+            @Html.EditorFor(d => d.Storekeeper, new { EmployeeDisplayName = @Model.GetDisplayName(m => m.Storekeeper) })
+        </div>
     </div>
 
     <div class="right-panel">
@@ -92,13 +89,13 @@
 
             <div class="form-group">
                 <div class="right-panel-label right-panel-label-whole-width">
-                    @Html.LabelFor(model => model.WorkDescription)
+                    @Html.LabelFor(model => model.Caption)
                 </div>
                 <div class="div-input">
-                    @Html.Kendo().MaskedTextBoxFor(model => model.WorkDescription).HtmlAttributes(new { @class = "right-panel-input", @readonly = "readonly" })
+                    @Html.Kendo().MaskedTextBoxFor(model => model.Caption).HtmlAttributes(new { @class = "right-panel-input", @readonly = "readonly" })
                 </div>
                 <div class="div-validation-message">
-                    @Html.ValidationMessageFor(model => model.WorkDescription, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.Caption, "", new { @class = "text-danger" })
                 </div>
             </div>                              
             
@@ -349,7 +346,7 @@
     function GetPendingFirmOrderMaterials() {
         require(["kpopupWindow"], function (kpopupWindow) {
             var createWizardWindow = new kpopupWindow();
-            createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("GetPendingFirmOrderMaterials", "MaterialIssues", new { area = "Inventories" })", "Chọn mặt hàng từ lệnh sản xuất", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
+            createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("GetPendingFirmOrderMaterials", "MaterialIssues", new { area = "Inventories" })", "Xuất kho", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
         });
     }
 
