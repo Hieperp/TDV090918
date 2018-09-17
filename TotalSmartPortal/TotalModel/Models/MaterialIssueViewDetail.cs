@@ -29,5 +29,7 @@ namespace TotalModel.Models
         public Nullable<decimal> QuantityAvailables { get; set; }
         public int FirmOrderMaterialID { get; set; }
         public Nullable<decimal> FirmOrderRemains { get; set; }
+        public int BatchID { get; set; }
+        public System.DateTime BatchEntryDate { get; set; }
     }
 }

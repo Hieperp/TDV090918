@@ -12157,9 +12157,11 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="DateTime" Name="GoodsReceiptEntryDate" Nullable="false" Precision="23" />
           <Property Type="String" Name="GoodsReceiptReference" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="GoodsReceiptCode" Nullable="true" MaxLength="50" />
-          <Property Type="Decimal" Name="QuantityAvailables" Nullable="true" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="QuantityAvailables" Nullable="true" Precision="38" Scale="2" />
           <Property Type="Int32" Name="FirmOrderMaterialID" Nullable="false" />
-          <Property Type="Decimal" Name="FirmOrderRemains" Nullable="true" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="FirmOrderRemains" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Int32" Name="BatchID" Nullable="false" />
+          <Property Type="DateTime" Name="BatchEntryDate" Nullable="false" Precision="23" />
         </ComplexType>
         <EntityType Name="GoodsReceiptDetail">
           <Key>
@@ -17747,6 +17749,8 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="QuantityAvailables" ColumnName="QuantityAvailables" />
                 <ScalarProperty Name="FirmOrderMaterialID" ColumnName="FirmOrderMaterialID" />
                 <ScalarProperty Name="FirmOrderRemains" ColumnName="FirmOrderRemains" />
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+                <ScalarProperty Name="BatchEntryDate" ColumnName="BatchEntryDate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
