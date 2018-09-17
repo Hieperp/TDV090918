@@ -21,5 +21,11 @@ namespace TotalModel.Models
         public string Description { get; set; }
         public decimal TotalQuantity { get; set; }
         public bool Approved { get; set; }
+        public System.DateTime WorkshiftEntryDate { get; set; }
+        public string ProductionLinesCode { get; set; }
+        public string FirmOrdersReference { get; set; }
+        public string FirmOrdersCode { get; set; }
+        public System.DateTime FirmOrderEntryDate { get; set; }
+        public string FirmOrderSpecification { get; set; }
     }
 }
