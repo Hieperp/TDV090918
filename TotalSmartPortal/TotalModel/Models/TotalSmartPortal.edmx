@@ -14105,6 +14105,9 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="String" Name="MaterialName" Nullable="false" MaxLength="200" />
           <Property Type="Decimal" Name="MaterialQuantity" Nullable="false" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="MaterialQuantityRemains" Nullable="true" Precision="19" Scale="2" />
+          <Property Type="Int32" Name="CrucialWorkerID" Nullable="false" />
+          <Property Type="String" Name="CrucialWorkerCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CrucialWorkerName" Nullable="false" MaxLength="50" />
         </ComplexType>
         <EntityType Name="BomDetail">
           <Key>
@@ -18705,6 +18708,9 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
                 <ScalarProperty Name="MaterialQuantity" ColumnName="MaterialQuantity" />
                 <ScalarProperty Name="MaterialQuantityRemains" ColumnName="MaterialQuantityRemains" />
+                <ScalarProperty Name="CrucialWorkerID" ColumnName="CrucialWorkerID" />
+                <ScalarProperty Name="CrucialWorkerCode" ColumnName="CrucialWorkerCode" />
+                <ScalarProperty Name="CrucialWorkerName" ColumnName="CrucialWorkerName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -64,16 +64,16 @@
         .Name("materialIssuePendingFirmOrderGrid")
         .Columns(columns =>
         {
-            columns.Bound(c => c.FirmOrderReference).Title("Số KHSX").Width(30);
+            columns.Bound(c => c.FirmOrderReference).Title("KHSX").Width(28);
             columns.Bound(c => c.FirmOrderCode).Title("Mã CT").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(25);
-            columns.Bound(c => c.FirmOrderEntryDate).Title("Ngày KHSX").Format("{0:dd/MM/yyyy}").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(40);
-            columns.Bound(c => c.WorkshiftEntryDate).Title("Ngày SX").Format("{0:dd/MM/yyyy}").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(40); 
+            columns.Bound(c => c.FirmOrderEntryDate).Title("Ngày KHSX").Format("{0:dd/MM/yyyy}").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(38);
+            columns.Bound(c => c.WorkshiftEntryDate).Title("Ngày SX").Format("{0:dd/MM/yyyy}").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(38);
             columns.Bound(c => c.WorkshiftCode).Title("Ca SX").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(30);
-            columns.Bound(c => c.ProductionLineCode).Title("MS máy").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(30);
-            columns.Bound(c => c.CustomerName).Title("Khách hàng").Width(60);
-            columns.Bound(c => c.FirmOrderSpecification).Title("Mã thành phẩm").Width(80);
-            columns.Bound(p => p.TotalQuantity).Title("SL ĐH").Format(Settings.kfmQuantity).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(35);
-            columns.Bound(p => p.TotalQuantitySemifinished).Title("Đã ĐHCK").Format(Settings.kfmQuantity).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(35);
+            columns.Bound(c => c.ProductionLineCode).Title("MS máy").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(27);
+            columns.Bound(c => c.CustomerName).Title("Khách hàng").Width(68);
+            columns.Bound(c => c.FirmOrderSpecification).Title("Mã thành phẩm").Width(92);
+            columns.Bound(p => p.TotalQuantity).Title("SL ĐH").Format(Settings.kfmQuantity).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(32);
+            columns.Bound(p => p.TotalQuantitySemifinished).Title("Đã ĐHCK").Format(Settings.kfmQuantity).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(32);
         })
         .ToolBar(toolbar =>
         {

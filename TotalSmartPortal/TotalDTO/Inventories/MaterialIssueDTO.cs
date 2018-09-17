@@ -40,7 +40,7 @@ namespace TotalDTO.Inventories
         public DateTime FirmOrderEntryDate { get; set; }
         [Display(Name = "Mã thành phẩm")]
         public string FirmOrderSpecification { get; set; }
-        
+
 
         [Display(Name = "Số chứng từ")]
         [UIHint("Commons/SOCode")]
@@ -55,19 +55,19 @@ namespace TotalDTO.Inventories
         public virtual int ProductionLineID { get; set; }
         [Display(Name = "Mã số máy")]
         public string ProductionLineCode { get; set; }
-        
+
         [Display(Name = "Mã số máy, ca sx")]
         public string Caption { get { return this.ProductionLineCode + ", " + this.WorkshiftCode + " [" + this.WorkshiftEntryDate.ToString("dd/MM/yyyy") + "]"; } }
 
         public virtual Nullable<int> WarehouseID { get; set; }
         public virtual int StorekeeperID { get; set; }
-        public virtual int CrucialWorkerID { get; set; }        
+        public virtual int CrucialWorkerID { get; set; }
 
         public override void PerformPresaveRule()
         {
             base.PerformPresaveRule();
 
-            this.DtoDetails().ToList().ForEach(e => { e.MaterialIssueTypeID = this.MaterialIssueTypeID; e.PlannedOrderID = this.PlannedOrderID; e.FirmOrderID = this.FirmOrderID; e.ProductionOrderID = this.ProductionOrderID; e.ProductionOrderDetailID = this.ProductionOrderDetailID; e.CustomerID = this.CustomerID; e.WorkshiftID = this.WorkshiftID; e.ProductionLineID = this.ProductionLineID; e.WarehouseID = this.WarehouseID; });
+            this.DtoDetails().ToList().ForEach(e => { e.MaterialIssueTypeID = this.MaterialIssueTypeID; e.PlannedOrderID = this.PlannedOrderID; e.FirmOrderID = this.FirmOrderID; e.ProductionOrderID = this.ProductionOrderID; e.ProductionOrderDetailID = this.ProductionOrderDetailID; e.CustomerID = this.CustomerID; e.WorkshiftID = this.WorkshiftID; e.ProductionLineID = this.ProductionLineID; e.CrucialWorkerID = this.CrucialWorkerID; e.WarehouseID = this.WarehouseID; });
         }
     }
 

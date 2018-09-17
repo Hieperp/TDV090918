@@ -29,7 +29,7 @@ namespace TotalDTO.Inventories
         public int WorkshiftID { get; set; }
 
         public int ProductionLineID { get; set; }
-
+        public int CrucialWorkerID { get; set; }
 
         public Nullable<int> WarehouseID { get; set; }
 

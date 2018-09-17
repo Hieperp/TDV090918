@@ -64,19 +64,18 @@
     @(Html.Kendo().Grid<SemifinishedProductPendingMaterialIssueDetail>()
            .Name("semifinishedProductPendingMaterialIssueDetailGrid")
         .Columns(columns =>
-        {                       
-            columns.Bound(c => c.FirmOrderCode).Title("Mã CT").Width(50);
-            columns.Bound(c => c.FirmOrderReference).Title("Số KHSX").Width(50);
-            columns.Bound(c => c.FirmOrderEntryDate).Title("Ngày KHSX").Format("{0:dd/MM/yyyy}").Width(70).Filterable(false);
-            columns.Bound(c => c.CustomerName).Title("Khách hàng").Width(100);            
-            columns.Bound(c => c.WorkshiftCode).Title("Ca SX").Width(50);
-            columns.Bound(c => c.ProductionLineCode).Title("Mã số máy").Width(50);
-            columns.Bound(c => c.FirmOrderSpecification).Title("Thành phẩm khay").Width(140);
-            columns.Bound(c => c.WorkshiftEntryDate).Title("Ngày SX").Format("{0:dd/MM/yyyy}").Width(70).Filterable(false);
-            columns.Bound(c => c.MaterialCode).Title("Mã NVL").Width(80);            
-            columns.Bound(c => c.MaterialQuantityRemains).Title("Tồn NVL").Format(Settings.kfmQuantity).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
-            columns.Bound(c => c.MaterialQuantity).Title("SL").Format(Settings.kfmQuantity).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
-            columns.Bound(c => c.GoodsReceiptEntryDate).Format("{0:dd/MM/yyyy}").Width(60).Filterable(false).Hidden();
+        {
+            columns.Bound(c => c.FirmOrderReference).Title("KHSX").Width(28);
+            columns.Bound(c => c.FirmOrderCode).Title("Mã CT").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(25);
+            columns.Bound(c => c.FirmOrderEntryDate).Title("Ngày KHSX").Format("{0:dd/MM/yyyy}").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(38);
+            columns.Bound(c => c.WorkshiftEntryDate).Title("Ngày SX").Format("{0:dd/MM/yyyy}").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(38);
+            columns.Bound(c => c.WorkshiftCode).Title("Ca SX").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(30);
+            columns.Bound(c => c.ProductionLineCode).Title("MS máy").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(27);
+            columns.Bound(c => c.CustomerName).Title("Khách hàng").Width(60);
+            columns.Bound(c => c.FirmOrderSpecification).Title("Mã thành phẩm").Width(80);
+            columns.Bound(c => c.MaterialCode).Title("Mã màng").Width(60);
+            columns.Bound(c => c.MaterialQuantity).Title("SL màng").Format(Settings.kfmQuantity).Width(30).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
+            ////columns.Bound(c => c.MaterialQuantityRemains).Title("Tồn NVL").Format(Settings.kfmQuantity).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
         })
         .ToolBar(toolbar =>
         {
@@ -176,11 +175,13 @@
             $("#MaterialQuantity").val(selectedDataItem === undefined || selectedDataItem.MaterialQuantity === undefined ? null : selectedDataItem.MaterialQuantity);
             $("#MaterialQuantityRemains").val(selectedDataItem === undefined || selectedDataItem.MaterialQuantityRemains === undefined ? null : selectedDataItem.MaterialQuantityRemains);
 
+            $("#GoodsReceiptID").val(selectedDataItem === undefined || selectedDataItem.GoodsReceiptID === undefined ? null : selectedDataItem.GoodsReceiptID);
+            $("#GoodsReceiptDetailID").val(selectedDataItem === undefined || selectedDataItem.GoodsReceiptDetailID === undefined ? null : selectedDataItem.GoodsReceiptDetailID);
             $("#GoodsReceiptReference").val(selectedDataItem === undefined || selectedDataItem.GoodsReceiptReference === undefined ? null : selectedDataItem.GoodsReceiptReference);
             $("#GoodsReceiptEntryDate").val(selectedDataItem === undefined || selectedDataItem.GoodsReceiptEntryDate === undefined ? null : kendo.toString(selectedDataItem.GoodsReceiptEntryDate, Settings.DateTimeFormat));
             
-            $("#GoodsReceiptID").val(selectedDataItem === undefined || selectedDataItem.GoodsReceiptID === undefined ? null : selectedDataItem.GoodsReceiptID);
-            $("#GoodsReceiptDetailID").val(selectedDataItem === undefined || selectedDataItem.GoodsReceiptDetailID === undefined ? null : selectedDataItem.GoodsReceiptDetailID);
+            $("#CrucialWorker_EmployeeID").val(selectedDataItem === undefined || selectedDataItem.CrucialWorkerID === undefined ? null : selectedDataItem.CrucialWorkerID);
+            $("#CrucialWorker_Name").val(selectedDataItem === undefined || selectedDataItem.CrucialWorkerName === undefined ? null : selectedDataItem.CrucialWorkerName);
         }
     }
 

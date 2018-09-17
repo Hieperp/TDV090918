@@ -37,5 +37,8 @@ namespace TotalModel.Models
         public string MaterialName { get; set; }
         public decimal MaterialQuantity { get; set; }
         public Nullable<decimal> MaterialQuantityRemains { get; set; }
+        public int CrucialWorkerID { get; set; }
+        public string CrucialWorkerCode { get; set; }
+        public string CrucialWorkerName { get; set; }
     }
 }

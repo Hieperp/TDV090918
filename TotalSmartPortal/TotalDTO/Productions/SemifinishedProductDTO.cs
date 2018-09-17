@@ -30,7 +30,7 @@ namespace TotalDTO.Productions
         public int FirmOrderID { get; set; }
         [Display(Name = "Số KHSX")]
         public string FirmOrderReference { get; set; }
-        [Display(Name = "Mã KHSX")]
+        [Display(Name = "Mã chứng từ")]
         public string FirmOrderCode { get; set; }
         [Display(Name = "Ngày KHSX")]
         public DateTime FirmOrderEntryDate { get; set; }
@@ -96,7 +96,7 @@ namespace TotalDTO.Productions
         public CustomerBaseDTO Customer { get; set; }
 
         public override int CrucialWorkerID { get { return (this.CrucialWorker != null ? this.CrucialWorker.EmployeeID : 0); } }
-        [Display(Name = "Nhân viên kho")]
+        [Display(Name = "Công nhân ĐHCK")]
         [UIHint("AutoCompletes/EmployeeBase")]
         public EmployeeBaseDTO CrucialWorker { get; set; }
 
