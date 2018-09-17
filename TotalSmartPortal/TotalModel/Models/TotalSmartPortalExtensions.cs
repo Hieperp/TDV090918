@@ -183,6 +183,11 @@ namespace TotalModel.Models
     {
         public int GetID() { return this.SemifinishedProductID; }
 
+        public string MaterialCode { get { return this.MaterialIssueDetail.Commodity.Code; } }
+        public string MaterialName { get { return this.MaterialIssueDetail.Commodity.Name; } }
+        public decimal MaterialQuantity { get { return this.MaterialIssueDetail.Quantity; } }
+        public decimal MaterialQuantityRemains { get { return this.MaterialIssueDetail.Quantity - this.MaterialIssueDetail.QuantitySemifinished; } }
+
         public virtual Employee CrucialWorker { get { return this.Employee; } }
 
         public ICollection<SemifinishedProductDetail> GetDetails() { return this.SemifinishedProductDetails; }

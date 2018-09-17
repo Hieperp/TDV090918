@@ -37,18 +37,18 @@ namespace TotalDTO.Productions
         [Display(Name = "Thành phẩm khay")]
         public string FirmOrderSpecification { get; set; }
 
+
+        public string MaterialCode { get; set; }
+        public string MaterialName { get; set; }
+
         public int GoodsReceiptID { get; set; }
-        [Display(Name = "Số KHSX")]
-        [UIHint("StringReadonly")]
         public string GoodsReceiptReference { get; set; }
-        [Display(Name = "Mã KHSX")]
-        [UIHint("StringReadonly")]
         public string GoodsReceiptCode { get; set; }
-        [Display(Name = "Ngày KHSX")]
-        [UIHint("DateTimeReadonly")]
         public Nullable<System.DateTime> GoodsReceiptEntryDate { get; set; }
         public int GoodsReceiptDetailID { get; set; }
 
+        public decimal MaterialQuantity { get; set; }
+        public decimal MaterialQuantityRemains { get; set; }
 
         [Display(Name = "Số chứng từ")]
         [UIHint("Commons/SOCode")]

@@ -14081,7 +14081,6 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="String" Name="WorkshiftCode" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="ProductionLineID" Nullable="false" />
           <Property Type="String" Name="ProductionLineCode" Nullable="false" MaxLength="50" />
-          <Property Type="Decimal" Name="QuantityRemains" Nullable="true" Precision="19" Scale="2" />
           <Property Type="String" Name="FirmOrderSpecification" Nullable="true" MaxLength="800" />
           <Property Type="Int32" Name="GoodsReceiptID" Nullable="false" />
           <Property Type="String" Name="GoodsReceiptReference" Nullable="true" MaxLength="10" />
@@ -14089,6 +14088,10 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="DateTime" Name="GoodsReceiptEntryDate" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="GoodsReceiptDetailID" Nullable="false" />
           <Property Type="Int32" Name="WorkshiftID" Nullable="false" />
+          <Property Type="String" Name="MaterialCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="MaterialName" Nullable="false" MaxLength="200" />
+          <Property Type="Decimal" Name="MaterialQuantity" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="MaterialQuantityRemains" Nullable="true" Precision="19" Scale="2" />
         </ComplexType>
         <EntityType Name="BomDetail">
           <Key>
@@ -18665,7 +18668,6 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="WorkshiftCode" ColumnName="WorkshiftCode" />
                 <ScalarProperty Name="ProductionLineID" ColumnName="ProductionLineID" />
                 <ScalarProperty Name="ProductionLineCode" ColumnName="ProductionLineCode" />
-                <ScalarProperty Name="QuantityRemains" ColumnName="QuantityRemains" />
                 <ScalarProperty Name="FirmOrderSpecification" ColumnName="FirmOrderSpecification" />
                 <ScalarProperty Name="GoodsReceiptID" ColumnName="GoodsReceiptID" />
                 <ScalarProperty Name="GoodsReceiptReference" ColumnName="GoodsReceiptReference" />
@@ -18673,6 +18675,10 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="GoodsReceiptEntryDate" ColumnName="GoodsReceiptEntryDate" />
                 <ScalarProperty Name="GoodsReceiptDetailID" ColumnName="GoodsReceiptDetailID" />
                 <ScalarProperty Name="WorkshiftID" ColumnName="WorkshiftID" />
+                <ScalarProperty Name="MaterialCode" ColumnName="MaterialCode" />
+                <ScalarProperty Name="MaterialName" ColumnName="MaterialName" />
+                <ScalarProperty Name="MaterialQuantity" ColumnName="MaterialQuantity" />
+                <ScalarProperty Name="MaterialQuantityRemains" ColumnName="MaterialQuantityRemains" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

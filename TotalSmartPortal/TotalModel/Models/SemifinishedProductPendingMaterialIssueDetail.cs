@@ -26,7 +26,6 @@ namespace TotalModel.Models
         public string WorkshiftCode { get; set; }
         public int ProductionLineID { get; set; }
         public string ProductionLineCode { get; set; }
-        public Nullable<decimal> QuantityRemains { get; set; }
         public string FirmOrderSpecification { get; set; }
         public int GoodsReceiptID { get; set; }
         public string GoodsReceiptReference { get; set; }
@@ -34,5 +33,9 @@ namespace TotalModel.Models
         public System.DateTime GoodsReceiptEntryDate { get; set; }
         public int GoodsReceiptDetailID { get; set; }
         public int WorkshiftID { get; set; }
+        public string MaterialCode { get; set; }
+        public string MaterialName { get; set; }
+        public decimal MaterialQuantity { get; set; }
+        public Nullable<decimal> MaterialQuantityRemains { get; set; }
     }
 }
