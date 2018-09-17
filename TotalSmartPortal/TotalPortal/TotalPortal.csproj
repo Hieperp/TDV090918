@@ -2424,6 +2424,7 @@
     <Content Include="Views\Shared\EditorTemplates\DropDowns\Shift.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AutoCompletes\Bom.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AutoCompletes\Mold.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DecimalN0.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

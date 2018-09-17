@@ -542,7 +542,10 @@
           <Property Name="CommodityID" Type="int" Nullable="false" />
           <Property Name="CommodityTypeID" Type="int" Nullable="false" />
           <Property Name="BomID" Type="int" Nullable="false" />
+          <Property Name="BlockUnit" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="BlockQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="MoldID" Type="int" Nullable="false" />
+          <Property Name="MoldQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="DeliveryDate" Type="datetime" />
           <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="QuantitySemifinished" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -565,6 +568,8 @@
           <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="CustomerID" Type="int" Nullable="false" />
           <Property Name="BomID" Type="int" Nullable="false" />
+          <Property Name="BlockUnit" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="BlockQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="MaterialID" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="QuantityIssued" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -587,6 +592,8 @@
           <Property Name="Purposes" Type="nvarchar" MaxLength="100" />
           <Property Name="PlannedOrderID" Type="int" Nullable="false" />
           <Property Name="BomID" Type="int" Nullable="false" />
+          <Property Name="BlockUnit" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="BlockQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="CustomerID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="PreparedPersonID" Type="int" Nullable="false" />
@@ -1060,7 +1067,10 @@
           <Property Name="CommodityTypeID" Type="int" Nullable="false" />
           <Property Name="CombineIndex" Type="int" />
           <Property Name="BomID" Type="int" Nullable="false" />
+          <Property Name="BlockUnit" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="BlockQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="MoldID" Type="int" Nullable="false" />
+          <Property Name="MoldQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="DeliveryDate" Type="datetime" />
           <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="QuantitySemifinished" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -4197,6 +4207,18 @@ warning 6035: The relationship 'FK_SemifinishedHandovers_AspNetUsers2' has colum
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SemifinishedHandovers_Workshifts">
+          <End Role="Workshifts" Type="Self.Workshifts" Multiplicity="1" />
+          <End Role="SemifinishedHandovers" Type="Self.SemifinishedHandovers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workshifts">
+              <PropertyRef Name="WorkshiftID" />
+            </Principal>
+            <Dependent Role="SemifinishedHandovers">
+              <PropertyRef Name="WorkshiftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SemifinishedProductDetails_Commodities">
           <End Role="Commodities" Type="Self.Commodities" Multiplicity="1" />
           <End Role="SemifinishedProductDetails" Type="Self.SemifinishedProductDetails" Multiplicity="*" />
@@ -6346,6 +6368,10 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           </AssociationSet>
           <AssociationSet Name="FK_SemifinishedHandovers_Locations" Association="Self.FK_SemifinishedHandovers_Locations">
             <End Role="Locations" EntitySet="Locations" />
+            <End Role="SemifinishedHandovers" EntitySet="SemifinishedHandovers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SemifinishedHandovers_Workshifts" Association="Self.FK_SemifinishedHandovers_Workshifts">
+            <End Role="Workshifts" EntitySet="Workshifts" />
             <End Role="SemifinishedHandovers" EntitySet="SemifinishedHandovers" />
           </AssociationSet>
           <AssociationSet Name="FK_SemifinishedProductDetails_Commodities" Association="Self.FK_SemifinishedProductDetails_Commodities">
@@ -10781,6 +10807,10 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             <Parameter Name="Remarks" Mode="In" Type="String" />
             <Parameter Name="IsDefault" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <AssociationSet Name="FK_SemifinishedHandovers_Workshifts" Association="TotalSmartPortalModel.FK_SemifinishedHandovers_Workshifts">
+            <End Role="Workshift" EntitySet="Workshifts" />
+            <End Role="SemifinishedHandover" EntitySet="SemifinishedHandovers" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="AccountInvoiceIndex">
           <Property Type="Int32" Name="AccountInvoiceID" Nullable="false" />
@@ -12075,6 +12105,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <NavigationProperty Name="ProductionOrders" Relationship="TotalSmartPortalModel.FK_ProductionOrders_Workshifts" FromRole="Workshift" ToRole="ProductionOrder" />
           <NavigationProperty Name="MaterialIssueDetails" Relationship="TotalSmartPortalModel.FK_MaterialIssueDetails_Workshifts" FromRole="Workshift" ToRole="MaterialIssueDetail" />
           <NavigationProperty Name="SemifinishedProducts" Relationship="TotalSmartPortalModel.FK_SemifinishedProducts_Workshifts" FromRole="Workshift" ToRole="SemifinishedProduct" />
+          <NavigationProperty Name="SemifinishedHandovers" Relationship="TotalSmartPortalModel.FK_SemifinishedHandovers_Workshifts" FromRole="Workshift" ToRole="SemifinishedHandover" />
         </EntityType>
         <ComplexType Name="MaterialIssueIndex">
           <Property Type="Int32" Name="MaterialIssueID" Nullable="false" />
@@ -12248,6 +12279,9 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="String" Name="BomCode" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="BomName" Nullable="false" MaxLength="200" />
           <Property Type="Int32" Name="CombineIndex" Nullable="true" />
+          <Property Type="Decimal" Name="MoldQuantity" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="BlockUnit" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="BlockQuantity" Nullable="false" Precision="18" Scale="2" />
         </ComplexType>
         <ComplexType Name="ProductionOrderPendingCustomer">
           <Property Type="Int32" Name="CustomerID" Nullable="false" />
@@ -13283,6 +13317,9 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <NavigationProperty Name="Bom" Relationship="TotalSmartPortalModel.FK_FirmOrderDetails_Boms" FromRole="FirmOrderDetail" ToRole="Bom" />
           <NavigationProperty Name="Mold" Relationship="TotalSmartPortalModel.FK_FirmOrderDetails_Molds" FromRole="FirmOrderDetail" ToRole="Mold" />
           <NavigationProperty Name="SemifinishedProductDetails" Relationship="TotalSmartPortalModel.FK_SemifinishedProductDetails_FirmOrderDetails" FromRole="FirmOrderDetail" ToRole="SemifinishedProductDetail" />
+          <Property Name="BlockUnit" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="BlockQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="MoldQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="FirmOrder">
           <Key>
@@ -13327,6 +13364,8 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <NavigationProperty Name="FirmOrderMaterials" Relationship="TotalSmartPortalModel.FK_FirmOrderMaterials_FirmOrders" FromRole="FirmOrder" ToRole="FirmOrderMaterial" />
           <NavigationProperty Name="SemifinishedProductDetails" Relationship="TotalSmartPortalModel.FK_SemifinishedProductDetails_FirmOrders" FromRole="FirmOrder" ToRole="SemifinishedProductDetail" />
           <NavigationProperty Name="SemifinishedProducts" Relationship="TotalSmartPortalModel.FK_SemifinishedProducts_FirmOrders" FromRole="FirmOrder" ToRole="SemifinishedProduct" />
+          <Property Name="BlockUnit" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="BlockQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="MaterialIssue">
           <Key>
@@ -13405,6 +13444,9 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <NavigationProperty Name="Bom" Relationship="TotalSmartPortalModel.FK_PlannedOrderDetails_Boms" FromRole="PlannedOrderDetail" ToRole="Bom" />
           <NavigationProperty Name="Mold" Relationship="TotalSmartPortalModel.FK_PlannedOrderDetails_Molds" FromRole="PlannedOrderDetail" ToRole="Mold" />
           <NavigationProperty Name="SemifinishedProductDetails" Relationship="TotalSmartPortalModel.FK_SemifinishedProductDetails_PlannedOrderDetails" FromRole="PlannedOrderDetail" ToRole="SemifinishedProductDetail" />
+          <Property Name="BlockUnit" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="BlockQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="MoldQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="PlannedOrder">
           <Key>
@@ -14282,6 +14324,8 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <NavigationProperty Name="FirmOrder" Relationship="TotalSmartPortalModel.FK_FirmOrderMaterials_FirmOrders" FromRole="FirmOrderMaterial" ToRole="FirmOrder" />
           <NavigationProperty Name="VoidType" Relationship="TotalSmartPortalModel.FK_FirmOrderMaterials_VoidTypes" FromRole="FirmOrderMaterial" ToRole="VoidType" />
           <NavigationProperty Name="MaterialIssueDetails" Relationship="TotalSmartPortalModel.FK_MaterialIssueDetails_FirmOrderMaterials" FromRole="FirmOrderMaterial" ToRole="MaterialIssueDetail" />
+          <Property Name="BlockUnit" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="BlockQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
         <Association Name="FK_FirmOrderMaterials_Boms">
           <End Type="TotalSmartPortalModel.Bom" Role="Bom" Multiplicity="1" />
@@ -14471,6 +14515,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <NavigationProperty Name="Employee1" Relationship="TotalSmartPortalModel.FK_SemifinishedHandovers_Employees1" FromRole="SemifinishedHandover" ToRole="Employee" />
           <NavigationProperty Name="Location" Relationship="TotalSmartPortalModel.FK_SemifinishedHandovers_Locations" FromRole="SemifinishedHandover" ToRole="Location" />
           <NavigationProperty Name="SemifinishedHandoverDetails" Relationship="TotalSmartPortalModel.FK_SemifinishedHandoverDetails_SemifinishedHandovers" FromRole="SemifinishedHandover" ToRole="SemifinishedHandoverDetail" />
+          <NavigationProperty Name="Workshift" Relationship="TotalSmartPortalModel.FK_SemifinishedHandovers_Workshifts" FromRole="SemifinishedHandover" ToRole="Workshift" />
         </EntityType>
         <EntityType Name="SemifinishedProductDetail">
           <Key>
@@ -14872,6 +14917,18 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="DateTime" Name="EntryDate" Nullable="false" Precision="23" />
           <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
         </ComplexType>
+        <Association Name="FK_SemifinishedHandovers_Workshifts">
+          <End Type="TotalSmartPortalModel.Workshift" Role="Workshift" Multiplicity="1" />
+          <End Type="TotalSmartPortalModel.SemifinishedHandover" Role="SemifinishedHandover" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workshift">
+              <PropertyRef Name="WorkshiftID" />
+            </Principal>
+            <Dependent Role="SemifinishedHandover">
+              <PropertyRef Name="WorkshiftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -17749,6 +17806,9 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="BomCode" ColumnName="BomCode" />
                 <ScalarProperty Name="BomName" ColumnName="BomName" />
                 <ScalarProperty Name="CombineIndex" ColumnName="CombineIndex" />
+                <ScalarProperty Name="MoldQuantity" ColumnName="MoldQuantity" />
+                <ScalarProperty Name="BlockUnit" ColumnName="BlockUnit" />
+                <ScalarProperty Name="BlockQuantity" ColumnName="BlockQuantity" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -18248,6 +18308,9 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <EntitySetMapping Name="FirmOrderDetails">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.FirmOrderDetail">
               <MappingFragment StoreEntitySet="FirmOrderDetails">
+                <ScalarProperty Name="MoldQuantity" ColumnName="MoldQuantity" />
+                <ScalarProperty Name="BlockQuantity" ColumnName="BlockQuantity" />
+                <ScalarProperty Name="BlockUnit" ColumnName="BlockUnit" />
                 <ScalarProperty Name="InActivePartialDate" ColumnName="InActivePartialDate" />
                 <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
                 <ScalarProperty Name="InActive" ColumnName="InActive" />
@@ -18275,6 +18338,8 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <EntitySetMapping Name="FirmOrders">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.FirmOrder">
               <MappingFragment StoreEntitySet="FirmOrders">
+                <ScalarProperty Name="BlockQuantity" ColumnName="BlockQuantity" />
+                <ScalarProperty Name="BlockUnit" ColumnName="BlockUnit" />
                 <ScalarProperty Name="InActiveDate" ColumnName="InActiveDate" />
                 <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
                 <ScalarProperty Name="InActive" ColumnName="InActive" />
@@ -18344,6 +18409,9 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <EntitySetMapping Name="PlannedOrderDetails">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.PlannedOrderDetail">
               <MappingFragment StoreEntitySet="PlannedOrderDetails">
+                <ScalarProperty Name="MoldQuantity" ColumnName="MoldQuantity" />
+                <ScalarProperty Name="BlockQuantity" ColumnName="BlockQuantity" />
+                <ScalarProperty Name="BlockUnit" ColumnName="BlockUnit" />
                 <ScalarProperty Name="InActivePartialDate" ColumnName="InActivePartialDate" />
                 <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
                 <ScalarProperty Name="InActive" ColumnName="InActive" />
@@ -18625,6 +18693,8 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <EntitySetMapping Name="FirmOrderMaterials">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.FirmOrderMaterial">
               <MappingFragment StoreEntitySet="FirmOrderMaterials">
+                <ScalarProperty Name="BlockQuantity" ColumnName="BlockQuantity" />
+                <ScalarProperty Name="BlockUnit" ColumnName="BlockUnit" />
                 <ScalarProperty Name="InActivePartialDate" ColumnName="InActivePartialDate" />
                 <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
                 <ScalarProperty Name="InActive" ColumnName="InActive" />

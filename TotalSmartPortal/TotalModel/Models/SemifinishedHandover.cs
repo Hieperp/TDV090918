@@ -46,5 +46,6 @@ namespace TotalModel.Models
         public virtual Location Location { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemifinishedHandoverDetail> SemifinishedHandoverDetails { get; set; }
+        public virtual Workshift Workshift { get; set; }
     }
 }

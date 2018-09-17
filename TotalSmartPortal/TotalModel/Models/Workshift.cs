@@ -22,6 +22,7 @@ namespace TotalModel.Models
             this.ProductionOrders = new HashSet<ProductionOrder>();
             this.MaterialIssueDetails = new HashSet<MaterialIssueDetail>();
             this.SemifinishedProducts = new HashSet<SemifinishedProduct>();
+            this.SemifinishedHandovers = new HashSet<SemifinishedHandover>();
         }
     
         public int WorkshiftID { get; set; }
@@ -43,5 +44,7 @@ namespace TotalModel.Models
         public virtual ICollection<MaterialIssueDetail> MaterialIssueDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemifinishedProduct> SemifinishedProducts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SemifinishedHandover> SemifinishedHandovers { get; set; }
     }
 }

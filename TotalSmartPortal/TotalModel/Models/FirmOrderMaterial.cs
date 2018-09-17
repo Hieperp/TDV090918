@@ -35,6 +35,8 @@ namespace TotalModel.Models
         public bool InActive { get; set; }
         public bool InActivePartial { get; set; }
         public Nullable<System.DateTime> InActivePartialDate { get; set; }
+        public decimal BlockUnit { get; set; }
+        public decimal BlockQuantity { get; set; }
     
         public virtual Bom Bom { get; set; }
         public virtual Customer Customer { get; set; }

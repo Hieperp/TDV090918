@@ -22,7 +22,7 @@ namespace TotalPortal.Configuration
 
         public static string NumberFormat = "{0:n0}"; //MUST FIND AND REPLACE BY CORRECT FORMAT FOR QUANTITY/ AMOUNT/ WEIGHT/ ... ==> MUST HAVE DEIFFENT TEMPLATE FOR QUANTITY/ AMOUNT/ WEIGHT/ .... INSTEAD OF ONLY ONE SIGLE DECIMAL TEMPLATE FOR ALL QUANTITY/ AMOUNT/ WEIGHT/
 
-
+        public static string kfmN0 { get { return "{0:n" + GlobalEnums.rndN0.ToString("N0") + "}"; } }
         public static string kfmQuantity { get { return "{0:n" + GlobalEnums.rndQuantity.ToString("N0") + "}"; } }
         public static string kfmAmount { get { return "{0:n" + GlobalEnums.rndAmount.ToString("N0") + "}"; } }
         public static string kfmDiscountPercent { get { return "{0:n" + GlobalEnums.rndDiscountPercent.ToString("N0") + "}%"; } }
@@ -84,6 +84,7 @@ namespace TotalPortal.Configuration
         public string DateTimeFormat { get { return Settings.DateTimeFormat; } }
         public string NumberFormat { get { return Settings.NumberFormat; } }
 
+        public string kfmN0 { get { return Settings.kfmN0; } }
         public string kfmQuantity { get { return Settings.kfmQuantity; } }
         public string kfmAmount { get { return Settings.kfmAmount; } }
         public string kfmDiscountPercent { get { return Settings.kfmDiscountPercent; } }

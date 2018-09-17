@@ -48,10 +48,13 @@
             {
                 currentDataSourceRow.set("BomID", dataItem.BomID);
                 currentDataSourceRow.set("BomCode", dataItem.BomCode);
+                currentDataSourceRow.set("BlockUnit", dataItem.BlockUnit);
+                currentDataSourceRow.set("BlockQuantity", dataItem.BlockQuantity);
             }
             if (currentDataSourceRow.MoldID != undefined) {
                 currentDataSourceRow.set("MoldID", dataItem.MoldID);
                 currentDataSourceRow.set("MoldCode", dataItem.MoldCode);
+                currentDataSourceRow.set("MoldQuantity", dataItem.MoldQuantity);
             }
         }
 

@@ -100,7 +100,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             queryString = queryString + "       DECLARE         @COUNTCommodityMoldID int = (SELECT COUNT(CommodityMoldID) FROM CommodityMolds WHERE CommodityID = @CommodityID) " + "\r\n";
 
             queryString = queryString + "       INSERT INTO     CommodityMolds  (CommodityID, MoldID, EntryDate, Quantity, Remarks, IsDefault, InActive) " + "\r\n";
-            queryString = queryString + "       VALUES                          (@CommodityID, @MoldID, GETDATE(), 0, NULL, IIF(@COUNTCommodityMoldID = 0, 1, 0), 0) " + "\r\n";
+            queryString = queryString + "       VALUES                          (@CommodityID, @MoldID, GETDATE(), 1, NULL, IIF(@COUNTCommodityMoldID = 0, 1, 0), 0) " + "\r\n";
             queryString = queryString + "    END " + "\r\n";
 
             this.totalSmartPortalEntities.CreateStoredProcedure("AddCommodityMold", queryString);
@@ -135,7 +135,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             queryString = queryString + "       BEGIN " + "\r\n";
 
             queryString = queryString + "           UPDATE          CommodityMolds " + "\r\n";
-            queryString = queryString + "           SET             Quantity = @Quantity, Remarks = @Remarks " + "\r\n";
+            queryString = queryString + "           SET             Quantity = ROUND(IIF(@Quantity > 0, @Quantity, Quantity), " + (int)GlobalEnums.rndN0 + "), Remarks = @Remarks " + "\r\n";
             queryString = queryString + "           WHERE           CommodityMoldID = @CommodityMoldID " + "\r\n";
 
             queryString = queryString + "           IF (@IsDefault = 1) " + "\r\n"; //ONLY CHANGE WHEN @IsDefault = true: THIS WILL KEEP AT LEAST 1 ROW IS DEFAULT

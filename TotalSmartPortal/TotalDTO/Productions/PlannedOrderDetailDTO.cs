@@ -20,13 +20,20 @@ namespace TotalDTO.Productions
         [Display(Name = "Mã khuôn")]
         [Required(ErrorMessage = "Vui lòng chọn mã khuôn")]
         [UIHint("AutoCompletes/MoldBase")]
-        public virtual string MoldCode { get; set; }
+        public string MoldCode { get; set; }
+        [Display(Name = "P/M")]
+        [UIHint("DecimalN0")]
+        public decimal MoldQuantity { get; set; }
 
         public int BomID { get; set; }
         [Display(Name = "Nguyên liệu")]
         [Required(ErrorMessage = "Vui lòng chọn nguyên liệu")]
         [UIHint("AutoCompletes/BomBase")]
-        public virtual string BomCode { get; set; }
+        public string BomCode { get; set; }
+        [UIHint("DecimalN0")]
+        public decimal BlockUnit { get; set; }
+        [UIHint("Quantity")]
+        public decimal BlockQuantity { get; set; }
 
         //[Display(Name = "Mã CK")]
         [UIHint("AutoCompletes/CommodityBase")]

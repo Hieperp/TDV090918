@@ -33,5 +33,8 @@ namespace TotalModel.Models
         public string BomCode { get; set; }
         public string BomName { get; set; }
         public Nullable<int> CombineIndex { get; set; }
+        public decimal MoldQuantity { get; set; }
+        public decimal BlockUnit { get; set; }
+        public decimal BlockQuantity { get; set; }
     }
 }

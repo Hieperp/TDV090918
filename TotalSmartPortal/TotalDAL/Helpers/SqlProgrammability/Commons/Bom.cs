@@ -96,7 +96,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             queryString = queryString + "       BEGIN " + "\r\n";
 
             queryString = queryString + "           UPDATE          CommodityBoms " + "\r\n";
-            queryString = queryString + "           SET             BlockUnit = @BlockUnit, BlockQuantity = @BlockQuantity, Remarks = @Remarks " + "\r\n";
+            queryString = queryString + "           SET             BlockUnit = ROUND(IIF(@BlockUnit > 0, @BlockUnit, BlockUnit), " + (int)GlobalEnums.rndN0 + "), BlockQuantity = ROUND(IIF(@BlockQuantity > 0, @BlockQuantity, BlockQuantity), " + (int)GlobalEnums.rndQuantity + "), Remarks = @Remarks " + "\r\n";
             queryString = queryString + "           WHERE           CommodityBomID = @CommodityBomID " + "\r\n";
 
             queryString = queryString + "           IF (@IsDefault = 1) " + "\r\n"; //ONLY CHANGE WHEN @IsDefault = true: THIS WILL KEEP AT LEAST 1 ROW IS DEFAULT
