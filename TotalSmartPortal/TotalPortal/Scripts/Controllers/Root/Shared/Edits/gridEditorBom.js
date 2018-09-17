@@ -17,6 +17,9 @@
 
             currentDataSourceRow.set("BomID", dataItem.BomID);
             currentDataSourceRow.set("BomCode", dataItem.Code);
+
+            currentDataSourceRow.set("BlockUnit", dataItem.BlockUnit);
+            currentDataSourceRow.set("BlockQuantity", dataItem.BlockQuantity);
         }
 
         window.bomCodeBeforeChange = dataItem.Code;

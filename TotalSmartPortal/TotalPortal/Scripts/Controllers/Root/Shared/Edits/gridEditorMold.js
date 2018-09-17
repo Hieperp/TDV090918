@@ -17,6 +17,8 @@
 
             currentDataSourceRow.set("MoldID", dataItem.MoldID);
             currentDataSourceRow.set("MoldCode", dataItem.Code);
+
+            currentDataSourceRow.set("MoldQuantity", dataItem.MoldQuantity);
         }
 
         window.moldCodeBeforeChange = dataItem.Code;

@@ -56,7 +56,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
         {
             string[] queryArray = new string[1];
 
-            queryArray[0] = " SELECT TOP 1 @FoundEntity = MoldID FROM Molds WHERE @EntityID = @EntityID"; 
+            queryArray[0] = " SELECT TOP 1 @FoundEntity = MoldID FROM Molds WHERE @EntityID = @EntityID";
 
             //queryArray[0] = " SELECT TOP 1 @FoundEntity = MoldID FROM Molds WHERE MoldID = @EntityID AND (InActive = 1 OR InActivePartial = 1)"; //Don't allow approve after void
             //queryArray[1] = " SELECT TOP 1 @FoundEntity = MoldID FROM GoodsIssueDetails WHERE MoldID = @EntityID ";
@@ -152,14 +152,23 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
         {
             string queryString;
 
+            string querySELECT = "              SELECT      Molds.MoldID, Molds.Code, Molds.Name, Molds.Reference, Molds.Quantity " + " \r\n";
+            string queryFROM = "                FROM        Molds " + "\r\n";
+            string queryWHERE = "               WHERE       Molds.InActive = 0 AND (@SearchText = '' OR Molds.Code LIKE '%' + @SearchText + '%' OR Molds.OfficialCode LIKE '%' + @SearchText + '%' OR Molds.Name LIKE '%' + @SearchText + '%' OR Molds.Reference LIKE '%' + @SearchText + '%')  " + "\r\n";
+
             queryString = " @SearchText nvarchar(60), @CommodityID int " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
-            queryString = queryString + "       SELECT      MoldID, Code, Name, Reference, Quantity " + " \r\n";
-            queryString = queryString + "       FROM        Molds " + "\r\n";
-            queryString = queryString + "       WHERE       InActive = 0 AND (@SearchText = '' OR Code LIKE '%' + @SearchText + '%' OR OfficialCode LIKE '%' + @SearchText + '%' OR Name LIKE '%' + @SearchText + '%' OR Reference LIKE '%' + @SearchText + '%') AND (@CommodityID = 0 OR MoldID IN (SELECT MoldID FROM CommodityMolds WHERE CommodityID = @CommodityID)) " + "\r\n";
+            queryString = queryString + "       IF (@CommodityID > 0) " + "\r\n"; //GET ALL MOLDS BY @CommodityID
+            queryString = queryString + "           " + querySELECT + ", CommodityMolds.Quantity AS MoldQuantity " + "\r\n";
+            queryString = queryString + "           " + queryFROM + " INNER JOIN CommodityMolds ON CommodityMolds.CommodityID = @CommodityID AND Molds.MoldID = CommodityMolds.MoldID " + "\r\n";
+            queryString = queryString + "           " + queryWHERE + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n"; //GET ALL MOLDS
+            queryString = queryString + "           " + querySELECT + ", 0.0 AS MoldQuantity " + "\r\n";
+            queryString = queryString + "           " + queryFROM + "\r\n";
+            queryString = queryString + "           " + queryWHERE + "\r\n";
 
             queryString = queryString + "    END " + "\r\n";
 

@@ -47,7 +47,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             this.totalSmartPortalEntities.CreateStoredProcedure("GetCommodityBoms", queryString);
         }
 
-        
+
 
         private void AddCommodityBom()
         {
@@ -113,9 +113,9 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
         {
             string queryString;
 
-            string querySQL = "             SELECT      BomID, Code, Name, Reference " + " \r\n";
-            querySQL = querySQL + "         FROM        Boms " + "\r\n";
-            querySQL = querySQL + "         WHERE       InActive = 0 AND (@SearchText = '' OR Code LIKE '%' + @SearchText + '%' OR OfficialCode LIKE '%' + @SearchText + '%' OR Name LIKE '%' + @SearchText + '%' OR Reference LIKE '%' + @SearchText + '%') " + "\r\n";
+            string querySELECT = "              SELECT      Boms.BomID, Boms.Code, Boms.Name, Boms.Reference " + " \r\n";
+            string queryFROM = "                FROM        Boms " + "\r\n";
+            string queryWHERE = "               WHERE       Boms.InActive = 0 AND (@SearchText = '' OR Boms.Code LIKE '%' + @SearchText + '%' OR Boms.OfficialCode LIKE '%' + @SearchText + '%' OR Boms.Name LIKE '%' + @SearchText + '%' OR Boms.Reference LIKE '%' + @SearchText + '%') " + "\r\n";
 
             queryString = " @SearchText nvarchar(60), @CommodityID int, @CommodityCategoryID int, @CommodityClassID int, @CommodityLineID int " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
@@ -123,10 +123,13 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             queryString = queryString + "    BEGIN " + "\r\n";
 
             queryString = queryString + "       IF (@CommodityID > 0) " + "\r\n"; //GET ALL BOMS BY @CommodityID
-            queryString = queryString + "           " + querySQL + " AND BomID IN (SELECT BomID FROM CommodityBoms WHERE CommodityID = @CommodityID) " + "\r\n";
+            queryString = queryString + "           " + querySELECT + ", CommodityBoms.BlockUnit, CommodityBoms.BlockQuantity " + "\r\n";
+            queryString = queryString + "           " + queryFROM + " INNER JOIN CommodityBoms ON CommodityBoms.CommodityID = @CommodityID AND Boms.BomID = CommodityBoms.BomID " + "\r\n";
+            queryString = queryString + "           " + queryWHERE + "\r\n";
             queryString = queryString + "       ELSE " + "\r\n"; //GET ALL BOMS BY @CommodityCategoryID AND @CommodityClassID AND @CommodityLineID
-            queryString = queryString + "           " + querySQL + " AND CommodityCategoryID = @CommodityCategoryID AND CommodityClassID = @CommodityClassID AND CommodityLineID = @CommodityLineID " + "\r\n";
-
+            queryString = queryString + "           " + querySELECT + ", 0.0 AS BlockUnit, 0.0 AS BlockQuantity " + "\r\n";
+            queryString = queryString + "           " + queryFROM + "\r\n";
+            queryString = queryString + "           " + queryWHERE + " AND CommodityCategoryID = @CommodityCategoryID AND CommodityClassID = @CommodityClassID AND CommodityLineID = @CommodityLineID " + "\r\n";
             queryString = queryString + "    END " + "\r\n";
 
             this.totalSmartPortalEntities.CreateStoredProcedure("GetBomBases", queryString);

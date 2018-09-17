@@ -17,5 +17,7 @@ namespace TotalModel.Models
         public string Code { get; set; }
         public string Name { get; set; }
         public string Reference { get; set; }
+        public decimal BlockUnit { get; set; }
+        public decimal BlockQuantity { get; set; }
     }
 }
