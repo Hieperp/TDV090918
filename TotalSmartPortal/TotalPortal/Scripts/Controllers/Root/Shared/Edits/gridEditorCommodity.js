@@ -46,13 +46,13 @@
             
             if (currentDataSourceRow.BomID != undefined)
             {
-                currentDataSourceRow.set("BomID", dataItem.BomID);
+                currentDataSourceRow.set("BomID", dataItem.BomID === null ? 0 : dataItem.BomID);
                 currentDataSourceRow.set("BomCode", dataItem.BomCode);
                 currentDataSourceRow.set("BlockUnit", dataItem.BlockUnit === null ? 0 : dataItem.BlockUnit);
                 currentDataSourceRow.set("BlockQuantity", dataItem.BlockQuantity === null ? 0 : dataItem.BlockQuantity);
             }
             if (currentDataSourceRow.MoldID != undefined) {
-                currentDataSourceRow.set("MoldID", dataItem.MoldID);
+                currentDataSourceRow.set("MoldID", dataItem.MoldID === null ? 0 : dataItem.MoldID);
                 currentDataSourceRow.set("MoldCode", dataItem.MoldCode);
                 currentDataSourceRow.set("MoldQuantity", dataItem.MoldQuantity === null ? 0 : dataItem.MoldQuantity);
             }
