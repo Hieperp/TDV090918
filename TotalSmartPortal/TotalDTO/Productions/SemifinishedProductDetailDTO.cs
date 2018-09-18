@@ -37,13 +37,16 @@ namespace TotalDTO.Productions
         [Display(Name = "Tồn đơn")]
         [UIHint("QuantityReadonly")]
         public decimal QuantityRemains { get; set; }
-        [Display(Name = "SL")]
-        [UIHint("Quantity")]
+        [Display(Name = "SL (Cái)")]
+        [UIHint("DecimalN0")]
         public override decimal Quantity { get; set; }
+        [Display(Name = "Thành phẩm")]
+        [UIHint("Quantity")]
+        public decimal QuantityGainings { get; set; }
         [Display(Name = "Hao hụt")]
         [UIHint("Quantity")]
         public decimal QuantityWastage { get; set; }
-        [Display(Name = "Hư hỏng")]
+        [Display(Name = "Phế phẩm")]
         [UIHint("Quantity")]
         public decimal QuantityFailure { get; set; }
         [Display(Name = "Trả lại")]

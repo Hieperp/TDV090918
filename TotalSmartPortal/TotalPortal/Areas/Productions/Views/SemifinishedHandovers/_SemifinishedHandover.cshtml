@@ -55,7 +55,7 @@
 
         <div class="right-top-panel right-top-panel-H2">
 
-            @Html.EditorFor(d => d.Customer, new { CustomerDisplayName = @Model.GetDisplayName(m => m.Customer), CustomerIcon = "Customer Red 24.png", NullCustomer = (Model.CustomerID > 0 ? null : "Lệnh sản xuất tổng hợp của nhiều khách hàng"), CustomerInfo = (Model.CustomerID > 0 ? null : "#") })
+            @Html.EditorFor(d => d.Customer, new { CustomerDisplayName = @Model.GetDisplayName(m => m.Customer), CustomerIcon = "Customer Red 24.png", NullCustomer = (Model.CustomerID > 0 ? null : "Bàn giao phôi định hình tổng hợp của nhiều khách hàng"), CustomerInfo = (Model.CustomerID > 0 ? null : "#") })
             
         </div>
 
@@ -111,6 +111,11 @@
                         .ClientFooterTemplate("#= kendo.format('" + Settings.kfmQuantity + "', sum) #")
                         .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', Quantity) #" + "<input type='hidden' name='SemifinishedHandoverViewDetails[#= index(data) #].Quantity' value='#= Quantity #' />");
 
+                    columns.Bound(p => p.QuantityGainings).DisplayNameTitle().HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(50)
+                        .Format(Settings.kfmQuantity)
+                        .ClientFooterTemplate("#= kendo.format('" + Settings.kfmQuantity + "', sum) #")
+                        .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', QuantityGainings) #" + "<input type='hidden' name='SemifinishedHandoverViewDetails[#= index(data) #].QuantityGainings' value='#= QuantityGainings #' />");
+                    
                     columns.Bound(p => p.Remarks).DisplayNameTitle().Width(120)
                         .ClientTemplate("#= (Remarks == null)? '' : Remarks #" + "<input type='hidden' name='SemifinishedHandoverViewDetails[#= index(data) #].Remarks' value='#= (Remarks == null) ? '' : Remarks #' />");
 
@@ -187,6 +192,7 @@
                             events.Error("kendGrid_ErrorHandler");
                         })                                                
                         .Aggregates(a => a.Add(x => x.Quantity).Sum())
+                        .Aggregates(a => a.Add(x => x.QuantityGainings).Sum())
                     )
             )
         </div>

@@ -45,9 +45,13 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
-            queryString = queryString + "       SELECT      SemifinishedProducts.SemifinishedProductID, CAST(SemifinishedProducts.EntryDate AS DATE) AS EntryDate, SemifinishedProducts.Reference, Locations.Code AS LocationCode, SemifinishedProducts.Description, SemifinishedProducts.Approved " + "\r\n";
+            queryString = queryString + "       SELECT      SemifinishedProducts.SemifinishedProductID, CAST(SemifinishedProducts.EntryDate AS DATE) AS EntryDate, SemifinishedProducts.Reference, Locations.Code AS LocationCode, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, ProductionLines.Code AS ProductionLineCode, Workshifts.EntryDate AS WorkshiftEntryDate, Workshifts.Code AS WorkshiftCode, FirmOrders.Specification, SemifinishedProducts.Description, SemifinishedProducts.Approved " + "\r\n";
             queryString = queryString + "       FROM        SemifinishedProducts " + "\r\n";
             queryString = queryString + "                   INNER JOIN Locations ON SemifinishedProducts.EntryDate >= @FromDate AND SemifinishedProducts.EntryDate <= @ToDate AND SemifinishedProducts.OrganizationalUnitID IN (SELECT AccessControls.OrganizationalUnitID FROM AccessControls INNER JOIN AspNetUsers ON AccessControls.UserID = AspNetUsers.UserID WHERE AspNetUsers.Id = @AspUserID AND AccessControls.NMVNTaskID = " + (int)TotalBase.Enums.GlobalEnums.NmvnTaskID.SemifinishedProduct + " AND AccessControls.AccessLevel > 0) AND Locations.LocationID = SemifinishedProducts.LocationID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN FirmOrders ON SemifinishedProducts.FirmOrderID = FirmOrders.FirmOrderID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN Customers ON SemifinishedProducts.CustomerID = Customers.CustomerID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN Workshifts ON SemifinishedProducts.WorkshiftID = Workshifts.WorkshiftID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN ProductionLines ON SemifinishedProducts.ProductionLineID = ProductionLines.ProductionLineID " + "\r\n";
             queryString = queryString + "       " + "\r\n";
 
             queryString = queryString + "    END " + "\r\n";
@@ -68,7 +72,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "    BEGIN " + "\r\n";
 
             queryString = queryString + "       SELECT          ISNULL(SemifinishedProductDetails.SemifinishedProductDetailID, 0) AS SemifinishedProductDetailID, ISNULL(SemifinishedProductDetails.SemifinishedProductID, 0) AS SemifinishedProductID, FirmOrderDetails.FirmOrderDetailID, FirmOrderDetails.PlannedOrderDetailID, Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, " + "\r\n";
-            queryString = queryString + "                       ROUND(FirmOrderDetails.Quantity - FirmOrderDetails.QuantitySemifinished + ISNULL(SemifinishedProductDetails.Quantity, 0) + ISNULL(SemifinishedProductDetails.QuantityWastage, 0) + ISNULL(SemifinishedProductDetails.QuantityFailure, 0) + ISNULL(SemifinishedProductDetails.QuantityRejected, 0), " + (int)GlobalEnums.rndQuantity + ") AS QuantityRemains, ISNULL(SemifinishedProductDetails.Quantity, 0) AS Quantity, ISNULL(SemifinishedProductDetails.QuantityWastage, 0) AS QuantityWastage, ISNULL(SemifinishedProductDetails.QuantityFailure, 0) AS QuantityFailure, ISNULL(SemifinishedProductDetails.QuantityRejected, 0) AS QuantityRejected, SemifinishedProductDetails.Remarks " + "\r\n";
+            queryString = queryString + "                       ROUND(FirmOrderDetails.Quantity - FirmOrderDetails.QuantitySemifinished + ISNULL(SemifinishedProductDetails.Quantity, 0) + ISNULL(SemifinishedProductDetails.QuantityWastage, 0) + ISNULL(SemifinishedProductDetails.QuantityFailure, 0) + ISNULL(SemifinishedProductDetails.QuantityRejected, 0), " + (int)GlobalEnums.rndQuantity + ") AS QuantityRemains, ISNULL(SemifinishedProductDetails.Quantity, 0) AS Quantity, ISNULL(SemifinishedProductDetails.QuantityGainings, 0) AS QuantityGainings, ISNULL(SemifinishedProductDetails.QuantityWastage, 0) AS QuantityWastage, ISNULL(SemifinishedProductDetails.QuantityFailure, 0) AS QuantityFailure, ISNULL(SemifinishedProductDetails.QuantityRejected, 0) AS QuantityRejected, SemifinishedProductDetails.Remarks " + "\r\n";
             
             queryString = queryString + "       FROM            FirmOrderDetails " + "\r\n";
             queryString = queryString + "                       INNER JOIN Commodities ON FirmOrderDetails.FirmOrderID = @FirmOrderID AND FirmOrderDetails.CommodityID = Commodities.CommodityID " + "\r\n";
@@ -106,6 +110,38 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             string queryString = " @EntityID int, @SaveRelativeOption int " + "\r\n"; //SaveRelativeOption: 1: Update, -1:Undo
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "   BEGIN  " + "\r\n";
+            
+            queryString = queryString + "       DECLARE @msg NVARCHAR(300) ";
+
+            queryString = queryString + "       DECLARE         @SemifinishedProductDetails TABLE (FirmOrderDetailID int NOT NULL PRIMARY KEY, PlannedOrderDetailID int NOT NULL, Quantity decimal(18, 2) NOT NULL)" + "\r\n";
+            queryString = queryString + "       INSERT INTO     @SemifinishedProductDetails (FirmOrderDetailID, PlannedOrderDetailID, Quantity) SELECT FirmOrderDetailID, PlannedOrderDetailID, SUM(Quantity) AS Quantity FROM SemifinishedProductDetails WHERE SemifinishedProductID = @EntityID GROUP BY FirmOrderDetailID, PlannedOrderDetailID " + "\r\n";
+
+            queryString = queryString + "       UPDATE          FirmOrderDetails " + "\r\n";
+            queryString = queryString + "       SET             FirmOrderDetails.QuantitySemifinished = ROUND(FirmOrderDetails.QuantitySemifinished + SemifinishedProductDetails.Quantity * @SaveRelativeOption, " + (int)GlobalEnums.rndQuantity + ") " + "\r\n";
+            queryString = queryString + "       FROM            FirmOrderDetails " + "\r\n";
+            queryString = queryString + "                       INNER JOIN @SemifinishedProductDetails SemifinishedProductDetails ON ((FirmOrderDetails.Approved = 1 AND FirmOrderDetails.InActive = 0 AND FirmOrderDetails.InActivePartial = 0) OR @SaveRelativeOption = -1) AND FirmOrderDetails.FirmOrderDetailID = SemifinishedProductDetails.FirmOrderDetailID " + "\r\n";
+
+            queryString = queryString + "       IF @@ROWCOUNT <> (SELECT COUNT(*) FROM @SemifinishedProductDetails) " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               SET         @msg = N'Kế hoạch sản xuất đã hủy, chưa duyệt hoặc đã xóa.' ; " + "\r\n";
+            queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
+
+            queryString = queryString + "       UPDATE          PlannedOrderDetails " + "\r\n";
+            queryString = queryString + "       SET             PlannedOrderDetails.QuantitySemifinished = ROUND(PlannedOrderDetails.QuantitySemifinished + SemifinishedProductDetails.Quantity * @SaveRelativeOption, " + (int)GlobalEnums.rndQuantity + ") " + "\r\n";
+            queryString = queryString + "       FROM            PlannedOrderDetails " + "\r\n";
+            queryString = queryString + "                       INNER JOIN @SemifinishedProductDetails SemifinishedProductDetails ON ((PlannedOrderDetails.Approved = 1 AND PlannedOrderDetails.InActive = 0 AND PlannedOrderDetails.InActivePartial = 0) OR @SaveRelativeOption = -1) AND PlannedOrderDetails.PlannedOrderDetailID = SemifinishedProductDetails.PlannedOrderDetailID " + "\r\n";
+
+            queryString = queryString + "       IF @@ROWCOUNT <> (SELECT COUNT(*) FROM @SemifinishedProductDetails) " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               SET         @msg = N'Kế hoạch sản xuất đã hủy, chưa duyệt hoặc đã xóa.' ; " + "\r\n";
+            queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
+
+            queryString = queryString + "   END " + "\r\n";
+
 
             this.totalSmartPortalEntities.CreateStoredProcedure("SemifinishedProductSaveRelative", queryString);
         }

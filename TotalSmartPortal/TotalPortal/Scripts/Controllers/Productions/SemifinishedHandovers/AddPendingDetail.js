@@ -61,6 +61,7 @@ function handleOKEvent(semifinishedHandoverGridDataSource, pendingDetailGridData
         dataRow.CommodityCode = semifinishedHandoverGridDataItem.CommodityCode;
         
         dataRow.Quantity = semifinishedHandoverGridDataItem.Quantity;
+        dataRow.QuantityGainings = semifinishedHandoverGridDataItem.QuantityGainings;
         
         dataRow.ProductionLineID = semifinishedHandoverGridDataItem.ProductionLineID;
         dataRow.ProductionLineCode = semifinishedHandoverGridDataItem.ProductionLineCode;

@@ -43,5 +43,9 @@ namespace TotalDTO.Productions
         [Display(Name = "Công nhân")]
         [UIHint("StringReadonly")]
         public string CrucialWorkerName { get; set; }
+
+        [Display(Name = "Thành phẩm")]
+        [UIHint("QuantityReadonly")]
+        public decimal QuantityGainings { get; set; }
     }
 }

@@ -44,7 +44,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
-            queryString = queryString + "       SELECT      SemifinishedHandovers.SemifinishedHandoverID, CAST(SemifinishedHandovers.EntryDate AS DATE) AS EntryDate, SemifinishedHandovers.Reference, Locations.Code AS LocationCode, ISNULL(Customers.Name + ',    ' + Customers.BillingAddress, N'Phiếu giao hàng gộp chung của nhiều khách hàng') AS CustomerDescription, Workshifts.EntryDate AS WorkshiftEntryDate, Workshifts.Code AS WorkshiftCode, SemifinishedHandovers.Description, SemifinishedHandovers.TotalQuantity " + "\r\n";
+            queryString = queryString + "       SELECT      SemifinishedHandovers.SemifinishedHandoverID, CAST(SemifinishedHandovers.EntryDate AS DATE) AS EntryDate, SemifinishedHandovers.Reference, Locations.Code AS LocationCode, ISNULL(Customers.Name + ',    ' + Customers.BillingAddress, N'Bàn giao phôi định hình') AS CustomerDescription, Workshifts.EntryDate AS WorkshiftEntryDate, Workshifts.Code AS WorkshiftCode, SemifinishedHandovers.Description, SemifinishedHandovers.TotalQuantity " + "\r\n";
             queryString = queryString + "       FROM        SemifinishedHandovers " + "\r\n";
             queryString = queryString + "                   INNER JOIN Locations ON SemifinishedHandovers.EntryDate >= @FromDate AND SemifinishedHandovers.EntryDate <= @ToDate AND SemifinishedHandovers.OrganizationalUnitID IN (SELECT AccessControls.OrganizationalUnitID FROM AccessControls INNER JOIN AspNetUsers ON AccessControls.UserID = AspNetUsers.UserID WHERE AspNetUsers.Id = @AspUserID AND AccessControls.NMVNTaskID = " + (int)TotalBase.Enums.GlobalEnums.NmvnTaskID.SemifinishedHandover + " AND AccessControls.AccessLevel > 0) AND Locations.LocationID = SemifinishedHandovers.LocationID " + "\r\n";
             queryString = queryString + "                   INNER JOIN Workshifts ON SemifinishedHandovers.WorkshiftID = Workshifts.WorkshiftID " + "\r\n";
@@ -67,7 +67,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "       SELECT      SemifinishedHandoverDetails.SemifinishedHandoverDetailID, SemifinishedHandoverDetails.SemifinishedHandoverID, SemifinishedProductDetails.SemifinishedProductID, SemifinishedProductDetails.SemifinishedProductDetailID, SemifinishedProductDetails.EntryDate, SemifinishedProductDetails.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, " + "\r\n";
             queryString = queryString + "                   SemifinishedProductDetails.CommodityID, Commodities.Code AS CommodityCode, SemifinishedProductDetails.ProductionLineID, ProductionLines.Code AS ProductionLineCode, SemifinishedProductDetails.CrucialWorkerID, Employees.Name AS CrucialWorkerName, " + "\r\n";
-            queryString = queryString + "                   SemifinishedHandoverDetails.Quantity, SemifinishedHandoverDetails.Remarks" + "\r\n";
+            queryString = queryString + "                   SemifinishedHandoverDetails.Quantity, SemifinishedProductDetails.QuantityGainings, SemifinishedHandoverDetails.Remarks" + "\r\n";
 
             queryString = queryString + "       FROM        SemifinishedHandoverDetails " + "\r\n";
             queryString = queryString + "                   INNER JOIN SemifinishedProductDetails ON SemifinishedHandoverDetails.SemifinishedHandoverID = @SemifinishedHandoverID AND SemifinishedHandoverDetails.SemifinishedProductDetailID = SemifinishedProductDetails.SemifinishedProductDetailID " + "\r\n";
@@ -188,7 +188,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "       SELECT      SemifinishedProductDetails.SemifinishedProductID, SemifinishedProductDetails.SemifinishedProductDetailID, SemifinishedProductDetails.EntryDate, SemifinishedProductDetails.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, " + "\r\n";
             queryString = queryString + "                   SemifinishedProductDetails.CommodityID, Commodities.Code AS CommodityCode, SemifinishedProductDetails.ProductionLineID, ProductionLines.Code AS ProductionLineCode, SemifinishedProductDetails.CrucialWorkerID, Employees.Name AS CrucialWorkerName, " + "\r\n";
-            queryString = queryString + "                   SemifinishedProductDetails.Quantity, CAST(0 AS bit) AS IsSelected " + "\r\n";
+            queryString = queryString + "                   SemifinishedProductDetails.Quantity, SemifinishedProductDetails.QuantityGainings, CAST(1 AS bit) AS IsSelected " + "\r\n";
 
             queryString = queryString + "       FROM        SemifinishedProductDetails " + "\r\n";
             queryString = queryString + "                   INNER JOIN Customers ON SemifinishedProductDetails.WorkshiftID = @WorkshiftID AND SemifinishedProductDetails.Approved = 1 " + (isCustomerID ? " AND SemifinishedProductDetails.CustomerID = @CustomerID " : "") + " AND SemifinishedProductDetails.SemifinishedHandoverID IS NULL AND SemifinishedProductDetails.CustomerID = Customers.CustomerID " + (isSemifinishedProductDetailIDs ? " AND SemifinishedProductDetails.SemifinishedProductDetailID NOT IN (SELECT Id FROM dbo.SplitToIntList (@SemifinishedProductDetailIDs))" : "") + "\r\n";
@@ -205,7 +205,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "       SELECT      SemifinishedProductDetails.SemifinishedProductID, SemifinishedProductDetails.SemifinishedProductDetailID, SemifinishedProductDetails.EntryDate, SemifinishedProductDetails.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, " + "\r\n";
             queryString = queryString + "                   SemifinishedProductDetails.CommodityID, Commodities.Code AS CommodityCode, SemifinishedProductDetails.ProductionLineID, ProductionLines.Code AS ProductionLineCode, SemifinishedProductDetails.CrucialWorkerID, Employees.Name AS CrucialWorkerName, " + "\r\n";
-            queryString = queryString + "                   SemifinishedProductDetails.Quantity, CAST(0 AS bit) AS IsSelected " + "\r\n";
+            queryString = queryString + "                   SemifinishedProductDetails.Quantity, SemifinishedProductDetails.QuantityGainings, CAST(1 AS bit) AS IsSelected " + "\r\n";
 
             queryString = queryString + "       FROM        SemifinishedProductDetails " + "\r\n";
             queryString = queryString + "                   INNER JOIN Customers ON SemifinishedProductDetails.SemifinishedHandoverID = @SemifinishedHandoverID AND SemifinishedProductDetails.CustomerID = Customers.CustomerID " + (isSemifinishedProductDetailIDs ? " AND SemifinishedProductDetails.SemifinishedProductDetailID NOT IN (SELECT Id FROM dbo.SplitToIntList (@SemifinishedProductDetailIDs))" : "") + "\r\n";

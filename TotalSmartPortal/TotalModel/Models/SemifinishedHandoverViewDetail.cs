@@ -29,5 +29,6 @@ namespace TotalModel.Models
         public string Remarks { get; set; }
         public int CrucialWorkerID { get; set; }
         public string CrucialWorkerName { get; set; }
+        public decimal QuantityGainings { get; set; }
     }
 }
