@@ -15,7 +15,7 @@ namespace TotalDTO.Productions
         public int PlannedOrderID { get; set; }
 
         public int CustomerID { get; set; }
-        
+
         public int MoldID { get; set; }
         [Display(Name = "Mã khuôn")]
         [Required(ErrorMessage = "Vui lòng chọn mã khuôn")]
@@ -54,6 +54,6 @@ namespace TotalDTO.Productions
 
         public string Description { get; set; }
 
-        public string GetDescription() { return this.CommodityCode + " [" + this.Quantity.ToString("N" + GlobalEnums.rndQuantity.ToString()) + "] ";}
+        public string GetDescription() { return this.CommodityCode + (this.CombineIndex != null ? " [" + this.Quantity.ToString("N" + GlobalEnums.rndQuantity.ToString()) + "] " : ""); }
     }
 }

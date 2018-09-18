@@ -35,29 +35,17 @@ namespace TotalDTO.Productions
 
         public virtual int CustomerID { get; set; }
 
-        public virtual bool CheckBomID
-        {
-            get
-            {
-                bool check = false;
-                this.DtoDetails().ToList().ForEach(e => { if (e.CombineIndex != null && check == false && this.DtoDetails().Where(w => w.CombineIndex == e.CombineIndex && w.BomID != e.BomID).Count() > 0) check = true; });
-                return check;
-            }
-        }
+        public virtual bool CheckBomID { get { bool checkBomID = false; this.DtoDetails().ToList().ForEach(e => { if (e.CombineIndex != null && checkBomID == false && this.DtoDetails().Where(w => w.CombineIndex == e.CombineIndex && w.BomID != e.BomID).Count() > 0) checkBomID = true; }); return checkBomID; } }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             foreach (var result in base.Validate(validationContext)) { yield return result; }
-            if (this.CheckBomID) yield return new ValidationResult("Lỗi nguyên liệu [BOM]", new[] { "BOM" });
-
+            if (this.CheckBomID) yield return new ValidationResult("Lỗi nguyên liệu [BOM]. Ghép khuôn phải sử dụng chung nguyên liệu.", new[] { "BOM" });
         }
 
         public override void PerformPresaveRule()
         {
             base.PerformPresaveRule();
-
-            //var a = this.DtoDetails().Where(w => w.CombineIndex != null).GroupBy(g => new { g.CombineIndex, g.BomID }).ToLookup(g => g.Key, g => g.Count());
-            var a = this.DtoDetails().Where(w => w.CombineIndex != null).GroupBy(g => g.BomID);
 
             this.DtoDetails().ToList().ForEach(e => { e.CustomerID = this.CustomerID; e.Description = e.CombineIndex == null ? e.GetDescription() : string.Join(", ", this.DtoDetails().Where(w => w.CombineIndex == e.CombineIndex).Select(o => o.GetDescription())); });
         }
