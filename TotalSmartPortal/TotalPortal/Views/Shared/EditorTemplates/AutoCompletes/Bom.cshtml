@@ -43,7 +43,7 @@
         $("#Code-list").css("width", "382");
     }
 
-    $(".bomBase_AutoComplete").focusout(function (e) { //Keep old selected value. This is used in master mode
+    $(".BomBase_AutoComplete").focusout(function (e) { //Keep old selected value. This is used in master mode
         var modelID = getBomModelID(this.id);
         $(this).val($("#" + modelID + "TempCode").val());
     });

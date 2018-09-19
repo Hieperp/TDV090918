@@ -30,7 +30,7 @@
         {
             e.Select("warehouse_Select");
         })
-        .HtmlAttributes(new { @class = (ViewData["LeftPanelInput"] != null ? ViewData["LeftPanelInput"] : "right-panel-input right-panel-input-whole-width") + " warehouseBase_AutoComplete" })
+        .HtmlAttributes(new { @class = (ViewData["LeftPanelInput"] != null ? ViewData["LeftPanelInput"] : "right-panel-input right-panel-input-whole-width") + " WarehouseBase_AutoComplete" })
         )
 
     </div>
@@ -60,7 +60,7 @@
         $("#" + modelID + "WarehouseID").trigger("change");
     }
 
-    $(".warehouseBase_AutoComplete").focusout(function (e) {
+    $(".WarehouseBase_AutoComplete").focusout(function (e) {
         var modelID = getWarehouseModelID(this.id);
         $(this).val($("#" + modelID + "TempName").val());        
     });

@@ -27,7 +27,7 @@
                 {
                     e.Select("employee_Select");
                 })
-                .HtmlAttributes(new { @class = "left-panel-input employeeBase_AutoComplete" })
+                .HtmlAttributes(new { @class = "left-panel-input EmployeeBase_AutoComplete" })
     )
 
 </div>
@@ -55,7 +55,7 @@
         $("#" + modelID + "EmployeeID").trigger("change");
     }
 
-    $(".employeeBase_AutoComplete").focusout(function (e) {        
+    $(".EmployeeBase_AutoComplete").focusout(function (e) {        
         var modelID = getEmployeeModelID(this.id);
         $(this).val($("#" + modelID + "TempName").val());
     });

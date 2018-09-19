@@ -37,7 +37,7 @@
                     e.Select("customer_Select");
                     e.DataBound("customer_DataBound");
                 })
-                .HtmlAttributes(new { @class = "right-panel-input customerBase_AutoComplete" })
+                .HtmlAttributes(new { @class = "right-panel-input CustomerBase_AutoComplete" })
             )
 
         </div>
@@ -104,7 +104,7 @@
         $("#" + modelID + "CustomerID").trigger("change");
     }
 
-    $(".customerBase_AutoComplete").focusout(function (e) {
+    $(".CustomerBase_AutoComplete").focusout(function (e) {
         var modelID = getCustomerModelID(this.id);
         $(this).val($("#" + modelID + "TempCodeAndName").val());
     });

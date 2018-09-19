@@ -42,7 +42,7 @@
 
     gridEditorVoidTypeChange = function (e) { } //Keep old selected value. This function is used in detail mode (In conjuction with grid)
 
-    $(".voidTypeBase_AutoComplete").focusout(function (e) { //Keep old selected value. This is used in master mode
+    $(".VoidTypeBase_AutoComplete").focusout(function (e) { //Keep old selected value. This is used in master mode
         var modelID = getVoidTypeModelID(this.id);
         $(this).val($("#" + modelID + "TempName").val());        
     });
