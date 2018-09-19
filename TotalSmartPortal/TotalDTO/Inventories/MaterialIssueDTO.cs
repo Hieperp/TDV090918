@@ -52,12 +52,14 @@ namespace TotalDTO.Inventories
         [Display(Name = "Ngày sản xuất")]
         public DateTime WorkshiftEntryDate { get; set; }
 
-        public virtual int ProductionLineID { get; set; }
-        [Display(Name = "Mã số máy")]
+        public int ProductionLineID { get; set; }
+        [Display(Name = "Dây chuyền")]
+        [Required(ErrorMessage = "Vui lòng chọn dây chuyền")]
+        [UIHint("AutoCompletes/ProductionLine")]
         public string ProductionLineCode { get; set; }
 
         [Display(Name = "Mã số máy, ca sx")]
-        public string Caption { get { return this.ProductionLineCode + ", " + this.WorkshiftCode + " [" + this.WorkshiftEntryDate.ToString("dd/MM/yyyy") + "]"; } }
+        public string Caption { get { return this.WorkshiftCode + " [" + this.WorkshiftEntryDate.ToString("dd/MM/yyyy") + "]"; } }
 
         public virtual Nullable<int> WarehouseID { get; set; }
         public virtual int StorekeeperID { get; set; }

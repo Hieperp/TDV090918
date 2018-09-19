@@ -115,12 +115,6 @@
                                 "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].Specification' value='#= (Specification == null) ? '' : Specification #' />");
 
                     
-                    columns.Bound(p => p.ProductionLineID).DisplayNameTitle().Hidden()
-                        .ClientTemplate("#= ProductionLineID #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].ProductionLineID' value='#= ProductionLineID #' />");
-                    columns.Bound(p => p.ProductionLineCode).DisplayNameTitle().Width(100)
-                        .ClientTemplate("#= (ProductionLineCode == null)? '' : ProductionLineCode #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].ProductionLineCode' value='#= (ProductionLineCode == null) ? '' : ProductionLineCode #' />");
-                    
-
                     columns.Bound(p => p.BomID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= BomID #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].BomID' value='#= BomID #' />");
                     columns.Bound(p => p.BomCode).DisplayNameTitle().Width(100)

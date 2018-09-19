@@ -45,8 +45,6 @@
     @Html.HiddenFor(model => model.WorkshiftID)
     @Html.HiddenFor(model => model.WorkshiftCode)
     @Html.HiddenFor(model => model.WorkshiftEntryDate)
-    @Html.HiddenFor(model => model.ProductionLineID)
-    @Html.HiddenFor(model => model.ProductionLineCode)
 
     @Html.HiddenFor(model => model.Warehouse.WarehouseID)
     @Html.HiddenFor(model => model.Warehouse.Code)
@@ -69,7 +67,6 @@
             columns.Bound(c => c.FirmOrderEntryDate).Title("Ngày KHSX").Format("{0:dd/MM/yyyy}").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(38);
             columns.Bound(c => c.WorkshiftEntryDate).Title("Ngày SX").Format("{0:dd/MM/yyyy}").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(38);
             columns.Bound(c => c.WorkshiftCode).Title("Ca SX").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(30);
-            columns.Bound(c => c.ProductionLineCode).Title("MS máy").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(27);
             columns.Bound(c => c.CustomerName).Title("Khách hàng").Width(68);
             columns.Bound(c => c.FirmOrderSpecification).Title("Mã thành phẩm").Width(92);
             columns.Bound(p => p.TotalQuantity).Title("SL ĐH").Format(Settings.kfmQuantity).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(32);
@@ -177,8 +174,6 @@
             $("#WorkshiftID").val(selectedDataItem === undefined || selectedDataItem.WorkshiftID === undefined ? null : selectedDataItem.WorkshiftID);
             $("#WorkshiftCode").val(selectedDataItem === undefined || selectedDataItem.WorkshiftCode === undefined ? null : selectedDataItem.WorkshiftCode);
             $("#WorkshiftEntryDate").val(selectedDataItem === undefined || selectedDataItem.WorkshiftEntryDate === undefined ? null : kendo.toString(selectedDataItem.WorkshiftEntryDate, Settings.DateTimeFormat));
-            $("#ProductionLineID").val(selectedDataItem === undefined || selectedDataItem.ProductionLineID === undefined ? null : selectedDataItem.ProductionLineID);
-            $("#ProductionLineCode").val(selectedDataItem === undefined || selectedDataItem.ProductionLineCode === undefined ? null : selectedDataItem.ProductionLineCode);
 
             $("#Warehouse_WarehouseID").val(selectedDataItem === undefined || selectedDataItem.WarehouseID === undefined ? null : selectedDataItem.WarehouseID);
             $("#Warehouse_Code").val(selectedDataItem === undefined || selectedDataItem.WarehouseCode === undefined ? null : selectedDataItem.WarehouseCode);
@@ -200,7 +195,6 @@
                     { field: "FirmOrderReference", operator: "contains", value: materialIssuePendingFirmOrderFilter },
                     { field: "CustomerName", operator: "contains", value: materialIssuePendingFirmOrderFilter },
                     { field: "WorkshiftCode", operator: "contains", value: materialIssuePendingFirmOrderFilter },
-                    { field: "ProductionLineCode", operator: "contains", value: materialIssuePendingFirmOrderFilter },
                     { field: "FirmOrderSpecification", operator: "contains", value: materialIssuePendingFirmOrderFilter }
                 ]
             });

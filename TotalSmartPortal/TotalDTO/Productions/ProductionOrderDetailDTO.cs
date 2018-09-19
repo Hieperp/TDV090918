@@ -40,12 +40,6 @@ namespace TotalDTO.Productions
         [UIHint("StringReadonly")]
         public virtual string Specification { get; set; }
 
-        public int ProductionLineID { get; set; }
-        [Display(Name = "Dây chuyền")]
-        [Required(ErrorMessage = "Vui lòng chọn dây chuyền")]
-        [UIHint("AutoCompletes/ProductionLineBase")]
-        public virtual string ProductionLineCode { get; set; }
-
         public int BomID { get; set; }
         [Display(Name = "Mã khuôn")]
         [Required(ErrorMessage = "Vui lòng chọn mã nguyên liệu")]
