@@ -17,8 +17,8 @@ namespace TotalModel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ProductionOrderDetail()
         {
-            this.MaterialIssues = new HashSet<MaterialIssue>();
             this.MaterialIssueDetails = new HashSet<MaterialIssueDetail>();
+            this.MaterialIssues = new HashSet<MaterialIssue>();
         }
     
         public int ProductionOrderDetailID { get; set; }
@@ -31,7 +31,6 @@ namespace TotalModel.Models
         public int WorkshiftID { get; set; }
         public int CustomerID { get; set; }
         public int BomID { get; set; }
-        public int ProductionLineID { get; set; }
         public string Remarks { get; set; }
         public Nullable<int> VoidTypeID { get; set; }
         public bool Approved { get; set; }
@@ -39,17 +38,16 @@ namespace TotalModel.Models
         public bool InActivePartial { get; set; }
         public Nullable<System.DateTime> InActivePartialDate { get; set; }
     
+        public virtual Bom Bom { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual FirmOrder FirmOrder { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MaterialIssueDetail> MaterialIssueDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MaterialIssue> MaterialIssues { get; set; }
         public virtual PlannedOrder PlannedOrder { get; set; }
-        public virtual ProductionLine ProductionLine { get; set; }
         public virtual ProductionOrder ProductionOrder { get; set; }
         public virtual VoidType VoidType { get; set; }
         public virtual Workshift Workshift { get; set; }
-        public virtual Bom Bom { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MaterialIssueDetail> MaterialIssueDetails { get; set; }
     }
 }

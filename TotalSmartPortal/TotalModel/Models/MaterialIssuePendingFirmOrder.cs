@@ -26,8 +26,6 @@ namespace TotalModel.Models
         public string CustomerName { get; set; }
         public int WorkshiftID { get; set; }
         public string WorkshiftCode { get; set; }
-        public int ProductionLineID { get; set; }
-        public string ProductionLineCode { get; set; }
         public string FirmOrderSpecification { get; set; }
         public int WarehouseID { get; set; }
         public string WarehouseCode { get; set; }
