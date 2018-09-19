@@ -299,6 +299,13 @@
         <EntityTypeShape EntityType="TotalSmartPortalModel.Mold" Width="1.5" PointX="3.375" PointY="5" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_FirmOrderDetails_Molds" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_PlannedOrderDetails_Molds" />
+        <EntityTypeShape EntityType="TotalSmartPortalModel.FinishedProductDetail" Width="1.5" PointX="42.375" PointY="20.875" />
+        <EntityTypeShape EntityType="TotalSmartPortalModel.FinishedProduct" Width="1.5" PointX="40.125" PointY="26.625" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProductDetails_Commodities" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProducts_Employees" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProductDetails_FinishedProducts" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProducts_FirmOrders" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProducts_Locations" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

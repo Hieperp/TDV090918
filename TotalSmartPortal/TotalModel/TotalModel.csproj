@@ -183,6 +183,21 @@
     <Compile Include="Models\EntireTerritory.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FinishedProduct.cs">
+      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FinishedProductDetail.cs">
+      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FinishedProductIndex.cs">
+      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FinishedProductPendingFirmOrder.cs">
+      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FinishedProductViewDetail.cs">
+      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\FirmOrder.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>

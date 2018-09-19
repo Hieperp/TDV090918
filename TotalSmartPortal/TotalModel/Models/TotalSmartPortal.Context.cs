@@ -101,6 +101,8 @@ namespace TotalModel.Models
         public virtual DbSet<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
         public virtual DbSet<SemifinishedProduct> SemifinishedProducts { get; set; }
         public virtual DbSet<Mold> Molds { get; set; }
+        public virtual DbSet<FinishedProductDetail> FinishedProductDetails { get; set; }
+        public virtual DbSet<FinishedProduct> FinishedProducts { get; set; }
     
         public virtual ObjectResult<string> AccountInvoicePostSaveValidate(Nullable<int> entityID)
         {
@@ -3326,6 +3328,106 @@ namespace TotalModel.Models
                 new ObjectParameter("IsDefault", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCommodityBom", commodityBomIDParameter, commodityIDParameter, blockUnitParameter, blockQuantityParameter, remarksParameter, isDefaultParameter);
+        }
+    
+        public virtual ObjectResult<string> FinishedProductApproved(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("FinishedProductApproved", entityIDParameter);
+        }
+    
+        public virtual ObjectResult<string> FinishedProductEditable(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("FinishedProductEditable", entityIDParameter);
+        }
+    
+        public virtual ObjectResult<string> FinishedProductPostSaveValidate(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("FinishedProductPostSaveValidate", entityIDParameter);
+        }
+    
+        public virtual int FinishedProductSaveRelative(Nullable<int> entityID, Nullable<int> saveRelativeOption)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var saveRelativeOptionParameter = saveRelativeOption.HasValue ?
+                new ObjectParameter("SaveRelativeOption", saveRelativeOption) :
+                new ObjectParameter("SaveRelativeOption", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FinishedProductSaveRelative", entityIDParameter, saveRelativeOptionParameter);
+        }
+    
+        public virtual int FinishedProductToggleApproved(Nullable<int> entityID, Nullable<bool> approved)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var approvedParameter = approved.HasValue ?
+                new ObjectParameter("Approved", approved) :
+                new ObjectParameter("Approved", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FinishedProductToggleApproved", entityIDParameter, approvedParameter);
+        }
+    
+        public virtual ObjectResult<FinishedProductIndex> GetFinishedProductIndexes(string aspUserID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var aspUserIDParameter = aspUserID != null ?
+                new ObjectParameter("AspUserID", aspUserID) :
+                new ObjectParameter("AspUserID", typeof(string));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FinishedProductIndex>("GetFinishedProductIndexes", aspUserIDParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<FinishedProductPendingFirmOrder> GetFinishedProductPendingFirmOrders(Nullable<int> locationID)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FinishedProductPendingFirmOrder>("GetFinishedProductPendingFirmOrders", locationIDParameter);
+        }
+    
+        public virtual ObjectResult<FinishedProductViewDetail> GetFinishedProductViewDetails(Nullable<int> finishedProductID, Nullable<int> locationID, Nullable<int> firmOrderID, Nullable<bool> isReadonly)
+        {
+            var finishedProductIDParameter = finishedProductID.HasValue ?
+                new ObjectParameter("FinishedProductID", finishedProductID) :
+                new ObjectParameter("FinishedProductID", typeof(int));
+    
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            var firmOrderIDParameter = firmOrderID.HasValue ?
+                new ObjectParameter("FirmOrderID", firmOrderID) :
+                new ObjectParameter("FirmOrderID", typeof(int));
+    
+            var isReadonlyParameter = isReadonly.HasValue ?
+                new ObjectParameter("IsReadonly", isReadonly) :
+                new ObjectParameter("IsReadonly", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FinishedProductViewDetail>("GetFinishedProductViewDetails", finishedProductIDParameter, locationIDParameter, firmOrderIDParameter, isReadonlyParameter);
         }
     }
 }
