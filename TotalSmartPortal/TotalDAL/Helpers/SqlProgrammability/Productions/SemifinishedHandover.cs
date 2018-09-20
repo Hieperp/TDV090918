@@ -29,6 +29,11 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.SemifinishedHandoverSaveRelative();
             this.SemifinishedHandoverPostSaveValidate();
 
+            this.SemifinishedHandoverApproved();
+            this.SemifinishedHandoverEditable();
+
+            this.SemifinishedHandoverToggleApproved();
+
             this.SemifinishedHandoverInitReference();
 
 
@@ -250,6 +255,48 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         }
 
 
+
+
+        private void SemifinishedHandoverApproved()
+        {
+            string[] queryArray = new string[1];
+
+            queryArray[0] = " SELECT TOP 1 @FoundEntity = SemifinishedHandoverID FROM SemifinishedHandovers WHERE SemifinishedHandoverID = @EntityID AND Approved = 1";
+
+            this.totalSmartPortalEntities.CreateProcedureToCheckExisting("SemifinishedHandoverApproved", queryArray);
+        }
+
+
+        private void SemifinishedHandoverEditable()
+        {
+            string[] queryArray = new string[1];
+
+            queryArray[0] = " SELECT TOP 1 @FoundEntity = SemifinishedHandoverID FROM FinishedProductDetails WHERE SemifinishedHandoverID = @EntityID ";
+
+            this.totalSmartPortalEntities.CreateProcedureToCheckExisting("SemifinishedHandoverEditable", queryArray);
+        }
+
+        private void SemifinishedHandoverToggleApproved()
+        {
+            string queryString = " @EntityID int, @Approved bit " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "       UPDATE      SemifinishedHandovers  SET Approved = @Approved, ApprovedDate = GetDate() WHERE SemifinishedHandoverID = @EntityID AND Approved = ~@Approved" + "\r\n";
+
+            queryString = queryString + "       IF @@ROWCOUNT = 1 " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               UPDATE          SemifinishedHandoverDetails     SET Approved            = @Approved WHERE SemifinishedHandoverID = @EntityID ; " + "\r\n";
+            queryString = queryString + "               UPDATE          SemifinishedProductDetails      SET HandoverApproved    = @Approved WHERE SemifinishedHandoverID = @EntityID ; " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               DECLARE     @msg NVARCHAR(300) = N'Dữ liệu không tồn tại hoặc đã ' + iif(@Approved = 0, N'hủy', '')  + N' duyệt' ; " + "\r\n";
+            queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
+
+            this.totalSmartPortalEntities.CreateStoredProcedure("SemifinishedHandoverToggleApproved", queryString);
+        }
 
         private void SemifinishedHandoverInitReference()
         {

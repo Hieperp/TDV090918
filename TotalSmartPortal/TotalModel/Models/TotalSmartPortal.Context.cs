@@ -3429,5 +3429,36 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FinishedProductViewDetail>("GetFinishedProductViewDetails", finishedProductIDParameter, locationIDParameter, firmOrderIDParameter, isReadonlyParameter);
         }
+    
+        public virtual ObjectResult<string> SemifinishedHandoverApproved(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SemifinishedHandoverApproved", entityIDParameter);
+        }
+    
+        public virtual ObjectResult<string> SemifinishedHandoverEditable(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SemifinishedHandoverEditable", entityIDParameter);
+        }
+    
+        public virtual int SemifinishedHandoverToggleApproved(Nullable<int> entityID, Nullable<bool> approved)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var approvedParameter = approved.HasValue ?
+                new ObjectParameter("Approved", approved) :
+                new ObjectParameter("Approved", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SemifinishedHandoverToggleApproved", entityIDParameter, approvedParameter);
+        }
     }
 }
