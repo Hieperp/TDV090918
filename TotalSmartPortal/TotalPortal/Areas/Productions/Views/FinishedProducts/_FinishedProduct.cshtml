@@ -92,6 +92,11 @@
                     columns.Bound(p => p.FirmOrderDetailID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= (FirmOrderDetailID == null)? '' : FirmOrderDetailID #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].FirmOrderDetailID' value='#= (FirmOrderDetailID == null) ? '' : FirmOrderDetailID #' />");
 
+                    columns.Bound(p => p.SemifinishedProductID).DisplayNameTitle().Hidden()
+                        .ClientTemplate("#= (SemifinishedProductID == null)? '' : SemifinishedProductID #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].SemifinishedProductID' value='#= (SemifinishedProductID == null) ? '' : SemifinishedProductID #' />");
+                    columns.Bound(p => p.SemifinishedProductDetailID).DisplayNameTitle().Hidden()
+                        .ClientTemplate("#= (SemifinishedProductDetailID == null)? '' : SemifinishedProductDetailID #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].SemifinishedProductDetailID' value='#= (SemifinishedProductDetailID == null) ? '' : SemifinishedProductDetailID #' />");
+                    
                     columns.Bound(p => p.PlannedOrderDetailID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= (PlannedOrderDetailID == null)? '' : PlannedOrderDetailID #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].PlannedOrderDetailID' value='#= (PlannedOrderDetailID == null) ? '' : PlannedOrderDetailID #' />");
 
@@ -99,7 +104,7 @@
                        .ClientTemplate("#= (SemifinishedHandoverID == null)? '' : SemifinishedHandoverID #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].SemifinishedHandoverID' value='#= (SemifinishedHandoverID == null) ? '' : SemifinishedHandoverID #' />");
 
                     columns.Bound(p => p.FinishedHandoverID).DisplayNameTitle().Hidden()
-                       .ClientTemplate("#= (FinishedHandoverID == null)? '' : FinishedHandoverID #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].FinishedHandoverID' value='#= (FinishedHandoverID == null) ? '' : FinishedHandoverID #' />");
+                       .ClientTemplate("#= (FinishedHandoverID == null)? '' : FinishedHandoverID #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].FinishedHandoverID' value='#= (FinishedHandoverID == null) ? '' : FinishedHandoverID #' />");      
 
                     columns.Bound(p => p.CommodityID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= CommodityID #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].CommodityID' value='#= CommodityID #' />");
@@ -116,15 +121,15 @@
                         .ClientTemplate("#= (WorkshiftCode == null)? '' : WorkshiftCode #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].WorkshiftCode' value='#= (WorkshiftCode == null) ? '' : WorkshiftCode #' />");                    
                     columns.Bound(p => p.WorkshiftEntryDate).DisplayNameTitle().Width(80)
                         .Format("{0:" + @Settings.DateFormat + "}")
-                        .ClientTemplate("#= (WorkshiftEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', WorkshiftEntryDate) #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].WorkshiftEntryDate' value='#= (WorkshiftEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', WorkshiftEntryDate) #' />");
+                        .ClientTemplate("#= (WorkshiftEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', WorkshiftEntryDate) #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].WorkshiftEntryDate' value='#= (WorkshiftEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', WorkshiftEntryDate) #' />");                   
                     
                     columns.Bound(p => p.GoodsReceiptCode).DisplayNameTitle().Width(60).Hidden()
                     .ClientTemplate("#= (GoodsReceiptCode == null)? '' : GoodsReceiptCode #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].GoodsReceiptCode' value='#= (GoodsReceiptCode == null) ? '' : GoodsReceiptCode #' />");
                     columns.Bound(p => p.GoodsReceiptReference).DisplayNameTitle().Width(60)
                         .ClientTemplate("#= (GoodsReceiptReference == null)? '' : GoodsReceiptReference #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].GoodsReceiptReference' value='#= (GoodsReceiptReference == null) ? '' : GoodsReceiptReference #' />");
-                    columns.Bound(p => p.GoodsReceiptEntryDate).DisplayNameTitle().Width(80)
-                        .Format("{0:" + @Settings.DateFormat + "}")
-                        .ClientTemplate("#= (GoodsReceiptEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', GoodsReceiptEntryDate) #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].GoodsReceiptEntryDate' value='#= (GoodsReceiptEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', GoodsReceiptEntryDate) #' />");
+                    //columns.Bound(p => p.GoodsReceiptEntryDate).DisplayNameTitle().Width(80)
+                    //    .Format("{0:" + @Settings.DateFormat + "}")
+                    //    .ClientTemplate("#= (GoodsReceiptEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', GoodsReceiptEntryDate) #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].GoodsReceiptEntryDate' value='#= (GoodsReceiptEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', GoodsReceiptEntryDate) #' />");
                     
                     columns.Bound(p => p.BatchEntryDate).DisplayNameTitle().Filterable(false).Width(80)
                         .Format("{0:" + @Settings.DateFormat + "}")

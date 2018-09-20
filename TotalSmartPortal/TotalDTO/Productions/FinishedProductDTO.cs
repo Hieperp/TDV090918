@@ -37,6 +37,13 @@ namespace TotalDTO.Productions
         public virtual int CrucialWorkerID { get; set; }
 
         public decimal TotalQuantityIssue { get; set; }
+
+        public override void PerformPresaveRule()
+        {
+            base.PerformPresaveRule();
+
+            this.DtoDetails().ToList().ForEach(e => { e.CrucialWorkerID = this.CrucialWorkerID; });            
+        }
         
     }
 

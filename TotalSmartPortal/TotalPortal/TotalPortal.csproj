@@ -1298,7 +1298,6 @@
     <Content Include="Areas\Productions\Views\SemifinishedProducts\CreateWizard.cshtml" />
     <Content Include="Areas\Productions\Views\SemifinishedProducts\Delete.cshtml" />
     <Content Include="Areas\Productions\Views\SemifinishedProducts\Edit.cshtml" />
-    <Content Include="Areas\Productions\Views\SemifinishedProducts\GetPendingMaterialIssueDetails.cshtml" />
     <Content Include="Areas\Productions\Views\SemifinishedProducts\Index.cshtml" />
     <Content Include="Areas\Productions\Views\SemifinishedProducts\Print.cshtml" />
     <Content Include="Areas\Productions\Views\SemifinishedProducts\_SemifinishedProduct.cshtml" />
@@ -1318,7 +1317,6 @@
     <Content Include="Areas\Productions\Views\FinishedProducts\CreateWizard.cshtml" />
     <Content Include="Areas\Productions\Views\FinishedProducts\Delete.cshtml" />
     <Content Include="Areas\Productions\Views\FinishedProducts\Edit.cshtml" />
-    <Content Include="Areas\Productions\Views\FinishedProducts\GetPendingFirmOrders.cshtml" />
     <Content Include="Areas\Productions\Views\FinishedProducts\Index.cshtml" />
     <Content Include="Areas\Productions\Views\FinishedProducts\Print.cshtml" />
     <Content Include="Areas\Productions\Views\FinishedProducts\_FinishedProduct.cshtml" />
@@ -1492,7 +1490,6 @@
     <Content Include="Scripts\Controllers\Inventories\WarehouseAdjustments\Index.js" />
     <Content Include="Scripts\Controllers\Inventories\WarehouseAdjustments\Open.js" />
     <Content Include="Scripts\Controllers\Inventories\WarehouseAdjustments\Print.js" />
-    <Content Include="Scripts\Controllers\Productions\FinishedProducts\AddPendingFirmOrder.js" />
     <Content Include="Scripts\Controllers\Productions\FinishedProducts\Approve.js" />
     <Content Include="Scripts\Controllers\Productions\FinishedProducts\CreateWizard.js" />
     <Content Include="Scripts\Controllers\Productions\FinishedProducts\Delete.js" />
@@ -1517,7 +1514,6 @@
     <Content Include="Scripts\Controllers\Productions\ProductionOrders\Open.js" />
     <Content Include="Scripts\Controllers\Productions\ProductionOrders\Print.js" />
     <Content Include="Scripts\Controllers\Productions\ProductionOrders\Void.js" />
-    <Content Include="Scripts\Controllers\Productions\SemifinishedHandovers\AddPendingDetail.js" />
     <Content Include="Scripts\Controllers\Productions\SemifinishedHandovers\Approve.js" />
     <Content Include="Scripts\Controllers\Productions\SemifinishedHandovers\CreateWizard.js" />
     <Content Include="Scripts\Controllers\Productions\SemifinishedHandovers\Delete.js" />
