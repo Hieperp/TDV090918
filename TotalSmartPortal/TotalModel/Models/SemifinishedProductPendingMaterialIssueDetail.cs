@@ -22,8 +22,6 @@ namespace TotalModel.Models
         public int CustomerID { get; set; }
         public string CustomerCode { get; set; }
         public string CustomerName { get; set; }
-        public System.DateTime WorkshiftEntryDate { get; set; }
-        public string WorkshiftCode { get; set; }
         public int ProductionLineID { get; set; }
         public string ProductionLineCode { get; set; }
         public string FirmOrderSpecification { get; set; }
@@ -32,7 +30,6 @@ namespace TotalModel.Models
         public string GoodsReceiptCode { get; set; }
         public System.DateTime GoodsReceiptEntryDate { get; set; }
         public int GoodsReceiptDetailID { get; set; }
-        public int WorkshiftID { get; set; }
         public string MaterialCode { get; set; }
         public string MaterialName { get; set; }
         public decimal MaterialQuantity { get; set; }
@@ -40,5 +37,8 @@ namespace TotalModel.Models
         public int CrucialWorkerID { get; set; }
         public string CrucialWorkerCode { get; set; }
         public string CrucialWorkerName { get; set; }
+        public int MaterialIssueDetailWorkshiftID { get; set; }
+        public System.DateTime MaterialIssueDetailWorkshiftEntryDate { get; set; }
+        public string MaterialIssueDetailWorkshiftCode { get; set; }
     }
 }

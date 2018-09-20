@@ -45,6 +45,7 @@ namespace TotalModel.Models
         public System.DateTime EditedDate { get; set; }
         public bool Approved { get; set; }
         public Nullable<System.DateTime> ApprovedDate { get; set; }
+        public int ShiftID { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Employee Employee { get; set; }
@@ -57,5 +58,6 @@ namespace TotalModel.Models
         public virtual ICollection<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
         public virtual Workshift Workshift { get; set; }
         public virtual MaterialIssueDetail MaterialIssueDetail { get; set; }
+        public virtual Shift Shift { get; set; }
     }
 }

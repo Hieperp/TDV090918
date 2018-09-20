@@ -48,6 +48,7 @@ namespace TotalModel.Models
         public decimal QuantityGainings { get; set; }
         public decimal QuantityFinished { get; set; }
         public bool HandoverApproved { get; set; }
+        public int ShiftID { get; set; }
     
         public virtual Commodity Commodity { get; set; }
         public virtual FirmOrderDetail FirmOrderDetail { get; set; }
