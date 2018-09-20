@@ -127,6 +127,12 @@ namespace TotalPortal.App_Start
                 cfg.CreateMap<SemifinishedHandoverViewDetail, SemifinishedHandoverDetailDTO>();
                 cfg.CreateMap<SemifinishedHandoverDetailDTO, SemifinishedHandoverDetail>();
 
+                cfg.CreateMap<FinishedProduct, FinishedProductViewModel>();
+                cfg.CreateMap<FinishedProduct, FinishedProductDTO>();
+                cfg.CreateMap<FinishedProductPrimitiveDTO, FinishedProduct>();
+                cfg.CreateMap<FinishedProductViewDetail, FinishedProductDetailDTO>();
+                cfg.CreateMap<FinishedProductDetailDTO, FinishedProductDetail>();
+
 
 
 

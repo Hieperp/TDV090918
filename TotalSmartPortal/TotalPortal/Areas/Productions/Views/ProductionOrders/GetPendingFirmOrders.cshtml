@@ -11,6 +11,7 @@
         columns.Bound(c => c.FirmOrderReference).Title("Số phiếu").Width(30);
         columns.Bound(c => c.FirmOrderCode).Title("Số chứng từ").Width(50);
         columns.Bound(c => c.FirmOrderEntryDate).Title("Ngày chứng từ").Width(50).Format("{0:" + Settings.DateTimeFormat + "}");
+        columns.Bound(c => c.CustomerName).Title("Khách hàng").Width(130);        
         columns.Bound(c => c.Specification).Title("Mặt hàng").Width(130);        
         columns.Bound(c => c.QuantityRemains).Title("SL").Format(Settings.kfmQuantity).Width(25).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });           
 
@@ -84,7 +85,9 @@
                     { field: "CommodityCode", operator: "contains", value: filterText },
                     { field: "CommodityName", operator: "contains", value: filterText },
 
-                    { field: "Specification", operator: "contains", value: filterText }
+                    { field: "CustomerName", operator: "contains", value: filterText },
+
+                    { field: "Specification", operator: "contains", value: filterText }                    
                     
                 ]
             });

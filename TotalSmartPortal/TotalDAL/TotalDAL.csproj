@@ -106,6 +106,7 @@
     <Compile Include="Repositories\Inventories\HandlingUnitRepository.cs" />
     <Compile Include="Repositories\Inventories\MaterialIssueRepository.cs" />
     <Compile Include="Repositories\Inventories\WarehouseAdjustmentRepository.cs" />
+    <Compile Include="Repositories\Productions\FinishedProductRepository.cs" />
     <Compile Include="Repositories\Productions\PlannedOrderRepository.cs" />
     <Compile Include="Repositories\Productions\ProductionOrderRepository.cs" />
     <Compile Include="Repositories\Productions\SemifinishedHandoverRepository.cs" />

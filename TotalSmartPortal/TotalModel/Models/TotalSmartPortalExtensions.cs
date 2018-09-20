@@ -196,7 +196,7 @@ namespace TotalModel.Models
 
     public partial class SemifinishedProductDetail : IPrimitiveEntity, IHelperEntryDate, IHelperCommodityID, IHelperCommodityTypeID
     {
-        public int GetID() { return this.SemifinishedProductDetailID; }
+        public int GetID() { return this.SemifinishedProductDetailID; }               
     }
 
 
@@ -216,6 +216,22 @@ namespace TotalModel.Models
         public int GetID() { return this.SemifinishedHandoverDetailID; }
     }
 
+
+
+    public partial class FinishedProduct : IPrimitiveEntity, IBaseEntity, IBaseDetailEntity<FinishedProductDetail>
+    {
+        public int GetID() { return this.FinishedProductID; }
+      
+        public virtual Employee CrucialWorker { get { return this.Employee; } }
+
+        public ICollection<FinishedProductDetail> GetDetails() { return this.FinishedProductDetails; }
+    }
+
+
+    public partial class FinishedProductDetail : IPrimitiveEntity, IHelperEntryDate, IHelperCommodityID, IHelperCommodityTypeID
+    {
+        public int GetID() { return this.FinishedProductDetailID; }
+    }
 
 
 

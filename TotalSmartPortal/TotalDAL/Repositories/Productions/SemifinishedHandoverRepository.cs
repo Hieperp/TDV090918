@@ -12,8 +12,8 @@ namespace TotalDAL.Repositories.Productions
 {  
     public class SemifinishedHandoverRepository : GenericWithDetailRepository<SemifinishedHandover, SemifinishedHandoverDetail>, ISemifinishedHandoverRepository
     {
-        public SemifinishedHandoverRepository(TotalSmartPortalEntities totalSmartPortalEntities)            
-            : base(totalSmartPortalEntities, null, null, null, null)
+        public SemifinishedHandoverRepository(TotalSmartPortalEntities totalSmartPortalEntities)
+            : base(totalSmartPortalEntities, "SemifinishedHandoverEditable", "SemifinishedHandoverApproved")
         {
         }
     }

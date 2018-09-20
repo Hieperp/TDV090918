@@ -124,6 +124,8 @@
     <Compile Include="Inventories\WarehouseAdjustmentDetailDTO.cs" />
     <Compile Include="Inventories\WarehouseAdjustmentDTO.cs" />
     <Compile Include="IPrimitiveDTO.cs" />
+    <Compile Include="Productions\FinishedProductDetailDTO.cs" />
+    <Compile Include="Productions\FinishedProductDTO.cs" />
     <Compile Include="Productions\PlannedOrderDetailDTO.cs" />
     <Compile Include="Productions\PlannedOrderDTO.cs" />
     <Compile Include="Productions\ProductionOrderDetailDTO.cs" />

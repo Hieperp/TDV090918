@@ -71,6 +71,7 @@
     <Compile Include="Inventories\HandlingUnitService.cs" />
     <Compile Include="Inventories\MaterialIssueService.cs" />
     <Compile Include="Inventories\WarehouseAdjustmentService.cs" />
+    <Compile Include="Productions\FinishedProductService.cs" />
     <Compile Include="Productions\PlannedOrderService.cs" />
     <Compile Include="Productions\ProductionOrderService.cs" />
     <Compile Include="Productions\SemifinishedHandoverService.cs" />
