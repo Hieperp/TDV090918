@@ -3,7 +3,7 @@
 @model TotalDTO.Commons.IBomBaseDTO
 
 @Html.HiddenFor(model => model.BomID)
-@Html.HiddenFor(model => model.Code)
+@Html.HiddenFor(model => model.Name)
 
 @Html.Hidden("TempCode", (@Model != null ? @Model.Code : ""))
 
@@ -28,7 +28,7 @@
         var dataItem = e.sender.dataItem(e.item.index());
 
         $("#" + modelID + "BomID").val(dataItem.BomID);
-        $("#" + modelID + "Code").val(dataItem.Code);
+        $("#" + modelID + "Name").val(dataItem.Name);
 
         //Remember last AutoComplete value
         $("#" + modelID + "TempCode").val(dataItem.Code);
