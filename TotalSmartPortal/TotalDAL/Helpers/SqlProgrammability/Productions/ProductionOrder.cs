@@ -251,26 +251,6 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
-            queryString = queryString + "       BEGIN " + "\r\n";
-            queryString = queryString + "           IF (@SaveRelativeOption = 1) ";
-            queryString = queryString + "               BEGIN ";
-
-            queryString = queryString + "                   DECLARE         @EntryDate Datetime, @ShiftID int, @WorkshiftID int " + "\r\n";
-            queryString = queryString + "                   SELECT          @EntryDate = CONVERT(date, EntryDate), @ShiftID = ShiftID FROM ProductionOrders WHERE ProductionOrderID = @EntityID " + "\r\n";
-            queryString = queryString + "                   SET             @WorkshiftID = (SELECT TOP 1 WorkshiftID FROM Workshifts WHERE EntryDate = @EntryDate AND ShiftID = @ShiftID) " + "\r\n";
-
-            queryString = queryString + "                   IF             (@WorkshiftID IS NULL) " + "\r\n";
-            queryString = queryString + "                       BEGIN ";
-            queryString = queryString + "                           INSERT INTO     Workshifts(EntryDate, ShiftID, Code, Name, WorkingHours, Remarks) SELECT @EntryDate, ShiftID, Code, Name, WorkingHours, Remarks FROM Shifts WHERE ShiftID = @ShiftID " + "\r\n";
-            queryString = queryString + "                           SELECT          @WorkshiftID = SCOPE_IDENTITY(); " + "\r\n";
-            queryString = queryString + "                       END ";
-
-            queryString = queryString + "                   UPDATE          ProductionOrders        SET WorkshiftID = @WorkshiftID WHERE ProductionOrderID = @EntityID " + "\r\n";
-            queryString = queryString + "                   UPDATE          ProductionOrderDetails  SET WorkshiftID = @WorkshiftID WHERE ProductionOrderID = @EntityID " + "\r\n";
-
-            queryString = queryString + "               END ";
-            queryString = queryString + "       END " + "\r\n";
-
             this.totalSmartPortalEntities.CreateStoredProcedure("ProductionOrderSaveRelative", queryString);
         }
 

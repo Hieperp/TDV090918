@@ -147,11 +147,11 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "   BEGIN  " + "\r\n";
 
             queryString = queryString + "       UPDATE          SemifinishedProductDetails " + "\r\n";
-            queryString = queryString + "       SET             SemifinishedProductDetails.QuantityIssueed = ROUND(SemifinishedProductDetails.QuantityIssueed + FinishedProductDetail.Quantity * @SaveRelativeOption, " + (int)GlobalEnums.rndQuantity + "), SemifinishedProductDetails.FreeQuantityIssue = ROUND(SemifinishedProductDetails.FreeQuantityIssue + FinishedProductDetail.FreeQuantity * @SaveRelativeOption, " + (int)GlobalEnums.rndQuantity + ") " + "\r\n";
-            queryString = queryString + "       FROM            FinishedProductDetail " + "\r\n";
-            queryString = queryString + "                       INNER JOIN SemifinishedProductDetails ON SemifinishedProductDetails.Approved = 1 AND SemifinishedProductDetails.HandoverApproved = 1 AND FinishedProductDetail.FinishedProductID = @EntityID AND FinishedProductDetail.SemifinishedProductDetailID = SemifinishedProductDetails.SemifinishedProductDetailID " + "\r\n";
+            queryString = queryString + "       SET             SemifinishedProductDetails.QuantityFinished = ROUND(SemifinishedProductDetails.QuantityFinished + FinishedProductDetails.Quantity * @SaveRelativeOption, " + (int)GlobalEnums.rndQuantity + ") " + "\r\n";
+            queryString = queryString + "       FROM            FinishedProductDetails " + "\r\n";
+            queryString = queryString + "                       INNER JOIN SemifinishedProductDetails ON SemifinishedProductDetails.Approved = 1 AND SemifinishedProductDetails.HandoverApproved = 1 AND FinishedProductDetails.FinishedProductID = @EntityID AND FinishedProductDetails.SemifinishedProductDetailID = SemifinishedProductDetails.SemifinishedProductDetailID " + "\r\n";
 
-            queryString = queryString + "       IF @@ROWCOUNT <> (SELECT COUNT(*) FROM FinishedProductDetail WHERE FinishedProductID = @EntityID) " + "\r\n";
+            queryString = queryString + "       IF @@ROWCOUNT <> (SELECT COUNT(*) FROM FinishedProductDetails WHERE FinishedProductID = @EntityID) " + "\r\n";
             queryString = queryString + "           BEGIN " + "\r\n";
             queryString = queryString + "               DECLARE     @msg NVARCHAR(300) = N'Phie61i BTP không tồn tại, chưa duyệt hoặc đã hủy' ; " + "\r\n";
             queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
