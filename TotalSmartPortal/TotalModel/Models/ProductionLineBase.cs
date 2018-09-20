@@ -14,7 +14,7 @@ namespace TotalModel.Models
     public partial class ProductionLineBase
     {
         public int ProductionLineID { get; set; }
-        public string ProductionLineCode { get; set; }
-        public string ProductionLineName { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
     }
 }

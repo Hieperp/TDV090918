@@ -38,10 +38,7 @@
 
     gridEditorProductionLineChange = function (e) { } //Keep old selected value. This function is used in detail mode (In conjuction with grid)
 
-    gridEditorProductionLineDataBound = function (e) {
-        $(".k-animation-container:has(#Code-list)").css("width", "382");
-        $("#Code-list").css("width", "382");
-    }
+    gridEditorProductionLineDataBound = function (e) { }
 
     $(".ProductionLineBase_AutoComplete").focusout(function (e) { //Keep old selected value. This is used in master mode
         var modelID = getProductionLineModelID(this.id);

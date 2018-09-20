@@ -16,10 +16,10 @@
             var dataItem = e.sender.dataItem(e.item.index());
 
             currentDataSourceRow.set("ProductionLineID", dataItem.ProductionLineID);
-            currentDataSourceRow.set("ProductionLineCode", dataItem.ProductionLineCode);
+            currentDataSourceRow.set("ProductionLineCode", dataItem.Code);
         }
 
-        window.productionLineCodeBeforeChange = dataItem.ProductionLineCode;
+        window.productionLineCodeBeforeChange = dataItem.Code;
     };
 
 

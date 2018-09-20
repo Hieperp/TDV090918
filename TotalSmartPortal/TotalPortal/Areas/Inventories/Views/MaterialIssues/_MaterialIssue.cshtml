@@ -30,8 +30,6 @@
 
         @Html.HiddenFor(model => model.FirmOrderID)
 
-        @Html.HiddenFor(model => model.ProductionLineID)
-        @Html.HiddenFor(model => model.ProductionLineCode)
         @Html.HiddenFor(model => model.WorkshiftCode)
                
 
@@ -72,6 +70,10 @@
                 </div>
             </div>                   
         }
+
+        <div class="form-group">
+            @Html.EditorFor(d => d.ProductionLine)
+        </div>
 
         <div class="form-group">
             @Html.EditorFor(d => d.CrucialWorker, new { EmployeeDisplayName = @Model.GetDisplayName(m => m.CrucialWorker) })

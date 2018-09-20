@@ -52,11 +52,7 @@ namespace TotalDTO.Inventories
         [Display(Name = "Ngày sản xuất")]
         public DateTime WorkshiftEntryDate { get; set; }
 
-        public int ProductionLineID { get; set; }
-        [Display(Name = "Dây chuyền")]
-        [Required(ErrorMessage = "Vui lòng chọn dây chuyền")]
-        [UIHint("AutoCompletes/ProductionLine")]
-        public string ProductionLineCode { get; set; }
+        public virtual int ProductionLineID { get; set; }        
 
         [Display(Name = "Mã số máy, ca sx")]
         public string Caption { get { return this.WorkshiftCode + " [" + this.WorkshiftEntryDate.ToString("dd/MM/yyyy") + "]"; } }
@@ -90,6 +86,11 @@ namespace TotalDTO.Inventories
         [Display(Name = "Kho hàng")]
         [UIHint("AutoCompletes/WarehouseBase")]
         public WarehouseBaseDTO Warehouse { get; set; }
+
+        public override int ProductionLineID { get { return (this.ProductionLine != null ? this.ProductionLine.ProductionLineID : 0); } }
+        [Display(Name = "Mã số máy")]
+        [UIHint("AutoCompletes/ProductionLine")]
+        public ProductionLineBaseDTO ProductionLine { get; set; }
 
         public override int StorekeeperID { get { return (this.Storekeeper != null ? this.Storekeeper.EmployeeID : 0); } }
         [Display(Name = "Nhân viên kho")]

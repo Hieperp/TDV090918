@@ -100,9 +100,9 @@ namespace TotalModel.Models
         public virtual DbSet<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
         public virtual DbSet<SemifinishedProduct> SemifinishedProducts { get; set; }
         public virtual DbSet<Mold> Molds { get; set; }
+        public virtual DbSet<ProductionOrderDetail> ProductionOrderDetails { get; set; }
         public virtual DbSet<FinishedProductDetail> FinishedProductDetails { get; set; }
         public virtual DbSet<FinishedProduct> FinishedProducts { get; set; }
-        public virtual DbSet<ProductionOrderDetail> ProductionOrderDetails { get; set; }
     
         public virtual ObjectResult<string> AccountInvoicePostSaveValidate(Nullable<int> entityID)
         {

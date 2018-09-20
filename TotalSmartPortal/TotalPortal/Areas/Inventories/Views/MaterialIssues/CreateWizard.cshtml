@@ -46,6 +46,9 @@
     @Html.HiddenFor(model => model.WorkshiftCode)
     @Html.HiddenFor(model => model.WorkshiftEntryDate)
 
+    @Html.HiddenFor(model => model.ProductionLine.ProductionLineID);
+    @Html.HiddenFor(model => model.ProductionLine.Name);
+    
     @Html.HiddenFor(model => model.Warehouse.WarehouseID)
     @Html.HiddenFor(model => model.Warehouse.Code)
     @Html.HiddenFor(model => model.Warehouse.Name)

@@ -65,7 +65,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
-            queryString = queryString + "       SELECT      TOP 30 ProductionLineID, Code AS ProductionLineCode, Name AS ProductionLineName " + " \r\n";
+            queryString = queryString + "       SELECT      TOP 30 ProductionLineID, Code, Name " + " \r\n";
             queryString = queryString + "       FROM        ProductionLines " + "\r\n";
             queryString = queryString + "       WHERE       InActive = 0 AND (@SearchText = '' OR Code LIKE '%' + @SearchText + '%' OR Name LIKE '%' + @SearchText + '%') " + "\r\n";
 

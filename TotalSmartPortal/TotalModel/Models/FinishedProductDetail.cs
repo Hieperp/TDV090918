@@ -23,6 +23,7 @@ namespace TotalModel.Models
         public int PlannedOrderDetailID { get; set; }
         public int SemifinishedProductID { get; set; }
         public int SemifinishedProductDetailID { get; set; }
+        public int SemifinishedHandoverID { get; set; }
         public Nullable<int> FinishedHandoverID { get; set; }
         public int CommodityID { get; set; }
         public int CommodityTypeID { get; set; }
@@ -31,7 +32,6 @@ namespace TotalModel.Models
         public decimal QuantityIssue { get; set; }
         public string Remarks { get; set; }
         public bool Approved { get; set; }
-        public int SemifinishedHandoverID { get; set; }
     
         public virtual Commodity Commodity { get; set; }
         public virtual FinishedProduct FinishedProduct { get; set; }
