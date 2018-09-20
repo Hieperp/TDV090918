@@ -71,7 +71,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "    BEGIN " + "\r\n";
 
             queryString = queryString + "       SELECT      SemifinishedHandoverDetails.SemifinishedHandoverDetailID, SemifinishedHandoverDetails.SemifinishedHandoverID, SemifinishedProductDetails.SemifinishedProductID, SemifinishedProductDetails.SemifinishedProductDetailID, SemifinishedProductDetails.EntryDate, SemifinishedProductDetails.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, " + "\r\n";
-            queryString = queryString + "                   SemifinishedProductDetails.CommodityID, Commodities.Code AS CommodityCode, SemifinishedProductDetails.ProductionLineID, ProductionLines.Code AS ProductionLineCode, SemifinishedProductDetails.CrucialWorkerID, Employees.Name AS CrucialWorkerName, " + "\r\n";
+            queryString = queryString + "                   SemifinishedProductDetails.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, SemifinishedProductDetails.ProductionLineID, ProductionLines.Code AS ProductionLineCode, SemifinishedProductDetails.CrucialWorkerID, Employees.Name AS CrucialWorkerName, " + "\r\n";
             queryString = queryString + "                   SemifinishedHandoverDetails.Quantity, SemifinishedProductDetails.QuantityGainings, SemifinishedHandoverDetails.Remarks" + "\r\n";
 
             queryString = queryString + "       FROM        SemifinishedHandoverDetails " + "\r\n";
