@@ -27,8 +27,6 @@ namespace TotalModel.Models
         public int FirmOrderID { get; set; }
         public System.DateTime EntryDate { get; set; }
         public int LocationID { get; set; }
-        public int ShiftID { get; set; }
-        public int WorkshiftID { get; set; }
         public int CustomerID { get; set; }
         public int BomID { get; set; }
         public string Remarks { get; set; }
@@ -48,6 +46,5 @@ namespace TotalModel.Models
         public virtual PlannedOrder PlannedOrder { get; set; }
         public virtual ProductionOrder ProductionOrder { get; set; }
         public virtual VoidType VoidType { get; set; }
-        public virtual Workshift Workshift { get; set; }
     }
 }

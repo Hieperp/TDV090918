@@ -26,6 +26,7 @@ namespace TotalModel.Models
         public string Reference { get; set; }
         public string Code { get; set; }
         public int MaterialIssueTypeID { get; set; }
+        public int ShiftID { get; set; }
         public int WorkshiftID { get; set; }
         public int CustomerID { get; set; }
         public int ProductionOrderID { get; set; }
@@ -34,6 +35,7 @@ namespace TotalModel.Models
         public int FirmOrderID { get; set; }
         public int ProductionLineID { get; set; }
         public int WarehouseID { get; set; }
+        public int CrucialWorkerID { get; set; }
         public int StorekeeperID { get; set; }
         public int UserID { get; set; }
         public int PreparedPersonID { get; set; }
@@ -50,22 +52,22 @@ namespace TotalModel.Models
         public System.DateTime EditedDate { get; set; }
         public bool Approved { get; set; }
         public Nullable<System.DateTime> ApprovedDate { get; set; }
-        public int CrucialWorkerID { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Employee Employee { get; set; }
+        public virtual Employee Employee1 { get; set; }
         public virtual FirmOrder FirmOrder { get; set; }
         public virtual Location Location { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MaterialIssueDetail> MaterialIssueDetails { get; set; }
         public virtual PlannedOrder PlannedOrder { get; set; }
         public virtual ProductionLine ProductionLine { get; set; }
+        public virtual ProductionOrderDetail ProductionOrderDetail { get; set; }
         public virtual ProductionOrder ProductionOrder { get; set; }
+        public virtual Shift Shift { get; set; }
         public virtual Warehouse Warehouse { get; set; }
         public virtual Workshift Workshift { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MaterialIssueDetail> MaterialIssueDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
-        public virtual Employee Employee1 { get; set; }
-        public virtual ProductionOrderDetail ProductionOrderDetail { get; set; }
     }
 }

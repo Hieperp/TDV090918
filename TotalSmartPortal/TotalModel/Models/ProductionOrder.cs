@@ -29,8 +29,6 @@ namespace TotalModel.Models
         public string PlannedOrderCodes { get; set; }
         public string PlannedOrderReferences { get; set; }
         public Nullable<int> CustomerID { get; set; }
-        public int ShiftID { get; set; }
-        public int WorkshiftID { get; set; }
         public int UserID { get; set; }
         public int PreparedPersonID { get; set; }
         public int OrganizationalUnitID { get; set; }
@@ -52,9 +50,8 @@ namespace TotalModel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MaterialIssue> MaterialIssues { get; set; }
         public virtual PlannedOrder PlannedOrder { get; set; }
-        public virtual VoidType VoidType { get; set; }
-        public virtual Workshift Workshift { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductionOrderDetail> ProductionOrderDetails { get; set; }
+        public virtual VoidType VoidType { get; set; }
     }
 }

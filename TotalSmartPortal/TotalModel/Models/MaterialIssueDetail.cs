@@ -26,8 +26,10 @@ namespace TotalModel.Models
         public System.DateTime EntryDate { get; set; }
         public int LocationID { get; set; }
         public int MaterialIssueTypeID { get; set; }
+        public int ShiftID { get; set; }
         public int WorkshiftID { get; set; }
         public int CustomerID { get; set; }
+        public int CrucialWorkerID { get; set; }
         public int ProductionOrderID { get; set; }
         public int ProductionOrderDetailID { get; set; }
         public int PlannedOrderID { get; set; }
@@ -38,6 +40,8 @@ namespace TotalModel.Models
         public int GoodsReceiptDetailID { get; set; }
         public int CommodityID { get; set; }
         public int CommodityTypeID { get; set; }
+        public int BatchID { get; set; }
+        public System.DateTime BatchEntryDate { get; set; }
         public int WarehouseID { get; set; }
         public decimal Quantity { get; set; }
         public decimal QuantitySemifinished { get; set; }
@@ -46,21 +50,19 @@ namespace TotalModel.Models
         public decimal QuantityRejected { get; set; }
         public string Remarks { get; set; }
         public bool Approved { get; set; }
-        public int CrucialWorkerID { get; set; }
-        public int BatchID { get; set; }
-        public System.DateTime BatchEntryDate { get; set; }
     
         public virtual Commodity Commodity { get; set; }
         public virtual Customer Customer { get; set; }
+        public virtual FirmOrderMaterial FirmOrderMaterial { get; set; }
         public virtual FirmOrder FirmOrder { get; set; }
         public virtual GoodsReceiptDetail GoodsReceiptDetail { get; set; }
         public virtual MaterialIssue MaterialIssue { get; set; }
+        public virtual ProductionOrderDetail ProductionOrderDetail { get; set; }
+        public virtual Shift Shift { get; set; }
         public virtual Workshift Workshift { get; set; }
-        public virtual FirmOrderMaterial FirmOrderMaterial { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemifinishedProduct> SemifinishedProducts { get; set; }
-        public virtual ProductionOrderDetail ProductionOrderDetail { get; set; }
     }
 }

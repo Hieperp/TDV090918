@@ -24,13 +24,10 @@ namespace TotalModel.Models
         public int CustomerID { get; set; }
         public string CustomerCode { get; set; }
         public string CustomerName { get; set; }
-        public int WorkshiftID { get; set; }
-        public string WorkshiftCode { get; set; }
         public string FirmOrderSpecification { get; set; }
         public int WarehouseID { get; set; }
         public string WarehouseCode { get; set; }
         public string WarehouseName { get; set; }
-        public System.DateTime WorkshiftEntryDate { get; set; }
         public decimal TotalQuantity { get; set; }
         public decimal TotalQuantitySemifinished { get; set; }
     }

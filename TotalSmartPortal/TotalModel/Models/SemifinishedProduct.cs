@@ -52,10 +52,10 @@ namespace TotalModel.Models
         public virtual GoodsReceiptDetail GoodsReceiptDetail { get; set; }
         public virtual GoodsReceipt GoodsReceipt { get; set; }
         public virtual Location Location { get; set; }
-        public virtual MaterialIssueDetail MaterialIssueDetail { get; set; }
         public virtual ProductionLine ProductionLine { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
         public virtual Workshift Workshift { get; set; }
+        public virtual MaterialIssueDetail MaterialIssueDetail { get; set; }
     }
 }

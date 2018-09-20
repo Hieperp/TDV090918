@@ -15,7 +15,6 @@
     @Html.Hidden("WarehouseTaskID", (int)@ViewBag.WarehouseTaskID);
     @Html.Hidden("WarehouseTaskIDList", (string)@ViewBag.WarehouseTaskIDList);
 
-    @Html.HiddenFor(p => p.WorkshiftID)
     @Html.HiddenFor(model => model.MaterialIssueID)
     @Html.HiddenFor(model => model.MaterialIssueTypeID)
 
@@ -27,12 +26,10 @@
         @Html.HiddenFor(model => model.ProductionOrderDetailID)
 
         @Html.HiddenFor(model => model.PlannedOrderID)
-
         @Html.HiddenFor(model => model.FirmOrderID)
 
-        @Html.HiddenFor(model => model.WorkshiftCode)
-               
-
+        @Html.Partial("~/Views/Shared/EditorTemplates/DropDowns/Shift.cshtml")
+        
         <div class="SBT-Hidden">
             @Html.EditorFor(d => d.Warehouse, new { WarehouseDisplayName = @Model.GetDisplayName(m => m.Warehouse) })
         </div>

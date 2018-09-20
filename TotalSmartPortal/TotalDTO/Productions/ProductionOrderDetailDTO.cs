@@ -56,11 +56,6 @@ namespace TotalDTO.Productions
         [UIHint("QuantityReadonly")]
         public decimal QuantityRemains { get; set; }
 
-        public virtual int ShiftID { get; set; }
-
-        public virtual int WorkshiftID { get; set; }
-
-
         #region NO USE
         public override int CommodityID { get { return 1; } set { } } 
         public override string CommodityCode { get { return "#"; } set { } } 

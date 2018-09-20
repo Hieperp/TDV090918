@@ -17,12 +17,10 @@ namespace TotalModel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Workshift()
         {
-            this.MaterialIssues = new HashSet<MaterialIssue>();
-            this.ProductionOrders = new HashSet<ProductionOrder>();
-            this.MaterialIssueDetails = new HashSet<MaterialIssueDetail>();
             this.SemifinishedProducts = new HashSet<SemifinishedProduct>();
             this.SemifinishedHandovers = new HashSet<SemifinishedHandover>();
-            this.ProductionOrderDetails = new HashSet<ProductionOrderDetail>();
+            this.MaterialIssueDetails = new HashSet<MaterialIssueDetail>();
+            this.MaterialIssues = new HashSet<MaterialIssue>();
         }
     
         public int WorkshiftID { get; set; }
@@ -35,16 +33,12 @@ namespace TotalModel.Models
     
         public virtual Shift Shift { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MaterialIssue> MaterialIssues { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductionOrder> ProductionOrders { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MaterialIssueDetail> MaterialIssueDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemifinishedProduct> SemifinishedProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemifinishedHandover> SemifinishedHandovers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductionOrderDetail> ProductionOrderDetails { get; set; }
+        public virtual ICollection<MaterialIssueDetail> MaterialIssueDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MaterialIssue> MaterialIssues { get; set; }
     }
 }

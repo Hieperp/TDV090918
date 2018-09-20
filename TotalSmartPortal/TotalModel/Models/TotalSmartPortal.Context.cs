@@ -87,22 +87,22 @@ namespace TotalModel.Models
         public virtual DbSet<Shift> Shifts { get; set; }
         public virtual DbSet<FirmOrderDetail> FirmOrderDetails { get; set; }
         public virtual DbSet<FirmOrder> FirmOrders { get; set; }
-        public virtual DbSet<MaterialIssue> MaterialIssues { get; set; }
         public virtual DbSet<PlannedOrderDetail> PlannedOrderDetails { get; set; }
         public virtual DbSet<PlannedOrder> PlannedOrders { get; set; }
-        public virtual DbSet<ProductionOrder> ProductionOrders { get; set; }
         public virtual DbSet<BomDetail> BomDetails { get; set; }
         public virtual DbSet<Bom> Boms { get; set; }
-        public virtual DbSet<MaterialIssueDetail> MaterialIssueDetails { get; set; }
         public virtual DbSet<FirmOrderMaterial> FirmOrderMaterials { get; set; }
         public virtual DbSet<SemifinishedHandoverDetail> SemifinishedHandoverDetails { get; set; }
         public virtual DbSet<SemifinishedHandover> SemifinishedHandovers { get; set; }
         public virtual DbSet<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
         public virtual DbSet<SemifinishedProduct> SemifinishedProducts { get; set; }
         public virtual DbSet<Mold> Molds { get; set; }
-        public virtual DbSet<ProductionOrderDetail> ProductionOrderDetails { get; set; }
         public virtual DbSet<FinishedProduct> FinishedProducts { get; set; }
         public virtual DbSet<FinishedProductDetail> FinishedProductDetails { get; set; }
+        public virtual DbSet<MaterialIssueDetail> MaterialIssueDetails { get; set; }
+        public virtual DbSet<MaterialIssue> MaterialIssues { get; set; }
+        public virtual DbSet<ProductionOrderDetail> ProductionOrderDetails { get; set; }
+        public virtual DbSet<ProductionOrder> ProductionOrders { get; set; }
     
         public virtual ObjectResult<string> AccountInvoicePostSaveValidate(Nullable<int> entityID)
         {

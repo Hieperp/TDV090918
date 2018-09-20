@@ -12,20 +12,9 @@ namespace TotalPortal.Areas.Productions.Builders
 
     public class ProductionOrderViewModelSelectListBuilder : A01ViewModelSelectListBuilder<ProductionOrderViewModel>, IProductionOrderViewModelSelectListBuilder
     {
-        private readonly IShiftSelectListBuilder shiftSelectListBuilder;
-        private readonly IShiftRepository shiftRepository;
-
-        public ProductionOrderViewModelSelectListBuilder(IAspNetUserSelectListBuilder aspNetUserSelectListBuilder, IAspNetUserRepository aspNetUserRepository, IShiftSelectListBuilder shiftSelectListBuilder, IShiftRepository shiftRepository)
+        public ProductionOrderViewModelSelectListBuilder(IAspNetUserSelectListBuilder aspNetUserSelectListBuilder, IAspNetUserRepository aspNetUserRepository)
             : base(aspNetUserSelectListBuilder, aspNetUserRepository)
         {
-            this.shiftSelectListBuilder = shiftSelectListBuilder;
-            this.shiftRepository = shiftRepository;
-        }
-
-        public override void BuildSelectLists(ProductionOrderViewModel productionOrderViewModel)
-        {
-            base.BuildSelectLists(productionOrderViewModel);
-            productionOrderViewModel.ShiftSelectList = this.shiftSelectListBuilder.BuildSelectListItemsForShifts(this.shiftRepository.GetAllShifts());
         }
     }
 

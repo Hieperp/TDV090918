@@ -100,12 +100,11 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + " AS " + "\r\n";
 
             queryString = queryString + "       SELECT          " + (int)@GlobalEnums.MaterialIssueTypeID.FirmOrders + " AS MaterialIssueTypeID, ProductionOrderDetails.ProductionOrderDetailID, ProductionOrderDetails.ProductionOrderID, ProductionOrderDetails.PlannedOrderID, ProductionOrderDetails.FirmOrderID, FirmOrders.Code AS FirmOrderCode, FirmOrders.Reference AS FirmOrderReference, FirmOrders.EntryDate AS FirmOrderEntryDate, FirmOrders.Specification AS FirmOrderSpecification, FirmOrders.TotalQuantity, FirmOrders.TotalQuantitySemifinished, " + "\r\n";
-            queryString = queryString + "                       ProductionOrderDetails.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, ProductionOrderDetails.WorkshiftID, Workshifts.EntryDate AS WorkshiftEntryDate, Workshifts.Code AS WorkshiftCode, Warehouses.WarehouseID, Warehouses.Code AS WarehouseCode, Warehouses.Name AS WarehouseName " + "\r\n";
+            queryString = queryString + "                       ProductionOrderDetails.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, Warehouses.WarehouseID, Warehouses.Code AS WarehouseCode, Warehouses.Name AS WarehouseName " + "\r\n";
 
             queryString = queryString + "       FROM            ProductionOrderDetails " + "\r\n";
             queryString = queryString + "                       INNER JOIN FirmOrders ON ProductionOrderDetails.FirmOrderID IN (SELECT DISTINCT FirmOrderID FROM FirmOrderMaterials WHERE LocationID = @LocationID AND Approved = 1 AND InActive = 0 AND InActivePartial = 0 AND ROUND(Quantity - QuantityIssued, " + (int)GlobalEnums.rndQuantity + ") > 0) AND ProductionOrderDetails.Approved = 1 AND ProductionOrderDetails.InActive = 0 AND ProductionOrderDetails.InActivePartial = 0 AND ProductionOrderDetails.FirmOrderID = FirmOrders.FirmOrderID " + "\r\n";
 
-            queryString = queryString + "                       INNER JOIN Workshifts ON ProductionOrderDetails.WorkshiftID = Workshifts.WorkshiftID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Customers ON ProductionOrderDetails.CustomerID = Customers.CustomerID " + "\r\n";
 
             queryString = queryString + "                       INNER JOIN Warehouses ON Warehouses.WarehouseID = 2 " + "\r\n";
@@ -222,18 +221,18 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + "                   END " + "\r\n";
 
 
-            //queryString = queryString + "                   DECLARE         @EntryDate Datetime, @ShiftID int, @WorkshiftID int " + "\r\n";
-            //queryString = queryString + "                   SELECT          @EntryDate = CONVERT(date, EntryDate), @ShiftID = ShiftID FROM MaterialIssues WHERE MaterialIssueID = @EntityID " + "\r\n";
-            //queryString = queryString + "                   SET             @WorkshiftID = (SELECT TOP 1 WorkshiftID FROM Workshifts WHERE EntryDate = @EntryDate AND ShiftID = @ShiftID) " + "\r\n";
+            queryString = queryString + "                   DECLARE         @EntryDate Datetime, @ShiftID int, @WorkshiftID int " + "\r\n";
+            queryString = queryString + "                   SELECT          @EntryDate = CONVERT(date, EntryDate), @ShiftID = ShiftID FROM MaterialIssues WHERE MaterialIssueID = @EntityID " + "\r\n";
+            queryString = queryString + "                   SET             @WorkshiftID = (SELECT TOP 1 WorkshiftID FROM Workshifts WHERE EntryDate = @EntryDate AND ShiftID = @ShiftID) " + "\r\n";
 
-            //queryString = queryString + "                   IF             (@WorkshiftID IS NULL) " + "\r\n";
-            //queryString = queryString + "                       BEGIN ";
-            //queryString = queryString + "                           INSERT INTO     Workshifts(EntryDate, ShiftID, Code, Name, WorkingHours, Remarks) SELECT @EntryDate, ShiftID, Code, Name, WorkingHours, Remarks FROM Shifts WHERE ShiftID = @ShiftID " + "\r\n";
-            //queryString = queryString + "                           SELECT          @WorkshiftID = SCOPE_IDENTITY(); " + "\r\n";
-            //queryString = queryString + "                       END ";
+            queryString = queryString + "                   IF             (@WorkshiftID IS NULL) " + "\r\n";
+            queryString = queryString + "                       BEGIN ";
+            queryString = queryString + "                           INSERT INTO     Workshifts(EntryDate, ShiftID, Code, Name, WorkingHours, Remarks) SELECT @EntryDate, ShiftID, Code, Name, WorkingHours, Remarks FROM Shifts WHERE ShiftID = @ShiftID " + "\r\n";
+            queryString = queryString + "                           SELECT          @WorkshiftID = SCOPE_IDENTITY(); " + "\r\n";
+            queryString = queryString + "                       END ";
 
-            //queryString = queryString + "                   UPDATE          MaterialIssues        SET WorkshiftID = @WorkshiftID WHERE MaterialIssueID = @EntityID " + "\r\n";
-            //queryString = queryString + "                   UPDATE          MaterialIssueDetails  SET WorkshiftID = @WorkshiftID WHERE MaterialIssueID = @EntityID " + "\r\n";
+            queryString = queryString + "                   UPDATE          MaterialIssues        SET WorkshiftID = @WorkshiftID WHERE MaterialIssueID = @EntityID " + "\r\n";
+            queryString = queryString + "                   UPDATE          MaterialIssueDetails  SET WorkshiftID = @WorkshiftID WHERE MaterialIssueID = @EntityID " + "\r\n";
 
 
             queryString = queryString + "               END " + "\r\n";

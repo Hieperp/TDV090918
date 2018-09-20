@@ -52,11 +52,11 @@ namespace TotalModel.Models
         public virtual Commodity Commodity { get; set; }
         public virtual FirmOrderDetail FirmOrderDetail { get; set; }
         public virtual FirmOrder FirmOrder { get; set; }
-        public virtual MaterialIssueDetail MaterialIssueDetail { get; set; }
-        public virtual MaterialIssue MaterialIssue { get; set; }
         public virtual PlannedOrderDetail PlannedOrderDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemifinishedHandoverDetail> SemifinishedHandoverDetails { get; set; }
         public virtual SemifinishedProduct SemifinishedProduct { get; set; }
+        public virtual MaterialIssueDetail MaterialIssueDetail { get; set; }
+        public virtual MaterialIssue MaterialIssue { get; set; }
     }
 }

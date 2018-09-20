@@ -46,16 +46,13 @@ namespace TotalDTO.Inventories
         [UIHint("Commons/SOCode")]
         public string Code { get; set; }
 
-        public virtual int WorkshiftID { get; set; }
-        [Display(Name = "Ca sản xuất")]
-        public string WorkshiftCode { get; set; }
-        [Display(Name = "Ngày sản xuất")]
-        public DateTime WorkshiftEntryDate { get; set; }
-
+        public int ShiftID { get; set; }
+        public int WorkshiftID { get; set; }// JUST INIT A VALUE. THE REAL VALUE OF WorkshiftID WILL BE UPDATE BY ProductionOrderSaveRelative
+        
         public virtual int ProductionLineID { get; set; }        
 
         [Display(Name = "Mã số máy, ca sx")]
-        public string Caption { get { return this.WorkshiftCode + " [" + this.WorkshiftEntryDate.ToString("dd/MM/yyyy") + "]"; } }
+        public string Caption { get { return ""; } }
 
         public virtual Nullable<int> WarehouseID { get; set; }
         public virtual int StorekeeperID { get; set; }
@@ -65,7 +62,7 @@ namespace TotalDTO.Inventories
         {
             base.PerformPresaveRule();
 
-            this.DtoDetails().ToList().ForEach(e => { e.MaterialIssueTypeID = this.MaterialIssueTypeID; e.PlannedOrderID = this.PlannedOrderID; e.FirmOrderID = this.FirmOrderID; e.ProductionOrderID = this.ProductionOrderID; e.ProductionOrderDetailID = this.ProductionOrderDetailID; e.CustomerID = this.CustomerID; e.WorkshiftID = this.WorkshiftID; e.ProductionLineID = this.ProductionLineID; e.CrucialWorkerID = this.CrucialWorkerID; e.WarehouseID = this.WarehouseID; });
+            this.DtoDetails().ToList().ForEach(e => { e.MaterialIssueTypeID = this.MaterialIssueTypeID; e.PlannedOrderID = this.PlannedOrderID; e.FirmOrderID = this.FirmOrderID; e.ProductionOrderID = this.ProductionOrderID; e.ProductionOrderDetailID = this.ProductionOrderDetailID; e.CustomerID = this.CustomerID; e.ShiftID = this.ShiftID; e.WorkshiftID = this.WorkshiftID; e.ProductionLineID = this.ProductionLineID; e.CrucialWorkerID = this.CrucialWorkerID; e.WarehouseID = this.WarehouseID; });
         }
     }
 
