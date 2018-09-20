@@ -30,5 +30,7 @@ namespace TotalModel.Models
         public int CrucialWorkerID { get; set; }
         public string CrucialWorkerName { get; set; }
         public decimal QuantityGainings { get; set; }
+        public string CommodityName { get; set; }
+        public int CommodityTypeID { get; set; }
     }
 }
