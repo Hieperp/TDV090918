@@ -3,7 +3,7 @@
 @model TotalDTO.Commons.IBomBaseDTO
 
 @Html.HiddenFor(model => model.BomID)
-@Html.HiddenFor(model => model.Name)
+@Html.HiddenFor(model => model.Code)
 
 @Html.Hidden("TempCode", (@Model != null ? @Model.Code : ""))
 
@@ -19,7 +19,7 @@
 <script type="text/javascript">
 
     getBomModelID = function (modelID) {
-        return modelID.substring(0, modelID.length - 4); //At first: Pass: modelID = this.element.attr('id') = 'Bom_Name', Then: Return: ('Bom_Name').substring(0, modelID.length - 4) = 'Bom_'
+        return modelID.substring(0, modelID.length - 4); //At first: Pass: modelID = this.element.attr('id') = 'Bom_Code', Then: Return: ('Bom_Code').substring(0, modelID.length - 4) = 'Bom_'
     }
 
     gridEditorBomSelect = function (e) {
@@ -28,7 +28,7 @@
         var dataItem = e.sender.dataItem(e.item.index());
 
         $("#" + modelID + "BomID").val(dataItem.BomID);
-        $("#" + modelID + "Name").val(dataItem.Name);
+        $("#" + modelID + "Code").val(dataItem.Code);
 
         //Remember last AutoComplete value
         $("#" + modelID + "TempCode").val(dataItem.Code);
