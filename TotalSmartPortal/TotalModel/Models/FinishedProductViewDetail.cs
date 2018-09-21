@@ -34,5 +34,6 @@ namespace TotalModel.Models
         public Nullable<decimal> QuantityRemains { get; set; }
         public decimal Quantity { get; set; }
         public Nullable<int> SemifinishedHandoverID { get; set; }
+        public int FinishedProductID { get; set; }
     }
 }

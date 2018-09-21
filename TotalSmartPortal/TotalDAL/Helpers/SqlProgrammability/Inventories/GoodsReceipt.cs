@@ -127,12 +127,10 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
         }
 
 
-
+        #region PurchaseRequisition
         private void GetGoodsReceiptPendingPurchaseRequisitionDetails()
         {
             string queryString;
-
-            SqlProgrammability.Inventories.Inventories inventories = new SqlProgrammability.Inventories.Inventories(this.totalSmartPortalEntities);
 
             queryString = " @LocationID Int, @GoodsReceiptID Int, @PurchaseRequisitionID Int, @CustomerID Int, @PurchaseRequisitionDetailIDs varchar(3999), @IsReadonly bit " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
@@ -155,38 +153,38 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             string queryString = "";
             queryString = queryString + "   BEGIN " + "\r\n";
             queryString = queryString + "       IF  (@PurchaseRequisitionDetailIDs <> '') " + "\r\n";
-            queryString = queryString + "           " + this.BuildSQLPurchaseRequisitionPurchaseRequisitionDetailIDs(isPurchaseRequisitionID, true) + "\r\n";
+            queryString = queryString + "           " + this.BuildSQLPurchaseRequisition(isPurchaseRequisitionID, true) + "\r\n";
             queryString = queryString + "       ELSE " + "\r\n";
-            queryString = queryString + "           " + this.BuildSQLPurchaseRequisitionPurchaseRequisitionDetailIDs(isPurchaseRequisitionID, false) + "\r\n";
+            queryString = queryString + "           " + this.BuildSQLPurchaseRequisition(isPurchaseRequisitionID, false) + "\r\n";
             queryString = queryString + "   END " + "\r\n";
 
             return queryString;
         }
 
-        private string BuildSQLPurchaseRequisitionPurchaseRequisitionDetailIDs(bool isPurchaseRequisitionID, bool isPurchaseRequisitionDetailIDs)
+        private string BuildSQLPurchaseRequisition(bool isPurchaseRequisitionID, bool isPurchaseRequisitionDetailIDs)
         {
             string queryString = "";
             queryString = queryString + "   BEGIN " + "\r\n";
 
             queryString = queryString + "       IF (@GoodsReceiptID <= 0) " + "\r\n";
             queryString = queryString + "               BEGIN " + "\r\n";
-            queryString = queryString + "                   " + this.BuildSQLNew(isPurchaseRequisitionID, isPurchaseRequisitionDetailIDs) + "\r\n";
+            queryString = queryString + "                   " + this.BuildSQLPurchaseRequisitionNew(isPurchaseRequisitionID, isPurchaseRequisitionDetailIDs) + "\r\n";
             queryString = queryString + "                   ORDER BY PurchaseRequisitions.EntryDate, PurchaseRequisitions.PurchaseRequisitionID, PurchaseRequisitionDetails.PurchaseRequisitionDetailID " + "\r\n";
             queryString = queryString + "               END " + "\r\n";
             queryString = queryString + "       ELSE " + "\r\n";
 
             queryString = queryString + "               IF (@IsReadonly = 1) " + "\r\n";
             queryString = queryString + "                   BEGIN " + "\r\n";
-            queryString = queryString + "                       " + this.BuildSQLEdit(isPurchaseRequisitionID, isPurchaseRequisitionDetailIDs) + "\r\n";
+            queryString = queryString + "                       " + this.BuildSQLPurchaseRequisitionEdit(isPurchaseRequisitionID, isPurchaseRequisitionDetailIDs) + "\r\n";
             queryString = queryString + "                       ORDER BY PurchaseRequisitions.EntryDate, PurchaseRequisitions.PurchaseRequisitionID, PurchaseRequisitionDetails.PurchaseRequisitionDetailID " + "\r\n";
             queryString = queryString + "                   END " + "\r\n";
 
             queryString = queryString + "               ELSE " + "\r\n"; //FULL SELECT FOR EDIT MODE
 
             queryString = queryString + "                   BEGIN " + "\r\n";
-            queryString = queryString + "                       " + this.BuildSQLNew(isPurchaseRequisitionID, isPurchaseRequisitionDetailIDs) + " WHERE PurchaseRequisitionDetails.PurchaseRequisitionDetailID NOT IN (SELECT PurchaseRequisitionDetailID FROM GoodsReceiptDetails WHERE GoodsReceiptID = @GoodsReceiptID) " + "\r\n";
+            queryString = queryString + "                       " + this.BuildSQLPurchaseRequisitionNew(isPurchaseRequisitionID, isPurchaseRequisitionDetailIDs) + " WHERE PurchaseRequisitionDetails.PurchaseRequisitionDetailID NOT IN (SELECT PurchaseRequisitionDetailID FROM GoodsReceiptDetails WHERE GoodsReceiptID = @GoodsReceiptID) " + "\r\n";
             queryString = queryString + "                       UNION ALL " + "\r\n";
-            queryString = queryString + "                       " + this.BuildSQLEdit(isPurchaseRequisitionID, isPurchaseRequisitionDetailIDs) + "\r\n";
+            queryString = queryString + "                       " + this.BuildSQLPurchaseRequisitionEdit(isPurchaseRequisitionID, isPurchaseRequisitionDetailIDs) + "\r\n";
             queryString = queryString + "                       ORDER BY PurchaseRequisitions.EntryDate, PurchaseRequisitions.PurchaseRequisitionID, PurchaseRequisitionDetails.PurchaseRequisitionDetailID " + "\r\n";
             queryString = queryString + "                   END " + "\r\n";
 
@@ -195,7 +193,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             return queryString;
         }
 
-        private string BuildSQLNew(bool isPurchaseRequisitionID, bool isPurchaseRequisitionDetailIDs)
+        private string BuildSQLPurchaseRequisitionNew(bool isPurchaseRequisitionID, bool isPurchaseRequisitionDetailIDs)
         {
             string queryString = "";
 
@@ -211,7 +209,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             return queryString;
         }
 
-        private string BuildSQLEdit(bool isPurchaseRequisitionID, bool isPurchaseRequisitionDetailIDs)
+        private string BuildSQLPurchaseRequisitionEdit(bool isPurchaseRequisitionID, bool isPurchaseRequisitionDetailIDs)
         {
             string queryString = "";
             
@@ -227,6 +225,97 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
 
             return queryString;
         }
+        #endregion PurchaseRequisition
+
+
+
+        #region MaterialIssue
+        private void GetGoodsReceiptPendingMaterialIssueDetails()
+        {
+            string queryString;
+
+            queryString = " @LocationID Int, @GoodsReceiptID Int, @MaterialIssueDetailIDs varchar(3999), @IsReadonly bit " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "   BEGIN " + "\r\n";
+
+            queryString = queryString + "       IF  (@MaterialIssueDetailIDs <> '') " + "\r\n";
+            queryString = queryString + "           " + this.BuildSQLMaterialIssue(true) + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+            queryString = queryString + "           " + this.BuildSQLMaterialIssue(false) + "\r\n";
+
+            queryString = queryString + "   END " + "\r\n";
+
+            this.totalSmartPortalEntities.CreateStoredProcedure("GetGoodsReceiptPendingMaterialIssueDetails", queryString);
+        }
+        
+        private string BuildSQLMaterialIssue(bool isMaterialIssueDetailIDs)
+        {
+            string queryString = "";
+            queryString = queryString + "   BEGIN " + "\r\n";
+
+            queryString = queryString + "       IF (@GoodsReceiptID <= 0) " + "\r\n";
+            queryString = queryString + "               BEGIN " + "\r\n";
+            queryString = queryString + "                   " + this.BuildSQLMaterialIssueNew(isMaterialIssueDetailIDs) + "\r\n";
+            queryString = queryString + "                   ORDER BY MaterialIssues.EntryDate, MaterialIssues.MaterialIssueID, MaterialIssueDetails.MaterialIssueDetailID " + "\r\n";
+            queryString = queryString + "               END " + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+
+            queryString = queryString + "               IF (@IsReadonly = 1) " + "\r\n";
+            queryString = queryString + "                   BEGIN " + "\r\n";
+            queryString = queryString + "                       " + this.BuildSQLMaterialIssueEdit(isMaterialIssueDetailIDs) + "\r\n";
+            queryString = queryString + "                       ORDER BY MaterialIssues.EntryDate, MaterialIssues.MaterialIssueID, MaterialIssueDetails.MaterialIssueDetailID " + "\r\n";
+            queryString = queryString + "                   END " + "\r\n";
+
+            queryString = queryString + "               ELSE " + "\r\n"; //FULL SELECT FOR EDIT MODE
+
+            queryString = queryString + "                   BEGIN " + "\r\n";
+            queryString = queryString + "                       " + this.BuildSQLMaterialIssueNew(isMaterialIssueDetailIDs) + " WHERE MaterialIssueDetails.MaterialIssueDetailID NOT IN (SELECT MaterialIssueDetailID FROM GoodsReceiptDetails WHERE GoodsReceiptID = @GoodsReceiptID) " + "\r\n";
+            queryString = queryString + "                       UNION ALL " + "\r\n";
+            queryString = queryString + "                       " + this.BuildSQLMaterialIssueEdit(isMaterialIssueDetailIDs) + "\r\n";
+            queryString = queryString + "                       ORDER BY MaterialIssues.EntryDate, MaterialIssues.MaterialIssueID, MaterialIssueDetails.MaterialIssueDetailID " + "\r\n";
+            queryString = queryString + "                   END " + "\r\n";
+
+            queryString = queryString + "   END " + "\r\n";
+
+            return queryString;
+        }
+
+        private string BuildSQLMaterialIssueNew(bool isMaterialIssueDetailIDs)
+        {
+            string queryString = "";
+
+            queryString = queryString + "       SELECT      MaterialIssues.MaterialIssueID, MaterialIssueDetails.MaterialIssueDetailID, MaterialIssues.Reference AS MaterialIssueReference, MaterialIssues.Code AS MaterialIssueCode, MaterialIssues.EntryDate AS MaterialIssueEntryDate, " + "\r\n";
+            queryString = queryString + "                   Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, " + "\r\n";
+            queryString = queryString + "                   ROUND(MaterialIssueDetails.Quantity - MaterialIssueDetails.QuantityReceipted, 0) AS QuantityRemains, " + "\r\n";
+            queryString = queryString + "                   0 AS Quantity, MaterialIssues.Description, MaterialIssueDetails.Remarks, CAST(1 AS bit) AS IsSelected " + "\r\n";
+
+            queryString = queryString + "       FROM        MaterialIssues " + "\r\n";
+            queryString = queryString + "                   INNER JOIN MaterialIssueDetails ON MaterialIssues.LocationID = @LocationID AND MaterialIssueDetails.Approved = 1 AND ROUND(MaterialIssueDetails.Quantity- MaterialIssueDetails.QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") > 0 AND MaterialIssues.MaterialIssueID = MaterialIssueDetails.MaterialIssueID" + (isMaterialIssueDetailIDs ? " AND MaterialIssueDetails.MaterialIssueDetailID NOT IN (SELECT Id FROM dbo.SplitToIntList (@MaterialIssueDetailIDs))" : "") + "\r\n";
+            queryString = queryString + "                   INNER JOIN Commodities ON MaterialIssueDetails.CommodityID = Commodities.CommodityID " + "\r\n";
+
+            return queryString;
+        }
+
+        private string BuildSQLMaterialIssueEdit(bool isMaterialIssueDetailIDs)
+        {
+            string queryString = "";
+
+            queryString = queryString + "       SELECT      MaterialIssues.MaterialIssueID, MaterialIssueDetails.MaterialIssueDetailID, MaterialIssues.Reference AS MaterialIssueReference, MaterialIssues.Code AS MaterialIssueCode, MaterialIssues.EntryDate AS MaterialIssueEntryDate, " + "\r\n";
+            queryString = queryString + "                   Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, " + "\r\n";
+            queryString = queryString + "                   ROUND(MaterialIssueDetails.Quantity - MaterialIssueDetails.QuantityReceipted + GoodsReceiptDetails.Quantity, 0) AS QuantityRemains, " + "\r\n";
+            queryString = queryString + "                   0 AS Quantity, MaterialIssues.Description, MaterialIssueDetails.Remarks, CAST(1 AS bit) AS IsSelected " + "\r\n";
+
+            queryString = queryString + "       FROM        MaterialIssueDetails " + "\r\n";
+            queryString = queryString + "                   INNER JOIN GoodsReceiptDetails ON GoodsReceiptDetails.GoodsReceiptID = @GoodsReceiptID AND MaterialIssueDetails.MaterialIssueDetailID = GoodsReceiptDetails.MaterialIssueDetailID" + (isMaterialIssueDetailIDs ? " AND MaterialIssueDetails.MaterialIssueDetailID NOT IN (SELECT Id FROM dbo.SplitToIntList (@MaterialIssueDetailIDs))" : "") + "\r\n";
+            queryString = queryString + "                   INNER JOIN Commodities ON MaterialIssueDetails.CommodityID = Commodities.CommodityID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN MaterialIssues ON MaterialIssueDetails.MaterialIssueID = MaterialIssues.MaterialIssueID " + "\r\n";
+
+            return queryString;
+        }
+        #endregion MaterialIssue
+
 
 
         private void GoodsReceiptSaveRelative()

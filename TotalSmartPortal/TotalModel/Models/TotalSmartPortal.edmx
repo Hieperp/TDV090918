@@ -973,6 +973,7 @@
           <Property Name="QuantityWastage" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="QuantityFailure" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="QuantityRejected" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="QuantityReceipted" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
           <Property Name="Approved" Type="bit" Nullable="false" />
         </EntityType>
@@ -14743,6 +14744,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="Decimal" Name="QuantityRemains" Nullable="true" Precision="19" Scale="2" />
           <Property Type="Decimal" Name="Quantity" Nullable="false" Precision="1" Scale="1" />
           <Property Type="Int32" Name="SemifinishedHandoverID" Nullable="true" />
+          <Property Type="Int32" Name="FinishedProductID" Nullable="false" />
         </ComplexType>
         <ComplexType Name="FinishedProductPendingFirmOrder">
           <Property Type="Int32" Name="FirmOrderID" Nullable="false" />
@@ -14925,6 +14927,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <NavigationProperty Name="Workshift" Relationship="TotalSmartPortalModel.FK_MaterialIssueDetails_Workshifts" FromRole="MaterialIssueDetail" ToRole="Workshift" />
           <NavigationProperty Name="SemifinishedProductDetails" Relationship="TotalSmartPortalModel.FK_SemifinishedProductDetails_MaterialIssueDetails" FromRole="MaterialIssueDetail" ToRole="SemifinishedProductDetail" />
           <NavigationProperty Name="SemifinishedProducts" Relationship="TotalSmartPortalModel.FK_SemifinishedProducts_MaterialIssueDetails" FromRole="MaterialIssueDetail" ToRole="SemifinishedProduct" />
+          <Property Name="QuantityReceipted" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="MaterialIssue">
           <Key>
@@ -19480,6 +19483,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="QuantityRemains" ColumnName="QuantityRemains" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="SemifinishedHandoverID" ColumnName="SemifinishedHandoverID" />
+                <ScalarProperty Name="FinishedProductID" ColumnName="FinishedProductID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -19538,6 +19542,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <EntitySetMapping Name="MaterialIssueDetails">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.MaterialIssueDetail">
               <MappingFragment StoreEntitySet="MaterialIssueDetails">
+                <ScalarProperty Name="QuantityReceipted" ColumnName="QuantityReceipted" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="QuantityRejected" ColumnName="QuantityRejected" />
