@@ -3460,5 +3460,26 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SemifinishedHandoverToggleApproved", entityIDParameter, approvedParameter);
         }
+    
+        public virtual ObjectResult<GoodsReceiptPendingMaterialIssueDetail> GetGoodsReceiptPendingMaterialIssueDetails(Nullable<int> locationID, Nullable<int> goodsReceiptID, string materialIssueDetailIDs, Nullable<bool> isReadonly)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            var goodsReceiptIDParameter = goodsReceiptID.HasValue ?
+                new ObjectParameter("GoodsReceiptID", goodsReceiptID) :
+                new ObjectParameter("GoodsReceiptID", typeof(int));
+    
+            var materialIssueDetailIDsParameter = materialIssueDetailIDs != null ?
+                new ObjectParameter("MaterialIssueDetailIDs", materialIssueDetailIDs) :
+                new ObjectParameter("MaterialIssueDetailIDs", typeof(string));
+    
+            var isReadonlyParameter = isReadonly.HasValue ?
+                new ObjectParameter("IsReadonly", isReadonly) :
+                new ObjectParameter("IsReadonly", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GoodsReceiptPendingMaterialIssueDetail>("GetGoodsReceiptPendingMaterialIssueDetails", locationIDParameter, goodsReceiptIDParameter, materialIssueDetailIDsParameter, isReadonlyParameter);
+        }
     }
 }

@@ -26,6 +26,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             this.GetGoodsReceiptPendingPurchaseRequisitions();
             this.GetGoodsReceiptPendingPurchaseRequisitionDetails();
 
+            this.GetGoodsReceiptPendingMaterialIssueDetails();
+
             GenerateSQLPendingDetails generatePendingWarehouseAdjustmentDetails = new GenerateSQLPendingDetails(this.totalSmartPortalEntities, GlobalEnums.GoodsReceiptTypeID.WarehouseAdjustments, "WarehouseAdjustments", "WarehouseAdjustmentDetails", "WarehouseAdjustmentID", "@WarehouseAdjustmentID", "WarehouseAdjustmentDetailID", "@WarehouseAdjustmentDetailIDs", "WarehouseReceiptID", "PrimaryReference", "PrimaryEntryDate");
             generatePendingWarehouseAdjustmentDetails.GetPendingPickupDetails("GetPendingWarehouseAdjustmentDetails");
 
@@ -200,10 +202,10 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + "       SELECT      PurchaseRequisitions.PurchaseRequisitionID, PurchaseRequisitionDetails.PurchaseRequisitionDetailID, PurchaseRequisitions.Reference AS PurchaseRequisitionReference, PurchaseRequisitions.Code AS PurchaseRequisitionCode, PurchaseRequisitions.EntryDate AS PurchaseRequisitionEntryDate, " + "\r\n";
             queryString = queryString + "                   Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, " + "\r\n";
             queryString = queryString + "                   ROUND(PurchaseRequisitionDetails.Quantity - PurchaseRequisitionDetails.QuantityReceipted, 0) AS QuantityRemains, " + "\r\n";
-            queryString = queryString + "                   0 AS Quantity, PurchaseRequisitions.Description, PurchaseRequisitionDetails.Remarks, CAST(1 AS bit) AS IsSelected " + "\r\n";
+            queryString = queryString + "                   0.0 AS Quantity, PurchaseRequisitions.Description, PurchaseRequisitionDetails.Remarks, CAST(1 AS bit) AS IsSelected " + "\r\n";
 
             queryString = queryString + "       FROM        PurchaseRequisitions " + "\r\n";
-            queryString = queryString + "                   INNER JOIN PurchaseRequisitionDetails ON " + (isPurchaseRequisitionID ? " PurchaseRequisitions.PurchaseRequisitionID = @PurchaseRequisitionID " : "PurchaseRequisitions.LocationID = @LocationID AND PurchaseRequisitions.CustomerID = @CustomerID ") + " AND PurchaseRequisitionDetails.Approved = 1 AND PurchaseRequisitionDetails.InActive = 0 AND PurchaseRequisitionDetails.InActivePartial = 0 AND ROUND(PurchaseRequisitionDetails.Quantity- PurchaseRequisitionDetails.QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") > 0 AND PurchaseRequisitions.PurchaseRequisitionID = PurchaseRequisitionDetails.PurchaseRequisitionID" + (isPurchaseRequisitionDetailIDs ? " AND PurchaseRequisitionDetails.PurchaseRequisitionDetailID NOT IN (SELECT Id FROM dbo.SplitToIntList (@PurchaseRequisitionDetailIDs))" : "") + "\r\n";
+            queryString = queryString + "                   INNER JOIN PurchaseRequisitionDetails ON " + (isPurchaseRequisitionID ? " PurchaseRequisitions.PurchaseRequisitionID = @PurchaseRequisitionID " : "PurchaseRequisitions.LocationID = @LocationID AND PurchaseRequisitions.CustomerID = @CustomerID ") + " AND PurchaseRequisitionDetails.Approved = 1 AND PurchaseRequisitionDetails.InActive = 0 AND PurchaseRequisitionDetails.InActivePartial = 0 AND ROUND(PurchaseRequisitionDetails.Quantity - PurchaseRequisitionDetails.QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") > 0 AND PurchaseRequisitions.PurchaseRequisitionID = PurchaseRequisitionDetails.PurchaseRequisitionID" + (isPurchaseRequisitionDetailIDs ? " AND PurchaseRequisitionDetails.PurchaseRequisitionDetailID NOT IN (SELECT Id FROM dbo.SplitToIntList (@PurchaseRequisitionDetailIDs))" : "") + "\r\n";
             queryString = queryString + "                   INNER JOIN Commodities ON PurchaseRequisitionDetails.CommodityID = Commodities.CommodityID " + "\r\n";
 
             return queryString;
@@ -216,7 +218,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + "       SELECT      PurchaseRequisitions.PurchaseRequisitionID, PurchaseRequisitionDetails.PurchaseRequisitionDetailID, PurchaseRequisitions.Reference AS PurchaseRequisitionReference, PurchaseRequisitions.Code AS PurchaseRequisitionCode, PurchaseRequisitions.EntryDate AS PurchaseRequisitionEntryDate, " + "\r\n";
             queryString = queryString + "                   Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, " + "\r\n";
             queryString = queryString + "                   ROUND(PurchaseRequisitionDetails.Quantity - PurchaseRequisitionDetails.QuantityReceipted + GoodsReceiptDetails.Quantity, 0) AS QuantityRemains, " + "\r\n";
-            queryString = queryString + "                   0 AS Quantity, PurchaseRequisitions.Description, PurchaseRequisitionDetails.Remarks, CAST(1 AS bit) AS IsSelected " + "\r\n";
+            queryString = queryString + "                   0.0 AS Quantity, PurchaseRequisitions.Description, PurchaseRequisitionDetails.Remarks, CAST(1 AS bit) AS IsSelected " + "\r\n";
 
             queryString = queryString + "       FROM        PurchaseRequisitionDetails " + "\r\n";
             queryString = queryString + "                   INNER JOIN GoodsReceiptDetails ON GoodsReceiptDetails.GoodsReceiptID = @GoodsReceiptID AND PurchaseRequisitionDetails.PurchaseRequisitionDetailID = GoodsReceiptDetails.PurchaseRequisitionDetailID" + (isPurchaseRequisitionDetailIDs ? " AND PurchaseRequisitionDetails.PurchaseRequisitionDetailID NOT IN (SELECT Id FROM dbo.SplitToIntList (@PurchaseRequisitionDetailIDs))" : "") + "\r\n";
@@ -288,11 +290,11 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
 
             queryString = queryString + "       SELECT      MaterialIssues.MaterialIssueID, MaterialIssueDetails.MaterialIssueDetailID, MaterialIssues.Reference AS MaterialIssueReference, MaterialIssues.Code AS MaterialIssueCode, MaterialIssues.EntryDate AS MaterialIssueEntryDate, " + "\r\n";
             queryString = queryString + "                   Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, " + "\r\n";
-            queryString = queryString + "                   ROUND(MaterialIssueDetails.Quantity - MaterialIssueDetails.QuantityReceipted, 0) AS QuantityRemains, " + "\r\n";
-            queryString = queryString + "                   0 AS Quantity, MaterialIssues.Description, MaterialIssueDetails.Remarks, CAST(1 AS bit) AS IsSelected " + "\r\n";
+            queryString = queryString + "                   ROUND(MaterialIssueDetails.Quantity - MaterialIssueDetails.QuantitySemifinished - MaterialIssueDetails.QuantityWastage - MaterialIssueDetails.QuantityFailure - MaterialIssueDetails.QuantityRejected - MaterialIssueDetails.QuantityReceipted, 0) AS QuantityRemains, " + "\r\n";
+            queryString = queryString + "                   0.0 AS Quantity, MaterialIssues.Description, MaterialIssueDetails.Remarks, CAST(0 AS bit) AS IsSelected " + "\r\n";
 
             queryString = queryString + "       FROM        MaterialIssues " + "\r\n";
-            queryString = queryString + "                   INNER JOIN MaterialIssueDetails ON MaterialIssues.LocationID = @LocationID AND MaterialIssueDetails.Approved = 1 AND ROUND(MaterialIssueDetails.Quantity- MaterialIssueDetails.QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") > 0 AND MaterialIssues.MaterialIssueID = MaterialIssueDetails.MaterialIssueID" + (isMaterialIssueDetailIDs ? " AND MaterialIssueDetails.MaterialIssueDetailID NOT IN (SELECT Id FROM dbo.SplitToIntList (@MaterialIssueDetailIDs))" : "") + "\r\n";
+            queryString = queryString + "                   INNER JOIN MaterialIssueDetails ON MaterialIssues.LocationID = @LocationID AND MaterialIssueDetails.Approved = 1 AND ROUND(MaterialIssueDetails.Quantity - MaterialIssueDetails.QuantitySemifinished - MaterialIssueDetails.QuantityWastage - MaterialIssueDetails.QuantityFailure - MaterialIssueDetails.QuantityRejected - MaterialIssueDetails.QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") > 0 AND MaterialIssues.MaterialIssueID = MaterialIssueDetails.MaterialIssueID" + (isMaterialIssueDetailIDs ? " AND MaterialIssueDetails.MaterialIssueDetailID NOT IN (SELECT Id FROM dbo.SplitToIntList (@MaterialIssueDetailIDs))" : "") + "\r\n";
             queryString = queryString + "                   INNER JOIN Commodities ON MaterialIssueDetails.CommodityID = Commodities.CommodityID " + "\r\n";
 
             return queryString;
@@ -304,8 +306,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
 
             queryString = queryString + "       SELECT      MaterialIssues.MaterialIssueID, MaterialIssueDetails.MaterialIssueDetailID, MaterialIssues.Reference AS MaterialIssueReference, MaterialIssues.Code AS MaterialIssueCode, MaterialIssues.EntryDate AS MaterialIssueEntryDate, " + "\r\n";
             queryString = queryString + "                   Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, " + "\r\n";
-            queryString = queryString + "                   ROUND(MaterialIssueDetails.Quantity - MaterialIssueDetails.QuantityReceipted + GoodsReceiptDetails.Quantity, 0) AS QuantityRemains, " + "\r\n";
-            queryString = queryString + "                   0 AS Quantity, MaterialIssues.Description, MaterialIssueDetails.Remarks, CAST(1 AS bit) AS IsSelected " + "\r\n";
+            queryString = queryString + "                   ROUND(MaterialIssueDetails.Quantity - MaterialIssueDetails.QuantitySemifinished - MaterialIssueDetails.QuantityWastage - MaterialIssueDetails.QuantityFailure - MaterialIssueDetails.QuantityRejected - MaterialIssueDetails.QuantityReceipted + GoodsReceiptDetails.Quantity, 0) AS QuantityRemains, " + "\r\n";
+            queryString = queryString + "                   0.0 AS Quantity, MaterialIssues.Description, MaterialIssueDetails.Remarks, CAST(0 AS bit) AS IsSelected " + "\r\n";
 
             queryString = queryString + "       FROM        MaterialIssueDetails " + "\r\n";
             queryString = queryString + "                   INNER JOIN GoodsReceiptDetails ON GoodsReceiptDetails.GoodsReceiptID = @GoodsReceiptID AND MaterialIssueDetails.MaterialIssueDetailID = GoodsReceiptDetails.MaterialIssueDetailID" + (isMaterialIssueDetailIDs ? " AND MaterialIssueDetails.MaterialIssueDetailID NOT IN (SELECT Id FROM dbo.SplitToIntList (@MaterialIssueDetailIDs))" : "") + "\r\n";

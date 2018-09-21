@@ -249,6 +249,9 @@
     <Compile Include="Models\GoodsReceiptPendingCustomer.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GoodsReceiptPendingMaterialIssueDetail.cs">
+      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GoodsReceiptPendingPurchaseRequisition.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>

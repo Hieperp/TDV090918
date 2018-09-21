@@ -307,6 +307,8 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_ProductionOrderDetails_VoidTypes" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_ProductionOrders_VoidTypes" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_SemifinishedProducts_Shifts" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceiptDetails_MaterialIssueDetails" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProducts_Customers" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

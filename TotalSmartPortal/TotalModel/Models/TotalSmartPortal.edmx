@@ -828,6 +828,8 @@
           <Property Name="WarehouseAdjustmentID" Type="int" />
           <Property Name="WarehouseAdjustmentDetailID" Type="int" />
           <Property Name="WarehouseAdjustmentTypeID" Type="int" />
+          <Property Name="MaterialIssueID" Type="int" />
+          <Property Name="MaterialIssueDetailID" Type="int" />
           <Property Name="CustomerID" Type="int" />
           <Property Name="BatchID" Type="int" Nullable="false" />
           <Property Name="BatchEntryDate" Type="datetime" Nullable="false" />
@@ -2502,6 +2504,18 @@ warning 6035: The relationship 'FK_FinishedProducts_AspNetUsers1' has columns th
         <!--Errors Found During Generation:
 warning 6035: The relationship 'FK_FinishedProducts_AspNetUsers2' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
         <Association Name="FK_FinishedProducts_AspNetUsers2" />-->
+        <Association Name="FK_FinishedProducts_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="FinishedProducts" Type="Self.FinishedProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="FinishedProducts">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FinishedProducts_Employees">
           <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
           <End Role="FinishedProducts" Type="Self.FinishedProducts" Multiplicity="*" />
@@ -2985,6 +2999,18 @@ warning 6035: The relationship 'FK_GoodsDeliveries_AspNetUsers2' has columns tha
             </Principal>
             <Dependent Role="GoodsReceiptDetails">
               <PropertyRef Name="GoodsReceiptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GoodsReceiptDetails_MaterialIssueDetails">
+          <End Role="MaterialIssueDetails" Type="Self.MaterialIssueDetails" Multiplicity="0..1" />
+          <End Role="GoodsReceiptDetails" Type="Self.GoodsReceiptDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterialIssueDetails">
+              <PropertyRef Name="MaterialIssueDetailID" />
+            </Principal>
+            <Dependent Role="GoodsReceiptDetails">
+              <PropertyRef Name="MaterialIssueDetailID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5002,6 +5028,12 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
         <Function Name="GetGoodsReceiptPendingCustomers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LocationID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetGoodsReceiptPendingMaterialIssueDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="LocationID" Type="int" Mode="In" />
+          <Parameter Name="GoodsReceiptID" Type="int" Mode="In" />
+          <Parameter Name="MaterialIssueDetailIDs" Type="varchar" Mode="In" />
+          <Parameter Name="IsReadonly" Type="bit" Mode="In" />
+        </Function>
         <Function Name="GetGoodsReceiptPendingPurchaseRequisitionDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LocationID" Type="int" Mode="In" />
           <Parameter Name="GoodsReceiptID" Type="int" Mode="In" />
@@ -6010,6 +6042,10 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             <End Role="FinishedProducts" EntitySet="FinishedProducts" />
             <End Role="FinishedProductDetails" EntitySet="FinishedProductDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK_FinishedProducts_Customers" Association="Self.FK_FinishedProducts_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="FinishedProducts" EntitySet="FinishedProducts" />
+          </AssociationSet>
           <AssociationSet Name="FK_FinishedProducts_Employees" Association="Self.FK_FinishedProducts_Employees">
             <End Role="Employees" EntitySet="Employees" />
             <End Role="FinishedProducts" EntitySet="FinishedProducts" />
@@ -6164,6 +6200,10 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           </AssociationSet>
           <AssociationSet Name="FK_GoodsReceiptDetails_GoodsReceipts" Association="Self.FK_GoodsReceiptDetails_GoodsReceipts">
             <End Role="GoodsReceipts" EntitySet="GoodsReceipts" />
+            <End Role="GoodsReceiptDetails" EntitySet="GoodsReceiptDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GoodsReceiptDetails_MaterialIssueDetails" Association="Self.FK_GoodsReceiptDetails_MaterialIssueDetails">
+            <End Role="MaterialIssueDetails" EntitySet="MaterialIssueDetails" />
             <End Role="GoodsReceiptDetails" EntitySet="GoodsReceiptDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_GoodsReceiptDetails_PurchaseRequisitionDetails" Association="Self.FK_GoodsReceiptDetails_PurchaseRequisitionDetails">
@@ -7027,6 +7067,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <NavigationProperty Name="MaterialIssues" Relationship="TotalSmartPortalModel.FK_MaterialIssues_Customers" FromRole="Customer" ToRole="MaterialIssue" />
           <NavigationProperty Name="ProductionOrderDetails" Relationship="TotalSmartPortalModel.FK_ProductionOrderDetails_Customers" FromRole="Customer" ToRole="ProductionOrderDetail" />
           <NavigationProperty Name="ProductionOrders" Relationship="TotalSmartPortalModel.FK_ProductionOrders_Customers" FromRole="Customer" ToRole="ProductionOrder" />
+          <NavigationProperty Name="FinishedProducts" Relationship="TotalSmartPortalModel.FK_FinishedProducts_Customers" FromRole="Customer" ToRole="FinishedProduct" />
         </EntityType>
         <EntityType Name="CustomerType">
           <Key>
@@ -11110,6 +11151,20 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             <End Role="Shift" EntitySet="Shifts" />
             <End Role="SemifinishedProduct" EntitySet="SemifinishedProducts" />
           </AssociationSet>
+          <AssociationSet Name="FK_GoodsReceiptDetails_MaterialIssueDetails" Association="TotalSmartPortalModel.FK_GoodsReceiptDetails_MaterialIssueDetails">
+            <End Role="MaterialIssueDetail" EntitySet="MaterialIssueDetails" />
+            <End Role="GoodsReceiptDetail" EntitySet="GoodsReceiptDetails" />
+          </AssociationSet>
+          <FunctionImport Name="GetGoodsReceiptPendingMaterialIssueDetails" ReturnType="Collection(TotalSmartPortalModel.GoodsReceiptPendingMaterialIssueDetail)">
+            <Parameter Name="LocationID" Mode="In" Type="Int32" />
+            <Parameter Name="GoodsReceiptID" Mode="In" Type="Int32" />
+            <Parameter Name="MaterialIssueDetailIDs" Mode="In" Type="String" />
+            <Parameter Name="IsReadonly" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <AssociationSet Name="FK_FinishedProducts_Customers" Association="TotalSmartPortalModel.FK_FinishedProducts_Customers">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="FinishedProduct" EntitySet="FinishedProducts" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="AccountInvoiceIndex">
           <Property Type="Int32" Name="AccountInvoiceID" Nullable="false" />
@@ -12477,6 +12532,9 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <NavigationProperty Name="Commodity" Relationship="TotalSmartPortalModel.FK_GoodsReceiptDetails_Commodities" FromRole="GoodsReceiptDetail" ToRole="Commodity" />
           <NavigationProperty Name="SemifinishedProducts" Relationship="TotalSmartPortalModel.FK_SemifinishedProducts_GoodsReceiptDetails" FromRole="GoodsReceiptDetail" ToRole="SemifinishedProduct" />
           <NavigationProperty Name="MaterialIssueDetails" Relationship="TotalSmartPortalModel.FK_MaterialIssueDetails_GoodsReceiptDetails" FromRole="GoodsReceiptDetail" ToRole="MaterialIssueDetail" />
+          <Property Name="MaterialIssueID" Type="Int32" />
+          <Property Name="MaterialIssueDetailID" Type="Int32" />
+          <NavigationProperty Name="MaterialIssueDetail" Relationship="TotalSmartPortalModel.FK_GoodsReceiptDetails_MaterialIssueDetails" FromRole="GoodsReceiptDetail" ToRole="MaterialIssueDetail" />
           </EntityType>
         <EntityType Name="GoodsReceipt">
           <Key>
@@ -14785,6 +14843,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <NavigationProperty Name="FirmOrder" Relationship="TotalSmartPortalModel.FK_FinishedProducts_FirmOrders" FromRole="FinishedProduct" ToRole="FirmOrder" />
           <NavigationProperty Name="Location" Relationship="TotalSmartPortalModel.FK_FinishedProducts_Locations" FromRole="FinishedProduct" ToRole="Location" />
           <NavigationProperty Name="FinishedProductDetails" Relationship="TotalSmartPortalModel.FK_FinishedProductDetails_FinishedProducts" FromRole="FinishedProduct" ToRole="FinishedProductDetail" />
+          <NavigationProperty Name="Customer" Relationship="TotalSmartPortalModel.FK_FinishedProducts_Customers" FromRole="FinishedProduct" ToRole="Customer" />
         </EntityType>
         <Association Name="FK_FinishedProducts_Employees">
           <End Type="TotalSmartPortalModel.Employee" Role="Employee" Multiplicity="1" />
@@ -14928,6 +14987,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <NavigationProperty Name="SemifinishedProductDetails" Relationship="TotalSmartPortalModel.FK_SemifinishedProductDetails_MaterialIssueDetails" FromRole="MaterialIssueDetail" ToRole="SemifinishedProductDetail" />
           <NavigationProperty Name="SemifinishedProducts" Relationship="TotalSmartPortalModel.FK_SemifinishedProducts_MaterialIssueDetails" FromRole="MaterialIssueDetail" ToRole="SemifinishedProduct" />
           <Property Name="QuantityReceipted" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartPortalModel.FK_GoodsReceiptDetails_MaterialIssueDetails" FromRole="MaterialIssueDetail" ToRole="GoodsReceiptDetail" />
         </EntityType>
         <EntityType Name="MaterialIssue">
           <Key>
@@ -15457,6 +15517,46 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             </Principal>
             <Dependent Role="SemifinishedProduct">
               <PropertyRef Name="ShiftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GoodsReceiptDetails_MaterialIssueDetails">
+          <End Type="TotalSmartPortalModel.MaterialIssueDetail" Role="MaterialIssueDetail" Multiplicity="0..1" />
+          <End Type="TotalSmartPortalModel.GoodsReceiptDetail" Role="GoodsReceiptDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterialIssueDetail">
+              <PropertyRef Name="MaterialIssueDetailID" />
+            </Principal>
+            <Dependent Role="GoodsReceiptDetail">
+              <PropertyRef Name="MaterialIssueDetailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GoodsReceiptPendingMaterialIssueDetail">
+          <Property Type="Int32" Name="MaterialIssueID" Nullable="false" />
+          <Property Type="Int32" Name="MaterialIssueDetailID" Nullable="false" />
+          <Property Type="String" Name="MaterialIssueReference" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="MaterialIssueCode" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="MaterialIssueEntryDate" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="CommodityID" Nullable="false" />
+          <Property Type="String" Name="CommodityCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CommodityName" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="CommodityTypeID" Nullable="false" />
+          <Property Type="Decimal" Name="QuantityRemains" Nullable="true" Precision="23" Scale="2" />
+          <Property Type="Decimal" Name="Quantity" Nullable="false" Precision="1" Scale="1" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="IsSelected" Nullable="true" />
+        </ComplexType>
+        <Association Name="FK_FinishedProducts_Customers">
+          <End Type="TotalSmartPortalModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="TotalSmartPortalModel.FinishedProduct" Role="FinishedProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="FinishedProduct">
+              <PropertyRef Name="CustomerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -18247,6 +18347,8 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <EntitySetMapping Name="GoodsReceiptDetails">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.GoodsReceiptDetail">
               <MappingFragment StoreEntitySet="GoodsReceiptDetails">
+                <ScalarProperty Name="MaterialIssueDetailID" ColumnName="MaterialIssueDetailID" />
+                <ScalarProperty Name="MaterialIssueID" ColumnName="MaterialIssueID" />
                 <ScalarProperty Name="WarehouseAdjustmentTypeID" ColumnName="WarehouseAdjustmentTypeID" />
                 <ScalarProperty Name="GoodsReceiptTypeID" ColumnName="GoodsReceiptTypeID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
@@ -19661,6 +19763,26 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetGoodsReceiptPendingMaterialIssueDetails" FunctionName="TotalSmartPortalModel.Store.GetGoodsReceiptPendingMaterialIssueDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartPortalModel.GoodsReceiptPendingMaterialIssueDetail">
+                <ScalarProperty Name="MaterialIssueID" ColumnName="MaterialIssueID" />
+                <ScalarProperty Name="MaterialIssueDetailID" ColumnName="MaterialIssueDetailID" />
+                <ScalarProperty Name="MaterialIssueReference" ColumnName="MaterialIssueReference" />
+                <ScalarProperty Name="MaterialIssueCode" ColumnName="MaterialIssueCode" />
+                <ScalarProperty Name="MaterialIssueEntryDate" ColumnName="MaterialIssueEntryDate" />
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="CommodityCode" ColumnName="CommodityCode" />
+                <ScalarProperty Name="CommodityName" ColumnName="CommodityName" />
+                <ScalarProperty Name="CommodityTypeID" ColumnName="CommodityTypeID" />
+                <ScalarProperty Name="QuantityRemains" ColumnName="QuantityRemains" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

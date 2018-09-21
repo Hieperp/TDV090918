@@ -48,6 +48,8 @@ namespace TotalModel.Models
         public string Code { get; set; }
         public int GoodsReceiptTypeID { get; set; }
         public Nullable<int> WarehouseAdjustmentTypeID { get; set; }
+        public Nullable<int> MaterialIssueID { get; set; }
+        public Nullable<int> MaterialIssueDetailID { get; set; }
     
         public virtual GoodsReceipt GoodsReceipt { get; set; }
         public virtual PurchaseRequisitionDetail PurchaseRequisitionDetail { get; set; }
@@ -60,5 +62,6 @@ namespace TotalModel.Models
         public virtual ICollection<SemifinishedProduct> SemifinishedProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MaterialIssueDetail> MaterialIssueDetails { get; set; }
+        public virtual MaterialIssueDetail MaterialIssueDetail { get; set; }
     }
 }
