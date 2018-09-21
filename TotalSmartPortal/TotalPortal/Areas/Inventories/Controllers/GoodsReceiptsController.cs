@@ -50,6 +50,12 @@ namespace TotalPortal.Areas.Inventories.Controllers
             this.AddRequireJsOptions();
             return View();
         }
+
+        public virtual ActionResult GetPendingMaterialIssueDetails()
+        {
+            this.AddRequireJsOptions();
+            return View();
+        }
     }
 
 }

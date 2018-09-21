@@ -1320,6 +1320,7 @@
     <Content Include="Areas\Productions\Views\FinishedProducts\Index.cshtml" />
     <Content Include="Areas\Productions\Views\FinishedProducts\Print.cshtml" />
     <Content Include="Areas\Productions\Views\FinishedProducts\_FinishedProduct.cshtml" />
+    <Content Include="Areas\Inventories\Views\GoodsReceipts\GetPendingMaterialIssueDetails.cshtml" />
     <None Include="Properties\PublishProfiles\TDV.pubxml" />
     <None Include="Properties\PublishProfiles\VCP.pubxml">
       <SubType>Designer</SubType>
@@ -1396,6 +1397,7 @@
     <Content Include="Scripts\Controllers\Inventories\GoodsIssues\Index.js" />
     <Content Include="Scripts\Controllers\Inventories\GoodsIssues\Open.js" />
     <Content Include="Scripts\Controllers\Inventories\GoodsIssues\Print.js" />
+    <Content Include="Scripts\Controllers\Inventories\GoodsReceipts\AddPendingMaterialIssueDetail.js" />
     <Content Include="Scripts\Controllers\Inventories\GoodsReceipts\AddPendingPurchaseRequisitionDetail.js" />
     <Content Include="Scripts\Controllers\Inventories\GoodsReceipts\Approve.js" />
     <Content Include="Scripts\Controllers\Inventories\GoodsReceipts\CreateWizard.js" />

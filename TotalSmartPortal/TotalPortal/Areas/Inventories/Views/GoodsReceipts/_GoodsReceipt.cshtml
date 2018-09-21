@@ -14,7 +14,7 @@
 
     @Html.Hidden("WarehouseTaskID", (int)@ViewBag.WarehouseTaskID);
     @Html.Hidden("WarehouseTaskIDList", (string)@ViewBag.WarehouseTaskIDList);
-    
+
     @Html.HiddenFor(model => model.GoodsReceiptID)
     @Html.HiddenFor(model => model.GoodsReceiptTypeID)
 
@@ -81,8 +81,14 @@
     <div class="right-panel">
 
         <div class="right-top-panel right-top-panel-H2">
-
-            @Html.EditorFor(d => d.Customer, new { CustomerDescriptionHidden = "false", CustomerDisplayName = @Model.GetDisplayName(m => m.Customer) })
+            @if (Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.MaterialIssue)
+            {
+                @Html.EditorFor(d => d.Customer, new { CustomerDisplayName = @Model.GetDisplayName(m => m.Customer), CustomerIcon = "Customer Red 24.png", NullCustomer = (Model.CustomerID > 0 ? null : "Nhập từ sản xuất trả về."), CustomerInfo = (Model.CustomerID > 0 ? null : "#") })
+            }            
+            else
+            {
+                @Html.EditorFor(d => d.Customer, new { CustomerDescriptionHidden = "false", CustomerDisplayName = @Model.GetDisplayName(m => m.Customer) })
+            }            
 
             <div class="form-group">
                 <div class="right-panel-label right-panel-label-whole-width">
@@ -94,7 +100,7 @@
                 <div class="div-validation-message">
                     @Html.ValidationMessageFor(model => model.Purposes, "", new { @class = "text-danger" })
                 </div>
-            </div>        
+            </div>
 
             @*@Html.DisplayFor(d => d.Warehouse, "Commons/WarehouseBase")*@
 
@@ -129,13 +135,35 @@
                         .ClientTemplate("#= (PurchaseRequisitionEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', PurchaseRequisitionEntryDate) #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].PurchaseRequisitionEntryDate' value='#= (PurchaseRequisitionEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', PurchaseRequisitionEntryDate) #' />");
 
 
+                    columns.Bound(p => p.MaterialIssueID).DisplayNameTitle().Filterable(false).Hidden()
+                    .ClientTemplate("#= (MaterialIssueID == null)? '' : MaterialIssueID #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].MaterialIssueID' value='#= (MaterialIssueID == null) ? '' : MaterialIssueID #' />");
+                    columns.Bound(p => p.MaterialIssueDetailID).DisplayNameTitle().Filterable(false).Hidden()
+                        .ClientTemplate("#= (MaterialIssueDetailID == null)? '' : MaterialIssueDetailID #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].MaterialIssueDetailID' value='#= (MaterialIssueDetailID == null) ? '' : MaterialIssueDetailID #' />");
+
+                    columns.Bound(p => p.MaterialIssueCode).DisplayNameTitle().Filterable(false).Width(60).Hidden()
+                        .ClientTemplate("#= (MaterialIssueCode == null)? '' : MaterialIssueCode #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].MaterialIssueCode' value='#= (MaterialIssueCode == null) ? '' : MaterialIssueCode #' />");
+                    columns.Bound(p => p.MaterialIssueReference).DisplayNameTitle().Filterable(false).Width(60).Hidden(Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.MaterialIssue? false : true)
+                        .ClientTemplate("#= (MaterialIssueReference == null)? '' : MaterialIssueReference #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].MaterialIssueReference' value='#= (MaterialIssueReference == null) ? '' : MaterialIssueReference #' />");
+                    columns.Bound(p => p.MaterialIssueEntryDate).DisplayNameTitle().Filterable(false).Width(80).Hidden(Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.MaterialIssue? false : true)
+                        .Format("{0:" + @Settings.DateFormat + "}")
+                        .ClientTemplate("#= (MaterialIssueEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', MaterialIssueEntryDate) #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].MaterialIssueEntryDate' value='#= (MaterialIssueEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', MaterialIssueEntryDate) #' />");
+
+                    columns.Bound(p => p.WorkshiftName).DisplayNameTitle().Filterable(false).Width(80).Hidden(Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.MaterialIssue ? false : true)
+                       .ClientTemplate("#= (WorkshiftName == null)? '' : WorkshiftName #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].WorkshiftName' value='#= (WorkshiftName == null) ? '' : WorkshiftName #' />");
+                    columns.Bound(p => p.WorkshiftEntryDate).DisplayNameTitle().Filterable(false).Width(80).Hidden(Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.MaterialIssue ? false : true)
+                       .Format("{0:" + @Settings.DateFormat + "}")
+                       .ClientTemplate("#= (WorkshiftEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', WorkshiftEntryDate) #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].WorkshiftEntryDate' value='#= (WorkshiftEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', WorkshiftEntryDate) #' />");
+                    columns.Bound(p => p.ProductionLinesCode).DisplayNameTitle().Filterable(false).Width(60).Hidden(Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.MaterialIssue ? false : true)
+                        .ClientTemplate("#= (ProductionLinesCode == null)? '' : ProductionLinesCode #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].ProductionLinesCode' value='#= (ProductionLinesCode == null) ? '' : ProductionLinesCode #' />");                   
+
+
                     columns.Bound(p => p.CommodityID).DisplayNameTitle().Filterable(false).Hidden()
-                        .ClientTemplate("#= CommodityID #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].CommodityID' value='#= CommodityID #' />");                   
-                    columns.Bound(p => p.CommodityCode).DisplayNameTitle().Filterable(false).Width(200).EditorTemplateName(Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.PurchaseRequisition ? "StringReadonly" : "AutoCompletes/CommodityAvailable")
+                        .ClientTemplate("#= CommodityID #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].CommodityID' value='#= CommodityID #' />");
+                    columns.Bound(p => p.CommodityCode).DisplayNameTitle().Filterable(false).Width(150).EditorTemplateName(Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.PurchaseRequisition || Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.MaterialIssue ? "StringReadonly" : "AutoCompletes/CommodityAvailable")
                         .ClientFooterTemplate("Tổng cộng (#= kendo.format('{0:n0}', count) # dòng)")
                         .ClientTemplate("#= CommodityCode #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].CommodityCode' value='#= CommodityCode #' />");
-                    
-                    columns.Bound(p => p.CommodityName).DisplayNameTitle().Filterable(false).Width(280).HtmlAttributes(new { style = "" })
+
+                    columns.Bound(p => p.CommodityName).DisplayNameTitle().Filterable(false).Width(200).HtmlAttributes(new { style = "" })
                        .ClientTemplate("#= CommodityName #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].CommodityName' value='#= CommodityName #' />");
 
                     columns.Bound(p => p.CommodityTypeID).DisplayNameTitle().Filterable(false).Hidden()
@@ -156,7 +184,7 @@
                     columns.Bound(p => p.Remarks).DisplayNameTitle().Filterable(false).Hidden()
                         .ClientTemplate("#= (Remarks == null)? '' : Remarks #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].Remarks' value='#= (Remarks == null) ? '' : Remarks #' />");
 
-                    
+
                     columns.Command(command => { command.Destroy().Text("<span class='command' ></span>"); }).Width(50).Hidden(!@Model.Editable).HtmlAttributes(new { @class = "grid-column-center" });
 
                     columns.Template(model => null).HtmlAttributes(new { @class = "grid-column-center" }).Width(50).Hidden(!@Model.Voidable && !@Model.UnVoidable)
@@ -170,15 +198,28 @@
                         if (Model.Editable)
                         {
                             //toolbar.Create().HtmlAttributes(new { @class = "fa fa-map-marker" }).Text("Add new aa le ea1");
-                            if (Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.PurchaseRequisition)
-                                toolbar.Template(@<text>
-                                    <button type="button" class="k-button" onclick="GetPendingPurchaseRequisitionDetails()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Chọn mặt hàng </button>
-                                    <button type="button" class="k-button" onclick="copyRemainsToQuantity()"> <img src="~/Content/Images/Mains/Size24/Borderlands-Select-icon-24.png" /> Nhập toàn bộ mặt hàng </button>
-                                </text>);
-                            else
-                                toolbar.Template(@<text>
-                                <button type="button" class="k-button" onclick="$('#kendoGridDetails').data('kendoGrid').addRow()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Thêm mặt hàng </button>
-                                </text>);
+                            switch (Model.GoodsReceiptTypeID)
+                            {
+                                case (int)GlobalEnums.GoodsReceiptTypeID.PurchaseRequisition:
+                                    toolbar.Template(@<text>
+                                        <button type="button" class="k-button" onclick="GetPendingPurchaseRequisitionDetails()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Chọn mặt hàng </button>
+                                        <button type="button" class="k-button" onclick="copyRemainsToQuantity()"> <img src="~/Content/Images/Mains/Size24/Borderlands-Select-icon-24.png" /> Nhập toàn bộ mặt hàng </button>
+                                    </text>);
+                                    break;
+                                case (int)GlobalEnums.GoodsReceiptTypeID.MaterialIssue:
+                                    toolbar.Template(@<text>
+                                        <button type="button" class="k-button" onclick="GetPendingMaterialIssueDetails()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Chọn mặt hàng </button>
+                                        <button type="button" class="k-button" onclick="copyRemainsToQuantity()"> <img src="~/Content/Images/Mains/Size24/Borderlands-Select-icon-24.png" /> Nhập toàn bộ mặt hàng </button>
+                                    </text>);
+                                    break;
+                                default:
+                                    toolbar.Template(@<text>
+                                        <button type="button" class="k-button" onclick="$('#kendoGridDetails').data('kendoGrid').addRow()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Thêm mặt hàng </button>
+                                    </text>);
+                                    break;
+
+                            }
+
                         }
                         else
                         {//Add a functionless button for display purpose only
@@ -217,23 +258,23 @@
                             }
                         </text>);
                     }).DataSource(dataSource => dataSource
-                        .Ajax()
-                        .Batch(true)
-                        .ServerOperation(false)
-                        .Model(model =>
-                        {
-                            model.Id(x => x.GoodsReceiptDetailID);
-                            model.Field(m => m.GoodsReceiptDetailID).DefaultValue(0);
-                            model.Field(m => m.GoodsReceiptID).DefaultValue(@Model.GoodsReceiptID);
-                        })
-                        .Events(events =>
-                        {
-                            events.Error("kendGrid_ErrorHandler");
-                        })
-                        .Aggregates(a => a.Add(x => x.CommodityCode).Count())
-                        .Aggregates(a => a.Add(x => x.QuantityRemains).Sum())
-                        .Aggregates(a => a.Add(x => x.Quantity).Sum())
-                    )
+                                .Ajax()
+                                .Batch(true)
+                                .ServerOperation(false)
+                                .Model(model =>
+                                {
+                                    model.Id(x => x.GoodsReceiptDetailID);
+                                    model.Field(m => m.GoodsReceiptDetailID).DefaultValue(0);
+                                    model.Field(m => m.GoodsReceiptID).DefaultValue(@Model.GoodsReceiptID);
+                                })
+                                .Events(events =>
+                                {
+                                    events.Error("kendGrid_ErrorHandler");
+                                })
+                                .Aggregates(a => a.Add(x => x.CommodityCode).Count())
+                                .Aggregates(a => a.Add(x => x.QuantityRemains).Sum())
+                                .Aggregates(a => a.Add(x => x.Quantity).Sum())
+                            )
             )
         </div>
 
@@ -306,6 +347,13 @@
         require(["kpopupWindow"], function (kpopupWindow) {
             var createWizardWindow = new kpopupWindow();
             createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("GetPendingPurchaseRequisitionDetails", "GoodsReceipts", new { area = "Inventories" })", "Chọn mặt hàng ", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
+        });
+    }
+
+    function GetPendingMaterialIssueDetails() {
+        require(["kpopupWindow"], function (kpopupWindow) {
+            var createWizardWindow = new kpopupWindow();
+            createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("GetPendingMaterialIssueDetails", "GoodsReceipts", new { area = "Inventories" })", "Chọn mặt hàng ", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
         });
     }
 

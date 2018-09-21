@@ -2,9 +2,9 @@
     window.parent.$("#myWindow").data("kendoWindow").close();
 }
 
-function handleOKEvent(goodsReceiptGridDataSource, pendingPurchaseRequisitionDetailGridDataSource) {
-    if (goodsReceiptGridDataSource != undefined && pendingPurchaseRequisitionDetailGridDataSource != undefined) {
-        var pendingPurchaseRequisitionDetailGridDataItems = pendingPurchaseRequisitionDetailGridDataSource.view();
+function handleOKEvent(goodsReceiptGridDataSource, pendingMaterialIssueDetailGridDataSource) {
+    if (goodsReceiptGridDataSource != undefined && pendingMaterialIssueDetailGridDataSource != undefined) {
+        var pendingPurchaseRequisitionDetailGridDataItems = pendingMaterialIssueDetailGridDataSource.view();
         var goodsReceiptJSON = goodsReceiptGridDataSource.data().toJSON();
         for (var i = 0; i < pendingPurchaseRequisitionDetailGridDataItems.length; i++) {
             if (pendingPurchaseRequisitionDetailGridDataItems[i].IsSelected === true)
@@ -34,7 +34,7 @@ function handleOKEvent(goodsReceiptGridDataSource, pendingPurchaseRequisitionDet
     //grid.dataSource.data(data); //set changed data as data of the Grid
 
 
-    function _setParentInput(goodsReceiptJSON, purchaseRequisitionGridDataItem) {
+    function _setParentInput(goodsReceiptJSON, materialIssueGridDataItem) {
 
         //var dataRow = goodsReceiptJSON.add({});
 
@@ -46,22 +46,27 @@ function handleOKEvent(goodsReceiptGridDataSource, pendingPurchaseRequisitionDet
         dataRow.GoodsReceiptDetailID = 0;
         dataRow.GoodsReceiptID = window.parent.$("#GoodsReceiptID").val();
 
-        dataRow.MaterialIssueID = null;
-        dataRow.MaterialIssueDetailID = null;
+        dataRow.PurchaseRequisitionID = null;
+        dataRow.PurchaseRequisitionDetailID = null;                  
+        dataRow.PurchaseRequisitionEntryDate = null;
 
-        dataRow.PurchaseRequisitionID = purchaseRequisitionGridDataItem.PurchaseRequisitionID;
-        dataRow.PurchaseRequisitionDetailID = purchaseRequisitionGridDataItem.PurchaseRequisitionDetailID;
-        dataRow.PurchaseRequisitionCode = purchaseRequisitionGridDataItem.PurchaseRequisitionCode;
-        dataRow.PurchaseRequisitionReference = purchaseRequisitionGridDataItem.PurchaseRequisitionReference;
-        dataRow.PurchaseRequisitionEntryDate = purchaseRequisitionGridDataItem.PurchaseRequisitionEntryDate;
+        dataRow.MaterialIssueID = materialIssueGridDataItem.MaterialIssueID;
+        dataRow.MaterialIssueDetailID = materialIssueGridDataItem.MaterialIssueDetailID;
+        dataRow.MaterialIssueCode = materialIssueGridDataItem.MaterialIssueCode;
+        dataRow.MaterialIssueReference = materialIssueGridDataItem.MaterialIssueReference;
+        dataRow.ProductionLinesCode = materialIssueGridDataItem.ProductionLinesCode;
 
-        dataRow.CommodityID = purchaseRequisitionGridDataItem.CommodityID;
-        dataRow.CommodityName = purchaseRequisitionGridDataItem.CommodityName;
-        dataRow.CommodityCode = purchaseRequisitionGridDataItem.CommodityCode;
-        dataRow.CommodityTypeID = purchaseRequisitionGridDataItem.CommodityTypeID;
+        dataRow.WorkshiftName = materialIssueGridDataItem.WorkshiftName;
+        dataRow.WorkshiftEntryDate = materialIssueGridDataItem.WorkshiftEntryDate;
+        dataRow.MaterialIssueEntryDate = materialIssueGridDataItem.MaterialIssueEntryDate;
 
-        dataRow.QuantityRemains = purchaseRequisitionGridDataItem.QuantityRemains;
-        dataRow.Quantity = purchaseRequisitionGridDataItem.Quantity;
+        dataRow.CommodityID = materialIssueGridDataItem.CommodityID;
+        dataRow.CommodityName = materialIssueGridDataItem.CommodityName;
+        dataRow.CommodityCode = materialIssueGridDataItem.CommodityCode;
+        dataRow.CommodityTypeID = materialIssueGridDataItem.CommodityTypeID;
+
+        dataRow.QuantityRemains = materialIssueGridDataItem.QuantityRemains;
+        dataRow.Quantity = materialIssueGridDataItem.Quantity;
 
         dataRow.Remarks = null;
 

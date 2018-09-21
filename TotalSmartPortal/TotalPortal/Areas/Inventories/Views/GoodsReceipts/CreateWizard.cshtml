@@ -20,7 +20,7 @@
     @Html.HiddenFor(model => model.PurchaseRequisitionReference)
     @Html.HiddenFor(model => model.PurchaseRequisitionEntryDate)
 
-    @Html.HiddenFor(model => model.WarehouseAdjustmentID)
+    @Html.HiddenFor(model => model.WarehouseAdjustmentID)       
 
     @Html.HiddenFor(model => model.Customer.CustomerID);
     @Html.HiddenFor(model => model.Customer.Code);
@@ -56,6 +56,7 @@
                     </text>);
         })
     )
+       
 
 
     <div class="background-bar" style="height: 45px;">
@@ -65,7 +66,8 @@
             <input id="submitCreateWizard" type="submit" formaction="@Url.Action("CreateWizard", "GoodsReceipts")" formtarget="_top" style="display:none" />
 
             @*<button type="button" class="k-button" onclick="okButton_Click()"> <img src="~/Content/Images/Mains/Size24/Ok-1.png" /> Áp dụng CTKM đang chọn </button>   //At VCP DON'T ALLOW SELECT BY SINGLE PROMOTION *@
-            <button type="button" class="k-button" onclick="okWOSelectButton_Click()"> <img src="~/Content/Images/Mains/Size24/Accept-Total.png" /> Áp dụng tất cả CTKM </button>
+            <button type="button" class="k-button" onclick="okMaterialIssueButton_Click()"> <img src="~/Content/Images/Mains/Size24/Accept-Total.png" /> Nhập từ SX trả về </button>
+            <button type="button" class="k-button" onclick="okWOSelectButton_Click()"> <img src="~/Content/Images/Mains/Size24/Accept-Total.png" /> Áp dụng KH/CT đang chọn </button>
             <button type="button" class="k-button" onclick="window.parent.$('#myWindow').data('kendoWindow').close()"> <img src="~/Content/Images/Mains/Size24/Users-Exit-icon-24.png" /> Thoát </button>
         </div>
     </div>
@@ -85,6 +87,13 @@
     function okWOSelectButton_Click() {
         handleOKEvent();
     }
+
+    function okMaterialIssueButton_Click() {
+        $("#GoodsReceiptTypeID").val("@((int)GlobalEnums.GoodsReceiptTypeID.MaterialIssue)");
+        
+        $("#submitCreateWizard").trigger("click");
+    }
+   
 
     function handleOKEvent(promotionGrid) { //This javascript is now used only here. Later, if it is used somewhere else, it should be break into a standalone js file, and then just only add a link here
 

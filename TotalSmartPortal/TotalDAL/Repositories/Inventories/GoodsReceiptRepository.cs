@@ -59,6 +59,14 @@ namespace TotalDAL.Repositories.Inventories
             return pendingPurchaseRequisitionDetails;
         }
 
+        public IEnumerable<GoodsReceiptPendingMaterialIssueDetail> GetPendingMaterialIssueDetails(int? locationID, int? goodsReceiptID, string materialIssueDetailIDs, bool isReadonly)
+        {
+            this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = false;
+            IEnumerable<GoodsReceiptPendingMaterialIssueDetail> pendingMaterialIssueDetails = base.TotalSmartPortalEntities.GetGoodsReceiptPendingMaterialIssueDetails(locationID, goodsReceiptID, materialIssueDetailIDs, isReadonly).ToList();
+            this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = true;
+
+            return pendingMaterialIssueDetails;
+        }
 
 
 
