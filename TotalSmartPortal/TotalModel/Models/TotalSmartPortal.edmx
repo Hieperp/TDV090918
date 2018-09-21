@@ -5186,6 +5186,10 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Parameter Name="FromDate" Type="datetime" Mode="In" />
           <Parameter Name="ToDate" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="GetPlannedOrderLogs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PlannedOrderID" Type="int" Mode="In" />
+          <Parameter Name="FirmOrderID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetPlannedOrderViewDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PlannedOrderID" Type="int" Mode="In" />
         </Function>
@@ -11165,6 +11169,10 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             <End Role="Customer" EntitySet="Customers" />
             <End Role="FinishedProduct" EntitySet="FinishedProducts" />
           </AssociationSet>
+          <FunctionImport Name="GetPlannedOrderLogs" ReturnType="Collection(TotalSmartPortalModel.PlannedOrderLog)">
+            <Parameter Name="PlannedOrderID" Mode="In" Type="Int32" />
+            <Parameter Name="FirmOrderID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="AccountInvoiceIndex">
           <Property Type="Int32" Name="AccountInvoiceID" Nullable="false" />
@@ -15563,6 +15571,21 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="PlannedOrderLog">
+          <Property Type="Int32" Name="MaterialIssueDetailID" Nullable="false" />
+          <Property Type="DateTime" Name="EntryDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="ProductionLineCode" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="MaterialIssueWorkshiftEntryDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="MaterialIssueWorkshiftCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="GoodsReceiptReference" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="BatchEntryDate" Nullable="true" Precision="23" />
+          <Property Type="Decimal" Name="MaterialIssueDetailQuantity" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="SemifinishedProductWorkshiftEntryDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="SemifinishedProductWorkshiftCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CommoditiyCode" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="QuantityGainings" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Quantity" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -19786,6 +19809,25 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="WorkshiftName" ColumnName="WorkshiftName" />
                 <ScalarProperty Name="WorkshiftEntryDate" ColumnName="WorkshiftEntryDate" />
                 <ScalarProperty Name="ProductionLinesCode" ColumnName="ProductionLinesCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPlannedOrderLogs" FunctionName="TotalSmartPortalModel.Store.GetPlannedOrderLogs">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalSmartPortalModel.PlannedOrderLog">
+                <ScalarProperty Name="MaterialIssueDetailID" ColumnName="MaterialIssueDetailID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="ProductionLineCode" ColumnName="ProductionLineCode" />
+                <ScalarProperty Name="MaterialIssueWorkshiftEntryDate" ColumnName="MaterialIssueWorkshiftEntryDate" />
+                <ScalarProperty Name="MaterialIssueWorkshiftCode" ColumnName="MaterialIssueWorkshiftCode" />
+                <ScalarProperty Name="GoodsReceiptReference" ColumnName="GoodsReceiptReference" />
+                <ScalarProperty Name="BatchEntryDate" ColumnName="BatchEntryDate" />
+                <ScalarProperty Name="MaterialIssueDetailQuantity" ColumnName="MaterialIssueDetailQuantity" />
+                <ScalarProperty Name="SemifinishedProductWorkshiftEntryDate" ColumnName="SemifinishedProductWorkshiftEntryDate" />
+                <ScalarProperty Name="SemifinishedProductWorkshiftCode" ColumnName="SemifinishedProductWorkshiftCode" />
+                <ScalarProperty Name="CommoditiyCode" ColumnName="CommoditiyCode" />
+                <ScalarProperty Name="QuantityGainings" ColumnName="QuantityGainings" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

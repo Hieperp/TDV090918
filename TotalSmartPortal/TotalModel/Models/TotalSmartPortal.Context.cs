@@ -3481,5 +3481,18 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GoodsReceiptPendingMaterialIssueDetail>("GetGoodsReceiptPendingMaterialIssueDetails", locationIDParameter, goodsReceiptIDParameter, materialIssueDetailIDsParameter, isReadonlyParameter);
         }
+    
+        public virtual ObjectResult<PlannedOrderLog> GetPlannedOrderLogs(Nullable<int> plannedOrderID, Nullable<int> firmOrderID)
+        {
+            var plannedOrderIDParameter = plannedOrderID.HasValue ?
+                new ObjectParameter("PlannedOrderID", plannedOrderID) :
+                new ObjectParameter("PlannedOrderID", typeof(int));
+    
+            var firmOrderIDParameter = firmOrderID.HasValue ?
+                new ObjectParameter("FirmOrderID", firmOrderID) :
+                new ObjectParameter("FirmOrderID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PlannedOrderLog>("GetPlannedOrderLogs", plannedOrderIDParameter, firmOrderIDParameter);
+        }
     }
 }

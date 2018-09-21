@@ -33,6 +33,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.PlannedOrderToggleVoidDetail();
 
             this.PlannedOrderInitReference();
+
+            this.GetPlannedOrderLogs();
         }
 
 
@@ -298,6 +300,39 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.totalSmartPortalEntities.CreateTrigger("PlannedOrderInitReference", simpleInitReference.CreateQuery());
         }
 
+        private void GetPlannedOrderLogs()
+        {
+            string queryString = " @PlannedOrderID int, @FirmOrderID int " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+            queryString = queryString + "    BEGIN " + "\r\n";
+
+            queryString = queryString + "       DECLARE         @FirmOrders TABLE (FirmOrderID int NOT NULL PRIMARY KEY)" + "\r\n";
+            queryString = queryString + "       IF (NOT @FirmOrderID IS NULL) " + "\r\n";
+            queryString = queryString + "           INSERT INTO @FirmOrders (FirmOrderID) VALUES (@FirmOrderID) " + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+            queryString = queryString + "           INSERT INTO @FirmOrders (FirmOrderID) SELECT FirmOrderID FROM FirmOrders WHERE PlannedOrderID = @PlannedOrderID " + "\r\n";
+
+            queryString = queryString + "       SELECT          MaterialIssueDetails.MaterialIssueDetailID, MaterialIssueDetails.EntryDate, ProductionLines.Code AS ProductionLineCode, Workshifts.EntryDate AS MaterialIssueWorkshiftEntryDate, Workshifts.Code AS MaterialIssueWorkshiftCode, GoodsReceiptDetails.Reference AS GoodsReceiptReference, GoodsReceiptDetails.BatchEntryDate, MaterialIssueDetails.Quantity AS MaterialIssueDetailQuantity, NULL AS SemifinishedProductWorkshiftEntryDate, NULL AS SemifinishedProductWorkshiftCode, NULL AS CommoditiyCode, NULL AS QuantityGainings, NULL AS Quantity " + "\r\n";
+            queryString = queryString + "       FROM            MaterialIssueDetails " + "\r\n";
+            queryString = queryString + "                       INNER JOIN Workshifts ON MaterialIssueDetails.FirmOrderID IN (SELECT FirmOrderID FROM @FirmOrders) AND MaterialIssueDetails.WorkshiftID = Workshifts.WorkshiftID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN ProductionLines ON MaterialIssueDetails.ProductionLineID = ProductionLines.ProductionLineID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN GoodsReceiptDetails ON MaterialIssueDetails.GoodsReceiptDetailID = GoodsReceiptDetails.GoodsReceiptDetailID " + "\r\n";
+
+            queryString = queryString + "                       UNION ALL " + "\r\n";
+
+            queryString = queryString + "       SELECT          SemifinishedProductDetails.MaterialIssueDetailID, MaterialIssueDetails.EntryDate, NULL AS ProductionLineCode, NULL AS MaterialIssueWorkshiftEntryDate, NULL AS MaterialIssueWorkshiftCode, NULL AS GoodsReceiptReference, NULL AS BatchEntryDate, NULL AS MaterialIssueDetailQuantity, Workshifts.EntryDate AS SemifinishedProductWorkshiftEntryDate, Workshifts.Code AS SemifinishedProductWorkshiftCode, Commodities.Code AS CommoditiyCode, SemifinishedProductDetails.QuantityGainings, SemifinishedProductDetails.Quantity " + "\r\n";
+            queryString = queryString + "       FROM            SemifinishedProductDetails " + "\r\n";
+            queryString = queryString + "                       INNER JOIN Workshifts ON SemifinishedProductDetails.FirmOrderID IN (SELECT FirmOrderID FROM @FirmOrders) AND SemifinishedProductDetails.WorkshiftID = Workshifts.WorkshiftID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN Commodities ON SemifinishedProductDetails.CommodityID = Commodities.CommodityID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN MaterialIssueDetails ON SemifinishedProductDetails.MaterialIssueDetailID = MaterialIssueDetails.MaterialIssueDetailID " + "\r\n";
+
+            queryString = queryString + "       ORDER BY        MaterialIssueDetailID, EntryDate, SemifinishedProductWorkshiftEntryDate " + "\r\n";
+
+            queryString = queryString + "    END " + "\r\n";
+
+            this.totalSmartPortalEntities.CreateStoredProcedure("GetPlannedOrderLogs", queryString);
+        }
 
         #endregion
     }
