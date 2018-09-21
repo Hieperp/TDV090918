@@ -27,5 +27,8 @@ namespace TotalModel.Models
         public string Description { get; set; }
         public string Remarks { get; set; }
         public Nullable<bool> IsSelected { get; set; }
+        public string WorkshiftName { get; set; }
+        public System.DateTime WorkshiftEntryDate { get; set; }
+        public string ProductionLinesCode { get; set; }
     }
 }

@@ -15547,6 +15547,9 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="String" Name="Description" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
           <Property Type="Boolean" Name="IsSelected" Nullable="true" />
+          <Property Type="String" Name="WorkshiftName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="WorkshiftEntryDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="ProductionLinesCode" Nullable="false" MaxLength="50" />
         </ComplexType>
         <Association Name="FK_FinishedProducts_Customers">
           <End Type="TotalSmartPortalModel.Customer" Role="Customer" Multiplicity="1" />
@@ -19780,6 +19783,9 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
+                <ScalarProperty Name="WorkshiftName" ColumnName="WorkshiftName" />
+                <ScalarProperty Name="WorkshiftEntryDate" ColumnName="WorkshiftEntryDate" />
+                <ScalarProperty Name="ProductionLinesCode" ColumnName="ProductionLinesCode" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
