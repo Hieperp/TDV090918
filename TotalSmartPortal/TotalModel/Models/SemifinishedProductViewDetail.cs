@@ -28,5 +28,6 @@ namespace TotalModel.Models
         public string Remarks { get; set; }
         public int SemifinishedProductID { get; set; }
         public decimal QuantityGainings { get; set; }
+        public int PlannedOrderID { get; set; }
     }
 }

@@ -105,7 +105,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "       SELECT          Workshifts.WorkshiftID, Workshifts.EntryDate, Workshifts.Code " + "\r\n";
             queryString = queryString + "       FROM            Workshifts " + "\r\n";
-            queryString = queryString + "                       INNER JOIN (SELECT WorkshiftID FROM SemifinishedProductDetails WHERE SemifinishedHandoverID IS NULL GROUP BY WorkshiftID) SemifinishedProductDetails ON Workshifts.WorkshiftID = SemifinishedProductDetails.WorkshiftID " + "\r\n";
+            queryString = queryString + "       WHERE           WorkshiftID IN (SELECT DISTINCT WorkshiftID FROM SemifinishedProductDetails WHERE SemifinishedHandoverID IS NULL AND Approved = 1) " + "\r\n";
 
             this.totalSmartPortalEntities.CreateStoredProcedure("GetSemifinishedHandoverPendingWorkshifts", queryString);
         }
@@ -117,7 +117,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "       SELECT          Workshifts.WorkshiftID, Workshifts.EntryDate, Workshifts.Code AS WorkshiftCode, Customers.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName " + "\r\n";
             queryString = queryString + "       FROM            Workshifts " + "\r\n";
-            queryString = queryString + "                       INNER JOIN (SELECT WorkshiftID, CustomerID FROM SemifinishedProductDetails WHERE SemifinishedHandoverID IS NULL GROUP BY WorkshiftID, CustomerID) SemifinishedProductDetails ON Workshifts.WorkshiftID = SemifinishedProductDetails.WorkshiftID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN (SELECT WorkshiftID, CustomerID FROM SemifinishedProductDetails WHERE SemifinishedHandoverID IS NULL AND Approved = 1 GROUP BY WorkshiftID, CustomerID) SemifinishedProductDetails ON Workshifts.WorkshiftID = SemifinishedProductDetails.WorkshiftID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Customers ON SemifinishedProductDetails.CustomerID = Customers.CustomerID " + "\r\n";
 
             this.totalSmartPortalEntities.CreateStoredProcedure("GetSemifinishedHandoverPendingCustomers", queryString);
@@ -192,7 +192,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             string queryString = "";
 
             queryString = queryString + "       SELECT      SemifinishedProductDetails.SemifinishedProductID, SemifinishedProductDetails.SemifinishedProductDetailID, SemifinishedProductDetails.EntryDate, SemifinishedProductDetails.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, " + "\r\n";
-            queryString = queryString + "                   SemifinishedProductDetails.CommodityID, Commodities.Code AS CommodityCode, SemifinishedProductDetails.ProductionLineID, ProductionLines.Code AS ProductionLineCode, SemifinishedProductDetails.CrucialWorkerID, Employees.Name AS CrucialWorkerName, " + "\r\n";
+            queryString = queryString + "                   SemifinishedProductDetails.CommodityID, Commodities.Code AS CommodityCode, Commodities.CommodityTypeID, SemifinishedProductDetails.ProductionLineID, ProductionLines.Code AS ProductionLineCode, SemifinishedProductDetails.CrucialWorkerID, Employees.Name AS CrucialWorkerName, " + "\r\n";
             queryString = queryString + "                   SemifinishedProductDetails.Quantity, SemifinishedProductDetails.QuantityGainings, CAST(1 AS bit) AS IsSelected " + "\r\n";
 
             queryString = queryString + "       FROM        SemifinishedProductDetails " + "\r\n";
@@ -209,7 +209,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             string queryString = "";
 
             queryString = queryString + "       SELECT      SemifinishedProductDetails.SemifinishedProductID, SemifinishedProductDetails.SemifinishedProductDetailID, SemifinishedProductDetails.EntryDate, SemifinishedProductDetails.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, " + "\r\n";
-            queryString = queryString + "                   SemifinishedProductDetails.CommodityID, Commodities.Code AS CommodityCode, SemifinishedProductDetails.ProductionLineID, ProductionLines.Code AS ProductionLineCode, SemifinishedProductDetails.CrucialWorkerID, Employees.Name AS CrucialWorkerName, " + "\r\n";
+            queryString = queryString + "                   SemifinishedProductDetails.CommodityID, Commodities.Code AS CommodityCode, Commodities.CommodityTypeID, SemifinishedProductDetails.ProductionLineID, ProductionLines.Code AS ProductionLineCode, SemifinishedProductDetails.CrucialWorkerID, Employees.Name AS CrucialWorkerName, " + "\r\n";
             queryString = queryString + "                   SemifinishedProductDetails.Quantity, SemifinishedProductDetails.QuantityGainings, CAST(1 AS bit) AS IsSelected " + "\r\n";
 
             queryString = queryString + "       FROM        SemifinishedProductDetails " + "\r\n";
@@ -230,10 +230,18 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "    BEGIN " + "\r\n";
 
             queryString = queryString + "       IF (@SaveRelativeOption = 1) " + "\r\n";
-            queryString = queryString + "           UPDATE      SemifinishedProductDetails" + "\r\n";
-            queryString = queryString + "           SET         SemifinishedProductDetails.SemifinishedHandoverID = SemifinishedHandoverDetails.SemifinishedHandoverID " + "\r\n";
-            queryString = queryString + "           FROM        SemifinishedProductDetails INNER JOIN" + "\r\n";
-            queryString = queryString + "                       SemifinishedHandoverDetails ON SemifinishedHandoverDetails.SemifinishedHandoverID = @EntityID AND SemifinishedProductDetails.SemifinishedProductDetailID = SemifinishedHandoverDetails.SemifinishedProductDetailID " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               UPDATE      SemifinishedProductDetails" + "\r\n";
+            queryString = queryString + "               SET         SemifinishedProductDetails.SemifinishedHandoverID = SemifinishedHandoverDetails.SemifinishedHandoverID " + "\r\n";
+            queryString = queryString + "               FROM        SemifinishedProductDetails INNER JOIN" + "\r\n";
+            queryString = queryString + "                           SemifinishedHandoverDetails ON SemifinishedHandoverDetails.SemifinishedHandoverID = @EntityID AND SemifinishedProductDetails.Approved = 1 AND SemifinishedProductDetails.SemifinishedProductDetailID = SemifinishedHandoverDetails.SemifinishedProductDetailID " + "\r\n";
+
+            queryString = queryString + "               IF @@ROWCOUNT <> (SELECT COUNT(*) FROM SemifinishedProductDetails WHERE SemifinishedHandoverID = @EntityID) " + "\r\n";
+            queryString = queryString + "                   BEGIN " + "\r\n";
+            queryString = queryString + "                       DECLARE     @msg NVARCHAR(300) = N'Dữ liệu không tồn tại hoặc chưa duyệt' ; " + "\r\n";
+            queryString = queryString + "                       THROW       61001,  @msg, 1; " + "\r\n";
+            queryString = queryString + "                   END " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
 
             queryString = queryString + "       ELSE " + "\r\n"; //(@SaveRelativeOption = -1) 
             queryString = queryString + "           UPDATE      SemifinishedProductDetails" + "\r\n";

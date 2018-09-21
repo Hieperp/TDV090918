@@ -54,7 +54,7 @@ namespace TotalBase.Enums
             SemifinishedHandover = 680026,
 
             FinishedProduct = 680028,
-            FinishedProductHandover = 680029,
+            FinishedHandover = 680029,
 
             Quotation = 8031,
             SalesOrder = 8032,

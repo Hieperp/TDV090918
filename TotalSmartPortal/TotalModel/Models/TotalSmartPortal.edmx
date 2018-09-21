@@ -538,6 +538,7 @@
           <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="FirmOrderID" Type="int" Nullable="false" />
           <Property Name="FirmOrderDetailID" Type="int" Nullable="false" />
+          <Property Name="PlannedOrderID" Type="int" Nullable="false" />
           <Property Name="PlannedOrderDetailID" Type="int" Nullable="false" />
           <Property Name="SemifinishedProductID" Type="int" Nullable="false" />
           <Property Name="SemifinishedProductDetailID" Type="int" Nullable="false" />
@@ -1668,6 +1669,7 @@
           <Property Name="MaterialIssueDetailID" Type="int" Nullable="false" />
           <Property Name="FirmOrderID" Type="int" Nullable="false" />
           <Property Name="FirmOrderDetailID" Type="int" Nullable="false" />
+          <Property Name="PlannedOrderID" Type="int" Nullable="false" />
           <Property Name="PlannedOrderDetailID" Type="int" Nullable="false" />
           <Property Name="GoodsReceiptID" Type="int" Nullable="false" />
           <Property Name="GoodsReceiptDetailID" Type="int" Nullable="false" />
@@ -14014,6 +14016,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="SemifinishedProductID" Nullable="false" />
           <Property Type="Decimal" Name="QuantityGainings" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="PlannedOrderID" Nullable="false" />
         </ComplexType>
         <ComplexType Name="MaterialIssuePendingFirmOrder">
           <Property Type="Int32" Name="MaterialIssueTypeID" Nullable="false" />
@@ -14385,6 +14388,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <NavigationProperty Name="MaterialIssueDetail" Relationship="TotalSmartPortalModel.FK_SemifinishedProductDetails_MaterialIssueDetails" FromRole="SemifinishedProductDetail" ToRole="MaterialIssueDetail" />
           <NavigationProperty Name="MaterialIssue" Relationship="TotalSmartPortalModel.FK_SemifinishedProductDetails_MaterialIssues" FromRole="SemifinishedProductDetail" ToRole="MaterialIssue" />
           <Property Name="ShiftID" Type="Int32" Nullable="false" />
+          <Property Name="PlannedOrderID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="SemifinishedProduct">
           <Key>
@@ -14712,6 +14716,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="Int32" Name="CrucialWorkerID" Nullable="false" />
           <Property Type="String" Name="CrucialWorkerName" Nullable="false" MaxLength="50" />
           <Property Type="Decimal" Name="QuantityGainings" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="CommodityTypeID" Nullable="false" />
         </ComplexType>
         <ComplexType Name="SemifinishedHandoverPendingWorkshift">
           <Property Type="Int32" Name="WorkshiftID" Nullable="false" />
@@ -14925,6 +14930,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Name="Approved" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Commodity" Relationship="TotalSmartPortalModel.FK_FinishedProductDetails_Commodities" FromRole="FinishedProductDetail" ToRole="Commodity" />
           <NavigationProperty Name="FinishedProduct" Relationship="TotalSmartPortalModel.FK_FinishedProductDetails_FinishedProducts" FromRole="FinishedProductDetail" ToRole="FinishedProduct" />
+          <Property Name="PlannedOrderID" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_FinishedProductDetails_Commodities">
           <End Type="TotalSmartPortalModel.Commodity" Role="Commodity" Multiplicity="1" />
@@ -19136,6 +19142,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="SemifinishedProductID" ColumnName="SemifinishedProductID" />
                 <ScalarProperty Name="QuantityGainings" ColumnName="QuantityGainings" />
+                <ScalarProperty Name="PlannedOrderID" ColumnName="PlannedOrderID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -19382,6 +19389,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <EntitySetMapping Name="SemifinishedProductDetails">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.SemifinishedProductDetail">
               <MappingFragment StoreEntitySet="SemifinishedProductDetails">
+                <ScalarProperty Name="PlannedOrderID" ColumnName="PlannedOrderID" />
                 <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
                 <ScalarProperty Name="HandoverApproved" ColumnName="HandoverApproved" />
                 <ScalarProperty Name="QuantityFinished" ColumnName="QuantityFinished" />
@@ -19518,6 +19526,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="CrucialWorkerID" ColumnName="CrucialWorkerID" />
                 <ScalarProperty Name="CrucialWorkerName" ColumnName="CrucialWorkerName" />
                 <ScalarProperty Name="QuantityGainings" ColumnName="QuantityGainings" />
+                <ScalarProperty Name="CommodityTypeID" ColumnName="CommodityTypeID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -19646,6 +19655,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <EntitySetMapping Name="FinishedProductDetails">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.FinishedProductDetail">
               <MappingFragment StoreEntitySet="FinishedProductDetails">
+                <ScalarProperty Name="PlannedOrderID" ColumnName="PlannedOrderID" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="QuantityIssue" ColumnName="QuantityIssue" />
