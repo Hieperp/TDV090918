@@ -133,6 +133,7 @@ namespace TotalBase.Enums
             InventoryAdjustment = 4, //ERP VCP VB6
             WarehouseAdjustments = 5,
             PurchaseRequisition = 6,
+            MaterialIssue = 7,
 
 
             GoodsIssueTransfer = 3333,
