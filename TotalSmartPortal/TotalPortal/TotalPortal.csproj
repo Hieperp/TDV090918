@@ -1516,6 +1516,7 @@
     <Content Include="Scripts\Controllers\Productions\ProductionOrders\Open.js" />
     <Content Include="Scripts\Controllers\Productions\ProductionOrders\Print.js" />
     <Content Include="Scripts\Controllers\Productions\ProductionOrders\Void.js" />
+    <Content Include="Scripts\Controllers\Productions\SemifinishedHandovers\AddPendingDetail.js" />
     <Content Include="Scripts\Controllers\Productions\SemifinishedHandovers\Approve.js" />
     <Content Include="Scripts\Controllers\Productions\SemifinishedHandovers\CreateWizard.js" />
     <Content Include="Scripts\Controllers\Productions\SemifinishedHandovers\Delete.js" />
