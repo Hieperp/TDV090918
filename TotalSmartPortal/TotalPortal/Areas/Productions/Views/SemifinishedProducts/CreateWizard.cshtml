@@ -2,7 +2,6 @@
 @using TotalPortal.Configuration;
 @using TotalModel.Models;
 
-
 @{Layout = "~/Views/Shared/_LayoutPopup.cshtml";}
 
 @model TotalPortal.Areas.Productions.ViewModels.SemifinishedProductViewModel
@@ -41,9 +40,9 @@
     @Html.HiddenFor(model => model.Customer.PriceCategoryID)
     @Html.HiddenFor(model => model.Customer.PriceCategoryCode)
 
-    @Html.HiddenFor(model => model.WorkshiftID)
-    @Html.HiddenFor(model => model.WorkshiftCode)
-    @Html.HiddenFor(model => model.WorkshiftEntryDate)
+    @Html.HiddenFor(model => model.MaterialIssueDetailWorkshiftID)
+    @Html.HiddenFor(model => model.MaterialIssueDetailWorkshiftCode)
+    @Html.HiddenFor(model => model.MaterialIssueDetailWorkshiftEntryDate)
     
     @Html.HiddenFor(model => model.ProductionLineID)
     @Html.HiddenFor(model => model.ProductionLineCode)
@@ -68,8 +67,8 @@
             columns.Bound(c => c.FirmOrderReference).Title("KHSX").Width(28);
             columns.Bound(c => c.FirmOrderCode).Title("Mã CT").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(25);
             columns.Bound(c => c.FirmOrderEntryDate).Title("Ngày KHSX").Format("{0:dd/MM/yyyy}").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(38);
-            columns.Bound(c => c.WorkshiftEntryDate).Title("Ngày SX").Format("{0:dd/MM/yyyy}").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(38);
-            columns.Bound(c => c.WorkshiftCode).Title("Ca SX").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(30);
+            columns.Bound(c => c.MaterialIssueDetailWorkshiftEntryDate).Title("Ngày phát NVL").Format("{0:dd/MM/yyyy}").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(38);
+            columns.Bound(c => c.MaterialIssueDetailWorkshiftCode).Title("Ca phát NVL").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(30);
             columns.Bound(c => c.ProductionLineCode).Title("MS máy").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(27);
             columns.Bound(c => c.CustomerName).Title("Khách hàng").Width(60);
             columns.Bound(c => c.FirmOrderSpecification).Title("Mã thành phẩm").Width(80);
@@ -163,9 +162,9 @@
             $("#Customer_PriceCategoryID").val(selectedDataItem === undefined || selectedDataItem.CustomerPriceCategoryID === undefined ? null : selectedDataItem.CustomerPriceCategoryID);
             $("#Customer_PriceCategoryCode").val(selectedDataItem === undefined || selectedDataItem.CustomerPriceCategoryCode === undefined ? null : selectedDataItem.CustomerPriceCategoryCode);
 
-            $("#WorkshiftEntryDate").val(selectedDataItem === undefined || selectedDataItem.WorkshiftEntryDate === undefined ? null : kendo.toString(selectedDataItem.WorkshiftEntryDate, Settings.DateTimeFormat));
-            $("#WorkshiftID").val(selectedDataItem === undefined || selectedDataItem.WorkshiftID === undefined ? null : selectedDataItem.WorkshiftID);
-            $("#WorkshiftCode").val(selectedDataItem === undefined || selectedDataItem.WorkshiftCode === undefined ? null : selectedDataItem.WorkshiftCode);
+            $("#MaterialIssueDetailWorkshiftID").val(selectedDataItem === undefined || selectedDataItem.MaterialIssueDetailWorkshiftID === undefined ? null : selectedDataItem.MaterialIssueDetailWorkshiftID);
+            $("#MaterialIssueDetailWorkshiftEntryDate").val(selectedDataItem === undefined || selectedDataItem.MaterialIssueDetailWorkshiftEntryDate === undefined ? null : kendo.toString(selectedDataItem.MaterialIssueDetailWorkshiftEntryDate, Settings.DateTimeFormat));
+            $("#MaterialIssueDetailWorkshiftCode").val(selectedDataItem === undefined || selectedDataItem.MaterialIssueDetailWorkshiftCode === undefined ? null : selectedDataItem.MaterialIssueDetailWorkshiftCode);
 
             $("#ProductionLineID").val(selectedDataItem === undefined || selectedDataItem.ProductionLineID === undefined ? null : selectedDataItem.ProductionLineID);
             $("#ProductionLineCode").val(selectedDataItem === undefined || selectedDataItem.ProductionLineCode === undefined ? null : selectedDataItem.ProductionLineCode);
@@ -196,7 +195,7 @@
                     { field: "FirmOrderCode", operator: "contains", value: semifinishedProductPendingMaterialIssueDetailFilter },
                     { field: "FirmOrderReference", operator: "contains", value: semifinishedProductPendingMaterialIssueDetailFilter },
                     { field: "CustomerName", operator: "contains", value: semifinishedProductPendingMaterialIssueDetailFilter },
-                    { field: "WorkshiftCode", operator: "contains", value: semifinishedProductPendingMaterialIssueDetailFilter },
+                    { field: "MaterialIssueDetailWorkshiftCode", operator: "contains", value: semifinishedProductPendingMaterialIssueDetailFilter },
                     { field: "ProductionLineCode", operator: "contains", value: semifinishedProductPendingMaterialIssueDetailFilter },
                     { field: "FirmOrderSpecification", operator: "contains", value: semifinishedProductPendingMaterialIssueDetailFilter },
                     { field: "MaterialName", operator: "contains", value: semifinishedProductPendingMaterialIssueDetailFilter }

@@ -17,7 +17,9 @@ namespace TotalDAL.Repositories.Commons
 
         public IList<Shift> GetAllShifts()
         {
-            return this.totalSmartPortalEntities.Shifts.ToList();
+            IList<Shift> shifts = this.totalSmartPortalEntities.Shifts.ToList();
+            shifts.Insert(0, new Shift());
+            return shifts;
         }
 
     }

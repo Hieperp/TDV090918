@@ -115,6 +115,23 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             
             queryString = queryString + "       DECLARE @msg NVARCHAR(300) ";
 
+
+            #region UPDATE WorkshiftID
+            queryString = queryString + "       DECLARE         @EntryDate Datetime, @ShiftID int, @WorkshiftID int " + "\r\n";
+            queryString = queryString + "       SELECT          @EntryDate = CONVERT(date, EntryDate), @ShiftID = ShiftID FROM SemifinishedProducts WHERE SemifinishedProductID = @EntityID " + "\r\n";
+            queryString = queryString + "       SET             @WorkshiftID = (SELECT TOP 1 WorkshiftID FROM Workshifts WHERE EntryDate = @EntryDate AND ShiftID = @ShiftID) " + "\r\n";
+
+            queryString = queryString + "       IF             (@WorkshiftID IS NULL) " + "\r\n";
+            queryString = queryString + "           BEGIN ";
+            queryString = queryString + "               INSERT INTO     Workshifts(EntryDate, ShiftID, Code, Name, WorkingHours, Remarks) SELECT @EntryDate, ShiftID, Code, Name, WorkingHours, Remarks FROM Shifts WHERE ShiftID = @ShiftID " + "\r\n";
+            queryString = queryString + "               SELECT          @WorkshiftID = SCOPE_IDENTITY(); " + "\r\n";
+            queryString = queryString + "           END ";
+
+            queryString = queryString + "       UPDATE          SemifinishedProducts        SET WorkshiftID = @WorkshiftID WHERE SemifinishedProductID = @EntityID " + "\r\n";
+            queryString = queryString + "       UPDATE          SemifinishedProductDetails  SET WorkshiftID = @WorkshiftID WHERE SemifinishedProductID = @EntityID " + "\r\n";
+            #endregion UPDATE WorkshiftID
+
+
             queryString = queryString + "       DECLARE         @SemifinishedProductDetails TABLE (FirmOrderDetailID int NOT NULL PRIMARY KEY, PlannedOrderDetailID int NOT NULL, Quantity decimal(18, 2) NOT NULL)" + "\r\n";
             queryString = queryString + "       INSERT INTO     @SemifinishedProductDetails (FirmOrderDetailID, PlannedOrderDetailID, Quantity) SELECT FirmOrderDetailID, PlannedOrderDetailID, SUM(Quantity) AS Quantity FROM SemifinishedProductDetails WHERE SemifinishedProductID = @EntityID GROUP BY FirmOrderDetailID, PlannedOrderDetailID " + "\r\n";
 

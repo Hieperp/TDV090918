@@ -15,7 +15,6 @@
     @Html.Hidden("WarehouseTaskID", (int)@ViewBag.WarehouseTaskID);
     @Html.Hidden("WarehouseTaskIDList", (string)@ViewBag.WarehouseTaskIDList);
 
-    @Html.HiddenFor(p => p.WorkshiftID)
     @Html.HiddenFor(model => model.SemifinishedProductID)
 
     @Html.HiddenFor(model => model.MaterialIssueID)
@@ -26,9 +25,10 @@
 
     @Html.HiddenFor(model => model.ProductionLineID)
     @Html.HiddenFor(model => model.ProductionLineCode)
-    @Html.HiddenFor(model => model.WorkshiftCode)
-    @Html.HiddenFor(model => model.WorkshiftEntryDate)
     
+    @Html.HiddenFor(model => model.MaterialIssueDetailWorkshiftID)
+    @Html.HiddenFor(model => model.MaterialIssueDetailWorkshiftCode)
+    @Html.HiddenFor(model => model.MaterialIssueDetailWorkshiftEntryDate)
 
     @Html.HiddenFor(model => model.MaterialCode)
     @Html.HiddenFor(model => model.MaterialName)
@@ -43,8 +43,9 @@
 
         @Html.Partial("~/Views/Helpers/Bases/_BaseSectionLeftA.cshtml")
 
-        @Html.HiddenFor(model => model.FirmOrderID)
+        @Html.Partial("~/Views/Shared/EditorTemplates/DropDowns/Shift.cshtml")
 
+        @Html.HiddenFor(model => model.FirmOrderID)
         <div class="form-group">
             @Html.LabelFor(model => model.FirmOrderReference)
             <div class="div-input">

@@ -12,9 +12,20 @@ namespace TotalPortal.Areas.Productions.Builders
 
     public class SemifinishedProductViewModelSelectListBuilder : A01ViewModelSelectListBuilder<SemifinishedProductViewModel>, ISemifinishedProductViewModelSelectListBuilder
     {
-        public SemifinishedProductViewModelSelectListBuilder(IAspNetUserSelectListBuilder aspNetUserSelectListBuilder, IAspNetUserRepository aspNetUserRepository)
+        private readonly IShiftSelectListBuilder shiftSelectListBuilder;
+        private readonly IShiftRepository shiftRepository;
+
+        public SemifinishedProductViewModelSelectListBuilder(IAspNetUserSelectListBuilder aspNetUserSelectListBuilder, IAspNetUserRepository aspNetUserRepository, IShiftSelectListBuilder shiftSelectListBuilder, IShiftRepository shiftRepository)
             : base(aspNetUserSelectListBuilder, aspNetUserRepository)
         {
+            this.shiftSelectListBuilder = shiftSelectListBuilder;
+            this.shiftRepository = shiftRepository;
+        }
+
+        public override void BuildSelectLists(SemifinishedProductViewModel semifinishedProductViewModel)
+        {
+            base.BuildSelectLists(semifinishedProductViewModel);
+            semifinishedProductViewModel.ShiftSelectList = this.shiftSelectListBuilder.BuildSelectListItemsForShifts(this.shiftRepository.GetAllShifts());
         }
     }
 }

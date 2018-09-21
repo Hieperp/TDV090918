@@ -54,21 +54,24 @@ namespace TotalDTO.Productions
         [UIHint("Commons/SOCode")]
         public string Code { get; set; }
 
-        public virtual int WorkshiftID { get; set; }
+        public int MaterialIssueDetailWorkshiftID { get; set; }
         [Display(Name = "Ca sản xuất")]
-        public string WorkshiftCode { get; set; }
+        public string MaterialIssueDetailWorkshiftCode { get; set; }
         [Display(Name = "Ngày sản xuất")]
-        public DateTime WorkshiftEntryDate { get; set; }
+        public DateTime MaterialIssueDetailWorkshiftEntryDate { get; set; }
 
         public virtual int ProductionLineID { get; set; }
         [Display(Name = "Mã số máy")]
         public string ProductionLineCode { get; set; }
 
         [Display(Name = "Mã số máy, ca sx")]
-        public string WorkDescription { get { return this.ProductionLineCode + ", " + this.WorkshiftCode + " [" + this.WorkshiftEntryDate.ToString("dd/MM/yyyy") + "]"; } }
+        public string WorkDescription { get { return this.ProductionLineCode + ", " + this.MaterialIssueDetailWorkshiftCode + " [" + this.MaterialIssueDetailWorkshiftEntryDate.ToString("dd/MM/yyyy") + "]"; } }
 
         [Display(Name = "Cuộn màng")]
         public string GoodsReceiptDescription { get { return this.MaterialCode + ", " + this.GoodsReceiptReference + (this.GoodsReceiptEntryDate != null ? " [" + this.GoodsReceiptEntryDate.Value.ToString("dd/MM/yyyy") + "]" : "") + ", " + this.MaterialQuantity.ToString("N2"); } }
+
+        public int ShiftID { get; set; }
+        public int WorkshiftID { get; set; } // WHEN ADD NEW: THIS WILL BE ZERO. THEN, THE REAL VALUE OF WorkshiftID WILL BE UPDATE BY SemifinishedProductSaveRelative
 
         public virtual int CrucialWorkerID { get; set; }
 
@@ -78,7 +81,7 @@ namespace TotalDTO.Productions
         {
             base.PerformPresaveRule();
 
-            this.DtoDetails().ToList().ForEach(e => { e.MaterialIssueID = this.MaterialIssueID; e.MaterialIssueDetailID = this.MaterialIssueDetailID; e.FirmOrderID = this.FirmOrderID; e.GoodsReceiptID = this.GoodsReceiptID; e.GoodsReceiptDetailID = this.GoodsReceiptDetailID; e.CustomerID = this.CustomerID; e.WorkshiftID = this.WorkshiftID; e.ProductionLineID = this.ProductionLineID; e.CrucialWorkerID = this.CrucialWorkerID; });
+            this.DtoDetails().ToList().ForEach(e => { e.MaterialIssueID = this.MaterialIssueID; e.MaterialIssueDetailID = this.MaterialIssueDetailID; e.FirmOrderID = this.FirmOrderID; e.GoodsReceiptID = this.GoodsReceiptID; e.GoodsReceiptDetailID = this.GoodsReceiptDetailID; e.CustomerID = this.CustomerID; e.ShiftID = this.ShiftID; e.WorkshiftID = this.WorkshiftID; e.ProductionLineID = this.ProductionLineID; e.CrucialWorkerID = this.CrucialWorkerID; });
         }
     }
 

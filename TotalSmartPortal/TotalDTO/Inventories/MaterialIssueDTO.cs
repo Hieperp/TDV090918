@@ -47,7 +47,7 @@ namespace TotalDTO.Inventories
         public string Code { get; set; }
 
         public int ShiftID { get; set; }
-        public int WorkshiftID { get; set; }// JUST INIT A VALUE. THE REAL VALUE OF WorkshiftID WILL BE UPDATE BY ProductionOrderSaveRelative
+        public int WorkshiftID { get; set; } // WHEN ADD NEW: THIS WILL BE ZERO. THEN, THE REAL VALUE OF WorkshiftID WILL BE UPDATE BY MaterialIssueSaveRelative
         
         public virtual int ProductionLineID { get; set; }        
 

@@ -221,6 +221,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + "                   END " + "\r\n";
 
 
+            #region UPDATE WorkshiftID
             queryString = queryString + "                   DECLARE         @EntryDate Datetime, @ShiftID int, @WorkshiftID int " + "\r\n";
             queryString = queryString + "                   SELECT          @EntryDate = CONVERT(date, EntryDate), @ShiftID = ShiftID FROM MaterialIssues WHERE MaterialIssueID = @EntityID " + "\r\n";
             queryString = queryString + "                   SET             @WorkshiftID = (SELECT TOP 1 WorkshiftID FROM Workshifts WHERE EntryDate = @EntryDate AND ShiftID = @ShiftID) " + "\r\n";
@@ -233,6 +234,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
 
             queryString = queryString + "                   UPDATE          MaterialIssues        SET WorkshiftID = @WorkshiftID WHERE MaterialIssueID = @EntityID " + "\r\n";
             queryString = queryString + "                   UPDATE          MaterialIssueDetails  SET WorkshiftID = @WorkshiftID WHERE MaterialIssueID = @EntityID " + "\r\n";
+            #endregion UPDATE WorkshiftID
+
 
 
             queryString = queryString + "               END " + "\r\n";

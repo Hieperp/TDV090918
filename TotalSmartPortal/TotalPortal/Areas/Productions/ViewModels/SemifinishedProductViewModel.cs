@@ -10,8 +10,9 @@ using TotalPortal.Areas.Commons.ViewModels.Helpers;
 
 namespace TotalPortal.Areas.Productions.ViewModels
 {
-    public class SemifinishedProductViewModel : SemifinishedProductDTO, IViewDetailViewModel<SemifinishedProductDetailDTO>, IPreparedPersonDropDownViewModel, IApproverDropDownViewModel, IA01SimpleViewModel
+    public class SemifinishedProductViewModel : SemifinishedProductDTO, IViewDetailViewModel<SemifinishedProductDetailDTO>, IPreparedPersonDropDownViewModel, IApproverDropDownViewModel, IA01SimpleViewModel, IShiftDropDownViewModel
     {
         public IEnumerable<SelectListItem> AspNetUserSelectList { get; set; }
+        public IEnumerable<SelectListItem> ShiftSelectList { get; set; }
     }
 }

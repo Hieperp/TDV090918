@@ -16,7 +16,7 @@ namespace TotalPortal.Areas.Commons.Builders
     {
         public IEnumerable<SelectListItem> BuildSelectListItemsForShifts(IEnumerable<Shift> Shifts)
         {
-            return Shifts.Select(pt => new SelectListItem { Text = pt.Code + " [" + pt.Name + "]", Value = pt.ShiftID.ToString() }).ToList();
+            return Shifts.Select(pt => new SelectListItem { Text = pt.Code + (pt.Name != null ? " [" + pt.Name + "]" : ""), Value = pt.ShiftID.ToString() }).ToList();
         }
     }
 }
