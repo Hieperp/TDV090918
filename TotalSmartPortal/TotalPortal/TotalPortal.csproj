@@ -2445,6 +2445,7 @@
     <Content Include="Views\Shared\EditorTemplates\AutoCompletes\Mold.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DecimalN0.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\AutoCompletes\ProductionLine.cshtml" />
+    <Content Include="Views\Helpers\Commons\_PlannedOrderLogs.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

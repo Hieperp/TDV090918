@@ -1,0 +1,73 @@
+﻿@using TotalModel.Models;
+@using TotalPortal.Configuration;
+
+
+@(Html.Kendo().Grid<PlannedOrderLog>()
+    .Name("gridPlannedOrderLogs")
+    .Columns(columns =>
+    {
+        columns.Bound(c => c.EntryDate).Title("Ngày").Width(80).Format("{0:" + Settings.DateTimeFormat + "}");
+        columns.Bound(c => c.ProductionLineCode).Title("Mã Máy").Width(50);
+        columns.Bound(c => c.MaterialIssueWorkshiftEntryDate).Title("Ngày sx màng").Width(80).Format("{0:" + Settings.DateFormat + "}");
+        columns.Bound(c => c.MaterialIssueWorkshiftCode).Title("Ca sx phôi").Width(50);
+        columns.Bound(c => c.GoodsReceiptReference).Title("Lô sx").Width(50);
+        columns.Bound(c => c.BatchEntryDate).Title("Ngày lô hàng").Width(80).Format("{0:" + Settings.DateFormat + "}");
+        columns.Bound(c => c.MaterialIssueDetailQuantity).Title("SL").Format(Settings.kfmQuantity).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
+        columns.Bound(c => c.SemifinishedProductWorkshiftEntryDate).Title("Ngày sx phôi").Width(80).Format("{0:" + Settings.DateFormat + "}");
+        columns.Bound(c => c.SemifinishedProductWorkshiftCode).Title("Ca sx phôi").Width(50);        
+        columns.Bound(c => c.CommoditiyCode).Title("Mã hàng").Width(100);
+        columns.Bound(c => c.QuantityGainings).Title("TL (kg)").Format(Settings.kfmQuantity).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
+        columns.Bound(c => c.Quantity).Title("SL").Format(Settings.kfmQuantity).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });         
+    })
+    .ToolBar(toolbar =>
+    {
+        toolbar.Template(@<text>
+            <div class="toolbar" style="float: right;">
+                <label>Nhập mã hàng, mã máy, ca sx hoặc lô sx </label>
+                <input id="filterText" class="k-textbox" style="text-align: center; margin-right: 13px;" onkeyup="filterText_KeyUp()" />
+            </div>
+        </text>);
+    })
+    .Scrollable(s => s.Height(Settings.GridPopupHeight))
+    .DataSource(ds => ds.Ajax()
+                        .Read(read => read.Action("GetFirmOrders", "PlannedOrderAPIs", new { area = "Productions" }).Data(@<text>
+                        function(e) {
+
+                        var semifinishedHandoverJSON = window.parent.$("#kendoGridDetails").data("kendoGrid").dataSource.data().toJSON();
+
+                        return {
+                            plannedOrderID:  window.$("#PlannedOrderID").val(),
+                            firmOrderID: window.$("#FirmOrderID").val()
+                        };}
+                    </text>))
+    .ServerOperation(false)) //If this is TRUE: Apply filter to datasource will call Ajax to get new datasource result. If this is FALSE: filter will run on client
+    .Selectable()
+)
+
+
+<script>
+    function filterText_KeyUp() {
+        var filterText = $("#filterText").val(), gridDetails = $("#gridPlannedOrderLogs").data("kendoGrid");
+
+        if (filterText && filterText.length >= "@Settings.AutoCompleteMinLenght") {
+            gridDetails.dataSource.filter({
+                logic: "or",
+                filters: [
+                    { field: "CommodityCode", operator: "contains", value: filterText },
+                    { field: "ProductionLineCode", operator: "contains", value: filterText },
+
+                    { field: "CommodityCode", operator: "contains", value: filterText },
+                    { field: "CommodityName", operator: "contains", value: filterText },
+
+                    { field: "CrucialWorkerName", operator: "contains", value: filterText }
+
+                ]
+            });
+
+    
+        } else {
+            if (gridDetails.dataSource.filter() != undefined)
+                gridDetails.dataSource.filter({});
+        }
+    }
+</script>

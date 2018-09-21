@@ -278,7 +278,7 @@
                     items.Add()
                         .Text("Thông tin khác")
                         .Selected(true)
-                        .Expanded(false)
+                        .Expanded(false)                        
                         .Content(@<text>
                             <div class="right-first-panel">
                                 <div class="form-group">
@@ -305,6 +305,24 @@
                                 @Html.Partial("~/Views/Shared/EditorTemplates/DropDowns/PreparedPerson.cshtml")
                                 @Html.Partial("~/Views/Shared/EditorTemplates/DropDowns/Approver.cshtml")
                             </div>
+
+                        </text>).HtmlAttributes(new { @class = "panel-class" });
+                })
+            )
+        </div>        
+
+        <div class="div-k-panel">
+            @(Html.Kendo().PanelBar()
+                .Name("PlanedOrderLogPanelBar")
+                .Items(items =>
+                {
+                    items.Add()
+                        .Text("Thông tin Kế hoạch sản xuất")
+                        .Selected(true)
+                        .Expanded(true)
+                        .Content(@<text>
+                          
+                            @Html.Partial("~/Views/Helpers/Commons/_PlannedOrderLogs.cshtml")            
 
                         </text>).HtmlAttributes(new { @class = "panel-class" });
                 })

@@ -1,4 +1,8 @@
-﻿using TotalModel.Models;
+﻿using System.Linq;
+using System.Data.Entity;
+using System.Collections.Generic;
+
+using TotalModel.Models;
 using TotalCore.Repositories.Productions;
 
 namespace TotalDAL.Repositories.Productions
@@ -23,6 +27,15 @@ namespace TotalDAL.Repositories.Productions
         public PlannedOrderAPIRepository(TotalSmartPortalEntities totalSmartPortalEntities)
             : base(totalSmartPortalEntities, "GetPlannedOrderIndexes")
         {
+        }
+
+        public IEnumerable<PlannedOrderLog> GetPlannedOrderLogs(int? plannedOrderID, int? firmOrderID)
+        {
+            this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = false;
+            IEnumerable<PlannedOrderLog> plannedOrderLogs = base.TotalSmartPortalEntities.GetPlannedOrderLogs(plannedOrderID, firmOrderID).ToList();
+            this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = true;
+
+            return plannedOrderLogs;
         }
     }
 
