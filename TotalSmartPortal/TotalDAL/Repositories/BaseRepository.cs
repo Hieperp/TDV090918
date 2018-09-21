@@ -334,7 +334,10 @@ namespace TotalDAL.Repositories
             semifinishedHandover.RestoreProcedure();
 
             Helpers.SqlProgrammability.Productions.FinishedProduct finishedProduct = new Helpers.SqlProgrammability.Productions.FinishedProduct(totalSmartPortalEntities);
-            finishedProduct.RestoreProcedure();            
+            finishedProduct.RestoreProcedure();
+
+            Helpers.SqlProgrammability.Productions.FinishedHandover finishedHandover = new Helpers.SqlProgrammability.Productions.FinishedHandover(totalSmartPortalEntities);
+            finishedHandover.RestoreProcedure();
 
             //return;
 

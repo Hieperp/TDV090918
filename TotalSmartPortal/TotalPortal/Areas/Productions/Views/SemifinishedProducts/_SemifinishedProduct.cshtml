@@ -138,7 +138,7 @@
                     columns.Bound(p => p.FirmOrderDetailID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= (FirmOrderDetailID == null)? '' : FirmOrderDetailID #" + "<input type='hidden' name='SemifinishedProductViewDetails[#= index(data) #].FirmOrderDetailID' value='#= (FirmOrderDetailID == null) ? '' : FirmOrderDetailID #' />");
 
-                    columns.Bound(p => p.PlannedOrderID).DisplayNameTitle()
+                    columns.Bound(p => p.PlannedOrderID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= (PlannedOrderID == null)? '' : PlannedOrderID #" + "<input type='hidden' name='SemifinishedProductViewDetails[#= index(data) #].PlannedOrderID' value='#= (PlannedOrderID == null) ? '' : PlannedOrderID #' />");
                     columns.Bound(p => p.PlannedOrderDetailID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= (PlannedOrderDetailID == null)? '' : PlannedOrderDetailID #" + "<input type='hidden' name='SemifinishedProductViewDetails[#= index(data) #].PlannedOrderDetailID' value='#= (PlannedOrderDetailID == null) ? '' : PlannedOrderDetailID #' />");

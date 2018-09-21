@@ -96,7 +96,9 @@
                         .ClientTemplate("#= (SemifinishedProductID == null)? '' : SemifinishedProductID #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].SemifinishedProductID' value='#= (SemifinishedProductID == null) ? '' : SemifinishedProductID #' />");
                     columns.Bound(p => p.SemifinishedProductDetailID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= (SemifinishedProductDetailID == null)? '' : SemifinishedProductDetailID #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].SemifinishedProductDetailID' value='#= (SemifinishedProductDetailID == null) ? '' : SemifinishedProductDetailID #' />");
-                    
+
+                    columns.Bound(p => p.PlannedOrderID).DisplayNameTitle().Hidden()
+                        .ClientTemplate("#= (PlannedOrderID == null)? '' : PlannedOrderID #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].PlannedOrderID' value='#= (PlannedOrderID == null) ? '' : PlannedOrderID #' />");                    
                     columns.Bound(p => p.PlannedOrderDetailID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= (PlannedOrderDetailID == null)? '' : PlannedOrderDetailID #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].PlannedOrderDetailID' value='#= (PlannedOrderDetailID == null) ? '' : PlannedOrderDetailID #' />");
 
