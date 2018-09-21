@@ -27,5 +27,16 @@ namespace TotalModel.Models
         public Nullable<decimal> QuantityRemains { get; set; }
         public decimal Quantity { get; set; }
         public string Remarks { get; set; }
+        public Nullable<int> WarehouseAdjustmentID { get; set; }
+        public Nullable<int> WarehouseAdjustmentDetailID { get; set; }
+        public string WarehouseAdjustmentReference { get; set; }
+        public Nullable<System.DateTime> WarehouseAdjustmentEntryDate { get; set; }
+        public Nullable<int> WarehouseAdjustmentTypeID { get; set; }
+        public string MaterialIssueReference { get; set; }
+        public string MaterialIssueCode { get; set; }
+        public System.DateTime MaterialIssueEntryDate { get; set; }
+        public string WorkshiftName { get; set; }
+        public System.DateTime WorkshiftEntryDate { get; set; }
+        public string ProductionLinesCode { get; set; }
     }
 }

@@ -21,6 +21,7 @@ namespace TotalDTO.Productions
         public int FirmOrderID { get; set; }
         public int FirmOrderDetailID { get; set; }
 
+        public int PlannedOrderID { get; set; }
         public int PlannedOrderDetailID { get; set; }
 
         public int GoodsReceiptID { get; set; }

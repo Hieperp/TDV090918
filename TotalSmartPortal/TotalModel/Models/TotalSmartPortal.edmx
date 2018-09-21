@@ -12412,6 +12412,17 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="Decimal" Name="QuantityRemains" Nullable="true" Precision="20" Scale="2" />
           <Property Type="Decimal" Name="Quantity" Nullable="false" Precision="18" Scale="2" />
           <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="WarehouseAdjustmentID" Nullable="true" />
+          <Property Type="Int32" Name="WarehouseAdjustmentDetailID" Nullable="true" />
+          <Property Type="String" Name="WarehouseAdjustmentReference" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="WarehouseAdjustmentEntryDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="WarehouseAdjustmentTypeID" Nullable="true" />
+          <Property Type="String" Name="MaterialIssueReference" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="MaterialIssueCode" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="MaterialIssueEntryDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="WorkshiftName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="WorkshiftEntryDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="ProductionLinesCode" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="ProductionOrderIndex">
           <Property Type="Int32" Name="ProductionOrderID" Nullable="false" />
@@ -18249,6 +18260,17 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="QuantityRemains" ColumnName="QuantityRemains" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="WarehouseAdjustmentID" ColumnName="WarehouseAdjustmentID" />
+                <ScalarProperty Name="WarehouseAdjustmentDetailID" ColumnName="WarehouseAdjustmentDetailID" />
+                <ScalarProperty Name="WarehouseAdjustmentReference" ColumnName="WarehouseAdjustmentReference" />
+                <ScalarProperty Name="WarehouseAdjustmentEntryDate" ColumnName="WarehouseAdjustmentEntryDate" />
+                <ScalarProperty Name="WarehouseAdjustmentTypeID" ColumnName="WarehouseAdjustmentTypeID" />
+                <ScalarProperty Name="MaterialIssueReference" ColumnName="MaterialIssueReference" />
+                <ScalarProperty Name="MaterialIssueCode" ColumnName="MaterialIssueCode" />
+                <ScalarProperty Name="MaterialIssueEntryDate" ColumnName="MaterialIssueEntryDate" />
+                <ScalarProperty Name="WorkshiftName" ColumnName="WorkshiftName" />
+                <ScalarProperty Name="WorkshiftEntryDate" ColumnName="WorkshiftEntryDate" />
+                <ScalarProperty Name="ProductionLinesCode" ColumnName="ProductionLinesCode" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
