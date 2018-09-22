@@ -36,6 +36,10 @@ namespace TotalDTO.Productions
 
         public Nullable<int> SemifinishedHandoverID { get; set; }      
         public decimal QuantityRejectedReturned { get; set; }
+        
+        [Display(Name = "Cái/ tấm")]
+        [UIHint("QuantityReadonly")]
+        public decimal MoldQuantity { get; set; }
 
         [Display(Name = "Tồn đơn")]
         [UIHint("QuantityReadonly")]

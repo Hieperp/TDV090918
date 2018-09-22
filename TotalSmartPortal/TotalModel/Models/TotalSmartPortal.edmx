@@ -11440,13 +11440,13 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             <End Role="FinishedHandover" EntitySet="FinishedHandovers" />
           </AssociationSet>
           <FunctionImport Name="FinishedHandoverApproved" ReturnType="Collection(String)">
-            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          <Parameter Name="EntityID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="FinishedHandoverEditable" ReturnType="Collection(String)">
-            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          <Parameter Name="EntityID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="FinishedHandoverPostSaveValidate" ReturnType="Collection(String)">
-            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          <Parameter Name="EntityID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="FinishedHandoverSaveRelative">
             <Parameter Name="EntityID" Mode="In" Type="Int32" />
@@ -14310,6 +14310,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="Int32" Name="SemifinishedProductID" Nullable="false" />
           <Property Type="Decimal" Name="QuantityGainings" Nullable="false" Precision="18" Scale="2" />
           <Property Type="Int32" Name="PlannedOrderID" Nullable="false" />
+          <Property Type="Decimal" Name="MoldQuantity" Nullable="false" Precision="18" Scale="2" />
         </ComplexType>
         <ComplexType Name="MaterialIssuePendingFirmOrder">
           <Property Type="Int32" Name="MaterialIssueTypeID" Nullable="false" />
@@ -19640,6 +19641,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="SemifinishedProductID" ColumnName="SemifinishedProductID" />
                 <ScalarProperty Name="QuantityGainings" ColumnName="QuantityGainings" />
                 <ScalarProperty Name="PlannedOrderID" ColumnName="PlannedOrderID" />
+                <ScalarProperty Name="MoldQuantity" ColumnName="MoldQuantity" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
