@@ -40,11 +40,11 @@ namespace TotalModel.Models
         public bool Approved { get; set; }
         public Nullable<System.DateTime> ApprovedDate { get; set; }
     
+        public virtual Customer Customer { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual Employee Employee1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FinishedHandoverDetail> FinishedHandoverDetails { get; set; }
         public virtual Location Location { get; set; }
-        public virtual Workshift Workshift { get; set; }
     }
 }

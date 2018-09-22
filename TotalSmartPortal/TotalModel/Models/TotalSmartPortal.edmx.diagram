@@ -310,14 +310,14 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceiptDetails_MaterialIssueDetails" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProducts_Customers" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.FinishedHandoverDetail" Width="1.5" PointX="47.75" PointY="17.25" />
-        <EntityTypeShape EntityType="TotalSmartPortalModel.FinishedHandover" Width="1.5" PointX="18.25" PointY="11.75" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandoverDetails_Commodities" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandoverDetails_FinishedProductDetails" />
+        <EntityTypeShape EntityType="TotalSmartPortalModel.FinishedHandover" Width="1.5" PointX="13.25" PointY="35.25" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandovers_Customers" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandovers_Employees" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandovers_Employees1" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandoverDetails_FinishedHandovers" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandoverDetails_FinishedProductDetails" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandovers_Locations" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandovers_Workshifts" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -27,7 +27,7 @@ namespace TotalModel.Models
         public bool Approved { get; set; }
     
         public virtual Commodity Commodity { get; set; }
-        public virtual FinishedHandover FinishedHandover { get; set; }
         public virtual FinishedProductDetail FinishedProductDetail { get; set; }
+        public virtual FinishedHandover FinishedHandover { get; set; }
     }
 }
