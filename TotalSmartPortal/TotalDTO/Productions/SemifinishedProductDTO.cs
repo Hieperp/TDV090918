@@ -88,6 +88,8 @@ namespace TotalDTO.Productions
         public decimal FoilUnitWeights { get; set; }
         [Display(Name = "Tổng số kg phôi")]
         public decimal FoilWeights { get; set; }
+        [Display(Name = "Số kg phế phẩm")]
+        public decimal FailureWeights { get; set; }
 
         public decimal TotalQuantityIssue { get; set; }
 

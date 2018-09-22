@@ -52,6 +52,7 @@ namespace TotalModel.Models
         public decimal FoilUnitCounts { get; set; }
         public decimal FoilUnitWeights { get; set; }
         public decimal FoilWeights { get; set; }
+        public decimal FailureWeights { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Employee Employee { get; set; }

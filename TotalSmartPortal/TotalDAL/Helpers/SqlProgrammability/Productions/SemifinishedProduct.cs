@@ -72,7 +72,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "    BEGIN " + "\r\n";
 
             queryString = queryString + "       SELECT          ISNULL(SemifinishedProductDetails.SemifinishedProductDetailID, 0) AS SemifinishedProductDetailID, ISNULL(SemifinishedProductDetails.SemifinishedProductID, 0) AS SemifinishedProductID, FirmOrderDetails.FirmOrderDetailID, FirmOrderDetails.PlannedOrderID, FirmOrderDetails.PlannedOrderDetailID, Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, " + "\r\n";
-            queryString = queryString + "                       FirmOrderDetails.MoldQuantity, ROUND(FirmOrderDetails.Quantity - FirmOrderDetails.QuantitySemifinished + ISNULL(SemifinishedProductDetails.Quantity, 0) + ISNULL(SemifinishedProductDetails.QuantityWastage, 0) + ISNULL(SemifinishedProductDetails.QuantityFailure, 0) + ISNULL(SemifinishedProductDetails.QuantityRejected, 0), " + (int)GlobalEnums.rndQuantity + ") AS QuantityRemains, ISNULL(SemifinishedProductDetails.Quantity, 0) AS Quantity, ISNULL(SemifinishedProductDetails.QuantityGainings, 0) AS QuantityGainings, ISNULL(SemifinishedProductDetails.QuantityWastage, 0) AS QuantityWastage, ISNULL(SemifinishedProductDetails.QuantityFailure, 0) AS QuantityFailure, ISNULL(SemifinishedProductDetails.QuantityRejected, 0) AS QuantityRejected, SemifinishedProductDetails.Remarks " + "\r\n";
+            queryString = queryString + "                       FirmOrderDetails.MoldQuantity, ROUND(FirmOrderDetails.Quantity - FirmOrderDetails.QuantitySemifinished + ISNULL(SemifinishedProductDetails.Quantity, 0), " + (int)GlobalEnums.rndQuantity + ") AS QuantityRemains, ISNULL(SemifinishedProductDetails.Quantity, 0) AS Quantity, SemifinishedProductDetails.Remarks " + "\r\n";
             
             queryString = queryString + "       FROM            FirmOrderDetails " + "\r\n";
             queryString = queryString + "                       INNER JOIN Commodities ON FirmOrderDetails.FirmOrderID = @FirmOrderID AND FirmOrderDetails.CommodityID = Commodities.CommodityID " + "\r\n";
@@ -90,10 +90,10 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " AS " + "\r\n";
 
             queryString = queryString + "       SELECT          MaterialIssueDetails.MaterialIssueDetailID, MaterialIssueDetails.MaterialIssueID, MaterialIssueDetails.FirmOrderID, FirmOrders.EntryDate AS FirmOrderEntryDate, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FirmOrders.Specification AS FirmOrderSpecification, MaterialIssueDetails.GoodsReceiptID, GoodsReceipts.Reference AS GoodsReceiptReference, GoodsReceipts.Code AS GoodsReceiptCode, GoodsReceipts.EntryDate AS GoodsReceiptEntryDate, MaterialIssueDetails.GoodsReceiptDetailID, " + "\r\n";
-            queryString = queryString + "                       MaterialIssueDetails.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, MaterialIssueDetails.WorkshiftID AS MaterialIssueDetailWorkshiftID, Workshifts.EntryDate AS MaterialIssueDetailWorkshiftEntryDate, Workshifts.Code AS MaterialIssueDetailWorkshiftCode, MaterialIssueDetails.ProductionLineID, ProductionLines.Code AS ProductionLineCode, MaterialIssueDetails.CrucialWorkerID, CrucialWorkers.Code AS CrucialWorkerCode, CrucialWorkers.Name AS CrucialWorkerName, Materials.Code AS MaterialCode, Materials.Name AS MaterialName, MaterialIssueDetails.Quantity AS MaterialQuantity, ROUND(MaterialIssueDetails.Quantity - MaterialIssueDetails.QuantitySemifinished, " + (int)GlobalEnums.rndQuantity + ") AS MaterialQuantityRemains " + "\r\n";
+            queryString = queryString + "                       MaterialIssueDetails.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, MaterialIssueDetails.WorkshiftID AS MaterialIssueDetailWorkshiftID, Workshifts.EntryDate AS MaterialIssueDetailWorkshiftEntryDate, Workshifts.Code AS MaterialIssueDetailWorkshiftCode, MaterialIssueDetails.ProductionLineID, ProductionLines.Code AS ProductionLineCode, MaterialIssueDetails.CrucialWorkerID, CrucialWorkers.Code AS CrucialWorkerCode, CrucialWorkers.Name AS CrucialWorkerName, Materials.Code AS MaterialCode, Materials.Name AS MaterialName, MaterialIssueDetails.Quantity AS MaterialQuantity, ROUND(MaterialIssueDetails.Quantity - MaterialIssueDetails.QuantitySemifinished - MaterialIssueDetails.QuantityFailure - MaterialIssueDetails.QuantityReceipted - MaterialIssueDetails.QuantityLoss, " + (int)GlobalEnums.rndQuantity + ") AS MaterialQuantityRemains " + "\r\n";
 
             queryString = queryString + "       FROM            MaterialIssueDetails  " + "\r\n";
-            queryString = queryString + "                       INNER JOIN FirmOrders ON MaterialIssueDetails.LocationID = @LocationID AND MaterialIssueDetails.Approved = 1 AND ROUND(MaterialIssueDetails.Quantity - MaterialIssueDetails.QuantitySemifinished, " + (int)GlobalEnums.rndQuantity + ") > 0 AND MaterialIssueDetails.FirmOrderID = FirmOrders.FirmOrderID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN FirmOrders ON MaterialIssueDetails.LocationID = @LocationID AND MaterialIssueDetails.Approved = 1 AND ROUND(MaterialIssueDetails.Quantity - MaterialIssueDetails.QuantitySemifinished - MaterialIssueDetails.QuantityFailure - MaterialIssueDetails.QuantityReceipted - MaterialIssueDetails.QuantityLoss, " + (int)GlobalEnums.rndQuantity + ") > 0 AND MaterialIssueDetails.FirmOrderID = FirmOrders.FirmOrderID " + "\r\n";
             queryString = queryString + "                       INNER JOIN GoodsReceipts ON MaterialIssueDetails.GoodsReceiptID = GoodsReceipts.GoodsReceiptID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Customers ON MaterialIssueDetails.CustomerID = Customers.CustomerID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Workshifts ON MaterialIssueDetails.WorkshiftID = Workshifts.WorkshiftID " + "\r\n";
@@ -157,6 +157,17 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
             queryString = queryString + "           END " + "\r\n";
 
+            queryString = queryString + "       UPDATE          MaterialIssueDetails " + "\r\n";
+            queryString = queryString + "       SET             MaterialIssueDetails.QuantitySemifinished = ROUND(MaterialIssueDetails.QuantitySemifinished + SemifinishedProducts.FoilWeights * @SaveRelativeOption, " + (int)GlobalEnums.rndQuantity + "), MaterialIssueDetails.QuantityFailure = ROUND(MaterialIssueDetails.QuantityFailure + SemifinishedProducts.FailureWeights * @SaveRelativeOption, " + (int)GlobalEnums.rndQuantity + ") " + "\r\n";
+            queryString = queryString + "       FROM            MaterialIssueDetails " + "\r\n";
+            queryString = queryString + "                       INNER JOIN SemifinishedProducts ON SemifinishedProducts.SemifinishedProductID = @EntityID AND MaterialIssueDetails.MaterialIssueDetailID = SemifinishedProducts.MaterialIssueDetailID " + "\r\n";
+
+            queryString = queryString + "       IF @@ROWCOUNT <> 1 " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               SET         @msg = N'Phiếu xuất NVL đã hủy, chưa duyệt hoặc đã xóa.' ; " + "\r\n";
+            queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
+
             queryString = queryString + "   END " + "\r\n";
 
 
@@ -165,10 +176,12 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
         private void SemifinishedProductPostSaveValidate()
         {
-            string[] queryArray = new string[0];
+            string[] queryArray = new string[3];
 
-            //queryArray[0] = " SELECT TOP 1 @FoundEntity = N'Ngày đặt hàng: ' + CAST(MaterialIssues.EntryDate AS nvarchar) FROM SemifinishedProductDetails INNER JOIN MaterialIssues ON SemifinishedProductDetails.SemifinishedProductID = @EntityID AND SemifinishedProductDetails.MaterialIssueID = MaterialIssues.MaterialIssueID AND SemifinishedProductDetails.EntryDate < MaterialIssues.EntryDate ";
-            //queryArray[1] = " SELECT TOP 1 @FoundEntity = N'Số lượng xuất vượt quá số lượng đặt hàng: ' + CAST(ROUND(Quantity - QuantitySemifinished, " + (int)GlobalEnums.rndQuantity + ") AS nvarchar) FROM MaterialIssueDetails WHERE (ROUND(Quantity - QuantitySemifinished, " + (int)GlobalEnums.rndQuantity + ") < 0) ";
+            queryArray[0] = " SELECT TOP 1 @FoundEntity = N'Ngày xuất nguyên liệu: ' + CAST(MaterialIssues.EntryDate AS nvarchar) FROM SemifinishedProductDetails INNER JOIN MaterialIssues ON SemifinishedProductDetails.SemifinishedProductID = @EntityID AND SemifinishedProductDetails.MaterialIssueID = MaterialIssues.MaterialIssueID AND SemifinishedProductDetails.EntryDate < MaterialIssues.EntryDate ";
+            queryArray[1] = " SELECT TOP 1 @FoundEntity = N'Số lượng xuất vượt quá số lượng đặt hàng: ' + CAST(ROUND(Quantity - QuantitySemifinished, " + (int)GlobalEnums.rndQuantity + ") AS nvarchar) FROM FirmOrderDetails WHERE (ROUND(Quantity - QuantitySemifinished, " + (int)GlobalEnums.rndQuantity + ") < 0) ";
+
+            queryArray[2] = " SELECT TOP 1 @FoundEntity = N'Số lượng NVL sử dụng vượt quá số lượng đã xuất kho cho sản xuất: ' + CAST(ROUND(Quantity - QuantitySemifinished - QuantityFailure - QuantityReceipted - QuantityLoss, " + (int)GlobalEnums.rndQuantity + ") AS nvarchar) FROM MaterialIssueDetails WHERE (ROUND(Quantity - QuantitySemifinished - QuantityFailure - QuantityReceipted - QuantityLoss, " + (int)GlobalEnums.rndQuantity + ") < 0) ";
 
             this.totalSmartPortalEntities.CreateProcedureToCheckExisting("SemifinishedProductPostSaveValidate", queryArray);
         }
