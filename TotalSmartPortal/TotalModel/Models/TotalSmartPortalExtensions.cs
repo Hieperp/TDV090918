@@ -235,6 +235,24 @@ namespace TotalModel.Models
 
 
 
+    public partial class FinishedHandover : IPrimitiveEntity, IBaseEntity, IBaseDetailEntity<FinishedHandoverDetail>
+    {
+        public int GetID() { return this.FinishedHandoverID; }
+        
+        public virtual Employee FinishedLeader { get { return this.Employee; } }
+        public virtual Employee Storekeeper { get { return this.Employee1; } }
+
+        public ICollection<FinishedHandoverDetail> GetDetails() { return this.FinishedHandoverDetails; }
+    }
+
+
+    public partial class FinishedHandoverDetail : IPrimitiveEntity, IHelperEntryDate
+    {
+        public int GetID() { return this.FinishedHandoverDetailID; }
+    }
+
+
+
 
     public partial class SalesOrder : IPrimitiveEntity, IBaseEntity, IBaseDetailEntity<SalesOrderDetail>
     {

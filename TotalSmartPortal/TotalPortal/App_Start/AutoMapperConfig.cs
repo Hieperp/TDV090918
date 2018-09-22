@@ -133,6 +133,11 @@ namespace TotalPortal.App_Start
                 cfg.CreateMap<FinishedProductViewDetail, FinishedProductDetailDTO>();
                 cfg.CreateMap<FinishedProductDetailDTO, FinishedProductDetail>();
 
+                cfg.CreateMap<FinishedHandover, FinishedHandoverViewModel>();
+                cfg.CreateMap<FinishedHandover, FinishedHandoverDTO>();
+                cfg.CreateMap<FinishedHandoverPrimitiveDTO, FinishedHandover>();
+                cfg.CreateMap<FinishedHandoverViewDetail, FinishedHandoverDetailDTO>();
+                cfg.CreateMap<FinishedHandoverDetailDTO, FinishedHandoverDetail>();
 
 
 
