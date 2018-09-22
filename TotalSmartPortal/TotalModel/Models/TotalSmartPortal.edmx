@@ -1755,6 +1755,12 @@
           <Property Name="OrganizationalUnitID" Type="int" Nullable="false" />
           <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="ApproverID" Type="int" Nullable="false" />
+          <Property Name="StartSequenceNo" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="StopSequenceNo" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FoilCounts" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FoilUnitCounts" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FoilUnitWeights" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FoilWeights" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="TotalQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="TotalQuantityIssue" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="100" />
@@ -4960,6 +4966,23 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
         </Function>
         <Function Name="DeliveryAdviceVoidable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="FinishedHandoverApproved" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="FinishedHandoverEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="FinishedHandoverPostSaveValidate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="FinishedHandoverSaveRelative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+          <Parameter Name="SaveRelativeOption" Type="int" Mode="In" />
+        </Function>
+        <Function Name="FinishedHandoverToggleApproved" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+          <Parameter Name="Approved" Type="bit" Mode="In" />
         </Function>
         <Function Name="FinishedProductApproved" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
@@ -11416,6 +11439,23 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             <End Role="Location" EntitySet="Locations" />
             <End Role="FinishedHandover" EntitySet="FinishedHandovers" />
           </AssociationSet>
+          <FunctionImport Name="FinishedHandoverApproved" ReturnType="Collection(String)">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="FinishedHandoverEditable" ReturnType="Collection(String)">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="FinishedHandoverPostSaveValidate" ReturnType="Collection(String)">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="FinishedHandoverSaveRelative">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+            <Parameter Name="SaveRelativeOption" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="FinishedHandoverToggleApproved">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+            <Parameter Name="Approved" Mode="In" Type="Boolean" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="AccountInvoiceIndex">
           <Property Type="Int32" Name="AccountInvoiceID" Nullable="false" />
@@ -14684,6 +14724,12 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <NavigationProperty Name="MaterialIssueDetail" Relationship="TotalSmartPortalModel.FK_SemifinishedProducts_MaterialIssueDetails" FromRole="SemifinishedProduct" ToRole="MaterialIssueDetail" />
           <Property Name="ShiftID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Shift" Relationship="TotalSmartPortalModel.FK_SemifinishedProducts_Shifts" FromRole="SemifinishedProduct" ToRole="Shift" />
+          <Property Name="StartSequenceNo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="StopSequenceNo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="FoilCounts" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="FoilUnitCounts" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="FoilUnitWeights" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="FoilWeights" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
         <Association Name="FK_SemifinishedHandoverDetails_Commodities">
           <End Type="TotalSmartPortalModel.Commodity" Role="Commodity" Multiplicity="1" />
@@ -19876,6 +19922,12 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <EntitySetMapping Name="SemifinishedProducts">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.SemifinishedProduct">
               <MappingFragment StoreEntitySet="SemifinishedProducts">
+                <ScalarProperty Name="FoilWeights" ColumnName="FoilWeights" />
+                <ScalarProperty Name="FoilUnitWeights" ColumnName="FoilUnitWeights" />
+                <ScalarProperty Name="FoilUnitCounts" ColumnName="FoilUnitCounts" />
+                <ScalarProperty Name="FoilCounts" ColumnName="FoilCounts" />
+                <ScalarProperty Name="StopSequenceNo" ColumnName="StopSequenceNo" />
+                <ScalarProperty Name="StartSequenceNo" ColumnName="StartSequenceNo" />
                 <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
                 <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
@@ -20408,6 +20460,11 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="FinishedHandoverApproved" FunctionName="TotalSmartPortalModel.Store.FinishedHandoverApproved" />
+          <FunctionImportMapping FunctionImportName="FinishedHandoverEditable" FunctionName="TotalSmartPortalModel.Store.FinishedHandoverEditable" />
+          <FunctionImportMapping FunctionImportName="FinishedHandoverPostSaveValidate" FunctionName="TotalSmartPortalModel.Store.FinishedHandoverPostSaveValidate" />
+          <FunctionImportMapping FunctionImportName="FinishedHandoverSaveRelative" FunctionName="TotalSmartPortalModel.Store.FinishedHandoverSaveRelative" />
+          <FunctionImportMapping FunctionImportName="FinishedHandoverToggleApproved" FunctionName="TotalSmartPortalModel.Store.FinishedHandoverToggleApproved" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

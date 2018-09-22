@@ -46,6 +46,12 @@ namespace TotalModel.Models
         public bool Approved { get; set; }
         public Nullable<System.DateTime> ApprovedDate { get; set; }
         public int ShiftID { get; set; }
+        public decimal StartSequenceNo { get; set; }
+        public decimal StopSequenceNo { get; set; }
+        public decimal FoilCounts { get; set; }
+        public decimal FoilUnitCounts { get; set; }
+        public decimal FoilUnitWeights { get; set; }
+        public decimal FoilWeights { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Employee Employee { get; set; }

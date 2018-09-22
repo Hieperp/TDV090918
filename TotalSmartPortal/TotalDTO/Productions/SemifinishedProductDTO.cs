@@ -75,7 +75,30 @@ namespace TotalDTO.Productions
 
         public virtual int CrucialWorkerID { get; set; }
 
+        [Display(Name = "Số thứ tự tấm phôi đầu")]
+        public decimal StartSequenceNo { get; set; }
+        [Display(Name = "Số thứ tự tấm phôi cuối")]
+        public decimal StopSequenceNo { get; set; }
+        [Display(Name = "Tổng số tấm phôi")]
+        public decimal FoilCounts { get; set; }
+        [Display(Name = "Số tấm")]
+        [Range(1, 999999, ErrorMessage = "Số tấm phải >= 1")]
+        public decimal FoilUnitCounts { get; set; }
+        [Display(Name = "Số kg")]
+        public decimal FoilUnitWeights { get; set; }
+        [Display(Name = "Tổng số kg phôi")]
+        public decimal FoilWeights { get; set; }
+
         public decimal TotalQuantityIssue { get; set; }
+
+        
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            foreach (var result in base.Validate(validationContext)) { yield return result; }
+
+            if (Math.Round(this.StopSequenceNo - this.StartSequenceNo, GlobalEnums.rndN0, MidpointRounding.AwayFromZero) != this.FoilCounts) yield return new ValidationResult("Lỗi số lượng tấm phôi", new[] { "FoilCounts" });
+            if (Math.Round(this.FoilCounts * this.FoilUnitWeights / this.FoilUnitCounts, GlobalEnums.rndQuantity, MidpointRounding.AwayFromZero) != this.FoilWeights) yield return new ValidationResult("Lỗi tổng số kg phôi", new[] { "FoilWeights" });
+        }
 
         public override void PerformPresaveRule()
         {

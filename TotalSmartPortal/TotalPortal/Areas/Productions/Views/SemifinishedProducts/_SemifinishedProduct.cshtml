@@ -80,6 +80,67 @@
             @Html.EditorFor(d => d.CrucialWorker, new { EmployeeDisplayName = @Model.GetDisplayName(m => m.CrucialWorker) })
         </div>
 
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartSequenceNo)
+            <div class="div-input">
+                @Html.Kendo().NumericTextBoxFor(model => model.StartSequenceNo).Format(@Settings.kfmN0).HtmlAttributes(new { @class = "left-panel-input" }).Events(e => e.Change("Bxx").Spin("Bxx"))
+            </div>
+            <div class="div-validation-message">
+                @Html.ValidationMessageFor(model => model.StartSequenceNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StopSequenceNo)
+            <div class="div-input">
+                @Html.Kendo().NumericTextBoxFor(model => model.StopSequenceNo).Format(@Settings.kfmN0).HtmlAttributes(new { @class = "left-panel-input" }).Events(e => e.Change("Bxx").Spin("Bxx"))
+            </div>
+            <div class="div-validation-message">
+                @Html.ValidationMessageFor(model => model.StopSequenceNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FoilCounts)
+            <div class="div-input">
+                @Html.Kendo().NumericTextBoxFor(model => model.FoilCounts).Format(@Settings.kfmN0).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" }).Events(e => e.Change("Cxx").Spin("Cxx"))
+            </div>
+            <div class="div-validation-message">
+                @Html.ValidationMessageFor(model => model.FoilCounts, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FoilUnitCounts)
+            <div class="div-input">
+                @Html.Kendo().NumericTextBoxFor(model => model.FoilUnitCounts).Format(@Settings.kfmN0).HtmlAttributes(new { @class = "left-panel-input" }).Events(e => e.Change("Cxx").Spin("Cxx"))
+            </div>
+            <div class="div-validation-message">
+                @Html.ValidationMessageFor(model => model.FoilUnitCounts, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FoilUnitWeights)
+            <div class="div-input">
+                @Html.Kendo().NumericTextBoxFor(model => model.FoilUnitWeights).Format(@Settings.kfmQuantity).HtmlAttributes(new { @class = "left-panel-input" }).Events(e => e.Change("Cxx").Spin("Cxx"))
+            </div>
+            <div class="div-validation-message">
+                @Html.ValidationMessageFor(model => model.FoilUnitWeights, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FoilWeights)
+            <div class="div-input">
+                @Html.Kendo().NumericTextBoxFor(model => model.FoilWeights).Format(@Settings.kfmQuantity).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
+            </div>
+            <div class="div-validation-message">
+                @Html.ValidationMessageFor(model => model.FoilWeights, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
     </div>
 
     <div class="right-panel">
@@ -319,7 +380,30 @@
 
 <script src="@Url.Content("~/Scripts/Helpers/KendoGrid/gridHelper.js")"></script>
 
-<script type="text/javascript">   
+<script type="text/javascript">
+
+
+
+
+    //function Bxx() {
+        //if (($("#TotalReceiptAmount").val() == 0 && $("#TotalFluctuationAmount").val() == 0) || ($("#TotalDepositAmount").val() != -(-$("#TotalReceiptAmount").val() - $("#TotalFluctuationAmount").val()) && confirm("Vui lòng nhấn OK để phần mềm phân bổ lại số tiền thu được vô chi tiết công nợ, hoặc nhấn Cancel để bỏ qua.")))
+        //    copyAmountDueToReceiptAmount($("#TotalDepositAmount").val() - $("#TotalFluctuationAmount").val()); //COPY copyAmountDueToReceiptAmount IN TWO CASE: There is no detail row receipted before (TotalReceiptAmount + TotalFluctuationAmount) OR WHEN input new TotalDepositAmount value:  TotalDepositAmount <> (TotalReceiptAmount + TotalFluctuationAmount)
+
+        //updateTotalAmountDifference();
+    //}
+
+    function Bxx() {
+        var foilCounts = DoRound($("#StopSequenceNo").val() - $("#StartSequenceNo").val(), requireConfig.websiteOptions.rndN0);
+        $("#FoilCounts").data("kendoNumericTextBox").value(foilCounts > 0 ? foilCounts : 0);
+        $("#FoilCounts").data("kendoNumericTextBox").trigger("change");
+    }
+
+    function Cxx() {
+        $("#FoilWeights").data("kendoNumericTextBox").value(($("#FoilUnitCounts").val() * 1) > 0 ? DoRound($("#FoilCounts").val() * $("#FoilUnitWeights").val()/ $("#FoilUnitCounts").val(), requireConfig.websiteOptions.rndQuantity) : 0);
+        $("#FoilWeights").data("kendoNumericTextBox").trigger("change");
+    }
+
+
     function callVoidDetail(materialIssueDetailID) {
         require(["kpopupWindow"], function (kpopupWindow) {
             var voidDetailWindow = new kpopupWindow();
