@@ -2,7 +2,28 @@
 @using TotalPortal.Configuration;
 
 
-@(Html.Kendo().Grid<PlannedOrderLog>()
+<div style="clear:both"></div>
+
+<div class="div-k-panel">
+    @(Html.Kendo().PanelBar()
+                .Name("PlanedOrderLogPanelBar")
+                .Items(items =>
+                {
+                    items.Add()
+                        .Text("Thông tin Kế hoạch sản xuất")
+                        .Selected(true)
+                        .Expanded(true)
+                        .Content(@<text>
+
+                            @kendoGrid()
+
+                        </text>).HtmlAttributes(new { @class = "panel-class" });
+                })
+    )
+</div>
+
+@helper kendoGrid() { 
+    @(Html.Kendo().Grid<PlannedOrderLog>()
     .Name("gridPlannedOrderLogs")
     .Columns(columns =>
     {
@@ -14,10 +35,10 @@
         columns.Bound(c => c.BatchEntryDate).Title("Ngày lô hàng").Width(80).Format("{0:" + Settings.DateFormat + "}");
         columns.Bound(c => c.MaterialIssueDetailQuantity).Title("SL").Format(Settings.kfmQuantity).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
         columns.Bound(c => c.SemifinishedProductWorkshiftEntryDate).Title("Ngày sx phôi").Width(80).Format("{0:" + Settings.DateFormat + "}");
-        columns.Bound(c => c.SemifinishedProductWorkshiftCode).Title("Ca sx phôi").Width(50);        
+        columns.Bound(c => c.SemifinishedProductWorkshiftCode).Title("Ca sx phôi").Width(50);
         columns.Bound(c => c.CommoditiyCode).Title("Mã hàng").Width(100);
         columns.Bound(c => c.QuantityGainings).Title("TL (kg)").Format(Settings.kfmQuantity).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
-        columns.Bound(c => c.Quantity).Title("SL").Format(Settings.kfmQuantity).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });         
+        columns.Bound(c => c.Quantity).Title("SL").Format(Settings.kfmQuantity).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
     })
     .ToolBar(toolbar =>
     {
@@ -30,19 +51,21 @@
     })
     .Scrollable(s => s.Height(Settings.GridPopupHeight))
     .DataSource(ds => ds.Ajax()
-                        .Read(read => read.Action("GetFirmOrders", "PlannedOrderAPIs", new { area = "Productions" }).Data(@<text>
-                        function(e) {
+            .Read(read => read.Action("GetPlannedOrderLogs", "PlannedOrderAPIs", new { area = "Productions" }).Data(@<text>
+            function(e) {
 
-                        var semifinishedHandoverJSON = window.parent.$("#kendoGridDetails").data("kendoGrid").dataSource.data().toJSON();
+            var semifinishedHandoverJSON = window.parent.$("#kendoGridDetails").data("kendoGrid").dataSource.data().toJSON();
 
-                        return {
-                            plannedOrderID:  window.$("#PlannedOrderID").val(),
-                            firmOrderID: window.$("#FirmOrderID").val()
-                        };}
-                    </text>))
+            return {
+            plannedOrderID:  window.$("#PlannedOrderID").val(),
+            firmOrderID: window.$("#FirmOrderID").val()
+            };}
+                        </text>))
     .ServerOperation(false)) //If this is TRUE: Apply filter to datasource will call Ajax to get new datasource result. If this is FALSE: filter will run on client
     .Selectable()
-)
+    )
+}
+
 
 
 <script>
