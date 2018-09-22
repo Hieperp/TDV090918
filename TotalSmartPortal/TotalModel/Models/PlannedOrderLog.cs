@@ -24,7 +24,6 @@ namespace TotalModel.Models
         public Nullable<System.DateTime> SemifinishedProductWorkshiftEntryDate { get; set; }
         public string SemifinishedProductWorkshiftCode { get; set; }
         public string CommoditiyCode { get; set; }
-        public Nullable<decimal> QuantityGainings { get; set; }
         public Nullable<decimal> Quantity { get; set; }
     }
 }

@@ -27,7 +27,6 @@ namespace TotalModel.Models
         public Nullable<bool> IsSelected { get; set; }
         public int CrucialWorkerID { get; set; }
         public string CrucialWorkerName { get; set; }
-        public decimal QuantityGainings { get; set; }
         public int CommodityTypeID { get; set; }
     }
 }

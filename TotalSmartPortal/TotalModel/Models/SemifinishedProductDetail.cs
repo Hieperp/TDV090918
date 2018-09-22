@@ -29,9 +29,11 @@ namespace TotalModel.Models
         public int MaterialIssueDetailID { get; set; }
         public int FirmOrderID { get; set; }
         public int FirmOrderDetailID { get; set; }
+        public int PlannedOrderID { get; set; }
         public int PlannedOrderDetailID { get; set; }
         public int GoodsReceiptID { get; set; }
         public int GoodsReceiptDetailID { get; set; }
+        public int ShiftID { get; set; }
         public int WorkshiftID { get; set; }
         public int ProductionLineID { get; set; }
         public int CrucialWorkerID { get; set; }
@@ -39,26 +41,19 @@ namespace TotalModel.Models
         public int CommodityID { get; set; }
         public int CommodityTypeID { get; set; }
         public decimal Quantity { get; set; }
-        public decimal QuantityWastage { get; set; }
-        public decimal QuantityFailure { get; set; }
-        public decimal QuantityRejected { get; set; }
-        public decimal QuantityRejectedReturned { get; set; }
+        public decimal QuantityFinished { get; set; }
         public string Remarks { get; set; }
         public bool Approved { get; set; }
-        public decimal QuantityGainings { get; set; }
-        public decimal QuantityFinished { get; set; }
         public bool HandoverApproved { get; set; }
-        public int ShiftID { get; set; }
-        public int PlannedOrderID { get; set; }
     
         public virtual Commodity Commodity { get; set; }
         public virtual FirmOrderDetail FirmOrderDetail { get; set; }
         public virtual FirmOrder FirmOrder { get; set; }
+        public virtual MaterialIssueDetail MaterialIssueDetail { get; set; }
+        public virtual MaterialIssue MaterialIssue { get; set; }
         public virtual PlannedOrderDetail PlannedOrderDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemifinishedHandoverDetail> SemifinishedHandoverDetails { get; set; }
         public virtual SemifinishedProduct SemifinishedProduct { get; set; }
-        public virtual MaterialIssueDetail MaterialIssueDetail { get; set; }
-        public virtual MaterialIssue MaterialIssue { get; set; }
     }
 }

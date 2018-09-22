@@ -76,19 +76,25 @@ namespace TotalDTO.Productions
         public virtual int CrucialWorkerID { get; set; }
 
         [Display(Name = "Số thứ tự tấm phôi đầu")]
+        [Range(0, 999999, ErrorMessage = "Số thứ tự >= 0")]
         public decimal StartSequenceNo { get; set; }
         [Display(Name = "Số thứ tự tấm phôi cuối")]
+        [Range(0, 999999, ErrorMessage = "Số thứ tự >= 0")]
         public decimal StopSequenceNo { get; set; }
         [Display(Name = "Tổng số tấm phôi")]
+        [Range(0, 999999, ErrorMessage = "Tổng số tấm phôi >= 0")]
         public decimal FoilCounts { get; set; }
-        [Display(Name = "Số tấm")]
+        [Display(Name = "Số kg/ Số tấm phôi mẫu")]
         [Range(1, 999999, ErrorMessage = "Số tấm phải >= 1")]
         public decimal FoilUnitCounts { get; set; }
         [Display(Name = "Số kg")]
+        [Range(0, 999999, ErrorMessage = "Số kg >= 0")]
         public decimal FoilUnitWeights { get; set; }
         [Display(Name = "Tổng số kg phôi")]
+        [Range(0, 999999, ErrorMessage = "Tổng số kg >= 0")]
         public decimal FoilWeights { get; set; }
         [Display(Name = "Số kg phế phẩm")]
+        [Range(0, 999999, ErrorMessage = "Số kg >= 0")]
         public decimal FailureWeights { get; set; }
 
         public decimal TotalQuantityIssue { get; set; }

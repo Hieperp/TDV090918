@@ -37,7 +37,6 @@
         columns.Bound(c => c.SemifinishedProductWorkshiftEntryDate).Title("Ngày sx phôi").Width(80).Format("{0:" + Settings.DateFormat + "}");
         columns.Bound(c => c.SemifinishedProductWorkshiftCode).Title("Ca sx phôi").Width(50);
         columns.Bound(c => c.CommoditiyCode).Title("Mã hàng").Width(100);
-        columns.Bound(c => c.QuantityGainings).Title("TL (kg)").Format(Settings.kfmQuantity).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
         columns.Bound(c => c.Quantity).Title("SL").Format(Settings.kfmQuantity).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
     })
     .ToolBar(toolbar =>

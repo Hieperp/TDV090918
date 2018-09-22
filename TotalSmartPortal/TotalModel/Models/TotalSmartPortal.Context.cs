@@ -92,11 +92,7 @@ namespace TotalModel.Models
         public virtual DbSet<FirmOrderMaterial> FirmOrderMaterials { get; set; }
         public virtual DbSet<SemifinishedHandoverDetail> SemifinishedHandoverDetails { get; set; }
         public virtual DbSet<SemifinishedHandover> SemifinishedHandovers { get; set; }
-        public virtual DbSet<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
-        public virtual DbSet<SemifinishedProduct> SemifinishedProducts { get; set; }
         public virtual DbSet<Mold> Molds { get; set; }
-        public virtual DbSet<MaterialIssueDetail> MaterialIssueDetails { get; set; }
-        public virtual DbSet<MaterialIssue> MaterialIssues { get; set; }
         public virtual DbSet<ProductionOrderDetail> ProductionOrderDetails { get; set; }
         public virtual DbSet<ProductionOrder> ProductionOrders { get; set; }
         public virtual DbSet<FinishedHandoverDetail> FinishedHandoverDetails { get; set; }
@@ -105,6 +101,10 @@ namespace TotalModel.Models
         public virtual DbSet<FinishedProduct> FinishedProducts { get; set; }
         public virtual DbSet<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
         public virtual DbSet<GoodsReceipt> GoodsReceipts { get; set; }
+        public virtual DbSet<MaterialIssueDetail> MaterialIssueDetails { get; set; }
+        public virtual DbSet<MaterialIssue> MaterialIssues { get; set; }
+        public virtual DbSet<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
+        public virtual DbSet<SemifinishedProduct> SemifinishedProducts { get; set; }
     
         public virtual ObjectResult<string> AccountInvoicePostSaveValidate(Nullable<int> entityID)
         {

@@ -44,8 +44,9 @@ namespace TotalModel.Models
         public int ApproverID { get; set; }
         public decimal TotalQuantity { get; set; }
         public decimal TotalQuantitySemifinished { get; set; }
-        public decimal TotalQuantityWastage { get; set; }
-        public decimal TotalQuantityRejected { get; set; }
+        public decimal TotalQuantityFailure { get; set; }
+        public decimal TotalQuantityReceipted { get; set; }
+        public decimal TotalQuantityLoss { get; set; }
         public string Description { get; set; }
         public string Remarks { get; set; }
         public System.DateTime CreatedDate { get; set; }

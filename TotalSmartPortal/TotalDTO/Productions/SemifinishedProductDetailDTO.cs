@@ -34,9 +34,6 @@ namespace TotalDTO.Productions
         public int ProductionLineID { get; set; }
         public int CrucialWorkerID { get; set; }
 
-        public Nullable<int> SemifinishedHandoverID { get; set; }      
-        public decimal QuantityRejectedReturned { get; set; }
-        
         [Display(Name = "Cái/ tấm")]
         [UIHint("QuantityReadonly")]
         public decimal MoldQuantity { get; set; }
@@ -44,21 +41,9 @@ namespace TotalDTO.Productions
         [Display(Name = "Tồn đơn")]
         [UIHint("QuantityReadonly")]
         public decimal QuantityRemains { get; set; }
-        [Display(Name = "SL (Cái)")]
-        [UIHint("DecimalN0")]
+        [Display(Name = "SL khay")]
+        [UIHint("QuantityReadonly")]
         public override decimal Quantity { get; set; }
-        [Display(Name = "Thành phẩm")]
-        [UIHint("Quantity")]
-        public decimal QuantityGainings { get; set; }
-        [Display(Name = "Hao hụt")]
-        [UIHint("Quantity")]
-        public decimal QuantityWastage { get; set; }
-        [Display(Name = "Phế phẩm")]
-        [UIHint("Quantity")]
-        public decimal QuantityFailure { get; set; }
-        [Display(Name = "Trả lại")]
-        [UIHint("Quantity")]
-        public decimal QuantityRejected { get; set; }
 
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

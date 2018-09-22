@@ -27,7 +27,6 @@ namespace TotalDTO.Productions
         public int CrucialWorkerID { get; set; }
 
         public int SemifinishedHandoverID { get; set; }
-        public Nullable<int> FinishedHandoverID { get; set; }
         
         [Display(Name = "Ca sản xuất")]
         [UIHint("StringReadonly")]

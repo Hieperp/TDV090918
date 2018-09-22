@@ -22,12 +22,8 @@ namespace TotalModel.Models
         public int CommodityTypeID { get; set; }
         public Nullable<decimal> QuantityRemains { get; set; }
         public decimal Quantity { get; set; }
-        public decimal QuantityWastage { get; set; }
-        public decimal QuantityFailure { get; set; }
-        public decimal QuantityRejected { get; set; }
         public string Remarks { get; set; }
         public int SemifinishedProductID { get; set; }
-        public decimal QuantityGainings { get; set; }
         public int PlannedOrderID { get; set; }
         public decimal MoldQuantity { get; set; }
     }
