@@ -34,7 +34,7 @@ namespace TotalPortal.Areas.Productions.APIs
             return Json(response, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetFirmOrders([DataSourceRequest] DataSourceRequest dataSourceRequest, int? plannedOrderID, int? firmOrderID)
+        public JsonResult GetPlannedOrderLogs([DataSourceRequest] DataSourceRequest dataSourceRequest, int? plannedOrderID, int? firmOrderID)
         {
             var result = this.plannedOrderAPIRepository.GetPlannedOrderLogs(plannedOrderID, firmOrderID);
             return Json(result.ToDataSourceResult(dataSourceRequest), JsonRequestBehavior.AllowGet);

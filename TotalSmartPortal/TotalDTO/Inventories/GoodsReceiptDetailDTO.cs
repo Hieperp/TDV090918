@@ -32,6 +32,17 @@ namespace TotalDTO.Inventories
         public Nullable<System.DateTime> PurchaseRequisitionEntryDate { get; set; }
 
 
+        public Nullable<int> FinishedProductID { get; set; }
+        public Nullable<int> FinishedProductDetailID { get; set; }
+
+        [Display(Name = "Số CT")]
+        [UIHint("StringReadonly")]
+        public string FinishedProductReference { get; set; }        
+        [Display(Name = "Ngày CT")]
+        [UIHint("DateTimeReadonly")]
+        public Nullable<System.DateTime> FinishedProductEntryDate { get; set; }
+
+
         public Nullable<int> MaterialIssueID { get; set; }
         public Nullable<int> MaterialIssueDetailID { get; set; }
 
@@ -50,7 +61,7 @@ namespace TotalDTO.Inventories
         public string WorkshiftName { get; set; }
         [Display(Name = "Ngày sx")]
         [UIHint("DateTimeReadonly")]
-        public System.DateTime WorkshiftEntryDate { get; set; }
+        public Nullable<System.DateTime> WorkshiftEntryDate { get; set; }
         [Display(Name = "Số máy")]
         [UIHint("StringReadonly")]
         public string ProductionLinesCode { get; set; }

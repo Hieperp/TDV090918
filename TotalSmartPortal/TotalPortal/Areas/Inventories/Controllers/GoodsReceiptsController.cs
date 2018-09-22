@@ -56,6 +56,12 @@ namespace TotalPortal.Areas.Inventories.Controllers
             this.AddRequireJsOptions();
             return View();
         }
+
+        public virtual ActionResult GetPendingPlannedOrderDetails()
+        {
+            this.AddRequireJsOptions();
+            return View();
+        }
     }
 
 }

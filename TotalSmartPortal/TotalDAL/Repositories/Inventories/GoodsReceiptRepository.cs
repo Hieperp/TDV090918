@@ -59,6 +59,36 @@ namespace TotalDAL.Repositories.Inventories
             return pendingPurchaseRequisitionDetails;
         }
 
+
+
+        public IEnumerable<GoodsReceiptPendingPlannedOrderCustomer> GetPlannedOrderCustomers(int? locationID)
+        {
+            this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = false;
+            IEnumerable<GoodsReceiptPendingPlannedOrderCustomer> pendingPlannedOrderCustomers = base.TotalSmartPortalEntities.GetGoodsReceiptPendingPlannedOrderCustomers(locationID).ToList();
+            this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = true;
+
+            return pendingPlannedOrderCustomers;
+        }
+
+        public IEnumerable<GoodsReceiptPendingPlannedOrder> GetPlannedOrders(int? locationID)
+        {
+            this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = false;
+            IEnumerable<GoodsReceiptPendingPlannedOrder> pendingPlannedOrders = base.TotalSmartPortalEntities.GetGoodsReceiptPendingPlannedOrders(locationID).ToList();
+            this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = true;
+
+            return pendingPlannedOrders;
+        }
+
+        public IEnumerable<GoodsReceiptPendingPlannedOrderDetail> GetPendingPlannedOrderDetails(int? locationID, int? goodsReceiptID, int? plannedOrderID, int? customerID, string finishedProductDetailIDs, bool isReadonly)
+        {
+            this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = false;
+            IEnumerable<GoodsReceiptPendingPlannedOrderDetail> pendingPlannedOrderDetails = base.TotalSmartPortalEntities.GetGoodsReceiptPendingPlannedOrderDetails(locationID, goodsReceiptID, plannedOrderID, customerID, finishedProductDetailIDs, isReadonly).ToList();
+            this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = true;
+
+            return pendingPlannedOrderDetails;
+        }
+
+
         public IEnumerable<GoodsReceiptPendingMaterialIssueDetail> GetPendingMaterialIssueDetails(int? locationID, int? goodsReceiptID, string materialIssueDetailIDs, bool isReadonly)
         {
             this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = false;

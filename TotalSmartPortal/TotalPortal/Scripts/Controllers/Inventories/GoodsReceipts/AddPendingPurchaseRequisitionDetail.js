@@ -48,6 +48,19 @@ function handleOKEvent(goodsReceiptGridDataSource, pendingPurchaseRequisitionDet
 
         dataRow.MaterialIssueID = null;
         dataRow.MaterialIssueDetailID = null;
+        dataRow.MaterialIssueCode = null;
+        dataRow.MaterialIssueReference = null;
+        dataRow.MaterialIssueEntryDate = null;
+        dataRow.ProductionLinesCode = null;
+
+        dataRow.WorkshiftName = null;
+        dataRow.WorkshiftEntryDate = null;
+        dataRow.MaterialIssueEntryDate = null;
+
+        dataRow.FinishedProductID = null;
+        dataRow.FinishedProductDetailID = null;
+        dataRow.FinishedProductReference = null;
+        dataRow.FinishedProductEntryDate = null;
 
         dataRow.PurchaseRequisitionID = purchaseRequisitionGridDataItem.PurchaseRequisitionID;
         dataRow.PurchaseRequisitionDetailID = purchaseRequisitionGridDataItem.PurchaseRequisitionDetailID;

@@ -1336,6 +1336,9 @@
     <Content Include="Areas\Productions\Views\FinishedHandovers\_FinishedHandover.cshtml" />
     <Content Include="Areas\Productions\Views\FinishedHandovers\_GetCustomer.cshtml" />
     <Content Include="Areas\Productions\Views\FinishedHandovers\_GetPlannedOrder.cshtml" />
+    <Content Include="Areas\Inventories\Views\GoodsReceipts\_GetPlannedOrder.cshtml" />
+    <Content Include="Areas\Inventories\Views\GoodsReceipts\_GetPlannedOrderCustomer.cshtml" />
+    <Content Include="Areas\Inventories\Views\GoodsReceipts\GetPendingPlannedOrderDetails.cshtml" />
     <None Include="Properties\PublishProfiles\TDV.pubxml" />
     <None Include="Properties\PublishProfiles\VCP.pubxml">
       <SubType>Designer</SubType>
@@ -1413,6 +1416,7 @@
     <Content Include="Scripts\Controllers\Inventories\GoodsIssues\Open.js" />
     <Content Include="Scripts\Controllers\Inventories\GoodsIssues\Print.js" />
     <Content Include="Scripts\Controllers\Inventories\GoodsReceipts\AddPendingMaterialIssueDetail.js" />
+    <Content Include="Scripts\Controllers\Inventories\GoodsReceipts\AddPendingPlannedOrderDetail.js" />
     <Content Include="Scripts\Controllers\Inventories\GoodsReceipts\AddPendingPurchaseRequisitionDetail.js" />
     <Content Include="Scripts\Controllers\Inventories\GoodsReceipts\Approve.js" />
     <Content Include="Scripts\Controllers\Inventories\GoodsReceipts\CreateWizard.js" />

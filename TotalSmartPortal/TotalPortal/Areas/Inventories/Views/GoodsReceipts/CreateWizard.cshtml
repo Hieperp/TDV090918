@@ -20,6 +20,11 @@
     @Html.HiddenFor(model => model.PurchaseRequisitionReference)
     @Html.HiddenFor(model => model.PurchaseRequisitionEntryDate)
 
+    @Html.HiddenFor(model => model.FinishedProductID)
+    @Html.HiddenFor(model => model.FinishedProductDetailID)
+    @Html.HiddenFor(model => model.FinishedProductReference)
+    @Html.HiddenFor(model => model.FinishedProductEntryDate)
+
     @Html.HiddenFor(model => model.WarehouseAdjustmentID)       
 
     @Html.HiddenFor(model => model.Customer.CustomerID);
@@ -54,9 +59,17 @@
                     .Content(@<text>
                     @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetCustomer.cshtml")
                     </text>);
+            tabStrip.Add().Text("Nhập kho cho hàng đã đóng gói xong")
+              .Content(@<text>
+                    @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetPlannedOrder.cshtml")
+            </text>);
+            tabStrip.Add().Text("Nhập kho tổng hợp theo khách hàng")
+                    .Content(@<text>
+                    @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetPlannedOrderCustomer.cshtml")
+                    </text>);
         })
-    )
-       
+)
+
 
 
     <div class="background-bar" style="height: 45px;">
@@ -95,9 +108,8 @@
     }
    
 
-    function handleOKEvent(promotionGrid) { //This javascript is now used only here. Later, if it is used somewhere else, it should be break into a standalone js file, and then just only add a link here
-
-        var hasPurchaseRequisition = $("#tabStrip").data("kendoTabStrip").select().index() === 0 ? false : true;
+    function handleOKEvent(promotionGrid) { //This javascript is now used only here. Later, if it is used somewhere else, it should be break into a standalone js file, and then just only add a link here        
+        var hasPurchaseRequisition = $("#tabStrip").data("kendoTabStrip").select().index() === 0 ? false : true;        
 
         if (hasPurchaseRequisition == false) {
             if ($("#Customer_CustomerID").val() === null || $("#Customer_CustomerID").val() === "")
@@ -112,7 +124,25 @@
             _setModelInput();
         }
         else {
-            var selectedGrid = $($("#tabStrip").data("kendoTabStrip").select().index() === 1 ? "#goodsReceiptPendingPurchaseRequisitionGrid" : "#goodsReceiptPendingCustomerGrid").data("kendoGrid");
+            //var selectedGrid = $($("#tabStrip").data("kendoTabStrip").select().index() === 1 ? "goodsReceiptPendingPurchaseRequisitionGrid" : "#goodsReceiptPendingCustomerGrid").data("kendoGrid");
+
+            switch($("#tabStrip").data("kendoTabStrip").select().index()) {
+                case 1:
+                    selectedGrid = $("#goodsReceiptPendingPurchaseRequisitionGrid").data("kendoGrid");
+                    break;
+                case 2:
+                    selectedGrid = $("#goodsReceiptPendingCustomerGrid").data("kendoGrid");
+                    break;
+                case 3:
+                    selectedGrid = $("#goodsReceiptPendingPlannedOrderGrid").data("kendoGrid");
+                    break;
+                case 4:
+                    selectedGrid = $("#goodsReceiptPendingPlannedOrderCustomerGrid").data("kendoGrid");
+                    break;
+                default:
+                    return false;
+            }
+
             var selectedDataItem = selectedGrid.dataItem(selectedGrid.select());
             if (selectedDataItem === undefined || selectedDataItem === null)
                 return false;
@@ -125,7 +155,7 @@
 
 
         function _setModelInput(selectedDataItem) {
-
+            debugger
             if (hasPurchaseRequisition == false) {
                 $("#CustomerID").val(-1); //FOR TEMP ONLY
 
@@ -143,19 +173,23 @@
                 $("#Customer_BillingAddress").val(selectedDataItem === undefined || selectedDataItem.CustomerBillingAddress === undefined ? null : selectedDataItem.CustomerBillingAddress);
                 $("#Customer_EntireTerritoryEntireName").val(selectedDataItem === undefined || selectedDataItem.CustomerEntireTerritoryEntireName === undefined ? null : selectedDataItem.CustomerEntireTerritoryEntireName);
                 $("#Customer_SalespersonID").val(selectedDataItem === undefined || selectedDataItem.CustomerSalespersonID === undefined ? null : selectedDataItem.CustomerSalespersonID);
-                $("#Customer_SalespersonName").val(selectedDataItem === undefined || selectedDataItem.CustomerSalespersonName === undefined ? null : selectedDataItem.CustomerSalespersonName);
+                $("#Customer_SalespersonName").val(selectedDataItem === undefined || selectedDataItem.CustomerSalespersonName === undefined ? null : selectedDataItem.CustomerSalespersonName);                
+
+                $("#FinishedProductID").val(selectedDataItem === undefined || selectedDataItem.FinishedProductID === undefined ? null : selectedDataItem.FinishedProductID);
+                $("#FinishedProductDetailID").val(selectedDataItem === undefined || selectedDataItem.FinishedProductDetailID === undefined ? null : selectedDataItem.FinishedProductDetailID);
+                $("#FinishedProductReference").val(selectedDataItem === undefined || selectedDataItem.FinishedProductReference === undefined ? null : selectedDataItem.FinishedProductReference);
+                $("#FinishedProductEntryDate").val(selectedDataItem === undefined || selectedDataItem.EntryDate === undefined ? null : kendo.toString(selectedDataItem.EntryDate, Settings.DateTimeFormat));
 
                 $("#PurchaseRequisitionID").val(selectedDataItem === undefined || selectedDataItem.PurchaseRequisitionID === undefined ? null : selectedDataItem.PurchaseRequisitionID);
                 $("#PurchaseRequisitionCode").val(selectedDataItem === undefined || selectedDataItem.PurchaseRequisitionCode === undefined ? null : selectedDataItem.PurchaseRequisitionCode);
                 $("#PurchaseRequisitionReference").val(selectedDataItem === undefined || selectedDataItem.PurchaseRequisitionReference === undefined ? null : selectedDataItem.PurchaseRequisitionReference);
                 $("#PurchaseRequisitionEntryDate").val(selectedDataItem === undefined || selectedDataItem.PurchaseRequisitionEntryDate === undefined ? null : kendo.toString(selectedDataItem.PurchaseRequisitionEntryDate, Settings.DateTimeFormat));
 
-
                 //$("#Warehouse_WarehouseID").val(selectedDataItem === undefined || selectedDataItem.WarehouseID === undefined ? null : selectedDataItem.WarehouseID);
                 //$("#Warehouse_Code").val(selectedDataItem === undefined || selectedDataItem.WarehouseCode === undefined ? null : selectedDataItem.WarehouseCode);
                 //$("#Warehouse_Name").val(selectedDataItem === undefined || selectedDataItem.WarehouseName === undefined ? null : selectedDataItem.WarehouseName);
 
-                $("#Description").val(selectedDataItem === undefined || selectedDataItem.Description === undefined ? null : selectedDataItem.Description);
+                $("#Description").val(selectedDataItem === undefined || selectedDataItem.Description === undefined ? null : selectedDataItem.Description);                
 
             }
         }
