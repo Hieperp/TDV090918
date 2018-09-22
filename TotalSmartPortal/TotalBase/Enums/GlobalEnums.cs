@@ -134,6 +134,7 @@ namespace TotalBase.Enums
             WarehouseAdjustments = 5,
             PurchaseRequisition = 6,
             MaterialIssue = 7,
+            FinishedProduct = 8,
 
 
             GoodsIssueTransfer = 3333,

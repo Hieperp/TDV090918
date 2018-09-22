@@ -26,6 +26,10 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             this.GetGoodsReceiptPendingPurchaseRequisitions();
             this.GetGoodsReceiptPendingPurchaseRequisitionDetails();
 
+            this.GetGoodsReceiptPendingPlannedOrders();
+            this.GetGoodsReceiptPendingPlannedOrderCustomers();
+            this.GetGoodsReceiptPendingPlannedOrderDetails();
+            
             this.GetGoodsReceiptPendingMaterialIssueDetails();
 
             GenerateSQLPendingDetails generatePendingWarehouseAdjustmentDetails = new GenerateSQLPendingDetails(this.totalSmartPortalEntities, GlobalEnums.GoodsReceiptTypeID.WarehouseAdjustments, "WarehouseAdjustments", "WarehouseAdjustmentDetails", "WarehouseAdjustmentID", "@WarehouseAdjustmentID", "WarehouseAdjustmentDetailID", "@WarehouseAdjustmentDetailIDs", "WarehouseReceiptID", "PrimaryReference", "PrimaryEntryDate");
@@ -238,6 +242,136 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
 
 
 
+
+        #region FinishedProduct
+        private void GetGoodsReceiptPendingPlannedOrders()
+        {
+            string queryString = " @LocationID int " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+            queryString = queryString + "       SELECT          " + (int)@GlobalEnums.GoodsReceiptTypeID.FinishedProduct + " AS GoodsReceiptTypeID, PlannedOrders.PlannedOrderID, PlannedOrders.EntryDate, PlannedOrders.Code AS PlannedOrderCode, Customers.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName " + "\r\n";
+            queryString = queryString + "       FROM            Customers " + "\r\n";
+            queryString = queryString + "                       INNER JOIN PlannedOrders ON PlannedOrders.PlannedOrderID IN (SELECT DISTINCT PlannedOrderID FROM FinishedProductDetails WHERE LocationID = @LocationID AND Approved = 1 AND HandoverApproved = 1 AND ROUND(Quantity - QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") > 0) AND PlannedOrders.CustomerID = Customers.CustomerID " + "\r\n";
+
+            this.totalSmartPortalEntities.CreateStoredProcedure("GetGoodsReceiptPendingPlannedOrders", queryString);
+        }
+
+        private void GetGoodsReceiptPendingPlannedOrderCustomers()
+        {
+            string queryString = " @LocationID int " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+            queryString = queryString + "       SELECT          " + (int)@GlobalEnums.GoodsReceiptTypeID.FinishedProduct + " AS GoodsReceiptTypeID, Customers.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName " + "\r\n";
+            queryString = queryString + "       FROM            Customers " + "\r\n";
+            queryString = queryString + "       WHERE           CustomerID IN (SELECT DISTINCT CustomerID FROM FinishedProductDetails WHERE LocationID = @LocationID AND Approved = 1 AND HandoverApproved = 1 AND ROUND(Quantity - QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") > 0 GROUP BY CustomerID) " + "\r\n";
+
+            this.totalSmartPortalEntities.CreateStoredProcedure("GetGoodsReceiptPendingPlannedOrderCustomers", queryString);
+        }
+
+
+        private void GetGoodsReceiptPendingPlannedOrderDetails()
+        {
+            string queryString;
+
+            queryString = " @LocationID Int, @GoodsReceiptID Int, @PlannedOrderID Int, @CustomerID Int, @FinishedProductDetailIDs varchar(3999), @IsReadonly bit " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "   BEGIN " + "\r\n";
+
+            queryString = queryString + "       IF  (@PlannedOrderID <> 0) " + "\r\n";
+            queryString = queryString + "           " + this.BuildSQLFinishedProduct(true) + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+            queryString = queryString + "           " + this.BuildSQLFinishedProduct(false) + "\r\n";
+
+            queryString = queryString + "   END " + "\r\n";
+
+            this.totalSmartPortalEntities.CreateStoredProcedure("GetGoodsReceiptPendingPlannedOrderDetails", queryString);
+        }
+
+        private string BuildSQLFinishedProduct(bool isFinishedProductID)
+        {
+            string queryString = "";
+            queryString = queryString + "   BEGIN " + "\r\n";
+            queryString = queryString + "       IF  (@FinishedProductDetailIDs <> '') " + "\r\n";
+            queryString = queryString + "           " + this.BuildSQLFinishedProduct(isFinishedProductID, true) + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+            queryString = queryString + "           " + this.BuildSQLFinishedProduct(isFinishedProductID, false) + "\r\n";
+            queryString = queryString + "   END " + "\r\n";
+
+            return queryString;
+        }
+
+        private string BuildSQLFinishedProduct(bool isFinishedProductID, bool isFinishedProductDetailIDs)
+        {
+            string queryString = "";
+            queryString = queryString + "   BEGIN " + "\r\n";
+
+            queryString = queryString + "       IF (@GoodsReceiptID <= 0) " + "\r\n";
+            queryString = queryString + "               BEGIN " + "\r\n";
+            queryString = queryString + "                   " + this.BuildSQLFinishedProductNew(isFinishedProductID, isFinishedProductDetailIDs) + "\r\n";
+            queryString = queryString + "                   ORDER BY FinishedProducts.EntryDate, FinishedProducts.FinishedProductID, FinishedProductDetails.FinishedProductDetailID " + "\r\n";
+            queryString = queryString + "               END " + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+
+            queryString = queryString + "               IF (@IsReadonly = 1) " + "\r\n";
+            queryString = queryString + "                   BEGIN " + "\r\n";
+            queryString = queryString + "                       " + this.BuildSQLFinishedProductEdit(isFinishedProductID, isFinishedProductDetailIDs) + "\r\n";
+            queryString = queryString + "                       ORDER BY FinishedProducts.EntryDate, FinishedProducts.FinishedProductID, FinishedProductDetails.FinishedProductDetailID " + "\r\n";
+            queryString = queryString + "                   END " + "\r\n";
+
+            queryString = queryString + "               ELSE " + "\r\n"; //FULL SELECT FOR EDIT MODE
+
+            queryString = queryString + "                   BEGIN " + "\r\n";
+            queryString = queryString + "                       " + this.BuildSQLFinishedProductNew(isFinishedProductID, isFinishedProductDetailIDs) + " WHERE FinishedProductDetails.FinishedProductDetailID NOT IN (SELECT FinishedProductDetailID FROM GoodsReceiptDetails WHERE GoodsReceiptID = @GoodsReceiptID) " + "\r\n";
+            queryString = queryString + "                       UNION ALL " + "\r\n";
+            queryString = queryString + "                       " + this.BuildSQLFinishedProductEdit(isFinishedProductID, isFinishedProductDetailIDs) + "\r\n";
+            queryString = queryString + "                       ORDER BY FinishedProducts.EntryDate, FinishedProducts.FinishedProductID, FinishedProductDetails.FinishedProductDetailID " + "\r\n";
+            queryString = queryString + "                   END " + "\r\n";
+
+            queryString = queryString + "   END " + "\r\n";
+
+            return queryString;
+        }
+
+        private string BuildSQLFinishedProductNew(bool isFinishedProductID, bool isFinishedProductDetailIDs)
+        {
+            string queryString = "";
+
+            queryString = queryString + "       SELECT      FinishedProducts.FinishedProductID, FinishedProductDetails.FinishedProductDetailID, FinishedProducts.Reference AS FinishedProductReference, FinishedProducts.EntryDate AS FinishedProductEntryDate, " + "\r\n";
+            queryString = queryString + "                   Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, " + "\r\n";
+            queryString = queryString + "                   ROUND(FinishedProductDetails.Quantity - FinishedProductDetails.QuantityReceipted, 0) AS QuantityRemains, " + "\r\n";
+            queryString = queryString + "                   0.0 AS Quantity, FinishedProducts.Description, FinishedProductDetails.Remarks, CAST(1 AS bit) AS IsSelected " + "\r\n";
+
+            queryString = queryString + "       FROM        FinishedProducts " + "\r\n";
+            queryString = queryString + "                   INNER JOIN FinishedProductDetails ON " + (isFinishedProductID ? " FinishedProductDetails.PlannedOrderID = @PlannedOrderID " : "FinishedProductDetails.LocationID = @LocationID AND FinishedProductDetails.CustomerID = @CustomerID ") + " AND FinishedProductDetails.Approved = 1 AND FinishedProductDetails.HandoverApproved = 1 AND ROUND(FinishedProductDetails.Quantity - FinishedProductDetails.QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") > 0 AND FinishedProducts.FinishedProductID = FinishedProductDetails.FinishedProductID" + (isFinishedProductDetailIDs ? " AND FinishedProductDetails.FinishedProductDetailID NOT IN (SELECT Id FROM dbo.SplitToIntList (@FinishedProductDetailIDs))" : "") + "\r\n";
+            queryString = queryString + "                   INNER JOIN Commodities ON FinishedProductDetails.CommodityID = Commodities.CommodityID " + "\r\n";
+
+            return queryString;
+        }
+
+        private string BuildSQLFinishedProductEdit(bool isFinishedProductID, bool isFinishedProductDetailIDs)
+        {
+            string queryString = "";
+
+            queryString = queryString + "       SELECT      FinishedProducts.FinishedProductID, FinishedProductDetails.FinishedProductDetailID, FinishedProducts.Reference AS FinishedProductReference, FinishedProducts.EntryDate AS FinishedProductEntryDate, " + "\r\n";
+            queryString = queryString + "                   Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, " + "\r\n";
+            queryString = queryString + "                   ROUND(FinishedProductDetails.Quantity - FinishedProductDetails.QuantityReceipted + GoodsReceiptDetails.Quantity, 0) AS QuantityRemains, " + "\r\n";
+            queryString = queryString + "                   0.0 AS Quantity, FinishedProducts.Description, FinishedProductDetails.Remarks, CAST(1 AS bit) AS IsSelected " + "\r\n";
+
+            queryString = queryString + "       FROM        FinishedProductDetails " + "\r\n";
+            queryString = queryString + "                   INNER JOIN GoodsReceiptDetails ON GoodsReceiptDetails.GoodsReceiptID = @GoodsReceiptID AND FinishedProductDetails.FinishedProductDetailID = GoodsReceiptDetails.FinishedProductDetailID" + (isFinishedProductDetailIDs ? " AND FinishedProductDetails.FinishedProductDetailID NOT IN (SELECT Id FROM dbo.SplitToIntList (@FinishedProductDetailIDs))" : "") + "\r\n";
+            queryString = queryString + "                   INNER JOIN Commodities ON FinishedProductDetails.CommodityID = Commodities.CommodityID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN FinishedProducts ON FinishedProductDetails.FinishedProductID = FinishedProducts.FinishedProductID " + "\r\n";
+
+            return queryString;
+        }
+
+        #endregion FinishedProduct
+
+
+
+
         #region MaterialIssue
         private void GetGoodsReceiptPendingMaterialIssueDetails()
         {
@@ -362,6 +496,15 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + "                           SET @AffectedROWCOUNT = @@ROWCOUNT " + "\r\n";
             queryString = queryString + "                       END " + "\r\n";
 
+            queryString = queryString + "                   IF (@GoodsReceiptTypeID = " + (int)GlobalEnums.GoodsReceiptTypeID.FinishedProduct + ") " + "\r\n";
+            queryString = queryString + "                       BEGIN  " + "\r\n";
+            queryString = queryString + "                           UPDATE          FinishedProductDetails " + "\r\n";
+            queryString = queryString + "                           SET             FinishedProductDetails.QuantityReceipted = ROUND(FinishedProductDetails.QuantityReceipted + GoodsReceiptDetails.Quantity * @SaveRelativeOption, " + (int)GlobalEnums.rndQuantity + ") " + "\r\n";
+            queryString = queryString + "                           FROM            GoodsReceiptDetails " + "\r\n";
+            queryString = queryString + "                                           INNER JOIN FinishedProductDetails ON ((FinishedProductDetails.Approved = 1 AND FinishedProductDetails.HandoverApproved = 1) OR @SaveRelativeOption = -1) AND GoodsReceiptDetails.GoodsReceiptID = @EntityID AND GoodsReceiptDetails.FinishedProductDetailID = FinishedProductDetails.FinishedProductDetailID " + "\r\n";
+            queryString = queryString + "                           SET @AffectedROWCOUNT = @@ROWCOUNT " + "\r\n";
+            queryString = queryString + "                       END " + "\r\n";
+
 
             //queryString = queryString + "                   IF (@GoodsReceiptTypeID = " + (int)GlobalEnums.GoodsReceiptTypeID.GoodsIssueTransfer + ") " + "\r\n";
             //queryString = queryString + "                       BEGIN  " + "\r\n";
@@ -408,10 +551,16 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
 
         private void GoodsReceiptPostSaveValidate()
         {
-            string[] queryArray = new string[2];
+            string[] queryArray = new string[6];
 
             queryArray[0] = " SELECT TOP 1 @FoundEntity = N'Ngày đặt hàng: ' + CAST(PurchaseRequisitions.EntryDate AS nvarchar) FROM GoodsReceiptDetails INNER JOIN PurchaseRequisitions ON GoodsReceiptDetails.GoodsReceiptID = @EntityID AND GoodsReceiptDetails.PurchaseRequisitionID = PurchaseRequisitions.PurchaseRequisitionID AND GoodsReceiptDetails.EntryDate < PurchaseRequisitions.EntryDate ";
             queryArray[1] = " SELECT TOP 1 @FoundEntity = N'Số lượng xuất vượt quá số lượng đặt hàng: ' + CAST(ROUND(Quantity - QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") AS nvarchar) FROM PurchaseRequisitionDetails WHERE (ROUND(Quantity - QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") < 0) ";
+
+            queryArray[2] = " SELECT TOP 1 @FoundEntity = N'Ngày đặt hàng: ' + CAST(FinishedProducts.EntryDate AS nvarchar) FROM GoodsReceiptDetails INNER JOIN FinishedProducts ON GoodsReceiptDetails.GoodsReceiptID = @EntityID AND GoodsReceiptDetails.FinishedProductID = FinishedProducts.FinishedProductID AND GoodsReceiptDetails.EntryDate < FinishedProducts.EntryDate ";
+            queryArray[3] = " SELECT TOP 1 @FoundEntity = N'Số lượng xuất vượt quá số lượng đặt hàng: ' + CAST(ROUND(Quantity - QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") AS nvarchar) FROM FinishedProductDetails WHERE (ROUND(Quantity - QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") < 0) ";
+
+            queryArray[4] = " SELECT TOP 1 @FoundEntity = N'Ngày đặt hàng: ' + CAST(MaterialIssues.EntryDate AS nvarchar) FROM GoodsReceiptDetails INNER JOIN MaterialIssues ON GoodsReceiptDetails.GoodsReceiptID = @EntityID AND GoodsReceiptDetails.MaterialIssueID = MaterialIssues.MaterialIssueID AND GoodsReceiptDetails.EntryDate < MaterialIssues.EntryDate ";
+            queryArray[5] = " SELECT TOP 1 @FoundEntity = N'Số lượng xuất vượt quá số lượng đặt hàng: ' + CAST(ROUND(Quantity - QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") AS nvarchar) FROM MaterialIssueDetails WHERE (ROUND(Quantity - QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") < 0) ";
 
             this.totalSmartPortalEntities.CreateProcedureToCheckExisting("GoodsReceiptPostSaveValidate", queryArray);
         }
