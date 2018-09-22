@@ -27,9 +27,12 @@ namespace TotalModel.Models
         public string Code { get; set; }
         public int GoodsReceiptTypeID { get; set; }
         public Nullable<int> PurchaseRequisitionID { get; set; }
+        public Nullable<int> PlannedOrderID { get; set; }
+        public Nullable<int> WarehouseAdjustmentID { get; set; }
         public string PrimaryReferences { get; set; }
         public Nullable<int> CustomerID { get; set; }
         public int WarehouseID { get; set; }
+        public int StorekeeperID { get; set; }
         public int UserID { get; set; }
         public int PreparedPersonID { get; set; }
         public int OrganizationalUnitID { get; set; }
@@ -43,16 +46,14 @@ namespace TotalModel.Models
         public System.DateTime EditedDate { get; set; }
         public bool Approved { get; set; }
         public Nullable<System.DateTime> ApprovedDate { get; set; }
-        public Nullable<int> WarehouseAdjustmentID { get; set; }
-        public int StorekeeperID { get; set; }
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
         public virtual Location Location { get; set; }
         public virtual PurchaseRequisition PurchaseRequisition { get; set; }
-        public virtual Warehouse Warehouse { get; set; }
         public virtual WarehouseAdjustment WarehouseAdjustment { get; set; }
+        public virtual Warehouse Warehouse { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemifinishedProduct> SemifinishedProducts { get; set; }
     }

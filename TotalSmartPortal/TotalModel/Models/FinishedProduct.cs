@@ -32,7 +32,7 @@ namespace TotalModel.Models
         public int LocationID { get; set; }
         public int ApproverID { get; set; }
         public decimal TotalQuantity { get; set; }
-        public decimal TotalQuantityIssue { get; set; }
+        public decimal TotalQuantityReceipted { get; set; }
         public string Description { get; set; }
         public string Remarks { get; set; }
         public System.DateTime CreatedDate { get; set; }
@@ -40,13 +40,13 @@ namespace TotalModel.Models
         public bool Approved { get; set; }
         public Nullable<System.DateTime> ApprovedDate { get; set; }
     
+        public virtual Customer Customer { get; set; }
         public virtual Employee Employee { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FinishedProductDetail> FinishedProductDetails { get; set; }
         public virtual FinishedProduct FinishedProducts1 { get; set; }
         public virtual FinishedProduct FinishedProduct1 { get; set; }
         public virtual FirmOrder FirmOrder { get; set; }
         public virtual Location Location { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FinishedProductDetail> FinishedProductDetails { get; set; }
-        public virtual Customer Customer { get; set; }
     }
 }

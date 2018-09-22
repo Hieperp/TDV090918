@@ -69,8 +69,6 @@ namespace TotalModel.Models
         public virtual DbSet<VoidType> VoidTypes { get; set; }
         public virtual DbSet<ProductionLine> ProductionLines { get; set; }
         public virtual DbSet<Workshift> Workshifts { get; set; }
-        public virtual DbSet<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
-        public virtual DbSet<GoodsReceipt> GoodsReceipts { get; set; }
         public virtual DbSet<PurchaseRequisitionDetail> PurchaseRequisitionDetails { get; set; }
         public virtual DbSet<PurchaseRequisition> PurchaseRequisitions { get; set; }
         public virtual DbSet<WarehouseAdjustmentType> WarehouseAdjustmentTypes { get; set; }
@@ -97,14 +95,16 @@ namespace TotalModel.Models
         public virtual DbSet<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
         public virtual DbSet<SemifinishedProduct> SemifinishedProducts { get; set; }
         public virtual DbSet<Mold> Molds { get; set; }
-        public virtual DbSet<FinishedProduct> FinishedProducts { get; set; }
-        public virtual DbSet<FinishedProductDetail> FinishedProductDetails { get; set; }
         public virtual DbSet<MaterialIssueDetail> MaterialIssueDetails { get; set; }
         public virtual DbSet<MaterialIssue> MaterialIssues { get; set; }
         public virtual DbSet<ProductionOrderDetail> ProductionOrderDetails { get; set; }
         public virtual DbSet<ProductionOrder> ProductionOrders { get; set; }
         public virtual DbSet<FinishedHandoverDetail> FinishedHandoverDetails { get; set; }
         public virtual DbSet<FinishedHandover> FinishedHandovers { get; set; }
+        public virtual DbSet<FinishedProductDetail> FinishedProductDetails { get; set; }
+        public virtual DbSet<FinishedProduct> FinishedProducts { get; set; }
+        public virtual DbSet<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
+        public virtual DbSet<GoodsReceipt> GoodsReceipts { get; set; }
     
         public virtual ObjectResult<string> AccountInvoicePostSaveValidate(Nullable<int> entityID)
         {
@@ -3617,6 +3617,53 @@ namespace TotalModel.Models
                 new ObjectParameter("Approved", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("FinishedHandoverToggleApproved", entityIDParameter, approvedParameter);
+        }
+    
+        public virtual ObjectResult<GoodsReceiptPendingPlannedOrderCustomer> GetGoodsReceiptPendingPlannedOrderCustomers(Nullable<int> locationID)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GoodsReceiptPendingPlannedOrderCustomer>("GetGoodsReceiptPendingPlannedOrderCustomers", locationIDParameter);
+        }
+    
+        public virtual ObjectResult<GoodsReceiptPendingPlannedOrderDetail> GetGoodsReceiptPendingPlannedOrderDetails(Nullable<int> locationID, Nullable<int> goodsReceiptID, Nullable<int> plannedOrderID, Nullable<int> customerID, string finishedProductDetailIDs, Nullable<bool> isReadonly)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            var goodsReceiptIDParameter = goodsReceiptID.HasValue ?
+                new ObjectParameter("GoodsReceiptID", goodsReceiptID) :
+                new ObjectParameter("GoodsReceiptID", typeof(int));
+    
+            var plannedOrderIDParameter = plannedOrderID.HasValue ?
+                new ObjectParameter("PlannedOrderID", plannedOrderID) :
+                new ObjectParameter("PlannedOrderID", typeof(int));
+    
+            var customerIDParameter = customerID.HasValue ?
+                new ObjectParameter("CustomerID", customerID) :
+                new ObjectParameter("CustomerID", typeof(int));
+    
+            var finishedProductDetailIDsParameter = finishedProductDetailIDs != null ?
+                new ObjectParameter("FinishedProductDetailIDs", finishedProductDetailIDs) :
+                new ObjectParameter("FinishedProductDetailIDs", typeof(string));
+    
+            var isReadonlyParameter = isReadonly.HasValue ?
+                new ObjectParameter("IsReadonly", isReadonly) :
+                new ObjectParameter("IsReadonly", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GoodsReceiptPendingPlannedOrderDetail>("GetGoodsReceiptPendingPlannedOrderDetails", locationIDParameter, goodsReceiptIDParameter, plannedOrderIDParameter, customerIDParameter, finishedProductDetailIDsParameter, isReadonlyParameter);
+        }
+    
+        public virtual ObjectResult<GoodsReceiptPendingPlannedOrder> GetGoodsReceiptPendingPlannedOrders(Nullable<int> locationID)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GoodsReceiptPendingPlannedOrder>("GetGoodsReceiptPendingPlannedOrders", locationIDParameter);
         }
     }
 }

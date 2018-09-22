@@ -11,13 +11,12 @@ namespace TotalModel.Models
 {
     using System;
     
-    public partial class GoodsReceiptPendingPurchaseRequisitionDetail
+    public partial class GoodsReceiptPendingPlannedOrderDetail
     {
-        public int PurchaseRequisitionID { get; set; }
-        public int PurchaseRequisitionDetailID { get; set; }
-        public string PurchaseRequisitionReference { get; set; }
-        public string PurchaseRequisitionCode { get; set; }
-        public System.DateTime PurchaseRequisitionEntryDate { get; set; }
+        public int FinishedProductID { get; set; }
+        public int FinishedProductDetailID { get; set; }
+        public string FinishedProductReference { get; set; }
+        public System.DateTime FinishedProductEntryDate { get; set; }
         public int CommodityID { get; set; }
         public string CommodityCode { get; set; }
         public string CommodityName { get; set; }

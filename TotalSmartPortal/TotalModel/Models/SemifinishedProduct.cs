@@ -56,8 +56,6 @@ namespace TotalModel.Models
         public virtual Customer Customer { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual FirmOrder FirmOrder { get; set; }
-        public virtual GoodsReceiptDetail GoodsReceiptDetail { get; set; }
-        public virtual GoodsReceipt GoodsReceipt { get; set; }
         public virtual Location Location { get; set; }
         public virtual ProductionLine ProductionLine { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -65,5 +63,7 @@ namespace TotalModel.Models
         public virtual Workshift Workshift { get; set; }
         public virtual MaterialIssueDetail MaterialIssueDetail { get; set; }
         public virtual Shift Shift { get; set; }
+        public virtual GoodsReceiptDetail GoodsReceiptDetail { get; set; }
+        public virtual GoodsReceipt GoodsReceipt { get; set; }
     }
 }
