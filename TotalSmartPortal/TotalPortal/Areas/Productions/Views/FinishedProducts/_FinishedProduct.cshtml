@@ -105,8 +105,6 @@
                     columns.Bound(p => p.SemifinishedHandoverID).DisplayNameTitle().Hidden()
                        .ClientTemplate("#= (SemifinishedHandoverID == null)? '' : SemifinishedHandoverID #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].SemifinishedHandoverID' value='#= (SemifinishedHandoverID == null) ? '' : SemifinishedHandoverID #' />");
 
-                    columns.Bound(p => p.FinishedHandoverID).DisplayNameTitle().Hidden()
-                       .ClientTemplate("#= (FinishedHandoverID == null)? '' : FinishedHandoverID #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].FinishedHandoverID' value='#= (FinishedHandoverID == null) ? '' : FinishedHandoverID #' />");      
 
                     columns.Bound(p => p.CommodityID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= CommodityID #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].CommodityID' value='#= CommodityID #' />");

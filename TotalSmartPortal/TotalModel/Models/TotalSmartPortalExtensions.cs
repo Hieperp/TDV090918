@@ -186,7 +186,7 @@ namespace TotalModel.Models
         public string MaterialCode { get { return this.MaterialIssueDetail.Commodity.Code; } }
         public string MaterialName { get { return this.MaterialIssueDetail.Commodity.Name; } }
         public decimal MaterialQuantity { get { return this.MaterialIssueDetail.Quantity; } }
-        public decimal MaterialQuantityRemains { get { return this.MaterialIssueDetail.Quantity - this.MaterialIssueDetail.QuantitySemifinished; } }
+        public decimal MaterialQuantityRemains { get { return this.MaterialIssueDetail.Quantity - this.MaterialIssueDetail.QuantitySemifinished - this.MaterialIssueDetail.QuantityFailure - this.MaterialIssueDetail.QuantityReceipted - this.MaterialIssueDetail.QuantityLoss + this.FoilWeights + this.FailureWeights; } }
 
         public virtual Employee CrucialWorker { get { return this.Employee; } }
 
@@ -196,7 +196,7 @@ namespace TotalModel.Models
 
     public partial class SemifinishedProductDetail : IPrimitiveEntity, IHelperEntryDate, IHelperCommodityID, IHelperCommodityTypeID
     {
-        public int GetID() { return this.SemifinishedProductDetailID; }               
+        public int GetID() { return this.SemifinishedProductDetailID; }
     }
 
 
@@ -221,7 +221,7 @@ namespace TotalModel.Models
     public partial class FinishedProduct : IPrimitiveEntity, IBaseEntity, IBaseDetailEntity<FinishedProductDetail>
     {
         public int GetID() { return this.FinishedProductID; }
-      
+
         public virtual Employee CrucialWorker { get { return this.Employee; } }
 
         public ICollection<FinishedProductDetail> GetDetails() { return this.FinishedProductDetails; }
@@ -238,7 +238,7 @@ namespace TotalModel.Models
     public partial class FinishedHandover : IPrimitiveEntity, IBaseEntity, IBaseDetailEntity<FinishedHandoverDetail>
     {
         public int GetID() { return this.FinishedHandoverID; }
-        
+
         public virtual Employee FinishedLeader { get { return this.Employee; } }
         public virtual Employee Storekeeper { get { return this.Employee1; } }
 

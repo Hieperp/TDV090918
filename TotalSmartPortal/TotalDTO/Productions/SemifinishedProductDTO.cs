@@ -68,7 +68,7 @@ namespace TotalDTO.Productions
         public string WorkDescription { get { return this.ProductionLineCode + ", " + this.MaterialIssueDetailWorkshiftCode + " [" + this.MaterialIssueDetailWorkshiftEntryDate.ToString("dd/MM/yyyy") + "]"; } }
 
         [Display(Name = "Cuộn màng")]
-        public string GoodsReceiptDescription { get { return this.MaterialCode + ", " + this.GoodsReceiptReference + (this.GoodsReceiptEntryDate != null ? " [" + this.GoodsReceiptEntryDate.Value.ToString("dd/MM/yyyy") + "]" : "") + ", " + this.MaterialQuantity.ToString("N2"); } }
+        public string GoodsReceiptDescription { get { return this.MaterialCode + ", " + this.GoodsReceiptReference + (this.GoodsReceiptEntryDate != null ? " [" + this.GoodsReceiptEntryDate.Value.ToString("dd/MM/yyyy") + "]" : "") + ", " + this.MaterialQuantity.ToString("N2") + ", " + this.MaterialQuantityRemains.ToString("N2"); } }
 
         public int ShiftID { get; set; }
         public int WorkshiftID { get; set; } // WHEN ADD NEW: THIS WILL BE ZERO. THEN, THE REAL VALUE OF WorkshiftID WILL BE UPDATE BY SemifinishedProductSaveRelative

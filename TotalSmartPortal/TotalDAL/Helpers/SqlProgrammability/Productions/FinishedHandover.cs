@@ -269,7 +269,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         {
             string[] queryArray = new string[1];
 
-            queryArray[0] = " SELECT TOP 1 @FoundEntity = FinishedHandoverID FROM FinishedProductDetails WHERE FinishedHandoverID = @EntityID ";
+            queryArray[0] = " SELECT TOP 1 @FoundEntity = GoodsReceiptDetailID FROM GoodsReceiptDetails WHERE FinishedProductDetailID IN (SELECT FinishedProductDetailID FROM FinishedProductDetails WHERE FinishedHandoverID = @EntityID) ";
 
             this.totalSmartPortalEntities.CreateProcedureToCheckExisting("FinishedHandoverEditable", queryArray);
         }

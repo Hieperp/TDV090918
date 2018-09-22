@@ -42,7 +42,7 @@ namespace TotalDTO.Productions
         {
             base.PerformPresaveRule();
 
-            this.DtoDetails().ToList().ForEach(e => { e.CrucialWorkerID = this.CrucialWorkerID; });            
+            this.DtoDetails().ToList().ForEach(e => { e.CustomerID = this.CustomerID; e.CrucialWorkerID = this.CrucialWorkerID; });            
         }
         
     }

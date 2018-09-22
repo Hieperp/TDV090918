@@ -23,7 +23,8 @@ namespace TotalDTO.Productions
 
         public int SemifinishedProductID { get; set; }
         public int SemifinishedProductDetailID { get; set; }
-     
+
+        public Nullable<int> CustomerID { get; set; }
         public int CrucialWorkerID { get; set; }
 
         public int SemifinishedHandoverID { get; set; }
