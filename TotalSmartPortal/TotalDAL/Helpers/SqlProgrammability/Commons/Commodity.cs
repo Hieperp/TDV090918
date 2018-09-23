@@ -35,9 +35,12 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
-            queryString = queryString + "       SELECT      Commodities.CommodityID, EntireCommodityCategories.Name1 AS CommodityCategoryName1, EntireCommodityCategories.Name2 AS CommodityCategoryName2, Commodities.Code, Commodities.OfficialCode, Commodities.CodePartA, Commodities.CodePartB, Commodities.CodePartC, Commodities.CodePartD, Commodities.CodePartE, Commodities.CodePartF, Commodities.Name, Commodities.SalesUnit, Commodities.Remarks, Commodities.Discontinue, Commodities.InActive " + "\r\n";
+            queryString = queryString + "       SELECT      Commodities.CommodityID, EntireCommodityCategories.Name1 AS CommodityCategoryName1, EntireCommodityCategories.Name2 AS CommodityCategoryName2, Commodities.Code, Commodities.OfficialCode, Commodities.CodePartA, Commodities.CodePartB, Commodities.CodePartC, Commodities.CodePartD, Commodities.CodePartE, Commodities.CodePartF, Commodities.Name, Commodities.SalesUnit, Commodities.Remarks, Commodities.Discontinue, Commodities.InActive, " + "\r\n";
+            queryString = queryString + "                   CommodityBoms.BomID, CommodityBoms.Code AS BomCode, CommodityBoms.Name AS BomName, CommodityBoms.BlockUnit, CommodityBoms.BlockQuantity, CommodityMolds.MoldID, CommodityMolds.Code AS MoldCode, CommodityMolds.Name AS MoldName, CommodityMolds.Quantity AS MoldQuantity " + " \r\n";
             queryString = queryString + "       FROM        Commodities " + "\r\n";
             queryString = queryString + "                   INNER JOIN EntireCommodityCategories ON Commodities.NMVNTaskID = @NMVNTaskID AND Commodities.CommodityCategoryID = EntireCommodityCategories.CommodityCategoryID " + "\r\n";
+            queryString = queryString + "                   LEFT JOIN (SELECT CommodityBoms.CommodityID, CommodityBoms.BomID, Boms.Code, Boms.Name, CommodityBoms.BlockUnit, CommodityBoms.BlockQuantity FROM CommodityBoms INNER JOIN Boms ON CommodityBoms.IsDefault = 1 AND CommodityBoms.BomID = Boms.BomID) CommodityBoms ON Commodities.CommodityID = CommodityBoms.CommodityID " + "\r\n";
+            queryString = queryString + "                   LEFT JOIN (SELECT CommodityMolds.CommodityID, CommodityMolds.MoldID, Molds.Code, Molds.Name, CommodityMolds.Quantity FROM CommodityMolds INNER JOIN Molds ON CommodityMolds.IsDefault = 1 AND CommodityMolds.MoldID = Molds.MoldID) CommodityMolds ON Commodities.CommodityID = CommodityMolds.CommodityID " + "\r\n";
 
             queryString = queryString + "    END " + "\r\n";
 
