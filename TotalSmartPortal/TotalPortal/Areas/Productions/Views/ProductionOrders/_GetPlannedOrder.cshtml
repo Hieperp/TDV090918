@@ -5,11 +5,11 @@
     .Name("productionOrderPendingPlannedOrderGrid")
     .Columns(columns =>
     {
-        columns.Bound(c => c.PlannedOrderCode).Title("Số KHSX").Width(50);
-        columns.Bound(c => c.PlannedOrderEntryDate).Title("Ngày chứng từ").Width(55).Format("{0:" + Settings.DateFormat + "}");
+        columns.Bound(c => c.PlannedOrderReference).Title("Số KHSX").Width(50);
+        columns.Bound(c => c.PlannedOrderCode).Title("Mã CT").Width(50);
+        columns.Bound(c => c.PlannedOrderEntryDate).Title("Ngày KHSX").Width(55).Format("{0:" + Settings.DateFormat + "}");
         columns.Bound(c => c.CustomerCode).Title("Mã khách hàng").Width(90);
         columns.Bound(c => c.CustomerName).Title("Tên khách hàng").Width(140);
-        columns.Bound(c => c.CustomerVATCode).Title("MST").Width(60);
         columns.Bound(c => c.Description).Title("Diễn giải").Width(80);              
     })    
     .ToolBar(toolbar =>

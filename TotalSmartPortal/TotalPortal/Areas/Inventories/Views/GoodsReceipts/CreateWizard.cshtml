@@ -48,25 +48,26 @@
         .Name("tabStrip")
         .Items(tabStrip =>
         {
-            tabStrip.Add().Text("Khách hàng không có đơn hàng")
+            @*tabStrip.Add().Text("Khách hàng không có đơn hàng")
                 .Selected(true)
                 .Content(@<text>
-                    @*@Html.Partial("~/Views/Helpers/Commons/_SearchCustomer.cshtml")*@
-                </text>);
+                    @Html.Partial("~/Views/Helpers/Commons/_SearchCustomer.cshtml")
+                </text>);*@
 
-            tabStrip.Add().Text("Giao hàng theo đơn đặt hàng")
+            tabStrip.Add().Text("Đơn đặt hàng")
+                .Selected(true)
                 .Content(@<text>
                     @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetPurchaseRequisition.cshtml")
                 </text>);
-            tabStrip.Add().Text("Giao hàng tổng hợp của nhiều đơn đặt hàng")
+            tabStrip.Add().Text("Nhà cung cấp")
                     .Content(@<text>
                     @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetCustomer.cshtml")
                     </text>);
-            tabStrip.Add().Text("Nhập kho cho hàng đã đóng gói xong")
+            tabStrip.Add().Text("Kế hoạch sản xuất")
               .Content(@<text>
                     @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetPlannedOrder.cshtml")
             </text>);
-            tabStrip.Add().Text("Nhập kho tổng hợp theo khách hàng")
+            tabStrip.Add().Text("Tổ đóng gói")
                     .Content(@<text>
                     @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetPlannedOrderCustomer.cshtml")
                     </text>);

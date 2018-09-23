@@ -244,6 +244,7 @@
             @if (Model.Editable)
             {
                 <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "ProductionOrders")"> <img src="~/Content/Images/New/save-icon.png" /> Lưu phiếu </button>
+                <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "ProductionOrders")" onclick="$('#Approved').val(true);"> <img src="~/Content/Images/New/save-verify-icon.png" /> Lưu và duyệt phiếu </button>
             }
             else
             {

@@ -27,39 +27,30 @@
     .Name("gridPlannedOrderLogs")
     .Columns(columns =>
     {
-        columns.Bound(c => c.EntryDate).Title("Ngày").Width(80).Format("{0:" + Settings.DateTimeFormat + "}");
-        columns.Bound(c => c.ProductionLineCode).Title("Mã Máy").Width(50);
-        columns.Bound(c => c.MaterialIssueWorkshiftEntryDate).Title("Ngày sx màng").Width(80).Format("{0:" + Settings.DateFormat + "}");
-        columns.Bound(c => c.MaterialIssueWorkshiftCode).Title("Ca sx phôi").Width(50);
-        columns.Bound(c => c.GoodsReceiptReference).Title("Lô sx").Width(50);
-        columns.Bound(c => c.BatchEntryDate).Title("Ngày lô hàng").Width(80).Format("{0:" + Settings.DateFormat + "}");
-        columns.Bound(c => c.MaterialIssueDetailQuantity).Title("SL").Format(Settings.kfmQuantity).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
-        columns.Bound(c => c.SemifinishedProductWorkshiftEntryDate).Title("Ngày sx phôi").Width(80).Format("{0:" + Settings.DateFormat + "}");
-        columns.Bound(c => c.SemifinishedProductWorkshiftCode).Title("Ca sx phôi").Width(50);
-        columns.Bound(c => c.CommoditiyCode).Title("Mã hàng").Width(100);
-        columns.Bound(c => c.Quantity).Title("SL").Format(Settings.kfmQuantity).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
+        columns.Bound(c => c.ProductionLineCode).Title("Máy").Width(20).HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" });
+        columns.Bound(c => c.MaterialIssueWorkshiftEntryDate).Title("Xuất màng").Width(30).Format("{0:" + Settings.DateTimeFormat + "}").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" });
+        columns.Bound(c => c.MaterialIssueWorkshiftCode).Title("Ca").Width(10).HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" });
+        columns.Bound(c => c.GoodsReceiptReference).Title("Số lô").Width(10).HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" });
+        columns.Bound(c => c.BatchEntryDate).Title("Lô màng").Width(20).Format("{0:" + Settings.DateFormat + "}").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" });
+        columns.Bound(c => c.MaterialIssueDetailQuantity).Title("Số kg").Format(Settings.kfmQuantity).Width(10).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
+
+        columns.Bound(c => c.SemifinishedProductWorkshiftEntryDate).Title("Sx phôi").Width(30).Format("{0:" + Settings.DateTimeFormat + "}").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" });
+        columns.Bound(c => c.SemifinishedProductWorkshiftCode).Title("Ca").Width(10).HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" });
+        columns.Bound(c => c.CommoditiyCode).Title("Mã hàng").Width(126).HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" });
+        columns.Bound(c => c.Quantity).Title("SL").Format(Settings.kfmN0).Width(10).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
+        columns.Bound(c => c.Weights).Title("TL").Format(Settings.kfmWeight).Width(10).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
     })
-    @*.ToolBar(toolbar =>
-    {
-        toolbar.Template(@<text>
-            <div class="toolbar" style="float: right;">
-                <label>Nhập mã hàng, mã máy, ca sx hoặc lô sx </label>
-                <input id="filterText" class="k-textbox" style="text-align: center; margin-right: 13px;" onkeyup="filterText_KeyUp()" />
-            </div>
-        </text>);
-    })*@
-    //.Scrollable(s => s.Height(Settings.GridPopupHeight))
     .DataSource(ds => ds.Ajax()
-            .Read(read => read.Action("GetPlannedOrderLogs", "PlannedOrderAPIs", new { area = "Productions" }).Data(@<text>
-            function(e) {
+        .Read(read => read.Action("GetPlannedOrderLogs", "PlannedOrderAPIs", new { area = "Productions" }).Data(@<text>
+        function(e) {
 
-            var semifinishedHandoverJSON = window.parent.$("#kendoGridDetails").data("kendoGrid").dataSource.data().toJSON();
+        var semifinishedHandoverJSON = window.parent.$("#kendoGridDetails").data("kendoGrid").dataSource.data().toJSON();
 
-            return {
-            plannedOrderID:  window.$("#PlannedOrderID").val(),
-            firmOrderID: window.$("#FirmOrderID").val()
-            };}
-                        </text>))
+        return {
+        plannedOrderID:  window.$("#PlannedOrderID").val(),
+        firmOrderID: window.$("#FirmOrderID").val()
+        };}
+                    </text>))
     .ServerOperation(false)) //If this is TRUE: Apply filter to datasource will call Ajax to get new datasource result. If this is FALSE: filter will run on client
     .Selectable()
     )

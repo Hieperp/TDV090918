@@ -45,6 +45,8 @@ namespace TotalModel.Models
         public decimal BlockQuantity { get; set; }
         public decimal MoldQuantity { get; set; }
         public int PiecePerPack { get; set; }
+        public decimal QuantityRequested { get; set; }
+        public decimal QuantityOnhand { get; set; }
     
         public virtual Commodity Commodity { get; set; }
         public virtual Customer Customer { get; set; }

@@ -46,6 +46,14 @@ namespace TotalDTO.Productions
         public string VoidTypeName { get; set; }
         public Nullable<int> VoidClassID { get; set; }
 
+        [Display(Name = "SLYC")]
+        [UIHint("Quantity")]
+        public decimal QuantityRequested { get; set; }
+        [Display(Name = "TK")]
+        [UIHint("Quantity")]
+        public decimal QuantityOnhand { get; set; }
+
+        [Display(Name = "SLSX")]
         [UIHint("Quantity")]
         public override decimal Quantity { get; set; }
 

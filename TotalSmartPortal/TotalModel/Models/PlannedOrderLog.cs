@@ -25,5 +25,6 @@ namespace TotalModel.Models
         public string SemifinishedProductWorkshiftCode { get; set; }
         public string CommoditiyCode { get; set; }
         public Nullable<decimal> Quantity { get; set; }
+        public Nullable<decimal> Weights { get; set; }
     }
 }

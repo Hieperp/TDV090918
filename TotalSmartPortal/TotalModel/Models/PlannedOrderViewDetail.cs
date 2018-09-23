@@ -37,5 +37,7 @@ namespace TotalModel.Models
         public decimal BlockUnit { get; set; }
         public decimal BlockQuantity { get; set; }
         public int PiecePerPack { get; set; }
+        public decimal QuantityRequested { get; set; }
+        public decimal QuantityOnhand { get; set; }
     }
 }
