@@ -227,7 +227,7 @@
             )
         </div>
 
-        <div class="div-k-panel">
+        <div class="div-k-panel">            
             @(Html.Kendo().PanelBar()
                 .Name("SummartyPanelBar")
                 .Items(items =>
@@ -282,9 +282,10 @@
         <div class="right-botton-panel">
             @if (Model.Editable)
             {
+                <button type="button" class="k-button custom-button" onclick="updateSummartyGrid()"> Test </button>
                 <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "FinishedProducts")" onclick="$('#Approved').val(false);"> <img src="~/Content/Images/New/save-icon.png" /> Lưu nhập ĐG </button>
                 <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "FinishedProducts")" onclick="$('#Approved').val(true);"> <img src="~/Content/Images/New/save-verify-icon.png" /> Lưu và duyệt phiếu </button>
-                <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "FinishedProducts")" onclick="$('#Approved').val(true);"> <img src="~/Content/Images/New/Actions-document-print-icon.png" /> Lưu, duyệt và in phiếu BTP</button>
+                <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "FinishedProducts")" onclick="$('#Approved').val(true);"> <img src="~/Content/Images/New/Actions-document-print-icon.png" /> Lưu, duyệt và in phiếu BTP</button>                
             }
             else
             {
@@ -364,12 +365,7 @@
                         .Format(Settings.kfmQuantity)
                         .ClientFooterTemplate("#= kendo.format('" + Settings.kfmQuantity + "', sum) #")
                         .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', Swarfs) #" + "<input type='hidden' name='FinishedProductSummaryViewDetails[#= index(data) #].Swarfs' value='#= Swarfs #' />");  
-
-
-                    //columns.Command(command => { command.Destroy().Text("<span class='command' ></span>"); }).Width(50).Hidden(!@Model.Editable).HtmlAttributes(new { @class = "grid-column-center" });
-
-                    //columns.Template(model => null).HtmlAttributes(new { @class = "grid-column-center" }).Width(50).Hidden(!@Model.Voidable && !@Model.UnVoidable)
-                    //    .ClientTemplate("<a class='k-button' style='padding:0px;' onclick='callVoidDetail(#= FinishedProductDetailID #)'><span class='k-icon k-edit'></span></a>");
+                   
                 })
                     .Filterable(f => f.Enabled(false))
                     .Navigatable()
@@ -423,11 +419,52 @@
 <script src="@Url.Content("~/Scripts/Helpers/KendoGrid/gridHelper.js")"></script>
 
 <script type="text/javascript">
-
     function callVoidDetail(materialIssueDetailID) {
         require(["kpopupWindow"], function (kpopupWindow) {
             var voidDetailWindow = new kpopupWindow();
             voidDetailWindow.openWindow($("#popupWindow"), "@Url.Action("VoidDetail", "FinishedProducts")" + "/" + $("#FinishedProductID").val() + "/" + materialIssueDetailID, "Hủy/ phục hồi một phần phiếu nhập BTP", @Settings.PopupWidthVoid,  @Settings.PopupHeightVoid);
         });
+    }
+
+    function updateSummartyGrid(){
+        var kenGrid = $("#kendoGridDetails").data("kendoGrid").dataSource.data();
+        var kenSummaryGrid = $("#kendoGridSummaryDetails").data("kendoGrid").dataSource.data();
+
+        for (var i = 0; i < kenSummaryGrid.length; i++) {
+            var dataSummaryItem = kenSummaryGrid[i];
+            var commodityID = dataSummaryItem["CommodityID"];
+
+            dataSummaryItem["Quantity"] = 0;
+            dataSummaryItem["Packages"] = 0;
+            dataSummaryItem["OddPackages"] = 0;
+            dataSummaryItem["QuantityWeights"] = 0;
+            
+            dataSummaryItem["QuantityFailure"] = 0;
+            dataSummaryItem["QuantityFailureWeights"] = 0;
+
+            dataSummaryItem["Swarfs"] = 0;
+            
+            kenGrid.forEach(function(dataItem){
+                if(commodityID === dataItem["CommodityID"]){
+                    dataSummaryItem["Quantity"] = dataSummaryItem["Quantity"] + dataItem["Quantity"];
+
+                    if(dataItem["PiecePerPack"] * 1 > 0){
+                        dataSummaryItem["Packages"] = dataSummaryItem["Packages"] + Math.trunc(dataItem["Quantity"]/dataItem["PiecePerPack"]);
+                        dataSummaryItem["OddPackages"] = dataSummaryItem["OddPackages"] + dataItem["Quantity"] % dataItem["PiecePerPack"];
+                    }
+                    
+                    if(dataItem["FoilUnitCounts"] * 1 > 0){
+                        dataSummaryItem["QuantityWeights"] = dataSummaryItem["QuantityWeights"] + DoRound(dataItem["Quantity"] * dataItem["FoilUnitWeights"]/dataItem["FoilUnitCounts"], requireConfig.websiteOptions.rndQuantity);
+                        dataSummaryItem["QuantityFailureWeights"] = dataSummaryItem["QuantityFailureWeights"] + DoRound(dataItem["QuantityFailure"] * dataItem["FoilUnitWeights"]/dataItem["FoilUnitCounts"], requireConfig.websiteOptions.rndQuantity);
+                    }
+
+                    dataSummaryItem["QuantityFailure"] = dataSummaryItem["QuantityFailure"] + dataItem["QuantityFailure"];
+                   
+                    dataSummaryItem["Swarfs"] = dataSummaryItem["Swarfs"] + dataItem["Swarfs"];                    
+                }
+            })            
+        }
+
+        $("#kendoGridDetails").data("kendoGrid").refresh();                  
     }
 </script>
