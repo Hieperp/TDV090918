@@ -29,10 +29,10 @@ namespace TotalDTO.Productions
 
         public int SemifinishedHandoverID { get; set; }
 
-        [Display(Name = "Ca sản xuất")]
+        [Display(Name = "Ca SX")]
         [UIHint("StringReadonly")]
         public string WorkshiftCode { get; set; }
-        [Display(Name = "Ngày sản xuất")]
+        [Display(Name = "Ngày SX")]
         [UIHint("DateTimeReadonly")]
         public DateTime WorkshiftEntryDate { get; set; }
 
@@ -46,7 +46,7 @@ namespace TotalDTO.Productions
         [UIHint("DateTimeReadonly")]
         public Nullable<System.DateTime> GoodsReceiptEntryDate { get; set; }
 
-        [Display(Name = "Ngày lô hàng")]
+        [Display(Name = "Lô hàng")]
         [UIHint("DateTimeReadonly")]
         public System.DateTime BatchEntryDate { get; set; }
 
@@ -60,11 +60,11 @@ namespace TotalDTO.Productions
         [UIHint("QuantityReadonly")]
         public decimal QuantityRemains { get; set; }
 
-        [Display(Name = "Thành phẩm")]
+        [Display(Name = "SLTP")]
         [UIHint("Quantity")]
         public override decimal Quantity { get; set; }
 
-        [Display(Name = "Phế phẩm")]
+        [Display(Name = "SLPP")]
         [UIHint("Quantity")]
         public decimal QuantityFailure { get; set; }
 

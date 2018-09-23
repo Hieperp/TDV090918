@@ -108,31 +108,32 @@
 
                     columns.Bound(p => p.CommodityID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= CommodityID #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].CommodityID' value='#= CommodityID #' />");
-                    columns.Bound(p => p.CommodityCode).DisplayNameTitle().Width(120).EditorTemplateName("StringReadonly")
+                    columns.Bound(p => p.CommodityCode).DisplayNameTitle().Width(88).EditorTemplateName("StringReadonly")
                         .ClientTemplate("#= CommodityCode #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].CommodityCode' value='#= CommodityCode #' />")
                         .ClientFooterTemplate("TC (#= kendo.format('{0:n0}', count) # dòng)");
-                    columns.Bound(p => p.CommodityName).DisplayNameTitle().Width(150).HtmlAttributes(new { style = "" })
+                    columns.Bound(p => p.CommodityName).DisplayNameTitle().Width(150).HtmlAttributes(new { style = "" }).Hidden()
                         .ClientTemplate("#= CommodityName #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].CommodityName' value='#= CommodityName #' />");
 
                     columns.Bound(p => p.CommodityTypeID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= CommodityTypeID #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].CommodityTypeID' value='#= CommodityTypeID #' />");
 
-                    columns.Bound(p => p.PiecePerPack).DisplayNameTitle().Width(30).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" })
+                    columns.Bound(p => p.PiecePerPack).DisplayNameTitle().Width(30).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Hidden()
                         .Format(Settings.kfmQuantity)
                         .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', PiecePerPack) #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].PiecePerPack' value='#= PiecePerPack #' />");
 
-                    columns.Bound(p => p.WorkshiftCode).DisplayNameTitle().Width(60)
-                        .ClientTemplate("#= (WorkshiftCode == null)? '' : WorkshiftCode #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].WorkshiftCode' value='#= (WorkshiftCode == null) ? '' : WorkshiftCode #' />");
-                    columns.Bound(p => p.WorkshiftEntryDate).DisplayNameTitle().Width(80)
+
+                    columns.Bound(p => p.WorkshiftEntryDate).DisplayNameTitle().HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(30)
                         .Format("{0:" + @Settings.DateFormat + "}")
                         .ClientTemplate("#= (WorkshiftEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', WorkshiftEntryDate) #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].WorkshiftEntryDate' value='#= (WorkshiftEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', WorkshiftEntryDate) #' />");
+                    columns.Bound(p => p.WorkshiftCode).DisplayNameTitle().HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(30)
+                        .ClientTemplate("#= (WorkshiftCode == null)? '' : WorkshiftCode #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].WorkshiftCode' value='#= (WorkshiftCode == null) ? '' : WorkshiftCode #' />");
+
 
                     columns.Bound(p => p.GoodsReceiptCode).DisplayNameTitle().Width(60).Hidden()
                     .ClientTemplate("#= (GoodsReceiptCode == null)? '' : GoodsReceiptCode #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].GoodsReceiptCode' value='#= (GoodsReceiptCode == null) ? '' : GoodsReceiptCode #' />");
-                    columns.Bound(p => p.GoodsReceiptReference).DisplayNameTitle().Width(60)
+                    columns.Bound(p => p.GoodsReceiptReference).DisplayNameTitle().Width(60).Hidden()
                         .ClientTemplate("#= (GoodsReceiptReference == null)? '' : GoodsReceiptReference #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].GoodsReceiptReference' value='#= (GoodsReceiptReference == null) ? '' : GoodsReceiptReference #' />");
-
-                    columns.Bound(p => p.BatchEntryDate).DisplayNameTitle().Filterable(false).Width(80)
+                    columns.Bound(p => p.BatchEntryDate).DisplayNameTitle().HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(30)
                         .Format("{0:" + @Settings.DateFormat + "}")
                         .ClientTemplate("#= (BatchEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', BatchEntryDate) #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].BatchEntryDate' value='#= (BatchEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', BatchEntryDate) #' />");
 
@@ -150,7 +151,7 @@
                         .Format(Settings.kfmQuantity)
                         .ClientFooterTemplate("#= kendo.format('" + Settings.kfmQuantity + "', sum) #")
                         .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', QuantityFailure) #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].QuantityFailure' value='#= QuantityFailure #' />");
-                    columns.Bound(p => p.Swarfs).DisplayNameTitle().HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(30)
+                    columns.Bound(p => p.Swarfs).DisplayNameTitle().HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(15)
                         .Format(Settings.kfmQuantity)
                         .ClientFooterTemplate("#= kendo.format('" + Settings.kfmQuantity + "', sum) #")
                         .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', Swarfs) #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].Swarfs' value='#= Swarfs #' />");
@@ -164,16 +165,25 @@
 
                     .ToolBar(toolbar =>
                     {
-                        toolbar.Template(
-                            @<text>
-                                <div>
-                                    @(Html.Kendo().Button()
+                        if (Model.Editable)
+                        {
+                            toolbar.Template(@<text>
+                                <button type="button" class="k-button" onclick="copyRemainsToQuantity()"> <img src="~/Content/Images/Mains/Size24/Borderlands-Select-icon-24.png" /> Đóng gói toàn bộ phôi </button>
+                            </text>);
+                        }
+                        else
+                        {//Add a functionless button for display purpose only
+                            toolbar.Template(
+                                @<text>
+                                    <div>
+                                        @(Html.Kendo().Button()
                                             .Name("iconButton")
                                             .HtmlAttributes(new { type = "button" })
                                             .SpriteCssClass("k-icon k-i-ungroup") //.Content("My button label")
-                                    )
-                                </div>
-                            </text>);
+                                        )
+                                    </div>
+                                </text>);
+                        }
                     })
 
                     .Editable(editable => { editable.Enabled(Model.Editable); editable.Mode(GridEditMode.InCell).DisplayDeleteConfirmation(true).CreateAt(GridInsertRowPosition.Bottom); })
@@ -220,22 +230,7 @@
             )
         </div>
 
-        <div class="div-k-panel">
-            @(Html.Kendo().PanelBar()
-                .Name("SummartyPanelBar")
-                .Items(items =>
-                {
-                    items.Add()
-                        .Text("Tổng hợp phiếu đóng gói")
-                        .Selected(true)
-                        .Expanded(true)
-                        .Content(@<text>
-                            @kendoSummaryGrid()
-                        </text>).HtmlAttributes(new { @class = "panel-class" });
-                })
-            )
-        </div>
-
+       
 
         <div class="div-k-panel">
             @(Html.Kendo().PanelBar()
@@ -269,25 +264,40 @@
             )
         </div>
 
+        <div class="div-k-panel">
+            @(Html.Kendo().PanelBar()
+                .Name("SummartyPanelBar")
+                .Items(items =>
+                {
+                    items.Add()
+                        .Text("Tổng hợp phiếu đóng gói")
+                        .Selected(true)
+                        .Expanded(true)
+                        .Content(@<text>
+                            @kendoSummaryGrid()
+                        </text>).HtmlAttributes(new { @class = "panel-class" });
+                })
+            )
+        </div>
 
         <div class="right-botton-panel">
             @if (Model.Editable)
             {
-                <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "FinishedProducts")" onclick="$('#Approved').val(false);"> <img src="~/Content/Images/New/save-icon.png" /> Lưu nhập ĐG </button>
+                <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "FinishedProducts")" onclick="$('#Approved').val(false);"> <img src="~/Content/Images/New/save-icon.png" /> Lưu phiếu </button>
                 <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "FinishedProducts")" onclick="$('#Approved').val(true);"> <img src="~/Content/Images/New/save-verify-icon.png" /> Lưu và duyệt phiếu </button>
-                <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "FinishedProducts")" onclick="$('#Approved').val(true);"> <img src="~/Content/Images/New/Actions-document-print-icon.png" /> Lưu, duyệt và in phiếu BTP</button>
+                <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "FinishedProducts")" onclick="$('#Approved').val(true);"> <img src="~/Content/Images/New/Actions-document-print-icon.png" /> Lưu, duyệt và in phiếu </button>
             }
             else
             {
                 if (Model.Approved && !Model.Approvable && !Model.UnApprovable)
                 {
-                    <button type="button" class="k-button custom-button" onclick="location.href='@Url.Action("Approve", "FinishedProducts", new {id = @Model.FinishedProductID })'"> <img src="~/Content/Images/Mains/Cross-icon-cancel32.png" /> Hủy duyệt phiếu nhập BTP </button>
+                    <button type="button" class="k-button custom-button" onclick="location.href='@Url.Action("Approve", "FinishedProducts", new {id = @Model.FinishedProductID })'"> <img src="~/Content/Images/Mains/Cross-icon-cancel32.png" /> Hủy duyệt phiếu </button>
                 }
             }
 
             @if (Model.FinishedProductID > 0)
             {
-                <button type="button" class="k-button custom-button" onclick="location.href='@Url.Action("Print", "FinishedProducts", new { id = @Model.FinishedProductID })'"> <img src="~/Content/Images/New/Apps-printer-icon.png" /> In phiếu nhập BTP </button>
+                <button type="button" class="k-button custom-button" onclick="location.href='@Url.Action("Print", "FinishedProducts", new { id = @Model.FinishedProductID })'"> <img src="~/Content/Images/New/Apps-printer-icon.png" /> In </button>
             }
         </div>
 
@@ -331,19 +341,22 @@
                     .ClientFooterTemplate("#= kendo.format('" + Settings.kfmN0 + "', sum) #")
                     .ClientTemplate("#= kendo.format('" + Settings.kfmN0 + "', Quantity) #" + "<input type='hidden' name='FinishedProductSummaryViewDetails[#= index(data) #].Quantity' value='#= Quantity #' />");
 
-                columns.Bound(p => p.PiecePerPack).DisplayNameTitle().Width(30).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" })
+                columns.Bound(p => p.PiecePerPack).DisplayNameTitle().Width(30).HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" })
                     .Format(Settings.kfmN0)
                     .ClientTemplate("#= kendo.format('" + Settings.kfmN0 + "', PiecePerPack) #" + "<input type='hidden' name='FinishedProductSummaryViewDetails[#= index(data) #].PiecePerPack' value='#= PiecePerPack #' />");
                 
                 columns.Bound(p => p.Packages).DisplayNameTitle().Width(30).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" })
                     .Format(Settings.kfmN0)
+                    .ClientFooterTemplate("#= kendo.format('" + Settings.kfmN0 + "', sum) #")
                     .ClientTemplate("#= kendo.format('" + Settings.kfmN0 + "', Packages) #" + "<input type='hidden' name='FinishedProductSummaryViewDetails[#= index(data) #].Packages' value='#= Packages #' />");
                 columns.Bound(p => p.OddPackages).DisplayNameTitle().Width(30).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" })
                     .Format(Settings.kfmN0)
+                    .ClientFooterTemplate("#= kendo.format('" + Settings.kfmN0 + "', sum) #")
                     .ClientTemplate("#= kendo.format('" + Settings.kfmN0 + "', OddPackages) #" + "<input type='hidden' name='FinishedProductSummaryViewDetails[#= index(data) #].OddPackages' value='#= OddPackages #' />");
                 
                 columns.Bound(p => p.QuantityWeights).DisplayNameTitle().Width(30).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" })
                     .Format(Settings.kfmQuantity)
+                    .ClientFooterTemplate("#= kendo.format('" + Settings.kfmQuantity + "', sum) #")
                     .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', QuantityWeights) #" + "<input type='hidden' name='FinishedProductSummaryViewDetails[#= index(data) #].QuantityWeights' value='#= QuantityWeights #' />");
 
                 columns.Bound(p => p.QuantityFailure).DisplayNameTitle().HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(30)
@@ -352,6 +365,7 @@
                     .ClientTemplate("#= kendo.format('" + Settings.kfmN0 + "', QuantityFailure) #" + "<input type='hidden' name='FinishedProductSummaryViewDetails[#= index(data) #].QuantityFailure' value='#= QuantityFailure #' />");
                 columns.Bound(p => p.QuantityFailureWeights).DisplayNameTitle().HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(30)
                     .Format(Settings.kfmQuantity)
+                    .ClientFooterTemplate("#= kendo.format('" + Settings.kfmQuantity + "', sum) #")
                     .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', QuantityFailureWeights) #" + "<input type='hidden' name='FinishedProductSummaryViewDetails[#= index(data) #].QuantityFailureWeights' value='#= QuantityFailureWeights #' />");
                 columns.Bound(p => p.Swarfs).DisplayNameTitle().HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(30)
                     .Format(Settings.kfmQuantity)
@@ -379,7 +393,11 @@
                 .Aggregates(a => a.Add(x => x.CommodityCode).Count())
                 .Aggregates(a => a.Add(x => x.QuantityRemains).Sum())
                 .Aggregates(a => a.Add(x => x.Quantity).Sum())
+                .Aggregates(a => a.Add(x => x.Packages).Sum())
+                .Aggregates(a => a.Add(x => x.OddPackages).Sum())
+                .Aggregates(a => a.Add(x => x.QuantityWeights).Sum())
                 .Aggregates(a => a.Add(x => x.QuantityFailure).Sum())
+                .Aggregates(a => a.Add(x => x.QuantityFailureWeights).Sum())
                 .Aggregates(a => a.Add(x => x.Swarfs).Sum())
             )
         )

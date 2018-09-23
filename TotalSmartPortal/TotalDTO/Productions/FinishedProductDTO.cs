@@ -73,7 +73,7 @@ namespace TotalDTO.Productions
         public CustomerBaseDTO Customer { get; set; }
 
         public override int CrucialWorkerID { get { return (this.CrucialWorker != null ? this.CrucialWorker.EmployeeID : 0); } }
-        [Display(Name = "Công nhân ĐHCK")]
+        [Display(Name = "NV đóng gói")]
         [UIHint("AutoCompletes/EmployeeBase")]
         public EmployeeBaseDTO CrucialWorker { get; set; }        
 

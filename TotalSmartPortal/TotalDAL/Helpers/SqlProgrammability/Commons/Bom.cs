@@ -129,7 +129,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             queryString = queryString + "       ELSE " + "\r\n"; //GET ALL BOMS BY @CommodityCategoryID AND @CommodityClassID AND @CommodityLineID
             queryString = queryString + "           " + querySELECT + ", 0.0 AS BlockUnit, 0.0 AS BlockQuantity " + "\r\n";
             queryString = queryString + "           " + queryFROM + "\r\n";
-            queryString = queryString + "           " + queryWHERE + " AND CommodityCategoryID = @CommodityCategoryID AND CommodityClassID = @CommodityClassID AND CommodityLineID = @CommodityLineID " + "\r\n";
+            queryString = queryString + "           " + queryWHERE + " AND CommodityLineID = @CommodityLineID " + "\r\n"; //AND CommodityCategoryID = @CommodityCategoryID AND CommodityClassID = @CommodityClassID 
             queryString = queryString + "    END " + "\r\n";
 
             this.totalSmartPortalEntities.CreateStoredProcedure("GetBomBases", queryString);

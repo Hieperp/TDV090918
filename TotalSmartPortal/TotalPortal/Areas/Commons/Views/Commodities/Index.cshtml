@@ -12,7 +12,7 @@
 
             columns.Bound(p => p.CommodityCategoryName1).Title("ROOT").Hidden();
             columns.Bound(p => p.CommodityCategoryName2).Title("CAT").Hidden();
-            columns.Bound(p => p.CodePartA).Title("Mã").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(25).ClientTemplate("<a href='" + Url.RouteUrl("Default", new { controller = "Commons/" + Model.ControllerName, action = "Edit" }) + "/#= CommodityID #'>#=CodePartA#</a>").Hidden(@Model.IsItem ? true : false);
+            columns.Bound(p => p.CodePartA).Title("Mã").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(39).ClientTemplate("<a href='" + Url.RouteUrl("Default", new { controller = "Commons/" + Model.ControllerName, action = "Edit" }) + "/#= CommodityID #'>#=CodePartA#</a>").Hidden(@Model.IsItem ? true : false);
             columns.Bound(p => p.CodePartB).Title("Phân loại").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(25).ClientTemplate(@Model.IsItem ? "<a href='" + Url.RouteUrl("Default", new { controller = "Commons/" + Model.ControllerName, action = "Edit" }) + "/#= CommodityID #'>#=CodePartB#</a>" : "");
             columns.Bound(p => p.CodePartC).Title("Mã màu").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(10);
             columns.Bound(p => p.CodePartD).Title("A/C/G/F/T").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(10).Hidden(@Model.IsMaterial ? true : false);
@@ -21,16 +21,11 @@
 
             columns.Bound(p => p.Name).Title("Tên thường gọi").Width(120);
             
-            columns.Bound(p => p.BomCode).Title("Mã màng").Width(100).Hidden(!@Model.IsProduct);
-            columns.Bound(p => p.BomName).Title("Tên màng").Width(120).Hidden(!@Model.IsProduct);
-            columns.Bound(p => p.BlockUnit).Title("SL Màng").Format(Settings.kfmQuantity).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Filterable(false).Width(50).Hidden(!@Model.IsProduct);
-            columns.Bound(p => p.BlockQuantity).Title("TL Màng").Format(Settings.kfmQuantity).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Filterable(false).Width(50).Hidden(!@Model.IsProduct);
+            columns.Bound(p => p.BomCode).Title("Mã màng").Width(88).Hidden(!@Model.IsProduct);
+            columns.Bound(p => p.MoldCode).Title("M").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(20).Hidden(!@Model.IsProduct);
+            columns.Bound(p => p.MoldQuantity).Title("P/M").Format(Settings.kfmQuantity).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Filterable(false).Width(10).Hidden(!@Model.IsProduct);
 
-            columns.Bound(p => p.MoldCode).Title("Mã khuôn").Width(100).Hidden(!@Model.IsProduct);
-            columns.Bound(p => p.MoldName).Title("Tên khuôn").Width(120).Hidden(!@Model.IsProduct);
-            columns.Bound(p => p.MoldQuantity).Title("SL khuôn").Format(Settings.kfmQuantity).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Filterable(false).Width(50).Hidden(!@Model.IsProduct);
-            
-            columns.Bound(p => p.Remarks).Title("Ghi chú").Width(80);
+            columns.Bound(p => p.Remarks).Title("Ghi chú").Width(80).Hidden(@Model.IsProduct);
 
             columns.Template(model => null).HtmlAttributes(new { @class = "grid-column-center" }).Width(10)
                 .ClientTemplate("<a class='k-button' style='padding-left:5px; min-width:28px; width:28px' href='" + Url.RouteUrl("Default", new { controller = "Commons/" + Model.ControllerName, action = "Edit" }) + "/#= CommodityID #'><span class='k-icon k-edit'></span></a>"); // <a class='k-button' style='padding-left:0px; padding-right:0px; min-width:28px; width:28px' href='" + Url.RouteUrl("Default", new { controller = "Commons/Commodities", action = "Delete" }) + "/#= CommodityID #'><span class='k-icon k-delete'></span></a>

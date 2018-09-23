@@ -10,7 +10,7 @@
                 .Items(items =>
                 {
                     items.Add()
-                        .Text("Thông tin Kế hoạch sản xuất")
+                        .Text("Số liệu sản xuất")
                         .Selected(true)
                         .Expanded(true)
                         .Content(@<text>
@@ -39,7 +39,7 @@
         columns.Bound(c => c.CommoditiyCode).Title("Mã hàng").Width(100);
         columns.Bound(c => c.Quantity).Title("SL").Format(Settings.kfmQuantity).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
     })
-    .ToolBar(toolbar =>
+    @*.ToolBar(toolbar =>
     {
         toolbar.Template(@<text>
             <div class="toolbar" style="float: right;">
@@ -47,8 +47,8 @@
                 <input id="filterText" class="k-textbox" style="text-align: center; margin-right: 13px;" onkeyup="filterText_KeyUp()" />
             </div>
         </text>);
-    })
-    .Scrollable(s => s.Height(Settings.GridPopupHeight))
+    })*@
+    //.Scrollable(s => s.Height(Settings.GridPopupHeight))
     .DataSource(ds => ds.Ajax()
             .Read(read => read.Action("GetPlannedOrderLogs", "PlannedOrderAPIs", new { area = "Productions" }).Data(@<text>
             function(e) {

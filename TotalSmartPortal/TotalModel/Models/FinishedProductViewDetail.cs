@@ -24,7 +24,7 @@ namespace TotalModel.Models
         public string CommodityCode { get; set; }
         public string CommodityName { get; set; }
         public int CommodityTypeID { get; set; }
-        public Nullable<int> Remarks { get; set; }
+        public string Remarks { get; set; }
         public int WorkshiftID { get; set; }
         public System.DateTime WorkshiftEntryDate { get; set; }
         public string WorkshiftCode { get; set; }
