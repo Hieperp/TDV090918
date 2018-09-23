@@ -19,8 +19,18 @@
             columns.Bound(p => p.CodePartE).Title("Độ dầy").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(10).Hidden(!@Model.IsItem ? true : false);
             columns.Bound(p => p.CodePartF).Title("Chiều rộng").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(10).Hidden(!@Model.IsItem ? true : false);
 
-            columns.Bound(p => p.Name).Title("Tên thường gọi").Width(200);
-            columns.Bound(p => p.Remarks).Title("Ghi chú").Width(96);
+            columns.Bound(p => p.Name).Title("Tên thường gọi").Width(120);
+            
+            columns.Bound(p => p.BomCode).Title("Mã màng").Width(100).Hidden(!@Model.IsProduct);
+            columns.Bound(p => p.BomName).Title("Tên màng").Width(120).Hidden(!@Model.IsProduct);
+            columns.Bound(p => p.BlockUnit).Title("SL Màng").Format(Settings.kfmQuantity).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Filterable(false).Width(50).Hidden(!@Model.IsProduct);
+            columns.Bound(p => p.BlockQuantity).Title("TL Màng").Format(Settings.kfmQuantity).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Filterable(false).Width(50).Hidden(!@Model.IsProduct);
+
+            columns.Bound(p => p.MoldCode).Title("Mã khuôn").Width(100).Hidden(!@Model.IsProduct);
+            columns.Bound(p => p.MoldName).Title("Tên khuôn").Width(120).Hidden(!@Model.IsProduct);
+            columns.Bound(p => p.MoldQuantity).Title("SL khuôn").Format(Settings.kfmQuantity).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Filterable(false).Width(50).Hidden(!@Model.IsProduct);
+            
+            columns.Bound(p => p.Remarks).Title("Ghi chú").Width(80);
 
             columns.Template(model => null).HtmlAttributes(new { @class = "grid-column-center" }).Width(10)
                 .ClientTemplate("<a class='k-button' style='padding-left:5px; min-width:28px; width:28px' href='" + Url.RouteUrl("Default", new { controller = "Commons/" + Model.ControllerName, action = "Edit" }) + "/#= CommodityID #'><span class='k-icon k-edit'></span></a>"); // <a class='k-button' style='padding-left:0px; padding-right:0px; min-width:28px; width:28px' href='" + Url.RouteUrl("Default", new { controller = "Commons/Commodities", action = "Delete" }) + "/#= CommodityID #'><span class='k-icon k-delete'></span></a>
