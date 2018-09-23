@@ -217,7 +217,9 @@
 
                     columns.Bound(p => p.CommodityTypeID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= CommodityTypeID #" + "<input type='hidden' name='SemifinishedProductViewDetails[#= index(data) #].CommodityTypeID' value='#= CommodityTypeID #' />");
-
+                    columns.Bound(p => p.PiecePerPack).DisplayNameTitle().HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(70)
+                        .ClientTemplate("#= (PiecePerPack == null)? '' : PiecePerPack #" + "<input type='hidden' name='SemifinishedProductViewDetails[#= index(data) #].PiecePerPack' value='#= (PiecePerPack == null) ? '' : PiecePerPack #' />");
+                    
                     columns.Bound(p => p.MoldQuantity).DisplayNameTitle().Width(30).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" })
                         .Format(Settings.kfmN0)
                         .ClientTemplate("#= kendo.format('" + Settings.kfmN0 + "', MoldQuantity) #" + "<input type='hidden' name='SemifinishedProductViewDetails[#= index(data) #].MoldQuantity' value='#= MoldQuantity #' />");

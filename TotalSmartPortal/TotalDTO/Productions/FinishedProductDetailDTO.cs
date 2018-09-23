@@ -112,10 +112,10 @@ namespace TotalDTO.Productions
         public decimal Quantity { get; set; }
         [Display(Name = "Số kiện")]
         [UIHint("QuantityReadonly")]
-        public decimal Packages { get { return this.PiecePerPack > 0? Math.Truncate(this.Quantity / this.PiecePerPack): 0; } } 
+        public decimal Packages { get { return this.PiecePerPack > 0 ? Math.Truncate(this.Quantity / this.PiecePerPack) : 0; } set { } } 
         [Display(Name = "Số cái lẻ")]
         [UIHint("QuantityReadonly")]
-        public decimal OddPackages { get { return this.PiecePerPack > 0? this.Quantity % this.PiecePerPack : 0; } } 
+        public decimal OddPackages { get { return this.PiecePerPack > 0 ? this.Quantity % this.PiecePerPack : 0; } set { } } 
 
         [Display(Name = "TP (kg)")]
         [UIHint("QuantityReadonly")]
@@ -126,7 +126,7 @@ namespace TotalDTO.Productions
         public decimal QuantityFailure { get; set; }
         [Display(Name = "PP (kg)")]
         [UIHint("QuantityReadonly")]
-        public decimal QuantityFailureWeights { get { return this.FoilUnitCounts > 0? this.QuantityFailure * this.FoilUnitWeights / this.FoilUnitCounts: 0; } }
+        public decimal QuantityFailureWeights { get { return this.FoilUnitCounts > 0 ? this.QuantityFailure * this.FoilUnitWeights / this.FoilUnitCounts : 0; } set { } }
 
         [Display(Name = "Biên (kg)")]
         [UIHint("QuantityReadonly")]

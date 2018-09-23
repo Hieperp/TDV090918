@@ -69,14 +69,14 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "       IF (@FinishedProductID <= 0) " + "\r\n";
             queryString = queryString + "               BEGIN " + "\r\n";
             queryString = queryString + "                   " + this.BUILDSQLNew() + "\r\n";
-            queryString = queryString + "                   ORDER BY SemifinishedProductEntryDate, SemifinishedProductDetails.SemifinishedProductID, SemifinishedProductDetails.SemifinishedProductDetailID " + "\r\n";
+            queryString = queryString + "                   ORDER BY CommodityCode, SemifinishedProductEntryDate, SemifinishedProductDetails.SemifinishedProductID, SemifinishedProductDetails.SemifinishedProductDetailID " + "\r\n";
             queryString = queryString + "               END " + "\r\n";
             queryString = queryString + "       ELSE " + "\r\n";
 
             queryString = queryString + "               IF (@IsReadonly = 1) " + "\r\n";
             queryString = queryString + "                   BEGIN " + "\r\n";
             queryString = queryString + "                       " + this.BUILDSQLEdit() + "\r\n";
-            queryString = queryString + "                       ORDER BY SemifinishedProductEntryDate, SemifinishedProductDetails.SemifinishedProductID, SemifinishedProductDetails.SemifinishedProductDetailID " + "\r\n";
+            queryString = queryString + "                       ORDER BY CommodityCode, SemifinishedProductEntryDate, SemifinishedProductDetails.SemifinishedProductID, SemifinishedProductDetails.SemifinishedProductDetailID " + "\r\n";
             queryString = queryString + "                   END " + "\r\n";
 
             queryString = queryString + "               ELSE " + "\r\n"; //FULL SELECT FOR EDIT MODE
@@ -85,7 +85,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "                       " + this.BUILDSQLNew() + " AND SemifinishedProductDetails.SemifinishedProductDetailID NOT IN (SELECT SemifinishedProductDetailID FROM FinishedProductDetails WHERE FinishedProductID = @FinishedProductID) " + "\r\n";
             queryString = queryString + "                       UNION ALL " + "\r\n";
             queryString = queryString + "                       " + this.BUILDSQLEdit() + "\r\n";
-            queryString = queryString + "                       ORDER BY SemifinishedProductEntryDate, SemifinishedProductDetails.SemifinishedProductID, SemifinishedProductDetails.SemifinishedProductDetailID " + "\r\n";
+            queryString = queryString + "                       ORDER BY CommodityCode, SemifinishedProductEntryDate, SemifinishedProductDetails.SemifinishedProductID, SemifinishedProductDetails.SemifinishedProductDetailID " + "\r\n";
             queryString = queryString + "                   END " + "\r\n";
 
             queryString = queryString + "   END " + "\r\n";
