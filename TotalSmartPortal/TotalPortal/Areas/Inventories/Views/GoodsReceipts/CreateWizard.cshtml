@@ -11,6 +11,9 @@
 
     @Html.Partial("~/Views/Helpers/Bases/_BaseSectionTop.cshtml")
 
+    @Html.Hidden("WarehouseTaskID", (int)@ViewBag.WarehouseTaskID);
+    @Html.Hidden("WarehouseTaskIDList", (string)@ViewBag.WarehouseTaskIDList);
+
     @Html.HiddenFor(model => model.GoodsReceiptTypeID)
 
     @Html.HiddenFor(model => model.Code);

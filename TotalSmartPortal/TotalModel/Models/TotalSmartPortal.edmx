@@ -13369,6 +13369,15 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="String" Name="CommodityCategoryName1" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="CommodityCategoryName2" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="OfficialCode" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="BomID" Nullable="true" />
+          <Property Type="String" Name="BomCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="BomName" Nullable="true" MaxLength="200" />
+          <Property Type="Decimal" Name="BlockUnit" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="BlockQuantity" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="MoldID" Nullable="true" />
+          <Property Type="String" Name="MoldCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MoldName" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="MoldQuantity" Nullable="true" Precision="18" Scale="2" />
         </ComplexType>
         <Association Name="FK_WarehouseAdjustments_Customers">
           <End Type="TotalSmartPortalModel.Customer" Role="Customer" Multiplicity="1" />
@@ -19298,6 +19307,15 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="CommodityCategoryName1" ColumnName="CommodityCategoryName1" />
                 <ScalarProperty Name="CommodityCategoryName2" ColumnName="CommodityCategoryName2" />
                 <ScalarProperty Name="OfficialCode" ColumnName="OfficialCode" />
+                <ScalarProperty Name="BomID" ColumnName="BomID" />
+                <ScalarProperty Name="BomCode" ColumnName="BomCode" />
+                <ScalarProperty Name="BomName" ColumnName="BomName" />
+                <ScalarProperty Name="BlockUnit" ColumnName="BlockUnit" />
+                <ScalarProperty Name="BlockQuantity" ColumnName="BlockQuantity" />
+                <ScalarProperty Name="MoldID" ColumnName="MoldID" />
+                <ScalarProperty Name="MoldCode" ColumnName="MoldCode" />
+                <ScalarProperty Name="MoldName" ColumnName="MoldName" />
+                <ScalarProperty Name="MoldQuantity" ColumnName="MoldQuantity" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -29,5 +29,14 @@ namespace TotalModel.Models
         public string CommodityCategoryName1 { get; set; }
         public string CommodityCategoryName2 { get; set; }
         public string OfficialCode { get; set; }
+        public Nullable<int> BomID { get; set; }
+        public string BomCode { get; set; }
+        public string BomName { get; set; }
+        public Nullable<decimal> BlockUnit { get; set; }
+        public Nullable<decimal> BlockQuantity { get; set; }
+        public Nullable<int> MoldID { get; set; }
+        public string MoldCode { get; set; }
+        public string MoldName { get; set; }
+        public Nullable<decimal> MoldQuantity { get; set; }
     }
 }
