@@ -85,6 +85,6 @@ namespace TotalDTO.Productions
         protected override IEnumerable<FinishedProductDetailDTO> DtoDetails() { return this.FinishedProductViewDetails; }
 
 
-        public List<FinishedProductSummaryDTO> FinishedProductSummarys { get; set; }
+        public List<FinishedProductSummaryDTO> FinishedProductSummaries { get; set; }
     }
 }

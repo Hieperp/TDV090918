@@ -37,26 +37,32 @@ namespace TotalPortal.Areas.Productions.Controllers
         {
             ICollection<FinishedProductViewDetail> finishedProductViewDetails = this.finishedProductService.GetFinishedProductViewDetails(finishedProductViewModel.FinishedProductID, this.finishedProductService.LocationID, finishedProductViewModel.FirmOrderID, false);
 
-            var finishedProductSummarys = finishedProductViewDetails
-                        .GroupBy(g => g.CommodityID)
-                        .Select(sl => new FinishedProductSummaryDTO { 
-                                CommodityID = sl.First().CommodityID,
-                                CommodityCode = sl.First().CommodityCode,
-                                CommodityName = sl.First().CommodityName,
-                                PiecePerPack = sl.First().PiecePerPack,
-
-                                FoilUnitCounts = 4,
-                                FoilUnitWeights = 78,
-
-                                QuantityRemains = sl.Sum(s => s.QuantityRemains).Value,
-                                Quantity = sl.Sum(s => s.Quantity),
-                                QuantityFailure = sl.Sum(s => s.QuantityFailure),
-                                Swarfs = sl.Sum(s => s.Swarfs),                                 
-                            });
-
-            finishedProductViewModel.FinishedProductSummarys = finishedProductSummarys.ToList();
-
             return finishedProductViewDetails;
+        }
+
+        protected override FinishedProductViewModel TailorViewModel(FinishedProductViewModel finishedProductViewModel, bool forDelete, bool forAlter, bool forOpen)
+        {
+            var finishedProductSummaries = finishedProductViewModel.ViewDetails
+                                            .GroupBy(g => g.CommodityID)
+                                            .Select(sl => new FinishedProductSummaryDTO
+                                            {
+                                                CommodityID = sl.First().CommodityID,
+                                                CommodityCode = sl.First().CommodityCode,
+                                                CommodityName = sl.First().CommodityName,
+                                                PiecePerPack = sl.First().PiecePerPack,
+
+                                                FoilUnitCounts = 4,
+                                                FoilUnitWeights = 78,
+
+                                                QuantityRemains = sl.Sum(s => s.QuantityRemains),
+                                                Quantity = sl.Sum(s => s.Quantity),
+                                                QuantityFailure = sl.Sum(s => s.QuantityFailure),
+                                                Swarfs = sl.Sum(s => s.Swarfs),
+                                            });
+
+            finishedProductViewModel.FinishedProductSummaries = finishedProductSummaries.ToList();
+
+            return base.TailorViewModel(finishedProductViewModel, forDelete, forAlter, forOpen);
         }
 
         public override void AddRequireJsOptions()
