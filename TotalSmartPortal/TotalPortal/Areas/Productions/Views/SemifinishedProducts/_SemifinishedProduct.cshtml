@@ -78,9 +78,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FoilUnitCounts)
             <div class="div-input left-panel-input">
-                <span>@Html.Kendo().NumericTextBoxFor(model => model.FoilUnitWeights).Format(@Settings.kfmQuantity).HtmlAttributes(new { @style = "width: 45%;" }).Events(e => e.Change("updateFoilWeights").Spin("updateFoilWeights")) </span>
-                <label style="width:6%; text-align:center"> / </label>
-                <span>@Html.Kendo().NumericTextBoxFor(model => model.FoilUnitCounts).Format(@Settings.kfmN0).HtmlAttributes(new { @style = "width: 45%;" }).Events(e => e.Change("updateFoilWeights").Spin("updateFoilWeights")) </span>
+                <span style="width: 47%;float: left;">@Html.Kendo().NumericTextBoxFor(model => model.FoilUnitWeights).Format(@Settings.kfmQuantity).HtmlAttributes(new { @style = "width: 100%;" }).Events(e => e.Change("updateFoilWeights").Spin("updateFoilWeights")) </span>
+                <label style="width:6%; text-align:center; margin-top: 4px;"> / </label>
+                <span style="width: 47%;float: right;">@Html.Kendo().NumericTextBoxFor(model => model.FoilUnitCounts).Format(@Settings.kfmN0).HtmlAttributes(new { @style = "width: 100%;" }).Events(e => e.Change("updateFoilWeights").Spin("updateFoilWeights")) </span>
             </div>
             <div class="div-validation-message">
                 @Html.ValidationMessageFor(model => model.FoilUnitCounts, "", new { @class = "text-danger" })

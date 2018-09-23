@@ -25,6 +25,9 @@
         "gridDatasourceWeight": "Controllers/Root/Shared/Edits/gridDatasourceWeight",
         "gridDatasourceWeightSubscribe": "Controllers/Root/Shared/Edits/gridDatasourceWeightSubscribe",
 
+        "gridDatasourceFinishedProduct": "Controllers/Root/Shared/Edits/gridDatasourceFinishedProduct",
+        "gridDatasourceFinishedProductSubscribe": "Controllers/Root/Shared/Edits/gridDatasourceFinishedProductSubscribe",
+
         "gridDatasourceReceipt": "Controllers/Root/Shared/Edits/gridDatasourceReceipt",
         "gridDatasourceReceiptSubscribe": "Controllers/Root/Shared/Edits/gridDatasourceReceiptSubscribe",
 
