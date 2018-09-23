@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Text;
 using System.Linq;
+using System.Collections;
 
 using AutoMapper;
 using RequireJsNet;
@@ -36,8 +37,24 @@ namespace TotalPortal.Areas.Productions.Controllers
         {
             ICollection<FinishedProductViewDetail> finishedProductViewDetails = this.finishedProductService.GetFinishedProductViewDetails(finishedProductViewModel.FinishedProductID, this.finishedProductService.LocationID, finishedProductViewModel.FirmOrderID, false);
 
+            var finishedProductSummarys = finishedProductViewDetails
+                        .GroupBy(g => g.CommodityID)
+                        .Select(sl => new FinishedProductSummaryDTO { 
+                                CommodityID = sl.First().CommodityID,
+                                CommodityCode = sl.First().CommodityCode,
+                                CommodityName = sl.First().CommodityName,
+                                PiecePerPack = sl.First().PiecePerPack,
 
-            finishedProductViewModel.FinishedProductSummarys = finishedProductViewDetails.GroupBy(g => g.CommodityID).Select().;
+                                FoilUnitCounts = 4,
+                                FoilUnitWeights = 78,
+
+                                QuantityRemains = sl.Sum(s => s.QuantityRemains).Value,
+                                Quantity = sl.Sum(s => s.Quantity),
+                                QuantityFailure = sl.Sum(s => s.QuantityFailure),
+                                Swarfs = sl.Sum(s => s.Swarfs),                                 
+                            });
+
+            finishedProductViewModel.FinishedProductSummarys = finishedProductSummarys.ToList();
 
             return finishedProductViewDetails;
         }
