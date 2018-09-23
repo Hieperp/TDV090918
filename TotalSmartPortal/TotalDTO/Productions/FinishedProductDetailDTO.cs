@@ -50,9 +50,6 @@ namespace TotalDTO.Productions
         [UIHint("DateTimeReadonly")]
         public System.DateTime BatchEntryDate { get; set; }
 
-        [Display(Name = "Cái/ kiện")]
-        [UIHint("Quantity")]
-        public decimal PiecePerPack { get; set; }
         [UIHint("QuantityReadonly")]
         public decimal FoilUnitCounts { get; set; }
         [UIHint("QuantityReadonly")]
@@ -95,7 +92,7 @@ namespace TotalDTO.Productions
         public string CommodityName { get; set; }
 
         [Display(Name = "Cái/ kiện")]
-        [UIHint("QuantityReadonly")]
+        [UIHint("IntegerReadonly")]
         public decimal PiecePerPack { get; set; }
 
         [UIHint("QuantityReadonly")]

@@ -71,7 +71,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
-            queryString = queryString + "       SELECT          ISNULL(SemifinishedProductDetails.SemifinishedProductDetailID, 0) AS SemifinishedProductDetailID, ISNULL(SemifinishedProductDetails.SemifinishedProductID, 0) AS SemifinishedProductID, FirmOrderDetails.FirmOrderDetailID, FirmOrderDetails.PlannedOrderID, FirmOrderDetails.PlannedOrderDetailID, Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, " + "\r\n";
+            queryString = queryString + "       SELECT          ISNULL(SemifinishedProductDetails.SemifinishedProductDetailID, 0) AS SemifinishedProductDetailID, ISNULL(SemifinishedProductDetails.SemifinishedProductID, 0) AS SemifinishedProductID, FirmOrderDetails.FirmOrderDetailID, FirmOrderDetails.PlannedOrderID, FirmOrderDetails.PlannedOrderDetailID, Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, FirmOrderDetails.PiecePerPack, " + "\r\n";
             queryString = queryString + "                       FirmOrderDetails.MoldQuantity, ROUND(FirmOrderDetails.Quantity - FirmOrderDetails.QuantitySemifinished + ISNULL(SemifinishedProductDetails.Quantity, 0), " + (int)GlobalEnums.rndQuantity + ") AS QuantityRemains, ISNULL(SemifinishedProductDetails.Quantity, 0) AS Quantity, SemifinishedProductDetails.Remarks " + "\r\n";
             
             queryString = queryString + "       FROM            FirmOrderDetails " + "\r\n";

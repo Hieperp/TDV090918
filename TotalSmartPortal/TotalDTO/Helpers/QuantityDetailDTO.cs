@@ -31,6 +31,8 @@ namespace TotalDTO.Helpers
         [Required(ErrorMessage = "Lỗi bắt buộc phải có loại hàng hóa")]
         public virtual int CommodityTypeID { get; set; }
 
+        [Display(Name = "P/P")]
+        public virtual int PiecePerPack { get; set; }
 
         [Display(Name = "SL")]                
         [Required(ErrorMessage = "Vui lòng nhập số lượng")]

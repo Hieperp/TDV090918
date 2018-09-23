@@ -26,5 +26,6 @@ namespace TotalModel.Models
         public int SemifinishedProductID { get; set; }
         public int PlannedOrderID { get; set; }
         public decimal MoldQuantity { get; set; }
+        public int PiecePerPack { get; set; }
     }
 }

@@ -308,17 +308,17 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_SemifinishedProductDetails_SemifinishedProducts" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_SemifinishedProducts_Shifts" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_SemifinishedProducts_Workshifts" />
-        <EntityTypeShape EntityType="TotalSmartPortalModel.FinishedProductDetail" Width="1.5" PointX="49.375" PointY="22.125" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.FinishedProduct" Width="1.5" PointX="40.125" PointY="25.875" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProductDetails_Commodities" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProducts_Customers" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProducts_Employees" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandoverDetails_FinishedProductDetails" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProductDetails_FinishedProducts" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceiptDetails_FinishedProductDetails" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProducts_FinishedProducts" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProducts_FirmOrders" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProducts_Locations" />
+        <EntityTypeShape EntityType="TotalSmartPortalModel.FinishedProductDetail" Width="1.5" PointX="49.375" PointY="22.125" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProductDetails_Commodities" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandoverDetails_FinishedProductDetails" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProductDetails_FinishedProducts" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceiptDetails_FinishedProductDetails" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -44,6 +44,8 @@
 
             currentDataSourceRow.set("DiscountPercent", dataItem.DiscountPercent);
             
+            if (currentDataSourceRow.PiecePerPack != undefined) { currentDataSourceRow.set("PiecePerPack", dataItem.PiecePerPack); }
+
             if (currentDataSourceRow.BomID != undefined)
             {
                 currentDataSourceRow.set("BomID", dataItem.BomID === null ? 0 : dataItem.BomID);

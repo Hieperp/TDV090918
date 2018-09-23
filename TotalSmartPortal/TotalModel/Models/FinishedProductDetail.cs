@@ -26,6 +26,7 @@ namespace TotalModel.Models
         public System.DateTime EntryDate { get; set; }
         public int LocationID { get; set; }
         public int CustomerID { get; set; }
+        public int CrucialWorkerID { get; set; }
         public int FirmOrderID { get; set; }
         public int FirmOrderDetailID { get; set; }
         public int PlannedOrderID { get; set; }
@@ -36,8 +37,7 @@ namespace TotalModel.Models
         public Nullable<int> FinishedHandoverID { get; set; }
         public int CommodityID { get; set; }
         public int CommodityTypeID { get; set; }
-        public int CrucialWorkerID { get; set; }
-        public decimal PiecePerPack { get; set; }
+        public int PiecePerPack { get; set; }
         public decimal Quantity { get; set; }
         public decimal QuantityFailure { get; set; }
         public decimal Swarfs { get; set; }

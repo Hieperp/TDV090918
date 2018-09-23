@@ -36,5 +36,6 @@ namespace TotalModel.Models
         public decimal MoldQuantity { get; set; }
         public decimal BlockUnit { get; set; }
         public decimal BlockQuantity { get; set; }
+        public int PiecePerPack { get; set; }
     }
 }

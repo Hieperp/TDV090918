@@ -35,9 +35,10 @@ namespace TotalDTO.Productions
         [UIHint("Quantity")]
         public decimal BlockQuantity { get; set; }
 
-        //[Display(Name = "Mã CK")]
         [UIHint("AutoCompletes/CommodityBase")]
         public override string CommodityCode { get; set; }
+        [UIHint("Integer")]
+        public override int PiecePerPack { get; set; }
 
         public string VoidTypeCode { get; set; }
         [Display(Name = "Lý do")]
