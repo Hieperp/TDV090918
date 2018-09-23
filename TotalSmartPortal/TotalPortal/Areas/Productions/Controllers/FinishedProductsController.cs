@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Web.Mvc;
 using System.Text;
+using System.Linq;
 
 using AutoMapper;
 using RequireJsNet;
@@ -34,6 +35,9 @@ namespace TotalPortal.Areas.Productions.Controllers
         protected override ICollection<FinishedProductViewDetail> GetEntityViewDetails(FinishedProductViewModel finishedProductViewModel)
         {
             ICollection<FinishedProductViewDetail> finishedProductViewDetails = this.finishedProductService.GetFinishedProductViewDetails(finishedProductViewModel.FinishedProductID, this.finishedProductService.LocationID, finishedProductViewModel.FirmOrderID, false);
+
+
+            finishedProductViewModel.FinishedProductSummarys = finishedProductViewDetails.GroupBy(g => g.CommodityID).Select().;
 
             return finishedProductViewDetails;
         }

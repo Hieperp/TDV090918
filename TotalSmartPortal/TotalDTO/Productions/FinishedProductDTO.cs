@@ -36,7 +36,19 @@ namespace TotalDTO.Productions
 
         public virtual int CrucialWorkerID { get; set; }
 
-        public decimal TotalQuantityIssue { get; set; }
+        public virtual decimal TotalQuantityFailure { get; set; }
+        public virtual decimal GetTotalQuantityFailure() { return this.DtoDetails().Select(o => o.QuantityFailure).Sum(); }
+        public virtual decimal TotalSwarfs { get; set; }
+        public virtual decimal GetTotalSwarfs() { return this.DtoDetails().Select(o => o.Swarfs).Sum(); }
+
+
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            foreach (var result in base.Validate(validationContext)) { yield return result; }
+
+            if (this.TotalSwarfs != this.GetTotalSwarfs()) yield return new ValidationResult("Lỗi tổng số lượng biên", new[] { "TotalSwarfs" });
+            if (this.TotalQuantityFailure != this.GetTotalQuantityFailure()) yield return new ValidationResult("Lỗi tổng số lượng phế phẩm sx", new[] { "TotalQuantityFailure" });
+        }
 
         public override void PerformPresaveRule()
         {
@@ -71,5 +83,8 @@ namespace TotalDTO.Productions
         public ICollection<FinishedProductDetailDTO> GetDetails() { return this.FinishedProductViewDetails; }
 
         protected override IEnumerable<FinishedProductDetailDTO> DtoDetails() { return this.FinishedProductViewDetails; }
+
+
+        public List<FinishedProductSummaryDTO> FinishedProductSummarys { get; set; }
     }
 }

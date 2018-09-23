@@ -37,7 +37,10 @@ namespace TotalModel.Models
         public int CommodityID { get; set; }
         public int CommodityTypeID { get; set; }
         public int CrucialWorkerID { get; set; }
+        public decimal PiecePerPack { get; set; }
         public decimal Quantity { get; set; }
+        public decimal QuantityFailure { get; set; }
+        public decimal Swarfs { get; set; }
         public decimal QuantityReceipted { get; set; }
         public string Remarks { get; set; }
         public bool Approved { get; set; }

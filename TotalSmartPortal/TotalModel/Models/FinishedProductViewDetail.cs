@@ -36,5 +36,8 @@ namespace TotalModel.Models
         public Nullable<int> SemifinishedHandoverID { get; set; }
         public int FinishedProductID { get; set; }
         public int PlannedOrderID { get; set; }
+        public int PiecePerPack { get; set; }
+        public decimal QuantityFailure { get; set; }
+        public decimal Swarfs { get; set; }
     }
 }

@@ -32,6 +32,8 @@ namespace TotalModel.Models
         public int LocationID { get; set; }
         public int ApproverID { get; set; }
         public decimal TotalQuantity { get; set; }
+        public decimal TotalQuantityFailure { get; set; }
+        public decimal TotalSwarfs { get; set; }
         public decimal TotalQuantityReceipted { get; set; }
         public string Description { get; set; }
         public string Remarks { get; set; }
