@@ -22,5 +22,6 @@ namespace TotalModel.Models
         public string WorkshiftCode { get; set; }
         public string Description { get; set; }
         public decimal TotalQuantity { get; set; }
+        public bool Approved { get; set; }
     }
 }
