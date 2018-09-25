@@ -380,7 +380,7 @@
 <script type="text/javascript">
 
     function updateFoilCounts() {
-        var foilCounts = DoRound($("#StopSequenceNo").val() - $("#StartSequenceNo").val(), requireConfig.websiteOptions.rndN0);
+        var foilCounts = DoRound($("#StopSequenceNo").val() - $("#StartSequenceNo").val() + 1, requireConfig.websiteOptions.rndN0);
         $("#FoilCounts").data("kendoNumericTextBox").value(foilCounts > 0 ? foilCounts : 0);
         $("#FoilCounts").data("kendoNumericTextBox").trigger("change");
 
