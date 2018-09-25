@@ -578,6 +578,21 @@
     </Compile>
     <Compile Include="Models\TotalSmartPortalEntities.cs" />
     <Compile Include="Models\TotalSmartPortalExtensions.cs" />
+    <Compile Include="Models\TransferOrder.cs">
+      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TransferOrderDetail.cs">
+      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TransferOrderIndex.cs">
+      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TransferOrderType.cs">
+      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TransferOrderViewDetail.cs">
+      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UserAccessControl.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>

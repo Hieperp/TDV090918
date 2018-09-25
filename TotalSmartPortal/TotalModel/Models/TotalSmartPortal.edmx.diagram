@@ -319,6 +319,18 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandoverDetails_FinishedProductDetails" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProductDetails_FinishedProducts" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceiptDetails_FinishedProductDetails" />
+        <EntityTypeShape EntityType="TotalSmartPortalModel.TransferOrderDetail" Width="1.5" PointX="44.875" PointY="25.75" />
+        <EntityTypeShape EntityType="TotalSmartPortalModel.TransferOrder" Width="1.5" PointX="42.625" PointY="29" />
+        <EntityTypeShape EntityType="TotalSmartPortalModel.TransferOrderType" Width="1.5" PointX="40.375" PointY="40.25" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrderDetails_Commodities" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_Customers" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_Locations" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrderDetails_TransferOrders" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrderDetails_Warehouses" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrderDetails_Warehouses1" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_TransferOrderTypes" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_Warehouses" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_Warehouses1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

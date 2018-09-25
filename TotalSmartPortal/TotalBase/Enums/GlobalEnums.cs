@@ -107,9 +107,13 @@ namespace TotalBase.Enums
 
             StockTransfer = 8073,
             VehicleTransfer = 8075,
-            PartTransfer = 8076
+            PartTransfer = 8076,
 
 
+
+            MaterialTransferOrder = 8081008,
+            ItemTransferOrder = 8081009,
+            ProductTransferOrder = 8081010
             
         };
 

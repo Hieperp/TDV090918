@@ -298,6 +298,10 @@ namespace TotalDAL.Repositories
 
         public void CreateStoredProcedure()
         {
+            //return;
+
+            Helpers.SqlProgrammability.Inventories.TransferOrder transferOrder = new Helpers.SqlProgrammability.Inventories.TransferOrder(totalSmartPortalEntities);
+            transferOrder.RestoreProcedure();
 
             //return;
 

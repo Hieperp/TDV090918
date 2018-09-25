@@ -105,6 +105,9 @@ namespace TotalModel.Models
         public virtual DbSet<SemifinishedProduct> SemifinishedProducts { get; set; }
         public virtual DbSet<FinishedProduct> FinishedProducts { get; set; }
         public virtual DbSet<FinishedProductDetail> FinishedProductDetails { get; set; }
+        public virtual DbSet<TransferOrderDetail> TransferOrderDetails { get; set; }
+        public virtual DbSet<TransferOrder> TransferOrders { get; set; }
+        public virtual DbSet<TransferOrderType> TransferOrderTypes { get; set; }
     
         public virtual ObjectResult<string> AccountInvoicePostSaveValidate(Nullable<int> entityID)
         {
@@ -3664,6 +3667,67 @@ namespace TotalModel.Models
                 new ObjectParameter("LocationID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GoodsReceiptPendingPlannedOrder>("GetGoodsReceiptPendingPlannedOrders", locationIDParameter);
+        }
+    
+        public virtual ObjectResult<TransferOrderIndex> GetTransferOrderIndexes(Nullable<int> nMVNTaskID, string aspUserID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate)
+        {
+            var nMVNTaskIDParameter = nMVNTaskID.HasValue ?
+                new ObjectParameter("NMVNTaskID", nMVNTaskID) :
+                new ObjectParameter("NMVNTaskID", typeof(int));
+    
+            var aspUserIDParameter = aspUserID != null ?
+                new ObjectParameter("AspUserID", aspUserID) :
+                new ObjectParameter("AspUserID", typeof(string));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TransferOrderIndex>("GetTransferOrderIndexes", nMVNTaskIDParameter, aspUserIDParameter, fromDateParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<TransferOrderViewDetail> GetTransferOrderViewDetails(Nullable<int> transferOrderID)
+        {
+            var transferOrderIDParameter = transferOrderID.HasValue ?
+                new ObjectParameter("TransferOrderID", transferOrderID) :
+                new ObjectParameter("TransferOrderID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TransferOrderViewDetail>("GetTransferOrderViewDetails", transferOrderIDParameter);
+        }
+    
+        public virtual ObjectResult<string> TransferOrderApproved(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("TransferOrderApproved", entityIDParameter);
+        }
+    
+        public virtual ObjectResult<string> TransferOrderEditable(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("TransferOrderEditable", entityIDParameter);
+        }
+    
+        public virtual int TransferOrderToggleApproved(Nullable<int> entityID, Nullable<bool> approved)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var approvedParameter = approved.HasValue ?
+                new ObjectParameter("Approved", approved) :
+                new ObjectParameter("Approved", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("TransferOrderToggleApproved", entityIDParameter, approvedParameter);
         }
     }
 }
