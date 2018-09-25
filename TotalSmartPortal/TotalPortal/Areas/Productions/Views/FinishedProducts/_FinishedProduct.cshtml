@@ -219,6 +219,7 @@
                     })
                     .Events(events =>
                     {
+                        events.Change("dataSourceChange");
                         events.Error("kendGrid_ErrorHandler");
                     })
                     .Aggregates(a => a.Add(x => x.CommodityCode).Count())
@@ -446,5 +447,29 @@
 
         kenGridSummaries.unbind("dataBinding"); //When finish modifying the data, unbind dataBinding event
         kenGridSummaries.refresh(); //Then, finally, refresh grid
+    }
+
+    dataSourceChange = function (e) {        
+        if (e.field === "Quantity") {
+            if (e.items[0].Quantity * 1 <= e.items[0].QuantityRemains * 1) {
+                e.items[0].QuantityFailure = e.items[0].QuantityRemains - e.items[0].Quantity;
+            }
+        else {
+                e.items[0].Quantity = e.items[0].QuantityRemains;
+            e.items[0].QuantityFailure = 0;
+        }
+        kenGrid = $("#kendoGridDetails").data("kendoGrid").refresh();
+    }
+
+    if (e.field === "QuantityFailure") {
+        if (e.items[0].QuantityFailure * 1 <= e.items[0].QuantityRemains * 1) {
+            e.items[0].Quantity = e.items[0].QuantityRemains - e.items[0].QuantityFailure;
+        }
+    else {
+            e.items[0].Quantity = 0;
+        e.items[0].QuantityFailure = e.items[0].QuantityRemains;
+    }
+    kenGrid = $("#kendoGridDetails").data("kendoGrid").refresh();
+    }
     }
 </script>
