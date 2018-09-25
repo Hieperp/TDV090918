@@ -227,6 +227,7 @@
                     })
                     .Events(events =>
                     {
+                        events.Change("dataSourceChange");
                         events.Error("kendGrid_ErrorHandler");
                     })
                     .Aggregates(a => a.Add(x => x.BomCode).Count())
@@ -314,5 +315,17 @@
     kendoGridDetailsEdit = function(e){
         window.bomCommodityID = e.model.CommodityID;
         window.moldCommodityID = e.model.CommodityID;
+    }
+
+    dataSourceChange = function (e) {        
+        if (e.field === "QuantityOnhand" || e.field === "QuantityRequested") {            
+            if (e.items[0].QuantityRequested * 1 >= e.items[0].QuantityOnhand * 1) {
+                e.items[0].Quantity = e.items[0].QuantityRequested - e.items[0].QuantityOnhand;
+            }
+            else {
+                e.items[0].Quantity = 0;                
+            }
+            kenGrid = $("#kendoGridDetails").data("kendoGrid").refresh();
+        }       
     }
 </script>

@@ -461,17 +461,17 @@
             e.items[0].QuantityFailure = 0;
         }
         kenGrid = $("#kendoGridDetails").data("kendoGrid").refresh();
-    }
-
-    if (e.field === "QuantityFailure") {
-        if (e.items[0].QuantityFailure * 1 <= e.items[0].QuantityRemains * 1) {
-            e.items[0].Quantity = e.items[0].QuantityRemains - e.items[0].QuantityFailure;
         }
-    else {
-            e.items[0].Quantity = 0;
-        e.items[0].QuantityFailure = e.items[0].QuantityRemains;
-    }
-    kenGrid = $("#kendoGridDetails").data("kendoGrid").refresh();
-    }
+
+        if (e.field === "QuantityFailure") {
+            if (e.items[0].QuantityFailure * 1 <= e.items[0].QuantityRemains * 1) {
+                e.items[0].Quantity = e.items[0].QuantityRemains - e.items[0].QuantityFailure;
+            }
+        else {
+                e.items[0].Quantity = 0;
+            e.items[0].QuantityFailure = e.items[0].QuantityRemains;
+        }
+        kenGrid = $("#kendoGridDetails").data("kendoGrid").refresh();
+        }
     }
 </script>

@@ -54,7 +54,7 @@ namespace TotalDTO.Productions
         public decimal QuantityOnhand { get; set; }
 
         [Display(Name = "SLSX")]
-        [UIHint("Quantity")]
+        [UIHint("QuantityReadonly")]
         public override decimal Quantity { get; set; }
 
         [Display(Name = "#")]
