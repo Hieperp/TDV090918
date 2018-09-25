@@ -27,6 +27,7 @@
                     return {
                     searchText: $("#CommodityCode").data("kendoAutoComplete").value(),
                     nmvnTaskID: requireConfig.pageOptions.NmvnTaskID,
+                    warehouseID: $("#Warehouse_WarehouseID").val() != undefined? $("#Warehouse_WarehouseID").val() : null,
                     commodityTypeIDList: requireConfig.pageOptions.commodityTypeIDList
                     };}
 

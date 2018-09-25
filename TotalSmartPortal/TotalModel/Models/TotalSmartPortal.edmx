@@ -5233,6 +5233,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
         <Function Name="GetCommodityBases" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CommodityTypeIDList" Type="varchar" Mode="In" />
           <Parameter Name="NmvnTaskID" Type="int" Mode="In" />
+          <Parameter Name="WarehouseID" Type="int" Mode="In" />
           <Parameter Name="SearchText" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetCommodityBoms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -10179,6 +10180,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <FunctionImport Name="GetCommodityBases" ReturnType="Collection(TotalSmartPortalModel.CommodityBase)">
             <Parameter Name="CommodityTypeIDList" Mode="In" Type="String" />
             <Parameter Name="NmvnTaskID" Mode="In" Type="Int32" />
+            <Parameter Name="WarehouseID" Mode="In" Type="Int32" />
             <Parameter Name="SearchText" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetCommodityCodePartA" ReturnType="Collection(TotalSmartPortalModel.CommodityCodePart)">
@@ -11788,13 +11790,13 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             <Parameter Name="ToDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="GetTransferOrderViewDetails" ReturnType="Collection(TotalSmartPortalModel.TransferOrderViewDetail)">
-            <Parameter Name="TransferOrderID" Mode="In" Type="Int32" />
+          <Parameter Name="TransferOrderID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="TransferOrderApproved" ReturnType="Collection(String)">
-            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          <Parameter Name="EntityID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="TransferOrderEditable" ReturnType="Collection(String)">
-            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          <Parameter Name="EntityID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="TransferOrderToggleApproved">
             <Parameter Name="EntityID" Mode="In" Type="Int32" />
@@ -11871,9 +11873,10 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <Property Type="Decimal" Name="BlockQuantity" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Int32" Name="MoldID" Nullable="true" />
           <Property Type="String" Name="MoldCode" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="MoldName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MoldName" Nullable="true" MaxLength="100" />
           <Property Type="Decimal" Name="MoldQuantity" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Int32" Name="PiecePerPack" Nullable="false" />
+          <Property Type="Decimal" Name="QuantityAvailables" Nullable="false" Precision="1" Scale="1" />
         </ComplexType>
         <ComplexType Name="CommodityPriceIndex">
           <Property Type="Int32" Name="CommodityPriceID" Nullable="false" />
@@ -17917,6 +17920,7 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
                 <ScalarProperty Name="MoldName" ColumnName="MoldName" />
                 <ScalarProperty Name="MoldQuantity" ColumnName="MoldQuantity" />
                 <ScalarProperty Name="PiecePerPack" ColumnName="PiecePerPack" />
+                <ScalarProperty Name="QuantityAvailables" ColumnName="QuantityAvailables" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

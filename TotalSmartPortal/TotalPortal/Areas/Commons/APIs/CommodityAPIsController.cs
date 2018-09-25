@@ -122,13 +122,13 @@ namespace TotalPortal.Areas.Commons.APIs
         /// <param name="name"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult GetCommodityBasesImport(string commodityTypeIDList, int? nmvnTaskID, string searchText, bool? isOnlyAlphaNumericString)
+        public JsonResult GetCommodityBasesImport(string commodityTypeIDList, int? nmvnTaskID, int? warehouseID, string searchText, bool? isOnlyAlphaNumericString)
         {
             try
             {
                 var commodityResult = new { CommodityID = 0, CommodityCode = "", CommodityName = "", CommodityTypeID = 0 };
 
-                var result = commodityRepository.GetCommodityBases(commodityTypeIDList, nmvnTaskID, searchText, isOnlyAlphaNumericString).Select(s => new { s.CommodityID, s.CommodityCode, s.CommodityName, s.CommodityTypeID });
+                var result = commodityRepository.GetCommodityBases(commodityTypeIDList, nmvnTaskID, warehouseID, searchText, isOnlyAlphaNumericString).Select(s => new { s.CommodityID, s.CommodityCode, s.CommodityName, s.CommodityTypeID });
                 if (result.Count() > 0)
                     commodityResult = new { CommodityID = result.First().CommodityID, CommodityCode = result.First().CommodityCode, CommodityName = result.First().CommodityName, CommodityTypeID = result.First().CommodityTypeID };
 
@@ -149,9 +149,9 @@ namespace TotalPortal.Areas.Commons.APIs
         }
 
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-        public JsonResult GetCommodityBases(string commodityTypeIDList, int? nmvnTaskID, string searchText, bool? isOnlyAlphaNumericString)
+        public JsonResult GetCommodityBases(string commodityTypeIDList, int? nmvnTaskID, int? warehouseID, string searchText, bool? isOnlyAlphaNumericString)
         {
-            var result = commodityRepository.GetCommodityBases(commodityTypeIDList, nmvnTaskID, searchText, isOnlyAlphaNumericString);
+            var result = commodityRepository.GetCommodityBases(commodityTypeIDList, nmvnTaskID, warehouseID, searchText, isOnlyAlphaNumericString);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }

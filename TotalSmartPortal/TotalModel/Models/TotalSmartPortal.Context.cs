@@ -442,7 +442,7 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CommodityAvailable>("GetCommodityAvailables", locationIDParameter, customerIDParameter, warehouseIDParameter, priceCategoryIDParameter, applyToSalesVersusReturnsParameter, promotionIDParameter, entryDateParameter, searchTextParameter);
         }
     
-        public virtual ObjectResult<CommodityBase> GetCommodityBases(string commodityTypeIDList, Nullable<int> nmvnTaskID, string searchText)
+        public virtual ObjectResult<CommodityBase> GetCommodityBases(string commodityTypeIDList, Nullable<int> nmvnTaskID, Nullable<int> warehouseID, string searchText)
         {
             var commodityTypeIDListParameter = commodityTypeIDList != null ?
                 new ObjectParameter("CommodityTypeIDList", commodityTypeIDList) :
@@ -452,11 +452,15 @@ namespace TotalModel.Models
                 new ObjectParameter("NmvnTaskID", nmvnTaskID) :
                 new ObjectParameter("NmvnTaskID", typeof(int));
     
+            var warehouseIDParameter = warehouseID.HasValue ?
+                new ObjectParameter("WarehouseID", warehouseID) :
+                new ObjectParameter("WarehouseID", typeof(int));
+    
             var searchTextParameter = searchText != null ?
                 new ObjectParameter("SearchText", searchText) :
                 new ObjectParameter("SearchText", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CommodityBase>("GetCommodityBases", commodityTypeIDListParameter, nmvnTaskIDParameter, searchTextParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CommodityBase>("GetCommodityBases", commodityTypeIDListParameter, nmvnTaskIDParameter, warehouseIDParameter, searchTextParameter);
         }
     
         public virtual ObjectResult<CommodityCodePart> GetCommodityCodePartA(string searchText)

@@ -63,8 +63,9 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
         {
             string queryString;
             string querySELECT = "                              Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, Commodities.PiecePerPack, Commodities.ListedPrice, Commodities.GrossPrice, 0.0 AS DiscountPercent, 0.0 AS TradeDiscountRate, CommodityCategories.VATPercent " + " \r\n";
+            string queryFROM = "                                @Commodities Commodities INNER JOIN CommodityCategories ON Commodities.CommodityCategoryID = CommodityCategories.CommodityCategoryID " + " \r\n";
 
-            queryString = " @CommodityTypeIDList varchar(200), @NmvnTaskID int, @SearchText nvarchar(60) " + "\r\n";
+            queryString = " @CommodityTypeIDList varchar(200), @NmvnTaskID int, @WarehouseID int, @SearchText nvarchar(60) " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
@@ -73,16 +74,24 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             queryString = queryString + "       INSERT INTO     @Commodities SELECT TOP 30 CommodityID, Code, Name, PiecePerPack, ListedPrice, GrossPrice, 0.0 AS DiscountPercent, 0.0 AS TradeDiscountRate, CommodityTypeID, CommodityCategoryID FROM Commodities WHERE InActive = 0 AND (@SearchText = '' OR Code = @SearchText OR Code LIKE '%' + @SearchText + '%' OR OfficialCode LIKE '%' + @SearchText + '%' OR Name LIKE '%' + @SearchText + '%') AND CommodityTypeID IN (SELECT Id FROM dbo.SplitToIntList (@CommodityTypeIDList)) " + "\r\n";
 
             queryString = queryString + "       IF (@NmvnTaskID = " + (int)GlobalEnums.NmvnTaskID.PlannedOrder + ") " + " \r\n";
-            queryString = queryString + "           SELECT      " + querySELECT + ", CommodityBoms.BomID, CommodityBoms.Code AS BomCode, CommodityBoms.Name AS BomName, CommodityBoms.BlockUnit, CommodityBoms.BlockQuantity, CommodityMolds.MoldID, CommodityMolds.Code AS MoldCode, CommodityMolds.Name AS MoldName, CommodityMolds.Quantity AS MoldQuantity " + " \r\n";
-            queryString = queryString + "           FROM        @Commodities Commodities " + "\r\n";
-            queryString = queryString + "                       INNER JOIN CommodityCategories ON Commodities.CommodityCategoryID = CommodityCategories.CommodityCategoryID " + "\r\n";
+            queryString = queryString + "           SELECT      " + querySELECT + ", CommodityBoms.BomID, CommodityBoms.Code AS BomCode, CommodityBoms.Name AS BomName, CommodityBoms.BlockUnit, CommodityBoms.BlockQuantity, CommodityMolds.MoldID, CommodityMolds.Code AS MoldCode, CommodityMolds.Name AS MoldName, CommodityMolds.Quantity AS MoldQuantity, 0.0 AS QuantityAvailables " + " \r\n";
+            queryString = queryString + "           FROM        " + queryFROM + "\r\n";
             queryString = queryString + "                       LEFT JOIN (SELECT CommodityBoms.CommodityID, CommodityBoms.BomID, Boms.Code, Boms.Name, CommodityBoms.BlockUnit, CommodityBoms.BlockQuantity FROM CommodityBoms INNER JOIN Boms ON CommodityBoms.CommodityID IN (SELECT CommodityID FROM @Commodities) AND CommodityBoms.IsDefault = 1 AND CommodityBoms.BomID = Boms.BomID) CommodityBoms ON Commodities.CommodityID = CommodityBoms.CommodityID " + "\r\n";
             queryString = queryString + "                       LEFT JOIN (SELECT CommodityMolds.CommodityID, CommodityMolds.MoldID, Molds.Code, Molds.Name, CommodityMolds.Quantity FROM CommodityMolds INNER JOIN Molds ON CommodityMolds.CommodityID IN (SELECT CommodityID FROM @Commodities) AND CommodityMolds.IsDefault = 1 AND CommodityMolds.MoldID = Molds.MoldID) CommodityMolds ON Commodities.CommodityID = CommodityMolds.CommodityID " + "\r\n";
             queryString = queryString + "       ELSE " + " \r\n";
-            queryString = queryString + "           SELECT      " + querySELECT + ", NULL AS BomID, NULL AS BomCode, NULL AS BomName, NULL AS BlockUnit, NULL AS BlockQuantity, NULL AS MoldID, NULL AS MoldCode, NULL AS MoldName, NULL AS MoldQuantity " + " \r\n";
-            queryString = queryString + "           FROM        @Commodities Commodities " + "\r\n";
-            queryString = queryString + "                       INNER JOIN CommodityCategories ON Commodities.CommodityCategoryID = CommodityCategories.CommodityCategoryID " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            
+            querySELECT = querySELECT + "               " + ", NULL AS BomID, NULL AS BomCode, NULL AS BomName, NULL AS BlockUnit, NULL AS BlockQuantity, NULL AS MoldID, NULL AS MoldCode, NULL AS MoldName, NULL AS MoldQuantity " + "\r\n";
 
+            queryString = queryString + "               IF (@WarehouseID > 0) " + "\r\n";
+            queryString = queryString + "                   SELECT      " + querySELECT + ", ISNULL(CommoditiesAvailables.QuantityAvailables, 0.0) AS QuantityAvailables " + " \r\n";
+            queryString = queryString + "                   FROM        " + queryFROM + "\r\n";
+            queryString = queryString + "                               LEFT JOIN (SELECT CommodityID, SUM(Quantity - QuantityIssued) AS QuantityAvailables FROM GoodsReceiptDetails WHERE ROUND(Quantity - QuantityIssued, " + (int)GlobalEnums.rndQuantity + ") > 0 AND WarehouseID = @WarehouseID AND CommodityID IN (SELECT DISTINCT CommodityID FROM @Commodities) GROUP BY CommodityID) CommoditiesAvailables ON Commodities.CommodityID = CommoditiesAvailables.CommodityID " + "\r\n";
+            queryString = queryString + "               ELSE " + "\r\n";
+            queryString = queryString + "                   SELECT      " + querySELECT + ", 0.0 AS QuantityAvailables " + " \r\n";
+            queryString = queryString + "                   FROM        " + queryFROM + "\r\n";
+
+            queryString = queryString + "           END " + "\r\n";
             queryString = queryString + "    END " + "\r\n";
 
             this.totalSmartPortalEntities.CreateStoredProcedure("GetCommodityBases", queryString);

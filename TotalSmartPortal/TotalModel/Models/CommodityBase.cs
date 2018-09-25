@@ -32,5 +32,6 @@ namespace TotalModel.Models
         public string MoldName { get; set; }
         public Nullable<decimal> MoldQuantity { get; set; }
         public int PiecePerPack { get; set; }
+        public decimal QuantityAvailables { get; set; }
     }
 }
