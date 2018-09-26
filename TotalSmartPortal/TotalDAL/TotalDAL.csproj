@@ -98,6 +98,7 @@
     <Compile Include="Repositories\Commons\SearchRepository.cs" />
     <Compile Include="Repositories\Commons\ShiftRepository.cs" />
     <Compile Include="Repositories\Commons\TerritoryRepository.cs" />
+    <Compile Include="Repositories\Commons\TransferOrderTypeRepository.cs" />
     <Compile Include="Repositories\Commons\VehicleRepository.cs" />
     <Compile Include="Repositories\Commons\VoidTypeRepository.cs" />
     <Compile Include="Repositories\Commons\WarehouseAdjustmentTypeRepository.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Repositories\Inventories\GoodsReceiptRepository.cs" />
     <Compile Include="Repositories\Inventories\HandlingUnitRepository.cs" />
     <Compile Include="Repositories\Inventories\MaterialIssueRepository.cs" />
+    <Compile Include="Repositories\Inventories\TransferOrderRepository.cs" />
     <Compile Include="Repositories\Inventories\WarehouseAdjustmentRepository.cs" />
     <Compile Include="Repositories\Productions\FinishedHandoverRepository.cs" />
     <Compile Include="Repositories\Productions\FinishedProductRepository.cs" />

@@ -97,6 +97,22 @@ namespace TotalPortal.App_Start
 
 
 
+                cfg.CreateMap<TransferOrder, TransferOrderDTO<TOOptionMaterial>>();
+                cfg.CreateMap<TransferOrder, TransferOrderDTO<TOOptionItem>>();
+                cfg.CreateMap<TransferOrder, TransferOrderDTO<TOOptionProduct>>();
+
+                cfg.CreateMap<TransferOrderPrimitiveDTO<TOOptionMaterial>, TransferOrder>();
+                cfg.CreateMap<TransferOrderPrimitiveDTO<TOOptionItem>, TransferOrder>();
+                cfg.CreateMap<TransferOrderPrimitiveDTO<TOOptionProduct>, TransferOrder>();
+                
+                cfg.CreateMap<TransferOrderViewDetail, TransferOrderDetailDTO>();
+                cfg.CreateMap<TransferOrderDetailDTO, TransferOrderDetail>();
+
+                cfg.CreateMap<TransferOrder, MaterialTransferOrderViewModel>();
+                cfg.CreateMap<TransferOrder, ItemTransferOrderViewModel>();
+                cfg.CreateMap<TransferOrder, ProductTransferOrderViewModel>();
+
+
 
 
 

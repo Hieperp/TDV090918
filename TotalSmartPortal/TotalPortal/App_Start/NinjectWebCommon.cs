@@ -157,6 +157,19 @@ namespace TotalPortal.App_Start
 
 
 
+                kernel.Bind<ITransferOrderRepository>().To<TransferOrderRepository>();
+                kernel.Bind<ITransferOrderAPIRepository>().To<TransferOrderAPIRepository>();
+
+                kernel.Bind<IMaterialTransferOrderService>().To<MaterialTransferOrderService>();
+                kernel.Bind<IMaterialTransferOrderViewModelSelectListBuilder>().To<MaterialTransferOrderViewModelSelectListBuilder>();                
+                kernel.Bind<IItemTransferOrderService>().To<ItemTransferOrderService>();
+                kernel.Bind<IItemTransferOrderViewModelSelectListBuilder>().To<ItemTransferOrderViewModelSelectListBuilder>();                
+                kernel.Bind<IProductTransferOrderService>().To<ProductTransferOrderService>();
+                kernel.Bind<IProductTransferOrderViewModelSelectListBuilder>().To<ProductTransferOrderViewModelSelectListBuilder>();                
+
+
+
+
                 kernel.Bind<IPlannedOrderService>().To<PlannedOrderService>();
                 kernel.Bind<IPlannedOrderRepository>().To<PlannedOrderRepository>();
                 kernel.Bind<IPlannedOrderAPIRepository>().To<PlannedOrderAPIRepository>();
@@ -285,6 +298,7 @@ namespace TotalPortal.App_Start
                 kernel.Bind<ICommodityClassSelectListBuilder>().To<CommodityClassSelectListBuilder>();
                 kernel.Bind<ICommodityLineSelectListBuilder>().To<CommodityLineSelectListBuilder>();
                 kernel.Bind<IShiftSelectListBuilder>().To<ShiftSelectListBuilder>();
+                kernel.Bind<ITransferOrderTypeSelectListBuilder>().To<TransferOrderTypeSelectListBuilder>();
 
                 kernel.Bind<IAspNetUserRepository>().To<AspNetUserRepository>();
                 kernel.Bind<IUserRepository>().To<UserRepository>();
@@ -318,6 +332,7 @@ namespace TotalPortal.App_Start
                 kernel.Bind<ICommodityClassRepository>().To<CommodityClassRepository>();
                 kernel.Bind<ICommodityLineRepository>().To<CommodityLineRepository>();
                 kernel.Bind<IShiftRepository>().To<ShiftRepository>();
+                kernel.Bind<ITransferOrderTypeRepository>().To<TransferOrderTypeRepository>();
 
 
                 //kernel.Bind<IMoldService>().To<MoldService>();

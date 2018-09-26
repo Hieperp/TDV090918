@@ -70,6 +70,7 @@
     <Compile Include="Repositories\Commons\ISearchRepository.cs" />
     <Compile Include="Repositories\Commons\IShiftRepository.cs" />
     <Compile Include="Repositories\Commons\ITerritoryRepository.cs" />
+    <Compile Include="Repositories\Commons\ITransferOrderTypeRepository.cs" />
     <Compile Include="Repositories\Commons\IVehicleRepository.cs" />
     <Compile Include="Repositories\Commons\IVoidTypeRepository.cs" />
     <Compile Include="Repositories\Commons\IWarehouseAdjustmentTypeRepository.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Repositories\Inventories\IGoodsReceiptRepository.cs" />
     <Compile Include="Repositories\Inventories\IHandlingUnitRepository.cs" />
     <Compile Include="Repositories\Inventories\IMaterialIssueRepository.cs" />
+    <Compile Include="Repositories\Inventories\ITransferOrderRepository.cs" />
     <Compile Include="Repositories\Inventories\IWarehouseAdjustmentRepository.cs" />
     <Compile Include="Repositories\Productions\IFinishedHandoverRepository.cs" />
     <Compile Include="Repositories\Productions\IFinishedProductRepository.cs" />
@@ -126,6 +128,7 @@
     <Compile Include="Services\Inventories\IGoodsReceiptService.cs" />
     <Compile Include="Services\Inventories\IHandlingUnitService.cs" />
     <Compile Include="Services\Inventories\IMaterialIssueService.cs" />
+    <Compile Include="Services\Inventories\ITransferOrderService.cs" />
     <Compile Include="Services\Inventories\IWarehouseAdjustmentService.cs" />
     <Compile Include="Services\Productions\IFinishedHandoverService.cs" />
     <Compile Include="Services\Productions\IFinishedProductService.cs" />
