@@ -32,6 +32,10 @@ namespace TotalModel.Models
         public decimal QuantityReceipted { get; set; }
         public string Remarks { get; set; }
         public bool Approved { get; set; }
+        public Nullable<int> VoidTypeID { get; set; }
+        public bool InActive { get; set; }
+        public bool InActivePartial { get; set; }
+        public Nullable<System.DateTime> InActivePartialDate { get; set; }
     
         public virtual Commodity Commodity { get; set; }
         public virtual TransferOrder TransferOrder { get; set; }

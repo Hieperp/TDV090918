@@ -3733,5 +3733,52 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("TransferOrderToggleApproved", entityIDParameter, approvedParameter);
         }
+    
+        public virtual int TransferOrderToggleVoid(Nullable<int> entityID, Nullable<bool> inActive, Nullable<int> voidTypeID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var inActiveParameter = inActive.HasValue ?
+                new ObjectParameter("InActive", inActive) :
+                new ObjectParameter("InActive", typeof(bool));
+    
+            var voidTypeIDParameter = voidTypeID.HasValue ?
+                new ObjectParameter("VoidTypeID", voidTypeID) :
+                new ObjectParameter("VoidTypeID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("TransferOrderToggleVoid", entityIDParameter, inActiveParameter, voidTypeIDParameter);
+        }
+    
+        public virtual int TransferOrderToggleVoidDetail(Nullable<int> entityID, Nullable<int> entityDetailID, Nullable<bool> inActivePartial, Nullable<int> voidTypeID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            var entityDetailIDParameter = entityDetailID.HasValue ?
+                new ObjectParameter("EntityDetailID", entityDetailID) :
+                new ObjectParameter("EntityDetailID", typeof(int));
+    
+            var inActivePartialParameter = inActivePartial.HasValue ?
+                new ObjectParameter("InActivePartial", inActivePartial) :
+                new ObjectParameter("InActivePartial", typeof(bool));
+    
+            var voidTypeIDParameter = voidTypeID.HasValue ?
+                new ObjectParameter("VoidTypeID", voidTypeID) :
+                new ObjectParameter("VoidTypeID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("TransferOrderToggleVoidDetail", entityIDParameter, entityDetailIDParameter, inActivePartialParameter, voidTypeIDParameter);
+        }
+    
+        public virtual ObjectResult<string> TransferOrderVoidable(Nullable<int> entityID)
+        {
+            var entityIDParameter = entityID.HasValue ?
+                new ObjectParameter("EntityID", entityID) :
+                new ObjectParameter("EntityID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("TransferOrderVoidable", entityIDParameter);
+        }
     }
 }

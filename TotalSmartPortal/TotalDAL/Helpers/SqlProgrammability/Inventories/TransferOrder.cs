@@ -24,8 +24,11 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
 
             this.TransferOrderApproved();
             this.TransferOrderEditable();
+            this.TransferOrderVoidable();
 
             this.TransferOrderToggleApproved();
+            this.TransferOrderToggleVoid();
+            this.TransferOrderToggleVoidDetail();
 
             this.TransferOrderInitReference();
         }
@@ -100,6 +103,15 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             this.totalSmartPortalEntities.CreateProcedureToCheckExisting("TransferOrderEditable", queryArray);
         }
 
+        private void TransferOrderVoidable()
+        {
+            string[] queryArray = new string[1];
+
+            queryArray[0] = " SELECT TOP 1 @FoundEntity = TransferOrderID FROM TransferOrders WHERE TransferOrderID = @EntityID AND Approved = 0"; //Must approve in order to allow void
+
+            this.totalSmartPortalEntities.CreateProcedureToCheckExisting("TransferOrderVoidable", queryArray);
+        }
+
         private void TransferOrderToggleApproved()
         {
             string queryString = " @EntityID int, @Approved bit " + "\r\n";
@@ -119,6 +131,50 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + "           END " + "\r\n";
 
             this.totalSmartPortalEntities.CreateStoredProcedure("TransferOrderToggleApproved", queryString);
+        }
+
+
+        private void TransferOrderToggleVoid()
+        {
+            string queryString = " @EntityID int, @InActive bit, @VoidTypeID int " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "       UPDATE      TransferOrders  SET InActive = @InActive, InActiveDate = GetDate(), VoidTypeID = IIF(@InActive = 1, @VoidTypeID, NULL) WHERE TransferOrderID = @EntityID AND InActive = ~@InActive" + "\r\n";
+
+            queryString = queryString + "       IF @@ROWCOUNT = 1 " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               UPDATE          TransferOrderDetails     SET InActive = @InActive WHERE TransferOrderID = @EntityID ; " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               DECLARE     @msg NVARCHAR(300) = N'Dữ liệu không tồn tại hoặc đã ' + iif(@InActive = 0, 'phục hồi lệnh', '')  + ' hủy' ; " + "\r\n";
+            queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
+
+
+            this.totalSmartPortalEntities.CreateStoredProcedure("TransferOrderToggleVoid", queryString);
+        }
+
+        private void TransferOrderToggleVoidDetail()
+        {
+            string queryString = " @EntityID int, @EntityDetailID int, @InActivePartial bit, @VoidTypeID int " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "       UPDATE      TransferOrderDetails     SET InActivePartial = @InActivePartial, InActivePartialDate = GetDate(), VoidTypeID = IIF(@InActivePartial = 1, @VoidTypeID, NULL) WHERE TransferOrderID = @EntityID AND TransferOrderDetailID = @EntityDetailID AND InActivePartial = ~@InActivePartial ; " + "\r\n";
+
+            queryString = queryString + "       IF @@ROWCOUNT = 1 " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               DECLARE         @MaxInActivePartial bit     SET @MaxInActivePartial = (SELECT MAX(CAST(InActivePartial AS int)) FROM TransferOrderDetails WHERE TransferOrderID = @EntityID) ;" + "\r\n";
+            queryString = queryString + "               UPDATE          TransferOrders  SET InActivePartial = @MaxInActivePartial WHERE TransferOrderID = @EntityID ; " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               DECLARE     @msg NVARCHAR(300) = N'Dữ liệu không tồn tại hoặc đã ' + iif(@InActivePartial = 0, 'phục hồi lệnh', '')  + ' hủy' ; " + "\r\n";
+            queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
+            this.totalSmartPortalEntities.CreateStoredProcedure("TransferOrderToggleVoidDetail", queryString);
         }
 
         private void TransferOrderInitReference()

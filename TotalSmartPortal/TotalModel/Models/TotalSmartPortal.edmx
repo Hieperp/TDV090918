@@ -1821,7 +1821,11 @@
           <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="QuantityReceipted" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
+          <Property Name="VoidTypeID" Type="int" />
           <Property Name="Approved" Type="bit" Nullable="false" />
+          <Property Name="InActive" Type="bit" Nullable="false" />
+          <Property Name="InActivePartial" Type="bit" Nullable="false" />
+          <Property Name="InActivePartialDate" Type="datetime" />
         </EntityType>
         <EntityType Name="TransferOrders">
           <Key>
@@ -1849,6 +1853,10 @@
           <Property Name="EditedDate" Type="datetime" Nullable="false" />
           <Property Name="Approved" Type="bit" Nullable="false" />
           <Property Name="ApprovedDate" Type="datetime" />
+          <Property Name="VoidTypeID" Type="int" />
+          <Property Name="InActive" Type="bit" Nullable="false" />
+          <Property Name="InActivePartial" Type="bit" Nullable="false" />
+          <Property Name="InActiveDate" Type="datetime" />
         </EntityType>
         <EntityType Name="TransferOrderTypes">
           <Key>
@@ -6113,6 +6121,20 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
         <Function Name="TransferOrderToggleApproved" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
           <Parameter Name="Approved" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="TransferOrderToggleVoid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+          <Parameter Name="InActive" Type="bit" Mode="In" />
+          <Parameter Name="VoidTypeID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TransferOrderToggleVoidDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
+          <Parameter Name="EntityDetailID" Type="int" Mode="In" />
+          <Parameter Name="InActivePartial" Type="bit" Mode="In" />
+          <Parameter Name="VoidTypeID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TransferOrderVoidable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EntityID" Type="int" Mode="In" />
         </Function>
         <Function Name="UpdateCommodityBom" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CommodityBomID" Type="int" Mode="In" />
@@ -11802,6 +11824,20 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             <Parameter Name="EntityID" Mode="In" Type="Int32" />
             <Parameter Name="Approved" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <FunctionImport Name="TransferOrderToggleVoid">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+            <Parameter Name="InActive" Mode="In" Type="Boolean" />
+            <Parameter Name="VoidTypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TransferOrderToggleVoidDetail">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+            <Parameter Name="EntityDetailID" Mode="In" Type="Int32" />
+            <Parameter Name="InActivePartial" Mode="In" Type="Boolean" />
+            <Parameter Name="VoidTypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TransferOrderVoidable" ReturnType="Collection(String)">
+            <Parameter Name="EntityID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="AccountInvoiceIndex">
           <Property Type="Int32" Name="AccountInvoiceID" Nullable="false" />
@@ -16525,6 +16561,10 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <NavigationProperty Name="TransferOrder" Relationship="TotalSmartPortalModel.FK_TransferOrderDetails_TransferOrders" FromRole="TransferOrderDetail" ToRole="TransferOrder" />
           <NavigationProperty Name="Warehouse" Relationship="TotalSmartPortalModel.FK_TransferOrderDetails_Warehouses" FromRole="TransferOrderDetail" ToRole="Warehouse" />
           <NavigationProperty Name="Warehouse1" Relationship="TotalSmartPortalModel.FK_TransferOrderDetails_Warehouses1" FromRole="TransferOrderDetail" ToRole="Warehouse" />
+          <Property Name="VoidTypeID" Type="Int32" />
+          <Property Name="InActive" Type="Boolean" Nullable="false" />
+          <Property Name="InActivePartial" Type="Boolean" Nullable="false" />
+          <Property Name="InActivePartialDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="TransferOrder">
           <Key>
@@ -16558,6 +16598,10 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <NavigationProperty Name="TransferOrderType" Relationship="TotalSmartPortalModel.FK_TransferOrders_TransferOrderTypes" FromRole="TransferOrder" ToRole="TransferOrderType" />
           <NavigationProperty Name="Warehouse" Relationship="TotalSmartPortalModel.FK_TransferOrders_Warehouses" FromRole="TransferOrder" ToRole="Warehouse" />
           <NavigationProperty Name="Warehouse1" Relationship="TotalSmartPortalModel.FK_TransferOrders_Warehouses1" FromRole="TransferOrder" ToRole="Warehouse" />
+          <Property Name="VoidTypeID" Type="Int32" />
+          <Property Name="InActive" Type="Boolean" Nullable="false" />
+          <Property Name="InActivePartial" Type="Boolean" Nullable="false" />
+          <Property Name="InActiveDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="TransferOrderType">
           <Key>
@@ -21159,6 +21203,10 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <EntitySetMapping Name="TransferOrderDetails">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.TransferOrderDetail">
               <MappingFragment StoreEntitySet="TransferOrderDetails">
+                <ScalarProperty Name="InActivePartialDate" ColumnName="InActivePartialDate" />
+                <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="VoidTypeID" ColumnName="VoidTypeID" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="QuantityReceipted" ColumnName="QuantityReceipted" />
@@ -21183,6 +21231,10 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <EntitySetMapping Name="TransferOrders">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.TransferOrder">
               <MappingFragment StoreEntitySet="TransferOrders">
+                <ScalarProperty Name="InActiveDate" ColumnName="InActiveDate" />
+                <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="VoidTypeID" ColumnName="VoidTypeID" />
                 <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
@@ -21253,6 +21305,9 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
           <FunctionImportMapping FunctionImportName="TransferOrderApproved" FunctionName="TotalSmartPortalModel.Store.TransferOrderApproved" />
           <FunctionImportMapping FunctionImportName="TransferOrderEditable" FunctionName="TotalSmartPortalModel.Store.TransferOrderEditable" />
           <FunctionImportMapping FunctionImportName="TransferOrderToggleApproved" FunctionName="TotalSmartPortalModel.Store.TransferOrderToggleApproved" />
+          <FunctionImportMapping FunctionImportName="TransferOrderToggleVoid" FunctionName="TotalSmartPortalModel.Store.TransferOrderToggleVoid" />
+          <FunctionImportMapping FunctionImportName="TransferOrderToggleVoidDetail" FunctionName="TotalSmartPortalModel.Store.TransferOrderToggleVoidDetail" />
+          <FunctionImportMapping FunctionImportName="TransferOrderVoidable" FunctionName="TotalSmartPortalModel.Store.TransferOrderVoidable" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
