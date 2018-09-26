@@ -300,6 +300,12 @@ namespace TotalDAL.Repositories
         {
             //return;
 
+            Helpers.SqlProgrammability.Inventories.WarehouseTransfer warehouseTransfer = new Helpers.SqlProgrammability.Inventories.WarehouseTransfer(totalSmartPortalEntities);
+            warehouseTransfer.RestoreProcedure();
+
+
+            //return;
+
             Helpers.SqlProgrammability.Inventories.TransferOrder transferOrder = new Helpers.SqlProgrammability.Inventories.TransferOrder(totalSmartPortalEntities);
             transferOrder.RestoreProcedure();
 

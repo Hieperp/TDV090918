@@ -11,19 +11,17 @@ namespace TotalModel.Models
 {
     using System;
     
-    public partial class TransferOrderIndex
+    public partial class WarehouseTransferPendingTransferOrder
     {
         public int TransferOrderID { get; set; }
-        public Nullable<System.DateTime> EntryDate { get; set; }
-        public string Reference { get; set; }
-        public string LocationCode { get; set; }
+        public string TransferOrderReference { get; set; }
+        public System.DateTime TransferOrderEntryDate { get; set; }
+        public int WarehouseID { get; set; }
+        public string WarehouseCode { get; set; }
+        public int WarehouseReceiptID { get; set; }
+        public string WarehouseReceiptCode { get; set; }
+        public int CustomerID { get; set; }
+        public string CustomerCode { get; set; }
         public string CustomerName { get; set; }
-        public int TransferOrderTypeID { get; set; }
-        public string TransferOrderTypeName { get; set; }
-        public string AdjustmentJobs { get; set; }
-        public string Description { get; set; }
-        public decimal TotalQuantity { get; set; }
-        public bool Approved { get; set; }
-        public string VoidTypeName { get; set; }
     }
 }

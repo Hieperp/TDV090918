@@ -22,5 +22,9 @@ namespace TotalModel.Models
         public decimal QuantityAvailables { get; set; }
         public decimal Quantity { get; set; }
         public string Remarks { get; set; }
+        public Nullable<int> VoidTypeID { get; set; }
+        public string VoidTypeCode { get; set; }
+        public string VoidTypeName { get; set; }
+        public Nullable<int> VoidClassID { get; set; }
     }
 }

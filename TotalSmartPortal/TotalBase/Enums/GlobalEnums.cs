@@ -101,7 +101,7 @@ namespace TotalBase.Enums
             HandlingUnit = 9010,
             GoodsDelivery = 9012,
 
-            TransferOrder = 8071,
+            
             VehicleTransferOrder = 8071008,
             PartTransferOrder = 8071009,
 
@@ -110,10 +110,15 @@ namespace TotalBase.Enums
             PartTransfer = 8076,
 
 
-
+            TransferOrder = 8071,
             MaterialTransferOrder = 8081008,
             ItemTransferOrder = 8081009,
-            ProductTransferOrder = 8081010
+            ProductTransferOrder = 8081010,
+
+            WarehouseTransfer = 1008071,
+            MaterialTransfer = 9081008,
+            ItemTransfer = 9081009,
+            ProductTransfer = 9081010,
             
         };
 

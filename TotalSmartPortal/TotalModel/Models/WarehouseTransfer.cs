@@ -12,38 +12,38 @@ namespace TotalModel.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TransferOrderDetail
+    public partial class WarehouseTransfer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TransferOrderDetail()
+        public WarehouseTransfer()
         {
             this.WarehouseTransferDetails = new HashSet<WarehouseTransferDetail>();
         }
     
-        public int TransferOrderDetailID { get; set; }
-        public int TransferOrderID { get; set; }
+        public int WarehouseTransferID { get; set; }
         public System.DateTime EntryDate { get; set; }
         public string Reference { get; set; }
         public int NMVNTaskID { get; set; }
-        public int CustomerID { get; set; }
-        public int TransferOrderTypeID { get; set; }
-        public string AdjustmentJobs { get; set; }
-        public int OrganizationalUnitID { get; set; }
-        public int LocationID { get; set; }
+        public Nullable<int> TransferOrderID { get; set; }
         public int WarehouseID { get; set; }
         public int WarehouseReceiptID { get; set; }
-        public int CommodityID { get; set; }
-        public int CommodityTypeID { get; set; }
-        public decimal Quantity { get; set; }
-        public decimal QuantityIssued { get; set; }
+        public int StorekeeperID { get; set; }
+        public int UserID { get; set; }
+        public int PreparedPersonID { get; set; }
+        public int OrganizationalUnitID { get; set; }
+        public int LocationID { get; set; }
+        public int ApproverID { get; set; }
+        public decimal TotalQuantity { get; set; }
+        public decimal TotalQuantityReceipted { get; set; }
+        public string Description { get; set; }
         public string Remarks { get; set; }
-        public Nullable<int> VoidTypeID { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public System.DateTime EditedDate { get; set; }
         public bool Approved { get; set; }
-        public bool InActive { get; set; }
-        public bool InActivePartial { get; set; }
-        public Nullable<System.DateTime> InActivePartialDate { get; set; }
+        public Nullable<System.DateTime> ApprovedDate { get; set; }
     
-        public virtual Commodity Commodity { get; set; }
+        public virtual Employee Employee { get; set; }
+        public virtual Location Location { get; set; }
         public virtual TransferOrder TransferOrder { get; set; }
         public virtual Warehouse Warehouse { get; set; }
         public virtual Warehouse Warehouse1 { get; set; }
