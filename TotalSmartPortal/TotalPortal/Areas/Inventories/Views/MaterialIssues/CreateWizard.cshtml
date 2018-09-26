@@ -97,7 +97,7 @@
         <div class="popup-button-bar">
             <input id="submitCreateWizard" type="submit" formaction="@Url.Action("CreateWizard", "MaterialIssues")" formtarget="_top" style="display:none" />
 
-            <button type="button" class="k-button" onclick="okWOSelectButton_Click()"> <img src="~/Content/Images/Mains/Size24/Accept-Total.png" /> Xuất kho </button>
+            <button type="button" class="k-button" onclick="okButton_Click()"> <img src="~/Content/Images/Mains/Size24/Accept-Total.png" /> Xuất kho </button>
             <button type="button" class="k-button" onclick="window.parent.$('#myWindow').data('kendoWindow').close()"> <img src="~/Content/Images/Mains/Size24/Users-Exit-icon-24.png" /> Thoát </button>
         </div>
     </div>
@@ -111,16 +111,10 @@
         okButton_Click();
     })
 
-    function okButton_Click() {
-        if ($("#tabStrip").data("kendoTabStrip").select().index() === 0)
-            handleOKEvent($("#gridPromotion").data("kendoGrid"));
-        else //BY FirmOrder
-            handleOKEvent();
-    }
-
-    function okWOSelectButton_Click() {
+    function okButton_Click() {       
         handleOKEvent();
     }
+    
 
     function handleOKEvent(promotionGrid) { //This javascript is now used only here. Later, if it is used somewhere else, it should be break into a standalone js file, and then just only add a link here
 
@@ -197,6 +191,7 @@
                 gridDetails.dataSource.filter({});
         }
     }
+
 
 </script>
 
