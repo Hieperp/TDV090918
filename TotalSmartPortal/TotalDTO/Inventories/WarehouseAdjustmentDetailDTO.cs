@@ -4,8 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using TotalModel;
 using TotalDTO.Helpers;
 using System.Collections.Generic;
-using TotalModel.Helpers;
-using TotalBase;
 using TotalBase.Enums;
 
 namespace TotalDTO.Inventories

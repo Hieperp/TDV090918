@@ -121,6 +121,8 @@
     <Compile Include="Inventories\HandlingUnitDTO.cs" />
     <Compile Include="Inventories\MaterialIssueDetailDTO.cs" />
     <Compile Include="Inventories\MaterialIssueDTO.cs" />
+    <Compile Include="Inventories\TransferOrderDetailDTO.cs" />
+    <Compile Include="Inventories\TransferOrderDTO.cs" />
     <Compile Include="Inventories\WarehouseAdjustmentDetailDTO.cs" />
     <Compile Include="Inventories\WarehouseAdjustmentDTO.cs" />
     <Compile Include="IPrimitiveDTO.cs" />
