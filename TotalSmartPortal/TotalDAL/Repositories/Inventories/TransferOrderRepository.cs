@@ -9,7 +9,7 @@ namespace TotalDAL.Repositories.Inventories
     public class TransferOrderRepository : GenericWithDetailRepository<TransferOrder, TransferOrderDetail>, ITransferOrderRepository
     {
         public TransferOrderRepository(TotalSmartPortalEntities totalSmartPortalEntities)
-            : base(totalSmartPortalEntities, "TransferOrderEditable", "TransferOrderApproved")
+            : base(totalSmartPortalEntities, "TransferOrderEditable", "TransferOrderApproved", null, "TransferOrderVoidable")
         {
         }
     }

@@ -1380,6 +1380,18 @@
     <Content Include="Areas\Inventories\Views\ProductTransferOrders\Edit.cshtml" />
     <Content Include="Areas\Inventories\Views\ProductTransferOrders\Index.cshtml" />
     <Content Include="Areas\Inventories\Views\ProductTransferOrders\Print.cshtml" />
+    <Content Include="Areas\Inventories\Views\TransferOrders\Void.cshtml" />
+    <Content Include="Areas\Inventories\Views\TransferOrders\VoidDetail.cshtml" />
+    <Content Include="Areas\Inventories\Views\TransferOrders\VoidDetailSuccess.cshtml" />
+    <Content Include="Areas\Inventories\Views\ItemTransferOrders\Void.cshtml" />
+    <Content Include="Areas\Inventories\Views\ItemTransferOrders\VoidDetail.cshtml" />
+    <Content Include="Areas\Inventories\Views\ItemTransferOrders\VoidDetailSuccess.cshtml" />
+    <Content Include="Areas\Inventories\Views\MaterialTransferOrders\Void.cshtml" />
+    <Content Include="Areas\Inventories\Views\MaterialTransferOrders\VoidDetail.cshtml" />
+    <Content Include="Areas\Inventories\Views\MaterialTransferOrders\VoidDetailSuccess.cshtml" />
+    <Content Include="Areas\Inventories\Views\ProductTransferOrders\Void.cshtml" />
+    <Content Include="Areas\Inventories\Views\ProductTransferOrders\VoidDetail.cshtml" />
+    <Content Include="Areas\Inventories\Views\ProductTransferOrders\VoidDetailSuccess.cshtml" />
     <None Include="Properties\PublishProfiles\TDV.pubxml" />
     <None Include="Properties\PublishProfiles\VCP.pubxml">
       <SubType>Designer</SubType>
@@ -1486,6 +1498,7 @@
     <Content Include="Scripts\Controllers\Inventories\ItemTransferOrders\Index.js" />
     <Content Include="Scripts\Controllers\Inventories\ItemTransferOrders\Open.js" />
     <Content Include="Scripts\Controllers\Inventories\ItemTransferOrders\Print.js" />
+    <Content Include="Scripts\Controllers\Inventories\ItemTransferOrders\Void.js" />
     <Content Include="Scripts\Controllers\Inventories\MaterialAdjustments\Approve.js" />
     <Content Include="Scripts\Controllers\Inventories\MaterialAdjustments\CreateWizard.js" />
     <Content Include="Scripts\Controllers\Inventories\MaterialAdjustments\Delete.js" />
@@ -1508,6 +1521,7 @@
     <Content Include="Scripts\Controllers\Inventories\MaterialTransferOrders\Index.js" />
     <Content Include="Scripts\Controllers\Inventories\MaterialTransferOrders\Open.js" />
     <Content Include="Scripts\Controllers\Inventories\MaterialTransferOrders\Print.js" />
+    <Content Include="Scripts\Controllers\Inventories\MaterialTransferOrders\Void.js" />
     <Content Include="Scripts\Controllers\Inventories\OtherItemIssues\Approve.js" />
     <Content Include="Scripts\Controllers\Inventories\OtherItemIssues\CreateWizard.js" />
     <Content Include="Scripts\Controllers\Inventories\OtherItemIssues\Delete.js" />
@@ -1564,6 +1578,7 @@
     <Content Include="Scripts\Controllers\Inventories\ProductTransferOrders\Index.js" />
     <Content Include="Scripts\Controllers\Inventories\ProductTransferOrders\Open.js" />
     <Content Include="Scripts\Controllers\Inventories\ProductTransferOrders\Print.js" />
+    <Content Include="Scripts\Controllers\Inventories\ProductTransferOrders\Void.js" />
     <Content Include="Scripts\Controllers\Inventories\TransferOrders\Approve.js" />
     <Content Include="Scripts\Controllers\Inventories\TransferOrders\CreateWizard.js" />
     <Content Include="Scripts\Controllers\Inventories\TransferOrders\Delete.js" />
@@ -1572,6 +1587,7 @@
     <Content Include="Scripts\Controllers\Inventories\TransferOrders\Index.js" />
     <Content Include="Scripts\Controllers\Inventories\TransferOrders\Open.js" />
     <Content Include="Scripts\Controllers\Inventories\TransferOrders\Print.js" />
+    <Content Include="Scripts\Controllers\Inventories\TransferOrders\Void.js" />
     <Content Include="Scripts\Controllers\Inventories\WarehouseAdjustments\AddWarehouseAdjustmentDetail.js" />
     <Content Include="Scripts\Controllers\Inventories\WarehouseAdjustments\Approve.js" />
     <Content Include="Scripts\Controllers\Inventories\WarehouseAdjustments\CreateWizard.js" />

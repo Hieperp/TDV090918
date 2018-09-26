@@ -34,7 +34,12 @@
 
         @Html.Partial("~/Views/Shared/EditorTemplates/DropDowns/TransferOrderType.cshtml")
 
-
+        @if (@Model.Voidable || @Model.UnVoidable || @Model.VoidTypeID > 0)
+        { //Don't render when in Edit Mode, so: do not add VoidType.VoidTypeID [Required] DataAnnotations to the view to submit to controller when edit
+            <div class="form-group">                
+                @Html.EditorFor(d => (d as ITransferOrderDTO).VoidType, (@Model.Voidable ? new { VoidTypeClassSpecialEditable = "SpecialEditable" } : null))
+            </div>
+        }
     </div>
 
     <div class="right-panel">
@@ -76,7 +81,9 @@
                         .ClientTemplate("#= CommodityID #" + "<input type='hidden' name='TransferOrderViewDetails[#= index(data) #].CommodityID' value='#= CommodityID #' />");
                     columns.Bound(p => p.CommodityCode).DisplayNameTitle().Filterable(false).Width(200)
                         .ClientFooterTemplate("Tổng cộng (#= kendo.format('{0:n0}', count) # dòng)")
-                        .ClientTemplate("<div> #= CommodityCode #</div>" + "<input type='hidden' name='TransferOrderViewDetails[#= index(data) #].CommodityCode' value='#= CommodityCode #' />");
+                        .ClientTemplate("<div> #= CommodityCode #</div>" +
+                            "<div> #= (VoidTypeName == null)? '' : VoidTypeName #</div>" +
+                            "<input type='hidden' name='TransferOrderViewDetails[#= index(data) #].CommodityCode' value='#= CommodityCode #' />");
 
                     columns.Bound(p => p.CommodityName).DisplayNameTitle().Filterable(false).Width(280).HtmlAttributes(new { style = "" })
                         .ClientTemplate("#= CommodityName #" + "<input type='hidden' name='TransferOrderViewDetails[#= index(data) #].CommodityName' value='#= CommodityName #' />");
@@ -97,7 +104,9 @@
 
                     columns.Bound(p => p.Remarks).DisplayNameTitle().Filterable(false)
                         .ClientTemplate("#= (Remarks == null)? '' : Remarks #" + "<input type='hidden' name='TransferOrderViewDetails[#= index(data) #].Remarks' value='#= (Remarks == null) ? '' : Remarks #' />");
-
+                    
+                    columns.Bound(p => p.InActivePartial).DisplayNameTitle().Hidden()
+                       .ClientTemplate("#= (InActivePartial == null)? '' : InActivePartial #" + "<input type='hidden' name='TransferOrderViewDetails[#= index(data) #].InActivePartial' value='#= (InActivePartial == null) ? '' : InActivePartial #' />");
 
                     columns.Command(command => { command.Destroy().Text("<span class='command' ></span>"); }).Width(50).Hidden(!@Model.Editable).HtmlAttributes(new { @class = "grid-column-center" });
 
@@ -150,7 +159,7 @@
                             var grid = $("#kendoGridDetails").data("kendoGrid");
                             var data = grid.dataSource.data();
                             $.each(data, function (i, row) {
-                            var isWarrantyClaim = null;
+                            var isWarrantyClaim = row.VoidTypeName;
                             if (isWarrantyClaim != null && isWarrantyClaim != '') {
                             $('tr[data-uid="' + row.uid + '"]').addClass("isBonus");
                             }

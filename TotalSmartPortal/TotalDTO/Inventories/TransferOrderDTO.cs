@@ -77,6 +77,10 @@ namespace TotalDTO.Inventories
         CustomerBaseDTO Customer { get; set; }
 
         List<TransferOrderDetailDTO> TransferOrderViewDetails { get; set; }
+        List<TransferOrderDetailDTO> ViewDetails { get; set; }
+        
+        [UIHint("AutoCompletes/VoidType")]
+        VoidTypeBaseDTO VoidType { get; set; }
 
         string ControllerName { get; }
 
@@ -105,6 +109,8 @@ namespace TotalDTO.Inventories
         public override Nullable<int> CustomerID { get { int? customerID = null; if (this.Customer != null) customerID = this.Customer.CustomerID; return customerID; } }
         public CustomerBaseDTO Customer { get; set; }
 
+        public override Nullable<int> VoidTypeID { get { return (this.VoidType != null ? this.VoidType.VoidTypeID : null); } }        
+        public VoidTypeBaseDTO VoidType { get; set; }
 
         public List<TransferOrderDetailDTO> TransferOrderViewDetails { get; set; }
         public List<TransferOrderDetailDTO> ViewDetails { get { return this.TransferOrderViewDetails; } set { this.TransferOrderViewDetails = value; } }

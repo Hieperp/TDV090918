@@ -32,5 +32,11 @@ namespace TotalDTO.Inventories
         [Display(Name = "SL")]
         [UIHint("QuantityWithMinus")]
         public override decimal Quantity { get; set; }
+
+        public string VoidTypeCode { get; set; }
+        [Display(Name = "Lý do")]
+        [UIHint("AutoCompletes/VoidTypeBase")]
+        public string VoidTypeName { get; set; }
+        public Nullable<int> VoidClassID { get; set; }
     }
 }
