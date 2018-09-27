@@ -1667,6 +1667,7 @@
     <Content Include="Scripts\Controllers\Inventories\WarehouseAdjustments\Index.js" />
     <Content Include="Scripts\Controllers\Inventories\WarehouseAdjustments\Open.js" />
     <Content Include="Scripts\Controllers\Inventories\WarehouseAdjustments\Print.js" />
+    <Content Include="Scripts\Controllers\Inventories\WarehouseTransfers\AddWarehouseTransferDetail.js" />
     <Content Include="Scripts\Controllers\Inventories\WarehouseTransfers\Approve.js" />
     <Content Include="Scripts\Controllers\Inventories\WarehouseTransfers\CreateWizard.js" />
     <Content Include="Scripts\Controllers\Inventories\WarehouseTransfers\Delete.js" />
