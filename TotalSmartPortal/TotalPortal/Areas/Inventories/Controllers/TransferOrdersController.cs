@@ -47,14 +47,7 @@ namespace TotalPortal.Areas.Inventories.Controllers
 
             ViewBag.WarehouseTaskID = (int)(viewDetailViewModel.IsMaterial ? GlobalEnums.WarehouseTaskID.MaterialAdjustment : (viewDetailViewModel.IsItem ? GlobalEnums.WarehouseTaskID.ItemAdjustment : (viewDetailViewModel.IsProduct ? GlobalEnums.WarehouseTaskID.ProductAdjustment : GlobalEnums.WarehouseTaskID.Unknown)));
             ViewBag.WarehouseTaskIDList = warehouseTaskIDList.ToString();
-        }
-
-        public virtual ActionResult GetGoodsReceiptDetailAvailables()
-        {
-            this.AddRequireJsOptions();
-            TViewDetailViewModel viewDetailViewModel = new TViewDetailViewModel();
-            return View(this.InitViewModel(viewDetailViewModel));
-        }
+        }   
 
         protected override PrintViewModel InitPrintViewModel(int? id)
         {
@@ -75,16 +68,16 @@ namespace TotalPortal.Areas.Inventories.Controllers
 
     public class MaterialTransferOrdersController : TransferOrdersController<TransferOrderDTO<TOOptionMaterial>, TransferOrderPrimitiveDTO<TOOptionMaterial>, TransferOrderDetailDTO, MaterialTransferOrderViewModel>
     {
-        public MaterialTransferOrdersController(IMaterialTransferOrderService otherMaterialReceiptService, IMaterialTransferOrderViewModelSelectListBuilder otherMaterialReceiptViewModelSelectListBuilder)
-            : base(otherMaterialReceiptService, otherMaterialReceiptViewModelSelectListBuilder)
+        public MaterialTransferOrdersController(IMaterialTransferOrderService materialTransferOrderService, IMaterialTransferOrderViewModelSelectListBuilder materialTransferOrderViewModelSelectListBuilder)
+            : base(materialTransferOrderService, materialTransferOrderViewModelSelectListBuilder)
         {
         }
     }  
 
     public class ItemTransferOrdersController : TransferOrdersController<TransferOrderDTO<TOOptionItem>, TransferOrderPrimitiveDTO<TOOptionItem>, TransferOrderDetailDTO, ItemTransferOrderViewModel>
     {
-        public ItemTransferOrdersController(IItemTransferOrderService otherItemReceiptService, IItemTransferOrderViewModelSelectListBuilder otherItemReceiptViewModelSelectListBuilder)
-            : base(otherItemReceiptService, otherItemReceiptViewModelSelectListBuilder)
+        public ItemTransferOrdersController(IItemTransferOrderService itemTransferOrderService, IItemTransferOrderViewModelSelectListBuilder itemTransferOrderViewModelSelectListBuilder)
+            : base(itemTransferOrderService, itemTransferOrderViewModelSelectListBuilder)
         {
         }
     }
@@ -92,8 +85,8 @@ namespace TotalPortal.Areas.Inventories.Controllers
    
     public class ProductTransferOrdersController : TransferOrdersController<TransferOrderDTO<TOOptionProduct>, TransferOrderPrimitiveDTO<TOOptionProduct>, TransferOrderDetailDTO, ProductTransferOrderViewModel>
     {
-        public ProductTransferOrdersController(IProductTransferOrderService otherProductReceiptService, IProductTransferOrderViewModelSelectListBuilder otherProductReceiptViewModelSelectListBuilder)
-            : base(otherProductReceiptService, otherProductReceiptViewModelSelectListBuilder)
+        public ProductTransferOrdersController(IProductTransferOrderService productTransferOrderService, IProductTransferOrderViewModelSelectListBuilder productTransferOrderViewModelSelectListBuilder)
+            : base(productTransferOrderService, productTransferOrderViewModelSelectListBuilder)
         {
         }
     }

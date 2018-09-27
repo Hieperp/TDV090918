@@ -8,11 +8,7 @@ using TotalPortal.Areas.Commons.Builders;
 using TotalPortal.Areas.Inventories.ViewModels;
 
 namespace TotalPortal.Areas.Inventories.Builders
-{
-    public class TransferOrderViewModelSelectListBuilder
-    {
-    }
-
+{   
     public interface ITransferOrderViewModelSelectListBuilder<TTransferOrderViewModel> : IViewModelSelectListBuilder<TTransferOrderViewModel>
         where TTransferOrderViewModel : ITransferOrderViewModel
     {

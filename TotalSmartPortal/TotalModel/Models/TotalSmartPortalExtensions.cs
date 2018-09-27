@@ -162,6 +162,25 @@ namespace TotalModel.Models
 
 
 
+    public partial class WarehouseTransfer : IPrimitiveEntity, IBaseEntity, IBaseDetailEntity<WarehouseTransferDetail>
+    {
+        public int GetID() { return this.WarehouseTransferID; }
+
+        public virtual Warehouse WarehouseReceipt { get { return this.Warehouse1; } }
+
+        public virtual Employee Storekeeper { get { return this.Employee; } }
+
+        public ICollection<WarehouseTransferDetail> GetDetails() { return this.WarehouseTransferDetails; }
+    }
+
+
+    public partial class WarehouseTransferDetail : IPrimitiveEntity, IHelperEntryDate, IHelperCommodityID, IHelperCommodityTypeID
+    {
+        public int GetID() { return this.WarehouseTransferDetailID; }
+    }
+
+
+
 
     public partial class PlannedOrder : IPrimitiveEntity, IBaseEntity, IBaseDetailEntity<PlannedOrderDetail>
     {

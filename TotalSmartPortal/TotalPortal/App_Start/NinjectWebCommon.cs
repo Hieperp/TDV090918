@@ -165,7 +165,20 @@ namespace TotalPortal.App_Start
                 kernel.Bind<IItemTransferOrderService>().To<ItemTransferOrderService>();
                 kernel.Bind<IItemTransferOrderViewModelSelectListBuilder>().To<ItemTransferOrderViewModelSelectListBuilder>();                
                 kernel.Bind<IProductTransferOrderService>().To<ProductTransferOrderService>();
-                kernel.Bind<IProductTransferOrderViewModelSelectListBuilder>().To<ProductTransferOrderViewModelSelectListBuilder>();                
+                kernel.Bind<IProductTransferOrderViewModelSelectListBuilder>().To<ProductTransferOrderViewModelSelectListBuilder>();
+
+
+
+                kernel.Bind<IWarehouseTransferRepository>().To<WarehouseTransferRepository>();
+                kernel.Bind<IWarehouseTransferAPIRepository>().To<WarehouseTransferAPIRepository>();
+
+                kernel.Bind<IMaterialTransferService>().To<MaterialTransferService>();
+                kernel.Bind<IMaterialTransferViewModelSelectListBuilder>().To<MaterialTransferViewModelSelectListBuilder>();
+                kernel.Bind<IItemTransferService>().To<ItemTransferService>();
+                kernel.Bind<IItemTransferViewModelSelectListBuilder>().To<ItemTransferViewModelSelectListBuilder>();
+                kernel.Bind<IProductTransferService>().To<ProductTransferService>();
+                kernel.Bind<IProductTransferViewModelSelectListBuilder>().To<ProductTransferViewModelSelectListBuilder>();                
+
 
 
 

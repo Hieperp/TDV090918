@@ -114,6 +114,23 @@ namespace TotalPortal.App_Start
 
 
 
+                cfg.CreateMap<WarehouseTransfer, WarehouseTransferDTO<WTOptionMaterial>>();
+                cfg.CreateMap<WarehouseTransfer, WarehouseTransferDTO<WTOptionItem>>();
+                cfg.CreateMap<WarehouseTransfer, WarehouseTransferDTO<WTOptionProduct>>();
+
+                cfg.CreateMap<WarehouseTransferPrimitiveDTO<WTOptionMaterial>, WarehouseTransfer>();
+                cfg.CreateMap<WarehouseTransferPrimitiveDTO<WTOptionItem>, WarehouseTransfer>();
+                cfg.CreateMap<WarehouseTransferPrimitiveDTO<WTOptionProduct>, WarehouseTransfer>();
+
+                cfg.CreateMap<WarehouseTransferViewDetail, WarehouseTransferDetailDTO>();
+                cfg.CreateMap<WarehouseTransferDetailDTO, WarehouseTransferDetail>();
+
+                cfg.CreateMap<WarehouseTransfer, MaterialTransferViewModel>();
+                cfg.CreateMap<WarehouseTransfer, ItemTransferViewModel>();
+                cfg.CreateMap<WarehouseTransfer, ProductTransferViewModel>();
+
+
+
 
 
 
