@@ -4977,6 +4977,18 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TransferOrders_VoidTypes">
+          <End Role="VoidTypes" Type="Self.VoidTypes" Multiplicity="0..1" />
+          <End Role="TransferOrders" Type="Self.TransferOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VoidTypes">
+              <PropertyRef Name="VoidTypeID" />
+            </Principal>
+            <Dependent Role="TransferOrders">
+              <PropertyRef Name="VoidTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TransferOrders_Warehouses">
           <End Role="Warehouses" Type="Self.Warehouses" Multiplicity="1" />
           <End Role="TransferOrders" Type="Self.TransferOrders" Multiplicity="*" />
@@ -7427,6 +7439,10 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
             <End Role="TransferOrderTypes" EntitySet="TransferOrderTypes" />
             <End Role="TransferOrders" EntitySet="TransferOrders" />
           </AssociationSet>
+          <AssociationSet Name="FK_TransferOrders_VoidTypes" Association="Self.FK_TransferOrders_VoidTypes">
+            <End Role="VoidTypes" EntitySet="VoidTypes" />
+            <End Role="TransferOrders" EntitySet="TransferOrders" />
+          </AssociationSet>
           <AssociationSet Name="FK_TransferOrders_Warehouses" Association="Self.FK_TransferOrders_Warehouses">
             <End Role="Warehouses" EntitySet="Warehouses" />
             <End Role="TransferOrders" EntitySet="TransferOrders" />
@@ -8818,6 +8834,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <NavigationProperty Name="FirmOrderMaterials" Relationship="TotalSmartPortalModel.FK_FirmOrderMaterials_VoidTypes" FromRole="VoidType" ToRole="FirmOrderMaterial" />
           <NavigationProperty Name="ProductionOrderDetails" Relationship="TotalSmartPortalModel.FK_ProductionOrderDetails_VoidTypes" FromRole="VoidType" ToRole="ProductionOrderDetail" />
           <NavigationProperty Name="ProductionOrders" Relationship="TotalSmartPortalModel.FK_ProductionOrders_VoidTypes" FromRole="VoidType" ToRole="ProductionOrder" />
+          <NavigationProperty Name="TransferOrders" Relationship="TotalSmartPortalModel.FK_TransferOrders_VoidTypes" FromRole="VoidType" ToRole="TransferOrder" />
         </EntityType>
         <Association Name="FK_AccessControls_OrganizationalUnits">
           <End Role="OrganizationalUnits" Type="Self.OrganizationalUnit" Multiplicity="1" />
@@ -12191,6 +12208,10 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
             <Parameter Name="LocationID" Mode="In" Type="Int32" />
             <Parameter Name="NMVNTaskID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_TransferOrders_VoidTypes" Association="TotalSmartPortalModel.FK_TransferOrders_VoidTypes">
+            <End Role="VoidType" EntitySet="VoidTypes" />
+            <End Role="TransferOrder" EntitySet="TransferOrders" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="AccountInvoiceIndex">
           <Property Type="Int32" Name="AccountInvoiceID" Nullable="false" />
@@ -16915,6 +16936,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="Decimal" Name="TotalQuantity" Nullable="false" Precision="18" Scale="2" />
           <Property Type="Boolean" Name="Approved" Nullable="false" />
           <Property Type="String" Name="VoidTypeName" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="InActive" Nullable="false" />
+          <Property Type="Boolean" Name="InActivePartial" Nullable="false" />
         </ComplexType>
         <ComplexType Name="TransferOrderViewDetail">
           <Property Type="Int32" Name="TransferOrderDetailID" Nullable="false" />
@@ -16930,6 +16953,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="String" Name="VoidTypeCode" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="VoidTypeName" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="VoidClassID" Nullable="true" />
+          <Property Type="Boolean" Name="InActivePartial" Nullable="true" />
         </ComplexType>
         <EntityType Name="TransferOrderDetail">
           <Key>
@@ -17001,6 +17025,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <NavigationProperty Name="Warehouse1" Relationship="TotalSmartPortalModel.FK_TransferOrders_Warehouses1" FromRole="TransferOrder" ToRole="Warehouse" />
           <NavigationProperty Name="WarehouseTransferDetails" Relationship="TotalSmartPortalModel.FK_WarehouseTransferDetails_TransferOrders" FromRole="TransferOrder" ToRole="WarehouseTransferDetail" />
           <NavigationProperty Name="WarehouseTransfers" Relationship="TotalSmartPortalModel.FK_WarehouseTransfers_TransferOrders" FromRole="TransferOrder" ToRole="WarehouseTransfer" />
+          <NavigationProperty Name="VoidType" Relationship="TotalSmartPortalModel.FK_TransferOrders_VoidTypes" FromRole="TransferOrder" ToRole="VoidType" />
         </EntityType>
         <EntityType Name="WarehouseTransferDetail">
           <Key>
@@ -17370,6 +17395,18 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="Decimal" Name="Quantity" Nullable="false" Precision="18" Scale="2" />
           <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <Association Name="FK_TransferOrders_VoidTypes">
+          <End Type="TotalSmartPortalModel.VoidType" Role="VoidType" Multiplicity="0..1" />
+          <End Type="TotalSmartPortalModel.TransferOrder" Role="TransferOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VoidType">
+              <PropertyRef Name="VoidTypeID" />
+            </Principal>
+            <Dependent Role="TransferOrder">
+              <PropertyRef Name="VoidTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -21850,6 +21887,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="VoidTypeName" ColumnName="VoidTypeName" />
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -21869,6 +21908,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="VoidTypeCode" ColumnName="VoidTypeCode" />
                 <ScalarProperty Name="VoidTypeName" ColumnName="VoidTypeName" />
                 <ScalarProperty Name="VoidClassID" ColumnName="VoidClassID" />
+                <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

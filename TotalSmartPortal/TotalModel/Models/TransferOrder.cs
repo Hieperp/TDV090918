@@ -60,5 +60,6 @@ namespace TotalModel.Models
         public virtual ICollection<WarehouseTransferDetail> WarehouseTransferDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WarehouseTransfer> WarehouseTransfers { get; set; }
+        public virtual VoidType VoidType { get; set; }
     }
 }

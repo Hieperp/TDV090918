@@ -119,7 +119,13 @@ namespace TotalDTO.Inventories
 
         protected override IEnumerable<TransferOrderDetailDTO> DtoDetails() { return this.TransferOrderViewDetails; }
 
-
+        public override void PrepareVoidDetail(int? detailID)
+        {
+            this.ViewDetails.RemoveAll(w => w.TransferOrderDetailID != detailID);
+            if (this.ViewDetails.Count() > 0)
+                this.VoidType = new VoidTypeBaseDTO() { VoidTypeID = this.ViewDetails[0].VoidTypeID, Code = this.ViewDetails[0].VoidTypeCode, Name = this.ViewDetails[0].VoidTypeName, VoidClassID = this.ViewDetails[0].VoidClassID };
+            base.PrepareVoidDetail(detailID);
+        }
 
         public string ControllerName { get { return this.NMVNTaskID.ToString() + "s"; } }
 
