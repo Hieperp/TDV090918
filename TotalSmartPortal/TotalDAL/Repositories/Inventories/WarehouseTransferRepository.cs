@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Data.Entity.Core.Objects;
+using System.Collections.Generic;
 
 using TotalModel.Models;
 using TotalCore.Repositories.Inventories;
@@ -37,6 +39,33 @@ namespace TotalDAL.Repositories.Inventories
             this.RepositoryBag.Remove("NMVNTaskID");
 
             return objectParameters;
+        }
+
+        public IEnumerable<WarehouseTransferPendingWarehouse> GetWarehouses(int? locationID, int? nmvnTaskID)
+        {
+            this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = false;
+            IEnumerable<WarehouseTransferPendingWarehouse> pendingWarehouses = base.TotalSmartPortalEntities.GetWarehouseTransferPendingWarehouses(locationID, nmvnTaskID).ToList();
+            this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = true;
+
+            return pendingWarehouses;
+        }
+
+        public IEnumerable<WarehouseTransferPendingTransferOrder> GetTransferOrders(int? locationID, int? nmvnTaskID)
+        {
+            this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = false;
+            IEnumerable<WarehouseTransferPendingTransferOrder> pendingTransferOrders = base.TotalSmartPortalEntities.GetWarehouseTransferPendingTransferOrders(locationID, nmvnTaskID).ToList();
+            this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = true;
+
+            return pendingTransferOrders;
+        }
+
+        public IEnumerable<WarehouseTransferPendingTransferOrderDetail> GetTransferOrderDetails(int? locationID, int? nmvnTaskID, int? warehouseTransferID, int? transferOrderID, int? warehouseID, int? warehouseReceiptID, string goodsReceiptDetailIDs, bool isReadonly)
+        {
+            this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = false;
+            IEnumerable<WarehouseTransferPendingTransferOrderDetail> pendingTransferOrderDetails = base.TotalSmartPortalEntities.GetWarehouseTransferPendingTransferOrderDetails(locationID, nmvnTaskID, warehouseTransferID, transferOrderID, warehouseID, warehouseReceiptID, goodsReceiptDetailIDs, isReadonly).ToList();
+            this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = true;
+
+            return pendingTransferOrderDetails;
         }
     }
 }

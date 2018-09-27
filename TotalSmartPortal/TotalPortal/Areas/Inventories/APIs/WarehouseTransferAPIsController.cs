@@ -34,5 +34,23 @@ namespace TotalPortal.Areas.Inventories.APIs
 
             return Json(response, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult GetWarehouses([DataSourceRequest] DataSourceRequest dataSourceRequest, int? locationID, int? nmvnTaskID)
+        {
+            var result = this.transferOrderAPIRepository.GetWarehouses(locationID, nmvnTaskID);
+            return Json(result.ToDataSourceResult(dataSourceRequest), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetTransferOrders([DataSourceRequest] DataSourceRequest dataSourceRequest, int? locationID, int? nmvnTaskID)
+        {
+            var result = this.transferOrderAPIRepository.GetTransferOrders(locationID, nmvnTaskID);
+            return Json(result.ToDataSourceResult(dataSourceRequest), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetTransferOrderDetails([DataSourceRequest] DataSourceRequest dataSourceRequest, int? locationID, int? nmvnTaskID, int? warehouseTransferID, int? transferOrderID, int? warehouseID, int? warehouseReceiptID, string goodsReceiptDetailIDs, bool isReadonly)
+        {
+            var result = this.transferOrderAPIRepository.GetTransferOrderDetails(locationID, nmvnTaskID, warehouseTransferID, transferOrderID, warehouseID, warehouseReceiptID, goodsReceiptDetailIDs, false);
+            return Json(result.ToDataSourceResult(dataSourceRequest), JsonRequestBehavior.AllowGet);
+        }
     }
 }

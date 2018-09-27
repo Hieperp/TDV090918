@@ -1433,11 +1433,11 @@
     <Content Include="Areas\Inventories\Views\WarehouseTransfers\VoidDetail.cshtml" />
     <Content Include="Areas\Inventories\Views\WarehouseTransfers\VoidDetailSuccess.cshtml" />
     <Content Include="Areas\Inventories\Views\WarehouseTransfers\_WarehouseTransfer.cshtml" />
-    <Content Include="Areas\Inventories\Views\TransferOrders\_GetWarehouse.cshtml" />
     <Content Include="Areas\Inventories\Views\ProductTransfers\GetGoodsReceiptDetailAvailables.cshtml" />
     <Content Include="Areas\Inventories\Views\MaterialTransfers\GetGoodsReceiptDetailAvailables.cshtml" />
     <Content Include="Areas\Inventories\Views\ItemTransfers\GetGoodsReceiptDetailAvailables.cshtml" />
-    <Content Include="Areas\Inventories\Views\TransferOrders\_GetTransferOrder.cshtml" />
+    <Content Include="Areas\Inventories\Views\WarehouseTransfers\_GetTransferOrder.cshtml" />
+    <Content Include="Areas\Inventories\Views\WarehouseTransfers\_GetWarehouse.cshtml" />
     <None Include="Properties\PublishProfiles\TDV.pubxml" />
     <None Include="Properties\PublishProfiles\VCP.pubxml">
       <SubType>Designer</SubType>

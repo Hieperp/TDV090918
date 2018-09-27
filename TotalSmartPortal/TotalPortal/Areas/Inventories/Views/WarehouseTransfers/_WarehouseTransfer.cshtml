@@ -18,7 +18,7 @@
     @Html.Partial("~/Views/Helpers/Bases/_BaseSectionTopB.cshtml")
 
     @Html.HiddenFor(model => (model as IWarehouseTransferPrimitiveDTO).WarehouseTransferID)    
-    @Html.HiddenFor(model => (model as IWarehouseTransferPrimitiveDTO).TransferOrderID)
+    @Html.HiddenFor(model => (model as IWarehouseTransferPrimitiveDTO).TransferOrderID)       
 
     <div class="left-panel">
 
@@ -46,7 +46,7 @@
 
     <div class="right-panel">
         <div class="right-top-panel right-top-panel-H2">
-            @Html.EditorFor(d => (d as IWarehouseTransferDTO).Customer, new { CustomerDescriptionHidden = "false", CustomerDisplayName = @Model.Customer.GetDisplayName(m => m.CustomerID) })
+            @Html.EditorFor(d => (d as IWarehouseTransferDTO).Customer, new { CustomerDescriptionHidden = "false", CustomerDisplayName = @Model.Customer.GetDisplayName(m => m.CustomerID), CustomerIcon = "Customer Red 24.png", NullCustomer = (Model.CustomerID > 0 ? null : "Giao hàng tổng hợp của nhiều lệnh đặt hàng"), CustomerInfo = (Model.CustomerID > 0 ? null : "#") })
 
             <div class="form-group">
                 <div class="right-panel-label right-panel-label-whole-width">
