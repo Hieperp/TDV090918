@@ -2,21 +2,21 @@
     window.parent.$("#myWindow").data("kendoWindow").close();
 }
 
-function handleOKEvent(warehouseTransferGridDataSource, goodsReceiptDetailAvailableGridDataSource, closeWhenFinished) {
-    if (warehouseTransferGridDataSource != undefined && goodsReceiptDetailAvailableGridDataSource != undefined) {
+function handleOKEvent(warehouseAdjustmentGridDataSource, goodsReceiptDetailAvailableGridDataSource, closeWhenFinished) {
+    if (warehouseAdjustmentGridDataSource != undefined && goodsReceiptDetailAvailableGridDataSource != undefined) {
         var goodsReceiptDetailAvailableGridDataItems = goodsReceiptDetailAvailableGridDataSource.view();
-        var warehouseTransferJSON = warehouseTransferGridDataSource.data().toJSON();
+        var warehouseAdjustmentJSON = warehouseAdjustmentGridDataSource.data().toJSON();
         for (var i = 0; i < goodsReceiptDetailAvailableGridDataItems.length; i++) {
             if (goodsReceiptDetailAvailableGridDataItems[i].IsSelected === true)
-                _setParentInput(warehouseTransferJSON, goodsReceiptDetailAvailableGridDataItems[i]);
+                _setParentInput(warehouseAdjustmentJSON, goodsReceiptDetailAvailableGridDataItems[i]);
         }
 
-        warehouseTransferJSON.push(new Object()); //Add a temporary empty row
+        warehouseAdjustmentJSON.push(new Object()); //Add a temporary empty row
 
-        warehouseTransferGridDataSource.data(warehouseTransferJSON);
+        warehouseAdjustmentGridDataSource.data(warehouseAdjustmentJSON);
 
-        var rawData = warehouseTransferGridDataSource.data()
-        warehouseTransferGridDataSource.remove(rawData[rawData.length - 1]); //Remove the last row: this is the temporary empty row        
+        var rawData = warehouseAdjustmentGridDataSource.data()
+        warehouseAdjustmentGridDataSource.remove(rawData[rawData.length - 1]); //Remove the last row: this is the temporary empty row        
 
         if (closeWhenFinished)
             cancelButton_Click();
@@ -35,9 +35,9 @@ function handleOKEvent(warehouseTransferGridDataSource, goodsReceiptDetailAvaila
     //grid.dataSource.data(data); //set changed data as data of the Grid
 
 
-    function _setParentInput(warehouseTransferJSON, warehouseTransferGridDataItem) {
+    function _setParentInput(warehouseAdjustmentJSON, productionOrderGridDataItem) {
 
-        //var dataRow = warehouseTransferJSON.add({});
+        //var dataRow = warehouseAdjustmentJSON.add({});
 
         var dataRow = new Object();
 
@@ -47,18 +47,24 @@ function handleOKEvent(warehouseTransferGridDataSource, goodsReceiptDetailAvaila
         dataRow.WarehouseAdjustmentDetailID = 0;
         dataRow.WarehouseAdjustmentID = window.parent.$("#WarehouseAdjustmentID").val();
 
-        dataRow.CommodityID = warehouseTransferGridDataItem.CommodityID;
-        dataRow.CommodityName = warehouseTransferGridDataItem.CommodityName;
-        dataRow.CommodityCode = warehouseTransferGridDataItem.CommodityCode;
-        dataRow.CommodityTypeID = warehouseTransferGridDataItem.CommodityTypeID;
+        dataRow.CommodityID = productionOrderGridDataItem.CommodityID;
+        dataRow.CommodityName = productionOrderGridDataItem.CommodityName;
+        dataRow.CommodityCode = productionOrderGridDataItem.CommodityCode;
+        dataRow.CommodityTypeID = productionOrderGridDataItem.CommodityTypeID;
 
-        dataRow.TransferOrderID = warehouseTransferGridDataItem.TransferOrderID;
-        dataRow.TransferOrderDetailID = warehouseTransferGridDataItem.TransferOrderDetailID;
+        dataRow.GoodsReceiptID = productionOrderGridDataItem.GoodsReceiptID;
+        dataRow.GoodsReceiptDetailID = productionOrderGridDataItem.GoodsReceiptDetailID;
+        dataRow.GoodsReceiptCode = productionOrderGridDataItem.GoodsReceiptCode;
+        dataRow.GoodsReceiptReference = productionOrderGridDataItem.GoodsReceiptReference;
+        dataRow.GoodsReceiptEntryDate = productionOrderGridDataItem.GoodsReceiptEntryDate;
 
-        dataRow.WarehouseID = warehouseTransferGridDataItem.WarehouseID;
-        dataRow.WarehouseCode = warehouseTransferGridDataItem.WarehouseCode;
+        dataRow.BatchID = productionOrderGridDataItem.BatchID;
+        dataRow.BatchEntryDate = productionOrderGridDataItem.BatchEntryDate;
 
-        dataRow.QuantityAvailables = warehouseTransferGridDataItem.QuantityAvailables;
+        dataRow.WarehouseID = productionOrderGridDataItem.WarehouseID;
+        dataRow.WarehouseCode = productionOrderGridDataItem.WarehouseCode;
+
+        dataRow.QuantityAvailables = productionOrderGridDataItem.QuantityAvailables;
         dataRow.Quantity = 0;
         dataRow.QuantityPositive = 0;
         dataRow.QuantityNegative = 0;
@@ -66,7 +72,7 @@ function handleOKEvent(warehouseTransferGridDataSource, goodsReceiptDetailAvaila
         dataRow.Remarks = null;
 
 
-        warehouseTransferJSON.push(dataRow);
+        warehouseAdjustmentJSON.push(dataRow);
     }
 }
 
