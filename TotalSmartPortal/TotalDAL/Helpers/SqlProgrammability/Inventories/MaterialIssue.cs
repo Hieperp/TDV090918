@@ -34,6 +34,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             this.MaterialIssueToggleApproved();
 
             this.MaterialIssueInitReference();
+
+            this.MaterialIssueSheet();
         }
 
 
@@ -382,6 +384,35 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             SimpleInitReference simpleInitReference = new SimpleInitReference("MaterialIssues", "MaterialIssueID", "Reference", ModelSettingManager.ReferenceLength, ModelSettingManager.ReferencePrefix(GlobalEnums.NmvnTaskID.MaterialIssue));
             this.totalSmartPortalEntities.CreateTrigger("MaterialIssueInitReference", simpleInitReference.CreateQuery());
         }
+
+        private void MaterialIssueSheet()
+        {
+            string queryString = " @MaterialIssueID int " + "\r\n";
+            //queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+            queryString = queryString + "    BEGIN " + "\r\n";
+
+            queryString = queryString + "       DECLARE         @LocalMaterialIssueID int    SET @LocalMaterialIssueID = @MaterialIssueID" + "\r\n";
+
+            queryString = queryString + "       SELECT          MaterialIssues.MaterialIssueID, MaterialIssues.EntryDate AS MaterialIssueEntryDate, MaterialIssues.Reference, Workshifts.Code AS WorkshiftCode, ProductionLines.Code AS ProductionLineCode, " + "\r\n";
+            queryString = queryString + "                       FirmOrders.EntryDate AS FirmOrderEntryDate, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, Customers.Name AS CustomerName, " + "\r\n";
+            queryString = queryString + "                       Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, MaterialIssueDetails.BatchEntryDate, MaterialIssueDetails.Quantity " + "\r\n";
+
+            queryString = queryString + "       FROM            MaterialIssues " + "\r\n";
+            queryString = queryString + "                       INNER JOIN MaterialIssueDetails ON MaterialIssues.MaterialIssueID = @LocalMaterialIssueID AND MaterialIssues.MaterialIssueID = MaterialIssueDetails.MaterialIssueID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN FirmOrders ON MaterialIssues.FirmOrderID = FirmOrders.FirmOrderID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN Customers ON MaterialIssues.CustomerID = Customers.CustomerID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN Workshifts ON MaterialIssues.WorkshiftID = Workshifts.WorkshiftID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN ProductionLines ON MaterialIssues.ProductionLineID = ProductionLines.ProductionLineID" + "\r\n";
+            queryString = queryString + "                       INNER JOIN Commodities ON MaterialIssueDetails.CommodityID = Commodities.CommodityID " + "\r\n";
+
+            queryString = queryString + "       ORDER BY        MaterialIssueDetails.MaterialIssueDetailID " + "\r\n";
+
+            queryString = queryString + "    END " + "\r\n";
+
+            this.totalSmartPortalEntities.CreateStoredProcedure("MaterialIssueSheet", queryString);
+        }
+
     }
 }
 
