@@ -28,6 +28,24 @@ namespace TotalDTO.Inventories
 
         public Nullable<int> CustomerID { get; set; }
 
+        public Nullable<int> GoodsReceiptID { get; set; }
+        public Nullable<int> GoodsReceiptDetailID { get; set; }
+
+        [Display(Name = "Lô SX")]
+        [UIHint("StringReadonly")]
+        public string GoodsReceiptReference { get; set; }
+        [Display(Name = "Mã NK")]
+        [UIHint("StringReadonly")]
+        public string GoodsReceiptCode { get; set; }
+        [Display(Name = "Ngày NK")]
+        [UIHint("DateTimeReadonly")]
+        public Nullable<System.DateTime> GoodsReceiptEntryDate { get; set; }
+
+        public int BatchID { get; set; }
+        [Display(Name = "Ngày lô hàng")]
+        [UIHint("DateTimeReadonly")]
+        public System.DateTime BatchEntryDate { get; set; }
+
         [Display(Name = "Tồn kho")]
         [UIHint("QuantityReadonly")]
         public decimal QuantityAvailables { get; set; }

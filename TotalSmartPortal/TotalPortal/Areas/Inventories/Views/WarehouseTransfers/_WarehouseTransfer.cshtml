@@ -17,8 +17,9 @@
     @Html.Partial("~/Views/Helpers/Bases/_BaseSectionTop.cshtml")
     @Html.Partial("~/Views/Helpers/Bases/_BaseSectionTopB.cshtml")
 
-    @Html.HiddenFor(model => (model as IWarehouseTransferPrimitiveDTO).WarehouseTransferID)    
-    @Html.HiddenFor(model => (model as IWarehouseTransferPrimitiveDTO).TransferOrderID)       
+    @Html.HiddenFor(model => (model as IWarehouseTransferPrimitiveDTO).WarehouseTransferID)
+    @Html.HiddenFor(model => (model as IWarehouseTransferPrimitiveDTO).TransferOrderID)
+    @Html.Hidden("NMVNTaskID", (int)Model.NMVNTaskID)
 
     <div class="left-panel">
 
@@ -31,14 +32,14 @@
         <div class="SBT-Hidden">
             @Html.EditorFor(d => (d as IWarehouseTransferDTO).WarehouseReceipt, new { WarehouseDisplayName = @Model.WarehouseReceipt.GetDisplayName(m => m.WarehouseID), LeftPanelInput = "left-panel-input" })
         </div>
-        
+
         <div class="form-group">
             @Html.EditorFor(d => (d as IWarehouseTransferDTO).Storekeeper, new { EmployeeDisplayName = @Model.Storekeeper.GetDisplayName(m => m.EmployeeID) })
-        </div>   
+        </div>
 
         @if (@Model.Voidable || @Model.UnVoidable || @Model.VoidTypeID > 0)
         { //Don't render when in Edit Mode, so: do not add VoidType.VoidTypeID [Required] DataAnnotations to the view to submit to controller when edit
-            <div class="form-group">                
+            <div class="form-group">
                 @Html.EditorFor(d => (d as IWarehouseTransferDTO).VoidType, (@Model.Voidable ? new { VoidTypeClassSpecialEditable = "SpecialEditable" } : null))
             </div>
         }
@@ -58,11 +59,11 @@
                 <div class="div-validation-message">
                     @Html.ValidationMessageFor(model => (model as IWarehouseTransferPrimitiveDTO).AdjustmentJobs, "", new { @class = "text-danger" })
                 </div>
-            </div>            
+            </div>
 
             <div id="show-current-PriceCategory" style="float: right; margin-top: -120px; text-align: center; width: 110px; height: 110px; " title="Kho hàng">
-                <div style="height: 90px; padding-left: 22px; padding-right: 22px; padding-top: 32px;">                    
-                    <span style="color:blue;" id="label_WarehouseCode"> @Html.Label(@Model.Warehouse.Code) </span>                    
+                <div style="height: 90px; padding-left: 22px; padding-right: 22px; padding-top: 32px;">
+                    <span style="color:blue;" id="label_WarehouseCode"> @Html.Label(@Model.Warehouse.Code) </span>
                     <span id="label_WarehouseReceiptCode" style="color:orange;"> @Html.Label(@Model.WarehouseReceipt.Code) </span>
                 </div>
             </div>
@@ -96,7 +97,27 @@
                         .ClientTemplate("#= CommodityName #" + "<input type='hidden' name='WarehouseTransferViewDetails[#= index(data) #].CommodityName' value='#= CommodityName #' />");
 
                     columns.Bound(p => p.CommodityTypeID).DisplayNameTitle().Filterable(false).Hidden()
-                        .ClientTemplate("#= CommodityTypeID #" + "<input type='hidden' name='WarehouseTransferViewDetails[#= index(data) #].CommodityTypeID' value='#= CommodityTypeID #' />");                  
+                        .ClientTemplate("#= CommodityTypeID #" + "<input type='hidden' name='WarehouseTransferViewDetails[#= index(data) #].CommodityTypeID' value='#= CommodityTypeID #' />");
+
+                    columns.Bound(p => p.GoodsReceiptID).DisplayNameTitle().Filterable(false).Hidden()
+                      .ClientTemplate("#= (GoodsReceiptID == null)? '' : GoodsReceiptID #" + "<input type='hidden' name='WarehouseTransferViewDetails[#= index(data) #].GoodsReceiptID' value='#= (GoodsReceiptID == null) ? '' : GoodsReceiptID #' />");
+                    columns.Bound(p => p.GoodsReceiptDetailID).DisplayNameTitle().Filterable(false).Hidden()
+                        .ClientTemplate("#= (GoodsReceiptDetailID == null)? '' : GoodsReceiptDetailID #" + "<input type='hidden' name='WarehouseTransferViewDetails[#= index(data) #].GoodsReceiptDetailID' value='#= (GoodsReceiptDetailID == null) ? '' : GoodsReceiptDetailID #' />");
+
+                    columns.Bound(p => p.GoodsReceiptCode).DisplayNameTitle().Filterable(false).Width(60).Hidden()
+                        .ClientTemplate("#= (GoodsReceiptCode == null)? '' : GoodsReceiptCode #" + "<input type='hidden' name='WarehouseTransferViewDetails[#= index(data) #].GoodsReceiptCode' value='#= (GoodsReceiptCode == null) ? '' : GoodsReceiptCode #' />");
+                    columns.Bound(p => p.GoodsReceiptReference).DisplayNameTitle().Filterable(false).Width(60)
+                        .ClientTemplate("#= (GoodsReceiptReference == null)? '' : GoodsReceiptReference #" + "<input type='hidden' name='WarehouseTransferViewDetails[#= index(data) #].GoodsReceiptReference' value='#= (GoodsReceiptReference == null) ? '' : GoodsReceiptReference #' />");
+                    columns.Bound(p => p.GoodsReceiptEntryDate).DisplayNameTitle().Filterable(false).Width(80)
+                        .Format("{0:" + @Settings.DateFormat + "}")
+                        .ClientTemplate("#= (GoodsReceiptEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', GoodsReceiptEntryDate) #" + "<input type='hidden' name='WarehouseTransferViewDetails[#= index(data) #].GoodsReceiptEntryDate' value='#= (GoodsReceiptEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', GoodsReceiptEntryDate) #' />");
+
+
+                    columns.Bound(p => p.BatchID).DisplayNameTitle().Filterable(false).Hidden()
+                        .ClientTemplate("#= BatchID #" + "<input type='hidden' name='WarehouseTransferViewDetails[#= index(data) #].BatchID' value='#= BatchID #' />");
+                    columns.Bound(p => p.BatchEntryDate).DisplayNameTitle().Filterable(false).Width(80)
+                        .Format("{0:" + @Settings.DateFormat + "}")
+                        .ClientTemplate("#= (BatchEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', BatchEntryDate) #" + "<input type='hidden' name='WarehouseTransferViewDetails[#= index(data) #].BatchEntryDate' value='#= (BatchEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', BatchEntryDate) #' />");
 
 
                     columns.Bound(p => p.QuantityAvailables).DisplayNameTitle().Filterable(false).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" })
@@ -107,11 +128,11 @@
                     columns.Bound(p => p.Quantity).DisplayNameTitle().Filterable(false).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" })
                         .Format(Settings.kfmQuantity)
                         .ClientFooterTemplate("#= kendo.format('" + Settings.kfmQuantity + "', sum) #")
-                        .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', Quantity) #" + "<input type='hidden' name='WarehouseTransferViewDetails[#= index(data) #].Quantity' value='#= Quantity #' />");                
+                        .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', Quantity) #" + "<input type='hidden' name='WarehouseTransferViewDetails[#= index(data) #].Quantity' value='#= Quantity #' />");
 
                     columns.Bound(p => p.Remarks).DisplayNameTitle().Filterable(false)
                         .ClientTemplate("#= (Remarks == null)? '' : Remarks #" + "<input type='hidden' name='WarehouseTransferViewDetails[#= index(data) #].Remarks' value='#= (Remarks == null) ? '' : Remarks #' />");
-                    
+
                     columns.Bound(p => p.InActivePartial).DisplayNameTitle().Hidden()
                        .ClientTemplate("#= (InActivePartial == null)? '' : InActivePartial #" + "<input type='hidden' name='WarehouseTransferViewDetails[#= index(data) #].InActivePartial' value='#= (InActivePartial == null) ? '' : InActivePartial #' />");
 
@@ -128,15 +149,18 @@
                         if (Model.Editable)
                         {
                             //toolbar.Create().HtmlAttributes(new { @class = "fa fa-map-marker" }).Text("Add new aa le ea1");
-                            toolbar.Template(@<text>                              
-                                    @*<button type="button" class="k-button" onclick="$('#kendoGridDetails').data('kendoGrid').addRow()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Thêm mặt hàng </button>*@
-
+                            toolbar.Template(@<text>
+                                @*<button type="button" class="k-button" onclick="$('#kendoGridDetails').data('kendoGrid').addRow()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Thêm mặt hàng </button>*@
+                                  
+                              
+                                    <button type="button" class="k-button" onclick="GetTransferOrderDetails()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Xuất hàng từ tồn kho theo lệnh ĐH </button>
+                               
                                     <button type="button" class="k-button" onclick="GetGoodsReceiptDetailAvailables()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Xuất hàng từ tồn kho </button>
-                                                                    
-                                    <span style="float:right">
-                                        @Html.Partial("~/Views/Helpers/Commons/_Import.cshtml")
-                                    </span>
                                 
+                                <span style="float:right">
+                                    @Html.Partial("~/Views/Helpers/Commons/_Import.cshtml")
+                                </span>
+
                             </text>);
                         }
                         else
@@ -177,23 +201,23 @@
                         </text>);
 
                     }).DataSource(dataSource => dataSource
-                                    .Ajax()
-                                    .Batch(true)
-                                    .ServerOperation(false)
-                                    .Model(model =>
-                                    {
-                                        model.Id(x => x.WarehouseTransferDetailID);
-                                        model.Field(m => m.WarehouseTransferDetailID).DefaultValue(0);
-                                        model.Field(m => m.WarehouseTransferID).DefaultValue(@Model.WarehouseTransferID);
-                                    })
-                                    .Events(events =>
-                                    {
-                                        events.Error("kendGrid_ErrorHandler");
-                                    })
-                                    .Aggregates(a => a.Add(x => x.CommodityCode).Count())
-                                    .Aggregates(a => a.Add(x => x.QuantityAvailables).Sum())
-                                    .Aggregates(a => a.Add(x => x.Quantity).Sum())                                    
-                                )
+                                                                        .Ajax()
+                                                                        .Batch(true)
+                                                                        .ServerOperation(false)
+                                                                        .Model(model =>
+                                                                        {
+                                                                            model.Id(x => x.WarehouseTransferDetailID);
+                                                                            model.Field(m => m.WarehouseTransferDetailID).DefaultValue(0);
+                                                                            model.Field(m => m.WarehouseTransferID).DefaultValue(@Model.WarehouseTransferID);
+                                                                        })
+                                                                        .Events(events =>
+                                                                        {
+                                                                            events.Error("kendGrid_ErrorHandler");
+                                                                        })
+                                                                        .Aggregates(a => a.Add(x => x.CommodityCode).Count())
+                                                                        .Aggregates(a => a.Add(x => x.QuantityAvailables).Sum())
+                                                                        .Aggregates(a => a.Add(x => x.Quantity).Sum())
+                                                                    )
             )
         </div>
 
@@ -262,8 +286,8 @@
         </div>
 
 
-        @Html.Partial("~/Views/Helpers/Bases/_BaseSubmit.cshtml")   
-        
+        @Html.Partial("~/Views/Helpers/Bases/_BaseSubmit.cshtml")
+
     </div>
 }
 
@@ -271,11 +295,19 @@
 <script src="@Url.Content("~/Scripts/Helpers/KendoGrid/gridHelper.js")"></script>
 <script src="@Url.Content("~/Scripts/Controllers/Inventories/WarehouseTransfers/Import.js")"></script>
 
-<script type="text/javascript">    
+<script type="text/javascript">
+
     function GetGoodsReceiptDetailAvailables() {
         require(["kpopupWindow"], function (kpopupWindow) {
             var createWizardWindow = new kpopupWindow();
             createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("GetGoodsReceiptDetailAvailables", Model.ControllerName, new { area = "Inventories" })", "Xuất kho", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
+        });
+    }
+
+    function GetTransferOrderDetails() {
+        require(["kpopupWindow"], function (kpopupWindow) {
+            var createWizardWindow = new kpopupWindow();
+            createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("GetTransferOrderDetails", Model.ControllerName, new { area = "Inventories" })", "Xuất kho theo lệnh ĐH", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
         });
     }
 

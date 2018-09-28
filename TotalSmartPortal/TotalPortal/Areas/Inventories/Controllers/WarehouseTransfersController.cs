@@ -56,6 +56,13 @@ namespace TotalPortal.Areas.Inventories.Controllers
             return View(this.InitViewModel(viewDetailViewModel));
         }
 
+        public virtual ActionResult GetTransferOrderDetails()
+        {
+            this.AddRequireJsOptions();
+            TViewDetailViewModel viewDetailViewModel = new TViewDetailViewModel();
+            return View(this.InitViewModel(viewDetailViewModel));
+        }
+
         protected override PrintViewModel InitPrintViewModel(int? id)
         {
             PrintViewModel printViewModel = base.InitPrintViewModel(id);
