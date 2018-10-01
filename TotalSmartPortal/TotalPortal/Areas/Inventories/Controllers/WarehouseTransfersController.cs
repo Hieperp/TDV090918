@@ -53,7 +53,7 @@ namespace TotalPortal.Areas.Inventories.Controllers
         {
             this.AddRequireJsOptions();
             TViewDetailViewModel viewDetailViewModel = new TViewDetailViewModel();
-            return View(this.InitViewModel(viewDetailViewModel));
+            return View("../WarehouseTransfers/GetGoodsReceiptDetailAvailables", this.InitViewModel(viewDetailViewModel));
         }
 
         public virtual ActionResult GetTransferOrderDetails()

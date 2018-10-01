@@ -258,7 +258,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
 
             #region TRANSFERORDERS
             queryString = queryString + "           DECLARE         @IssueTransferOrderDetails TABLE (TransferOrderDetailID int NOT NULL PRIMARY KEY, Quantity decimal(18, 2) NOT NULL)" + "\r\n";
-            queryString = queryString + "           INSERT INTO     @IssueTransferOrderDetails (TransferOrderDetailID, Quantity) SELECT TransferOrderDetailID, SUM(Quantity) AS Quantity FROM WarehouseTransferDetails WHERE WarehouseTransferID = @EntityID GROUP BY TransferOrderDetailID " + "\r\n";
+            queryString = queryString + "           INSERT INTO     @IssueTransferOrderDetails (TransferOrderDetailID, Quantity) SELECT TransferOrderDetailID, SUM(Quantity) AS Quantity FROM WarehouseTransferDetails WHERE WarehouseTransferID = @EntityID AND NOT TransferOrderDetailID IS NULL GROUP BY TransferOrderDetailID " + "\r\n";
 
             queryString = queryString + "           IF (NOT (SELECT MAX(TransferOrderDetailID) FROM @IssueTransferOrderDetails) IS NULL) " + "\r\n";
             queryString = queryString + "               BEGIN  " + "\r\n";

@@ -52,8 +52,8 @@ function handleOKEvent(warehouseTransferGridDataSource, goodsReceiptDetailAvaila
         dataRow.CommodityCode = warehouseTransferGridDataItem.CommodityCode;
         dataRow.CommodityTypeID = warehouseTransferGridDataItem.CommodityTypeID;
 
-        dataRow.TransferOrderID = warehouseTransferGridDataItem.TransferOrderID;
-        dataRow.TransferOrderDetailID = warehouseTransferGridDataItem.TransferOrderDetailID;
+        dataRow.TransferOrderID = warehouseTransferGridDataItem.TransferOrderID === undefined ? null : warehouseTransferGridDataItem.TransferOrderID;
+        dataRow.TransferOrderDetailID = warehouseTransferGridDataItem.TransferOrderDetailID === undefined ? null : warehouseTransferGridDataItem.TransferOrderDetailID;
 
         dataRow.GoodsReceiptID = warehouseTransferGridDataItem.GoodsReceiptID;
         dataRow.GoodsReceiptDetailID = warehouseTransferGridDataItem.GoodsReceiptDetailID;
@@ -70,7 +70,7 @@ function handleOKEvent(warehouseTransferGridDataSource, goodsReceiptDetailAvaila
         dataRow.WarehouseReceiptID = warehouseTransferGridDataItem.WarehouseReceiptID;
         dataRow.WarehouseReceiptCode = warehouseTransferGridDataItem.WarehouseReceiptCode;
 
-        dataRow.TransferOrderRemains = warehouseTransferGridDataItem.TransferOrderRemains;
+        dataRow.TransferOrderRemains = warehouseTransferGridDataItem.TransferOrderRemains === undefined ? 0 : warehouseTransferGridDataItem.TransferOrderRemains;
         dataRow.QuantityRemains = warehouseTransferGridDataItem.QuantityRemains;
         dataRow.QuantityAvailables = warehouseTransferGridDataItem.QuantityAvailables;
         dataRow.Quantity = 0;        

@@ -64,7 +64,7 @@ namespace TotalDTO.Inventories
 
     }
 
-    public interface IWarehouseTransferDTO : IWarehouseTransferPrimitiveDTO
+    public interface IWarehouseTransferDTO : IWarehouseTransferPrimitiveDTO, IMaterialItemProduct
     {
         [Display(Name = "Kho xuất")]
         [UIHint("AutoCompletes/WarehouseBase")]

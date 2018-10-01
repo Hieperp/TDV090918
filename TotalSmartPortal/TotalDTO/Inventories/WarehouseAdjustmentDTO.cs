@@ -101,7 +101,7 @@ namespace TotalDTO.Inventories
 
     }
 
-    public interface IWarehouseAdjustmentDTO : IWarehouseAdjustmentPrimitiveDTO
+    public interface IWarehouseAdjustmentDTO : IWarehouseAdjustmentPrimitiveDTO, IMaterialItemProduct
     {
         [Display(Name = "Kho xuất")]
         [UIHint("AutoCompletes/WarehouseBase")]

@@ -72,10 +72,10 @@
                     columns.Bound(p => p.WarehouseTransferID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= WarehouseTransferID #" + "<input type='hidden' name='WarehouseTransferViewDetails[#= index(data) #].WarehouseTransferID' value='#= WarehouseTransferID #' />");
 
-                    columns.Bound(p => p.TransferOrderDetailID).DisplayNameTitle().Hidden()
-                       .ClientTemplate("#= TransferOrderDetailID #" + "<input type='hidden' name='WarehouseTransferViewDetails[#= index(data) #].TransferOrderDetailID' value='#= TransferOrderDetailID #' />");
-                    columns.Bound(p => p.TransferOrderID).DisplayNameTitle().Hidden()
-                        .ClientTemplate("#= TransferOrderID #" + "<input type='hidden' name='WarehouseTransferViewDetails[#= index(data) #].TransferOrderID' value='#= TransferOrderID #' />");
+                    columns.Bound(p => p.TransferOrderDetailID).DisplayNameTitle().Filterable(false).Hidden()
+                        .ClientTemplate("#= (TransferOrderDetailID == null)? '' : TransferOrderDetailID #" + "<input type='hidden' name='WarehouseTransferViewDetails[#= index(data) #].TransferOrderDetailID' value='#= (TransferOrderDetailID == null) ? '' : TransferOrderDetailID #' />");
+                    columns.Bound(p => p.TransferOrderID).DisplayNameTitle().Filterable(false).Hidden()
+                        .ClientTemplate("#= (TransferOrderID == null)? '' : TransferOrderID #" + "<input type='hidden' name='WarehouseTransferViewDetails[#= index(data) #].TransferOrderID' value='#= (TransferOrderID == null) ? '' : TransferOrderID #' />");
 
                     columns.Bound(p => p.CommodityID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= CommodityID #" + "<input type='hidden' name='WarehouseTransferViewDetails[#= index(data) #].CommodityID' value='#= CommodityID #' />");

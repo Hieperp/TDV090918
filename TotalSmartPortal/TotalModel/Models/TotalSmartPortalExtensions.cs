@@ -71,6 +71,10 @@ namespace TotalModel.Models
         public int GetID() { return this.GoodsReceiptDetailID; }
     }
 
+    public partial class GoodsReceiptDetailAvailable
+    {
+        public virtual decimal? QuantityRemains { get { return this.QuantityAvailables; } }
+    }
 
     public partial class MaterialIssue : IPrimitiveEntity, IBaseEntity, IBaseDetailEntity<MaterialIssueDetail>
     {

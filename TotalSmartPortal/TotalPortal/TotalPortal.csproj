@@ -1429,9 +1429,6 @@
     <Content Include="Areas\Inventories\Views\WarehouseTransfers\Edit.cshtml" />
     <Content Include="Areas\Inventories\Views\WarehouseTransfers\Index.cshtml" />
     <Content Include="Areas\Inventories\Views\WarehouseTransfers\Print.cshtml" />
-    <Content Include="Areas\Inventories\Views\WarehouseTransfers\Void.cshtml" />
-    <Content Include="Areas\Inventories\Views\WarehouseTransfers\VoidDetail.cshtml" />
-    <Content Include="Areas\Inventories\Views\WarehouseTransfers\VoidDetailSuccess.cshtml" />
     <Content Include="Areas\Inventories\Views\WarehouseTransfers\_WarehouseTransfer.cshtml" />
     <Content Include="Areas\Inventories\Views\ProductTransfers\GetGoodsReceiptDetailAvailables.cshtml" />
     <Content Include="Areas\Inventories\Views\MaterialTransfers\GetGoodsReceiptDetailAvailables.cshtml" />
@@ -1443,6 +1440,7 @@
     <Content Include="Areas\Inventories\Views\ItemTransfers\GetTransferOrderDetails.cshtml" />
     <Content Include="Areas\Inventories\Views\ProductTransfers\GetTransferOrderDetails.cshtml" />
     <Content Include="Areas\Inventories\Views\GoodsReceipts\GetGoodsReceiptDetailAvailables.cshtml" />
+    <Content Include="Areas\Inventories\Views\WarehouseTransfers\GetGoodsReceiptDetailAvailables.cshtml" />
     <None Include="Properties\PublishProfiles\TDV.pubxml" />
     <None Include="Properties\PublishProfiles\VCP.pubxml">
       <SubType>Designer</SubType>
