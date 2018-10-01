@@ -77,8 +77,6 @@ function handleOKEvent(warehouseTransferGridDataSource, goodsReceiptDetailAvaila
 
         dataRow.Remarks = null;
 
-        dataRow.VoidTypeName = null;
-
         warehouseTransferJSON.push(dataRow);
     }
 }
