@@ -179,8 +179,15 @@ namespace TotalModel.Models
         public int GetID() { return this.WarehouseTransferDetailID; }
     }
 
+    public partial class WarehouseTransferViewDetail
+    {
+        public virtual decimal? QuantityRemains { get { return this.QuantityAvailables; } }
+    }
 
-
+    public partial class WarehouseTransferPendingTransferOrderDetail
+    {
+        public virtual decimal? QuantityRemains { get { return this.QuantityAvailables; } }
+    }
 
     public partial class PlannedOrder : IPrimitiveEntity, IBaseEntity, IBaseDetailEntity<PlannedOrderDetail>
     {

@@ -17,5 +17,6 @@ namespace TotalModel.Models
         public string WarehouseCode { get; set; }
         public int WarehouseReceiptID { get; set; }
         public string WarehouseReceiptCode { get; set; }
+        public string WarehouseName { get; set; }
     }
 }

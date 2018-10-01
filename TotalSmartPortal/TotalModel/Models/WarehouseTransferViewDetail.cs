@@ -28,9 +28,9 @@ namespace TotalModel.Models
         public System.DateTime GoodsReceiptEntryDate { get; set; }
         public int BatchID { get; set; }
         public System.DateTime BatchEntryDate { get; set; }
-        public Nullable<decimal> TransferOrderRemains { get; set; }
         public Nullable<decimal> QuantityAvailables { get; set; }
         public decimal Quantity { get; set; }
         public string Remarks { get; set; }
+        public Nullable<decimal> TransferOrderRemains { get; set; }
     }
 }

@@ -10,7 +10,6 @@
     .Name("gridWarehouseTransferPendingTransferOrderDetail")
     .Columns(columns =>
     {
-        //columns.Bound(c => c.CommodityCode).Title("Mã NVL").Width(30);
         columns.Bound(p => p.CodePartA).Title("Mã").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(20).Hidden(@Model.IsItem ? true : false);
         columns.Bound(p => p.CodePartB).Title("Phân loại").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(11);
         columns.Bound(p => p.CodePartC).Title("Mã màu").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(10);
@@ -42,9 +41,9 @@
 
             return {
                 locationID: window.parent.requireConfig.pageOptions.LocationID,
-                nmvnTaskID: window.parent.$("#NMVNTaskID").val(),
+                nmvnTaskID: window.parent.requireConfig.pageOptions.NmvnTaskID,
                 warehouseTransferID: window.parent.$("#WarehouseTransferID").val(),
-                transferOrderID: window.parent.$("#WarehouseTransferID").val(),
+                transferOrderID: window.parent.$("#TransferOrderID").val(),
                 warehouseID: window.parent.$("#Warehouse_WarehouseID").val(),
                 warehouseReceiptID: window.parent.$("#WarehouseReceipt_WarehouseID").val(),                    
                 goodsReceiptDetailIDs : materialIssueJSON.map(function(elem){return elem.GoodsReceiptDetailID;}).join(","),

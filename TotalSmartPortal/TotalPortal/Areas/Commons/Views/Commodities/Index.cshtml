@@ -1,7 +1,6 @@
 ﻿@using TotalPortal.Configuration
 
 @model TotalPortal.Areas.Commons.ViewModels.ICommodityViewModel
-@Html.Hidden("NMVNTaskID", (int)Model.NMVNTaskID)
 
 <div>
     @(Html.Kendo().Grid<TotalModel.Models.CommodityIndex>()
@@ -69,7 +68,7 @@
 <script type="text/javascript">
     function onCommodityIndexes(e) {
         return {
-            nmvnTaskID: $("#NMVNTaskID").val()
+            nmvnTaskID: requireConfig.pageOptions.NmvnTaskID
         };
     }
 

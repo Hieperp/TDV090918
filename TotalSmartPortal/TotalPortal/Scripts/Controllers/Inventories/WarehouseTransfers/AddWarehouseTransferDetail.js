@@ -70,6 +70,8 @@ function handleOKEvent(warehouseTransferGridDataSource, goodsReceiptDetailAvaila
         dataRow.WarehouseReceiptID = warehouseTransferGridDataItem.WarehouseReceiptID;
         dataRow.WarehouseReceiptCode = warehouseTransferGridDataItem.WarehouseReceiptCode;
 
+        dataRow.TransferOrderRemains = warehouseTransferGridDataItem.TransferOrderRemains;
+        dataRow.QuantityRemains = warehouseTransferGridDataItem.QuantityRemains;
         dataRow.QuantityAvailables = warehouseTransferGridDataItem.QuantityAvailables;
         dataRow.Quantity = 0;        
 

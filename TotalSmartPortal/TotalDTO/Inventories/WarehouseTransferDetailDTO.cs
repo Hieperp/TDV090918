@@ -46,12 +46,20 @@ namespace TotalDTO.Inventories
         [UIHint("DateTimeReadonly")]
         public System.DateTime BatchEntryDate { get; set; }
 
+        [Display(Name = "Tồn lệnh")]
+        [UIHint("QuantityReadonly")]
+        public decimal TransferOrderRemains { get; set; }
+
+        [Display(Name = "Tồn lệnh")]
+        [UIHint("QuantityReadonly")]
+        public decimal QuantityRemains { get; set; }
+
         [Display(Name = "Tồn kho")]
         [UIHint("QuantityReadonly")]
         public decimal QuantityAvailables { get; set; }
 
         [Display(Name = "SL")]
-        [UIHint("QuantityWithMinus")]
+        [UIHint("Quantity")]
         public override decimal Quantity { get; set; }
 
         public string VoidTypeCode { get; set; }

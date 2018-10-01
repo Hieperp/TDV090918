@@ -72,7 +72,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
 
             queryString = queryString + "       SELECT      WarehouseTransferDetails.WarehouseTransferDetailID, WarehouseTransferDetails.WarehouseTransferID, TransferOrderDetails.TransferOrderID, TransferOrderDetails.TransferOrderDetailID, Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, " + "\r\n";
             queryString = queryString + "                   GoodsReceiptDetails.GoodsReceiptID, GoodsReceiptDetails.GoodsReceiptDetailID, GoodsReceiptDetails.Reference AS GoodsReceiptReference, GoodsReceiptDetails.Code AS GoodsReceiptCode, GoodsReceiptDetails.EntryDate AS GoodsReceiptEntryDate, GoodsReceiptDetails.BatchID, GoodsReceiptDetails.BatchEntryDate, " + "\r\n";
-            queryString = queryString + "                   ROUND(ISNULL(TransferOrderDetails.Quantity, 0) - ISNULL(TransferOrderDetails.QuantityIssued, 0) + ISNULL(Issued_TransferOrderDetails.QuantityIssued, 0), " + (int)GlobalEnums.rndQuantity + ") AS TransferOrderRemains, ROUND(GoodsReceiptDetails.Quantity - GoodsReceiptDetails.QuantityIssued + Issued_GoodsReceiptDetails.QuantityIssued, " + (int)GlobalEnums.rndQuantity + ") AS QuantityAvailables, WarehouseTransferDetails.Quantity, WarehouseTransferDetails.Remarks " + "\r\n";
+            queryString = queryString + "                   ISNULL(ROUND(ISNULL(TransferOrderDetails.Quantity, 0) - ISNULL(TransferOrderDetails.QuantityIssued, 0) + ISNULL(Issued_TransferOrderDetails.QuantityIssued, 0), " + (int)GlobalEnums.rndQuantity + "), 0.0) AS TransferOrderRemains, ROUND(GoodsReceiptDetails.Quantity - GoodsReceiptDetails.QuantityIssued + ISNULL(Issued_GoodsReceiptDetails.QuantityIssued, 0), " + (int)GlobalEnums.rndQuantity + ") AS QuantityAvailables, WarehouseTransferDetails.Quantity, WarehouseTransferDetails.Remarks " + "\r\n";
 
             queryString = queryString + "       FROM        WarehouseTransferDetails " + "\r\n";
             queryString = queryString + "                   INNER JOIN Commodities ON WarehouseTransferDetails.WarehouseTransferID = @WarehouseTransferID AND WarehouseTransferDetails.CommodityID = Commodities.CommodityID " + "\r\n";
@@ -101,7 +101,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + " AS " + "\r\n";
 
             queryString = queryString + "       SELECT          TransferOrders.TransferOrderID, TransferOrders.Reference AS TransferOrderReference, TransferOrders.EntryDate AS TransferOrderEntryDate, " + "\r\n";
-            queryString = queryString + "                       TransferOrders.WarehouseID, Warehouses.Code AS WarehouseCode, TransferOrders.WarehouseReceiptID, WarehouseReceipts.Code AS WarehouseReceiptCode, TransferOrders.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName " + "\r\n";
+            queryString = queryString + "                       TransferOrders.WarehouseID, Warehouses.Code AS WarehouseCode, Warehouses.Name AS WarehouseName, TransferOrders.WarehouseReceiptID, WarehouseReceipts.Code AS WarehouseReceiptCode, WarehouseReceipts.Name AS WarehouseReceiptName, TransferOrders.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName " + "\r\n";
 
             queryString = queryString + "       FROM            TransferOrders " + "\r\n";
             queryString = queryString + "                       INNER JOIN Warehouses ON TransferOrders.TransferOrderID IN (SELECT DISTINCT TransferOrderID FROM TransferOrderDetails WHERE LocationID = @LocationID AND NMVNTaskID = @NMVNTaskID - 1000000 AND Approved = 1 AND InActive = 0 AND InActivePartial = 0 AND ROUND(Quantity - QuantityIssued, " + (int)GlobalEnums.rndQuantity + ") > 0) AND TransferOrders.WarehouseID = Warehouses.WarehouseID " + "\r\n";
@@ -117,7 +117,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
-            queryString = queryString + "       SELECT          PendingWarehouses.WarehouseID, Warehouses.Code AS WarehouseCode, PendingWarehouses.WarehouseReceiptID, WarehouseReceipts.Code AS WarehouseReceiptCode " + "\r\n";
+            queryString = queryString + "       SELECT          PendingWarehouses.WarehouseID, Warehouses.Code AS WarehouseCode, Warehouses.Name AS WarehouseName, PendingWarehouses.WarehouseReceiptID, WarehouseReceipts.Code AS WarehouseReceiptCode " + "\r\n";
             queryString = queryString + "       FROM           (SELECT WarehouseID, WarehouseReceiptID FROM TransferOrderDetails WHERE LocationID = @LocationID AND NMVNTaskID = @NMVNTaskID - 1000000 AND Approved = 1 AND InActive = 0 AND InActivePartial = 0 AND ROUND(Quantity - QuantityIssued, " + (int)GlobalEnums.rndQuantity + ") > 0 GROUP BY WarehouseID, WarehouseReceiptID) PendingWarehouses " + "\r\n";
             queryString = queryString + "                       INNER JOIN Warehouses ON PendingWarehouses.WarehouseID = Warehouses.WarehouseID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Warehouses WarehouseReceipts ON PendingWarehouses.WarehouseReceiptID = WarehouseReceipts.WarehouseID " + "\r\n";
@@ -136,7 +136,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
 
             queryString = queryString + "   BEGIN " + "\r\n";
 
-            queryString = queryString + "       IF  (@WarehouseTransferID > 0) " + "\r\n";
+            queryString = queryString + "       IF  (@TransferOrderID > 0) " + "\r\n";
             queryString = queryString + "           " + this.BuildSQLPendingDetails(true) + "\r\n";
             queryString = queryString + "       ELSE " + "\r\n";
             queryString = queryString + "           " + this.BuildSQLPendingDetails(false) + "\r\n";
@@ -260,7 +260,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + "           DECLARE         @IssueTransferOrderDetails TABLE (TransferOrderDetailID int NOT NULL PRIMARY KEY, Quantity decimal(18, 2) NOT NULL)" + "\r\n";
             queryString = queryString + "           INSERT INTO     @IssueTransferOrderDetails (TransferOrderDetailID, Quantity) SELECT TransferOrderDetailID, SUM(Quantity) AS Quantity FROM WarehouseTransferDetails WHERE WarehouseTransferID = @EntityID GROUP BY TransferOrderDetailID " + "\r\n";
 
-            queryString = queryString + "           IF ((SELECT MAX(TransferOrderDetailID) FROM @IssueTransferOrderDetails) <> NULL) " + "\r\n";
+            queryString = queryString + "           IF (NOT (SELECT MAX(TransferOrderDetailID) FROM @IssueTransferOrderDetails) IS NULL) " + "\r\n";
             queryString = queryString + "               BEGIN  " + "\r\n";
             queryString = queryString + "                   UPDATE          TransferOrderDetails " + "\r\n";
             queryString = queryString + "                   SET             TransferOrderDetails.QuantityIssued = ROUND(TransferOrderDetails.QuantityIssued + IssueTransferOrderDetails.Quantity * @SaveRelativeOption, " + (int)GlobalEnums.rndQuantity + ") " + "\r\n";

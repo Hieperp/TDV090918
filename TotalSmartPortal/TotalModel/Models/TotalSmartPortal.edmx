@@ -17351,16 +17351,17 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="DateTime" Name="GoodsReceiptEntryDate" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="BatchID" Nullable="true" />
           <Property Type="DateTime" Name="BatchEntryDate" Nullable="true" Precision="23" />
-          <Property Type="Decimal" Name="TransferOrderRemains" Nullable="true" Precision="19" Scale="2" />
           <Property Type="Decimal" Name="QuantityAvailables" Nullable="true" Precision="19" Scale="2" />
           <Property Type="Int32" Name="Quantity" Nullable="false" />
           <Property Type="Boolean" Name="IsSelected" Nullable="true" />
+          <Property Type="Decimal" Name="TransferOrderRemains" Nullable="true" Precision="19" Scale="2" />
         </ComplexType>
         <ComplexType Name="WarehouseTransferPendingWarehouse">
           <Property Type="Int32" Name="WarehouseID" Nullable="false" />
           <Property Type="String" Name="WarehouseCode" Nullable="false" MaxLength="10" />
           <Property Type="Int32" Name="WarehouseReceiptID" Nullable="false" />
           <Property Type="String" Name="WarehouseReceiptCode" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="WarehouseName" Nullable="false" MaxLength="60" />
         </ComplexType>
         <ComplexType Name="WarehouseTransferPendingTransferOrder">
           <Property Type="Int32" Name="TransferOrderID" Nullable="false" />
@@ -17373,6 +17374,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="Int32" Name="CustomerID" Nullable="false" />
           <Property Type="String" Name="CustomerCode" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="WarehouseName" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="WarehouseReceiptName" Nullable="false" MaxLength="60" />
         </ComplexType>
         <ComplexType Name="WarehouseTransferViewDetail">
           <Property Type="Int32" Name="WarehouseTransferDetailID" Nullable="false" />
@@ -17390,10 +17393,10 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="DateTime" Name="GoodsReceiptEntryDate" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="BatchID" Nullable="false" />
           <Property Type="DateTime" Name="BatchEntryDate" Nullable="false" Precision="23" />
-          <Property Type="Decimal" Name="TransferOrderRemains" Nullable="true" Precision="38" Scale="2" />
           <Property Type="Decimal" Name="QuantityAvailables" Nullable="true" Precision="38" Scale="2" />
           <Property Type="Decimal" Name="Quantity" Nullable="false" Precision="18" Scale="2" />
           <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="TransferOrderRemains" Nullable="true" Precision="38" Scale="2" />
         </ComplexType>
         <Association Name="FK_TransferOrders_VoidTypes">
           <End Type="TotalSmartPortalModel.VoidType" Role="VoidType" Multiplicity="0..1" />
@@ -22071,10 +22074,10 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="GoodsReceiptEntryDate" ColumnName="GoodsReceiptEntryDate" />
                 <ScalarProperty Name="BatchID" ColumnName="BatchID" />
                 <ScalarProperty Name="BatchEntryDate" ColumnName="BatchEntryDate" />
-                <ScalarProperty Name="TransferOrderRemains" ColumnName="TransferOrderRemains" />
                 <ScalarProperty Name="QuantityAvailables" ColumnName="QuantityAvailables" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
+                <ScalarProperty Name="TransferOrderRemains" ColumnName="TransferOrderRemains" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -22091,6 +22094,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="CustomerCode" ColumnName="CustomerCode" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
+                <ScalarProperty Name="WarehouseReceiptName" ColumnName="WarehouseReceiptName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -22112,10 +22117,10 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="GoodsReceiptEntryDate" ColumnName="GoodsReceiptEntryDate" />
                 <ScalarProperty Name="BatchID" ColumnName="BatchID" />
                 <ScalarProperty Name="BatchEntryDate" ColumnName="BatchEntryDate" />
-                <ScalarProperty Name="TransferOrderRemains" ColumnName="TransferOrderRemains" />
                 <ScalarProperty Name="QuantityAvailables" ColumnName="QuantityAvailables" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="TransferOrderRemains" ColumnName="TransferOrderRemains" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -22131,6 +22136,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="WarehouseCode" ColumnName="WarehouseCode" />
                 <ScalarProperty Name="WarehouseReceiptID" ColumnName="WarehouseReceiptID" />
                 <ScalarProperty Name="WarehouseReceiptCode" ColumnName="WarehouseReceiptCode" />
+                <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
