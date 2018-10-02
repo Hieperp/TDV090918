@@ -17,9 +17,9 @@ namespace TotalModel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public GoodsReceiptDetail()
         {
-            this.WarehouseAdjustmentDetails = new HashSet<WarehouseAdjustmentDetail>();
             this.MaterialIssueDetails = new HashSet<MaterialIssueDetail>();
             this.SemifinishedProducts = new HashSet<SemifinishedProduct>();
+            this.WarehouseAdjustmentDetails = new HashSet<WarehouseAdjustmentDetail>();
             this.WarehouseTransferDetails = new HashSet<WarehouseTransferDetail>();
         }
     
@@ -37,8 +37,8 @@ namespace TotalModel.Models
         public Nullable<int> FinishedProductDetailID { get; set; }
         public Nullable<int> MaterialIssueID { get; set; }
         public Nullable<int> MaterialIssueDetailID { get; set; }
-        public Nullable<int> GoodsIssueID { get; set; }
-        public Nullable<int> GoodsIssueTransferDetailID { get; set; }
+        public Nullable<int> WarehouseTransferID { get; set; }
+        public Nullable<int> WarehouseTransferDetailID { get; set; }
         public Nullable<int> WarehouseAdjustmentID { get; set; }
         public Nullable<int> WarehouseAdjustmentDetailID { get; set; }
         public Nullable<int> WarehouseAdjustmentTypeID { get; set; }
@@ -53,24 +53,22 @@ namespace TotalModel.Models
         public decimal QuantityIssued { get; set; }
         public string Remarks { get; set; }
         public bool Approved { get; set; }
-        public Nullable<int> WarehouseTransferID { get; set; }
-        public Nullable<int> WarehouseTransferDetailID { get; set; }
     
         public virtual Commodity Commodity { get; set; }
+        public virtual FinishedProductDetail FinishedProductDetail { get; set; }
         public virtual GoodsReceipt GoodsReceipt { get; set; }
+        public virtual MaterialIssueDetail MaterialIssueDetail { get; set; }
         public virtual PurchaseRequisitionDetail PurchaseRequisitionDetail { get; set; }
         public virtual WarehouseAdjustmentDetail WarehouseAdjustmentDetail { get; set; }
         public virtual Warehouse Warehouse { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WarehouseAdjustmentDetail> WarehouseAdjustmentDetails { get; set; }
-        public virtual MaterialIssueDetail MaterialIssueDetail { get; set; }
+        public virtual WarehouseTransferDetail WarehouseTransferDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MaterialIssueDetail> MaterialIssueDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemifinishedProduct> SemifinishedProducts { get; set; }
-        public virtual FinishedProductDetail FinishedProductDetail { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WarehouseAdjustmentDetail> WarehouseAdjustmentDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WarehouseTransferDetail> WarehouseTransferDetails { get; set; }
-        public virtual WarehouseTransferDetail WarehouseTransferDetail { get; set; }
     }
 }

@@ -290,7 +290,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
         {
             string queryString;
 
-            queryString = " @LocationID Int, @GoodsReceiptID Int, @WarehouseTransferID Int, @WarehouseID Int, @WarehouseIssueID Int, @WarehouseTransferDetailIDs varchar(3999), @IsReadonly bit " + "\r\n";
+            queryString = " @GoodsReceiptID Int, @WarehouseTransferID Int, @WarehouseID Int, @WarehouseIssueID Int, @WarehouseTransferDetailIDs varchar(3999), @IsReadonly bit " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 

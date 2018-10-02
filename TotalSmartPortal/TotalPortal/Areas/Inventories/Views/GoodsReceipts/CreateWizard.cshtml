@@ -23,6 +23,13 @@
     @Html.HiddenFor(model => model.PurchaseRequisitionReference)
     @Html.HiddenFor(model => model.PurchaseRequisitionEntryDate)
 
+
+    @*@Html.HiddenFor(model => model.WarehouseTransferID)
+    @Html.HiddenFor(model => model.WarehouseTransferCode)
+    @Html.HiddenFor(model => model.WarehouseTransferReference)
+    @Html.HiddenFor(model => model.WarehouseTransferEntryDate)*@
+
+
     @Html.HiddenFor(model => model.FinishedProductID)
     @Html.HiddenFor(model => model.FinishedProductDetailID)
     @Html.HiddenFor(model => model.FinishedProductReference)
@@ -63,6 +70,21 @@
                     .Content(@<text>
                     @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetCustomer.cshtml")
                     </text>);
+
+
+        
+            tabStrip.Add().Text("Phiếu CK")
+                .Selected(true)
+                .Content(@<text>
+                    @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetWarehouseTransfer.cshtml")
+                </text>);
+            tabStrip.Add().Text("VCNB")
+                    .Content(@<text>
+                    @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetWarehouse.cshtml")
+                    </text>);
+
+        
+            
             tabStrip.Add().Text("Kế hoạch sản xuất")
               .Content(@<text>
                     @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetPlannedOrder.cshtml")

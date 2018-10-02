@@ -1441,6 +1441,8 @@
     <Content Include="Areas\Inventories\Views\ProductTransfers\GetTransferOrderDetails.cshtml" />
     <Content Include="Areas\Inventories\Views\GoodsReceipts\GetGoodsReceiptDetailAvailables.cshtml" />
     <Content Include="Areas\Inventories\Views\WarehouseTransfers\GetGoodsReceiptDetailAvailables.cshtml" />
+    <Content Include="Areas\Inventories\Views\GoodsReceipts\_GetWarehouseTransfer.cshtml" />
+    <Content Include="Areas\Inventories\Views\GoodsReceipts\_GetWarehouse.cshtml" />
     <None Include="Properties\PublishProfiles\TDV.pubxml" />
     <None Include="Properties\PublishProfiles\VCP.pubxml">
       <SubType>Designer</SubType>

@@ -288,6 +288,15 @@
     <Compile Include="Models\GoodsReceiptPendingPurchaseRequisitionDetail.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GoodsReceiptPendingWarehouse.cs">
+      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GoodsReceiptPendingWarehouseTransfer.cs">
+      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GoodsReceiptPendingWarehouseTransferDetail.cs">
+      <DependentUpon>TotalSmartPortal.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GoodsReceiptViewDetail.cs">
       <DependentUpon>TotalSmartPortal.tt</DependentUpon>
     </Compile>

@@ -97,8 +97,6 @@ namespace TotalModel.Models
         public virtual DbSet<ProductionOrder> ProductionOrders { get; set; }
         public virtual DbSet<FinishedHandoverDetail> FinishedHandoverDetails { get; set; }
         public virtual DbSet<FinishedHandover> FinishedHandovers { get; set; }
-        public virtual DbSet<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
-        public virtual DbSet<GoodsReceipt> GoodsReceipts { get; set; }
         public virtual DbSet<MaterialIssueDetail> MaterialIssueDetails { get; set; }
         public virtual DbSet<MaterialIssue> MaterialIssues { get; set; }
         public virtual DbSet<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
@@ -110,6 +108,8 @@ namespace TotalModel.Models
         public virtual DbSet<TransferOrder> TransferOrders { get; set; }
         public virtual DbSet<WarehouseTransferDetail> WarehouseTransferDetails { get; set; }
         public virtual DbSet<WarehouseTransfer> WarehouseTransfers { get; set; }
+        public virtual DbSet<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
+        public virtual DbSet<GoodsReceipt> GoodsReceipts { get; set; }
     
         public virtual ObjectResult<string> AccountInvoicePostSaveValidate(Nullable<int> entityID)
         {
@@ -3927,6 +3927,57 @@ namespace TotalModel.Models
                 new ObjectParameter("NMVNTaskID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WarehouseTransferPendingWarehouse>("GetWarehouseTransferPendingWarehouses", locationIDParameter, nMVNTaskIDParameter);
+        }
+    
+        public virtual ObjectResult<GoodsReceiptPendingWarehouse> GetGoodsReceiptPendingWarehouses(Nullable<int> locationID)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GoodsReceiptPendingWarehouse>("GetGoodsReceiptPendingWarehouses", locationIDParameter);
+        }
+    
+        public virtual ObjectResult<GoodsReceiptPendingWarehouseTransferDetail> GetGoodsReceiptPendingWarehouseTransferDetails(Nullable<int> locationID, Nullable<int> goodsReceiptID, Nullable<int> warehouseTransferID, Nullable<int> warehouseID, Nullable<int> warehouseIssueID, string warehouseTransferDetailIDs, Nullable<bool> isReadonly)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            var goodsReceiptIDParameter = goodsReceiptID.HasValue ?
+                new ObjectParameter("GoodsReceiptID", goodsReceiptID) :
+                new ObjectParameter("GoodsReceiptID", typeof(int));
+    
+            var warehouseTransferIDParameter = warehouseTransferID.HasValue ?
+                new ObjectParameter("WarehouseTransferID", warehouseTransferID) :
+                new ObjectParameter("WarehouseTransferID", typeof(int));
+    
+            var warehouseIDParameter = warehouseID.HasValue ?
+                new ObjectParameter("WarehouseID", warehouseID) :
+                new ObjectParameter("WarehouseID", typeof(int));
+    
+            var warehouseIssueIDParameter = warehouseIssueID.HasValue ?
+                new ObjectParameter("WarehouseIssueID", warehouseIssueID) :
+                new ObjectParameter("WarehouseIssueID", typeof(int));
+    
+            var warehouseTransferDetailIDsParameter = warehouseTransferDetailIDs != null ?
+                new ObjectParameter("WarehouseTransferDetailIDs", warehouseTransferDetailIDs) :
+                new ObjectParameter("WarehouseTransferDetailIDs", typeof(string));
+    
+            var isReadonlyParameter = isReadonly.HasValue ?
+                new ObjectParameter("IsReadonly", isReadonly) :
+                new ObjectParameter("IsReadonly", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GoodsReceiptPendingWarehouseTransferDetail>("GetGoodsReceiptPendingWarehouseTransferDetails", locationIDParameter, goodsReceiptIDParameter, warehouseTransferIDParameter, warehouseIDParameter, warehouseIssueIDParameter, warehouseTransferDetailIDsParameter, isReadonlyParameter);
+        }
+    
+        public virtual ObjectResult<GoodsReceiptPendingWarehouseTransfer> GetGoodsReceiptPendingWarehouseTransfers(Nullable<int> locationID)
+        {
+            var locationIDParameter = locationID.HasValue ?
+                new ObjectParameter("LocationID", locationID) :
+                new ObjectParameter("LocationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GoodsReceiptPendingWarehouseTransfer>("GetGoodsReceiptPendingWarehouseTransfers", locationIDParameter);
         }
     }
 }

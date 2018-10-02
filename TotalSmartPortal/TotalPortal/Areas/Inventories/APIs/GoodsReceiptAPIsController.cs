@@ -65,6 +65,28 @@ namespace TotalPortal.Areas.Inventories.APIs
         }
 
 
+
+
+
+
+
+        public JsonResult GetWarehouses([DataSourceRequest] DataSourceRequest dataSourceRequest, int? locationID)
+        {
+            var result = this.goodsReceiptAPIRepository.GetWarehouses(locationID);
+            return Json(result.ToDataSourceResult(dataSourceRequest), JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetWarehouseTransfers([DataSourceRequest] DataSourceRequest dataSourceRequest, int? locationID)
+        {
+            var result = this.goodsReceiptAPIRepository.GetWarehouseTransfers(locationID);
+            return Json(result.ToDataSourceResult(dataSourceRequest), JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+
         public JsonResult GetPlannedOrderCustomers([DataSourceRequest] DataSourceRequest dataSourceRequest, int? locationID)
         {
             var result = this.goodsReceiptAPIRepository.GetPlannedOrderCustomers(locationID);

@@ -14,7 +14,13 @@ namespace TotalCore.Repositories.Inventories
         IEnumerable<GoodsReceiptPendingCustomer> GetCustomers(int? locationID);
         IEnumerable<GoodsReceiptPendingPurchaseRequisition> GetPurchaseRequisitions(int? locationID);
         IEnumerable<GoodsReceiptPendingPurchaseRequisitionDetail> GetPendingPurchaseRequisitionDetails(int? locationID, int? goodsReceiptID, int? purchaseRequisitionID, int? customerID, string purchaseRequisitionDetailIDs, bool isReadonly);
-        
+
+
+        IEnumerable<GoodsReceiptPendingWarehouse> GetWarehouses(int? locationID);
+        IEnumerable<GoodsReceiptPendingWarehouseTransfer> GetWarehouseTransfers(int? locationID);
+
+
+
         IEnumerable<GoodsReceiptPendingPlannedOrderCustomer> GetPlannedOrderCustomers(int? locationID);
         IEnumerable<GoodsReceiptPendingPlannedOrder> GetPlannedOrders(int? locationID);
         IEnumerable<GoodsReceiptPendingPlannedOrderDetail> GetPendingPlannedOrderDetails(int? locationID, int? goodsReceiptID, int? plannedOrderID, int? customerID, string finishedProductDetailIDs, bool isReadonly);

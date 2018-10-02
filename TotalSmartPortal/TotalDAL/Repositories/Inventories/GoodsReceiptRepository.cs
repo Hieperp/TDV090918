@@ -61,6 +61,30 @@ namespace TotalDAL.Repositories.Inventories
 
 
 
+
+
+        public IEnumerable<GoodsReceiptPendingWarehouse> GetWarehouses(int? locationID)
+        {
+            this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = false;
+            IEnumerable<GoodsReceiptPendingWarehouse> pendingWarehouseTransferWarehouses = base.TotalSmartPortalEntities.GetGoodsReceiptPendingWarehouses(locationID).ToList();
+            this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = true;
+
+            return pendingWarehouseTransferWarehouses;
+        }
+
+        public IEnumerable<GoodsReceiptPendingWarehouseTransfer> GetWarehouseTransfers(int? locationID)
+        {
+            this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = false;
+            IEnumerable<GoodsReceiptPendingWarehouseTransfer> pendingWarehouseTransfers = base.TotalSmartPortalEntities.GetGoodsReceiptPendingWarehouseTransfers(locationID).ToList();
+            this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = true;
+
+            return pendingWarehouseTransfers;
+        }
+
+
+
+
+
         public IEnumerable<GoodsReceiptPendingPlannedOrderCustomer> GetPlannedOrderCustomers(int? locationID)
         {
             this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = false;
