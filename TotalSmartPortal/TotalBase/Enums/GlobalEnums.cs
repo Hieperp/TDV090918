@@ -146,6 +146,9 @@ namespace TotalBase.Enums
             FinishedProduct = 8,
 
 
+            WarehouseTransfer = 9,
+
+
             GoodsIssueTransfer = 3333,
             Pickup = 686868
         };
