@@ -42,5 +42,9 @@ namespace TotalModel.Models
         public Nullable<int> MaterialIssueID { get; set; }
         public Nullable<int> FinishedProductDetailID { get; set; }
         public Nullable<int> FinishedProductID { get; set; }
+        public Nullable<int> WarehouseTransferID { get; set; }
+        public Nullable<int> WarehouseTransferDetailID { get; set; }
+        public string WarehouseTransferReference { get; set; }
+        public Nullable<System.DateTime> WarehouseTransferEntryDate { get; set; }
     }
 }

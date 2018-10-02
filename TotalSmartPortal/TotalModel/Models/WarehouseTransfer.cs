@@ -18,6 +18,7 @@ namespace TotalModel.Models
         public WarehouseTransfer()
         {
             this.WarehouseTransferDetails = new HashSet<WarehouseTransferDetail>();
+            this.GoodsReceipts = new HashSet<GoodsReceipt>();
         }
     
         public int WarehouseTransferID { get; set; }
@@ -50,5 +51,7 @@ namespace TotalModel.Models
         public virtual Warehouse Warehouse1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WarehouseTransferDetail> WarehouseTransferDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GoodsReceipt> GoodsReceipts { get; set; }
     }
 }

@@ -32,6 +32,19 @@ namespace TotalDTO.Inventories
         public Nullable<System.DateTime> PurchaseRequisitionEntryDate { get; set; }
 
 
+
+        public Nullable<int> WarehouseTransferID { get; set; }
+        public Nullable<int> WarehouseTransferDetailID { get; set; }
+
+        [Display(Name = "Phiếu CK")]
+        [UIHint("StringReadonly")]
+        public string WarehouseTransferReference { get; set; }
+        [Display(Name = "Ngày CK")]
+        [UIHint("DateTimeReadonly")]        
+        public Nullable<System.DateTime> WarehouseTransferEntryDate { get; set; }
+
+
+
         public Nullable<int> FinishedProductID { get; set; }
         public Nullable<int> FinishedProductDetailID { get; set; }
 

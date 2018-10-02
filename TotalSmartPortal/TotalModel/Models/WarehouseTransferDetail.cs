@@ -14,6 +14,12 @@ namespace TotalModel.Models
     
     public partial class WarehouseTransferDetail
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public WarehouseTransferDetail()
+        {
+            this.GoodsReceiptDetails = new HashSet<GoodsReceiptDetail>();
+        }
+    
         public int WarehouseTransferDetailID { get; set; }
         public int WarehouseTransferID { get; set; }
         public System.DateTime EntryDate { get; set; }
@@ -40,5 +46,7 @@ namespace TotalModel.Models
         public virtual TransferOrderDetail TransferOrderDetail { get; set; }
         public virtual TransferOrder TransferOrder { get; set; }
         public virtual WarehouseTransfer WarehouseTransfer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
     }
 }

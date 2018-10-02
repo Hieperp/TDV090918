@@ -53,6 +53,8 @@ namespace TotalModel.Models
         public decimal QuantityIssued { get; set; }
         public string Remarks { get; set; }
         public bool Approved { get; set; }
+        public Nullable<int> WarehouseTransferID { get; set; }
+        public Nullable<int> WarehouseTransferDetailID { get; set; }
     
         public virtual Commodity Commodity { get; set; }
         public virtual GoodsReceipt GoodsReceipt { get; set; }
@@ -69,5 +71,6 @@ namespace TotalModel.Models
         public virtual FinishedProductDetail FinishedProductDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WarehouseTransferDetail> WarehouseTransferDetails { get; set; }
+        public virtual WarehouseTransferDetail WarehouseTransferDetail { get; set; }
     }
 }

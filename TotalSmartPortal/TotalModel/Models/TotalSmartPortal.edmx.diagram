@@ -344,6 +344,9 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_Warehouses" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransferDetails_WarehouseTransfers" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_VoidTypes" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceiptDetails_WarehouseTransferDetails" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceipts_Warehouses1" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceipts_WarehouseTransfers" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
