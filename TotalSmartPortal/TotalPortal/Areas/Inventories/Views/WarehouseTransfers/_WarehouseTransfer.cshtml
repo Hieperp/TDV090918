@@ -262,14 +262,14 @@
     function GetGoodsReceiptDetailAvailables() {
         require(["kpopupWindow"], function (kpopupWindow) {
             var createWizardWindow = new kpopupWindow();
-            createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("GetGoodsReceiptDetailAvailables", Model.ControllerName, new { area = "Inventories" })", "Xuất kho", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
+            createWizardWindow.openWindow($("#popupWindow"), (false ? "@Url.Action("GetTransferOrderDetails", Model.ControllerName, new { area = "Inventories" })" : "@Url.Action("GetGoodsReceiptDetailAvailables", Model.ControllerName, new { area = "Inventories" })"), "Xuất kho", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
         });
     }
 
     function GetTransferOrderDetails() {
         require(["kpopupWindow"], function (kpopupWindow) {
             var createWizardWindow = new kpopupWindow();
-            createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("GetTransferOrderDetails", Model.ControllerName, new { area = "Inventories" })", "Xuất kho theo lệnh ĐH", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
+            createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("GetTransferOrderDetails", Model.ControllerName, new { area = "Inventories" })", "Xuất kho", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
         });
     }
 </script>
