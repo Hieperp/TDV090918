@@ -3938,12 +3938,8 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GoodsReceiptPendingWarehouse>("GetGoodsReceiptPendingWarehouses", locationIDParameter);
         }
     
-        public virtual ObjectResult<GoodsReceiptPendingWarehouseTransferDetail> GetGoodsReceiptPendingWarehouseTransferDetails(Nullable<int> locationID, Nullable<int> goodsReceiptID, Nullable<int> warehouseTransferID, Nullable<int> warehouseID, Nullable<int> warehouseIssueID, string warehouseTransferDetailIDs, Nullable<bool> isReadonly)
+        public virtual ObjectResult<GoodsReceiptPendingWarehouseTransferDetail> GetGoodsReceiptPendingWarehouseTransferDetails(Nullable<int> goodsReceiptID, Nullable<int> warehouseTransferID, Nullable<int> warehouseID, Nullable<int> warehouseIssueID, string warehouseTransferDetailIDs, Nullable<bool> isReadonly)
         {
-            var locationIDParameter = locationID.HasValue ?
-                new ObjectParameter("LocationID", locationID) :
-                new ObjectParameter("LocationID", typeof(int));
-    
             var goodsReceiptIDParameter = goodsReceiptID.HasValue ?
                 new ObjectParameter("GoodsReceiptID", goodsReceiptID) :
                 new ObjectParameter("GoodsReceiptID", typeof(int));
@@ -3968,7 +3964,7 @@ namespace TotalModel.Models
                 new ObjectParameter("IsReadonly", isReadonly) :
                 new ObjectParameter("IsReadonly", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GoodsReceiptPendingWarehouseTransferDetail>("GetGoodsReceiptPendingWarehouseTransferDetails", locationIDParameter, goodsReceiptIDParameter, warehouseTransferIDParameter, warehouseIDParameter, warehouseIssueIDParameter, warehouseTransferDetailIDsParameter, isReadonlyParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GoodsReceiptPendingWarehouseTransferDetail>("GetGoodsReceiptPendingWarehouseTransferDetails", goodsReceiptIDParameter, warehouseTransferIDParameter, warehouseIDParameter, warehouseIssueIDParameter, warehouseTransferDetailIDsParameter, isReadonlyParameter);
         }
     
         public virtual ObjectResult<GoodsReceiptPendingWarehouseTransfer> GetGoodsReceiptPendingWarehouseTransfers(Nullable<int> locationID)

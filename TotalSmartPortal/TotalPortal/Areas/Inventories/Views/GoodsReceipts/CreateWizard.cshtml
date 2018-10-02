@@ -24,12 +24,17 @@
     @Html.HiddenFor(model => model.PurchaseRequisitionEntryDate)
 
 
-    @*@Html.HiddenFor(model => model.WarehouseTransferID)
-    @Html.HiddenFor(model => model.WarehouseTransferCode)
+    
+    @Html.HiddenFor(model => model.WarehouseTransferID)
     @Html.HiddenFor(model => model.WarehouseTransferReference)
-    @Html.HiddenFor(model => model.WarehouseTransferEntryDate)*@
+    @Html.HiddenFor(model => model.WarehouseTransferEntryDate)
 
-
+    @Html.HiddenFor(model => model.WarehouseIssue.WarehouseID);
+    @Html.HiddenFor(model => model.WarehouseIssue.Code);
+    @Html.HiddenFor(model => model.WarehouseIssue.Name);
+    
+    
+    
     @Html.HiddenFor(model => model.FinishedProductID)
     @Html.HiddenFor(model => model.FinishedProductDetailID)
     @Html.HiddenFor(model => model.FinishedProductReference)
@@ -55,11 +60,10 @@
         .Name("tabStrip")
         .Items(tabStrip =>
         {
-            @*tabStrip.Add().Text("Khách hàng không có đơn hàng")
-                .Selected(true)
+            tabStrip.Add().Text("Khách hàng không có đơn hàng")
                 .Content(@<text>
-                    @Html.Partial("~/Views/Helpers/Commons/_SearchCustomer.cshtml")
-                </text>);*@
+                    @*@Html.Partial("~/Views/Helpers/Commons/_SearchCustomer.cshtml")*@
+                </text>);
 
             tabStrip.Add().Text("Đơn đặt hàng")
                 .Selected(true)
@@ -67,21 +71,20 @@
                     @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetPurchaseRequisition.cshtml")
                 </text>);
             tabStrip.Add().Text("Nhà cung cấp")
-                    .Content(@<text>
-                    @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetCustomer.cshtml")
-                    </text>);
+                .Content(@<text>
+                @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetCustomer.cshtml")
+                </text>);
 
 
         
             tabStrip.Add().Text("Phiếu CK")
-                .Selected(true)
                 .Content(@<text>
                     @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetWarehouseTransfer.cshtml")
                 </text>);
             tabStrip.Add().Text("VCNB")
-                    .Content(@<text>
-                    @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetWarehouse.cshtml")
-                    </text>);
+                .Content(@<text>
+                @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetWarehouse.cshtml")
+                </text>);
 
         
             
@@ -152,6 +155,7 @@
         else {
             //var selectedGrid = $($("#tabStrip").data("kendoTabStrip").select().index() === 1 ? "goodsReceiptPendingPurchaseRequisitionGrid" : "#goodsReceiptPendingCustomerGrid").data("kendoGrid");
 
+            alert($("#tabStrip").data("kendoTabStrip").select().index());
             switch($("#tabStrip").data("kendoTabStrip").select().index()) {
                 case 1:
                     selectedGrid = $("#goodsReceiptPendingPurchaseRequisitionGrid").data("kendoGrid");
@@ -159,10 +163,22 @@
                 case 2:
                     selectedGrid = $("#goodsReceiptPendingCustomerGrid").data("kendoGrid");
                     break;
+
+
+
                 case 3:
-                    selectedGrid = $("#goodsReceiptPendingPlannedOrderGrid").data("kendoGrid");
+                    selectedGrid = $("#goodsReceiptPendingWarehouseTransferGrid").data("kendoGrid");
                     break;
                 case 4:
+                    selectedGrid = $("#goodsReceiptPendingWarehouseGrid").data("kendoGrid");
+                    break;
+
+
+
+                case 5:
+                    selectedGrid = $("#goodsReceiptPendingPlannedOrderGrid").data("kendoGrid");
+                    break;
+                case 6:
                     selectedGrid = $("#goodsReceiptPendingPlannedOrderCustomerGrid").data("kendoGrid");
                     break;
                 default:
@@ -210,6 +226,19 @@
                 $("#PurchaseRequisitionCode").val(selectedDataItem === undefined || selectedDataItem.PurchaseRequisitionCode === undefined ? null : selectedDataItem.PurchaseRequisitionCode);
                 $("#PurchaseRequisitionReference").val(selectedDataItem === undefined || selectedDataItem.PurchaseRequisitionReference === undefined ? null : selectedDataItem.PurchaseRequisitionReference);
                 $("#PurchaseRequisitionEntryDate").val(selectedDataItem === undefined || selectedDataItem.PurchaseRequisitionEntryDate === undefined ? null : kendo.toString(selectedDataItem.PurchaseRequisitionEntryDate, Settings.DateTimeFormat));
+
+
+
+
+                $("#WarehouseTransferID").val(selectedDataItem === undefined || selectedDataItem.WarehouseTransferID === undefined ? null : selectedDataItem.WarehouseTransferID);
+                $("#WarehouseTransferReference").val(selectedDataItem === undefined || selectedDataItem.WarehouseTransferReference === undefined ? null : selectedDataItem.WarehouseTransferReference);
+                $("#WarehouseTransferEntryDate").val(selectedDataItem === undefined || selectedDataItem.WarehouseTransferEntryDate === undefined ? null : kendo.toString(selectedDataItem.WarehouseTransferEntryDate, Settings.DateTimeFormat));
+
+                $("#WarehouseIssue_WarehouseID").val(selectedDataItem === undefined || selectedDataItem.WarehouseIssueID === undefined ? null : selectedDataItem.WarehouseIssueID);
+                $("#WarehouseIssue_Code").val(selectedDataItem === undefined || selectedDataItem.WarehouseIssueCode === undefined ? null : selectedDataItem.WarehouseIssueCode);
+                $("#WarehouseIssue_Name").val(selectedDataItem === undefined || selectedDataItem.WarehouseIssueName === undefined ? null : selectedDataItem.WarehouseIssueName);
+
+
 
                 //$("#Warehouse_WarehouseID").val(selectedDataItem === undefined || selectedDataItem.WarehouseID === undefined ? null : selectedDataItem.WarehouseID);
                 //$("#Warehouse_Code").val(selectedDataItem === undefined || selectedDataItem.WarehouseCode === undefined ? null : selectedDataItem.WarehouseCode);

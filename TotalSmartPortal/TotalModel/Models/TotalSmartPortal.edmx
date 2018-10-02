@@ -5674,7 +5674,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Parameter Name="LocationID" Type="int" Mode="In" />
         </Function>
         <Function Name="GetGoodsReceiptPendingWarehouseTransferDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="LocationID" Type="int" Mode="In" />
           <Parameter Name="GoodsReceiptID" Type="int" Mode="In" />
           <Parameter Name="WarehouseTransferID" Type="int" Mode="In" />
           <Parameter Name="WarehouseID" Type="int" Mode="In" />
@@ -12213,7 +12212,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Parameter Name="LocationID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetGoodsReceiptPendingWarehouseTransferDetails" ReturnType="Collection(TotalSmartPortalModel.GoodsReceiptPendingWarehouseTransferDetail)">
-            <Parameter Name="LocationID" Mode="In" Type="Int32" />
             <Parameter Name="GoodsReceiptID" Mode="In" Type="Int32" />
             <Parameter Name="WarehouseTransferID" Mode="In" Type="Int32" />
             <Parameter Name="WarehouseID" Mode="In" Type="Int32" />

@@ -25,6 +25,7 @@ namespace TotalDTO.Inventories
         public virtual Nullable<int> CustomerID { get; set; }
 
         public virtual Nullable<int> WarehouseID { get; set; }
+        public virtual Nullable<int> WarehouseIssueID { get; set; }
 
         public int GoodsReceiptTypeID { get; set; }
 
@@ -39,6 +40,18 @@ namespace TotalDTO.Inventories
         public string PurchaseRequisitionCodeNote { get { return this.PurchaseRequisitionID != null ? this.PurchaseRequisitionCode : (this.PurchaseRequisitionCodes != "" ? this.PurchaseRequisitionCodes : ""); } }
         [Display(Name = "Ngày đặt hàng")]
         public Nullable<System.DateTime> PurchaseRequisitionEntryDate { get; set; }
+
+
+
+        public Nullable<int> WarehouseTransferID { get; set; }
+        public string WarehouseTransferReference { get; set; }
+        public string WarehouseTransferReferences { get; set; }
+        [Display(Name = "Phiếu đặt hàng")]
+        public string WarehouseTransferReferenceNote { get { return this.WarehouseTransferID != null ? this.WarehouseTransferReference : (this.WarehouseTransferReferences != "" ? this.WarehouseTransferReferences : "Nhập kho tổng hợp của nhiều phiếu VCNB"); } }
+        [Display(Name = "Ngày đặt hàng")]
+        public Nullable<System.DateTime> WarehouseTransferEntryDate { get; set; }
+
+
 
         public Nullable<int> FinishedProductID { get; set; }
         public Nullable<int> FinishedProductDetailID { get; set; }
@@ -62,9 +75,9 @@ namespace TotalDTO.Inventories
         {
             base.PerformPresaveRule();
 
-            string purchaseRequisitionReferences = ""; string purchaseRequisitionCodes = "";
-            this.DtoDetails().ToList().ForEach(e => { e.GoodsReceiptTypeID = this.GoodsReceiptTypeID; e.CustomerID = this.CustomerID; e.WarehouseID = this.WarehouseID; e.Code = Code; if (this.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.PurchaseRequisition && purchaseRequisitionReferences.IndexOf(e.PurchaseRequisitionReference) < 0) purchaseRequisitionReferences = purchaseRequisitionReferences + (purchaseRequisitionReferences != "" ? ", " : "") + e.PurchaseRequisitionReference; if (this.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.PurchaseRequisition && e.PurchaseRequisitionCode != null && purchaseRequisitionCodes.IndexOf(e.PurchaseRequisitionCode) < 0) purchaseRequisitionCodes = purchaseRequisitionCodes + (purchaseRequisitionCodes != "" ? ", " : "") + e.PurchaseRequisitionCode; });
-            this.PurchaseRequisitionReferences = purchaseRequisitionReferences; this.PurchaseRequisitionCodes = purchaseRequisitionCodes != "" ? purchaseRequisitionCodes : null; if (this.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.PurchaseRequisition) this.Code = this.PurchaseRequisitionCodes;
+            string purchaseRequisitionReferences = ""; string purchaseRequisitionCodes = ""; string warehouseTransferReferences = "";
+            this.DtoDetails().ToList().ForEach(e => { e.GoodsReceiptTypeID = this.GoodsReceiptTypeID; e.CustomerID = this.CustomerID; e.WarehouseID = this.WarehouseID; e.Code = Code; if (this.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.PurchaseRequisition && purchaseRequisitionReferences.IndexOf(e.PurchaseRequisitionReference) < 0) purchaseRequisitionReferences = purchaseRequisitionReferences + (purchaseRequisitionReferences != "" ? ", " : "") + e.PurchaseRequisitionReference; if (this.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.PurchaseRequisition && e.PurchaseRequisitionCode != null && purchaseRequisitionCodes.IndexOf(e.PurchaseRequisitionCode) < 0) purchaseRequisitionCodes = purchaseRequisitionCodes + (purchaseRequisitionCodes != "" ? ", " : "") + e.PurchaseRequisitionCode; if (this.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.WarehouseTransfer && warehouseTransferReferences.IndexOf(e.WarehouseTransferReference) < 0) warehouseTransferReferences = warehouseTransferReferences + (warehouseTransferReferences != "" ? ", " : "") + e.WarehouseTransferReference; });
+            this.PurchaseRequisitionReferences = purchaseRequisitionReferences; this.PurchaseRequisitionCodes = purchaseRequisitionCodes != "" ? purchaseRequisitionCodes : null; this.WarehouseTransferReferences = warehouseTransferReferences; if (this.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.PurchaseRequisition) this.Code = this.PurchaseRequisitionCodes;
         }
     }
 
@@ -85,6 +98,12 @@ namespace TotalDTO.Inventories
         [Display(Name = "Kho hàng")]
         [UIHint("AutoCompletes/WarehouseBase")]
         public WarehouseBaseDTO Warehouse { get; set; }
+
+        public override Nullable<int> WarehouseIssueID { get { return (this.WarehouseIssue != null ? this.WarehouseIssue.WarehouseID : null); } }
+        [Display(Name = "Kho hàng")]
+        [UIHint("AutoCompletes/WarehouseBase")]
+        public WarehouseBaseDTO WarehouseIssue { get; set; }
+
 
         public override int StorekeeperID { get { return (this.Storekeeper != null ? this.Storekeeper.EmployeeID : 0); } }
         [Display(Name = "Nhân viên kho")]
