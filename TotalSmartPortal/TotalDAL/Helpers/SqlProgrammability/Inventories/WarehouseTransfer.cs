@@ -100,7 +100,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
-            queryString = queryString + "       SELECT          TransferOrders.TransferOrderID, TransferOrders.Reference AS TransferOrderReference, TransferOrders.EntryDate AS TransferOrderEntryDate, " + "\r\n";
+            queryString = queryString + "       SELECT          CAST(1 AS bit) AS HasTransferOrder, TransferOrders.TransferOrderID, TransferOrders.Reference AS TransferOrderReference, TransferOrders.EntryDate AS TransferOrderEntryDate, " + "\r\n";
             queryString = queryString + "                       TransferOrders.WarehouseID, Warehouses.Code AS WarehouseCode, Warehouses.Name AS WarehouseName, TransferOrders.WarehouseReceiptID, WarehouseReceipts.Code AS WarehouseReceiptCode, WarehouseReceipts.Name AS WarehouseReceiptName, TransferOrders.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName " + "\r\n";
 
             queryString = queryString + "       FROM            TransferOrders " + "\r\n";
@@ -117,7 +117,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
-            queryString = queryString + "       SELECT          PendingWarehouses.WarehouseID, Warehouses.Code AS WarehouseCode, Warehouses.Name AS WarehouseName, PendingWarehouses.WarehouseReceiptID, WarehouseReceipts.Code AS WarehouseReceiptCode " + "\r\n";
+            queryString = queryString + "       SELECT          CAST(1 AS bit) AS HasTransferOrder, PendingWarehouses.WarehouseID, Warehouses.Code AS WarehouseCode, Warehouses.Name AS WarehouseName, PendingWarehouses.WarehouseReceiptID, WarehouseReceipts.Code AS WarehouseReceiptCode " + "\r\n";
             queryString = queryString + "       FROM           (SELECT WarehouseID, WarehouseReceiptID FROM TransferOrderDetails WHERE LocationID = @LocationID AND NMVNTaskID = @NMVNTaskID - 1000000 AND Approved = 1 AND InActive = 0 AND InActivePartial = 0 AND ROUND(Quantity - QuantityIssued, " + (int)GlobalEnums.rndQuantity + ") > 0 GROUP BY WarehouseID, WarehouseReceiptID) PendingWarehouses " + "\r\n";
             queryString = queryString + "                       INNER JOIN Warehouses ON PendingWarehouses.WarehouseID = Warehouses.WarehouseID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Warehouses WarehouseReceipts ON PendingWarehouses.WarehouseReceiptID = WarehouseReceipts.WarehouseID " + "\r\n";

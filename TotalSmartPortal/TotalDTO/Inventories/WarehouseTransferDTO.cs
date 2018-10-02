@@ -22,7 +22,11 @@ namespace TotalDTO.Inventories
     public interface IWarehouseTransferPrimitiveDTO : IQuantityDTO, IPrimitiveEntity, IPrimitiveDTO, IBaseDTO
     {
         int WarehouseTransferID { get; set; }
+        
         int WarehouseTransferTypeID { get; set; }
+
+        bool HasTransferOrder { get; set; }
+
         Nullable<int> WarehouseID { get; set; }
         Nullable<int> WarehouseReceiptID { get; set; }
         Nullable<int> CustomerID { get; set; }
@@ -44,6 +48,8 @@ namespace TotalDTO.Inventories
         public int WarehouseTransferID { get; set; }
 
         public int WarehouseTransferTypeID { get; set; }
+
+        public bool HasTransferOrder { get; set; }
 
         public virtual Nullable<int> WarehouseID { get; set; }
         public virtual Nullable<int> WarehouseReceiptID { get; set; }
@@ -86,10 +92,6 @@ namespace TotalDTO.Inventories
         VoidTypeBaseDTO VoidType { get; set; }
 
         string ControllerName { get; }
-
-        bool IsMaterial { get; }
-        bool IsItem { get; }
-        bool IsProduct { get; }
     }
 
     public class WarehouseTransferDTO<TWTOption> : WarehouseTransferPrimitiveDTO<TWTOption>, IBaseDetailEntity<WarehouseTransferDetailDTO>, IWarehouseTransferDTO

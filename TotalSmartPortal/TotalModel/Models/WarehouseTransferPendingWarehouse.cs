@@ -18,5 +18,6 @@ namespace TotalModel.Models
         public int WarehouseReceiptID { get; set; }
         public string WarehouseReceiptCode { get; set; }
         public string WarehouseName { get; set; }
+        public Nullable<bool> HasTransferOrder { get; set; }
     }
 }

@@ -123,10 +123,6 @@ namespace TotalDTO.Inventories
         bool NegativeOnly { get; }
         bool PositiveOnly { get; }
         bool BothAdjustment { get; }
-
-        bool IsMaterial { get; }
-        bool IsItem { get; }
-        bool IsProduct { get; }
     }
 
     public class WarehouseAdjustmentDTO<TWAOption> : WarehouseAdjustmentPrimitiveDTO<TWAOption>, IBaseDetailEntity<WarehouseAdjustmentDetailDTO>, IWarehouseAdjustmentDTO

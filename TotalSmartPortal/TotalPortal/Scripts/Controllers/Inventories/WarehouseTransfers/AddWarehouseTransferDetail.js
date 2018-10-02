@@ -73,7 +73,7 @@ function handleOKEvent(warehouseTransferGridDataSource, goodsReceiptDetailAvaila
         dataRow.TransferOrderRemains = warehouseTransferGridDataItem.TransferOrderRemains === undefined ? 0 : warehouseTransferGridDataItem.TransferOrderRemains;
         dataRow.QuantityRemains = warehouseTransferGridDataItem.QuantityRemains;
         dataRow.QuantityAvailables = warehouseTransferGridDataItem.QuantityAvailables;
-        dataRow.Quantity = 0;        
+        dataRow.Quantity = warehouseTransferGridDataItem.QuantityAvailables; //INIT BY THE WHOLE QuantityAvailables
 
         dataRow.Remarks = null;
 

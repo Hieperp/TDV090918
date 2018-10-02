@@ -18,6 +18,8 @@
     @Html.Partial("~/Views/Helpers/Bases/_BaseSectionTopB.cshtml")
 
     @Html.HiddenFor(model => (model as IWarehouseTransferPrimitiveDTO).WarehouseTransferID)
+    @Html.HiddenFor(model => (model as IWarehouseTransferPrimitiveDTO).HasTransferOrder)
+
     @Html.HiddenFor(model => (model as IWarehouseTransferPrimitiveDTO).TransferOrderID)
 
     <div class="left-panel">
@@ -140,8 +142,7 @@
                         if (Model.Editable)
                         {
                             toolbar.Template(@<text>
-                                <button type="button" class="k-button" onclick="GetTransferOrderDetails()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Xuất hàng theo lệnh </button>
-                                <button type="button" class="k-button" onclick="GetGoodsReceiptDetailAvailables()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Xuất hàng từ tồn kho </button>
+                                <button type="button" class="k-button" onclick="GetDetailAvailables()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Xuất hàng từ tồn kho </button>
                                 <button type="button" class="k-button" onclick="copyRemainsToQuantity()"> <img src="~/Content/Images/Mains/Size24/Borderlands-Select-icon-24.png" /> Xuất nguyên cuộn </button>
                             </text>);
                         }
@@ -258,18 +259,10 @@
 <script src="@Url.Content("~/Scripts/Controllers/Inventories/WarehouseTransfers/Import.js")"></script>
 
 <script type="text/javascript">
-
-    function GetGoodsReceiptDetailAvailables() {
+    function GetDetailAvailables() {
         require(["kpopupWindow"], function (kpopupWindow) {
             var createWizardWindow = new kpopupWindow();
-            createWizardWindow.openWindow($("#popupWindow"), (false ? "@Url.Action("GetTransferOrderDetails", Model.ControllerName, new { area = "Inventories" })" : "@Url.Action("GetGoodsReceiptDetailAvailables", Model.ControllerName, new { area = "Inventories" })"), "Xuất kho", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
-        });
-    }
-
-    function GetTransferOrderDetails() {
-        require(["kpopupWindow"], function (kpopupWindow) {
-            var createWizardWindow = new kpopupWindow();
-            createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("GetTransferOrderDetails", Model.ControllerName, new { area = "Inventories" })", "Xuất kho", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
+            createWizardWindow.openWindow($("#popupWindow"), ($("#HasTransferOrder").val() === "True" ? "@Url.Action("GetTransferOrderDetails", Model.ControllerName, new { area = "Inventories" })" : "@Url.Action("GetGoodsReceiptDetailAvailables", Model.ControllerName, new { area = "Inventories" })"), "Xuất kho", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
         });
     }
 </script>

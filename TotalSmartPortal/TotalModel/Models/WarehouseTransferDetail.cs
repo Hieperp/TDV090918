@@ -33,6 +33,7 @@ namespace TotalModel.Models
         public decimal QuantityReceipted { get; set; }
         public string Remarks { get; set; }
         public bool Approved { get; set; }
+        public bool HasTransferOrder { get; set; }
     
         public virtual Commodity Commodity { get; set; }
         public virtual GoodsReceiptDetail GoodsReceiptDetail { get; set; }
