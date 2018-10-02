@@ -169,6 +169,15 @@ namespace TotalDTO.Inventories
         public bool IsMaterial { get { return this.NMVNTaskID == GlobalEnums.NmvnTaskID.OtherMaterialIssue || this.NMVNTaskID == GlobalEnums.NmvnTaskID.OtherMaterialReceipt || this.NMVNTaskID == GlobalEnums.NmvnTaskID.MaterialAdjustment; } }
         public bool IsItem { get { return this.NMVNTaskID == GlobalEnums.NmvnTaskID.OtherItemIssue || this.NMVNTaskID == GlobalEnums.NmvnTaskID.OtherItemReceipt || this.NMVNTaskID == GlobalEnums.NmvnTaskID.ItemAdjustment; } }
         public bool IsProduct { get { return this.NMVNTaskID == GlobalEnums.NmvnTaskID.OtherProductIssue || this.NMVNTaskID == GlobalEnums.NmvnTaskID.OtherProductReceipt || this.NMVNTaskID == GlobalEnums.NmvnTaskID.ProductAdjustment; } }
+
+
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            foreach (var result in base.Validate(validationContext)) { yield return result; }
+
+            if (this.PositiveOnly && this.WarehouseAdjustmentTypeID >= 50) yield return new ValidationResult("Vui lòng chọn phân loại", new[] { "WarehouseAdjustmentTypeID" });
+            if (this.NegativeOnly && this.WarehouseAdjustmentTypeID < 50) yield return new ValidationResult("Vui lòng chọn phân loại", new[] { "WarehouseAdjustmentTypeID" });
+        }
     }
 
 }
