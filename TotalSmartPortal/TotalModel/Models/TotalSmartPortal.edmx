@@ -13450,7 +13450,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="String" Name="CommodityCode" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="CommodityName" Nullable="false" MaxLength="200" />
           <Property Type="Int32" Name="CommodityTypeID" Nullable="false" />
-          <Property Type="Decimal" Name="QuantityRemains" Nullable="true" Precision="20" Scale="2" />
+          <Property Type="Decimal" Name="QuantityRemains" Nullable="true" Precision="26" Scale="2" />
           <Property Type="Decimal" Name="Quantity" Nullable="false" Precision="18" Scale="2" />
           <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="WarehouseAdjustmentID" Nullable="true" />
@@ -13458,12 +13458,16 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="String" Name="WarehouseAdjustmentReference" Nullable="true" MaxLength="10" />
           <Property Type="DateTime" Name="WarehouseAdjustmentEntryDate" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="WarehouseAdjustmentTypeID" Nullable="true" />
-          <Property Type="String" Name="MaterialIssueReference" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="MaterialIssueCode" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="MaterialIssueEntryDate" Nullable="false" Precision="23" />
-          <Property Type="String" Name="WorkshiftName" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="WorkshiftEntryDate" Nullable="false" Precision="23" />
-          <Property Type="String" Name="ProductionLinesCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="MaterialIssueReference" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="MaterialIssueCode" Nullable="false" MaxLength="2" />
+          <Property Type="DateTime" Name="MaterialIssueEntryDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="WorkshiftName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="WorkshiftEntryDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ProductionLinesCode" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="MaterialIssueDetailID" Nullable="true" />
+          <Property Type="Int32" Name="MaterialIssueID" Nullable="true" />
+          <Property Type="Int32" Name="FinishedProductDetailID" Nullable="true" />
+          <Property Type="Int32" Name="FinishedProductID" Nullable="true" />
         </ComplexType>
         <ComplexType Name="ProductionOrderIndex">
           <Property Type="Int32" Name="ProductionOrderID" Nullable="false" />
@@ -20086,6 +20090,10 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="WorkshiftName" ColumnName="WorkshiftName" />
                 <ScalarProperty Name="WorkshiftEntryDate" ColumnName="WorkshiftEntryDate" />
                 <ScalarProperty Name="ProductionLinesCode" ColumnName="ProductionLinesCode" />
+                <ScalarProperty Name="MaterialIssueDetailID" ColumnName="MaterialIssueDetailID" />
+                <ScalarProperty Name="MaterialIssueID" ColumnName="MaterialIssueID" />
+                <ScalarProperty Name="FinishedProductDetailID" ColumnName="FinishedProductDetailID" />
+                <ScalarProperty Name="FinishedProductID" ColumnName="FinishedProductID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

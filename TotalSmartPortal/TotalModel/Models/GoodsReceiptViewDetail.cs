@@ -34,9 +34,13 @@ namespace TotalModel.Models
         public Nullable<int> WarehouseAdjustmentTypeID { get; set; }
         public string MaterialIssueReference { get; set; }
         public string MaterialIssueCode { get; set; }
-        public System.DateTime MaterialIssueEntryDate { get; set; }
+        public Nullable<System.DateTime> MaterialIssueEntryDate { get; set; }
         public string WorkshiftName { get; set; }
-        public System.DateTime WorkshiftEntryDate { get; set; }
+        public Nullable<System.DateTime> WorkshiftEntryDate { get; set; }
         public string ProductionLinesCode { get; set; }
+        public Nullable<int> MaterialIssueDetailID { get; set; }
+        public Nullable<int> MaterialIssueID { get; set; }
+        public Nullable<int> FinishedProductDetailID { get; set; }
+        public Nullable<int> FinishedProductID { get; set; }
     }
 }
