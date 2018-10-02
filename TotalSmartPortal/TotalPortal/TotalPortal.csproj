@@ -1443,6 +1443,7 @@
     <Content Include="Areas\Inventories\Views\WarehouseTransfers\GetGoodsReceiptDetailAvailables.cshtml" />
     <Content Include="Areas\Inventories\Views\GoodsReceipts\_GetWarehouseTransfer.cshtml" />
     <Content Include="Areas\Inventories\Views\GoodsReceipts\_GetWarehouse.cshtml" />
+    <Content Include="Areas\Inventories\Views\GoodsReceipts\GetPendingWarehouseTransferDetails.cshtml" />
     <None Include="Properties\PublishProfiles\TDV.pubxml" />
     <None Include="Properties\PublishProfiles\VCP.pubxml">
       <SubType>Designer</SubType>
@@ -1522,6 +1523,7 @@
     <Content Include="Scripts\Controllers\Inventories\GoodsReceipts\AddPendingMaterialIssueDetail.js" />
     <Content Include="Scripts\Controllers\Inventories\GoodsReceipts\AddPendingPlannedOrderDetail.js" />
     <Content Include="Scripts\Controllers\Inventories\GoodsReceipts\AddPendingPurchaseRequisitionDetail.js" />
+    <Content Include="Scripts\Controllers\Inventories\GoodsReceipts\AddPendingWarehouseTransferDetail.js" />
     <Content Include="Scripts\Controllers\Inventories\GoodsReceipts\Approve.js" />
     <Content Include="Scripts\Controllers\Inventories\GoodsReceipts\CreateWizard.js" />
     <Content Include="Scripts\Controllers\Inventories\GoodsReceipts\Delete.js" />

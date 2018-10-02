@@ -62,6 +62,8 @@ namespace TotalModel.Models
     {
         public int GetID() { return this.GoodsReceiptID; }
 
+        public virtual Warehouse WarehouseIssue { get { return this.Warehouse1; } }
+
         public ICollection<GoodsReceiptDetail> GetDetails() { return this.GoodsReceiptDetails; }
     }
 

@@ -81,8 +81,17 @@ namespace TotalDAL.Repositories.Inventories
             return pendingWarehouseTransfers;
         }
 
+        public IEnumerable<GoodsReceiptPendingWarehouseTransferDetail> GetPendingWarehouseTransferDetails(int? goodsReceiptID, int? warehouseTransferID, int? warehouseID, int? warehouseIssueID, string warehouseTransferDetailIDs, bool isReadonly)
+        {
+            this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = false;
+            IEnumerable<GoodsReceiptPendingWarehouseTransferDetail> pendingWarehouseTransferDetails = base.TotalSmartPortalEntities.GetGoodsReceiptPendingWarehouseTransferDetails(goodsReceiptID, warehouseTransferID, warehouseID, warehouseIssueID, warehouseTransferDetailIDs, isReadonly).ToList();
+            this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = true;
+
+            return pendingWarehouseTransferDetails;
+        }
 
 
+        
 
 
         public IEnumerable<GoodsReceiptPendingPlannedOrderCustomer> GetPlannedOrderCustomers(int? locationID)

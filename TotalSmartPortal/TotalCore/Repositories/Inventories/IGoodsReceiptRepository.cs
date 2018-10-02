@@ -18,6 +18,7 @@ namespace TotalCore.Repositories.Inventories
 
         IEnumerable<GoodsReceiptPendingWarehouse> GetWarehouses(int? locationID);
         IEnumerable<GoodsReceiptPendingWarehouseTransfer> GetWarehouseTransfers(int? locationID);
+        IEnumerable<GoodsReceiptPendingWarehouseTransferDetail> GetPendingWarehouseTransferDetails(int? goodsReceiptID, int? warehouseTransferID, int? warehouseID, int? warehouseIssueID, string warehouseTransferDetailIDs, bool isReadonly);
 
 
 

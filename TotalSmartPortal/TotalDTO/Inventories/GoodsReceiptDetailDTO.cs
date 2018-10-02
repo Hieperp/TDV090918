@@ -103,6 +103,7 @@ namespace TotalDTO.Inventories
 
         public Nullable<int> CustomerID { get; set; }
         public Nullable<int> WarehouseID { get; set; }
+        public Nullable<int> WarehouseIssueID { get; set; }
 
         [Display(Name = "Kho")]
         [UIHint("StringReadonly")]
