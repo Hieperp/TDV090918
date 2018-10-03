@@ -6,7 +6,8 @@ using AutoMapper;
 using RequireJsNet;
 
 using TotalBase.Enums;
-
+using TotalDTO;
+using TotalModel;
 using TotalModel.Models;
 
 using TotalCore.Services.Inventories;
@@ -15,14 +16,19 @@ using TotalCore.Repositories.Commons;
 using TotalDTO.Inventories;
 
 using TotalPortal.Controllers;
+using TotalPortal.ViewModels.Helpers;
 using TotalPortal.Areas.Inventories.ViewModels;
 using TotalPortal.Areas.Inventories.Builders;
 
 namespace TotalPortal.Areas.Inventories.Controllers
 {
-    public class GoodsReceiptsController : GenericViewDetailController<GoodsReceipt, GoodsReceiptDetail, GoodsReceiptViewDetail, GoodsReceiptDTO, GoodsReceiptPrimitiveDTO, GoodsReceiptDetailDTO, GoodsReceiptViewModel>
+    public class GoodsReceiptsController<TDto, TPrimitiveDto, TDtoDetail, TViewDetailViewModel> : GenericViewDetailController<GoodsReceipt, GoodsReceiptDetail, GoodsReceiptViewDetail, TDto, TPrimitiveDto, TDtoDetail, TViewDetailViewModel>
+        where TDto : TPrimitiveDto, IBaseDetailEntity<TDtoDetail>
+        where TPrimitiveDto : BaseDTO, IPrimitiveEntity, IPrimitiveDTO, new()
+        where TDtoDetail : class, IPrimitiveEntity
+        where TViewDetailViewModel : TDto, IViewDetailViewModel<TDtoDetail>, IGoodsReceiptViewModel, new()
     {
-        public GoodsReceiptsController(IGoodsReceiptService goodsReceiptService, IGoodsReceiptViewModelSelectListBuilder goodsReceiptViewModelSelectListBuilder)
+        public GoodsReceiptsController(IGoodsReceiptService<TDto, TPrimitiveDto, TDtoDetail> goodsReceiptService, IGoodsReceiptViewModelSelectListBuilder<TViewDetailViewModel> goodsReceiptViewModelSelectListBuilder)
             : base(goodsReceiptService, goodsReceiptViewModelSelectListBuilder, true)
         {
         }
@@ -70,4 +76,33 @@ namespace TotalPortal.Areas.Inventories.Controllers
         }
     }
 
+
+
+
+
+
+    public class MaterialReceiptsController : GoodsReceiptsController<GoodsReceiptDTO<GROptionMaterial>, GoodsReceiptPrimitiveDTO<GROptionMaterial>, GoodsReceiptDetailDTO, MaterialReceiptViewModel>
+    {
+        public MaterialReceiptsController(IMaterialReceiptService materialReceiptService, IMaterialReceiptViewModelSelectListBuilder materialReceiptViewModelSelectListBuilder)
+            : base(materialReceiptService, materialReceiptViewModelSelectListBuilder)
+        {
+        }
+    }
+
+    public class ItemReceiptsController : GoodsReceiptsController<GoodsReceiptDTO<GROptionItem>, GoodsReceiptPrimitiveDTO<GROptionItem>, GoodsReceiptDetailDTO, ItemReceiptViewModel>
+    {
+        public ItemReceiptsController(IItemReceiptService itemReceiptService, IItemReceiptViewModelSelectListBuilder itemReceiptViewModelSelectListBuilder)
+            : base(itemReceiptService, itemReceiptViewModelSelectListBuilder)
+        {
+        }
+    }
+
+
+    public class ProductReceiptsController : GoodsReceiptsController<GoodsReceiptDTO<GROptionProduct>, GoodsReceiptPrimitiveDTO<GROptionProduct>, GoodsReceiptDetailDTO, ProductReceiptViewModel>
+    {
+        public ProductReceiptsController(IProductReceiptService productReceiptService, IProductReceiptViewModelSelectListBuilder productReceiptViewModelSelectListBuilder)
+            : base(productReceiptService, productReceiptViewModelSelectListBuilder)
+        {
+        }
+    }
 }
