@@ -10,9 +10,22 @@ using TotalPortal.Areas.Commons.ViewModels.Helpers;
 
 namespace TotalPortal.Areas.Inventories.ViewModels
 {
-    public class GoodsReceiptViewModel : GoodsReceiptDTO, IViewDetailViewModel<GoodsReceiptDetailDTO>, IPreparedPersonDropDownViewModel, IApproverDropDownViewModel, IA01SimpleViewModel
+    public interface IGoodsReceiptViewModel : IGoodsReceiptDTO, IA01SimpleViewModel, IPreparedPersonDropDownViewModel, IApproverDropDownViewModel
+    {
+    }
+
+    public class MaterialReceiptViewModel : GoodsReceiptDTO<GROptionMaterial>, IViewDetailViewModel<GoodsReceiptDetailDTO>, IA01SimpleViewModel, IPreparedPersonDropDownViewModel, IApproverDropDownViewModel, IGoodsReceiptViewModel
     {
         public IEnumerable<SelectListItem> AspNetUserSelectList { get; set; }
     }
 
+    public class ItemReceiptViewModel : GoodsReceiptDTO<GROptionItem>, IViewDetailViewModel<GoodsReceiptDetailDTO>, IA01SimpleViewModel, IPreparedPersonDropDownViewModel, IApproverDropDownViewModel, IGoodsReceiptViewModel
+    {
+        public IEnumerable<SelectListItem> AspNetUserSelectList { get; set; }
+    }
+
+    public class ProductReceiptViewModel : GoodsReceiptDTO<GROptionProduct>, IViewDetailViewModel<GoodsReceiptDetailDTO>, IA01SimpleViewModel, IPreparedPersonDropDownViewModel, IApproverDropDownViewModel, IGoodsReceiptViewModel
+    {
+        public IEnumerable<SelectListItem> AspNetUserSelectList { get; set; }
+    }
 }

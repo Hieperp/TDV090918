@@ -6,11 +6,13 @@ using TotalPortal.Areas.Inventories.ViewModels;
 
 namespace TotalPortal.Areas.Inventories.Builders
 {
-    public interface IGoodsReceiptViewModelSelectListBuilder : IViewModelSelectListBuilder<GoodsReceiptViewModel>
+    public interface IGoodsReceiptViewModelSelectListBuilder<TGoodsReceiptViewModel> : IViewModelSelectListBuilder<TGoodsReceiptViewModel>
+    where TGoodsReceiptViewModel : IGoodsReceiptViewModel
     {
     }
 
-    public class GoodsReceiptViewModelSelectListBuilder : A01ViewModelSelectListBuilder<GoodsReceiptViewModel>, IGoodsReceiptViewModelSelectListBuilder
+    public class GoodsReceiptViewModelSelectListBuilder<TGoodsReceiptViewModel> : A01ViewModelSelectListBuilder<TGoodsReceiptViewModel>, IGoodsReceiptViewModelSelectListBuilder<TGoodsReceiptViewModel>
+        where TGoodsReceiptViewModel : IGoodsReceiptViewModel
     {
         public GoodsReceiptViewModelSelectListBuilder(IAspNetUserSelectListBuilder aspNetUserSelectListBuilder, IAspNetUserRepository aspNetUserRepository)
             : base(aspNetUserSelectListBuilder, aspNetUserRepository)
@@ -18,4 +20,43 @@ namespace TotalPortal.Areas.Inventories.Builders
         }
     }
 
+
+
+
+
+
+
+
+
+    public interface IMaterialReceiptViewModelSelectListBuilder : IGoodsReceiptViewModelSelectListBuilder<MaterialReceiptViewModel>
+    {
+    }
+    public class MaterialReceiptViewModelSelectListBuilder : GoodsReceiptViewModelSelectListBuilder<MaterialReceiptViewModel>, IMaterialReceiptViewModelSelectListBuilder
+    {
+        public MaterialReceiptViewModelSelectListBuilder(IAspNetUserSelectListBuilder aspNetUserSelectListBuilder, IAspNetUserRepository aspNetUserRepository)
+            : base(aspNetUserSelectListBuilder, aspNetUserRepository)
+        { }
+    }
+
+
+    public interface IItemReceiptViewModelSelectListBuilder : IGoodsReceiptViewModelSelectListBuilder<ItemReceiptViewModel>
+    {
+    }
+    public class ItemReceiptViewModelSelectListBuilder : GoodsReceiptViewModelSelectListBuilder<ItemReceiptViewModel>, IItemReceiptViewModelSelectListBuilder
+    {
+        public ItemReceiptViewModelSelectListBuilder(IAspNetUserSelectListBuilder aspNetUserSelectListBuilder, IAspNetUserRepository aspNetUserRepository)
+            : base(aspNetUserSelectListBuilder, aspNetUserRepository)
+        { }
+    }
+
+
+    public interface IProductReceiptViewModelSelectListBuilder : IGoodsReceiptViewModelSelectListBuilder<ProductReceiptViewModel>
+    {
+    }
+    public class ProductReceiptViewModelSelectListBuilder : GoodsReceiptViewModelSelectListBuilder<ProductReceiptViewModel>, IProductReceiptViewModelSelectListBuilder
+    {
+        public ProductReceiptViewModelSelectListBuilder(IAspNetUserSelectListBuilder aspNetUserSelectListBuilder, IAspNetUserRepository aspNetUserRepository)
+            : base(aspNetUserSelectListBuilder, aspNetUserRepository)
+        { }
+    }
 }
