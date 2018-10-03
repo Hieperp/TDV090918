@@ -520,6 +520,24 @@
     <Content Include="Areas\Inventories\Views\ProductAdjustments\GetGoodsReceiptDetailAvailables.cshtml" />
     <Content Include="Areas\Inventories\Views\ProductAdjustments\Index.cshtml" />
     <Content Include="Areas\Inventories\Views\ProductAdjustments\Print.cshtml" />
+    <Content Include="Areas\Inventories\Views\ProductReceipts\Approve.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Inventories\Views\ProductReceipts\CreateWizard.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Inventories\Views\ProductReceipts\Delete.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Inventories\Views\ProductReceipts\Edit.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Inventories\Views\ProductReceipts\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Inventories\Views\ProductReceipts\Print.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Areas\Inventories\Views\TransferOrders\Approve.cshtml" />
     <Content Include="Areas\Inventories\Views\TransferOrders\CreateWizard.cshtml">
       <SubType>Code</SubType>
@@ -1402,27 +1420,18 @@
     <Content Include="Areas\Inventories\Views\ItemTransfers\Edit.cshtml" />
     <Content Include="Areas\Inventories\Views\ItemTransfers\Index.cshtml" />
     <Content Include="Areas\Inventories\Views\ItemTransfers\Print.cshtml" />
-    <Content Include="Areas\Inventories\Views\ItemTransfers\Void.cshtml" />
-    <Content Include="Areas\Inventories\Views\ItemTransfers\VoidDetail.cshtml" />
-    <Content Include="Areas\Inventories\Views\ItemTransfers\VoidDetailSuccess.cshtml" />
     <Content Include="Areas\Inventories\Views\MaterialTransfers\Approve.cshtml" />
     <Content Include="Areas\Inventories\Views\MaterialTransfers\CreateWizard.cshtml" />
     <Content Include="Areas\Inventories\Views\MaterialTransfers\Delete.cshtml" />
     <Content Include="Areas\Inventories\Views\MaterialTransfers\Edit.cshtml" />
     <Content Include="Areas\Inventories\Views\MaterialTransfers\Index.cshtml" />
     <Content Include="Areas\Inventories\Views\MaterialTransfers\Print.cshtml" />
-    <Content Include="Areas\Inventories\Views\MaterialTransfers\Void.cshtml" />
-    <Content Include="Areas\Inventories\Views\MaterialTransfers\VoidDetail.cshtml" />
-    <Content Include="Areas\Inventories\Views\MaterialTransfers\VoidDetailSuccess.cshtml" />
     <Content Include="Areas\Inventories\Views\ProductTransfers\Approve.cshtml" />
     <Content Include="Areas\Inventories\Views\ProductTransfers\CreateWizard.cshtml" />
     <Content Include="Areas\Inventories\Views\ProductTransfers\Delete.cshtml" />
     <Content Include="Areas\Inventories\Views\ProductTransfers\Edit.cshtml" />
     <Content Include="Areas\Inventories\Views\ProductTransfers\Index.cshtml" />
     <Content Include="Areas\Inventories\Views\ProductTransfers\Print.cshtml" />
-    <Content Include="Areas\Inventories\Views\ProductTransfers\Void.cshtml" />
-    <Content Include="Areas\Inventories\Views\ProductTransfers\VoidDetail.cshtml" />
-    <Content Include="Areas\Inventories\Views\ProductTransfers\VoidDetailSuccess.cshtml" />
     <Content Include="Areas\Inventories\Views\WarehouseTransfers\Approve.cshtml" />
     <Content Include="Areas\Inventories\Views\WarehouseTransfers\CreateWizard.cshtml" />
     <Content Include="Areas\Inventories\Views\WarehouseTransfers\Delete.cshtml" />
@@ -1444,6 +1453,18 @@
     <Content Include="Areas\Inventories\Views\GoodsReceipts\_GetWarehouseTransfer.cshtml" />
     <Content Include="Areas\Inventories\Views\GoodsReceipts\_GetWarehouse.cshtml" />
     <Content Include="Areas\Inventories\Views\GoodsReceipts\GetPendingWarehouseTransferDetails.cshtml" />
+    <Content Include="Areas\Inventories\Views\MaterialReceipts\Approve.cshtml" />
+    <Content Include="Areas\Inventories\Views\MaterialReceipts\CreateWizard.cshtml" />
+    <Content Include="Areas\Inventories\Views\MaterialReceipts\Delete.cshtml" />
+    <Content Include="Areas\Inventories\Views\MaterialReceipts\Edit.cshtml" />
+    <Content Include="Areas\Inventories\Views\MaterialReceipts\Index.cshtml" />
+    <Content Include="Areas\Inventories\Views\MaterialReceipts\Print.cshtml" />
+    <Content Include="Areas\Inventories\Views\ItemReceipts\Approve.cshtml" />
+    <Content Include="Areas\Inventories\Views\ItemReceipts\CreateWizard.cshtml" />
+    <Content Include="Areas\Inventories\Views\ItemReceipts\Delete.cshtml" />
+    <Content Include="Areas\Inventories\Views\ItemReceipts\Edit.cshtml" />
+    <Content Include="Areas\Inventories\Views\ItemReceipts\Index.cshtml" />
+    <Content Include="Areas\Inventories\Views\ItemReceipts\Print.cshtml" />
     <None Include="Properties\PublishProfiles\TDV.pubxml" />
     <None Include="Properties\PublishProfiles\VCP.pubxml">
       <SubType>Designer</SubType>
