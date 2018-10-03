@@ -1,7 +1,12 @@
 ﻿@using TotalBase.Enums;
 @using TotalPortal.Configuration
 
-@model TotalPortal.Areas.Inventories.ViewModels.GoodsReceiptViewModel
+@using TotalDTO;
+@using TotalModel
+@using TotalDTO.Inventories
+@using TotalPortal.Areas.Inventories.ViewModels
+
+@model IGoodsReceiptViewModel
 
 <div id="popupWindow"></div>
 
@@ -15,25 +20,25 @@
     @Html.Hidden("WarehouseTaskID", (int)@ViewBag.WarehouseTaskID);
     @Html.Hidden("WarehouseTaskIDList", (string)@ViewBag.WarehouseTaskIDList);
 
-    @Html.HiddenFor(model => model.GoodsReceiptID)
-    @Html.HiddenFor(model => model.GoodsReceiptTypeID)
+    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).GoodsReceiptID)
+    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).GoodsReceiptTypeID)
 
     <div class="left-panel">
 
         @Html.Partial("~/Views/Helpers/Bases/_BaseSectionLeftA.cshtml")
 
 
-        @Html.HiddenFor(model => model.PurchaseRequisitionID)
-        @Html.HiddenFor(model => model.PurchaseRequisitionCode)
-        @Html.HiddenFor(model => model.PurchaseRequisitionReference)
+        @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).PurchaseRequisitionID)
+        @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).PurchaseRequisitionCode)
+        @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).PurchaseRequisitionReference)
 
-        @Html.HiddenFor(model => model.FinishedProductID)
-        @Html.HiddenFor(model => model.FinishedProductDetailID)
+        @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductID)
+        @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductDetailID)
 
 
 
-        @Html.HiddenFor(model => model.WarehouseTransferID)
-        @Html.HiddenFor(model => model.WarehouseTransferReference)
+        @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).WarehouseTransferID)
+        @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).WarehouseTransferReference)
 
 
 
@@ -41,34 +46,34 @@
         {
             case (int)GlobalEnums.GoodsReceiptTypeID.PurchaseRequisition:
                 <div class="form-group">
-                    @Html.LabelFor(model => model.PurchaseRequisitionReferenceNote)
+                    @Html.LabelFor(model => (model as IGoodsReceiptPrimitiveDTO).PurchaseRequisitionReferenceNote)
                     <div class="div-input">
-                        @Html.Kendo().MaskedTextBoxFor(model => model.PurchaseRequisitionReferenceNote).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
+                        @Html.Kendo().MaskedTextBoxFor(model => (model as IGoodsReceiptPrimitiveDTO).PurchaseRequisitionReferenceNote).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
                     </div>
                     <div class="div-validation-message">
-                        @Html.ValidationMessageFor(model => model.PurchaseRequisitionReferenceNote, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => (model as IGoodsReceiptPrimitiveDTO).PurchaseRequisitionReferenceNote, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.PurchaseRequisitionCodeNote)
+                    @Html.LabelFor(model => (model as IGoodsReceiptPrimitiveDTO).PurchaseRequisitionCodeNote)
                     <div class="div-input">
-                        @Html.Kendo().MaskedTextBoxFor(model => model.PurchaseRequisitionCodeNote).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
+                        @Html.Kendo().MaskedTextBoxFor(model => (model as IGoodsReceiptPrimitiveDTO).PurchaseRequisitionCodeNote).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
                     </div>
                     <div class="div-validation-message">
-                        @Html.ValidationMessageFor(model => model.PurchaseRequisitionCodeNote, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => (model as IGoodsReceiptPrimitiveDTO).PurchaseRequisitionCodeNote, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 if (Model.PurchaseRequisitionEntryDate != null)
                 {
                     <div class="form-group">
-                        @Html.LabelFor(model => model.PurchaseRequisitionEntryDate)
+                        @Html.LabelFor(model => (model as IGoodsReceiptPrimitiveDTO).PurchaseRequisitionEntryDate)
                         <div class="div-input">
-                            @Html.Kendo().DateTimePickerFor(model => model.PurchaseRequisitionEntryDate).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
+                            @Html.Kendo().DateTimePickerFor(model => (model as IGoodsReceiptPrimitiveDTO).PurchaseRequisitionEntryDate).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
                         </div>
                         <div class="div-validation-message">
-                            @Html.ValidationMessageFor(model => model.PurchaseRequisitionEntryDate, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => (model as IGoodsReceiptPrimitiveDTO).PurchaseRequisitionEntryDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 }
@@ -77,26 +82,26 @@
 
 
             case (int)GlobalEnums.GoodsReceiptTypeID.WarehouseTransfer:
-                <div class="form-group">
-                    @Html.LabelFor(model => model.WarehouseTransferReferenceNote)
-                    <div class="div-input">
-                        @Html.Kendo().MaskedTextBoxFor(model => model.WarehouseTransferReferenceNote).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
-                    </div>
-                    <div class="div-validation-message">
-                        @Html.ValidationMessageFor(model => model.WarehouseTransferReferenceNote, "", new { @class = "text-danger" })
-                    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => (model as IGoodsReceiptPrimitiveDTO).WarehouseTransferReferenceNote)
+                <div class="div-input">
+                    @Html.Kendo().MaskedTextBoxFor(model => (model as IGoodsReceiptPrimitiveDTO).WarehouseTransferReferenceNote).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
                 </div>
+                <div class="div-validation-message">
+                    @Html.ValidationMessageFor(model => (model as IGoodsReceiptPrimitiveDTO).WarehouseTransferReferenceNote, "", new { @class = "text-danger" })
+                </div>
+            </div>
 
 
                 if (Model.WarehouseTransferEntryDate != null)
                 {
                     <div class="form-group">
-                        @Html.LabelFor(model => model.WarehouseTransferEntryDate)
+                        @Html.LabelFor(model => (model as IGoodsReceiptPrimitiveDTO).WarehouseTransferEntryDate)
                         <div class="div-input">
-                            @Html.Kendo().DateTimePickerFor(model => model.WarehouseTransferEntryDate).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
+                            @Html.Kendo().DateTimePickerFor(model => (model as IGoodsReceiptPrimitiveDTO).WarehouseTransferEntryDate).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
                         </div>
                         <div class="div-validation-message">
-                            @Html.ValidationMessageFor(model => model.WarehouseTransferEntryDate, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => (model as IGoodsReceiptPrimitiveDTO).WarehouseTransferEntryDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 }
@@ -106,38 +111,39 @@
 
             case (int)GlobalEnums.GoodsReceiptTypeID.FinishedProduct:
             <div class="form-group">
-                @Html.LabelFor(model => model.FinishedProductReference)
+                @Html.LabelFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductReference)
                 <div class="div-input">
-                    @Html.Kendo().MaskedTextBoxFor(model => model.FinishedProductReference).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
+                    @Html.Kendo().MaskedTextBoxFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductReference).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
                 </div>
                 <div class="div-validation-message">
-                    @Html.ValidationMessageFor(model => model.FinishedProductReference, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductReference, "", new { @class = "text-danger" })
                 </div>
             </div>
 
                 if (Model.FinishedProductEntryDate != null)
                 {
                     <div class="form-group">
-                        @Html.LabelFor(model => model.FinishedProductEntryDate)
+                        @Html.LabelFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductEntryDate)
                         <div class="div-input">
-                            @Html.Kendo().DateTimePickerFor(model => model.FinishedProductEntryDate).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
+                            @Html.Kendo().DateTimePickerFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductEntryDate).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
                         </div>
                         <div class="div-validation-message">
-                            @Html.ValidationMessageFor(model => model.FinishedProductEntryDate, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductEntryDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 }
                 break;
             default:
             <div class="form-group">
-                @Html.LabelFor(model => model.Code)
+                @Html.LabelFor(model => (model as IGoodsReceiptPrimitiveDTO).Code)
                 <div class="div-input">
-                    @Html.Kendo().MaskedTextBoxFor(model => model.Code).HtmlAttributes(new { @class = "left-panel-input" })
+                    @Html.Kendo().MaskedTextBoxFor(model => (model as IGoodsReceiptPrimitiveDTO).Code).HtmlAttributes(new { @class = "left-panel-input" })
                 </div>
                 <div class="div-validation-message">
-                    @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => (model as IGoodsReceiptPrimitiveDTO).Code, "", new { @class = "text-danger" })
                 </div>
             </div>
+
                 break;
 
         }
@@ -145,7 +151,7 @@
 
         @*@Html.EditorFor(d => d.Warehouse, new { WarehouseDisplayName = @Model.GetDisplayName(m => m.Warehouse), LeftPanelInput = "left-panel-input" })*@
 
-        @Html.EditorFor(d => d.WarehouseIssue, new { WarehouseDisplayName = @Model.GetDisplayName(m => m.WarehouseIssue), LeftPanelInput = "left-panel-input" })
+        @Html.EditorFor(model => (model as IGoodsReceiptDTO).WarehouseIssue, new { WarehouseDisplayName = @Model.WarehouseIssue.GetDisplayName(m => m.WarehouseID), LeftPanelInput = "left-panel-input" })
 
     </div>
 
@@ -154,22 +160,22 @@
         <div class="right-top-panel right-top-panel-H2">
             @if (Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.WarehouseTransfer || Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.MaterialIssue)
             {
-                @Html.EditorFor(d => d.Customer, new { CustomerDisplayName = @Model.GetDisplayName(m => m.Customer), CustomerIcon = "Customer Red 24.png", NullCustomer = (Model.CustomerID > 0 ? null : "Nhập từ sản xuất trả về."), CustomerInfo = (Model.CustomerID > 0 ? null : "#") })
+                @Html.EditorFor(model => (model as IGoodsReceiptDTO).Customer, new { CustomerDisplayName = @Model.Customer.GetDisplayName(m => m.CustomerID), CustomerIcon = "Customer Red 24.png", NullCustomer = (Model.CustomerID > 0 ? null : "Nhập từ sản xuất trả về."), CustomerInfo = (Model.CustomerID > 0 ? null : "#") })
             }
             else
             {
-                @Html.EditorFor(d => d.Customer, new { CustomerDescriptionHidden = "false", CustomerDisplayName = @Model.GetDisplayName(m => m.Customer) })
+                @Html.EditorFor(model => (model as IGoodsReceiptDTO).Customer, new { CustomerDescriptionHidden = "false", CustomerDisplayName = @Model.Customer.GetDisplayName(m => m.CustomerID) })
             }
 
             <div class="form-group">
                 <div class="right-panel-label right-panel-label-whole-width">
-                    @Html.LabelFor(model => model.Purposes)
+                    @Html.LabelFor(model => (model as IGoodsReceiptPrimitiveDTO).Purposes)
                 </div>
                 <div class="div-input">
-                    @Html.Kendo().MaskedTextBoxFor(model => model.Purposes).HtmlAttributes(new { @class = "right-panel-input" })
+                    @Html.Kendo().MaskedTextBoxFor(model => (model as IGoodsReceiptPrimitiveDTO).Purposes).HtmlAttributes(new { @class = "right-panel-input" })
                 </div>
                 <div class="div-validation-message">
-                    @Html.ValidationMessageFor(model => model.Purposes, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => (model as IGoodsReceiptPrimitiveDTO).Purposes, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -284,9 +290,6 @@
 
 
                     columns.Command(command => { command.Destroy().Text("<span class='command' ></span>"); }).Width(50).Hidden(!@Model.Editable).HtmlAttributes(new { @class = "grid-column-center" });
-
-                    columns.Template(model => null).HtmlAttributes(new { @class = "grid-column-center" }).Width(50).Hidden(!@Model.Voidable && !@Model.UnVoidable)
-                        .ClientTemplate("<a class='k-button' style='padding:0px;' onclick='callVoidDetail(#= GoodsReceiptDetailID #)'><span class='k-icon k-edit'></span></a>");
                 })
                     .Filterable()
                     .Navigatable()
@@ -358,39 +361,24 @@
                         settings.Mode(GridSelectionMode.Multiple);
                         settings.Type(GridSelectionType.Row);
                     })
+                    .DataSource(dataSource => dataSource
+                    .Ajax()
+                    .Batch(true)
+                    .ServerOperation(false)
+                    .Model(model =>
+                    {
+                        model.Id(x => x.GoodsReceiptDetailID);
+                        model.Field(m => m.GoodsReceiptDetailID).DefaultValue(0);
+                        model.Field(m => m.GoodsReceiptID).DefaultValue(@Model.GoodsReceiptID);
+                    })
                     .Events(events =>
                     {
-                        events.DataBound(@<text>
-                            function(e) {
-
-                            var grid = $("#kendoGridDetails").data("kendoGrid");
-                            var data = grid.dataSource.data();
-                            $.each(data, function (i, row) {
-                            var isWarrantyClaim = row.VoidTypeName;
-                            if (isWarrantyClaim != null && isWarrantyClaim != '') {
-                            $('tr[data-uid="' + row.uid + '"]').addClass("isBonus");
-                            }
-                            });
-                            }
-                        </text>);
-                    }).DataSource(dataSource => dataSource
-                                                                    .Ajax()
-                                                                    .Batch(true)
-                                                                    .ServerOperation(false)
-                                                                    .Model(model =>
-                                                                    {
-                                                                        model.Id(x => x.GoodsReceiptDetailID);
-                                                                        model.Field(m => m.GoodsReceiptDetailID).DefaultValue(0);
-                                                                        model.Field(m => m.GoodsReceiptID).DefaultValue(@Model.GoodsReceiptID);
-                                                                    })
-                                                                    .Events(events =>
-                                                                    {
-                                                                        events.Error("kendGrid_ErrorHandler");
-                                                                    })
-                                                                    .Aggregates(a => a.Add(x => x.CommodityCode).Count())
-                                                                    .Aggregates(a => a.Add(x => x.QuantityRemains).Sum())
-                                                                    .Aggregates(a => a.Add(x => x.Quantity).Sum())
-                                                                )
+                        events.Error("kendGrid_ErrorHandler");
+                    })
+                    .Aggregates(a => a.Add(x => x.CommodityCode).Count())
+                    .Aggregates(a => a.Add(x => x.QuantityRemains).Sum())
+                    .Aggregates(a => a.Add(x => x.Quantity).Sum())
+                )
             )
         </div>
 
@@ -406,21 +394,21 @@
                         .Content(@<text>
                             <div class="right-first-panel">
                                 <div class="form-group">
-                                    @Html.LabelFor(model => model.Description, new { @class = "right-panel-label" })
+                                    @Html.LabelFor(model => (model as IBaseDTO).Description, new { @class = "right-panel-label" })
                                     <div class="div-input">
-                                        @Html.Kendo().MaskedTextBoxFor(model => model.Description).HtmlAttributes(new { @class = "right-panel-input" })
+                                        @Html.Kendo().MaskedTextBoxFor(model => (model as IBaseDTO).Description).HtmlAttributes(new { @class = "right-panel-input" })
                                     </div>
                                     <div class="div-validation-message">
-                                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(model => (model as IBaseDTO).Description, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    @Html.LabelFor(model => model.Remarks, new { @class = "right-panel-label" })
+                                    @Html.LabelFor(model => (model as IBaseModel).Remarks, new { @class = "right-panel-label" })
                                     <div class="div-input">
-                                        @Html.Kendo().MaskedTextBoxFor(model => model.Remarks).HtmlAttributes(new { @class = "right-panel-input" })
+                                        @Html.Kendo().MaskedTextBoxFor(model => (model as IBaseModel).Remarks).HtmlAttributes(new { @class = "right-panel-input" })
                                     </div>
                                     <div class="div-validation-message">
-                                        @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(model => (model as IBaseModel).Remarks, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
@@ -439,14 +427,11 @@
         <div class="right-botton-panel">
             @if (Model.Editable)
             {
-                <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "GoodsReceipts")"> <img src="~/Content/Images/New/save-icon.png" /> Lưu phiếu </button>
+                <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", Model.ControllerName)"> <img src="~/Content/Images/New/save-icon.png" /> Lưu phiếu </button>
             }
             else
             {
-                if (!Model.Voidable && !Model.UnVoidable)
-                {
-                    <button type="button" class="k-button custom-button" onclick="location.href='@Url.Action("Print", "GoodsReceipts", new { id = @Model.GoodsReceiptID })'"> <img src="~/Content/Images/New/Apps-printer-icon.png" /> In tổng hợp xuất kho </button>
-                }
+                <button type="button" class="k-button custom-button" onclick="location.href='@Url.Action("Print", Model.ControllerName, new { id = @Model.GoodsReceiptID })'"> <img src="~/Content/Images/New/Apps-printer-icon.png" /> In tổng hợp xuất kho </button>
             }
         </div>
 
@@ -462,7 +447,7 @@
     function GetPendingPurchaseRequisitionDetails() {
         require(["kpopupWindow"], function (kpopupWindow) {
             var createWizardWindow = new kpopupWindow();
-            createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("GetPendingPurchaseRequisitionDetails", "GoodsReceipts", new { area = "Inventories" })", "Chọn mặt hàng ", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
+            createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("GetPendingPurchaseRequisitionDetails", Model.ControllerName, new { area = "Inventories" })", "Chọn mặt hàng ", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
         });
     }
 
@@ -471,7 +456,7 @@
     function GetPendingWarehouseTransferDetails() {
         require(["kpopupWindow"], function (kpopupWindow) {
             var createWizardWindow = new kpopupWindow();
-            createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("GetPendingWarehouseTransferDetails", "GoodsReceipts", new { area = "Inventories" })", "Chọn mặt hàng ", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
+            createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("GetPendingWarehouseTransferDetails", Model.ControllerName, new { area = "Inventories" })", "Chọn mặt hàng ", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
         });
     }
 
@@ -480,21 +465,14 @@
     function GetPendingMaterialIssueDetails() {
         require(["kpopupWindow"], function (kpopupWindow) {
             var createWizardWindow = new kpopupWindow();
-            createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("GetPendingMaterialIssueDetails", "GoodsReceipts", new { area = "Inventories" })", "Chọn mặt hàng ", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
+            createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("GetPendingMaterialIssueDetails", Model.ControllerName, new { area = "Inventories" })", "Chọn mặt hàng ", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
         });
     }
 
     function GetPendingPlannedOrderDetails() {
         require(["kpopupWindow"], function (kpopupWindow) {
             var createWizardWindow = new kpopupWindow();
-            createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("GetPendingPlannedOrderDetails", "GoodsReceipts", new { area = "Inventories" })", "Chọn mặt hàng ", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
-        });
-    }
-
-    function callVoidDetail(goodsReceiptDetailID) {
-        require(["kpopupWindow"], function (kpopupWindow) {
-            var voidDetailWindow = new kpopupWindow();
-            voidDetailWindow.openWindow($("#popupWindow"), "@Url.Action("VoidDetail", "GoodsReceipts")" + "/" + $("#GoodsReceiptID").val() + "/" + goodsReceiptDetailID, "Hủy/ phục hồi một phần đề nghị giao hàng", @Settings.PopupWidthVoid,  @Settings.PopupHeightVoid);
+            createWizardWindow.openWindow($("#popupWindow"), "@Url.Action("GetPendingPlannedOrderDetails", Model.ControllerName, new { area = "Inventories" })", "Chọn mặt hàng ", "@Settings.PopupWidthLarge", "@Settings.PopupHeightWithTab");
         });
     }
 </script>

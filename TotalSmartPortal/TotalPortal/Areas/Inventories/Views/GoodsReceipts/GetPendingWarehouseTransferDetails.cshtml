@@ -33,6 +33,7 @@
             var goodsReceiptJSON = window.parent.$("#kendoGridDetails").data("kendoGrid").dataSource.data().toJSON();
 
             return {
+                nmvnTaskID: window.parent.requireConfig.pageOptions.NmvnTaskID,
                 goodsReceiptID: window.parent.$("#GoodsReceiptID").val(),
                 warehouseTransferID: window.parent.$("#WarehouseTransferID").val(),
                 warehouseID: window.parent.$("#Warehouse_WarehouseID").val(),

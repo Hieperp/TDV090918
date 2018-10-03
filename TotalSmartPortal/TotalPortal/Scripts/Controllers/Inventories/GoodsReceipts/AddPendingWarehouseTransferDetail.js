@@ -46,6 +46,7 @@ function handleOKEvent(goodsReceiptGridDataSource, pendingWarehouseTransferDetai
         dataRow.GoodsReceiptDetailID = 0;
         dataRow.GoodsReceiptID = window.parent.$("#GoodsReceiptID").val();
 
+
         dataRow.MaterialIssueID = null;
         dataRow.MaterialIssueDetailID = null;
         dataRow.MaterialIssueCode = null;
@@ -55,7 +56,7 @@ function handleOKEvent(goodsReceiptGridDataSource, pendingWarehouseTransferDetai
 
         dataRow.WorkshiftName = null;
         dataRow.WorkshiftEntryDate = null;
-        dataRow.MaterialIssueEntryDate = null;
+
 
         dataRow.FinishedProductID = null;
         dataRow.FinishedProductDetailID = null;
@@ -80,6 +81,7 @@ function handleOKEvent(goodsReceiptGridDataSource, pendingWarehouseTransferDetai
         dataRow.CommodityName = warehouseTransferGridDataItem.CommodityName;
         dataRow.CommodityCode = warehouseTransferGridDataItem.CommodityCode;
         dataRow.CommodityTypeID = warehouseTransferGridDataItem.CommodityTypeID;
+
 
         dataRow.QuantityRemains = warehouseTransferGridDataItem.QuantityRemains;
         dataRow.Quantity = warehouseTransferGridDataItem.Quantity;

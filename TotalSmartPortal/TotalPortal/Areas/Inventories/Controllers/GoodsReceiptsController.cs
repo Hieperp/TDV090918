@@ -54,25 +54,25 @@ namespace TotalPortal.Areas.Inventories.Controllers
         public virtual ActionResult GetPendingPurchaseRequisitionDetails()
         {
             this.AddRequireJsOptions();
-            return View();
+            return View("../GoodsReceipts/GetPendingPurchaseRequisitionDetails", this.InitViewModel(new TViewDetailViewModel()));
         }
 
         public virtual ActionResult GetPendingWarehouseTransferDetails()
         {
             this.AddRequireJsOptions();
-            return View();
+            return View("../GoodsReceipts/GetPendingWarehouseTransferDetails", this.InitViewModel(new TViewDetailViewModel()));
         }
 
         public virtual ActionResult GetPendingMaterialIssueDetails()
         {
             this.AddRequireJsOptions();
-            return View();
+            return View("../GoodsReceipts/GetPendingMaterialIssueDetails", this.InitViewModel(new TViewDetailViewModel()));
         }
 
         public virtual ActionResult GetPendingPlannedOrderDetails()
         {
             this.AddRequireJsOptions();
-            return View();
+            return View("../GoodsReceipts/GetPendingPlannedOrderDetails", this.InitViewModel(new TViewDetailViewModel()));
         }
     }
 

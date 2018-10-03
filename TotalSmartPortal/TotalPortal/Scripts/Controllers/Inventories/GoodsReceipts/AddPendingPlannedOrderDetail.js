@@ -46,6 +46,7 @@ function handleOKEvent(goodsReceiptGridDataSource, pendingPlannedOrderDetailGrid
         dataRow.GoodsReceiptDetailID = 0;
         dataRow.GoodsReceiptID = window.parent.$("#GoodsReceiptID").val();
 
+
         dataRow.MaterialIssueID = null;
         dataRow.MaterialIssueDetailID = null;
         dataRow.MaterialIssueCode = null;
@@ -55,21 +56,32 @@ function handleOKEvent(goodsReceiptGridDataSource, pendingPlannedOrderDetailGrid
 
         dataRow.WorkshiftName = null;
         dataRow.WorkshiftEntryDate = null;
-        dataRow.MaterialIssueEntryDate = null;
-
-        dataRow.PurchaseRequisitionID = null;
-        dataRow.PurchaseRequisitionDetailID = null;
-        dataRow.PurchaseRequisitionEntryDate = null;
+        
 
         dataRow.FinishedProductID = plannedOrderGridDataItem.FinishedProductID;
         dataRow.FinishedProductDetailID = plannedOrderGridDataItem.FinishedProductDetailID;
         dataRow.FinishedProductReference = plannedOrderGridDataItem.FinishedProductReference;
-        dataRow.FinishedProductEntryDate = plannedOrderGridDataItem.FinishedProductEntryDate;        
+        dataRow.FinishedProductEntryDate = plannedOrderGridDataItem.FinishedProductEntryDate;
+
+
+        dataRow.PurchaseRequisitionID = null;
+        dataRow.PurchaseRequisitionDetailID = null;
+        dataRow.PurchaseRequisitionCode = null;
+        dataRow.PurchaseRequisitionReference = null;
+        dataRow.PurchaseRequisitionEntryDate = null;
+
+
+        dataRow.WarehouseTransferID = null;
+        dataRow.WarehouseTransferDetailID = null;
+        dataRow.WarehouseTransferReference = null;
+        dataRow.WarehouseTransferEntryDate = null;
+
 
         dataRow.CommodityID = plannedOrderGridDataItem.CommodityID;
         dataRow.CommodityName = plannedOrderGridDataItem.CommodityName;
         dataRow.CommodityCode = plannedOrderGridDataItem.CommodityCode;
         dataRow.CommodityTypeID = plannedOrderGridDataItem.CommodityTypeID;
+
 
         dataRow.QuantityRemains = plannedOrderGridDataItem.QuantityRemains;
         dataRow.Quantity = plannedOrderGridDataItem.Quantity;

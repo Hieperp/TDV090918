@@ -46,6 +46,7 @@ function handleOKEvent(goodsReceiptGridDataSource, pendingPurchaseRequisitionDet
         dataRow.GoodsReceiptDetailID = 0;
         dataRow.GoodsReceiptID = window.parent.$("#GoodsReceiptID").val();
 
+
         dataRow.MaterialIssueID = null;
         dataRow.MaterialIssueDetailID = null;
         dataRow.MaterialIssueCode = null;
@@ -55,12 +56,13 @@ function handleOKEvent(goodsReceiptGridDataSource, pendingPurchaseRequisitionDet
 
         dataRow.WorkshiftName = null;
         dataRow.WorkshiftEntryDate = null;
-        dataRow.MaterialIssueEntryDate = null;
+        
 
         dataRow.FinishedProductID = null;
         dataRow.FinishedProductDetailID = null;
         dataRow.FinishedProductReference = null;
         dataRow.FinishedProductEntryDate = null;
+
 
         dataRow.PurchaseRequisitionID = purchaseRequisitionGridDataItem.PurchaseRequisitionID;
         dataRow.PurchaseRequisitionDetailID = purchaseRequisitionGridDataItem.PurchaseRequisitionDetailID;
@@ -68,10 +70,18 @@ function handleOKEvent(goodsReceiptGridDataSource, pendingPurchaseRequisitionDet
         dataRow.PurchaseRequisitionReference = purchaseRequisitionGridDataItem.PurchaseRequisitionReference;
         dataRow.PurchaseRequisitionEntryDate = purchaseRequisitionGridDataItem.PurchaseRequisitionEntryDate;
 
+
+        dataRow.WarehouseTransferID = null;
+        dataRow.WarehouseTransferDetailID = null;
+        dataRow.WarehouseTransferReference = null;
+        dataRow.WarehouseTransferEntryDate = null;
+
+
         dataRow.CommodityID = purchaseRequisitionGridDataItem.CommodityID;
         dataRow.CommodityName = purchaseRequisitionGridDataItem.CommodityName;
         dataRow.CommodityCode = purchaseRequisitionGridDataItem.CommodityCode;
         dataRow.CommodityTypeID = purchaseRequisitionGridDataItem.CommodityTypeID;
+
 
         dataRow.QuantityRemains = purchaseRequisitionGridDataItem.QuantityRemains;
         dataRow.Quantity = purchaseRequisitionGridDataItem.Quantity;

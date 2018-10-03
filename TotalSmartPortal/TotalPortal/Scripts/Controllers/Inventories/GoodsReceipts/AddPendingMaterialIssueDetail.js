@@ -46,29 +46,42 @@ function handleOKEvent(goodsReceiptGridDataSource, pendingMaterialIssueDetailGri
         dataRow.GoodsReceiptDetailID = 0;
         dataRow.GoodsReceiptID = window.parent.$("#GoodsReceiptID").val();
 
-        dataRow.FinishedProductID = null;
-        dataRow.FinishedProductDetailID = null;
-        dataRow.FinishedProductReference = null;
-        dataRow.FinishedProductEntryDate = null;
-
-        dataRow.PurchaseRequisitionID = null;
-        dataRow.PurchaseRequisitionDetailID = null;                  
-        dataRow.PurchaseRequisitionEntryDate = null;
 
         dataRow.MaterialIssueID = materialIssueGridDataItem.MaterialIssueID;
         dataRow.MaterialIssueDetailID = materialIssueGridDataItem.MaterialIssueDetailID;
         dataRow.MaterialIssueCode = materialIssueGridDataItem.MaterialIssueCode;
         dataRow.MaterialIssueReference = materialIssueGridDataItem.MaterialIssueReference;
+        dataRow.MaterialIssueEntryDate = materialIssueGridDataItem.MaterialIssueEntryDate;
         dataRow.ProductionLinesCode = materialIssueGridDataItem.ProductionLinesCode;
 
         dataRow.WorkshiftName = materialIssueGridDataItem.WorkshiftName;
         dataRow.WorkshiftEntryDate = materialIssueGridDataItem.WorkshiftEntryDate;
-        dataRow.MaterialIssueEntryDate = materialIssueGridDataItem.MaterialIssueEntryDate;
+
+
+        dataRow.FinishedProductID = null;
+        dataRow.FinishedProductDetailID = null;
+        dataRow.FinishedProductReference = null;
+        dataRow.FinishedProductEntryDate = null;
+
+
+        dataRow.PurchaseRequisitionID = null;
+        dataRow.PurchaseRequisitionDetailID = null;                  
+        dataRow.PurchaseRequisitionCode = null;
+        dataRow.PurchaseRequisitionReference = null;
+        dataRow.PurchaseRequisitionEntryDate = null;
+
+
+        dataRow.WarehouseTransferID = null;
+        dataRow.WarehouseTransferDetailID = null;
+        dataRow.WarehouseTransferReference = null;
+        dataRow.WarehouseTransferEntryDate = null;
+
 
         dataRow.CommodityID = materialIssueGridDataItem.CommodityID;
         dataRow.CommodityName = materialIssueGridDataItem.CommodityName;
         dataRow.CommodityCode = materialIssueGridDataItem.CommodityCode;
         dataRow.CommodityTypeID = materialIssueGridDataItem.CommodityTypeID;
+
 
         dataRow.QuantityRemains = materialIssueGridDataItem.QuantityRemains;
         dataRow.Quantity = materialIssueGridDataItem.Quantity;

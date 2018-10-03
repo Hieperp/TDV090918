@@ -1,9 +1,12 @@
 ﻿@using TotalBase.Enums;
 @using TotalPortal.Configuration;
 
+@using TotalDTO;
+@using TotalDTO.Inventories
+
 @{Layout = "~/Views/Shared/_LayoutPopup.cshtml";}
 
-@model TotalPortal.Areas.Inventories.ViewModels.GoodsReceiptViewModel
+@model TotalPortal.Areas.Inventories.ViewModels.IGoodsReceiptViewModel
 
 @using (Html.BeginForm())
 {
@@ -14,20 +17,20 @@
     @Html.Hidden("WarehouseTaskID", (int)@ViewBag.WarehouseTaskID);
     @Html.Hidden("WarehouseTaskIDList", (string)@ViewBag.WarehouseTaskIDList);
 
-    @Html.HiddenFor(model => model.GoodsReceiptTypeID)
+    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).GoodsReceiptTypeID)
 
-    @Html.HiddenFor(model => model.Code);
+    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).Code);
 
-    @Html.HiddenFor(model => model.PurchaseRequisitionID)
-    @Html.HiddenFor(model => model.PurchaseRequisitionCode)
-    @Html.HiddenFor(model => model.PurchaseRequisitionReference)
-    @Html.HiddenFor(model => model.PurchaseRequisitionEntryDate)
+    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).PurchaseRequisitionID)
+    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).PurchaseRequisitionCode)
+    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).PurchaseRequisitionReference)
+    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).PurchaseRequisitionEntryDate)
 
 
     
-    @Html.HiddenFor(model => model.WarehouseTransferID)
-    @Html.HiddenFor(model => model.WarehouseTransferReference)
-    @Html.HiddenFor(model => model.WarehouseTransferEntryDate)
+    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).WarehouseTransferID)
+    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).WarehouseTransferReference)
+    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).WarehouseTransferEntryDate)
 
     @Html.HiddenFor(model => model.WarehouseIssue.WarehouseID);
     @Html.HiddenFor(model => model.WarehouseIssue.Code);
@@ -35,12 +38,12 @@
     
     
     
-    @Html.HiddenFor(model => model.FinishedProductID)
-    @Html.HiddenFor(model => model.FinishedProductDetailID)
-    @Html.HiddenFor(model => model.FinishedProductReference)
-    @Html.HiddenFor(model => model.FinishedProductEntryDate)
+    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductID)
+    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductDetailID)
+    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductReference)
+    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductEntryDate)
 
-    @Html.HiddenFor(model => model.WarehouseAdjustmentID)       
+    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).WarehouseAdjustmentID)       
 
     @Html.HiddenFor(model => model.Customer.CustomerID);
     @Html.HiddenFor(model => model.Customer.Code);
@@ -52,8 +55,7 @@
     @Html.HiddenFor(model => model.Customer.SalespersonID)
     @Html.HiddenFor(model => model.Customer.SalespersonName)
 
-    @Html.HiddenFor(model => model.Description);
-    @Html.HiddenFor(model => model.Remarks);
+    @Html.HiddenFor(model => (model as IBaseDTO).Description);
 
     @(Html.Kendo().TabStrip()
         .HtmlAttributes(new { @style = "height: 468px; margin-left: 0px; margin-right: 0px;" })
@@ -102,10 +104,10 @@
 
 
     <div class="background-bar" style="height: 45px;">
-        <div style="width:40%;height:10px;float: left; margin-top:-3px"> @Html.EditorFor(d => d.Warehouse, new { WarehouseDisplayName = @Model.GetDisplayName(m => m.Warehouse) })           </div>
+        <div style="width:40%;height:10px;float: left; margin-top:-3px"> @Html.EditorFor(model => (model as IGoodsReceiptDTO).Warehouse, new { WarehouseDisplayName = @Model.Warehouse.GetDisplayName(m => m.WarehouseID) })           </div>
         <div class="popup-button-bar" style="clear:none">
 
-            <input id="submitCreateWizard" type="submit" formaction="@Url.Action("CreateWizard", "GoodsReceipts")" formtarget="_top" style="display:none" />
+            <input id="submitCreateWizard" type="submit" formaction="@Url.Action("CreateWizard", Model.ControllerName)" formtarget="_top" style="display:none" />
 
             @*<button type="button" class="k-button" onclick="okButton_Click()"> <img src="~/Content/Images/Mains/Size24/Ok-1.png" /> Áp dụng CTKM đang chọn </button>   //At VCP DON'T ALLOW SELECT BY SINGLE PROMOTION *@
             <button type="button" class="k-button" onclick="okMaterialIssueButton_Click()"> <img src="~/Content/Images/Mains/Size24/Accept-Total.png" /> Nhập từ SX trả về </button>
