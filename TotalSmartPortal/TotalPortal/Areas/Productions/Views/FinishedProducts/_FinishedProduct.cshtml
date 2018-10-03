@@ -219,7 +219,7 @@
                     })
                     .Events(events =>
                     {
-                        events.Change("dataSourceChange");
+                        //events.Change("dataSourceChange");
                         events.Error("kendGrid_ErrorHandler");
                     })
                     .Aggregates(a => a.Add(x => x.CommodityCode).Count())
@@ -451,27 +451,30 @@
         kenGridSummaries.refresh(); //Then, finally, refresh grid
     }
 
-    dataSourceChange = function (e) {        
+    dataSourceChange = function (e) {
+
+        //if (confirm("Vui lòng nhấn OK để phần mềm tự tính số lượng khay hư hoặc khay thành phẩm.")) {
+        var dataRow = e.items[0];
+
         if (e.field === "Quantity") {
-            if (e.items[0].Quantity * 1 <= e.items[0].QuantityRemains * 1) {
-                e.items[0].QuantityFailure = e.items[0].QuantityRemains - e.items[0].Quantity;
+            if (dataRow.Quantity <= dataRow.QuantityRemains) {
+                dataRow.set("QuantityFailure", DoRound(dataRow.QuantityRemains - dataRow.Quantity, requireConfig.websiteOptions.rndQuantity));
             }
-        else {
-                e.items[0].Quantity = e.items[0].QuantityRemains;
-            e.items[0].QuantityFailure = 0;
-        }
-        kenGrid = $("#kendoGridDetails").data("kendoGrid").refresh();
+            else {
+                dataRow.set("Quantity", dataRow.QuantityRemains);
+                dataRow.set("QuantityFailure", 0);
+            }
         }
 
         if (e.field === "QuantityFailure") {
-            if (e.items[0].QuantityFailure * 1 <= e.items[0].QuantityRemains * 1) {
-                e.items[0].Quantity = e.items[0].QuantityRemains - e.items[0].QuantityFailure;
+            if (dataRow.QuantityFailure <= dataRow.QuantityRemains) {
+                dataRow.set("Quantity", DoRound(dataRow.QuantityRemains - dataRow.QuantityFailure, requireConfig.websiteOptions.rndQuantity));
             }
-        else {
-                e.items[0].Quantity = 0;
-            e.items[0].QuantityFailure = e.items[0].QuantityRemains;
+            else {
+                dataRow.set("Quantity", 0);
+                dataRow.set("QuantityFailure", dataRow.QuantityRemains);
+            }
         }
-        kenGrid = $("#kendoGridDetails").data("kendoGrid").refresh();
-        }
+        //}
     }
 </script>

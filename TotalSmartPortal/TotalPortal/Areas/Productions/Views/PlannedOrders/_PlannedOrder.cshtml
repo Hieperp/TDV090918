@@ -317,15 +317,15 @@
         window.moldCommodityID = e.model.CommodityID;
     }
 
-    dataSourceChange = function (e) {        
-        if (e.field === "QuantityOnhand" || e.field === "QuantityRequested") {            
-            if (e.items[0].QuantityRequested * 1 >= e.items[0].QuantityOnhand * 1) {
-                e.items[0].Quantity = e.items[0].QuantityRequested - e.items[0].QuantityOnhand;
+    dataSourceChange = function (e) {
+        if (e.field === "QuantityOnhand" || e.field === "QuantityRequested") {
+            var dataRow = e.items[0];
+            if (dataRow.QuantityRequested >= dataRow.QuantityOnhand) {
+                dataRow.set("Quantity", DoRound(dataRow.QuantityRequested - dataRow.QuantityOnhand, requireConfig.websiteOptions.rndQuantity));
             }
             else {
-                e.items[0].Quantity = 0;                
+                dataRow.set("Quantity", 0);
             }
-            kenGrid = $("#kendoGridDetails").data("kendoGrid").refresh();
-        }       
+        }
     }
 </script>

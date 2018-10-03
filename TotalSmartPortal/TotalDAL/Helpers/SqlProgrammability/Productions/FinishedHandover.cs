@@ -221,6 +221,9 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "       IF (@SaveRelativeOption = 1) " + "\r\n";
             queryString = queryString + "           BEGIN " + "\r\n";
+
+            queryString = queryString + "               DECLARE @msg NVARCHAR(300) " + "\r\n"; ;
+
             queryString = queryString + "               UPDATE      FinishedProductDetails" + "\r\n";
             queryString = queryString + "               SET         FinishedProductDetails.FinishedHandoverID = FinishedHandoverDetails.FinishedHandoverID " + "\r\n";
             queryString = queryString + "               FROM        FinishedProductDetails INNER JOIN" + "\r\n";
@@ -228,9 +231,24 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "               IF @@ROWCOUNT <> (SELECT COUNT(*) FROM FinishedProductDetails WHERE FinishedHandoverID = @EntityID) " + "\r\n";
             queryString = queryString + "                   BEGIN " + "\r\n";
-            queryString = queryString + "                       DECLARE     @msg NVARCHAR(300) = N'Dữ liệu không tồn tại hoặc chưa duyệt' ; " + "\r\n";
+            queryString = queryString + "                       SET         @msg = N'Dữ liệu không tồn tại hoặc chưa duyệt' ; " + "\r\n";
             queryString = queryString + "                       THROW       61001,  @msg, 1; " + "\r\n";
             queryString = queryString + "                   END " + "\r\n";
+
+
+            queryString = queryString + "               IF ((SELECT Approved FROM FinishedHandovers WHERE FinishedHandoverID = @EntityID AND Approved = 1) = 1) " + "\r\n";
+            queryString = queryString + "                   BEGIN " + "\r\n";
+            queryString = queryString + "                       UPDATE      FinishedHandovers  SET Approved = 0 WHERE FinishedHandoverID = @EntityID AND Approved = 1" + "\r\n"; //CLEAR APPROVE BEFORE CALL FinishedHandoverToggleApproved
+            queryString = queryString + "                       IF @@ROWCOUNT = 1 " + "\r\n";
+            queryString = queryString + "                           EXEC        FinishedHandoverToggleApproved @EntityID, 1 " + "\r\n";
+            queryString = queryString + "                       ELSE " + "\r\n";
+            queryString = queryString + "                           BEGIN " + "\r\n";
+            queryString = queryString + "                               SET         @msg = N'Dữ liệu không tồn tại hoặc đã duyệt'; " + "\r\n";
+            queryString = queryString + "                               THROW       61001,  @msg, 1; " + "\r\n";
+            queryString = queryString + "                           END " + "\r\n";
+            queryString = queryString + "                   END " + "\r\n";
+
+
             queryString = queryString + "           END " + "\r\n";
 
             queryString = queryString + "       ELSE " + "\r\n"; //(@SaveRelativeOption = -1) 

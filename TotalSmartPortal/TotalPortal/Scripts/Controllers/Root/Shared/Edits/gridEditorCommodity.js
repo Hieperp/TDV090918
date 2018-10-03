@@ -20,7 +20,7 @@
             currentDataSourceRow.set("CommodityCode", dataItem.CommodityCode);
             currentDataSourceRow.set("CommodityName", dataItem.CommodityName);
             currentDataSourceRow.set("CommodityTypeID", dataItem.CommodityTypeID);
-            currentDataSourceRow.set("Quantity", 1);
+            //currentDataSourceRow.set("Quantity", 0);
 
             currentDataSourceRow.set("TradeDiscountRate", currentDataSourceRow.VATbyRow === true ? dataItem.TradeDiscountRate : $("#TradeDiscountRate").val());
             currentDataSourceRow.set("VATPercent", currentDataSourceRow.VATbyRow === true ? dataItem.VATPercent : $("#VATPercent").val());
