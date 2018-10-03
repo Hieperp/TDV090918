@@ -93,7 +93,7 @@ namespace TotalBase.Enums
             CreditNote = 8060,
 
 
-            GoodsReceipt = 8077,
+            
             InventoryAdjustment = 8078,
             VehicleAdjustment = 8078008,
             PartAdjustment = 8078009,
@@ -119,7 +119,12 @@ namespace TotalBase.Enums
             MaterialTransfer = 9081008,
             ItemTransfer = 9081009,
             ProductTransfer = 9081010,
-            
+
+
+            GoodsReceipt = 8077,
+            MaterialReceipt = 10081008,
+            ItemReceipt = 10081009,
+            ProductReceipt = 10081010
         };
 
         public enum ActiveOption

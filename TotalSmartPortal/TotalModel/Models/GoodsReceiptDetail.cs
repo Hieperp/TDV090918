@@ -53,6 +53,7 @@ namespace TotalModel.Models
         public decimal QuantityIssued { get; set; }
         public string Remarks { get; set; }
         public bool Approved { get; set; }
+        public int NMVNTaskID { get; set; }
     
         public virtual Commodity Commodity { get; set; }
         public virtual FinishedProductDetail FinishedProductDetail { get; set; }

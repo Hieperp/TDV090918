@@ -58,14 +58,14 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
         {
             string queryString;
 
-            queryString = " @AspUserID nvarchar(128), @FromDate DateTime, @ToDate DateTime " + "\r\n";
+            queryString = " @NMVNTaskID int, @AspUserID nvarchar(128), @FromDate DateTime, @ToDate DateTime " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
             queryString = queryString + "       SELECT      GoodsReceipts.GoodsReceiptID, CAST(GoodsReceipts.EntryDate AS DATE) AS EntryDate, GoodsReceipts.Reference, Locations.Code AS LocationCode, Customers.Name AS CustomerName, GoodsReceipts.Description, GoodsReceipts.TotalQuantity, GoodsReceipts.Approved " + "\r\n";
             queryString = queryString + "       FROM        GoodsReceipts " + "\r\n";
-            queryString = queryString + "                   INNER JOIN Locations ON GoodsReceipts.EntryDate >= @FromDate AND GoodsReceipts.EntryDate <= @ToDate AND GoodsReceipts.OrganizationalUnitID IN (SELECT AccessControls.OrganizationalUnitID FROM AccessControls INNER JOIN AspNetUsers ON AccessControls.UserID = AspNetUsers.UserID WHERE AspNetUsers.Id = @AspUserID AND AccessControls.NMVNTaskID = " + (int)TotalBase.Enums.GlobalEnums.NmvnTaskID.GoodsReceipt + " AND AccessControls.AccessLevel > 0) AND Locations.LocationID = GoodsReceipts.LocationID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN Locations ON GoodsReceipts.NMVNTaskID = @NMVNTaskID AND GoodsReceipts.EntryDate >= @FromDate AND GoodsReceipts.EntryDate <= @ToDate AND GoodsReceipts.OrganizationalUnitID IN (SELECT AccessControls.OrganizationalUnitID FROM AccessControls INNER JOIN AspNetUsers ON AccessControls.UserID = AspNetUsers.UserID WHERE AspNetUsers.Id = @AspUserID AND AccessControls.NMVNTaskID = @NMVNTaskID AND AccessControls.AccessLevel > 0) AND Locations.LocationID = GoodsReceipts.LocationID " + "\r\n";
             queryString = queryString + "                   LEFT JOIN Customers ON GoodsReceipts.CustomerID = Customers.CustomerID " + "\r\n";
 
             queryString = queryString + "    END " + "\r\n";
@@ -361,7 +361,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + "                   0.0 AS Quantity, WarehouseTransfers.Description, WarehouseTransferDetails.Remarks, CAST(1 AS bit) AS IsSelected " + "\r\n";
 
             queryString = queryString + "       FROM        WarehouseTransfers " + "\r\n";
-            queryString = queryString + "                   INNER JOIN WarehouseTransferDetails ON " + (isWarehouseTransferID ? " WarehouseTransfers.WarehouseTransferID = @WarehouseTransferID " : "WarehouseTransfers.WarehouseReceiptID = @WarehouseID AND WarehouseTransfers.WarehouseID = @WarehouseIssueID ") + " AND WarehouseTransferDetails.Approved = 1 AND ROUND(WarehouseTransferDetails.Quantity - WarehouseTransferDetails.QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") > 0 AND WarehouseTransfers.WarehouseTransferID = WarehouseTransferDetails.WarehouseTransferID" + (isWarehouseTransferDetailIDs ? " AND WarehouseTransferDetails.WarehouseTransferDetailID NOT IN (SELECT Id FROM dbo.SplitToIntList (@WarehouseTransferDetailIDs))" : "") + "\r\n";
+            queryString = queryString + "                   INNER JOIN WarehouseTransferDetails ON " + (isWarehouseTransferID ? " WarehouseTransfers.WarehouseTransferID = @WarehouseTransferID " : "WarehouseTransfers.NMVNTaskID = @NMVNTaskID - 1000000 AND WarehouseTransfers.WarehouseReceiptID = @WarehouseID AND WarehouseTransfers.WarehouseID = @WarehouseIssueID ") + " AND WarehouseTransferDetails.Approved = 1 AND ROUND(WarehouseTransferDetails.Quantity - WarehouseTransferDetails.QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") > 0 AND WarehouseTransfers.WarehouseTransferID = WarehouseTransferDetails.WarehouseTransferID" + (isWarehouseTransferDetailIDs ? " AND WarehouseTransferDetails.WarehouseTransferDetailID NOT IN (SELECT Id FROM dbo.SplitToIntList (@WarehouseTransferDetailIDs))" : "") + "\r\n";
             queryString = queryString + "                   INNER JOIN Commodities ON WarehouseTransferDetails.CommodityID = Commodities.CommodityID " + "\r\n";
 
             return queryString;
