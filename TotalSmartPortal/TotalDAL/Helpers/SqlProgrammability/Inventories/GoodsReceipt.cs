@@ -256,7 +256,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
         #region WarehouseTransfer
         private void GetGoodsReceiptPendingWarehouseTransfers()
         {
-            string queryString = " @LocationID int " + "\r\n";
+            string queryString = " @LocationID int, @NMVNTaskID int " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
@@ -264,7 +264,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + "                       Warehouses.WarehouseID, Warehouses.Code AS WarehouseCode, Warehouses.Name AS WarehouseName, WarehouseIssues.WarehouseID AS WarehouseIssueID, WarehouseIssues.Code AS WarehouseIssueCode, WarehouseIssues.Name AS WarehouseIssueName " + "\r\n";
 
             queryString = queryString + "       FROM            WarehouseTransfers " + "\r\n";
-            queryString = queryString + "                       INNER JOIN Warehouses ON WarehouseTransfers.WarehouseTransferID IN (SELECT WarehouseTransferID FROM WarehouseTransferDetails WHERE LocationID = @LocationID AND Approved = 1 AND ROUND(Quantity - QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") > 0) AND WarehouseTransfers.WarehouseReceiptID = Warehouses.WarehouseID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN Warehouses ON WarehouseTransfers.WarehouseTransferID IN (SELECT WarehouseTransferID FROM WarehouseTransferDetails WHERE LocationID = @LocationID AND NMVNTaskID = @NMVNTaskID - 1000000 AND Approved = 1 AND ROUND(Quantity - QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") > 0) AND WarehouseTransfers.WarehouseReceiptID = Warehouses.WarehouseID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Warehouses WarehouseIssues ON WarehouseTransfers.WarehouseID = WarehouseIssues.WarehouseID " + "\r\n";
 
             this.totalSmartPortalEntities.CreateStoredProcedure("GetGoodsReceiptPendingWarehouseTransfers", queryString);
@@ -272,13 +272,13 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
 
         private void GetGoodsReceiptPendingWarehouses()
         {
-            string queryString = " @LocationID int " + "\r\n";
+            string queryString = " @LocationID int, @NMVNTaskID int " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
             queryString = queryString + "       SELECT          " + (int)@GlobalEnums.GoodsReceiptTypeID.WarehouseTransfer + " AS GoodsReceiptTypeID, Warehouses.WarehouseID, Warehouses.Code AS WarehouseCode, Warehouses.Name AS WarehouseName, WarehouseIssues.WarehouseID AS WarehouseIssueID, WarehouseIssues.Code AS WarehouseIssueCode, WarehouseIssues.Name AS WarehouseIssueName " + "\r\n";
 
-            queryString = queryString + "       FROM           (SELECT WarehouseReceiptID, WarehouseID FROM WarehouseTransfers WHERE WarehouseTransferID IN (SELECT WarehouseTransferID FROM WarehouseTransferDetails WHERE LocationID = @LocationID AND Approved = 1 AND ROUND(Quantity - QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") > 0) GROUP BY WarehouseReceiptID, WarehouseID) WarehousePENDING " + "\r\n";
+            queryString = queryString + "       FROM           (SELECT WarehouseReceiptID, WarehouseID FROM WarehouseTransfers WHERE WarehouseTransferID IN (SELECT WarehouseTransferID FROM WarehouseTransferDetails WHERE LocationID = @LocationID AND NMVNTaskID = @NMVNTaskID - 1000000 AND Approved = 1 AND ROUND(Quantity - QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") > 0) GROUP BY WarehouseReceiptID, WarehouseID) WarehousePENDING " + "\r\n";
             queryString = queryString + "                       INNER JOIN Warehouses ON WarehousePENDING.WarehouseReceiptID = Warehouses.WarehouseID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Warehouses WarehouseIssues ON WarehousePENDING.WarehouseID = WarehouseIssues.WarehouseID " + "\r\n";
 
@@ -290,7 +290,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
         {
             string queryString;
 
-            queryString = " @GoodsReceiptID Int, @WarehouseTransferID Int, @WarehouseID Int, @WarehouseIssueID Int, @WarehouseTransferDetailIDs varchar(3999), @IsReadonly bit " + "\r\n";
+            queryString = " @NMVNTaskID int, @GoodsReceiptID Int, @WarehouseTransferID Int, @WarehouseID Int, @WarehouseIssueID Int, @WarehouseTransferDetailIDs varchar(3999), @IsReadonly bit " + "\r\n";
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
