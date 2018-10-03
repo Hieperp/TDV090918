@@ -60,6 +60,7 @@ namespace TotalService.Inventories
 
                     goodsReceiptDTO.Customer = new TotalDTO.Commons.CustomerBaseDTO() { CustomerID = warehouseAdjustment.CustomerID };
 
+                    goodsReceiptDTO.Purposes = warehouseAdjustment.AdjustmentJobs;
                     goodsReceiptDTO.Description = warehouseAdjustment.Description;
                     goodsReceiptDTO.Remarks = warehouseAdjustment.Remarks;
 
