@@ -38,11 +38,27 @@ namespace TotalPortal.App_Start
                 cfg.CreateMap<PurchaseRequisitionViewDetail, PurchaseRequisitionDetailDTO>();
                 cfg.CreateMap<PurchaseRequisitionDetailDTO, PurchaseRequisitionDetail>();
 
-                cfg.CreateMap<GoodsReceipt, GoodsReceiptViewModel>();
-                cfg.CreateMap<GoodsReceipt, GoodsReceiptDTO>();
-                cfg.CreateMap<GoodsReceiptPrimitiveDTO, GoodsReceipt>();
+                
+                
+
+
+
+                cfg.CreateMap<GoodsReceipt, GoodsReceiptDTO<GROptionMaterial>>();
+                cfg.CreateMap<GoodsReceipt, GoodsReceiptDTO<GROptionItem>>();
+                cfg.CreateMap<GoodsReceipt, GoodsReceiptDTO<GROptionProduct>>();
+
+                cfg.CreateMap<GoodsReceiptPrimitiveDTO<GROptionMaterial>, GoodsReceipt>();
+                cfg.CreateMap<GoodsReceiptPrimitiveDTO<GROptionItem>, GoodsReceipt>();
+                cfg.CreateMap<GoodsReceiptPrimitiveDTO<GROptionProduct>, GoodsReceipt>();
+
                 cfg.CreateMap<GoodsReceiptViewDetail, GoodsReceiptDetailDTO>();
                 cfg.CreateMap<GoodsReceiptDetailDTO, GoodsReceiptDetail>();
+
+                cfg.CreateMap<GoodsReceipt, MaterialReceiptViewModel>();
+                cfg.CreateMap<GoodsReceipt, ItemReceiptViewModel>();
+                cfg.CreateMap<GoodsReceipt, ProductReceiptViewModel>();
+
+
 
 
 
