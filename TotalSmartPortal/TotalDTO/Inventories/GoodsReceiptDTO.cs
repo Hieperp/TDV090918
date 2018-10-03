@@ -13,9 +13,71 @@ using TotalDTO.Helpers.Interfaces;
 
 namespace TotalDTO.Inventories
 {
-    public class GoodsReceiptPrimitiveDTO : QuantityDTO<GoodsReceiptDetailDTO>, IPrimitiveEntity, IPrimitiveDTO
+    public interface IGROption { GlobalEnums.NmvnTaskID NMVNTaskID { get; } }
+
+    public class GROptionMaterial : IGROption { public GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.MaterialReceipt; } } }
+    public class GROptionItem : IGROption { public GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.ItemReceipt; } } }
+    public class GROptionProduct : IGROption { public GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.ProductReceipt; } } }
+
+    public interface IGoodsReceiptPrimitiveDTO : IQuantityDTO, IPrimitiveEntity, IPrimitiveDTO, IBaseDTO
     {
-        public virtual GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.GoodsReceipt; } }
+        int GoodsReceiptID { get; set; }
+
+        virtual Nullable<int> CustomerID { get; set; }
+
+        virtual Nullable<int> WarehouseID { get; set; }
+        virtual Nullable<int> WarehouseIssueID { get; set; }
+
+        int GoodsReceiptTypeID { get; set; }
+
+        Nullable<int> PurchaseRequisitionID { get; set; }
+        string PurchaseRequisitionReference { get; set; }
+        string PurchaseRequisitionReferences { get; set; }
+        string PurchaseRequisitionCode { get; set; }
+        string PurchaseRequisitionCodes { get; set; }
+        [Display(Name = "Phiếu đặt hàng")]
+        string PurchaseRequisitionReferenceNote { get; }
+        [Display(Name = "Số đơn hàng")]
+        string PurchaseRequisitionCodeNote { get; }
+        [Display(Name = "Ngày đặt hàng")]
+        Nullable<System.DateTime> PurchaseRequisitionEntryDate { get; set; }
+
+
+
+        Nullable<int> WarehouseTransferID { get; set; }
+        string WarehouseTransferReference { get; set; }
+        string WarehouseTransferReferences { get; set; }
+        [Display(Name = "Phiếu đặt hàng")]
+        string WarehouseTransferReferenceNote { get; }
+        [Display(Name = "Ngày đặt hàng")]
+        Nullable<System.DateTime> WarehouseTransferEntryDate { get; set; }
+
+
+
+        Nullable<int> FinishedProductID { get; set; }
+        Nullable<int> FinishedProductDetailID { get; set; }
+        [Display(Name = "Số CT đóng gói")]
+        string FinishedProductReference { get; set; }
+        [Display(Name = "Ngày đóng gói")]
+        System.DateTime FinishedProductEntryDate { get; set; }
+
+        Nullable<int> WarehouseAdjustmentID { get; set; }
+
+        [Display(Name = "Số đơn hàng")]
+        [UIHint("Commons/SOCode")]
+        string Code { get; set; }
+
+        [Display(Name = "Mục đích")]
+        string Purposes { get; set; }
+
+        virtual int StorekeeperID { get; set; }
+    }
+
+
+    public class GoodsReceiptPrimitiveDTO<TGROption> : QuantityDTO<GoodsReceiptDetailDTO>, IPrimitiveEntity, IPrimitiveDTO
+        where TGROption : IGROption, new()
+    {
+        public virtual GlobalEnums.NmvnTaskID NMVNTaskID { get { return new TGROption().NMVNTaskID; } }
 
         public int GetID() { return this.GoodsReceiptID; }
         public void SetID(int id) { this.GoodsReceiptID = id; }
@@ -82,7 +144,35 @@ namespace TotalDTO.Inventories
     }
 
 
-    public class GoodsReceiptDTO : GoodsReceiptPrimitiveDTO, IBaseDetailEntity<GoodsReceiptDetailDTO>, IPriceCategory, IWarehouse
+    public interface IGoodsReceiptDTO : IGoodsReceiptPrimitiveDTO, IMaterialItemProduct
+    {
+        [Display(Name = "Khách hàng")]
+        [UIHint("Commons/CustomerBase")]
+        CustomerBaseDTO Customer { get; set; }
+
+        [Display(Name = "Kho hàng")]
+        [UIHint("AutoCompletes/WarehouseBase")]
+        WarehouseBaseDTO Warehouse { get; set; }
+
+        [Display(Name = "Kho hàng")]
+        [UIHint("AutoCompletes/WarehouseBase")]
+        WarehouseBaseDTO WarehouseIssue { get; set; }
+
+
+        [Display(Name = "Nhân viên kho")]
+        [UIHint("AutoCompletes/EmployeeBase")]
+        EmployeeBaseDTO Storekeeper { get; set; }
+
+        List<GoodsReceiptDetailDTO> GoodsReceiptViewDetails { get; set; }
+        List<GoodsReceiptDetailDTO> ViewDetails { get; set; }
+
+        string ControllerName { get; }
+    }
+
+
+
+    public class GoodsReceiptDTO<TGROption> : GoodsReceiptPrimitiveDTO<TGROption>, IBaseDetailEntity<GoodsReceiptDetailDTO>, IPriceCategory, IWarehouse
+        where TGROption : IGROption, new()
     {
         public GoodsReceiptDTO()
         {
@@ -118,6 +208,15 @@ namespace TotalDTO.Inventories
         protected override IEnumerable<GoodsReceiptDetailDTO> DtoDetails() { return this.GoodsReceiptViewDetails; }
 
 
+
+
+
+        public string ControllerName { get { return this.NMVNTaskID.ToString() + "s"; } }
+
+
+        public bool IsMaterial { get { return this.NMVNTaskID == GlobalEnums.NmvnTaskID.MaterialReceipt; } }
+        public bool IsItem { get { return this.NMVNTaskID == GlobalEnums.NmvnTaskID.ItemReceipt; } }
+        public bool IsProduct { get { return this.NMVNTaskID == GlobalEnums.NmvnTaskID.ProductReceipt; } }
 
         #region implement ISearchCustomer only
 

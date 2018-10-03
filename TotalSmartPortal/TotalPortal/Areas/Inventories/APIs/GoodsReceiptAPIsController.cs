@@ -70,21 +70,21 @@ namespace TotalPortal.Areas.Inventories.APIs
 
 
 
-        public JsonResult GetWarehouses([DataSourceRequest] DataSourceRequest dataSourceRequest, int? locationID)
+        public JsonResult GetWarehouses([DataSourceRequest] DataSourceRequest dataSourceRequest, int? locationID, int? nmvnTaskID)
         {
-            var result = this.goodsReceiptAPIRepository.GetWarehouses(locationID);
+            var result = this.goodsReceiptAPIRepository.GetWarehouses(locationID, nmvnTaskID);
             return Json(result.ToDataSourceResult(dataSourceRequest), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetWarehouseTransfers([DataSourceRequest] DataSourceRequest dataSourceRequest, int? locationID)
+        public JsonResult GetWarehouseTransfers([DataSourceRequest] DataSourceRequest dataSourceRequest, int? locationID, int? nmvnTaskID)
         {
-            var result = this.goodsReceiptAPIRepository.GetWarehouseTransfers(locationID);
+            var result = this.goodsReceiptAPIRepository.GetWarehouseTransfers(locationID, nmvnTaskID);
             return Json(result.ToDataSourceResult(dataSourceRequest), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetPendingWarehouseTransferDetails([DataSourceRequest] DataSourceRequest dataSourceRequest, int? goodsReceiptID, int? warehouseTransferID, int? warehouseID, int? warehouseIssueID, string warehouseTransferDetailIDs, bool isReadonly)
+        public JsonResult GetPendingWarehouseTransferDetails([DataSourceRequest] DataSourceRequest dataSourceRequest, int? nmvnTaskID, int? goodsReceiptID, int? warehouseTransferID, int? warehouseID, int? warehouseIssueID, string warehouseTransferDetailIDs, bool isReadonly)
         {
-            var result = this.goodsReceiptAPIRepository.GetPendingWarehouseTransferDetails(goodsReceiptID, warehouseTransferID, warehouseID, warehouseIssueID, warehouseTransferDetailIDs, isReadonly);
+            var result = this.goodsReceiptAPIRepository.GetPendingWarehouseTransferDetails(nmvnTaskID, goodsReceiptID, warehouseTransferID, warehouseID, warehouseIssueID, warehouseTransferDetailIDs, isReadonly);
             return Json(result.ToDataSourceResult(dataSourceRequest), JsonRequestBehavior.AllowGet);
         }
 
