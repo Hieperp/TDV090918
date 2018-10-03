@@ -171,7 +171,7 @@ namespace TotalDTO.Inventories
 
 
 
-    public class GoodsReceiptDTO<TGROption> : GoodsReceiptPrimitiveDTO<TGROption>, IBaseDetailEntity<GoodsReceiptDetailDTO>, IPriceCategory, IWarehouse
+    public class GoodsReceiptDTO<TGROption> : GoodsReceiptPrimitiveDTO<TGROption>, IBaseDetailEntity<GoodsReceiptDetailDTO>, IPriceCategory, IWarehouse, IGoodsReceiptDTO
         where TGROption : IGROption, new()
     {
         public GoodsReceiptDTO()

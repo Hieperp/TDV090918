@@ -22,6 +22,17 @@ namespace TotalCore.Services.Inventories
 
 
 
+
+
+    public interface IMaterialReceiptBaseService : IGoodsReceiptBaseService<GoodsReceiptDTO<GROptionMaterial>, GoodsReceiptPrimitiveDTO<GROptionMaterial>, GoodsReceiptDetailDTO>
+    { }
+    public interface IItemReceiptBaseService : IGoodsReceiptBaseService<GoodsReceiptDTO<GROptionItem>, GoodsReceiptPrimitiveDTO<GROptionItem>, GoodsReceiptDetailDTO>
+    { }
+    public interface IProductReceiptBaseService : IGoodsReceiptBaseService<GoodsReceiptDTO<GROptionProduct>, GoodsReceiptPrimitiveDTO<GROptionProduct>, GoodsReceiptDetailDTO>
+    { }
+
+
+
     public interface IMaterialReceiptService : IGoodsReceiptService<GoodsReceiptDTO<GROptionMaterial>, GoodsReceiptPrimitiveDTO<GROptionMaterial>, GoodsReceiptDetailDTO>
     { }
     public interface IItemReceiptService : IGoodsReceiptService<GoodsReceiptDTO<GROptionItem>, GoodsReceiptPrimitiveDTO<GROptionItem>, GoodsReceiptDetailDTO>

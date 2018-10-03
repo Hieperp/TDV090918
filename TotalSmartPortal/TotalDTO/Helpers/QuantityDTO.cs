@@ -8,6 +8,7 @@ namespace TotalDTO.Helpers
     public interface IQuantityDTO
     {
         decimal TotalQuantity { get; set; }
+        decimal GetTotalQuantity();
     }
 
     public abstract class QuantityDTO<TQuantityDetailDTO> : BaseWithDetailDTO<TQuantityDetailDTO>, IQuantityDTO

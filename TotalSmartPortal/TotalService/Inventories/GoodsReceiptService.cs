@@ -71,6 +71,25 @@ namespace TotalService.Inventories
 
 
 
+    public class MaterialReceiptBaseService : GoodsReceiptBaseService<GoodsReceiptDTO<GROptionMaterial>, GoodsReceiptPrimitiveDTO<GROptionMaterial>, GoodsReceiptDetailDTO>, IMaterialReceiptBaseService
+    {
+        public MaterialReceiptBaseService(IGoodsReceiptRepository warehouseReceiptRepository)
+            : base(warehouseReceiptRepository) { }
+    }
+    public class ItemReceiptBaseService : GoodsReceiptBaseService<GoodsReceiptDTO<GROptionItem>, GoodsReceiptPrimitiveDTO<GROptionItem>, GoodsReceiptDetailDTO>, IItemReceiptBaseService
+    {
+        public ItemReceiptBaseService(IGoodsReceiptRepository warehouseReceiptRepository)
+            : base(warehouseReceiptRepository) { }
+    }
+    public class ProductReceiptBaseService : GoodsReceiptBaseService<GoodsReceiptDTO<GROptionProduct>, GoodsReceiptPrimitiveDTO<GROptionProduct>, GoodsReceiptDetailDTO>, IProductReceiptBaseService
+    {
+        public ProductReceiptBaseService(IGoodsReceiptRepository warehouseReceiptRepository)
+            : base(warehouseReceiptRepository) { }
+    }
+
+
+
+
 
     public class MaterialReceiptService : GoodsReceiptService<GoodsReceiptDTO<GROptionMaterial>, GoodsReceiptPrimitiveDTO<GROptionMaterial>, GoodsReceiptDetailDTO>, IMaterialReceiptService
     {
