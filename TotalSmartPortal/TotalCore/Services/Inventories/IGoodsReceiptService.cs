@@ -1,15 +1,32 @@
-﻿using TotalModel.Models;
+﻿using TotalDTO;
+using TotalModel;
+using TotalModel.Models;
 using TotalDTO.Inventories;
 
 namespace TotalCore.Services.Inventories
 {
-    public interface IGoodsReceiptService : IGoodsReceiptBaseService { }
+    public interface IGoodsReceiptService<TDto, TPrimitiveDto, TDtoDetail> : IGoodsReceiptBaseService<TDto, TPrimitiveDto, TDtoDetail>
+        where TDto : TPrimitiveDto, IBaseDetailEntity<TDtoDetail>
+        where TPrimitiveDto : BaseDTO, IPrimitiveEntity, IPrimitiveDTO, new()
+        where TDtoDetail : class, IPrimitiveEntity
+    { }
 
-    public interface IGoodsReceiptBaseService : IGenericWithViewDetailService<GoodsReceipt, GoodsReceiptDetail, GoodsReceiptViewDetail, GoodsReceiptDTO, GoodsReceiptPrimitiveDTO, GoodsReceiptDetailDTO>
+    public interface IGoodsReceiptBaseService<TDto, TPrimitiveDto, TDtoDetail> : IGenericWithViewDetailService<GoodsReceipt, GoodsReceiptDetail, GoodsReceiptViewDetail, TDto, TPrimitiveDto, TDtoDetail>
+        where TDto : TPrimitiveDto, IBaseDetailEntity<TDtoDetail>
+        where TPrimitiveDto : BaseDTO, IPrimitiveEntity, IPrimitiveDTO, new()
+        where TDtoDetail : class, IPrimitiveEntity
     {
-        bool Save(GoodsReceiptDTO dto, bool useExistingTransaction);
+        bool Save(TDto dto, bool useExistingTransaction);
         bool Delete(int id, bool useExistingTransaction);
     }
+
+
+
+    public interface IMaterialReceiptService : IGoodsReceiptService<GoodsReceiptDTO<GROptionMaterial>, GoodsReceiptPrimitiveDTO<GROptionMaterial>, GoodsReceiptDetailDTO>
+    { }
+    public interface IItemReceiptService : IGoodsReceiptService<GoodsReceiptDTO<GROptionItem>, GoodsReceiptPrimitiveDTO<GROptionItem>, GoodsReceiptDetailDTO>
+    { }
+    public interface IProductReceiptService : IGoodsReceiptService<GoodsReceiptDTO<GROptionProduct>, GoodsReceiptPrimitiveDTO<GROptionProduct>, GoodsReceiptDetailDTO>
+    { }   
+
 }
-
-
