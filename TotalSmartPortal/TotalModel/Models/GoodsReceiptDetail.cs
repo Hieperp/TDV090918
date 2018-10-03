@@ -28,6 +28,7 @@ namespace TotalModel.Models
         public System.DateTime EntryDate { get; set; }
         public string Reference { get; set; }
         public string Code { get; set; }
+        public int NMVNTaskID { get; set; }
         public int LocationID { get; set; }
         public Nullable<int> LocationIssueID { get; set; }
         public int GoodsReceiptTypeID { get; set; }
@@ -53,7 +54,6 @@ namespace TotalModel.Models
         public decimal QuantityIssued { get; set; }
         public string Remarks { get; set; }
         public bool Approved { get; set; }
-        public int NMVNTaskID { get; set; }
     
         public virtual Commodity Commodity { get; set; }
         public virtual FinishedProductDetail FinishedProductDetail { get; set; }

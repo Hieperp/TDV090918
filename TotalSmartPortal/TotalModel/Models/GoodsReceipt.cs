@@ -25,6 +25,7 @@ namespace TotalModel.Models
         public System.DateTime EntryDate { get; set; }
         public string Reference { get; set; }
         public string Code { get; set; }
+        public int NMVNTaskID { get; set; }
         public int GoodsReceiptTypeID { get; set; }
         public Nullable<int> PurchaseRequisitionID { get; set; }
         public Nullable<int> PlannedOrderID { get; set; }
@@ -42,14 +43,13 @@ namespace TotalModel.Models
         public int ApproverID { get; set; }
         public decimal TotalQuantity { get; set; }
         public decimal TotalQuantityIssued { get; set; }
+        public string Purposes { get; set; }
         public string Description { get; set; }
         public string Remarks { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime EditedDate { get; set; }
         public bool Approved { get; set; }
         public Nullable<System.DateTime> ApprovedDate { get; set; }
-        public int NMVNTaskID { get; set; }
-        public string Purposes { get; set; }
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -14047,7 +14047,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <NavigationProperty Name="Commodity" Relationship="TotalSmartPortalModel.FK_WarehouseAdjustmentDetails_Commodities" FromRole="WarehouseAdjustmentDetail" ToRole="Commodity" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartPortalModel.FK_GoodsReceiptDetails_WarehouseAdjustmentDetails" FromRole="WarehouseAdjustmentDetail" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="GoodsReceiptDetail" Relationship="TotalSmartPortalModel.FK_WarehouseAdjustmentDetails_GoodsReceiptDetails" FromRole="WarehouseAdjustmentDetail" ToRole="GoodsReceiptDetail" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="WarehouseAdjustment">
           <Key>
             <PropertyRef Name="WarehouseAdjustmentID" />
@@ -16894,7 +16894,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Name="HasTransferOrder" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartPortalModel.FK_GoodsReceiptDetails_WarehouseTransferDetails" FromRole="WarehouseTransferDetail" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="GoodsReceiptDetail" Relationship="TotalSmartPortalModel.FK_WarehouseTransferDetails_GoodsReceiptDetails" FromRole="WarehouseTransferDetail" ToRole="GoodsReceiptDetail" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="WarehouseTransfer">
           <Key>
             <PropertyRef Name="WarehouseTransferID" />
@@ -17288,6 +17288,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Reference" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NMVNTaskID" Type="Int32" Nullable="false" />
           <Property Name="LocationID" Type="Int32" Nullable="false" />
           <Property Name="LocationIssueID" Type="Int32" />
           <Property Name="GoodsReceiptTypeID" Type="Int32" Nullable="false" />
@@ -17325,7 +17326,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <NavigationProperty Name="SemifinishedProducts" Relationship="TotalSmartPortalModel.FK_SemifinishedProducts_GoodsReceiptDetails" FromRole="GoodsReceiptDetail" ToRole="SemifinishedProduct" />
           <NavigationProperty Name="WarehouseAdjustmentDetails" Relationship="TotalSmartPortalModel.FK_WarehouseAdjustmentDetails_GoodsReceiptDetails" FromRole="GoodsReceiptDetail" ToRole="WarehouseAdjustmentDetail" />
           <NavigationProperty Name="WarehouseTransferDetails" Relationship="TotalSmartPortalModel.FK_WarehouseTransferDetails_GoodsReceiptDetails" FromRole="GoodsReceiptDetail" ToRole="WarehouseTransferDetail" />
-          <Property Name="NMVNTaskID" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="GoodsReceipt">
           <Key>
@@ -17335,6 +17335,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Reference" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NMVNTaskID" Type="Int32" Nullable="false" />
           <Property Name="GoodsReceiptTypeID" Type="Int32" Nullable="false" />
           <Property Name="PurchaseRequisitionID" Type="Int32" />
           <Property Name="PlannedOrderID" Type="Int32" />
@@ -17352,6 +17353,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Name="ApproverID" Type="Int32" Nullable="false" />
           <Property Name="TotalQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="TotalQuantityIssued" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Purposes" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
@@ -17367,8 +17369,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <NavigationProperty Name="Warehouse1" Relationship="TotalSmartPortalModel.FK_GoodsReceipts_Warehouses1" FromRole="GoodsReceipt" ToRole="Warehouse" />
           <NavigationProperty Name="WarehouseTransfer" Relationship="TotalSmartPortalModel.FK_GoodsReceipts_WarehouseTransfers" FromRole="GoodsReceipt" ToRole="WarehouseTransfer" />
           <NavigationProperty Name="SemifinishedProducts" Relationship="TotalSmartPortalModel.FK_SemifinishedProducts_GoodsReceipts" FromRole="GoodsReceipt" ToRole="SemifinishedProduct" />
-          <Property Name="NMVNTaskID" Type="Int32" Nullable="false" />
-          <Property Name="Purposes" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_GoodsReceiptDetails_Commodities">
           <End Type="TotalSmartPortalModel.Commodity" Role="Commodity" Multiplicity="1" />
@@ -22338,7 +22338,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <EntitySetMapping Name="GoodsReceiptDetails">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.GoodsReceiptDetail">
               <MappingFragment StoreEntitySet="GoodsReceiptDetails">
-                <ScalarProperty Name="NMVNTaskID" ColumnName="NMVNTaskID" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="QuantityIssued" ColumnName="QuantityIssued" />
@@ -22364,6 +22363,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="GoodsReceiptTypeID" ColumnName="GoodsReceiptTypeID" />
                 <ScalarProperty Name="LocationIssueID" ColumnName="LocationIssueID" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="NMVNTaskID" ColumnName="NMVNTaskID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Reference" ColumnName="Reference" />
                 <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
@@ -22375,14 +22375,13 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <EntitySetMapping Name="GoodsReceipts">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.GoodsReceipt">
               <MappingFragment StoreEntitySet="GoodsReceipts">
-                <ScalarProperty Name="Purposes" ColumnName="Purposes" />
-                <ScalarProperty Name="NMVNTaskID" ColumnName="NMVNTaskID" />
                 <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Purposes" ColumnName="Purposes" />
                 <ScalarProperty Name="TotalQuantityIssued" ColumnName="TotalQuantityIssued" />
                 <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
                 <ScalarProperty Name="ApproverID" ColumnName="ApproverID" />
@@ -22400,6 +22399,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="PlannedOrderID" ColumnName="PlannedOrderID" />
                 <ScalarProperty Name="PurchaseRequisitionID" ColumnName="PurchaseRequisitionID" />
                 <ScalarProperty Name="GoodsReceiptTypeID" ColumnName="GoodsReceiptTypeID" />
+                <ScalarProperty Name="NMVNTaskID" ColumnName="NMVNTaskID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Reference" ColumnName="Reference" />
                 <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />

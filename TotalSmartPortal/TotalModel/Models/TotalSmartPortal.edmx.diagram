@@ -326,7 +326,7 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransferDetails_WarehouseTransfers" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_VoidTypes" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.GoodsReceiptDetail" Width="1.5" PointX="57.625" PointY="29.125" />
-        <EntityTypeShape EntityType="TotalSmartPortalModel.GoodsReceipt" Width="1.5" PointX="52.125" PointY="32.25" />
+        <EntityTypeShape EntityType="TotalSmartPortalModel.GoodsReceipt" Width="1.5" PointX="52.125" PointY="32" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceiptDetails_Commodities" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceipts_Customers" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceiptDetails_FinishedProductDetails" />
