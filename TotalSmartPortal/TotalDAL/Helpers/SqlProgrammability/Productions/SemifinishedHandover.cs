@@ -348,19 +348,20 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "       DECLARE     @LocalSemifinishedHandoverID int      SET @LocalSemifinishedHandoverID = @SemifinishedHandoverID" + "\r\n";
 
-            queryString = queryString + "       SELECT      SemifinishedHandovers.SemifinishedHandoverID, SemifinishedHandoverDetails.SemifinishedHandoverDetailID, SemifinishedHandovers.EntryDate, SemifinishedHandovers.Reference, Vehicles.Name AS VehicleName, Drivers.Name AS DriverName, Collectors.Name AS CollectorName, SemifinishedProductDetails.CustomerID, Customers.Name AS CustomerName, SemifinishedProductDetails.CustomerID, Customers.Name AS CustomerName, IIF(SemifinishedProductDetails.Addressee <> '', SemifinishedProductDetails.Addressee, Customers.Name) AS Addressee, SemifinishedProductDetails.ShippingAddress, MINSemifinishedHandoverDetails.MINSemifinishedHandoverDetailID, " + "\r\n";
-            queryString = queryString + "                   SemifinishedProductDetails.Code, SemifinishedProductDetails.GoodsIssueReferences, SemifinishedProductDetails.PackingMaterialID, SemifinishedProductDetails.TotalQuantity AS Quantity, SemifinishedProductDetails.TotalWeight AS Weight, SemifinishedProductDetails.RealWeight " + "\r\n";
+            queryString = queryString + "       SELECT      SemifinishedHandovers.SemifinishedHandoverID, SemifinishedHandovers.EntryDate, SemifinishedHandovers.Reference, Workshifts.EntryDate AS WorkshiftEntryDate, Workshifts.Code AS WorkshiftCode, ProductionLines.Code AS ProductionLineCode, " + "\r\n";
+            queryString = queryString + "                   FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, Customers.Name AS CustomerName, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, CrucialWorkers.Name AS CrucialWorkerName, SemifinishedLeaders.Name AS SemifinishedLeaderName, FinishedLeaders.Name AS FinishedLeaderName, SemifinishedProductDetails.Quantity " + "\r\n";
 
             queryString = queryString + "       FROM        SemifinishedHandovers " + "\r\n";
             queryString = queryString + "                   INNER JOIN SemifinishedHandoverDetails ON SemifinishedHandovers.SemifinishedHandoverID = @LocalSemifinishedHandoverID AND SemifinishedHandovers.SemifinishedHandoverID = SemifinishedHandoverDetails.SemifinishedHandoverID " + "\r\n";
-            queryString = queryString + "                   INNER JOIN SemifinishedProductDetails ON SemifinishedHandoverDetails.SemifinishedProductID = SemifinishedProductDetails.SemifinishedProductID " + "\r\n";
-            queryString = queryString + "                   INNER JOIN Customers ON SemifinishedProductDetails.CustomerID = Customers.CustomerID " + "\r\n";
-            queryString = queryString + "                   INNER JOIN Customers AS Customers ON SemifinishedProductDetails.CustomerID = Customers.CustomerID " + "\r\n";
-            queryString = queryString + "                   INNER JOIN Vehicles ON SemifinishedHandovers.VehicleID = Vehicles.VehicleID " + "\r\n";
-            queryString = queryString + "                   INNER JOIN Employees AS Drivers ON SemifinishedHandovers.DriverID = Drivers.EmployeeID " + "\r\n";
-            queryString = queryString + "                   INNER JOIN Employees AS Collectors ON SemifinishedHandovers.CollectorID = Collectors.EmployeeID " + "\r\n";
-
-            queryString = queryString + "                   LEFT JOIN (SELECT MIN(SemifinishedHandoverDetails.SemifinishedHandoverDetailID) AS MINSemifinishedHandoverDetailID, SemifinishedProductDetails.ShippingAddress FROM SemifinishedHandoverDetails INNER JOIN SemifinishedProductDetails ON SemifinishedHandoverDetails.SemifinishedHandoverID = @LocalSemifinishedHandoverID AND SemifinishedHandoverDetails.SemifinishedProductID = SemifinishedProductDetails.SemifinishedProductID GROUP BY SemifinishedProductDetails.ShippingAddress) MINSemifinishedHandoverDetails ON SemifinishedProductDetails.ShippingAddress = MINSemifinishedHandoverDetails.ShippingAddress " + "\r\n"; //FOR SORT PURPOSE ONLY. MUST USE 'LEFT JOIN' BECAUSE: IF SemifinishedProductDetails.ShippingAddress IS NULL, CAN NOT RUN 'INNER JOIN'             
+            queryString = queryString + "                   INNER JOIN SemifinishedProductDetails ON SemifinishedHandoverDetails.SemifinishedProductDetailID = SemifinishedProductDetails.SemifinishedProductDetailID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN FirmOrders ON SemifinishedProductDetails.FirmOrderID = FirmOrders.FirmOrderID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN Commodities ON SemifinishedHandoverDetails.CommodityID = Commodities.CommodityID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN Workshifts ON SemifinishedHandovers.WorkshiftID = Workshifts.WorkshiftID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN ProductionLines ON SemifinishedProductDetails.ProductionLineID = ProductionLines.ProductionLineID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN Customers ON FirmOrders.CustomerID = Customers.CustomerID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN Employees AS CrucialWorkers ON SemifinishedProductDetails.CrucialWorkerID = CrucialWorkers.EmployeeID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN Employees AS SemifinishedLeaders ON SemifinishedHandovers.SemifinishedLeaderID = SemifinishedLeaders.EmployeeID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN Employees AS FinishedLeaders ON SemifinishedHandovers.FinishedLeaderID = FinishedLeaders.EmployeeID" + "\r\n";
 
             queryString = queryString + "       ORDER BY    SemifinishedHandoverDetails.SemifinishedHandoverDetailID " + "\r\n";
 
@@ -368,7 +369,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "    END " + "\r\n";
 
-            //this.totalSmartPortalEntities.CreateStoredProcedure("SemifinishedHandoverSheet", queryString);
+            this.totalSmartPortalEntities.CreateStoredProcedure("SemifinishedHandoverSheet", queryString);
         }
 
     }
