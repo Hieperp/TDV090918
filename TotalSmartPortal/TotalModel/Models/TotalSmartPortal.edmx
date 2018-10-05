@@ -1742,6 +1742,7 @@
           <Property Name="CommodityID" Type="int" Nullable="false" />
           <Property Name="CommodityTypeID" Type="int" Nullable="false" />
           <Property Name="PiecePerPack" Type="int" Nullable="false" />
+          <Property Name="MoldQuantity" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="QuantityFinished" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
@@ -16106,6 +16107,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <NavigationProperty Name="SemifinishedHandoverDetails" Relationship="TotalSmartPortalModel.FK_SemifinishedHandoverDetails_SemifinishedProductDetails" FromRole="SemifinishedProductDetail" ToRole="SemifinishedHandoverDetail" />
           <NavigationProperty Name="SemifinishedProduct" Relationship="TotalSmartPortalModel.FK_SemifinishedProductDetails_SemifinishedProducts" FromRole="SemifinishedProductDetail" ToRole="SemifinishedProduct" />
           <Property Name="PiecePerPack" Type="Int32" Nullable="false" />
+          <Property Name="MoldQuantity" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="SemifinishedProduct">
           <Key>
@@ -21881,6 +21883,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <EntitySetMapping Name="SemifinishedProductDetails">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.SemifinishedProductDetail">
               <MappingFragment StoreEntitySet="SemifinishedProductDetails">
+                <ScalarProperty Name="MoldQuantity" ColumnName="MoldQuantity" />
                 <ScalarProperty Name="PiecePerPack" ColumnName="PiecePerPack" />
                 <ScalarProperty Name="HandoverApproved" ColumnName="HandoverApproved" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />

@@ -33,6 +33,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.SemifinishedProductToggleApproved();
 
             this.SemifinishedProductInitReference();
+
+            this.SemifinishedProductSheet();
         }
 
 
@@ -238,5 +240,39 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
 
         #endregion
+
+
+        private void SemifinishedProductSheet()
+        {
+            string queryString = " @SemifinishedProductID int " + "\r\n";
+            //queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+            queryString = queryString + "    BEGIN " + "\r\n";
+
+            queryString = queryString + "       DECLARE         @LocalSemifinishedProductID int    SET @LocalSemifinishedProductID = @SemifinishedProductID" + "\r\n";
+
+            queryString = queryString + "       SELECT          SemifinishedProducts.SemifinishedProductID, SemifinishedProducts.Reference, SemifinishedProducts.EntryDate, Workshifts.Code AS WorkshiftCode, CrucialWorkers.Name AS CrucialWorkerName, ProductionLines.Code AS ProductionLineCode, " + "\r\n";
+            queryString = queryString + "                       FirmOrders.EntryDate AS FirmOrderEntryDate, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, Customers.Name AS CustomerName, Materials.Code AS MaterialCode, MaterialIssueDetails.BatchEntryDate, MaterialIssueDetails.Quantity AS MaterialQuantity, " + "\r\n";
+            queryString = queryString + "                       SemifinishedProducts.StartSequenceNo, SemifinishedProducts.StopSequenceNo, SemifinishedProducts.FoilCounts, SemifinishedProducts.FoilUnitCounts, SemifinishedProducts.FoilUnitWeights, SemifinishedProducts.FoilWeights, SemifinishedProducts.FailureWeights, Commodities.Code, Commodities.Name, SemifinishedProductDetails.Quantity, SemifinishedProductDetails.MoldQuantity, SemifinishedProductDetails.PiecePerPack, SemifinishedProducts.Description " + "\r\n";
+
+            queryString = queryString + "       FROM            SemifinishedProducts " + "\r\n";
+            queryString = queryString + "                       INNER JOIN SemifinishedProductDetails ON SemifinishedProducts.SemifinishedProductID = @LocalSemifinishedProductID AND SemifinishedProducts.SemifinishedProductID = SemifinishedProductDetails.SemifinishedProductID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN FirmOrders ON SemifinishedProducts.FirmOrderID = FirmOrders.FirmOrderID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN Customers ON SemifinishedProducts.CustomerID = Customers.CustomerID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN MaterialIssueDetails ON SemifinishedProducts.MaterialIssueDetailID = MaterialIssueDetails.MaterialIssueDetailID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN Commodities AS Materials ON MaterialIssueDetails.CommodityID = Materials.CommodityID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN Workshifts ON SemifinishedProducts.WorkshiftID = Workshifts.WorkshiftID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN Employees AS CrucialWorkers ON SemifinishedProducts.CrucialWorkerID = CrucialWorkers.EmployeeID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN ProductionLines ON SemifinishedProducts.ProductionLineID = ProductionLines.ProductionLineID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN Commodities ON SemifinishedProductDetails.CommodityID = Commodities.CommodityID " + "\r\n";
+
+            queryString = queryString + "       ORDER BY        SemifinishedProductDetails.SemifinishedProductDetailID " + "\r\n";
+
+            queryString = queryString + "    END " + "\r\n";
+
+
+            this.totalSmartPortalEntities.CreateStoredProcedure("SemifinishedProductSheet", queryString);
+        }
+
     }
 }

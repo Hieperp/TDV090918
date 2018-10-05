@@ -395,7 +395,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + "       DECLARE         @LocalMaterialIssueID int    SET @LocalMaterialIssueID = @MaterialIssueID" + "\r\n";
 
             queryString = queryString + "       SELECT          MaterialIssues.MaterialIssueID, MaterialIssues.EntryDate AS MaterialIssueEntryDate, MaterialIssues.Reference, Workshifts.Code AS WorkshiftCode, ProductionLines.Code AS ProductionLineCode, " + "\r\n";
-            queryString = queryString + "                       FirmOrders.EntryDate AS FirmOrderEntryDate, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, Customers.Name AS CustomerName, " + "\r\n";
+            queryString = queryString + "                       FirmOrders.EntryDate AS FirmOrderEntryDate, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FirmOrders.Specification, Customers.Name AS CustomerName, " + "\r\n";
             queryString = queryString + "                       Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, MaterialIssueDetails.BatchEntryDate, MaterialIssueDetails.Quantity " + "\r\n";
 
             queryString = queryString + "       FROM            MaterialIssues " + "\r\n";

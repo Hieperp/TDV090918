@@ -46,6 +46,7 @@ namespace TotalModel.Models
         public bool Approved { get; set; }
         public bool HandoverApproved { get; set; }
         public int PiecePerPack { get; set; }
+        public int MoldQuantity { get; set; }
     
         public virtual Commodity Commodity { get; set; }
         public virtual FirmOrderDetail FirmOrderDetail { get; set; }

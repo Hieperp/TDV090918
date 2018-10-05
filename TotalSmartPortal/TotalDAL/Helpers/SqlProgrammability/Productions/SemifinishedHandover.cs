@@ -349,11 +349,14 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "       DECLARE     @LocalSemifinishedHandoverID int      SET @LocalSemifinishedHandoverID = @SemifinishedHandoverID" + "\r\n";
 
             queryString = queryString + "       SELECT      SemifinishedHandovers.SemifinishedHandoverID, SemifinishedHandovers.EntryDate, SemifinishedHandovers.Reference, Workshifts.EntryDate AS WorkshiftEntryDate, Workshifts.Code AS WorkshiftCode, ProductionLines.Code AS ProductionLineCode, " + "\r\n";
-            queryString = queryString + "                   FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, Customers.Name AS CustomerName, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, CrucialWorkers.Name AS CrucialWorkerName, SemifinishedLeaders.Name AS SemifinishedLeaderName, FinishedLeaders.Name AS FinishedLeaderName, SemifinishedProductDetails.Quantity " + "\r\n";
+            queryString = queryString + "                   FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, Customers.Name AS CustomerName, SemifinishedProducts.Reference AS SemifinishedProductReference, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, CrucialWorkers.Name AS CrucialWorkerName, SemifinishedLeaders.Name AS SemifinishedLeaderName, FinishedLeaders.Name AS FinishedLeaderName, SemifinishedProductDetails.Quantity " + "\r\n";
 
             queryString = queryString + "       FROM        SemifinishedHandovers " + "\r\n";
             queryString = queryString + "                   INNER JOIN SemifinishedHandoverDetails ON SemifinishedHandovers.SemifinishedHandoverID = @LocalSemifinishedHandoverID AND SemifinishedHandovers.SemifinishedHandoverID = SemifinishedHandoverDetails.SemifinishedHandoverID " + "\r\n";
             queryString = queryString + "                   INNER JOIN SemifinishedProductDetails ON SemifinishedHandoverDetails.SemifinishedProductDetailID = SemifinishedProductDetails.SemifinishedProductDetailID " + "\r\n";
+
+            queryString = queryString + "                   INNER JOIN SemifinishedProducts ON SemifinishedHandoverDetails.SemifinishedProductID = SemifinishedProducts.SemifinishedProductID " + "\r\n";
+
             queryString = queryString + "                   INNER JOIN FirmOrders ON SemifinishedProductDetails.FirmOrderID = FirmOrders.FirmOrderID " + "\r\n";
             queryString = queryString + "                   INNER JOIN Commodities ON SemifinishedHandoverDetails.CommodityID = Commodities.CommodityID " + "\r\n";
             queryString = queryString + "                   INNER JOIN Workshifts ON SemifinishedHandovers.WorkshiftID = Workshifts.WorkshiftID " + "\r\n";
@@ -363,7 +366,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "                   INNER JOIN Employees AS SemifinishedLeaders ON SemifinishedHandovers.SemifinishedLeaderID = SemifinishedLeaders.EmployeeID " + "\r\n";
             queryString = queryString + "                   INNER JOIN Employees AS FinishedLeaders ON SemifinishedHandovers.FinishedLeaderID = FinishedLeaders.EmployeeID" + "\r\n";
 
-            queryString = queryString + "       ORDER BY    SemifinishedHandoverDetails.SemifinishedHandoverDetailID " + "\r\n";
+            queryString = queryString + "       ORDER BY    ProductionLines.Code, SemifinishedProducts.Reference, Commodities.Code " + "\r\n";
 
             queryString = queryString + "       SET NOCOUNT OFF" + "\r\n";
 
