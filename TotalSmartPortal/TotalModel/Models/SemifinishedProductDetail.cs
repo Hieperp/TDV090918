@@ -14,12 +14,6 @@ namespace TotalModel.Models
     
     public partial class SemifinishedProductDetail
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SemifinishedProductDetail()
-        {
-            this.SemifinishedHandoverDetails = new HashSet<SemifinishedHandoverDetail>();
-        }
-    
         public int SemifinishedProductDetailID { get; set; }
         public int SemifinishedProductID { get; set; }
         public System.DateTime EntryDate { get; set; }
@@ -54,8 +48,6 @@ namespace TotalModel.Models
         public virtual MaterialIssueDetail MaterialIssueDetail { get; set; }
         public virtual MaterialIssue MaterialIssue { get; set; }
         public virtual PlannedOrderDetail PlannedOrderDetail { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SemifinishedHandoverDetail> SemifinishedHandoverDetails { get; set; }
         public virtual SemifinishedProduct SemifinishedProduct { get; set; }
     }
 }

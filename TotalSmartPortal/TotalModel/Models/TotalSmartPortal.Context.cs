@@ -90,8 +90,6 @@ namespace TotalModel.Models
         public virtual DbSet<BomDetail> BomDetails { get; set; }
         public virtual DbSet<Bom> Boms { get; set; }
         public virtual DbSet<FirmOrderMaterial> FirmOrderMaterials { get; set; }
-        public virtual DbSet<SemifinishedHandoverDetail> SemifinishedHandoverDetails { get; set; }
-        public virtual DbSet<SemifinishedHandover> SemifinishedHandovers { get; set; }
         public virtual DbSet<Mold> Molds { get; set; }
         public virtual DbSet<ProductionOrderDetail> ProductionOrderDetails { get; set; }
         public virtual DbSet<ProductionOrder> ProductionOrders { get; set; }
@@ -110,6 +108,8 @@ namespace TotalModel.Models
         public virtual DbSet<WarehouseTransfer> WarehouseTransfers { get; set; }
         public virtual DbSet<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
         public virtual DbSet<GoodsReceipt> GoodsReceipts { get; set; }
+        public virtual DbSet<SemifinishedHandoverDetail> SemifinishedHandoverDetails { get; set; }
+        public virtual DbSet<SemifinishedHandover> SemifinishedHandovers { get; set; }
     
         public virtual ObjectResult<string> AccountInvoicePostSaveValidate(Nullable<int> entityID)
         {
@@ -3282,7 +3282,7 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SemifinishedHandoverPendingCustomer>("GetSemifinishedHandoverPendingCustomers", locationIDParameter);
         }
     
-        public virtual ObjectResult<SemifinishedHandoverPendingDetail> GetSemifinishedHandoverPendingDetails(Nullable<int> semifinishedHandoverID, Nullable<int> workshiftID, Nullable<int> customerID, string semifinishedProductDetailIDs, Nullable<bool> isReadonly)
+        public virtual ObjectResult<SemifinishedHandoverPendingDetail> GetSemifinishedHandoverPendingDetails(Nullable<int> semifinishedHandoverID, Nullable<int> workshiftID, Nullable<int> customerID, string semifinishedProductIDs, Nullable<bool> isReadonly)
         {
             var semifinishedHandoverIDParameter = semifinishedHandoverID.HasValue ?
                 new ObjectParameter("SemifinishedHandoverID", semifinishedHandoverID) :
@@ -3296,15 +3296,15 @@ namespace TotalModel.Models
                 new ObjectParameter("CustomerID", customerID) :
                 new ObjectParameter("CustomerID", typeof(int));
     
-            var semifinishedProductDetailIDsParameter = semifinishedProductDetailIDs != null ?
-                new ObjectParameter("SemifinishedProductDetailIDs", semifinishedProductDetailIDs) :
-                new ObjectParameter("SemifinishedProductDetailIDs", typeof(string));
+            var semifinishedProductIDsParameter = semifinishedProductIDs != null ?
+                new ObjectParameter("SemifinishedProductIDs", semifinishedProductIDs) :
+                new ObjectParameter("SemifinishedProductIDs", typeof(string));
     
             var isReadonlyParameter = isReadonly.HasValue ?
                 new ObjectParameter("IsReadonly", isReadonly) :
                 new ObjectParameter("IsReadonly", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SemifinishedHandoverPendingDetail>("GetSemifinishedHandoverPendingDetails", semifinishedHandoverIDParameter, workshiftIDParameter, customerIDParameter, semifinishedProductDetailIDsParameter, isReadonlyParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SemifinishedHandoverPendingDetail>("GetSemifinishedHandoverPendingDetails", semifinishedHandoverIDParameter, workshiftIDParameter, customerIDParameter, semifinishedProductIDsParameter, isReadonlyParameter);
         }
     
         public virtual ObjectResult<SemifinishedHandoverPendingWorkshift> GetSemifinishedHandoverPendingWorkshifts(Nullable<int> locationID)

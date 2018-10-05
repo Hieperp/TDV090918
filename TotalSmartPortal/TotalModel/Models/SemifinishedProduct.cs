@@ -18,6 +18,7 @@ namespace TotalModel.Models
         public SemifinishedProduct()
         {
             this.SemifinishedProductDetails = new HashSet<SemifinishedProductDetail>();
+            this.SemifinishedHandoverDetails = new HashSet<SemifinishedHandoverDetail>();
         }
     
         public int SemifinishedProductID { get; set; }
@@ -53,6 +54,8 @@ namespace TotalModel.Models
         public System.DateTime EditedDate { get; set; }
         public bool Approved { get; set; }
         public Nullable<System.DateTime> ApprovedDate { get; set; }
+        public Nullable<int> SemifinishedHandoverID { get; set; }
+        public bool HandoverApproved { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Employee Employee { get; set; }
@@ -66,5 +69,7 @@ namespace TotalModel.Models
         public virtual Workshift Workshift { get; set; }
         public virtual GoodsReceiptDetail GoodsReceiptDetail { get; set; }
         public virtual GoodsReceipt GoodsReceipt { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SemifinishedHandoverDetail> SemifinishedHandoverDetails { get; set; }
     }
 }

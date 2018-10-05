@@ -19,17 +19,12 @@ namespace TotalModel.Models
         public System.DateTime EntryDate { get; set; }
         public int LocationID { get; set; }
         public int SemifinishedProductID { get; set; }
-        public int SemifinishedProductDetailID { get; set; }
-        public int CommodityID { get; set; }
-        public int CommodityTypeID { get; set; }
-        public int CrucialWorkerID { get; set; }
         public decimal Quantity { get; set; }
         public decimal QuantityIssue { get; set; }
         public string Remarks { get; set; }
         public bool Approved { get; set; }
     
-        public virtual Commodity Commodity { get; set; }
         public virtual SemifinishedHandover SemifinishedHandover { get; set; }
-        public virtual SemifinishedProductDetail SemifinishedProductDetail { get; set; }
+        public virtual SemifinishedProduct SemifinishedProduct { get; set; }
     }
 }

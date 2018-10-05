@@ -16,20 +16,15 @@ namespace TotalModel.Models
         public int SemifinishedHandoverDetailID { get; set; }
         public int SemifinishedHandoverID { get; set; }
         public int SemifinishedProductID { get; set; }
-        public int SemifinishedProductDetailID { get; set; }
         public System.DateTime EntryDate { get; set; }
         public int CustomerID { get; set; }
         public string CustomerCode { get; set; }
         public string CustomerName { get; set; }
-        public int CommodityID { get; set; }
-        public string CommodityCode { get; set; }
         public int ProductionLineID { get; set; }
         public string ProductionLineCode { get; set; }
         public decimal Quantity { get; set; }
         public string Remarks { get; set; }
         public int CrucialWorkerID { get; set; }
         public string CrucialWorkerName { get; set; }
-        public string CommodityName { get; set; }
-        public int CommodityTypeID { get; set; }
     }
 }
