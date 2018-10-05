@@ -46,9 +46,9 @@ namespace TotalPortal.Areas.Productions.APIs
             return Json(result.ToDataSourceResult(dataSourceRequest), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetPendingDetails([DataSourceRequest] DataSourceRequest dataSourceRequest, int? semifinishedHandoverID, int? workshiftID, int? customerID, string semifinishedProductDetailIDs, bool? isReadonly)
+        public JsonResult GetPendingDetails([DataSourceRequest] DataSourceRequest dataSourceRequest, int? semifinishedHandoverID, int? workshiftID, int? customerID, string semifinishedProductIDs, bool? isReadonly)
         {
-            var result = this.semifinishedHandoverAPIRepository.GetPendingDetails(semifinishedHandoverID, workshiftID, customerID, semifinishedProductDetailIDs, false);
+            var result = this.semifinishedHandoverAPIRepository.GetPendingDetails(semifinishedHandoverID, workshiftID, customerID, semifinishedProductIDs, false);
             return Json(result.ToDataSourceResult(dataSourceRequest), JsonRequestBehavior.AllowGet);
         }
     }

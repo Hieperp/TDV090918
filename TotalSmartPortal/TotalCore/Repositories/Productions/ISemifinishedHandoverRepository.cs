@@ -14,7 +14,7 @@ namespace TotalCore.Repositories.Productions
         IEnumerable<SemifinishedHandoverPendingCustomer> GetCustomers(int? locationID);
         IEnumerable<SemifinishedHandoverPendingWorkshift> GetWorkshifts(int? locationID);
 
-        IEnumerable<SemifinishedHandoverPendingDetail> GetPendingDetails(int? semifinishedHandoverID, int? workshiftID, int? customerID, string semifinishedProductDetailIDs, bool? isReadonly);
+        IEnumerable<SemifinishedHandoverPendingDetail> GetPendingDetails(int? semifinishedHandoverID, int? workshiftID, int? customerID, string semifinishedProductIDs, bool? isReadonly);
      
     }
 }

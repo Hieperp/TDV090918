@@ -164,8 +164,9 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "       IF @@ROWCOUNT = 1 " + "\r\n";
             queryString = queryString + "           BEGIN " + "\r\n";
             queryString = queryString + "               UPDATE          PlannedOrderDetails  SET Approved = @Approved WHERE PlannedOrderID = @EntityID ; " + "\r\n";
-            queryString = queryString + "               IF (@Approved = 1) " + "\r\n";
 
+            #region INIT FirmOrders
+            queryString = queryString + "               IF (@Approved = 1) " + "\r\n";
             queryString = queryString + "                   BEGIN " + "\r\n";
 
             queryString = queryString + "                       DECLARE         @CombineIndex int, @PriorCombineIndex int, @PlannedOrderDetailID int, @FirmOrderID int; " + "\r\n";
@@ -208,6 +209,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "                       DELETE FROM     FirmOrderDetails WHERE PlannedOrderID = @EntityID ; " + "\r\n";
             queryString = queryString + "                       DELETE FROM     FirmOrders WHERE PlannedOrderID = @EntityID ; " + "\r\n";
             queryString = queryString + "                   END " + "\r\n";
+            #endregion INIT FirmOrders
 
             queryString = queryString + "           END " + "\r\n";
             queryString = queryString + "       ELSE " + "\r\n";

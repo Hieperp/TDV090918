@@ -12,8 +12,8 @@ using TotalDTO.Commons;
 using TotalDTO.Helpers.Interfaces;
 
 namespace TotalDTO.Productions
-{   
-    public class SemifinishedHandoverPrimitiveDTO : QuantityDTO<SemifinishedHandoverDetailDTO>, IPrimitiveEntity, IPrimitiveDTO
+{
+    public class SemifinishedHandoverPrimitiveDTO : BaseWithDetailDTO<SemifinishedHandoverDetailDTO>, IPrimitiveEntity, IPrimitiveDTO
     {
         public GlobalEnums.NmvnTaskID NMVNTaskID { get { return GlobalEnums.NmvnTaskID.SemifinishedHandover; } }
 
@@ -33,6 +33,11 @@ namespace TotalDTO.Productions
 
         public virtual int FinishedLeaderID { get; set; }
         public virtual int SemifinishedLeaderID { get; set; }
+
+
+        [Display(Name = "Tổng SL")]
+        [Required(ErrorMessage = "Vui lòng nhập chi tiết phiếu")]
+        public virtual decimal TotalQuantity { get; set; }
     }
 
     public class SemifinishedHandoverDTO : SemifinishedHandoverPrimitiveDTO, IBaseDetailEntity<SemifinishedHandoverDetailDTO>
@@ -63,5 +68,15 @@ namespace TotalDTO.Productions
         public ICollection<SemifinishedHandoverDetailDTO> GetDetails() { return this.SemifinishedHandoverViewDetails; }
 
         protected override IEnumerable<SemifinishedHandoverDetailDTO> DtoDetails() { return this.SemifinishedHandoverViewDetails; }
+
+
+
+        public virtual decimal GetTotalQuantity() { return this.DtoDetails().Select(o => o.Quantity).Sum(); }
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            foreach (var result in base.Validate(validationContext)) { yield return result; }
+
+            if (this.TotalQuantity != this.GetTotalQuantity()) yield return new ValidationResult("Lỗi tổng số lượng", new[] { "TotalQuantity" });
+        }
     }
 }

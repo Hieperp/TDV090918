@@ -50,10 +50,10 @@ namespace TotalDAL.Repositories.Productions
             return pendingWorkshifts;
         }
 
-        public IEnumerable<SemifinishedHandoverPendingDetail> GetPendingDetails(int? semifinishedHandoverID, int? workshiftID, int? customerID, string semifinishedProductDetailIDs, bool? isReadonly)
+        public IEnumerable<SemifinishedHandoverPendingDetail> GetPendingDetails(int? semifinishedHandoverID, int? workshiftID, int? customerID, string semifinishedProductIDs, bool? isReadonly)
         {
             this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = false;
-            IEnumerable<SemifinishedHandoverPendingDetail> semifinishedHandoverPendingDetails = base.TotalSmartPortalEntities.GetSemifinishedHandoverPendingDetails(semifinishedHandoverID, workshiftID, customerID, semifinishedProductDetailIDs, isReadonly).ToList();
+            IEnumerable<SemifinishedHandoverPendingDetail> semifinishedHandoverPendingDetails = base.TotalSmartPortalEntities.GetSemifinishedHandoverPendingDetails(semifinishedHandoverID, workshiftID, customerID, semifinishedProductIDs, isReadonly).ToList();
             this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = true;
 
             return semifinishedHandoverPendingDetails;

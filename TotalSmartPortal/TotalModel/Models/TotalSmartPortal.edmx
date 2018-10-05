@@ -15267,7 +15267,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="Int32" Name="SemifinishedHandoverDetailID" Nullable="false" />
           <Property Type="Int32" Name="SemifinishedHandoverID" Nullable="false" />
           <Property Type="Int32" Name="SemifinishedProductID" Nullable="false" />
-          <Property Type="DateTime" Name="EntryDate" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="CustomerID" Nullable="false" />
           <Property Type="String" Name="CustomerCode" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="100" />
@@ -15277,6 +15276,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="CrucialWorkerID" Nullable="false" />
           <Property Type="String" Name="CrucialWorkerName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SemifinishedProductReference" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="SemifinishedProductEntryDate" Nullable="false" Precision="23" />
           </ComplexType>
         <ComplexType Name="SemifinishedHandoverPendingCustomer">
           <Property Type="Int32" Name="WorkshiftID" Nullable="false" />
@@ -15288,7 +15289,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
         </ComplexType>
         <ComplexType Name="SemifinishedHandoverPendingDetail">
           <Property Type="Int32" Name="SemifinishedProductID" Nullable="false" />
-          <Property Type="DateTime" Name="EntryDate" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="CustomerID" Nullable="false" />
           <Property Type="String" Name="CustomerCode" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="100" />
@@ -15298,6 +15298,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="Boolean" Name="IsSelected" Nullable="true" />
           <Property Type="Int32" Name="CrucialWorkerID" Nullable="false" />
           <Property Type="String" Name="CrucialWorkerName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SemifinishedProductReference" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="SemifinishedProductEntryDate" Nullable="false" Precision="23" />
         </ComplexType>
         <ComplexType Name="SemifinishedHandoverPendingWorkshift">
           <Property Type="Int32" Name="WorkshiftID" Nullable="false" />
@@ -21309,7 +21311,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="SemifinishedHandoverDetailID" ColumnName="SemifinishedHandoverDetailID" />
                 <ScalarProperty Name="SemifinishedHandoverID" ColumnName="SemifinishedHandoverID" />
                 <ScalarProperty Name="SemifinishedProductID" ColumnName="SemifinishedProductID" />
-                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="CustomerCode" ColumnName="CustomerCode" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
@@ -21319,6 +21320,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="CrucialWorkerID" ColumnName="CrucialWorkerID" />
                 <ScalarProperty Name="CrucialWorkerName" ColumnName="CrucialWorkerName" />
+                <ScalarProperty Name="SemifinishedProductReference" ColumnName="SemifinishedProductReference" />
+                <ScalarProperty Name="SemifinishedProductEntryDate" ColumnName="SemifinishedProductEntryDate" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -21340,7 +21343,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
             <ResultMapping>
               <ComplexTypeMapping TypeName="TotalSmartPortalModel.SemifinishedHandoverPendingDetail">
                 <ScalarProperty Name="SemifinishedProductID" ColumnName="SemifinishedProductID" />
-                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="CustomerCode" ColumnName="CustomerCode" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
@@ -21350,6 +21352,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
                 <ScalarProperty Name="CrucialWorkerID" ColumnName="CrucialWorkerID" />
                 <ScalarProperty Name="CrucialWorkerName" ColumnName="CrucialWorkerName" />
+                <ScalarProperty Name="SemifinishedProductReference" ColumnName="SemifinishedProductReference" />
+                <ScalarProperty Name="SemifinishedProductEntryDate" ColumnName="SemifinishedProductEntryDate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

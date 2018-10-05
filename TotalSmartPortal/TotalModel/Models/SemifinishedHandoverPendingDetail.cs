@@ -14,7 +14,6 @@ namespace TotalModel.Models
     public partial class SemifinishedHandoverPendingDetail
     {
         public int SemifinishedProductID { get; set; }
-        public System.DateTime EntryDate { get; set; }
         public int CustomerID { get; set; }
         public string CustomerCode { get; set; }
         public string CustomerName { get; set; }
@@ -24,5 +23,7 @@ namespace TotalModel.Models
         public Nullable<bool> IsSelected { get; set; }
         public int CrucialWorkerID { get; set; }
         public string CrucialWorkerName { get; set; }
+        public string SemifinishedProductReference { get; set; }
+        public System.DateTime SemifinishedProductEntryDate { get; set; }
     }
 }

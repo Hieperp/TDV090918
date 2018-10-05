@@ -36,46 +36,32 @@ function handleOKEvent(semifinishedHandoverGridDataSource, pendingDetailGridData
 
 
     function _setParentInput(semifinishedHandoverJSON, semifinishedHandoverGridDataItem) {
-
         //var dataRow = semifinishedHandoverJSON.add({});        
         var dataRow = new Object();
 
         dataRow.LocationID = null;
         dataRow.EntryDate = null;
 
-        dataRow.SemifinishedHandoverDetailID = 0;
         dataRow.SemifinishedHandoverID = window.parent.$("#SemifinishedHandoverID").val();
+        dataRow.SemifinishedHandoverDetailID = 0;
 
         dataRow.SemifinishedProductID = semifinishedHandoverGridDataItem.SemifinishedProductID;
-        dataRow.SemifinishedProductDetailID = semifinishedHandoverGridDataItem.SemifinishedProductDetailID;
-
-        dataRow.SemifinishedProductCode = semifinishedHandoverGridDataItem.SemifinishedProductCode;
         dataRow.SemifinishedProductReference = semifinishedHandoverGridDataItem.SemifinishedProductReference;
-        dataRow.SemifinishedProductEntryDate = semifinishedHandoverGridDataItem.EntryDate;
+        dataRow.SemifinishedProductEntryDate = semifinishedHandoverGridDataItem.SemifinishedProductEntryDate;
 
         dataRow.CustomerID = semifinishedHandoverGridDataItem.CustomerID;
         dataRow.CustomerName = semifinishedHandoverGridDataItem.CustomerName;
         dataRow.CustomerCode = semifinishedHandoverGridDataItem.CustomerCode;
 
-        dataRow.CommodityID = semifinishedHandoverGridDataItem.CommodityID;
-        dataRow.CommodityCode = semifinishedHandoverGridDataItem.CommodityCode;
-        
-        dataRow.Quantity = semifinishedHandoverGridDataItem.Quantity;
-        
         dataRow.ProductionLineID = semifinishedHandoverGridDataItem.ProductionLineID;
         dataRow.ProductionLineCode = semifinishedHandoverGridDataItem.ProductionLineCode;
 
         dataRow.CrucialWorkerID = semifinishedHandoverGridDataItem.CrucialWorkerID;
         dataRow.CrucialWorkerName = semifinishedHandoverGridDataItem.CrucialWorkerName;
 
-        dataRow.CommodityTypeID = 1;
-        //dataRow.SemifinishedProductCode = "";
-        //dataRow.SemifinishedProductReference = "";
+        dataRow.Quantity = semifinishedHandoverGridDataItem.Quantity;
 
         dataRow.Remarks = null;        
-        dataRow.InActive = false;
-        dataRow.InActivePartial = false;
-        dataRow.InActiveIssue = false;
 
         semifinishedHandoverJSON.push(dataRow);
     }

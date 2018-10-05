@@ -8,11 +8,11 @@
     .Name("gridPendingDetails")
     .Columns(columns =>
     {
-        columns.Bound(c => c.EntryDate).Title("Ngày").Width(80).Format("{0:" + Settings.DateTimeFormat + "}");
-        columns.Bound(c => c.CustomerCode).Title("Mã KH").Width(50);
-        columns.Bound(c => c.CustomerName).Title("Tên KH").Width(100);
-        columns.Bound(c => c.CommodityCode).Title("Mã hàng").Width(100);
         columns.Bound(c => c.ProductionLineCode).Title("Mã máy").Width(80);
+        columns.Bound(c => c.SemifinishedProductReference).Title("Mã máy").Width(80);
+        columns.Bound(c => c.SemifinishedProductEntryDate).Title("Ngày").Width(80).Format("{0:" + Settings.DateTimeFormat + "}");
+        columns.Bound(c => c.CustomerName).Title("Khách hàng").Width(100);
+        
         columns.Bound(c => c.CrucialWorkerName).Title("Công nhân").Width(100);
         columns.Bound(c => c.Quantity).Title("SL").Format(Settings.kfmQuantity).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
         
@@ -29,7 +29,7 @@
     })
     .Scrollable(s => s.Height(Settings.PopupContentHeightLarge))
     .DataSource(ds => ds.Ajax()
-                    .Read(read => read.Action("GetPendingDetails", "SemifinishedHandoverAPIs", new { area = "Productions" }).Data(@<text>
+        .Read(read => read.Action("GetPendingDetails", "SemifinishedHandoverAPIs", new { area = "Productions" }).Data(@<text>
             function(e) {
 
             var semifinishedHandoverJSON = window.parent.$("#kendoGridDetails").data("kendoGrid").dataSource.data().toJSON();
@@ -38,7 +38,7 @@
                 semifinishedHandoverID: window.parent.$("#SemifinishedHandoverID").val(),
                 workshiftID: window.parent.$("#WorkshiftID").val(),
                 customerID: window.parent.$("#Customer_CustomerID").val(),
-                semifinishedProductDetailIDs : semifinishedHandoverJSON.map(function(elem){return elem.SemifinishedProductID;}).join(","),
+                semifinishedProductIDs : semifinishedHandoverJSON.map(function(elem){return elem.SemifinishedProductID;}).join(","),
                 isReadOnly: false
             };}
             </text>))
@@ -79,18 +79,12 @@
             gridDetails.dataSource.filter({
                 logic: "or",
                 filters: [
-                    { field: "CommodityCode", operator: "contains", value: filterText },
+                    { field: "CustomerCode", operator: "contains", value: filterText },
+                    { field: "CustomerName", operator: "contains", value: filterText },
                     { field: "ProductionLineCode", operator: "contains", value: filterText },
-
-                    { field: "CommodityCode", operator: "contains", value: filterText },
-                    { field: "CommodityName", operator: "contains", value: filterText },
-
                     { field: "CrucialWorkerName", operator: "contains", value: filterText }
-                                        
                 ]
             });
-
-
         } else {
             if (gridDetails.dataSource.filter() != undefined)
                 gridDetails.dataSource.filter({});

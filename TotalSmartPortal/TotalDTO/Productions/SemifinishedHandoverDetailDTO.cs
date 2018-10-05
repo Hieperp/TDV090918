@@ -7,23 +7,19 @@ using TotalDTO.Commons;
 
 namespace TotalDTO.Productions
 {
-    public class SemifinishedHandoverDetailDTO : QuantityDetailDTO, IPrimitiveEntity
+    public class SemifinishedHandoverDetailDTO : BaseModel, IPrimitiveEntity
     {
         public int GetID() { return this.SemifinishedHandoverDetailID; }
 
         public int SemifinishedHandoverDetailID { get; set; }
         public int SemifinishedHandoverID { get; set; }
        
-        public Nullable<int> SemifinishedProductID { get; set; }
-        public Nullable<int> SemifinishedProductDetailID { get; set; }
+        public int SemifinishedProductID { get; set; }
 
-        [Display(Name = "Số BTP")]
+        [Display(Name = "Phiếu phôi")]
         [UIHint("StringReadonly")]
         public string SemifinishedProductReference { get; set; }
-        [Display(Name = "Mã BTP")]
-        [UIHint("StringReadonly")]
-        public string SemifinishedProductCode { get; set; }
-        [Display(Name = "Ngày BTP")]
+        [Display(Name = "Ngày lập")]
         [UIHint("DateTimeReadonly")]
         public Nullable<System.DateTime> SemifinishedProductEntryDate { get; set; }
 
@@ -43,5 +39,9 @@ namespace TotalDTO.Productions
         [Display(Name = "Công nhân")]
         [UIHint("StringReadonly")]
         public string CrucialWorkerName { get; set; }
+
+        [Display(Name = "Số lượng")]
+        [UIHint("QuantityReadonly")]
+        public decimal Quantity { get; set; }
     }
 }

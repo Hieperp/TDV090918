@@ -70,7 +70,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
-            queryString = queryString + "       SELECT      SemifinishedHandoverDetails.SemifinishedHandoverDetailID, SemifinishedHandoverDetails.SemifinishedHandoverID, SemifinishedProducts.SemifinishedProductID, SemifinishedProducts.EntryDate, SemifinishedProducts.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, " + "\r\n";
+            queryString = queryString + "       SELECT      SemifinishedHandoverDetails.SemifinishedHandoverDetailID, SemifinishedHandoverDetails.SemifinishedHandoverID, SemifinishedProducts.SemifinishedProductID, SemifinishedProducts.EntryDate AS SemifinishedProductEntryDate, SemifinishedProducts.Reference AS SemifinishedProductReference, SemifinishedProducts.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, " + "\r\n";
             queryString = queryString + "                   SemifinishedProducts.ProductionLineID, ProductionLines.Code AS ProductionLineCode, SemifinishedProducts.CrucialWorkerID, Employees.Name AS CrucialWorkerName, SemifinishedHandoverDetails.Quantity, SemifinishedHandoverDetails.Remarks " + "\r\n";
 
             queryString = queryString + "       FROM        SemifinishedHandoverDetails " + "\r\n";
@@ -189,7 +189,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         {
             string queryString = "";
 
-            queryString = queryString + "       SELECT      SemifinishedProducts.SemifinishedProductID, SemifinishedProducts.EntryDate, SemifinishedProducts.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, " + "\r\n";
+            queryString = queryString + "       SELECT      SemifinishedProducts.SemifinishedProductID, SemifinishedProducts.EntryDate AS SemifinishedProductEntryDate, SemifinishedProducts.Reference AS SemifinishedProductReference, SemifinishedProducts.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, " + "\r\n";
             queryString = queryString + "                   SemifinishedProducts.ProductionLineID, ProductionLines.Code AS ProductionLineCode, SemifinishedProducts.CrucialWorkerID, Employees.Name AS CrucialWorkerName, SemifinishedProducts.TotalQuantity AS Quantity, CAST(1 AS bit) AS IsSelected " + "\r\n";
 
             queryString = queryString + "       FROM        SemifinishedProducts " + "\r\n";
@@ -204,7 +204,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         {
             string queryString = "";
 
-            queryString = queryString + "       SELECT      SemifinishedProducts.SemifinishedProductID, SemifinishedProducts.EntryDate, SemifinishedProducts.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, " + "\r\n";
+            queryString = queryString + "       SELECT      SemifinishedProducts.SemifinishedProductID, SemifinishedProducts.EntryDate AS SemifinishedProductEntryDate, SemifinishedProducts.Reference AS SemifinishedProductReference, SemifinishedProducts.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, " + "\r\n";
             queryString = queryString + "                   SemifinishedProducts.ProductionLineID, ProductionLines.Code AS ProductionLineCode, SemifinishedProducts.CrucialWorkerID, Employees.Name AS CrucialWorkerName, SemifinishedProducts.TotalQuantity AS Quantity, CAST(1 AS bit) AS IsSelected " + "\r\n";
 
             queryString = queryString + "       FROM        SemifinishedProducts " + "\r\n";
