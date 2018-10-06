@@ -12,21 +12,22 @@ namespace TotalModel.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class FinishedProductDetail
+    public partial class FinishedProductPackage
     {
-        public int FinishedProductDetailID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public FinishedProductPackage()
+        {
+            this.FinishedHandoverDetails = new HashSet<FinishedHandoverDetail>();
+            this.GoodsReceiptDetails = new HashSet<GoodsReceiptDetail>();
+        }
+    
+        public int FinishedProductPackageID { get; set; }
         public int FinishedProductID { get; set; }
         public System.DateTime EntryDate { get; set; }
         public int LocationID { get; set; }
         public int CustomerID { get; set; }
-        public int CrucialWorkerID { get; set; }
         public int FirmOrderID { get; set; }
-        public int FirmOrderDetailID { get; set; }
         public int PlannedOrderID { get; set; }
-        public int PlannedOrderDetailID { get; set; }
-        public int SemifinishedProductID { get; set; }
-        public int SemifinishedProductDetailID { get; set; }
-        public int SemifinishedHandoverID { get; set; }
         public Nullable<int> FinishedHandoverID { get; set; }
         public int CommodityID { get; set; }
         public int CommodityTypeID { get; set; }
@@ -35,12 +36,17 @@ namespace TotalModel.Models
         public decimal QuantityFailure { get; set; }
         public decimal Swarfs { get; set; }
         public decimal QuantityReceipted { get; set; }
+        public decimal Packages { get; set; }
+        public decimal OddPackages { get; set; }
+        public decimal QuantityWeights { get; set; }
+        public decimal QuantityFailureWeights { get; set; }
         public string Remarks { get; set; }
         public bool Approved { get; set; }
         public bool HandoverApproved { get; set; }
-        public Nullable<int> FinishedProductPackageID { get; set; }
     
-        public virtual Commodity Commodity { get; set; }
-        public virtual FinishedProduct FinishedProduct { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FinishedHandoverDetail> FinishedHandoverDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
     }
 }

@@ -33,9 +33,9 @@ namespace TotalModel.Models
             this.TransferOrders1 = new HashSet<TransferOrder>();
             this.WarehouseTransfers = new HashSet<WarehouseTransfer>();
             this.WarehouseTransfers1 = new HashSet<WarehouseTransfer>();
-            this.GoodsReceiptDetails = new HashSet<GoodsReceiptDetail>();
             this.GoodsReceipts = new HashSet<GoodsReceipt>();
             this.GoodsReceipts1 = new HashSet<GoodsReceipt>();
+            this.GoodsReceiptDetails = new HashSet<GoodsReceiptDetail>();
         }
     
         public int WarehouseID { get; set; }
@@ -83,10 +83,10 @@ namespace TotalModel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WarehouseTransfer> WarehouseTransfers1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GoodsReceipt> GoodsReceipts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GoodsReceipt> GoodsReceipts1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
     }
 }

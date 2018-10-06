@@ -19,7 +19,7 @@ namespace TotalModel.Models
         public System.DateTime EntryDate { get; set; }
         public int LocationID { get; set; }
         public int FinishedProductID { get; set; }
-        public int FinishedProductDetailID { get; set; }
+        public int FinishedProductPackageID { get; set; }
         public int CommodityID { get; set; }
         public int CommodityTypeID { get; set; }
         public decimal Quantity { get; set; }
@@ -28,6 +28,6 @@ namespace TotalModel.Models
     
         public virtual Commodity Commodity { get; set; }
         public virtual FinishedHandover FinishedHandover { get; set; }
-        public virtual FinishedProductDetail FinishedProductDetail { get; set; }
+        public virtual FinishedProductPackage FinishedProductPackage { get; set; }
     }
 }

@@ -35,7 +35,7 @@ namespace TotalModel.Models
         public Nullable<int> PurchaseRequisitionID { get; set; }
         public Nullable<int> PurchaseRequisitionDetailID { get; set; }
         public Nullable<int> FinishedProductID { get; set; }
-        public Nullable<int> FinishedProductDetailID { get; set; }
+        public Nullable<int> FinishedProductPackageID { get; set; }
         public Nullable<int> MaterialIssueID { get; set; }
         public Nullable<int> MaterialIssueDetailID { get; set; }
         public Nullable<int> WarehouseTransferID { get; set; }
@@ -56,7 +56,7 @@ namespace TotalModel.Models
         public bool Approved { get; set; }
     
         public virtual Commodity Commodity { get; set; }
-        public virtual FinishedProductDetail FinishedProductDetail { get; set; }
+        public virtual FinishedProductPackage FinishedProductPackage { get; set; }
         public virtual GoodsReceipt GoodsReceipt { get; set; }
         public virtual MaterialIssueDetail MaterialIssueDetail { get; set; }
         public virtual PurchaseRequisitionDetail PurchaseRequisitionDetail { get; set; }

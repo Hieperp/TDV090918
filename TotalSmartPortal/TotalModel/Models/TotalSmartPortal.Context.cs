@@ -93,7 +93,6 @@ namespace TotalModel.Models
         public virtual DbSet<Mold> Molds { get; set; }
         public virtual DbSet<ProductionOrderDetail> ProductionOrderDetails { get; set; }
         public virtual DbSet<ProductionOrder> ProductionOrders { get; set; }
-        public virtual DbSet<FinishedHandoverDetail> FinishedHandoverDetails { get; set; }
         public virtual DbSet<FinishedHandover> FinishedHandovers { get; set; }
         public virtual DbSet<MaterialIssueDetail> MaterialIssueDetails { get; set; }
         public virtual DbSet<MaterialIssue> MaterialIssues { get; set; }
@@ -106,10 +105,12 @@ namespace TotalModel.Models
         public virtual DbSet<TransferOrder> TransferOrders { get; set; }
         public virtual DbSet<WarehouseTransferDetail> WarehouseTransferDetails { get; set; }
         public virtual DbSet<WarehouseTransfer> WarehouseTransfers { get; set; }
-        public virtual DbSet<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
         public virtual DbSet<GoodsReceipt> GoodsReceipts { get; set; }
         public virtual DbSet<SemifinishedHandover> SemifinishedHandovers { get; set; }
         public virtual DbSet<SemifinishedHandoverDetail> SemifinishedHandoverDetails { get; set; }
+        public virtual DbSet<FinishedProductPackage> FinishedProductPackages { get; set; }
+        public virtual DbSet<FinishedHandoverDetail> FinishedHandoverDetails { get; set; }
+        public virtual DbSet<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
     
         public virtual ObjectResult<string> AccountInvoicePostSaveValidate(Nullable<int> entityID)
         {
@@ -3536,7 +3537,7 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FinishedHandoverPendingCustomer>("GetFinishedHandoverPendingCustomers", locationIDParameter);
         }
     
-        public virtual ObjectResult<FinishedHandoverPendingDetail> GetFinishedHandoverPendingDetails(Nullable<int> finishedHandoverID, Nullable<int> plannedOrderID, Nullable<int> customerID, string finishedProductDetailIDs, Nullable<bool> isReadonly)
+        public virtual ObjectResult<FinishedHandoverPendingDetail> GetFinishedHandoverPendingDetails(Nullable<int> finishedHandoverID, Nullable<int> plannedOrderID, Nullable<int> customerID, string finishedProductPackageIDs, Nullable<bool> isReadonly)
         {
             var finishedHandoverIDParameter = finishedHandoverID.HasValue ?
                 new ObjectParameter("FinishedHandoverID", finishedHandoverID) :
@@ -3550,15 +3551,15 @@ namespace TotalModel.Models
                 new ObjectParameter("CustomerID", customerID) :
                 new ObjectParameter("CustomerID", typeof(int));
     
-            var finishedProductDetailIDsParameter = finishedProductDetailIDs != null ?
-                new ObjectParameter("FinishedProductDetailIDs", finishedProductDetailIDs) :
-                new ObjectParameter("FinishedProductDetailIDs", typeof(string));
+            var finishedProductPackageIDsParameter = finishedProductPackageIDs != null ?
+                new ObjectParameter("FinishedProductPackageIDs", finishedProductPackageIDs) :
+                new ObjectParameter("FinishedProductPackageIDs", typeof(string));
     
             var isReadonlyParameter = isReadonly.HasValue ?
                 new ObjectParameter("IsReadonly", isReadonly) :
                 new ObjectParameter("IsReadonly", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FinishedHandoverPendingDetail>("GetFinishedHandoverPendingDetails", finishedHandoverIDParameter, plannedOrderIDParameter, customerIDParameter, finishedProductDetailIDsParameter, isReadonlyParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FinishedHandoverPendingDetail>("GetFinishedHandoverPendingDetails", finishedHandoverIDParameter, plannedOrderIDParameter, customerIDParameter, finishedProductPackageIDsParameter, isReadonlyParameter);
         }
     
         public virtual ObjectResult<FinishedHandoverPendingPlannedOrder> GetFinishedHandoverPendingPlannedOrders(Nullable<int> locationID)
