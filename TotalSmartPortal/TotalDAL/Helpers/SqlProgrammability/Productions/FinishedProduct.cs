@@ -208,24 +208,26 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "               UPDATE          FinishedProductDetails  SET Approved = @Approved WHERE FinishedProductID = @EntityID ; " + "\r\n";
 
 
-            //#region INIT FinishedProductPackages
-            //queryString = queryString + "               IF (@Approved = 1) " + "\r\n";
-            //queryString = queryString + "                   BEGIN " + "\r\n";
-            
-            //queryString = queryString + "                       INSERT INTO     FinishedProductPackages (FinishedProductID, EntryDate, LocationID, CustomerID, FirmOrderID, PlannedOrderID, FinishedHandoverID, CommodityID, CommodityTypeID, PiecePerPack, Quantity, QuantityFailure, Swarfs, QuantityReceipted, Packages, OddPackages, QuantityWeights, QuantityFailureWeights, Remarks, Approved, HandoverApproved) " + "\r\n";
-            
-            //queryString = queryString + "                       SELECT          FirmOrderDetails.FirmOrderID, FirmOrderDetails.PlannedOrderID, FirmOrderDetails.EntryDate, FirmOrderDetails.LocationID, FirmOrderDetails.CustomerID, FirmOrderDetails.BomID, FirmOrderDetails.BlockUnit, FirmOrderDetails.BlockQuantity, BomDetails.MaterialID, ROUND(SUM(FirmOrderDetails.Quantity * FirmOrderDetails.BlockQuantity / FirmOrderDetails.BlockUnit), " + (int)GlobalEnums.rndQuantity + ") AS Quantity, 0 AS QuantityIssued, FirmOrderDetails.VoidTypeID, FirmOrderDetails.Approved, FirmOrderDetails.InActive, FirmOrderDetails.InActivePartial, FirmOrderDetails.InActivePartialDate " + "\r\n";
-            //queryString = queryString + "                       FROM            FirmOrderDetails INNER JOIN BomDetails ON FirmOrderDetails.PlannedOrderID = @EntityID AND FirmOrderDetails.BomID = BomDetails.BomID " + "\r\n";
-            //queryString = queryString + "                       GROUP BY        FirmOrderDetails.FirmOrderID, FirmOrderDetails.PlannedOrderID, FirmOrderDetails.EntryDate, FirmOrderDetails.LocationID, FirmOrderDetails.CustomerID, FirmOrderDetails.BomID, FirmOrderDetails.BlockUnit, FirmOrderDetails.BlockQuantity, BomDetails.MaterialID, FirmOrderDetails.VoidTypeID, FirmOrderDetails.Approved, FirmOrderDetails.InActive, FirmOrderDetails.InActivePartial, FirmOrderDetails.InActivePartialDate; " + "\r\n";
+            #region INIT FinishedProductPackages
+            queryString = queryString + "               IF (@Approved = 1) " + "\r\n";
+            queryString = queryString + "                   BEGIN " + "\r\n";
+            queryString = queryString + "                       INSERT INTO     FinishedProductPackages (FinishedProductID, EntryDate, LocationID, CustomerID, FirmOrderID, PlannedOrderID, CommodityID, CommodityTypeID, PiecePerPack, Quantity, QuantityFailure, Swarfs, QuantityReceipted, Packages, OddPackages, QuantityWeights, QuantityFailureWeights, Remarks, Approved, HandoverApproved) " + "\r\n";
+            queryString = queryString + "                       SELECT          MIN(FinishedProductID) AS FinishedProductID, MIN(EntryDate) AS EntryDate, MIN(LocationID) AS LocationID, MIN(CustomerID) AS CustomerID, MIN(FirmOrderID) AS FirmOrderID, MIN(PlannedOrderID) AS PlannedOrderID, CommodityID, MIN(CommodityTypeID) AS CommodityTypeID, MIN(PiecePerPack) AS PiecePerPack, ROUND(SUM(Quantity), " + (int)GlobalEnums.rndQuantity + ") AS Quantity, ROUND(SUM(QuantityFailure), " + (int)GlobalEnums.rndQuantity + ") AS QuantityFailure, ROUND(SUM(Swarfs), " + (int)GlobalEnums.rndQuantity + ") AS Swarfs, 0 AS QuantityReceipted, IIF(MIN(PiecePerPack) <> 0, CAST(ROUND(SUM(Quantity), " + (int)GlobalEnums.rndQuantity + ") AS int) / MIN(PiecePerPack), 0) AS Packages, IIF(MIN(PiecePerPack) <> 0, ROUND(SUM(Quantity), " + (int)GlobalEnums.rndQuantity + ") % MIN(PiecePerPack), 0) AS OddPackages, 999 AS QuantityWeights, 999 AS QuantityFailureWeights, MAX(Remarks) AS Remarks, 1 AS Approved, 0 AS HandoverApproved " + "\r\n";
+            queryString = queryString + "                       FROM            FinishedProductDetails " + "\r\n";
+            queryString = queryString + "                       WHERE           FinishedProductID = @EntityID " + "\r\n";
+            queryString = queryString + "                       GROUP BY        CommodityID; " + "\r\n";
 
-            //queryString = queryString + "                   END " + "\r\n";
+            queryString = queryString + "                       UPDATE          FinishedProductDetails " + "\r\n";
+            queryString = queryString + "                       SET             FinishedProductDetails.FinishedProductPackageID = FinishedProductPackages.FinishedProductPackageID " + "\r\n";
+            queryString = queryString + "                       FROM            FinishedProductDetails INNER JOIN FinishedProductPackages ON FinishedProductDetails.FinishedProductID = @EntityID AND FinishedProductDetails.FinishedProductID = FinishedProductPackages.FinishedProductID AND FinishedProductDetails.CommodityID = FinishedProductPackages.CommodityID; " + "\r\n";
+            queryString = queryString + "                   END " + "\r\n";
 
-            //queryString = queryString + "               ELSE " + "\r\n";
-            //queryString = queryString + "                   BEGIN " + "\r\n";
-            //queryString = queryString + "                       UPDATE          FinishedProductDetails SET FinishedProductPackageID = NULL WHERE FinishedProductID = @EntityID ; " + "\r\n"; 
-            //queryString = queryString + "                       DELETE FROM     FinishedProductPackages WHERE FinishedProductID = @EntityID ; " + "\r\n";
-            //queryString = queryString + "                   END " + "\r\n";
-            //#endregion INIT FinishedProductPackages
+            queryString = queryString + "               ELSE " + "\r\n";
+            queryString = queryString + "                   BEGIN " + "\r\n";
+            queryString = queryString + "                       UPDATE          FinishedProductDetails SET FinishedProductPackageID = NULL WHERE FinishedProductID = @EntityID ; " + "\r\n";
+            queryString = queryString + "                       DELETE FROM     FinishedProductPackages WHERE FinishedProductID = @EntityID ; " + "\r\n";
+            queryString = queryString + "                   END " + "\r\n";
+            #endregion INIT FinishedProductPackages
 
 
             queryString = queryString + "           END " + "\r\n";
