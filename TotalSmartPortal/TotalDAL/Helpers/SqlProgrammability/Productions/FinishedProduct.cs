@@ -146,6 +146,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "   BEGIN  " + "\r\n";
 
+            queryString = queryString + "       DECLARE @msg NVARCHAR(300) ";
+
             queryString = queryString + "       UPDATE          SemifinishedProductDetails " + "\r\n";
             queryString = queryString + "       SET             SemifinishedProductDetails.QuantityFinished = ROUND(SemifinishedProductDetails.QuantityFinished + (FinishedProductDetails.Quantity + FinishedProductDetails.QuantityFailure) * @SaveRelativeOption, " + (int)GlobalEnums.rndQuantity + ") " + "\r\n";
             queryString = queryString + "       FROM            FinishedProductDetails " + "\r\n";
@@ -153,8 +155,23 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "       IF @@ROWCOUNT <> (SELECT COUNT(*) FROM FinishedProductDetails WHERE FinishedProductID = @EntityID) " + "\r\n";
             queryString = queryString + "           BEGIN " + "\r\n";
-            queryString = queryString + "               DECLARE     @msg NVARCHAR(300) = N'Phie61i BTP không tồn tại, chưa duyệt hoặc đã hủy' ; " + "\r\n";
+            queryString = queryString + "               SET         @msg = N'Phiếu BTP không tồn tại, chưa duyệt hoặc đã hủy' ; " + "\r\n";
             queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
+
+
+
+
+            queryString = queryString + "       IF ((SELECT Approved FROM FinishedProducts WHERE FinishedProductID = @EntityID AND Approved = 1) = 1) " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               UPDATE      FinishedProducts  SET Approved = 0 WHERE FinishedProductID = @EntityID AND Approved = 1" + "\r\n"; //CLEAR APPROVE BEFORE CALL FinishedProductToggleApproved
+            queryString = queryString + "               IF @@ROWCOUNT = 1 " + "\r\n";
+            queryString = queryString + "                   EXEC        FinishedProductToggleApproved @EntityID, 1 " + "\r\n";
+            queryString = queryString + "               ELSE " + "\r\n";
+            queryString = queryString + "                   BEGIN " + "\r\n";
+            queryString = queryString + "                       SET         @msg = N'Dữ liệu không tồn tại hoặc đã duyệt'; " + "\r\n";
+            queryString = queryString + "                       THROW       61001,  @msg, 1; " + "\r\n";
+            queryString = queryString + "                   END " + "\r\n";
             queryString = queryString + "           END " + "\r\n";
 
             queryString = queryString + "   END " + "\r\n";
