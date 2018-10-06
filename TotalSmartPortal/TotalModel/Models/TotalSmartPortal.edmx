@@ -12321,7 +12321,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
             <End Role="WarehouseTransferDetail" EntitySet="WarehouseTransferDetails" />
           </AssociationSet>
           <FunctionImport Name="GetGoodsReceiptViewDetails" ReturnType="Collection(TotalSmartPortalModel.GoodsReceiptViewDetail)">
-            <Parameter Name="GoodsReceiptID" Mode="In" Type="Int32" />
+          <Parameter Name="GoodsReceiptID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="AccountInvoiceIndex">
@@ -15764,11 +15764,12 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
         <ComplexType Name="GoodsReceiptPendingPlannedOrder">
           <Property Type="Int32" Name="GoodsReceiptTypeID" Nullable="false" />
           <Property Type="Int32" Name="PlannedOrderID" Nullable="false" />
-          <Property Type="DateTime" Name="EntryDate" Nullable="false" Precision="23" />
           <Property Type="String" Name="PlannedOrderCode" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="CustomerID" Nullable="false" />
           <Property Type="String" Name="CustomerCode" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="PlannedOrderEntryDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="PlannedOrderReference" Nullable="true" MaxLength="10" />
         </ComplexType>
         <EntityType Name="MaterialIssueDetail">
           <Key>
@@ -21702,11 +21703,12 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
               <ComplexTypeMapping TypeName="TotalSmartPortalModel.GoodsReceiptPendingPlannedOrder">
                 <ScalarProperty Name="GoodsReceiptTypeID" ColumnName="GoodsReceiptTypeID" />
                 <ScalarProperty Name="PlannedOrderID" ColumnName="PlannedOrderID" />
-                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
                 <ScalarProperty Name="PlannedOrderCode" ColumnName="PlannedOrderCode" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
                 <ScalarProperty Name="CustomerCode" ColumnName="CustomerCode" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="PlannedOrderEntryDate" ColumnName="PlannedOrderEntryDate" />
+                <ScalarProperty Name="PlannedOrderReference" ColumnName="PlannedOrderReference" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

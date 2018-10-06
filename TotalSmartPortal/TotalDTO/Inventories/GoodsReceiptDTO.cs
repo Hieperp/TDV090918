@@ -54,12 +54,13 @@ namespace TotalDTO.Inventories
 
 
 
-        Nullable<int> FinishedProductID { get; set; }
-        Nullable<int> FinishedProductDetailID { get; set; }
-        [Display(Name = "Số CT đóng gói")]
-        string FinishedProductReference { get; set; }
-        [Display(Name = "Ngày đóng gói")]
-        System.DateTime FinishedProductEntryDate { get; set; }
+        Nullable<int> PlannedOrderID { get; set; }
+        [Display(Name = "Số KHSX")]
+        string PlannedOrderReference { get; set; }
+        [Display(Name = "Số CT")]
+        string PlannedOrderCode { get; set; }
+        [Display(Name = "Ngày KHSX")]
+        System.DateTime PlannedOrderEntryDate { get; set; }
 
         Nullable<int> WarehouseAdjustmentID { get; set; }
 
@@ -115,12 +116,12 @@ namespace TotalDTO.Inventories
 
 
 
-        public Nullable<int> FinishedProductID { get; set; }
-        public Nullable<int> FinishedProductDetailID { get; set; }
+        public Nullable<int> PlannedOrderID { get; set; }
         [Display(Name = "Số CT đóng gói")]
-        public string FinishedProductReference { get; set; }
+        public string PlannedOrderReference { get; set; }
+        public string PlannedOrderCode { get; set; }
         [Display(Name = "Ngày đóng gói")]
-        public System.DateTime FinishedProductEntryDate { get; set; }
+        public System.DateTime PlannedOrderEntryDate { get; set; }
 
         public Nullable<int> WarehouseAdjustmentID { get; set; }
 

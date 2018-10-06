@@ -37,7 +37,7 @@
             goodsReceiptID: window.parent.$("#GoodsReceiptID").val(),
             plannedOrderID: window.parent.$("#PlannedOrderID").val(),
             customerID: window.parent.$("#Customer_CustomerID").val(),
-            finishedProductDetailIDs : goodsReceiptJSON.map(function(elem){return elem.FinishedProductDetailID;}).join(","),
+            finishedProductPackageIDs : goodsReceiptJSON.map(function(elem){return elem.FinishedProductPackageID;}).join(","),
             isReadOnly: false
             };}
             </text>))

@@ -6,7 +6,7 @@
     .Columns(columns =>
     {
         columns.Bound(c => c.PlannedOrderCode).Title("Số KHSX").Width(50);
-        columns.Bound(c => c.EntryDate).Title("Ngày KHSX").Width(55).Format("{0:" + Settings.DateFormat + "}");
+        columns.Bound(c => c.PlannedOrderEntryDate).Title("Ngày KHSX").Width(55).Format("{0:" + Settings.DateFormat + "}");
         columns.Bound(c => c.CustomerCode).Title("Mã KH").Width(80);
         columns.Bound(c => c.CustomerName).Title("Tên KH").Width(140);        
     })

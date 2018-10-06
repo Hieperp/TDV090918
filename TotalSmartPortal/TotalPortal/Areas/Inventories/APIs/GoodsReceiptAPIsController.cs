@@ -105,9 +105,9 @@ namespace TotalPortal.Areas.Inventories.APIs
             return Json(result.ToDataSourceResult(dataSourceRequest), JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetPendingPlannedOrderDetails([DataSourceRequest] DataSourceRequest dataSourceRequest, int? locationID, int? goodsReceiptID, int? plannedOrderID, int? customerID, string finishedProductDetailIDs, bool isReadonly)
+        public JsonResult GetPendingPlannedOrderDetails([DataSourceRequest] DataSourceRequest dataSourceRequest, int? locationID, int? goodsReceiptID, int? plannedOrderID, int? customerID, string finishedProductPackageIDs, bool isReadonly)
         {
-            var result = this.goodsReceiptAPIRepository.GetPendingPlannedOrderDetails(locationID, goodsReceiptID, plannedOrderID, customerID, finishedProductDetailIDs, false);
+            var result = this.goodsReceiptAPIRepository.GetPendingPlannedOrderDetails(locationID, goodsReceiptID, plannedOrderID, customerID, finishedProductPackageIDs, false);
             return Json(result.ToDataSourceResult(dataSourceRequest), JsonRequestBehavior.AllowGet);
         }
 

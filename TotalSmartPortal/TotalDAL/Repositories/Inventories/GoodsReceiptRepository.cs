@@ -123,10 +123,10 @@ namespace TotalDAL.Repositories.Inventories
             return pendingPlannedOrders;
         }
 
-        public IEnumerable<GoodsReceiptPendingPlannedOrderDetail> GetPendingPlannedOrderDetails(int? locationID, int? goodsReceiptID, int? plannedOrderID, int? customerID, string finishedProductDetailIDs, bool isReadonly)
+        public IEnumerable<GoodsReceiptPendingPlannedOrderDetail> GetPendingPlannedOrderDetails(int? locationID, int? goodsReceiptID, int? plannedOrderID, int? customerID, string finishedProductPackageIDs, bool isReadonly)
         {
             this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = false;
-            IEnumerable<GoodsReceiptPendingPlannedOrderDetail> pendingPlannedOrderDetails = base.TotalSmartPortalEntities.GetGoodsReceiptPendingPlannedOrderDetails(locationID, goodsReceiptID, plannedOrderID, customerID, finishedProductDetailIDs, isReadonly).ToList();
+            IEnumerable<GoodsReceiptPendingPlannedOrderDetail> pendingPlannedOrderDetails = base.TotalSmartPortalEntities.GetGoodsReceiptPendingPlannedOrderDetails(locationID, goodsReceiptID, plannedOrderID, customerID, finishedProductPackageIDs, isReadonly).ToList();
             this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = true;
 
             return pendingPlannedOrderDetails;

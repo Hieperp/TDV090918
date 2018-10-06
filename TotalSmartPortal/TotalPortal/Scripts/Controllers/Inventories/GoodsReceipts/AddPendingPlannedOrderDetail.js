@@ -59,7 +59,7 @@ function handleOKEvent(goodsReceiptGridDataSource, pendingPlannedOrderDetailGrid
         
 
         dataRow.FinishedProductID = plannedOrderGridDataItem.FinishedProductID;
-        dataRow.FinishedProductDetailID = plannedOrderGridDataItem.FinishedProductDetailID;
+        dataRow.FinishedProductPackageID = plannedOrderGridDataItem.FinishedProductPackageID;
         dataRow.FinishedProductReference = plannedOrderGridDataItem.FinishedProductReference;
         dataRow.FinishedProductEntryDate = plannedOrderGridDataItem.FinishedProductEntryDate;
 

@@ -15,10 +15,11 @@ namespace TotalModel.Models
     {
         public int GoodsReceiptTypeID { get; set; }
         public int PlannedOrderID { get; set; }
-        public System.DateTime EntryDate { get; set; }
         public string PlannedOrderCode { get; set; }
         public int CustomerID { get; set; }
         public string CustomerCode { get; set; }
         public string CustomerName { get; set; }
+        public System.DateTime PlannedOrderEntryDate { get; set; }
+        public string PlannedOrderReference { get; set; }
     }
 }

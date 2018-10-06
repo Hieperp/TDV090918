@@ -38,10 +38,10 @@
     
     
     
-    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductID)
-    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductDetailID)
-    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductReference)
-    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductEntryDate)
+    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).PlannedOrderID)
+    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).PlannedOrderCode)
+    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).PlannedOrderReference)
+    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).PlannedOrderEntryDate)
 
     @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).WarehouseAdjustmentID)       
 
@@ -220,10 +220,10 @@
                 //    $("#Customer_SalespersonName").val(selectedDataItem === undefined || selectedDataItem.CustomerSalespersonName === undefined ? null : selectedDataItem.CustomerSalespersonName);
                 //}
 
-                $("#FinishedProductID").val(selectedDataItem === undefined || selectedDataItem.FinishedProductID === undefined ? null : selectedDataItem.FinishedProductID);
-                $("#FinishedProductDetailID").val(selectedDataItem === undefined || selectedDataItem.FinishedProductDetailID === undefined ? null : selectedDataItem.FinishedProductDetailID);
-                $("#FinishedProductReference").val(selectedDataItem === undefined || selectedDataItem.FinishedProductReference === undefined ? null : selectedDataItem.FinishedProductReference);
-                $("#FinishedProductEntryDate").val(selectedDataItem === undefined || selectedDataItem.EntryDate === undefined ? null : kendo.toString(selectedDataItem.EntryDate, Settings.DateTimeFormat));
+                $("#PlannedOrderID").val(selectedDataItem === undefined || selectedDataItem.PlannedOrderID === undefined ? null : selectedDataItem.PlannedOrderID);
+                $("#PlannedOrderCode").val(selectedDataItem === undefined || selectedDataItem.PlannedOrderCode === undefined ? null : selectedDataItem.PlannedOrderCode);
+                $("#PlannedOrderReference").val(selectedDataItem === undefined || selectedDataItem.PlannedOrderReference === undefined ? null : selectedDataItem.PlannedOrderReference);
+                $("#PlannedOrderEntryDate").val(selectedDataItem === undefined || selectedDataItem.PlannedOrderEntryDate === undefined ? null : kendo.toString(selectedDataItem.PlannedOrderEntryDate, Settings.DateTimeFormat));
 
                 $("#PurchaseRequisitionID").val(selectedDataItem === undefined || selectedDataItem.PurchaseRequisitionID === undefined ? null : selectedDataItem.PurchaseRequisitionID);
                 $("#PurchaseRequisitionCode").val(selectedDataItem === undefined || selectedDataItem.PurchaseRequisitionCode === undefined ? null : selectedDataItem.PurchaseRequisitionCode);

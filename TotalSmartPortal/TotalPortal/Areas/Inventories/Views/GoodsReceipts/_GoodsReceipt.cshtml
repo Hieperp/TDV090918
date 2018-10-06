@@ -32,11 +32,7 @@
         @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).PurchaseRequisitionCode)
         @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).PurchaseRequisitionReference)
 
-        @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductID)
-        @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductDetailID)
-
-
-
+      
         @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).WarehouseTransferID)
         @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).WarehouseTransferReference)
 
@@ -110,25 +106,36 @@
 
 
             case (int)GlobalEnums.GoodsReceiptTypeID.FinishedProduct:
-            <div class="form-group">
-                @Html.LabelFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductReference)
-                <div class="div-input">
-                    @Html.Kendo().MaskedTextBoxFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductReference).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
+                @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).PlannedOrderID)
+                <div class="form-group">
+                    @Html.LabelFor(model => (model as IGoodsReceiptPrimitiveDTO).PlannedOrderReference)
+                    <div class="div-input">
+                        @Html.Kendo().MaskedTextBoxFor(model => (model as IGoodsReceiptPrimitiveDTO).PlannedOrderReference).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
+                    </div>
+                    <div class="div-validation-message">
+                        @Html.ValidationMessageFor(model => (model as IGoodsReceiptPrimitiveDTO).PlannedOrderReference, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-                <div class="div-validation-message">
-                    @Html.ValidationMessageFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductReference, "", new { @class = "text-danger" })
-                </div>
-            </div>
 
-                if (Model.FinishedProductEntryDate != null)
+                <div class="form-group">
+                    @Html.LabelFor(model => (model as IGoodsReceiptPrimitiveDTO).PlannedOrderCode)
+                    <div class="div-input">
+                        @Html.Kendo().MaskedTextBoxFor(model => (model as IGoodsReceiptPrimitiveDTO).PlannedOrderCode).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
+                    </div>
+                    <div class="div-validation-message">
+                        @Html.ValidationMessageFor(model => (model as IGoodsReceiptPrimitiveDTO).PlannedOrderCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+        
+                if (Model.PlannedOrderEntryDate != null)
                 {
                     <div class="form-group">
-                        @Html.LabelFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductEntryDate)
+                        @Html.LabelFor(model => (model as IGoodsReceiptPrimitiveDTO).PlannedOrderEntryDate)
                         <div class="div-input">
-                            @Html.Kendo().DateTimePickerFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductEntryDate).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
+                            @Html.Kendo().DateTimePickerFor(model => (model as IGoodsReceiptPrimitiveDTO).PlannedOrderEntryDate).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
                         </div>
                         <div class="div-validation-message">
-                            @Html.ValidationMessageFor(model => (model as IGoodsReceiptPrimitiveDTO).FinishedProductEntryDate, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => (model as IGoodsReceiptPrimitiveDTO).PlannedOrderEntryDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 }
@@ -230,8 +237,8 @@
 
                     columns.Bound(p => p.FinishedProductID).DisplayNameTitle().Filterable(false).Hidden()
                        .ClientTemplate("#= (FinishedProductID == null)? '' : FinishedProductID #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].FinishedProductID' value='#= (FinishedProductID == null) ? '' : FinishedProductID #' />");
-                    columns.Bound(p => p.FinishedProductDetailID).DisplayNameTitle().Filterable(false).Hidden()
-                        .ClientTemplate("#= (FinishedProductDetailID == null)? '' : FinishedProductDetailID #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].FinishedProductDetailID' value='#= (FinishedProductDetailID == null) ? '' : FinishedProductDetailID #' />");
+                    columns.Bound(p => p.FinishedProductPackageID).DisplayNameTitle().Filterable(false).Hidden()
+                        .ClientTemplate("#= (FinishedProductPackageID == null)? '' : FinishedProductPackageID #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].FinishedProductPackageID' value='#= (FinishedProductPackageID == null) ? '' : FinishedProductPackageID #' />");
 
                     columns.Bound(p => p.FinishedProductReference).DisplayNameTitle().Filterable(false).Width(60).Hidden(Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.FinishedProduct ? false : true)
                         .ClientTemplate("#= (FinishedProductReference == null)? '' : FinishedProductReference #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].FinishedProductReference' value='#= (FinishedProductReference == null) ? '' : FinishedProductReference #' />");

@@ -47,7 +47,7 @@ namespace TotalDTO.Inventories
 
 
         public Nullable<int> FinishedProductID { get; set; }
-        public Nullable<int> FinishedProductDetailID { get; set; }
+        public Nullable<int> FinishedProductPackageID { get; set; }
 
         [Display(Name = "Số CT")]
         [UIHint("StringReadonly")]
