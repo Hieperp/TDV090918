@@ -8,7 +8,7 @@
     .Name("gridPendingDetails")
     .Columns(columns =>
     {
-        columns.Bound(c => c.EntryDate).Title("Ngày").Width(80).Format("{0:" + Settings.DateTimeFormat + "}");
+        columns.Bound(c => c.FinishedProductEntryDate).Title("Ngày ĐG").Width(80).Format("{0:" + Settings.DateTimeFormat + "}");
         columns.Bound(c => c.CustomerCode).Title("Mã KH").Width(50);
         columns.Bound(c => c.CustomerName).Title("Tên KH").Width(100);
         columns.Bound(c => c.CommodityCode).Title("Mã hàng").Width(100);      
@@ -36,7 +36,7 @@
                 finishedHandoverID: window.parent.$("#FinishedHandoverID").val(),
                 plannedOrderID: window.parent.$("#PlannedOrderID").val(),
                 customerID: window.parent.$("#Customer_CustomerID").val(),
-                finishedProductDetailIDs: finishedHandoverJSON.map(function (elem) { return elem.FinishedProductDetailID; }).join(","),
+                finishedProductPackageIDs: finishedHandoverJSON.map(function (elem) { return elem.FinishedProductPackageID; }).join(","),
                 isReadOnly: false
             };}
             </text>))

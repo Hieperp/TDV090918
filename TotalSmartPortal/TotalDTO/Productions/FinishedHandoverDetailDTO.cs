@@ -15,15 +15,9 @@ namespace TotalDTO.Productions
         public int FinishedHandoverID { get; set; }
        
         public Nullable<int> FinishedProductID { get; set; }
-        public Nullable<int> FinishedProductDetailID { get; set; }
+        public Nullable<int> FinishedProductPackageID { get; set; }
 
-        [Display(Name = "Số BTP")]
-        [UIHint("StringReadonly")]
-        public string FinishedProductReference { get; set; }
-        [Display(Name = "Mã BTP")]
-        [UIHint("StringReadonly")]
-        public string FinishedProductCode { get; set; }
-        [Display(Name = "Ngày BTP")]
+        [Display(Name = "Ngày ĐG")]
         [UIHint("DateTimeReadonly")]
         public Nullable<System.DateTime> FinishedProductEntryDate { get; set; }
 
@@ -33,6 +27,5 @@ namespace TotalDTO.Productions
         [Display(Name = "Tên khách hàng")]
         [UIHint("StringReadonly")]
         public string CustomerName { get; set; }
-       
     }
 }

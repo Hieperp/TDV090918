@@ -16,7 +16,6 @@ namespace TotalModel.Models
         public int FinishedHandoverDetailID { get; set; }
         public int FinishedHandoverID { get; set; }
         public int FinishedProductID { get; set; }
-        public System.DateTime EntryDate { get; set; }
         public int CustomerID { get; set; }
         public string CustomerCode { get; set; }
         public string CustomerName { get; set; }
@@ -27,5 +26,6 @@ namespace TotalModel.Models
         public decimal Quantity { get; set; }
         public string Remarks { get; set; }
         public int FinishedProductPackageID { get; set; }
+        public System.DateTime FinishedProductEntryDate { get; set; }
     }
 }

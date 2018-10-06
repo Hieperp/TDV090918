@@ -14,7 +14,6 @@ namespace TotalModel.Models
     public partial class FinishedHandoverPendingDetail
     {
         public int FinishedProductID { get; set; }
-        public System.DateTime EntryDate { get; set; }
         public int CustomerID { get; set; }
         public string CustomerCode { get; set; }
         public string CustomerName { get; set; }
@@ -24,5 +23,6 @@ namespace TotalModel.Models
         public decimal Quantity { get; set; }
         public Nullable<bool> IsSelected { get; set; }
         public int FinishedProductPackageID { get; set; }
+        public System.DateTime FinishedProductEntryDate { get; set; }
     }
 }

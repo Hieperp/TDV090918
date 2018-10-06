@@ -40,7 +40,6 @@ function handleOKEvent(finishedHandoverGridDataSource, pendingDetailGridDataSour
         //var dataRow = finishedHandoverJSON.add({});        
         var dataRow = new Object();
         
-
         dataRow.LocationID = null;
         dataRow.EntryDate = null;
 
@@ -48,11 +47,8 @@ function handleOKEvent(finishedHandoverGridDataSource, pendingDetailGridDataSour
         dataRow.FinishedHandoverID = window.parent.$("#FinishedHandoverID").val();
 
         dataRow.FinishedProductID = finishedHandoverGridDataItem.FinishedProductID;
-        dataRow.FinishedProductDetailID = finishedHandoverGridDataItem.FinishedProductDetailID;
-
-        dataRow.FinishedProductCode = finishedHandoverGridDataItem.FinishedProductCode;
-        dataRow.FinishedProductReference = finishedHandoverGridDataItem.FinishedProductReference;
-        dataRow.FinishedProductEntryDate = finishedHandoverGridDataItem.EntryDate;
+        dataRow.FinishedProductPackageID = finishedHandoverGridDataItem.FinishedProductPackageID;
+        dataRow.FinishedProductEntryDate = finishedHandoverGridDataItem.FinishedProductEntryDate;
 
         dataRow.CustomerID = finishedHandoverGridDataItem.CustomerID;
         dataRow.CustomerName = finishedHandoverGridDataItem.CustomerName;
@@ -60,20 +56,12 @@ function handleOKEvent(finishedHandoverGridDataSource, pendingDetailGridDataSour
 
         dataRow.CommodityID = finishedHandoverGridDataItem.CommodityID;
         dataRow.CommodityCode = finishedHandoverGridDataItem.CommodityCode;
-        
-        dataRow.Quantity = finishedHandoverGridDataItem.Quantity;                        
-
-        dataRow.CrucialWorkerID = finishedHandoverGridDataItem.CrucialWorkerID;
-        dataRow.CrucialWorkerName = finishedHandoverGridDataItem.CrucialWorkerName;
-
         dataRow.CommodityTypeID = finishedHandoverGridDataItem.CommodityTypeID;
 
+        dataRow.Quantity = finishedHandoverGridDataItem.Quantity;                        
+
         dataRow.Remarks = null;        
-        dataRow.InActive = false;
-        dataRow.InActivePartial = false;
-        dataRow.InActiveIssue = false;
 
         finishedHandoverJSON.push(dataRow);
     }
 }
-

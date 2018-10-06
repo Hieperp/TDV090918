@@ -1380,7 +1380,6 @@
     <Content Include="Areas\Productions\Views\FinishedHandovers\GetPendingDetails.cshtml" />
     <Content Include="Areas\Productions\Views\FinishedHandovers\Index.cshtml" />
     <Content Include="Areas\Productions\Views\FinishedHandovers\Print.cshtml" />
-    <Content Include="Areas\Productions\Views\FinishedHandovers\Void.cshtml" />
     <Content Include="Areas\Productions\Views\FinishedHandovers\_FinishedHandover.cshtml" />
     <Content Include="Areas\Productions\Views\FinishedHandovers\_GetCustomer.cshtml" />
     <Content Include="Areas\Productions\Views\FinishedHandovers\_GetPlannedOrder.cshtml" />
@@ -1737,7 +1736,6 @@
     <Content Include="Scripts\Controllers\Productions\FinishedHandovers\Index.js" />
     <Content Include="Scripts\Controllers\Productions\FinishedHandovers\Open.js" />
     <Content Include="Scripts\Controllers\Productions\FinishedHandovers\Print.js" />
-    <Content Include="Scripts\Controllers\Productions\FinishedHandovers\Void.js" />
     <Content Include="Scripts\Controllers\Productions\FinishedProducts\Approve.js" />
     <Content Include="Scripts\Controllers\Productions\FinishedProducts\CreateWizard.js" />
     <Content Include="Scripts\Controllers\Productions\FinishedProducts\Delete.js" />

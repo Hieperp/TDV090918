@@ -15,7 +15,7 @@ namespace TotalCore.Repositories.Productions
         IEnumerable<FinishedHandoverPendingCustomer> GetCustomers(int? locationID);
         IEnumerable<FinishedHandoverPendingPlannedOrder> GetPlannedOrders(int? locationID);
 
-        IEnumerable<FinishedHandoverPendingDetail> GetPendingDetails(int? finishedHandoverID, int? plannedOrderID, int? customerID, string finishedProductDetailIDs, bool? isReadonly);
+        IEnumerable<FinishedHandoverPendingDetail> GetPendingDetails(int? finishedHandoverID, int? plannedOrderID, int? customerID, string finishedProductPackageIDs, bool? isReadonly);
 
     }
 }

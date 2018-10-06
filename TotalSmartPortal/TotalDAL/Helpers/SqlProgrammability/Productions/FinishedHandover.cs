@@ -69,7 +69,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
-            queryString = queryString + "       SELECT      FinishedHandoverDetails.FinishedHandoverDetailID, FinishedHandoverDetails.FinishedHandoverID, FinishedProductPackages.FinishedProductID, FinishedProductPackages.FinishedProductPackageID, FinishedProductPackages.EntryDate, FinishedProductPackages.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, " + "\r\n";
+            queryString = queryString + "       SELECT      FinishedHandoverDetails.FinishedHandoverDetailID, FinishedHandoverDetails.FinishedHandoverID, FinishedProductPackages.FinishedProductID, FinishedProductPackages.FinishedProductPackageID, FinishedProductPackages.EntryDate AS FinishedProductEntryDate, FinishedProductPackages.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, " + "\r\n";
             queryString = queryString + "                   FinishedProductPackages.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, " + "\r\n";
             queryString = queryString + "                   FinishedHandoverDetails.Quantity, FinishedHandoverDetails.Remarks" + "\r\n";
 
@@ -187,7 +187,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         {
             string queryString = "";
 
-            queryString = queryString + "       SELECT      FinishedProductPackages.FinishedProductID, FinishedProductPackages.FinishedProductPackageID, FinishedProductPackages.EntryDate, FinishedProductPackages.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, " + "\r\n";
+            queryString = queryString + "       SELECT      FinishedProductPackages.FinishedProductID, FinishedProductPackages.FinishedProductPackageID, FinishedProductPackages.EntryDate AS FinishedProductEntryDate, FinishedProductPackages.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, " + "\r\n";
             queryString = queryString + "                   FinishedProductPackages.CommodityID, Commodities.Code AS CommodityCode, Commodities.CommodityTypeID, FinishedProductPackages.Quantity, CAST(1 AS bit) AS IsSelected " + "\r\n";
 
             queryString = queryString + "       FROM        FinishedProductPackages " + "\r\n";
@@ -201,7 +201,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         {
             string queryString = "";
 
-            queryString = queryString + "       SELECT      FinishedProductPackages.FinishedProductID, FinishedProductPackages.FinishedProductPackageID, FinishedProductPackages.EntryDate, FinishedProductPackages.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, " + "\r\n";
+            queryString = queryString + "       SELECT      FinishedProductPackages.FinishedProductID, FinishedProductPackages.FinishedProductPackageID, FinishedProductPackages.EntryDate AS FinishedProductEntryDate, FinishedProductPackages.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, " + "\r\n";
             queryString = queryString + "                   FinishedProductPackages.CommodityID, Commodities.Code AS CommodityCode, Commodities.CommodityTypeID, FinishedProductPackages.Quantity, CAST(1 AS bit) AS IsSelected " + "\r\n";
 
             queryString = queryString + "       FROM        FinishedProductPackages " + "\r\n";
@@ -229,7 +229,13 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "               FROM        FinishedProductPackages INNER JOIN" + "\r\n";
             queryString = queryString + "                           FinishedHandoverDetails ON FinishedHandoverDetails.FinishedHandoverID = @EntityID AND FinishedProductPackages.Approved = 1 AND FinishedProductPackages.FinishedProductPackageID = FinishedHandoverDetails.FinishedProductPackageID " + "\r\n";
 
-            queryString = queryString + "               IF @@ROWCOUNT <> (SELECT COUNT(*) FROM FinishedProductPackages WHERE FinishedHandoverID = @EntityID) " + "\r\n";
+            queryString = queryString + "               IF @@ROWCOUNT = (SELECT COUNT(*) FROM FinishedProductPackages WHERE FinishedHandoverID = @EntityID) " + "\r\n";
+            queryString = queryString + "                   BEGIN " + "\r\n";
+            queryString = queryString + "                       UPDATE      FinishedProductDetails" + "\r\n";
+            queryString = queryString + "                       SET         FinishedHandoverID = @EntityID " + "\r\n";
+            queryString = queryString + "                       WHERE       FinishedProductPackageID IN (SELECT FinishedProductPackageID FROM FinishedProductPackages WHERE FinishedHandoverID = @EntityID) " + "\r\n";
+            queryString = queryString + "                   END " + "\r\n";
+            queryString = queryString + "               ELSE " + "\r\n";
             queryString = queryString + "                   BEGIN " + "\r\n";
             queryString = queryString + "                       SET         @msg = N'Dữ liệu không tồn tại hoặc chưa duyệt' ; " + "\r\n";
             queryString = queryString + "                       THROW       61001,  @msg, 1; " + "\r\n";
@@ -252,10 +258,15 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "           END " + "\r\n";
 
             queryString = queryString + "       ELSE " + "\r\n"; //(@SaveRelativeOption = -1) 
-            queryString = queryString + "           UPDATE      FinishedProductPackages" + "\r\n";
-            queryString = queryString + "           SET         FinishedHandoverID = NULL " + "\r\n";
-            queryString = queryString + "           WHERE       FinishedHandoverID = @EntityID " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               UPDATE      FinishedProductPackages" + "\r\n";
+            queryString = queryString + "               SET         FinishedHandoverID = NULL " + "\r\n";
+            queryString = queryString + "               WHERE       FinishedHandoverID = @EntityID " + "\r\n";
 
+            queryString = queryString + "               UPDATE      FinishedProductDetails " + "\r\n";
+            queryString = queryString + "               SET         FinishedHandoverID = NULL " + "\r\n";
+            queryString = queryString + "               WHERE       FinishedHandoverID = @EntityID " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
             queryString = queryString + "    END " + "\r\n";
 
             this.totalSmartPortalEntities.CreateStoredProcedure("FinishedHandoverSaveRelative", queryString);

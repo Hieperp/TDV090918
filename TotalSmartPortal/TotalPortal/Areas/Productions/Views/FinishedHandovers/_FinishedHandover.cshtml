@@ -42,7 +42,6 @@
                 .Name("kendoGridDetails")
                 .Columns(columns =>
                 {
-
                     columns.Bound(p => p.FinishedHandoverDetailID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= FinishedHandoverDetailID #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].FinishedHandoverDetailID' value='#= FinishedHandoverDetailID #' />");
                     columns.Bound(p => p.FinishedHandoverID).DisplayNameTitle().Hidden()
@@ -50,17 +49,12 @@
 
                     columns.Bound(p => p.FinishedProductID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= (FinishedProductID == null)? '' : FinishedProductID #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].FinishedProductID' value='#= (FinishedProductID == null) ? '' : FinishedProductID #' />");
-                    columns.Bound(p => p.FinishedProductDetailID).DisplayNameTitle().Hidden()
-                        .ClientTemplate("#= (FinishedProductDetailID == null)? '' : FinishedProductDetailID #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].FinishedProductDetailID' value='#= (FinishedProductDetailID == null) ? '' : FinishedProductDetailID #' />");
+                    columns.Bound(p => p.FinishedProductPackageID).DisplayNameTitle().Hidden()
+                        .ClientTemplate("#= (FinishedProductPackageID == null)? '' : FinishedProductPackageID #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].FinishedProductPackageID' value='#= (FinishedProductPackageID == null) ? '' : FinishedProductPackageID #' />");
 
-                    //columns.Bound(p => p.FinishedProductCode).DisplayNameTitle().Width(60)
-                    //    .ClientTemplate("#= (FinishedProductCode == null)? '' : FinishedProductCode #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].FinishedProductCode' value='#= (FinishedProductCode == null) ? '' : FinishedProductCode #' />");
-                    //columns.Bound(p => p.FinishedProductReference).DisplayNameTitle().Width(80)
-                    //    .ClientTemplate("#= (FinishedProductReference == null)? '' : FinishedProductReference #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].FinishedProductReference' value='#= (FinishedProductReference == null) ? '' : FinishedProductReference #' />");
-
-                    //columns.Bound(p => p.FinishedProductEntryDate).DisplayNameTitle().Width(80)
-                    //    .Format("{0:" + @Settings.DateFormat + "}")
-                    //    .ClientTemplate("#= (FinishedProductEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', FinishedProductEntryDate) #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].FinishedProductEntryDate' value='#= (FinishedProductEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', FinishedProductEntryDate) #' />");
+                    columns.Bound(p => p.FinishedProductEntryDate).DisplayNameTitle().Width(80)
+                        .Format("{0:" + @Settings.DateFormat + "}")
+                        .ClientTemplate("#= (FinishedProductEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', FinishedProductEntryDate) #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].FinishedProductEntryDate' value='#= (FinishedProductEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', FinishedProductEntryDate) #' />");
 
 
                     columns.Bound(p => p.CustomerID).DisplayNameTitle().Hidden()
@@ -85,15 +79,7 @@
                     columns.Bound(p => p.Remarks).DisplayNameTitle().Width(120)
                         .ClientTemplate("#= (Remarks == null)? '' : Remarks #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].Remarks' value='#= (Remarks == null) ? '' : Remarks #' />");
 
-
-                    columns.Bound(p => p.InActivePartial).DisplayNameTitle().Hidden()
-                        .ClientTemplate("#= (InActivePartial == null)? '' : InActivePartial #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].InActivePartial' value='#= (InActivePartial == null) ? '' : InActivePartial #' />");
-
-                    columns.Command(command => { command.Destroy().Text("<span class='command' ></span>"); }).Width(50).Hidden(!@Model.Editable).HtmlAttributes(new { @class = "grid-column-center" });
-
-                    columns.Template(model => null).HtmlAttributes(new { @class = "grid-column-center" }).Width(50).Hidden(!@Model.Voidable && !@Model.UnVoidable)
-                        .ClientTemplate("<a class='k-button' style='padding:0px;' onclick='callVoidDetail(#= FinishedProductDetailID #)'><span class='k-icon k-edit'></span></a>");
-                   
+                    columns.Command(command => { command.Destroy().Text("<span class='command' ></span>"); }).Width(50).Hidden(!@Model.Editable).HtmlAttributes(new { @class = "grid-column-center" });                   
                 })
                     .Filterable(f => f.Enabled(false))
                     .Navigatable()
@@ -128,22 +114,7 @@
                         settings.Mode(GridSelectionMode.Multiple);
                         settings.Type(GridSelectionType.Row);
                     })
-                    .Events(events =>
-                    {
-                        events.DataBound(@<text>
-                            function(e) {
-
-                            var grid = $("#kendoGridDetails").data("kendoGrid");
-                            var data = grid.dataSource.data();
-                            $.each(data, function (i, row) {
-                            var isWarrantyClaim = row.VoidTypeName;
-                            if (isWarrantyClaim != null && isWarrantyClaim != '') {
-                            $('tr[data-uid="' + row.uid + '"]').addClass("isBonus");
-                            }
-                            });
-                            }
-                        </text>);
-                    }).DataSource(dataSource => dataSource
+                    .DataSource(dataSource => dataSource
                         .Ajax()
                         .Batch(true)
                         .ServerOperation(false)
@@ -203,10 +174,7 @@
             }
             else
             {
-                if (!Model.Voidable && !Model.UnVoidable)
-                {
-                    <button type="button" class="k-button custom-button" onclick="location.href='@Url.Action("Print", "FinishedHandovers", new { id = @Model.FinishedHandoverID })'"> <img src="~/Content/Images/New/Apps-printer-icon.png" /> In tổng hợp xuất kho </button>
-                }
+                <button type="button" class="k-button custom-button" onclick="location.href='@Url.Action("Print", "FinishedHandovers", new { id = @Model.FinishedHandoverID })'"> <img src="~/Content/Images/New/Apps-printer-icon.png" /> In tổng hợp xuất kho </button>
             }
 
             @if (Model.FinishedHandoverID > 0 && !Model.Approvable && !Model.UnApprovable)
