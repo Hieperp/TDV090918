@@ -347,6 +347,7 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_SemifinishedProducts_GoodsReceiptDetails" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseAdjustmentDetails_GoodsReceiptDetails" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransferDetails_GoodsReceiptDetails" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProductDetails_FinishedProductPackages" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

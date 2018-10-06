@@ -2787,6 +2787,18 @@ warning 6035: The relationship 'FK_FinishedHandovers_AspNetUsers2' has columns t
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FinishedProductDetails_FinishedProductPackages">
+          <End Role="FinishedProductPackages" Type="Self.FinishedProductPackages" Multiplicity="0..1" />
+          <End Role="FinishedProductDetails" Type="Self.FinishedProductDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinishedProductPackages">
+              <PropertyRef Name="FinishedProductPackageID" />
+            </Principal>
+            <Dependent Role="FinishedProductDetails">
+              <PropertyRef Name="FinishedProductPackageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FinishedProductDetails_FinishedProducts">
           <End Role="FinishedProducts" Type="Self.FinishedProducts" Multiplicity="1" />
           <End Role="FinishedProductDetails" Type="Self.FinishedProductDetails" Multiplicity="*" />
@@ -6813,6 +6825,10 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           </AssociationSet>
           <AssociationSet Name="FK_FinishedProductDetails_Commodities" Association="Self.FK_FinishedProductDetails_Commodities">
             <End Role="Commodities" EntitySet="Commodities" />
+            <End Role="FinishedProductDetails" EntitySet="FinishedProductDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinishedProductDetails_FinishedProductPackages" Association="Self.FK_FinishedProductDetails_FinishedProductPackages">
+            <End Role="FinishedProductPackages" EntitySet="FinishedProductPackages" />
             <End Role="FinishedProductDetails" EntitySet="FinishedProductDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_FinishedProductDetails_FinishedProducts" Association="Self.FK_FinishedProductDetails_FinishedProducts">
@@ -12323,6 +12339,10 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <FunctionImport Name="GetGoodsReceiptViewDetails" ReturnType="Collection(TotalSmartPortalModel.GoodsReceiptViewDetail)">
           <Parameter Name="GoodsReceiptID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_FinishedProductDetails_FinishedProductPackages" Association="TotalSmartPortalModel.FK_FinishedProductDetails_FinishedProductPackages">
+            <End Role="FinishedProductPackage" EntitySet="FinishedProductPackages" />
+            <End Role="FinishedProductDetail" EntitySet="FinishedProductDetails" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="AccountInvoiceIndex">
           <Property Type="Int32" Name="AccountInvoiceID" Nullable="false" />
@@ -16503,6 +16523,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <NavigationProperty Name="Commodity" Relationship="TotalSmartPortalModel.FK_FinishedProductDetails_Commodities" FromRole="FinishedProductDetail" ToRole="Commodity" />
           <NavigationProperty Name="FinishedProduct" Relationship="TotalSmartPortalModel.FK_FinishedProductDetails_FinishedProducts" FromRole="FinishedProductDetail" ToRole="FinishedProduct" />
           <Property Name="FinishedProductPackageID" Type="Int32" />
+          <NavigationProperty Name="FinishedProductPackage" Relationship="TotalSmartPortalModel.FK_FinishedProductDetails_FinishedProductPackages" FromRole="FinishedProductDetail" ToRole="FinishedProductPackage" />
         </EntityType>
         <Association Name="FK_FinishedProductDetails_Commodities">
           <End Type="TotalSmartPortalModel.Commodity" Role="Commodity" Multiplicity="1" />
@@ -17341,6 +17362,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Name="HandoverApproved" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="FinishedHandoverDetails" Relationship="TotalSmartPortalModel.FK_FinishedHandoverDetails_FinishedProductPackages" FromRole="FinishedProductPackage" ToRole="FinishedHandoverDetail" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartPortalModel.FK_GoodsReceiptDetails_FinishedProductPackages" FromRole="FinishedProductPackage" ToRole="GoodsReceiptDetail" />
+          <NavigationProperty Name="FinishedProductDetails" Relationship="TotalSmartPortalModel.FK_FinishedProductDetails_FinishedProductPackages" FromRole="FinishedProductPackage" ToRole="FinishedProductDetail" />
         </EntityType>
         <EntityType Name="FinishedHandoverDetail">
           <Key>
@@ -17624,6 +17646,18 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="Int32" Name="FinishedProductPackageID" Nullable="true" />
           <Property Type="Int32" Name="FinishedProductID" Nullable="true" />
         </ComplexType>
+        <Association Name="FK_FinishedProductDetails_FinishedProductPackages">
+          <End Type="TotalSmartPortalModel.FinishedProductPackage" Role="FinishedProductPackage" Multiplicity="0..1" />
+          <End Type="TotalSmartPortalModel.FinishedProductDetail" Role="FinishedProductDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinishedProductPackage">
+              <PropertyRef Name="FinishedProductPackageID" />
+            </Principal>
+            <Dependent Role="FinishedProductDetail">
+              <PropertyRef Name="FinishedProductPackageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

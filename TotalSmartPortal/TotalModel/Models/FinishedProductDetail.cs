@@ -42,5 +42,6 @@ namespace TotalModel.Models
     
         public virtual Commodity Commodity { get; set; }
         public virtual FinishedProduct FinishedProduct { get; set; }
+        public virtual FinishedProductPackage FinishedProductPackage { get; set; }
     }
 }
