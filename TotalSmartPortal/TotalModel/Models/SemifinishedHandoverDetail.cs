@@ -20,7 +20,6 @@ namespace TotalModel.Models
         public int LocationID { get; set; }
         public int SemifinishedProductID { get; set; }
         public decimal Quantity { get; set; }
-        public decimal QuantityIssue { get; set; }
         public string Remarks { get; set; }
         public bool Approved { get; set; }
     

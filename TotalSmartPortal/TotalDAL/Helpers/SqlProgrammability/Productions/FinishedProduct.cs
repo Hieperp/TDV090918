@@ -208,24 +208,24 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "               UPDATE          FinishedProductDetails  SET Approved = @Approved WHERE FinishedProductID = @EntityID ; " + "\r\n";
 
 
-            #region INIT FinishedProductPackages
-            queryString = queryString + "               IF (@Approved = 1) " + "\r\n";
-            queryString = queryString + "                   BEGIN " + "\r\n";
+            //#region INIT FinishedProductPackages
+            //queryString = queryString + "               IF (@Approved = 1) " + "\r\n";
+            //queryString = queryString + "                   BEGIN " + "\r\n";
             
-            queryString = queryString + "                       INSERT INTO     FinishedProductPackages (FinishedProductID, EntryDate, LocationID, CustomerID, FirmOrderID, PlannedOrderID, FinishedHandoverID, CommodityID, CommodityTypeID, PiecePerPack, Quantity, QuantityFailure, Swarfs, QuantityReceipted, Packages, OddPackages, QuantityWeights, QuantityFailureWeights, Remarks, Approved, HandoverApproved) " + "\r\n";
+            //queryString = queryString + "                       INSERT INTO     FinishedProductPackages (FinishedProductID, EntryDate, LocationID, CustomerID, FirmOrderID, PlannedOrderID, FinishedHandoverID, CommodityID, CommodityTypeID, PiecePerPack, Quantity, QuantityFailure, Swarfs, QuantityReceipted, Packages, OddPackages, QuantityWeights, QuantityFailureWeights, Remarks, Approved, HandoverApproved) " + "\r\n";
             
-            queryString = queryString + "                       SELECT          FirmOrderDetails.FirmOrderID, FirmOrderDetails.PlannedOrderID, FirmOrderDetails.EntryDate, FirmOrderDetails.LocationID, FirmOrderDetails.CustomerID, FirmOrderDetails.BomID, FirmOrderDetails.BlockUnit, FirmOrderDetails.BlockQuantity, BomDetails.MaterialID, ROUND(SUM(FirmOrderDetails.Quantity * FirmOrderDetails.BlockQuantity / FirmOrderDetails.BlockUnit), " + (int)GlobalEnums.rndQuantity + ") AS Quantity, 0 AS QuantityIssued, FirmOrderDetails.VoidTypeID, FirmOrderDetails.Approved, FirmOrderDetails.InActive, FirmOrderDetails.InActivePartial, FirmOrderDetails.InActivePartialDate " + "\r\n";
-            queryString = queryString + "                       FROM            FirmOrderDetails INNER JOIN BomDetails ON FirmOrderDetails.PlannedOrderID = @EntityID AND FirmOrderDetails.BomID = BomDetails.BomID " + "\r\n";
-            queryString = queryString + "                       GROUP BY        FirmOrderDetails.FirmOrderID, FirmOrderDetails.PlannedOrderID, FirmOrderDetails.EntryDate, FirmOrderDetails.LocationID, FirmOrderDetails.CustomerID, FirmOrderDetails.BomID, FirmOrderDetails.BlockUnit, FirmOrderDetails.BlockQuantity, BomDetails.MaterialID, FirmOrderDetails.VoidTypeID, FirmOrderDetails.Approved, FirmOrderDetails.InActive, FirmOrderDetails.InActivePartial, FirmOrderDetails.InActivePartialDate; " + "\r\n";
+            //queryString = queryString + "                       SELECT          FirmOrderDetails.FirmOrderID, FirmOrderDetails.PlannedOrderID, FirmOrderDetails.EntryDate, FirmOrderDetails.LocationID, FirmOrderDetails.CustomerID, FirmOrderDetails.BomID, FirmOrderDetails.BlockUnit, FirmOrderDetails.BlockQuantity, BomDetails.MaterialID, ROUND(SUM(FirmOrderDetails.Quantity * FirmOrderDetails.BlockQuantity / FirmOrderDetails.BlockUnit), " + (int)GlobalEnums.rndQuantity + ") AS Quantity, 0 AS QuantityIssued, FirmOrderDetails.VoidTypeID, FirmOrderDetails.Approved, FirmOrderDetails.InActive, FirmOrderDetails.InActivePartial, FirmOrderDetails.InActivePartialDate " + "\r\n";
+            //queryString = queryString + "                       FROM            FirmOrderDetails INNER JOIN BomDetails ON FirmOrderDetails.PlannedOrderID = @EntityID AND FirmOrderDetails.BomID = BomDetails.BomID " + "\r\n";
+            //queryString = queryString + "                       GROUP BY        FirmOrderDetails.FirmOrderID, FirmOrderDetails.PlannedOrderID, FirmOrderDetails.EntryDate, FirmOrderDetails.LocationID, FirmOrderDetails.CustomerID, FirmOrderDetails.BomID, FirmOrderDetails.BlockUnit, FirmOrderDetails.BlockQuantity, BomDetails.MaterialID, FirmOrderDetails.VoidTypeID, FirmOrderDetails.Approved, FirmOrderDetails.InActive, FirmOrderDetails.InActivePartial, FirmOrderDetails.InActivePartialDate; " + "\r\n";
 
-            queryString = queryString + "                   END " + "\r\n";
+            //queryString = queryString + "                   END " + "\r\n";
 
-            queryString = queryString + "               ELSE " + "\r\n";
-            queryString = queryString + "                   BEGIN " + "\r\n";
-            queryString = queryString + "                       UPDATE          FinishedProductDetails SET FinishedProductPackageID = NULL WHERE FinishedProductID = @EntityID ; " + "\r\n"; 
-            queryString = queryString + "                       DELETE FROM     FinishedProductPackages WHERE FinishedProductID = @EntityID ; " + "\r\n";
-            queryString = queryString + "                   END " + "\r\n";
-            #endregion INIT FinishedProductPackages
+            //queryString = queryString + "               ELSE " + "\r\n";
+            //queryString = queryString + "                   BEGIN " + "\r\n";
+            //queryString = queryString + "                       UPDATE          FinishedProductDetails SET FinishedProductPackageID = NULL WHERE FinishedProductID = @EntityID ; " + "\r\n"; 
+            //queryString = queryString + "                       DELETE FROM     FinishedProductPackages WHERE FinishedProductID = @EntityID ; " + "\r\n";
+            //queryString = queryString + "                   END " + "\r\n";
+            //#endregion INIT FinishedProductPackages
 
 
             queryString = queryString + "           END " + "\r\n";
