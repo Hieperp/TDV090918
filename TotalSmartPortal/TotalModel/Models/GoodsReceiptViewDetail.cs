@@ -20,6 +20,15 @@ namespace TotalModel.Models
         public string PurchaseRequisitionReference { get; set; }
         public string PurchaseRequisitionCode { get; set; }
         public Nullable<System.DateTime> PurchaseRequisitionEntryDate { get; set; }
+        public Nullable<int> WarehouseTransferID { get; set; }
+        public Nullable<int> WarehouseTransferDetailID { get; set; }
+        public string WarehouseTransferReference { get; set; }
+        public Nullable<System.DateTime> WarehouseTransferEntryDate { get; set; }
+        public Nullable<int> WarehouseAdjustmentID { get; set; }
+        public Nullable<int> WarehouseAdjustmentDetailID { get; set; }
+        public string WarehouseAdjustmentReference { get; set; }
+        public Nullable<System.DateTime> WarehouseAdjustmentEntryDate { get; set; }
+        public Nullable<int> WarehouseAdjustmentTypeID { get; set; }
         public int CommodityID { get; set; }
         public string CommodityCode { get; set; }
         public string CommodityName { get; set; }
@@ -27,24 +36,15 @@ namespace TotalModel.Models
         public Nullable<decimal> QuantityRemains { get; set; }
         public decimal Quantity { get; set; }
         public string Remarks { get; set; }
-        public Nullable<int> WarehouseAdjustmentID { get; set; }
-        public Nullable<int> WarehouseAdjustmentDetailID { get; set; }
-        public string WarehouseAdjustmentReference { get; set; }
-        public Nullable<System.DateTime> WarehouseAdjustmentEntryDate { get; set; }
-        public Nullable<int> WarehouseAdjustmentTypeID { get; set; }
+        public Nullable<int> MaterialIssueDetailID { get; set; }
+        public Nullable<int> MaterialIssueID { get; set; }
         public string MaterialIssueReference { get; set; }
         public string MaterialIssueCode { get; set; }
         public Nullable<System.DateTime> MaterialIssueEntryDate { get; set; }
         public string WorkshiftName { get; set; }
         public Nullable<System.DateTime> WorkshiftEntryDate { get; set; }
         public string ProductionLinesCode { get; set; }
-        public Nullable<int> MaterialIssueDetailID { get; set; }
-        public Nullable<int> MaterialIssueID { get; set; }
-        public Nullable<int> FinishedProductDetailID { get; set; }
+        public Nullable<int> FinishedProductPackageID { get; set; }
         public Nullable<int> FinishedProductID { get; set; }
-        public Nullable<int> WarehouseTransferID { get; set; }
-        public Nullable<int> WarehouseTransferDetailID { get; set; }
-        public string WarehouseTransferReference { get; set; }
-        public Nullable<System.DateTime> WarehouseTransferEntryDate { get; set; }
     }
 }

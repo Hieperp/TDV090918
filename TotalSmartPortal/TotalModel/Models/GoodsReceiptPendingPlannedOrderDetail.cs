@@ -14,7 +14,6 @@ namespace TotalModel.Models
     public partial class GoodsReceiptPendingPlannedOrderDetail
     {
         public int FinishedProductID { get; set; }
-        public int FinishedProductDetailID { get; set; }
         public string FinishedProductReference { get; set; }
         public System.DateTime FinishedProductEntryDate { get; set; }
         public int CommodityID { get; set; }
@@ -26,5 +25,6 @@ namespace TotalModel.Models
         public string Description { get; set; }
         public string Remarks { get; set; }
         public Nullable<bool> IsSelected { get; set; }
+        public int FinishedProductPackageID { get; set; }
     }
 }

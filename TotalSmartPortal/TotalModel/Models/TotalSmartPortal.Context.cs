@@ -2295,15 +2295,6 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GoodsReceiptPendingPurchaseRequisition>("GetGoodsReceiptPendingPurchaseRequisitions", locationIDParameter);
         }
     
-        public virtual ObjectResult<GoodsReceiptViewDetail> GetGoodsReceiptViewDetails(Nullable<int> goodsReceiptID)
-        {
-            var goodsReceiptIDParameter = goodsReceiptID.HasValue ?
-                new ObjectParameter("GoodsReceiptID", goodsReceiptID) :
-                new ObjectParameter("GoodsReceiptID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GoodsReceiptViewDetail>("GetGoodsReceiptViewDetails", goodsReceiptIDParameter);
-        }
-    
         public virtual ObjectResult<string> GoodsReceiptApproved(Nullable<int> entityID)
         {
             var entityIDParameter = entityID.HasValue ?
@@ -3642,7 +3633,7 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GoodsReceiptPendingPlannedOrderCustomer>("GetGoodsReceiptPendingPlannedOrderCustomers", locationIDParameter);
         }
     
-        public virtual ObjectResult<GoodsReceiptPendingPlannedOrderDetail> GetGoodsReceiptPendingPlannedOrderDetails(Nullable<int> locationID, Nullable<int> goodsReceiptID, Nullable<int> plannedOrderID, Nullable<int> customerID, string finishedProductDetailIDs, Nullable<bool> isReadonly)
+        public virtual ObjectResult<GoodsReceiptPendingPlannedOrderDetail> GetGoodsReceiptPendingPlannedOrderDetails(Nullable<int> locationID, Nullable<int> goodsReceiptID, Nullable<int> plannedOrderID, Nullable<int> customerID, string finishedProductPackageIDs, Nullable<bool> isReadonly)
         {
             var locationIDParameter = locationID.HasValue ?
                 new ObjectParameter("LocationID", locationID) :
@@ -3660,15 +3651,15 @@ namespace TotalModel.Models
                 new ObjectParameter("CustomerID", customerID) :
                 new ObjectParameter("CustomerID", typeof(int));
     
-            var finishedProductDetailIDsParameter = finishedProductDetailIDs != null ?
-                new ObjectParameter("FinishedProductDetailIDs", finishedProductDetailIDs) :
-                new ObjectParameter("FinishedProductDetailIDs", typeof(string));
+            var finishedProductPackageIDsParameter = finishedProductPackageIDs != null ?
+                new ObjectParameter("FinishedProductPackageIDs", finishedProductPackageIDs) :
+                new ObjectParameter("FinishedProductPackageIDs", typeof(string));
     
             var isReadonlyParameter = isReadonly.HasValue ?
                 new ObjectParameter("IsReadonly", isReadonly) :
                 new ObjectParameter("IsReadonly", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GoodsReceiptPendingPlannedOrderDetail>("GetGoodsReceiptPendingPlannedOrderDetails", locationIDParameter, goodsReceiptIDParameter, plannedOrderIDParameter, customerIDParameter, finishedProductDetailIDsParameter, isReadonlyParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GoodsReceiptPendingPlannedOrderDetail>("GetGoodsReceiptPendingPlannedOrderDetails", locationIDParameter, goodsReceiptIDParameter, plannedOrderIDParameter, customerIDParameter, finishedProductPackageIDsParameter, isReadonlyParameter);
         }
     
         public virtual ObjectResult<GoodsReceiptPendingPlannedOrder> GetGoodsReceiptPendingPlannedOrders(Nullable<int> locationID)
@@ -3991,6 +3982,15 @@ namespace TotalModel.Models
                 new ObjectParameter("NMVNTaskID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GoodsReceiptPendingWarehouseTransfer>("GetGoodsReceiptPendingWarehouseTransfers", locationIDParameter, nMVNTaskIDParameter);
+        }
+    
+        public virtual ObjectResult<GoodsReceiptViewDetail> GetGoodsReceiptViewDetails(Nullable<int> goodsReceiptID)
+        {
+            var goodsReceiptIDParameter = goodsReceiptID.HasValue ?
+                new ObjectParameter("GoodsReceiptID", goodsReceiptID) :
+                new ObjectParameter("GoodsReceiptID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GoodsReceiptViewDetail>("GetGoodsReceiptViewDetails", goodsReceiptIDParameter);
         }
     }
 }
