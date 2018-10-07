@@ -16483,7 +16483,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="DateTime" Name="EntryDate" Nullable="true" />
           <Property Type="String" Name="Reference" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="LocationCode" Nullable="false" MaxLength="10" />
-          <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="100" />
           <Property Type="Int32" Name="TransferOrderTypeID" Nullable="false" />
           <Property Type="String" Name="TransferOrderTypeName" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="AdjustmentJobs" Nullable="true" MaxLength="100" />
@@ -21946,7 +21945,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
                 <ScalarProperty Name="Reference" ColumnName="Reference" />
                 <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
-                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
                 <ScalarProperty Name="TransferOrderTypeID" ColumnName="TransferOrderTypeID" />
                 <ScalarProperty Name="TransferOrderTypeName" ColumnName="TransferOrderTypeName" />
                 <ScalarProperty Name="AdjustmentJobs" ColumnName="AdjustmentJobs" />

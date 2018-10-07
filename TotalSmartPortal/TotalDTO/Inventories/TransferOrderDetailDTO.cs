@@ -23,8 +23,6 @@ namespace TotalDTO.Inventories
         [UIHint("AutoCompletes/CommodityBase")]
         public override string CommodityCode { get; set; }
 
-        public Nullable<int> CustomerID { get; set; }
-
         [Display(Name = "Tồn kho")]
         [UIHint("QuantityReadonly")]
         public decimal QuantityAvailables { get; set; }

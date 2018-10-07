@@ -19,8 +19,6 @@
 
     <div style="margin-top: 39px; margin-right: 18px;">
 
-        @Html.EditorFor(d => (d as ITransferOrderDTO).Customer, "AutoCompletes/CustomerBase", new { CustomerDescriptionHidden = "false", CustomerDisplayName = @Model.Customer.GetDisplayName(m => m.CustomerID) })
-
         @Html.EditorFor(d => (d as ITransferOrderDTO).Warehouse, new { WarehouseDisplayName = @Model.Warehouse.GetDisplayName(m => m.WarehouseID) })
 
         @Html.EditorFor(d => (d as ITransferOrderDTO).WarehouseReceipt, new { WarehouseDisplayName = @Model.WarehouseReceipt.GetDisplayName(m => m.WarehouseID) })
@@ -69,49 +67,6 @@
         function _setModelInput(selectedDataItem) {
         }
     }
-
-
-
-
-
-
-    $("#Customer_CustomerID").change(function (e) {
-        $("#Warehouse_WarehouseID").val($("#Customer_WarehouseID").val());
-        $("#Warehouse_Code").val($("#Customer_WarehouseCode").val());
-        $("#Warehouse_Name").val($("#Customer_WarehouseName").val());
-
-        $("#WarehouseReceipt_WarehouseID").val($("#Customer_WarehouseID").val());
-        $("#WarehouseReceipt_Code").val($("#Customer_WarehouseCode").val());
-        $("#WarehouseReceipt_Name").val($("#Customer_WarehouseName").val());
-
-        //Also remember last AutoComplete value for Warehouse
-        $("#Warehouse_TempName").val($("#Warehouse_Name").val());
-        //Also remember last AutoComplete value for Warehouse
-        $("#WarehouseReceipt_TempName").val($("#WarehouseReceipt_Name").val());
-    })
-
-
-
-    $("#Warehouse_WarehouseID").change(function (e) {
-        if ($("#NegativeOnly").val() == "True") {
-            $("#WarehouseReceipt_WarehouseID").val($("#Warehouse_WarehouseID").val());
-            $("#WarehouseReceipt_Code").val($("#Warehouse_Code").val());
-            $('#WarehouseReceipt_Name').val($("#Warehouse_Name").val());
-            //Also remember last AutoComplete value for Warehouse
-            $("#WarehouseReceipt_TempName").val($("#WarehouseReceipt_Name").val());
-        }
-    })
-
-    $("#WarehouseReceipt_WarehouseID").change(function (e) {
-        if ($("#PositiveOnly").val() == "True") {
-            $("#Warehouse_WarehouseID").val($("#WarehouseReceipt_WarehouseID").val());
-            $("#Warehouse_Code").val($("#WarehouseReceipt_Code").val());
-            $('#Warehouse_Name').val($("#WarehouseReceipt_Name").val());
-            //Also remember last AutoComplete value for Warehouse
-            $("#Warehouse_TempName").val($("#Warehouse_Name").val());
-        }
-    })
-
 </script>
 
 

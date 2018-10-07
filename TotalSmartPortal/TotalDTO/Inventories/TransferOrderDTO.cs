@@ -26,7 +26,6 @@ namespace TotalDTO.Inventories
         Nullable<int> WarehouseID { get; set; }
         Nullable<int> WarehouseReceiptID { get; set; }
         Nullable<int> LocationReceiptID { get; set; }
-        Nullable<int> CustomerID { get; set; }
 
         [Display(Name = "Mục đích")]
         string AdjustmentJobs { get; set; }
@@ -48,7 +47,6 @@ namespace TotalDTO.Inventories
         public virtual Nullable<int> WarehouseID { get; set; }
         public virtual Nullable<int> WarehouseReceiptID { get; set; }
         public virtual Nullable<int> LocationReceiptID { get; set; }
-        public virtual Nullable<int> CustomerID { get; set; }
 
         public string AdjustmentJobs { get; set; }
 
@@ -58,7 +56,7 @@ namespace TotalDTO.Inventories
         {
             base.PerformPresaveRule();
 
-            this.DtoDetails().ToList().ForEach(e => { e.TransferOrderTypeID = this.TransferOrderTypeID; e.NMVNTaskID = this.NMVNTaskID; e.WarehouseID = (int)this.WarehouseID; e.WarehouseReceiptID = this.WarehouseReceiptID; e.CustomerID = this.CustomerID; });
+            this.DtoDetails().ToList().ForEach(e => { e.TransferOrderTypeID = this.TransferOrderTypeID; e.NMVNTaskID = this.NMVNTaskID; e.WarehouseID = (int)this.WarehouseID; e.WarehouseReceiptID = this.WarehouseReceiptID; });
         }
 
     }
@@ -74,9 +72,6 @@ namespace TotalDTO.Inventories
         [Display(Name = "Nhân viên kho")]
         [UIHint("AutoCompletes/EmployeeBase")]
         EmployeeBaseDTO Storekeeper { get; set; }
-        [Display(Name = "Khách hàng")]
-        [UIHint("Commons/CustomerBase")]
-        CustomerBaseDTO Customer { get; set; }
 
         List<TransferOrderDetailDTO> TransferOrderViewDetails { get; set; }
         List<TransferOrderDetailDTO> ViewDetails { get; set; }
@@ -108,9 +103,6 @@ namespace TotalDTO.Inventories
 
         public override int StorekeeperID { get { return (this.Storekeeper != null ? this.Storekeeper.EmployeeID : 0); } }
         public EmployeeBaseDTO Storekeeper { get; set; }
-
-        public override Nullable<int> CustomerID { get { int? customerID = null; if (this.Customer != null) customerID = this.Customer.CustomerID; return customerID; } }
-        public CustomerBaseDTO Customer { get; set; }
 
         public override Nullable<int> VoidTypeID { get { return (this.VoidType != null ? this.VoidType.VoidTypeID : null); } }        
         public VoidTypeBaseDTO VoidType { get; set; }

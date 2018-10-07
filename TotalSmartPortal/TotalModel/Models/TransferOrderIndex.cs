@@ -17,7 +17,6 @@ namespace TotalModel.Models
         public Nullable<System.DateTime> EntryDate { get; set; }
         public string Reference { get; set; }
         public string LocationCode { get; set; }
-        public string CustomerName { get; set; }
         public int TransferOrderTypeID { get; set; }
         public string TransferOrderTypeName { get; set; }
         public string AdjustmentJobs { get; set; }
