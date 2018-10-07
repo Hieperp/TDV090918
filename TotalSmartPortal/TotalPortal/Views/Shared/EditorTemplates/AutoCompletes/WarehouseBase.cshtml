@@ -4,6 +4,7 @@
 
 @Html.HiddenFor(model => model.WarehouseID)
 @Html.HiddenFor(model => model.Code)
+@Html.HiddenFor(model => model.LocationID)
 
 @Html.Hidden("TempName", (@Model != null ? @Model.Name : ""))
 
@@ -52,6 +53,7 @@
 
         $("#" + modelID + "WarehouseID").val(dataItem.WarehouseID);
         $("#" + modelID + "Code").val(dataItem.Code);
+        $("#" + modelID + "LocationID").val(dataItem.LocationID);
 
         //Remember last AutoComplete value
         $("#" + modelID + "TempName").val(dataItem.Name);

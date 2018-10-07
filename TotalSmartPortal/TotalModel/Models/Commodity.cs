@@ -31,10 +31,10 @@ namespace TotalModel.Models
             this.MaterialIssueDetails = new HashSet<MaterialIssueDetail>();
             this.SemifinishedProductDetails = new HashSet<SemifinishedProductDetail>();
             this.FinishedProductDetails = new HashSet<FinishedProductDetail>();
-            this.TransferOrderDetails = new HashSet<TransferOrderDetail>();
             this.WarehouseTransferDetails = new HashSet<WarehouseTransferDetail>();
             this.FinishedHandoverDetails = new HashSet<FinishedHandoverDetail>();
             this.GoodsReceiptDetails = new HashSet<GoodsReceiptDetail>();
+            this.TransferOrderDetails = new HashSet<TransferOrderDetail>();
         }
     
         public int CommodityID { get; set; }
@@ -106,12 +106,12 @@ namespace TotalModel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FinishedProductDetail> FinishedProductDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TransferOrderDetail> TransferOrderDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WarehouseTransferDetail> WarehouseTransferDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FinishedHandoverDetail> FinishedHandoverDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TransferOrderDetail> TransferOrderDetails { get; set; }
     }
 }

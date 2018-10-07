@@ -283,29 +283,14 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProductDetails_Commodities" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProductDetails_FinishedProducts" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.TransferOrderType" Width="1.5" PointX="40.375" PointY="40.25" />
-        <EntityTypeShape EntityType="TotalSmartPortalModel.TransferOrderDetail" Width="1.5" PointX="44.875" PointY="25.5" />
-        <EntityTypeShape EntityType="TotalSmartPortalModel.TransferOrder" Width="1.5" PointX="42.625" PointY="29.5" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.WarehouseTransferDetail" Width="1.5" PointX="55.375" PointY="25.75" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.WarehouseTransfer" Width="1.5" PointX="49.875" PointY="29.875" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrderDetails_Commodities" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransferDetails_Commodities" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_Customers" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_Employees" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_Locations" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_Locations" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrderDetails_TransferOrders" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrderDetails_Warehouses" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrderDetails_Warehouses1" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransferDetails_TransferOrderDetails" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_TransferOrderTypes" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_Warehouses" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_Warehouses1" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransferDetails_TransferOrders" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_TransferOrders" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_WarehouseReceipts" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_Warehouses" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransferDetails_WarehouseTransfers" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_VoidTypes" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.GoodsReceipt" Width="1.5" PointX="52.125" PointY="32" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceipts_Customers" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceipts_Locations" />
@@ -349,6 +334,21 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandovers_Employees1" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandoverDetails_FinishedHandovers" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandovers_Locations" />
+        <EntityTypeShape EntityType="TotalSmartPortalModel.TransferOrderDetail" Width="1.5" PointX="46.875" PointY="25.625" />
+        <EntityTypeShape EntityType="TotalSmartPortalModel.TransferOrder" Width="1.5" PointX="44.625" PointY="25.5" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrderDetails_Commodities" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_Locations" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_Locations1" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrderDetails_TransferOrders" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrderDetails_Warehouses" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrderDetails_Warehouses1" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransferDetails_TransferOrderDetails" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_TransferOrderTypes" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_VoidTypes" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_Warehouses" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_Warehouses1" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransferDetails_TransferOrders" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_TransferOrders" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -42,11 +42,11 @@ namespace TotalModel.Models
         public bool HasTransferOrder { get; set; }
     
         public virtual Commodity Commodity { get; set; }
-        public virtual TransferOrderDetail TransferOrderDetail { get; set; }
-        public virtual TransferOrder TransferOrder { get; set; }
         public virtual WarehouseTransfer WarehouseTransfer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
         public virtual GoodsReceiptDetail GoodsReceiptDetail { get; set; }
+        public virtual TransferOrderDetail TransferOrderDetail { get; set; }
+        public virtual TransferOrder TransferOrder { get; set; }
     }
 }

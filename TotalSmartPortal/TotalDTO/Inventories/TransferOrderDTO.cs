@@ -25,6 +25,7 @@ namespace TotalDTO.Inventories
         int TransferOrderTypeID { get; set; }
         Nullable<int> WarehouseID { get; set; }
         Nullable<int> WarehouseReceiptID { get; set; }
+        Nullable<int> LocationReceiptID { get; set; }
         Nullable<int> CustomerID { get; set; }
 
         [Display(Name = "Mục đích")]
@@ -46,6 +47,7 @@ namespace TotalDTO.Inventories
 
         public virtual Nullable<int> WarehouseID { get; set; }
         public virtual Nullable<int> WarehouseReceiptID { get; set; }
+        public virtual Nullable<int> LocationReceiptID { get; set; }
         public virtual Nullable<int> CustomerID { get; set; }
 
         public string AdjustmentJobs { get; set; }
@@ -101,6 +103,7 @@ namespace TotalDTO.Inventories
         public WarehouseBaseDTO Warehouse { get; set; }
 
         public override Nullable<int> WarehouseReceiptID { get { return (this.WarehouseReceipt != null ? this.WarehouseReceipt.WarehouseID : null); } }
+        public override Nullable<int> LocationReceiptID { get { return (this.WarehouseReceipt != null ? (Nullable<int>)this.WarehouseReceipt.LocationID : null); } }
         public WarehouseBaseDTO WarehouseReceipt { get; set; }
 
         public override int StorekeeperID { get { return (this.Storekeeper != null ? this.Storekeeper.EmployeeID : 0); } }

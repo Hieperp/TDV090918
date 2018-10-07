@@ -25,13 +25,13 @@ namespace TotalModel.Models
         public System.DateTime EntryDate { get; set; }
         public string Reference { get; set; }
         public int NMVNTaskID { get; set; }
-        public int CustomerID { get; set; }
         public int TransferOrderTypeID { get; set; }
         public string AdjustmentJobs { get; set; }
         public int OrganizationalUnitID { get; set; }
         public int LocationID { get; set; }
         public int WarehouseID { get; set; }
         public int WarehouseReceiptID { get; set; }
+        public int LocationReceiptID { get; set; }
         public int CommodityID { get; set; }
         public int CommodityTypeID { get; set; }
         public decimal Quantity { get; set; }

@@ -20,6 +20,7 @@ namespace TotalDTO.Commons
         [UIHint("AutoCompletes/WarehouseBase")]
         [Required(ErrorMessage = "Vui lòng nhập kho hàng")]
         string Name { get; set; }
+        int LocationID { get; set; }
     }
 
     public class WarehouseBaseDTO : BaseDTO, IWarehouseBaseDTO
@@ -27,6 +28,7 @@ namespace TotalDTO.Commons
         public Nullable<int> WarehouseID { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
+        public int LocationID { get; set; }
     }
 
     public class WarehouseDTO

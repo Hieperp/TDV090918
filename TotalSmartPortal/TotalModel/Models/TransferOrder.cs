@@ -26,9 +26,9 @@ namespace TotalModel.Models
         public System.DateTime EntryDate { get; set; }
         public string Reference { get; set; }
         public int NMVNTaskID { get; set; }
-        public int CustomerID { get; set; }
         public int WarehouseID { get; set; }
         public int WarehouseReceiptID { get; set; }
+        public int LocationReceiptID { get; set; }
         public int TransferOrderTypeID { get; set; }
         public int StorekeeperID { get; set; }
         public bool HasPositiveLine { get; set; }
@@ -49,17 +49,17 @@ namespace TotalModel.Models
         public bool InActivePartial { get; set; }
         public Nullable<System.DateTime> InActiveDate { get; set; }
     
-        public virtual Customer Customer { get; set; }
         public virtual Location Location { get; set; }
+        public virtual Location Location1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransferOrderDetail> TransferOrderDetails { get; set; }
         public virtual TransferOrderType TransferOrderType { get; set; }
+        public virtual VoidType VoidType { get; set; }
         public virtual Warehouse Warehouse { get; set; }
         public virtual Warehouse Warehouse1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WarehouseTransferDetail> WarehouseTransferDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WarehouseTransfer> WarehouseTransfers { get; set; }
-        public virtual VoidType VoidType { get; set; }
     }
 }

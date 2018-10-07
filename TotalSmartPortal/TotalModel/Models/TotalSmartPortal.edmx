@@ -1851,13 +1851,13 @@
           <Property Name="EntryDate" Type="datetime" Nullable="false" />
           <Property Name="Reference" Type="nvarchar" MaxLength="10" />
           <Property Name="NMVNTaskID" Type="int" Nullable="false" />
-          <Property Name="CustomerID" Type="int" Nullable="false" />
           <Property Name="TransferOrderTypeID" Type="int" Nullable="false" />
           <Property Name="AdjustmentJobs" Type="nvarchar" MaxLength="100" />
           <Property Name="OrganizationalUnitID" Type="int" Nullable="false" />
           <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="WarehouseID" Type="int" Nullable="false" />
           <Property Name="WarehouseReceiptID" Type="int" Nullable="false" />
+          <Property Name="LocationReceiptID" Type="int" Nullable="false" />
           <Property Name="CommodityID" Type="int" Nullable="false" />
           <Property Name="CommodityTypeID" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
@@ -1877,9 +1877,9 @@
           <Property Name="EntryDate" Type="datetime" Nullable="false" />
           <Property Name="Reference" Type="nvarchar" MaxLength="10" />
           <Property Name="NMVNTaskID" Type="int" Nullable="false" />
-          <Property Name="CustomerID" Type="int" Nullable="false" />
           <Property Name="WarehouseID" Type="int" Nullable="false" />
           <Property Name="WarehouseReceiptID" Type="int" Nullable="false" />
+          <Property Name="LocationReceiptID" Type="int" Nullable="false" />
           <Property Name="TransferOrderTypeID" Type="int" Nullable="false" />
           <Property Name="StorekeeperID" Type="int" Nullable="false" />
           <Property Name="HasPositiveLine" Type="bit" Nullable="false" />
@@ -5021,18 +5021,6 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TransferOrders_Customers">
-          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
-          <End Role="TransferOrders" Type="Self.TransferOrders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customers">
-              <PropertyRef Name="CustomerID" />
-            </Principal>
-            <Dependent Role="TransferOrders">
-              <PropertyRef Name="CustomerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TransferOrders_Locations">
           <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
           <End Role="TransferOrders" Type="Self.TransferOrders" Multiplicity="*" />
@@ -5042,6 +5030,18 @@ warning 6035: The relationship 'FK_SemifinishedProducts_AspNetUsers2' has column
             </Principal>
             <Dependent Role="TransferOrders">
               <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransferOrders_Locations1">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+          <End Role="TransferOrders" Type="Self.TransferOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="TransferOrders">
+              <PropertyRef Name="LocationReceiptID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7539,11 +7539,11 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
             <End Role="Warehouses" EntitySet="Warehouses" />
             <End Role="TransferOrderDetails" EntitySet="TransferOrderDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_TransferOrders_Customers" Association="Self.FK_TransferOrders_Customers">
-            <End Role="Customers" EntitySet="Customers" />
+          <AssociationSet Name="FK_TransferOrders_Locations" Association="Self.FK_TransferOrders_Locations">
+            <End Role="Locations" EntitySet="Locations" />
             <End Role="TransferOrders" EntitySet="TransferOrders" />
           </AssociationSet>
-          <AssociationSet Name="FK_TransferOrders_Locations" Association="Self.FK_TransferOrders_Locations">
+          <AssociationSet Name="FK_TransferOrders_Locations1" Association="Self.FK_TransferOrders_Locations1">
             <End Role="Locations" EntitySet="Locations" />
             <End Role="TransferOrders" EntitySet="TransferOrders" />
           </AssociationSet>
@@ -7964,7 +7964,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <NavigationProperty Name="MaterialIssues" Relationship="TotalSmartPortalModel.FK_MaterialIssues_Customers" FromRole="Customer" ToRole="MaterialIssue" />
           <NavigationProperty Name="SemifinishedProducts" Relationship="TotalSmartPortalModel.FK_SemifinishedProducts_Customers" FromRole="Customer" ToRole="SemifinishedProduct" />
           <NavigationProperty Name="FinishedProducts" Relationship="TotalSmartPortalModel.FK_FinishedProducts_Customers" FromRole="Customer" ToRole="FinishedProduct" />
-          <NavigationProperty Name="TransferOrders" Relationship="TotalSmartPortalModel.FK_TransferOrders_Customers" FromRole="Customer" ToRole="TransferOrder" />
           <NavigationProperty Name="GoodsReceipts" Relationship="TotalSmartPortalModel.FK_GoodsReceipts_Customers" FromRole="Customer" ToRole="GoodsReceipt" />
           <NavigationProperty Name="FinishedHandovers" Relationship="TotalSmartPortalModel.FK_FinishedHandovers_Customers" FromRole="Customer" ToRole="FinishedHandover" />
         </EntityType>
@@ -8431,11 +8430,12 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <NavigationProperty Name="MaterialIssues" Relationship="TotalSmartPortalModel.FK_MaterialIssues_Locations" FromRole="Location" ToRole="MaterialIssue" />
           <NavigationProperty Name="SemifinishedProducts" Relationship="TotalSmartPortalModel.FK_SemifinishedProducts_Locations" FromRole="Location" ToRole="SemifinishedProduct" />
           <NavigationProperty Name="FinishedProducts" Relationship="TotalSmartPortalModel.FK_FinishedProducts_Locations" FromRole="Location" ToRole="FinishedProduct" />
-          <NavigationProperty Name="TransferOrders" Relationship="TotalSmartPortalModel.FK_TransferOrders_Locations" FromRole="Location" ToRole="TransferOrder" />
           <NavigationProperty Name="WarehouseTransfers" Relationship="TotalSmartPortalModel.FK_WarehouseTransfers_Locations" FromRole="Location" ToRole="WarehouseTransfer" />
           <NavigationProperty Name="GoodsReceipts" Relationship="TotalSmartPortalModel.FK_GoodsReceipts_Locations" FromRole="Location" ToRole="GoodsReceipt" />
           <NavigationProperty Name="SemifinishedHandovers" Relationship="TotalSmartPortalModel.FK_SemifinishedHandovers_Locations" FromRole="Location" ToRole="SemifinishedHandover" />
           <NavigationProperty Name="FinishedHandovers" Relationship="TotalSmartPortalModel.FK_FinishedHandovers_Locations" FromRole="Location" ToRole="FinishedHandover" />
+          <NavigationProperty Name="TransferOrders" Relationship="TotalSmartPortalModel.FK_TransferOrders_Locations" FromRole="Location" ToRole="TransferOrder" />
+          <NavigationProperty Name="TransferOrders1" Relationship="TotalSmartPortalModel.FK_TransferOrders_Locations1" FromRole="Location" ToRole="TransferOrder" />
         </EntityType>
         <EntityType Name="Module">
           <Key>
@@ -12050,68 +12050,18 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <FunctionImport Name="TransferOrderVoidable" ReturnType="Collection(String)">
           <Parameter Name="EntityID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="TransferOrderDetails" EntityType="TotalSmartPortalModel.TransferOrderDetail" />
-          <EntitySet Name="TransferOrders" EntityType="TotalSmartPortalModel.TransferOrder" />
           <EntitySet Name="WarehouseTransferDetails" EntityType="TotalSmartPortalModel.WarehouseTransferDetail" />
           <EntitySet Name="WarehouseTransfers" EntityType="TotalSmartPortalModel.WarehouseTransfer" />
-          <AssociationSet Name="FK_TransferOrderDetails_Commodities" Association="TotalSmartPortalModel.FK_TransferOrderDetails_Commodities">
-            <End Role="Commodity" EntitySet="Commodities" />
-            <End Role="TransferOrderDetail" EntitySet="TransferOrderDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_WarehouseTransferDetails_Commodities" Association="TotalSmartPortalModel.FK_WarehouseTransferDetails_Commodities">
             <End Role="Commodity" EntitySet="Commodities" />
             <End Role="WarehouseTransferDetail" EntitySet="WarehouseTransferDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TransferOrders_Customers" Association="TotalSmartPortalModel.FK_TransferOrders_Customers">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="TransferOrder" EntitySet="TransferOrders" />
           </AssociationSet>
           <AssociationSet Name="FK_WarehouseTransfers_Employees" Association="TotalSmartPortalModel.FK_WarehouseTransfers_Employees">
             <End Role="Employee" EntitySet="Employees" />
             <End Role="WarehouseTransfer" EntitySet="WarehouseTransfers" />
           </AssociationSet>
-          <AssociationSet Name="FK_TransferOrders_Locations" Association="TotalSmartPortalModel.FK_TransferOrders_Locations">
-            <End Role="Location" EntitySet="Locations" />
-            <End Role="TransferOrder" EntitySet="TransferOrders" />
-          </AssociationSet>
           <AssociationSet Name="FK_WarehouseTransfers_Locations" Association="TotalSmartPortalModel.FK_WarehouseTransfers_Locations">
             <End Role="Location" EntitySet="Locations" />
-            <End Role="WarehouseTransfer" EntitySet="WarehouseTransfers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TransferOrderDetails_TransferOrders" Association="TotalSmartPortalModel.FK_TransferOrderDetails_TransferOrders">
-            <End Role="TransferOrder" EntitySet="TransferOrders" />
-            <End Role="TransferOrderDetail" EntitySet="TransferOrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TransferOrderDetails_Warehouses" Association="TotalSmartPortalModel.FK_TransferOrderDetails_Warehouses">
-            <End Role="Warehouse" EntitySet="Warehouses" />
-            <End Role="TransferOrderDetail" EntitySet="TransferOrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TransferOrderDetails_Warehouses1" Association="TotalSmartPortalModel.FK_TransferOrderDetails_Warehouses1">
-            <End Role="Warehouse" EntitySet="Warehouses" />
-            <End Role="TransferOrderDetail" EntitySet="TransferOrderDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WarehouseTransferDetails_TransferOrderDetails" Association="TotalSmartPortalModel.FK_WarehouseTransferDetails_TransferOrderDetails">
-            <End Role="TransferOrderDetail" EntitySet="TransferOrderDetails" />
-            <End Role="WarehouseTransferDetail" EntitySet="WarehouseTransferDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TransferOrders_TransferOrderTypes" Association="TotalSmartPortalModel.FK_TransferOrders_TransferOrderTypes">
-            <End Role="TransferOrderType" EntitySet="TransferOrderTypes" />
-            <End Role="TransferOrder" EntitySet="TransferOrders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TransferOrders_Warehouses" Association="TotalSmartPortalModel.FK_TransferOrders_Warehouses">
-            <End Role="Warehouse" EntitySet="Warehouses" />
-            <End Role="TransferOrder" EntitySet="TransferOrders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TransferOrders_Warehouses1" Association="TotalSmartPortalModel.FK_TransferOrders_Warehouses1">
-            <End Role="Warehouse" EntitySet="Warehouses" />
-            <End Role="TransferOrder" EntitySet="TransferOrders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WarehouseTransferDetails_TransferOrders" Association="TotalSmartPortalModel.FK_WarehouseTransferDetails_TransferOrders">
-            <End Role="TransferOrder" EntitySet="TransferOrders" />
-            <End Role="WarehouseTransferDetail" EntitySet="WarehouseTransferDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WarehouseTransfers_TransferOrders" Association="TotalSmartPortalModel.FK_WarehouseTransfers_TransferOrders">
-            <End Role="TransferOrder" EntitySet="TransferOrders" />
             <End Role="WarehouseTransfer" EntitySet="WarehouseTransfers" />
           </AssociationSet>
           <AssociationSet Name="FK_WarehouseTransfers_WarehouseReceipts" Association="TotalSmartPortalModel.FK_WarehouseTransfers_WarehouseReceipts">
@@ -12170,10 +12120,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
             <Parameter Name="LocationID" Mode="In" Type="Int32" />
             <Parameter Name="NMVNTaskID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <AssociationSet Name="FK_TransferOrders_VoidTypes" Association="TotalSmartPortalModel.FK_TransferOrders_VoidTypes">
-            <End Role="VoidType" EntitySet="VoidTypes" />
-            <End Role="TransferOrder" EntitySet="TransferOrders" />
-          </AssociationSet>
           <FunctionImport Name="GetGoodsReceiptPendingWarehouses" ReturnType="Collection(TotalSmartPortalModel.GoodsReceiptPendingWarehouse)">
             <Parameter Name="LocationID" Mode="In" Type="Int32" />
             <Parameter Name="NMVNTaskID" Mode="In" Type="Int32" />
@@ -12338,6 +12284,60 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <AssociationSet Name="FK_FinishedHandovers_Locations" Association="TotalSmartPortalModel.FK_FinishedHandovers_Locations">
             <End Role="Location" EntitySet="Locations" />
             <End Role="FinishedHandover" EntitySet="FinishedHandovers" />
+          </AssociationSet>
+          <EntitySet Name="TransferOrderDetails" EntityType="TotalSmartPortalModel.TransferOrderDetail" />
+          <EntitySet Name="TransferOrders" EntityType="TotalSmartPortalModel.TransferOrder" />
+          <AssociationSet Name="FK_TransferOrderDetails_Commodities" Association="TotalSmartPortalModel.FK_TransferOrderDetails_Commodities">
+            <End Role="Commodity" EntitySet="Commodities" />
+            <End Role="TransferOrderDetail" EntitySet="TransferOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransferOrders_Locations" Association="TotalSmartPortalModel.FK_TransferOrders_Locations">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="TransferOrder" EntitySet="TransferOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransferOrders_Locations1" Association="TotalSmartPortalModel.FK_TransferOrders_Locations1">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="TransferOrder" EntitySet="TransferOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransferOrderDetails_TransferOrders" Association="TotalSmartPortalModel.FK_TransferOrderDetails_TransferOrders">
+            <End Role="TransferOrder" EntitySet="TransferOrders" />
+            <End Role="TransferOrderDetail" EntitySet="TransferOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransferOrderDetails_Warehouses" Association="TotalSmartPortalModel.FK_TransferOrderDetails_Warehouses">
+            <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="TransferOrderDetail" EntitySet="TransferOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransferOrderDetails_Warehouses1" Association="TotalSmartPortalModel.FK_TransferOrderDetails_Warehouses1">
+            <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="TransferOrderDetail" EntitySet="TransferOrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarehouseTransferDetails_TransferOrderDetails" Association="TotalSmartPortalModel.FK_WarehouseTransferDetails_TransferOrderDetails">
+            <End Role="TransferOrderDetail" EntitySet="TransferOrderDetails" />
+            <End Role="WarehouseTransferDetail" EntitySet="WarehouseTransferDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransferOrders_TransferOrderTypes" Association="TotalSmartPortalModel.FK_TransferOrders_TransferOrderTypes">
+            <End Role="TransferOrderType" EntitySet="TransferOrderTypes" />
+            <End Role="TransferOrder" EntitySet="TransferOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransferOrders_VoidTypes" Association="TotalSmartPortalModel.FK_TransferOrders_VoidTypes">
+            <End Role="VoidType" EntitySet="VoidTypes" />
+            <End Role="TransferOrder" EntitySet="TransferOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransferOrders_Warehouses" Association="TotalSmartPortalModel.FK_TransferOrders_Warehouses">
+            <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="TransferOrder" EntitySet="TransferOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransferOrders_Warehouses1" Association="TotalSmartPortalModel.FK_TransferOrders_Warehouses1">
+            <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="TransferOrder" EntitySet="TransferOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarehouseTransferDetails_TransferOrders" Association="TotalSmartPortalModel.FK_WarehouseTransferDetails_TransferOrders">
+            <End Role="TransferOrder" EntitySet="TransferOrders" />
+            <End Role="WarehouseTransferDetail" EntitySet="WarehouseTransferDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarehouseTransfers_TransferOrders" Association="TotalSmartPortalModel.FK_WarehouseTransfers_TransferOrders">
+            <End Role="TransferOrder" EntitySet="TransferOrders" />
+            <End Role="WarehouseTransfer" EntitySet="WarehouseTransfers" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="AccountInvoiceIndex">
@@ -13906,15 +13906,15 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <NavigationProperty Name="WarehouseAdjustments" Relationship="TotalSmartPortalModel.FK_WarehouseAdjustments_Warehouses" FromRole="Warehouse" ToRole="WarehouseAdjustment" />
           <NavigationProperty Name="WarehouseAdjustments1" Relationship="TotalSmartPortalModel.FK_WarehouseAdjustments_Warehouses1" FromRole="Warehouse" ToRole="WarehouseAdjustment" />
           <NavigationProperty Name="MaterialIssues" Relationship="TotalSmartPortalModel.FK_MaterialIssues_Warehouses" FromRole="Warehouse" ToRole="MaterialIssue" />
-          <NavigationProperty Name="TransferOrderDetails" Relationship="TotalSmartPortalModel.FK_TransferOrderDetails_Warehouses" FromRole="Warehouse" ToRole="TransferOrderDetail" />
-          <NavigationProperty Name="TransferOrderDetails1" Relationship="TotalSmartPortalModel.FK_TransferOrderDetails_Warehouses1" FromRole="Warehouse" ToRole="TransferOrderDetail" />
-          <NavigationProperty Name="TransferOrders" Relationship="TotalSmartPortalModel.FK_TransferOrders_Warehouses" FromRole="Warehouse" ToRole="TransferOrder" />
-          <NavigationProperty Name="TransferOrders1" Relationship="TotalSmartPortalModel.FK_TransferOrders_Warehouses1" FromRole="Warehouse" ToRole="TransferOrder" />
           <NavigationProperty Name="WarehouseTransfers" Relationship="TotalSmartPortalModel.FK_WarehouseTransfers_WarehouseReceipts" FromRole="Warehouse" ToRole="WarehouseTransfer" />
           <NavigationProperty Name="WarehouseTransfers1" Relationship="TotalSmartPortalModel.FK_WarehouseTransfers_Warehouses" FromRole="Warehouse" ToRole="WarehouseTransfer" />
           <NavigationProperty Name="GoodsReceipts" Relationship="TotalSmartPortalModel.FK_GoodsReceipts_Warehouses" FromRole="Warehouse" ToRole="GoodsReceipt" />
           <NavigationProperty Name="GoodsReceipts1" Relationship="TotalSmartPortalModel.FK_GoodsReceipts_Warehouses1" FromRole="Warehouse" ToRole="GoodsReceipt" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartPortalModel.FK_GoodsReceiptDetails_Warehouses" FromRole="Warehouse" ToRole="GoodsReceiptDetail" />
+          <NavigationProperty Name="TransferOrderDetails" Relationship="TotalSmartPortalModel.FK_TransferOrderDetails_Warehouses" FromRole="Warehouse" ToRole="TransferOrderDetail" />
+          <NavigationProperty Name="TransferOrderDetails1" Relationship="TotalSmartPortalModel.FK_TransferOrderDetails_Warehouses1" FromRole="Warehouse" ToRole="TransferOrderDetail" />
+          <NavigationProperty Name="TransferOrders" Relationship="TotalSmartPortalModel.FK_TransferOrders_Warehouses" FromRole="Warehouse" ToRole="TransferOrder" />
+          <NavigationProperty Name="TransferOrders1" Relationship="TotalSmartPortalModel.FK_TransferOrders_Warehouses1" FromRole="Warehouse" ToRole="TransferOrder" />
           </EntityType>
         <Association Name="FK_DeliveryAdvices_Warehouses">
           <End Type="TotalSmartPortalModel.Warehouse" Role="Warehouse" Multiplicity="1" />
@@ -14269,10 +14269,10 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <NavigationProperty Name="MaterialIssueDetails" Relationship="TotalSmartPortalModel.FK_MaterialIssueDetails_Commodities" FromRole="Commodity" ToRole="MaterialIssueDetail" />
           <NavigationProperty Name="SemifinishedProductDetails" Relationship="TotalSmartPortalModel.FK_SemifinishedProductDetails_Commodities" FromRole="Commodity" ToRole="SemifinishedProductDetail" />
           <NavigationProperty Name="FinishedProductDetails" Relationship="TotalSmartPortalModel.FK_FinishedProductDetails_Commodities" FromRole="Commodity" ToRole="FinishedProductDetail" />
-          <NavigationProperty Name="TransferOrderDetails" Relationship="TotalSmartPortalModel.FK_TransferOrderDetails_Commodities" FromRole="Commodity" ToRole="TransferOrderDetail" />
           <NavigationProperty Name="WarehouseTransferDetails" Relationship="TotalSmartPortalModel.FK_WarehouseTransferDetails_Commodities" FromRole="Commodity" ToRole="WarehouseTransferDetail" />
           <NavigationProperty Name="FinishedHandoverDetails" Relationship="TotalSmartPortalModel.FK_FinishedHandoverDetails_Commodities" FromRole="Commodity" ToRole="FinishedHandoverDetail" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartPortalModel.FK_GoodsReceiptDetails_Commodities" FromRole="Commodity" ToRole="GoodsReceiptDetail" />
+          <NavigationProperty Name="TransferOrderDetails" Relationship="TotalSmartPortalModel.FK_TransferOrderDetails_Commodities" FromRole="Commodity" ToRole="TransferOrderDetail" />
         </EntityType>
         <EntityType Name="CommodityBrand">
           <Key>
@@ -16510,78 +16510,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="Int32" Name="VoidClassID" Nullable="true" />
           <Property Type="Boolean" Name="InActivePartial" Nullable="true" />
         </ComplexType>
-        <EntityType Name="TransferOrderDetail">
-          <Key>
-            <PropertyRef Name="TransferOrderDetailID" />
-          </Key>
-          <Property Name="TransferOrderDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TransferOrderID" Type="Int32" Nullable="false" />
-          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Reference" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="NMVNTaskID" Type="Int32" Nullable="false" />
-          <Property Name="CustomerID" Type="Int32" Nullable="false" />
-          <Property Name="TransferOrderTypeID" Type="Int32" Nullable="false" />
-          <Property Name="AdjustmentJobs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="OrganizationalUnitID" Type="Int32" Nullable="false" />
-          <Property Name="LocationID" Type="Int32" Nullable="false" />
-          <Property Name="WarehouseID" Type="Int32" Nullable="false" />
-          <Property Name="WarehouseReceiptID" Type="Int32" Nullable="false" />
-          <Property Name="CommodityID" Type="Int32" Nullable="false" />
-          <Property Name="CommodityTypeID" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="QuantityIssued" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="VoidTypeID" Type="Int32" />
-          <Property Name="Approved" Type="Boolean" Nullable="false" />
-          <Property Name="InActive" Type="Boolean" Nullable="false" />
-          <Property Name="InActivePartial" Type="Boolean" Nullable="false" />
-          <Property Name="InActivePartialDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Commodity" Relationship="TotalSmartPortalModel.FK_TransferOrderDetails_Commodities" FromRole="TransferOrderDetail" ToRole="Commodity" />
-          <NavigationProperty Name="TransferOrder" Relationship="TotalSmartPortalModel.FK_TransferOrderDetails_TransferOrders" FromRole="TransferOrderDetail" ToRole="TransferOrder" />
-          <NavigationProperty Name="Warehouse" Relationship="TotalSmartPortalModel.FK_TransferOrderDetails_Warehouses" FromRole="TransferOrderDetail" ToRole="Warehouse" />
-          <NavigationProperty Name="Warehouse1" Relationship="TotalSmartPortalModel.FK_TransferOrderDetails_Warehouses1" FromRole="TransferOrderDetail" ToRole="Warehouse" />
-          <NavigationProperty Name="WarehouseTransferDetails" Relationship="TotalSmartPortalModel.FK_WarehouseTransferDetails_TransferOrderDetails" FromRole="TransferOrderDetail" ToRole="WarehouseTransferDetail" />
-        </EntityType>
-        <EntityType Name="TransferOrder">
-          <Key>
-            <PropertyRef Name="TransferOrderID" />
-          </Key>
-          <Property Name="TransferOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Reference" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="NMVNTaskID" Type="Int32" Nullable="false" />
-          <Property Name="CustomerID" Type="Int32" Nullable="false" />
-          <Property Name="WarehouseID" Type="Int32" Nullable="false" />
-          <Property Name="WarehouseReceiptID" Type="Int32" Nullable="false" />
-          <Property Name="TransferOrderTypeID" Type="Int32" Nullable="false" />
-          <Property Name="StorekeeperID" Type="Int32" Nullable="false" />
-          <Property Name="HasPositiveLine" Type="Boolean" Nullable="false" />
-          <Property Name="AdjustmentJobs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="PreparedPersonID" Type="Int32" Nullable="false" />
-          <Property Name="OrganizationalUnitID" Type="Int32" Nullable="false" />
-          <Property Name="LocationID" Type="Int32" Nullable="false" />
-          <Property Name="TotalQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EditedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Approved" Type="Boolean" Nullable="false" />
-          <Property Name="ApprovedDate" Type="DateTime" Precision="3" />
-          <Property Name="VoidTypeID" Type="Int32" />
-          <Property Name="InActive" Type="Boolean" Nullable="false" />
-          <Property Name="InActivePartial" Type="Boolean" Nullable="false" />
-          <Property Name="InActiveDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Customer" Relationship="TotalSmartPortalModel.FK_TransferOrders_Customers" FromRole="TransferOrder" ToRole="Customer" />
-          <NavigationProperty Name="Location" Relationship="TotalSmartPortalModel.FK_TransferOrders_Locations" FromRole="TransferOrder" ToRole="Location" />
-          <NavigationProperty Name="TransferOrderDetails" Relationship="TotalSmartPortalModel.FK_TransferOrderDetails_TransferOrders" FromRole="TransferOrder" ToRole="TransferOrderDetail" />
-          <NavigationProperty Name="TransferOrderType" Relationship="TotalSmartPortalModel.FK_TransferOrders_TransferOrderTypes" FromRole="TransferOrder" ToRole="TransferOrderType" />
-          <NavigationProperty Name="Warehouse" Relationship="TotalSmartPortalModel.FK_TransferOrders_Warehouses" FromRole="TransferOrder" ToRole="Warehouse" />
-          <NavigationProperty Name="Warehouse1" Relationship="TotalSmartPortalModel.FK_TransferOrders_Warehouses1" FromRole="TransferOrder" ToRole="Warehouse" />
-          <NavigationProperty Name="WarehouseTransferDetails" Relationship="TotalSmartPortalModel.FK_WarehouseTransferDetails_TransferOrders" FromRole="TransferOrder" ToRole="WarehouseTransferDetail" />
-          <NavigationProperty Name="WarehouseTransfers" Relationship="TotalSmartPortalModel.FK_WarehouseTransfers_TransferOrders" FromRole="TransferOrder" ToRole="WarehouseTransfer" />
-          <NavigationProperty Name="VoidType" Relationship="TotalSmartPortalModel.FK_TransferOrders_VoidTypes" FromRole="TransferOrder" ToRole="VoidType" />
-        </EntityType>
         <EntityType Name="WarehouseTransferDetail">
           <Key>
             <PropertyRef Name="WarehouseTransferDetailID" />
@@ -16606,12 +16534,12 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Approved" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Commodity" Relationship="TotalSmartPortalModel.FK_WarehouseTransferDetails_Commodities" FromRole="WarehouseTransferDetail" ToRole="Commodity" />
-          <NavigationProperty Name="TransferOrderDetail" Relationship="TotalSmartPortalModel.FK_WarehouseTransferDetails_TransferOrderDetails" FromRole="WarehouseTransferDetail" ToRole="TransferOrderDetail" />
-          <NavigationProperty Name="TransferOrder" Relationship="TotalSmartPortalModel.FK_WarehouseTransferDetails_TransferOrders" FromRole="WarehouseTransferDetail" ToRole="TransferOrder" />
           <NavigationProperty Name="WarehouseTransfer" Relationship="TotalSmartPortalModel.FK_WarehouseTransferDetails_WarehouseTransfers" FromRole="WarehouseTransferDetail" ToRole="WarehouseTransfer" />
           <Property Name="HasTransferOrder" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartPortalModel.FK_GoodsReceiptDetails_WarehouseTransferDetails" FromRole="WarehouseTransferDetail" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="GoodsReceiptDetail" Relationship="TotalSmartPortalModel.FK_WarehouseTransferDetails_GoodsReceiptDetails" FromRole="WarehouseTransferDetail" ToRole="GoodsReceiptDetail" />
+          <NavigationProperty Name="TransferOrderDetail" Relationship="TotalSmartPortalModel.FK_WarehouseTransferDetails_TransferOrderDetails" FromRole="WarehouseTransferDetail" ToRole="TransferOrderDetail" />
+          <NavigationProperty Name="TransferOrder" Relationship="TotalSmartPortalModel.FK_WarehouseTransferDetails_TransferOrders" FromRole="WarehouseTransferDetail" ToRole="TransferOrder" />
           </EntityType>
         <EntityType Name="WarehouseTransfer">
           <Key>
@@ -16640,25 +16568,13 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Name="ApprovedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Employee" Relationship="TotalSmartPortalModel.FK_WarehouseTransfers_Employees" FromRole="WarehouseTransfer" ToRole="Employee" />
           <NavigationProperty Name="Location" Relationship="TotalSmartPortalModel.FK_WarehouseTransfers_Locations" FromRole="WarehouseTransfer" ToRole="Location" />
-          <NavigationProperty Name="TransferOrder" Relationship="TotalSmartPortalModel.FK_WarehouseTransfers_TransferOrders" FromRole="WarehouseTransfer" ToRole="TransferOrder" />
           <NavigationProperty Name="Warehouse" Relationship="TotalSmartPortalModel.FK_WarehouseTransfers_WarehouseReceipts" FromRole="WarehouseTransfer" ToRole="Warehouse" />
           <NavigationProperty Name="Warehouse1" Relationship="TotalSmartPortalModel.FK_WarehouseTransfers_Warehouses" FromRole="WarehouseTransfer" ToRole="Warehouse" />
           <NavigationProperty Name="WarehouseTransferDetails" Relationship="TotalSmartPortalModel.FK_WarehouseTransferDetails_WarehouseTransfers" FromRole="WarehouseTransfer" ToRole="WarehouseTransferDetail" />
           <Property Name="HasTransferOrder" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="GoodsReceipts" Relationship="TotalSmartPortalModel.FK_GoodsReceipts_WarehouseTransfers" FromRole="WarehouseTransfer" ToRole="GoodsReceipt" />
+          <NavigationProperty Name="TransferOrder" Relationship="TotalSmartPortalModel.FK_WarehouseTransfers_TransferOrders" FromRole="WarehouseTransfer" ToRole="TransferOrder" />
         </EntityType>
-        <Association Name="FK_TransferOrderDetails_Commodities">
-          <End Type="TotalSmartPortalModel.Commodity" Role="Commodity" Multiplicity="1" />
-          <End Type="TotalSmartPortalModel.TransferOrderDetail" Role="TransferOrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Commodity">
-              <PropertyRef Name="CommodityID" />
-            </Principal>
-            <Dependent Role="TransferOrderDetail">
-              <PropertyRef Name="CommodityID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_WarehouseTransferDetails_Commodities">
           <End Type="TotalSmartPortalModel.Commodity" Role="Commodity" Multiplicity="1" />
           <End Type="TotalSmartPortalModel.WarehouseTransferDetail" Role="WarehouseTransferDetail" Multiplicity="*" />
@@ -16668,18 +16584,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
             </Principal>
             <Dependent Role="WarehouseTransferDetail">
               <PropertyRef Name="CommodityID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TransferOrders_Customers">
-          <End Type="TotalSmartPortalModel.Customer" Role="Customer" Multiplicity="1" />
-          <End Type="TotalSmartPortalModel.TransferOrder" Role="TransferOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="CustomerID" />
-            </Principal>
-            <Dependent Role="TransferOrder">
-              <PropertyRef Name="CustomerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -16695,18 +16599,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TransferOrders_Locations">
-          <End Type="TotalSmartPortalModel.Location" Role="Location" Multiplicity="1" />
-          <End Type="TotalSmartPortalModel.TransferOrder" Role="TransferOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Location">
-              <PropertyRef Name="LocationID" />
-            </Principal>
-            <Dependent Role="TransferOrder">
-              <PropertyRef Name="LocationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_WarehouseTransfers_Locations">
           <End Type="TotalSmartPortalModel.Location" Role="Location" Multiplicity="1" />
           <End Type="TotalSmartPortalModel.WarehouseTransfer" Role="WarehouseTransfer" Multiplicity="*" />
@@ -16716,114 +16608,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
             </Principal>
             <Dependent Role="WarehouseTransfer">
               <PropertyRef Name="LocationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TransferOrderDetails_TransferOrders">
-          <End Type="TotalSmartPortalModel.TransferOrder" Role="TransferOrder" Multiplicity="1" />
-          <End Type="TotalSmartPortalModel.TransferOrderDetail" Role="TransferOrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TransferOrder">
-              <PropertyRef Name="TransferOrderID" />
-            </Principal>
-            <Dependent Role="TransferOrderDetail">
-              <PropertyRef Name="TransferOrderID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TransferOrderDetails_Warehouses">
-          <End Type="TotalSmartPortalModel.Warehouse" Role="Warehouse" Multiplicity="1" />
-          <End Type="TotalSmartPortalModel.TransferOrderDetail" Role="TransferOrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Warehouse">
-              <PropertyRef Name="WarehouseID" />
-            </Principal>
-            <Dependent Role="TransferOrderDetail">
-              <PropertyRef Name="WarehouseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TransferOrderDetails_Warehouses1">
-          <End Type="TotalSmartPortalModel.Warehouse" Role="Warehouse" Multiplicity="1" />
-          <End Type="TotalSmartPortalModel.TransferOrderDetail" Role="TransferOrderDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Warehouse">
-              <PropertyRef Name="WarehouseID" />
-            </Principal>
-            <Dependent Role="TransferOrderDetail">
-              <PropertyRef Name="WarehouseReceiptID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_WarehouseTransferDetails_TransferOrderDetails">
-          <End Type="TotalSmartPortalModel.TransferOrderDetail" Role="TransferOrderDetail" Multiplicity="0..1" />
-          <End Type="TotalSmartPortalModel.WarehouseTransferDetail" Role="WarehouseTransferDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TransferOrderDetail">
-              <PropertyRef Name="TransferOrderDetailID" />
-            </Principal>
-            <Dependent Role="WarehouseTransferDetail">
-              <PropertyRef Name="TransferOrderDetailID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TransferOrders_TransferOrderTypes">
-          <End Type="TotalSmartPortalModel.TransferOrderType" Role="TransferOrderType" Multiplicity="1" />
-          <End Type="TotalSmartPortalModel.TransferOrder" Role="TransferOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TransferOrderType">
-              <PropertyRef Name="TransferOrderTypeID" />
-            </Principal>
-            <Dependent Role="TransferOrder">
-              <PropertyRef Name="TransferOrderTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TransferOrders_Warehouses">
-          <End Type="TotalSmartPortalModel.Warehouse" Role="Warehouse" Multiplicity="1" />
-          <End Type="TotalSmartPortalModel.TransferOrder" Role="TransferOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Warehouse">
-              <PropertyRef Name="WarehouseID" />
-            </Principal>
-            <Dependent Role="TransferOrder">
-              <PropertyRef Name="WarehouseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TransferOrders_Warehouses1">
-          <End Type="TotalSmartPortalModel.Warehouse" Role="Warehouse" Multiplicity="1" />
-          <End Type="TotalSmartPortalModel.TransferOrder" Role="TransferOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Warehouse">
-              <PropertyRef Name="WarehouseID" />
-            </Principal>
-            <Dependent Role="TransferOrder">
-              <PropertyRef Name="WarehouseReceiptID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_WarehouseTransferDetails_TransferOrders">
-          <End Type="TotalSmartPortalModel.TransferOrder" Role="TransferOrder" Multiplicity="0..1" />
-          <End Type="TotalSmartPortalModel.WarehouseTransferDetail" Role="WarehouseTransferDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TransferOrder">
-              <PropertyRef Name="TransferOrderID" />
-            </Principal>
-            <Dependent Role="WarehouseTransferDetail">
-              <PropertyRef Name="TransferOrderID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_WarehouseTransfers_TransferOrders">
-          <End Type="TotalSmartPortalModel.TransferOrder" Role="TransferOrder" Multiplicity="0..1" />
-          <End Type="TotalSmartPortalModel.WarehouseTransfer" Role="WarehouseTransfer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TransferOrder">
-              <PropertyRef Name="TransferOrderID" />
-            </Principal>
-            <Dependent Role="WarehouseTransfer">
-              <PropertyRef Name="TransferOrderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -16919,9 +16703,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="String" Name="WarehouseCode" Nullable="false" MaxLength="10" />
           <Property Type="Int32" Name="WarehouseReceiptID" Nullable="false" />
           <Property Type="String" Name="WarehouseReceiptCode" Nullable="false" MaxLength="10" />
-          <Property Type="Int32" Name="CustomerID" Nullable="false" />
-          <Property Type="String" Name="CustomerCode" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="WarehouseName" Nullable="false" MaxLength="60" />
           <Property Type="String" Name="WarehouseReceiptName" Nullable="false" MaxLength="60" />
           <Property Type="Boolean" Name="HasTransferOrder" Nullable="true" />
@@ -16947,18 +16728,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
           <Property Type="Decimal" Name="TransferOrderRemains" Nullable="true" Precision="38" Scale="2" />
         </ComplexType>
-        <Association Name="FK_TransferOrders_VoidTypes">
-          <End Type="TotalSmartPortalModel.VoidType" Role="VoidType" Multiplicity="0..1" />
-          <End Type="TotalSmartPortalModel.TransferOrder" Role="TransferOrder" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VoidType">
-              <PropertyRef Name="VoidTypeID" />
-            </Principal>
-            <Dependent Role="TransferOrder">
-              <PropertyRef Name="VoidTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="GoodsReceiptPendingWarehouse">
           <Property Type="Int32" Name="GoodsReceiptTypeID" Nullable="false" />
           <Property Type="Int32" Name="WarehouseID" Nullable="false" />
@@ -17679,6 +17448,234 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
             </Principal>
             <Dependent Role="FinishedHandover">
               <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TransferOrderDetail">
+          <Key>
+            <PropertyRef Name="TransferOrderDetailID" />
+          </Key>
+          <Property Name="TransferOrderDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransferOrderID" Type="Int32" Nullable="false" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Reference" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="NMVNTaskID" Type="Int32" Nullable="false" />
+          <Property Name="TransferOrderTypeID" Type="Int32" Nullable="false" />
+          <Property Name="AdjustmentJobs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="OrganizationalUnitID" Type="Int32" Nullable="false" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <Property Name="WarehouseID" Type="Int32" Nullable="false" />
+          <Property Name="WarehouseReceiptID" Type="Int32" Nullable="false" />
+          <Property Name="LocationReceiptID" Type="Int32" Nullable="false" />
+          <Property Name="CommodityID" Type="Int32" Nullable="false" />
+          <Property Name="CommodityTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="QuantityIssued" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="VoidTypeID" Type="Int32" />
+          <Property Name="Approved" Type="Boolean" Nullable="false" />
+          <Property Name="InActive" Type="Boolean" Nullable="false" />
+          <Property Name="InActivePartial" Type="Boolean" Nullable="false" />
+          <Property Name="InActivePartialDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Commodity" Relationship="TotalSmartPortalModel.FK_TransferOrderDetails_Commodities" FromRole="TransferOrderDetail" ToRole="Commodity" />
+          <NavigationProperty Name="TransferOrder" Relationship="TotalSmartPortalModel.FK_TransferOrderDetails_TransferOrders" FromRole="TransferOrderDetail" ToRole="TransferOrder" />
+          <NavigationProperty Name="Warehouse" Relationship="TotalSmartPortalModel.FK_TransferOrderDetails_Warehouses" FromRole="TransferOrderDetail" ToRole="Warehouse" />
+          <NavigationProperty Name="Warehouse1" Relationship="TotalSmartPortalModel.FK_TransferOrderDetails_Warehouses1" FromRole="TransferOrderDetail" ToRole="Warehouse" />
+          <NavigationProperty Name="WarehouseTransferDetails" Relationship="TotalSmartPortalModel.FK_WarehouseTransferDetails_TransferOrderDetails" FromRole="TransferOrderDetail" ToRole="WarehouseTransferDetail" />
+        </EntityType>
+        <EntityType Name="TransferOrder">
+          <Key>
+            <PropertyRef Name="TransferOrderID" />
+          </Key>
+          <Property Name="TransferOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Reference" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="NMVNTaskID" Type="Int32" Nullable="false" />
+          <Property Name="WarehouseID" Type="Int32" Nullable="false" />
+          <Property Name="WarehouseReceiptID" Type="Int32" Nullable="false" />
+          <Property Name="LocationReceiptID" Type="Int32" Nullable="false" />
+          <Property Name="TransferOrderTypeID" Type="Int32" Nullable="false" />
+          <Property Name="StorekeeperID" Type="Int32" Nullable="false" />
+          <Property Name="HasPositiveLine" Type="Boolean" Nullable="false" />
+          <Property Name="AdjustmentJobs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="PreparedPersonID" Type="Int32" Nullable="false" />
+          <Property Name="OrganizationalUnitID" Type="Int32" Nullable="false" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <Property Name="TotalQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EditedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Approved" Type="Boolean" Nullable="false" />
+          <Property Name="ApprovedDate" Type="DateTime" Precision="3" />
+          <Property Name="VoidTypeID" Type="Int32" />
+          <Property Name="InActive" Type="Boolean" Nullable="false" />
+          <Property Name="InActivePartial" Type="Boolean" Nullable="false" />
+          <Property Name="InActiveDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Location" Relationship="TotalSmartPortalModel.FK_TransferOrders_Locations" FromRole="TransferOrder" ToRole="Location" />
+          <NavigationProperty Name="Location1" Relationship="TotalSmartPortalModel.FK_TransferOrders_Locations1" FromRole="TransferOrder" ToRole="Location" />
+          <NavigationProperty Name="TransferOrderDetails" Relationship="TotalSmartPortalModel.FK_TransferOrderDetails_TransferOrders" FromRole="TransferOrder" ToRole="TransferOrderDetail" />
+          <NavigationProperty Name="TransferOrderType" Relationship="TotalSmartPortalModel.FK_TransferOrders_TransferOrderTypes" FromRole="TransferOrder" ToRole="TransferOrderType" />
+          <NavigationProperty Name="VoidType" Relationship="TotalSmartPortalModel.FK_TransferOrders_VoidTypes" FromRole="TransferOrder" ToRole="VoidType" />
+          <NavigationProperty Name="Warehouse" Relationship="TotalSmartPortalModel.FK_TransferOrders_Warehouses" FromRole="TransferOrder" ToRole="Warehouse" />
+          <NavigationProperty Name="Warehouse1" Relationship="TotalSmartPortalModel.FK_TransferOrders_Warehouses1" FromRole="TransferOrder" ToRole="Warehouse" />
+          <NavigationProperty Name="WarehouseTransferDetails" Relationship="TotalSmartPortalModel.FK_WarehouseTransferDetails_TransferOrders" FromRole="TransferOrder" ToRole="WarehouseTransferDetail" />
+          <NavigationProperty Name="WarehouseTransfers" Relationship="TotalSmartPortalModel.FK_WarehouseTransfers_TransferOrders" FromRole="TransferOrder" ToRole="WarehouseTransfer" />
+        </EntityType>
+        <Association Name="FK_TransferOrderDetails_Commodities">
+          <End Type="TotalSmartPortalModel.Commodity" Role="Commodity" Multiplicity="1" />
+          <End Type="TotalSmartPortalModel.TransferOrderDetail" Role="TransferOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodity">
+              <PropertyRef Name="CommodityID" />
+            </Principal>
+            <Dependent Role="TransferOrderDetail">
+              <PropertyRef Name="CommodityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransferOrders_Locations">
+          <End Type="TotalSmartPortalModel.Location" Role="Location" Multiplicity="1" />
+          <End Type="TotalSmartPortalModel.TransferOrder" Role="TransferOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="TransferOrder">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransferOrders_Locations1">
+          <End Type="TotalSmartPortalModel.Location" Role="Location" Multiplicity="1" />
+          <End Type="TotalSmartPortalModel.TransferOrder" Role="TransferOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="TransferOrder">
+              <PropertyRef Name="LocationReceiptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransferOrderDetails_TransferOrders">
+          <End Type="TotalSmartPortalModel.TransferOrder" Role="TransferOrder" Multiplicity="1" />
+          <End Type="TotalSmartPortalModel.TransferOrderDetail" Role="TransferOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransferOrder">
+              <PropertyRef Name="TransferOrderID" />
+            </Principal>
+            <Dependent Role="TransferOrderDetail">
+              <PropertyRef Name="TransferOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransferOrderDetails_Warehouses">
+          <End Type="TotalSmartPortalModel.Warehouse" Role="Warehouse" Multiplicity="1" />
+          <End Type="TotalSmartPortalModel.TransferOrderDetail" Role="TransferOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="WarehouseID" />
+            </Principal>
+            <Dependent Role="TransferOrderDetail">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransferOrderDetails_Warehouses1">
+          <End Type="TotalSmartPortalModel.Warehouse" Role="Warehouse" Multiplicity="1" />
+          <End Type="TotalSmartPortalModel.TransferOrderDetail" Role="TransferOrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="WarehouseID" />
+            </Principal>
+            <Dependent Role="TransferOrderDetail">
+              <PropertyRef Name="WarehouseReceiptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WarehouseTransferDetails_TransferOrderDetails">
+          <End Type="TotalSmartPortalModel.TransferOrderDetail" Role="TransferOrderDetail" Multiplicity="0..1" />
+          <End Type="TotalSmartPortalModel.WarehouseTransferDetail" Role="WarehouseTransferDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransferOrderDetail">
+              <PropertyRef Name="TransferOrderDetailID" />
+            </Principal>
+            <Dependent Role="WarehouseTransferDetail">
+              <PropertyRef Name="TransferOrderDetailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransferOrders_TransferOrderTypes">
+          <End Type="TotalSmartPortalModel.TransferOrderType" Role="TransferOrderType" Multiplicity="1" />
+          <End Type="TotalSmartPortalModel.TransferOrder" Role="TransferOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransferOrderType">
+              <PropertyRef Name="TransferOrderTypeID" />
+            </Principal>
+            <Dependent Role="TransferOrder">
+              <PropertyRef Name="TransferOrderTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransferOrders_VoidTypes">
+          <End Type="TotalSmartPortalModel.VoidType" Role="VoidType" Multiplicity="0..1" />
+          <End Type="TotalSmartPortalModel.TransferOrder" Role="TransferOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VoidType">
+              <PropertyRef Name="VoidTypeID" />
+            </Principal>
+            <Dependent Role="TransferOrder">
+              <PropertyRef Name="VoidTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransferOrders_Warehouses">
+          <End Type="TotalSmartPortalModel.Warehouse" Role="Warehouse" Multiplicity="1" />
+          <End Type="TotalSmartPortalModel.TransferOrder" Role="TransferOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="WarehouseID" />
+            </Principal>
+            <Dependent Role="TransferOrder">
+              <PropertyRef Name="WarehouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransferOrders_Warehouses1">
+          <End Type="TotalSmartPortalModel.Warehouse" Role="Warehouse" Multiplicity="1" />
+          <End Type="TotalSmartPortalModel.TransferOrder" Role="TransferOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="WarehouseID" />
+            </Principal>
+            <Dependent Role="TransferOrder">
+              <PropertyRef Name="WarehouseReceiptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WarehouseTransferDetails_TransferOrders">
+          <End Type="TotalSmartPortalModel.TransferOrder" Role="TransferOrder" Multiplicity="0..1" />
+          <End Type="TotalSmartPortalModel.WarehouseTransferDetail" Role="WarehouseTransferDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransferOrder">
+              <PropertyRef Name="TransferOrderID" />
+            </Principal>
+            <Dependent Role="WarehouseTransferDetail">
+              <PropertyRef Name="TransferOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WarehouseTransfers_TransferOrders">
+          <End Type="TotalSmartPortalModel.TransferOrder" Role="TransferOrder" Multiplicity="0..1" />
+          <End Type="TotalSmartPortalModel.WarehouseTransfer" Role="WarehouseTransfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransferOrder">
+              <PropertyRef Name="TransferOrderID" />
+            </Principal>
+            <Dependent Role="WarehouseTransfer">
+              <PropertyRef Name="TransferOrderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -21988,66 +21985,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <FunctionImportMapping FunctionImportName="TransferOrderToggleVoid" FunctionName="TotalSmartPortalModel.Store.TransferOrderToggleVoid" />
           <FunctionImportMapping FunctionImportName="TransferOrderToggleVoidDetail" FunctionName="TotalSmartPortalModel.Store.TransferOrderToggleVoidDetail" />
           <FunctionImportMapping FunctionImportName="TransferOrderVoidable" FunctionName="TotalSmartPortalModel.Store.TransferOrderVoidable" />
-          <EntitySetMapping Name="TransferOrderDetails">
-            <EntityTypeMapping TypeName="TotalSmartPortalModel.TransferOrderDetail">
-              <MappingFragment StoreEntitySet="TransferOrderDetails">
-                <ScalarProperty Name="InActivePartialDate" ColumnName="InActivePartialDate" />
-                <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
-                <ScalarProperty Name="InActive" ColumnName="InActive" />
-                <ScalarProperty Name="Approved" ColumnName="Approved" />
-                <ScalarProperty Name="VoidTypeID" ColumnName="VoidTypeID" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="QuantityIssued" ColumnName="QuantityIssued" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="CommodityTypeID" ColumnName="CommodityTypeID" />
-                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
-                <ScalarProperty Name="WarehouseReceiptID" ColumnName="WarehouseReceiptID" />
-                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
-                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-                <ScalarProperty Name="OrganizationalUnitID" ColumnName="OrganizationalUnitID" />
-                <ScalarProperty Name="AdjustmentJobs" ColumnName="AdjustmentJobs" />
-                <ScalarProperty Name="TransferOrderTypeID" ColumnName="TransferOrderTypeID" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="NMVNTaskID" ColumnName="NMVNTaskID" />
-                <ScalarProperty Name="Reference" ColumnName="Reference" />
-                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
-                <ScalarProperty Name="TransferOrderID" ColumnName="TransferOrderID" />
-                <ScalarProperty Name="TransferOrderDetailID" ColumnName="TransferOrderDetailID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TransferOrders">
-            <EntityTypeMapping TypeName="TotalSmartPortalModel.TransferOrder">
-              <MappingFragment StoreEntitySet="TransferOrders">
-                <ScalarProperty Name="InActiveDate" ColumnName="InActiveDate" />
-                <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
-                <ScalarProperty Name="InActive" ColumnName="InActive" />
-                <ScalarProperty Name="VoidTypeID" ColumnName="VoidTypeID" />
-                <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
-                <ScalarProperty Name="Approved" ColumnName="Approved" />
-                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
-                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-                <ScalarProperty Name="OrganizationalUnitID" ColumnName="OrganizationalUnitID" />
-                <ScalarProperty Name="PreparedPersonID" ColumnName="PreparedPersonID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="AdjustmentJobs" ColumnName="AdjustmentJobs" />
-                <ScalarProperty Name="HasPositiveLine" ColumnName="HasPositiveLine" />
-                <ScalarProperty Name="StorekeeperID" ColumnName="StorekeeperID" />
-                <ScalarProperty Name="TransferOrderTypeID" ColumnName="TransferOrderTypeID" />
-                <ScalarProperty Name="WarehouseReceiptID" ColumnName="WarehouseReceiptID" />
-                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="NMVNTaskID" ColumnName="NMVNTaskID" />
-                <ScalarProperty Name="Reference" ColumnName="Reference" />
-                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
-                <ScalarProperty Name="TransferOrderID" ColumnName="TransferOrderID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="WarehouseTransferDetails">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.WarehouseTransferDetail">
               <MappingFragment StoreEntitySet="WarehouseTransferDetails">
@@ -22160,9 +22097,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="WarehouseCode" ColumnName="WarehouseCode" />
                 <ScalarProperty Name="WarehouseReceiptID" ColumnName="WarehouseReceiptID" />
                 <ScalarProperty Name="WarehouseReceiptCode" ColumnName="WarehouseReceiptCode" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="CustomerCode" ColumnName="CustomerCode" />
-                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
                 <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
                 <ScalarProperty Name="WarehouseReceiptName" ColumnName="WarehouseReceiptName" />
                 <ScalarProperty Name="HasTransferOrder" ColumnName="HasTransferOrder" />
@@ -22507,6 +22441,66 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="Reference" ColumnName="Reference" />
                 <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
                 <ScalarProperty Name="FinishedHandoverID" ColumnName="FinishedHandoverID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransferOrderDetails">
+            <EntityTypeMapping TypeName="TotalSmartPortalModel.TransferOrderDetail">
+              <MappingFragment StoreEntitySet="TransferOrderDetails">
+                <ScalarProperty Name="InActivePartialDate" ColumnName="InActivePartialDate" />
+                <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="VoidTypeID" ColumnName="VoidTypeID" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="QuantityIssued" ColumnName="QuantityIssued" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="CommodityTypeID" ColumnName="CommodityTypeID" />
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="LocationReceiptID" ColumnName="LocationReceiptID" />
+                <ScalarProperty Name="WarehouseReceiptID" ColumnName="WarehouseReceiptID" />
+                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="OrganizationalUnitID" ColumnName="OrganizationalUnitID" />
+                <ScalarProperty Name="AdjustmentJobs" ColumnName="AdjustmentJobs" />
+                <ScalarProperty Name="TransferOrderTypeID" ColumnName="TransferOrderTypeID" />
+                <ScalarProperty Name="NMVNTaskID" ColumnName="NMVNTaskID" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="TransferOrderID" ColumnName="TransferOrderID" />
+                <ScalarProperty Name="TransferOrderDetailID" ColumnName="TransferOrderDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransferOrders">
+            <EntityTypeMapping TypeName="TotalSmartPortalModel.TransferOrder">
+              <MappingFragment StoreEntitySet="TransferOrders">
+                <ScalarProperty Name="InActiveDate" ColumnName="InActiveDate" />
+                <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="VoidTypeID" ColumnName="VoidTypeID" />
+                <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="OrganizationalUnitID" ColumnName="OrganizationalUnitID" />
+                <ScalarProperty Name="PreparedPersonID" ColumnName="PreparedPersonID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AdjustmentJobs" ColumnName="AdjustmentJobs" />
+                <ScalarProperty Name="HasPositiveLine" ColumnName="HasPositiveLine" />
+                <ScalarProperty Name="StorekeeperID" ColumnName="StorekeeperID" />
+                <ScalarProperty Name="TransferOrderTypeID" ColumnName="TransferOrderTypeID" />
+                <ScalarProperty Name="LocationReceiptID" ColumnName="LocationReceiptID" />
+                <ScalarProperty Name="WarehouseReceiptID" ColumnName="WarehouseReceiptID" />
+                <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
+                <ScalarProperty Name="NMVNTaskID" ColumnName="NMVNTaskID" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="TransferOrderID" ColumnName="TransferOrderID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

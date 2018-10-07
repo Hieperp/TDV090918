@@ -20,9 +20,6 @@ namespace TotalModel.Models
         public string WarehouseCode { get; set; }
         public int WarehouseReceiptID { get; set; }
         public string WarehouseReceiptCode { get; set; }
-        public int CustomerID { get; set; }
-        public string CustomerCode { get; set; }
-        public string CustomerName { get; set; }
         public string WarehouseName { get; set; }
         public string WarehouseReceiptName { get; set; }
         public Nullable<bool> HasTransferOrder { get; set; }
