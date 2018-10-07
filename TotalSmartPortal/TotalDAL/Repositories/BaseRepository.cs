@@ -436,14 +436,14 @@ namespace TotalDAL.Repositories
             Helpers.SqlProgrammability.Commons.Bom bom = new Helpers.SqlProgrammability.Commons.Bom(totalSmartPortalEntities);
             bom.RestoreProcedure();
 
-            return;
+            //return;
 
             Helpers.SqlProgrammability.Generals.UserReference userReference = new Helpers.SqlProgrammability.Generals.UserReference(totalSmartPortalEntities);
             userReference.RestoreProcedure();
 
 
 
-            //return;
+            return;
 
             Helpers.SqlProgrammability.Reports.SaleReports saleReports = new Helpers.SqlProgrammability.Reports.SaleReports(totalSmartPortalEntities);
             saleReports.RestoreProcedure();
