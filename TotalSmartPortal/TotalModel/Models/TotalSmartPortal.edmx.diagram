@@ -234,11 +234,6 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_ProductionOrderDetails_ProductionOrders" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_ProductionOrderDetails_VoidTypes" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_ProductionOrders_VoidTypes" />
-        <EntityTypeShape EntityType="TotalSmartPortalModel.FinishedHandover" Width="1.5" PointX="13.25" PointY="35.25" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandovers_Customers" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandovers_Employees" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandovers_Employees1" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandovers_Locations" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.MaterialIssueDetail" Width="1.5" PointX="52.375" PointY="21.875" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.MaterialIssue" Width="1.5" PointX="42.375" PointY="18.25" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.SemifinishedProductDetail" Width="1.5" PointX="61.875" PointY="24.75" />
@@ -333,7 +328,6 @@
         <EntityTypeShape EntityType="TotalSmartPortalModel.GoodsReceiptDetail" Width="1.5" PointX="64.625" PointY="24.125" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandoverDetails_Commodities" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceiptDetails_Commodities" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandoverDetails_FinishedHandovers" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandoverDetails_FinishedProductPackages" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceiptDetails_FinishedProductPackages" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceiptDetails_GoodsReceipts" />
@@ -349,6 +343,12 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProductDetails_FinishedProductPackages" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.ModuleDetail" Width="1.5" PointX="10.375" PointY="0.75" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.ModuleDefault" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TotalSmartPortalModel.FinishedHandover" Width="1.5" PointX="13.25" PointY="34.375" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandovers_Customers" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandovers_Employees" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandovers_Employees1" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandoverDetails_FinishedHandovers" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandovers_Locations" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

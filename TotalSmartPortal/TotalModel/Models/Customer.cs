@@ -42,13 +42,13 @@ namespace TotalModel.Models
             this.FirmOrderMaterials = new HashSet<FirmOrderMaterial>();
             this.ProductionOrderDetails = new HashSet<ProductionOrderDetail>();
             this.ProductionOrders = new HashSet<ProductionOrder>();
-            this.FinishedHandovers = new HashSet<FinishedHandover>();
             this.MaterialIssueDetails = new HashSet<MaterialIssueDetail>();
             this.MaterialIssues = new HashSet<MaterialIssue>();
             this.SemifinishedProducts = new HashSet<SemifinishedProduct>();
             this.FinishedProducts = new HashSet<FinishedProduct>();
             this.TransferOrders = new HashSet<TransferOrder>();
             this.GoodsReceipts = new HashSet<GoodsReceipt>();
+            this.FinishedHandovers = new HashSet<FinishedHandover>();
         }
     
         public int CustomerID { get; set; }
@@ -135,8 +135,6 @@ namespace TotalModel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductionOrder> ProductionOrders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FinishedHandover> FinishedHandovers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MaterialIssueDetail> MaterialIssueDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MaterialIssue> MaterialIssues { get; set; }
@@ -148,5 +146,7 @@ namespace TotalModel.Models
         public virtual ICollection<TransferOrder> TransferOrders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GoodsReceipt> GoodsReceipts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FinishedHandover> FinishedHandovers { get; set; }
     }
 }

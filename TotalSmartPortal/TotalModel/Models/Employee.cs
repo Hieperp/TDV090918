@@ -27,8 +27,6 @@ namespace TotalModel.Models
             this.Receipts = new HashSet<Receipt>();
             this.SalesOrders = new HashSet<SalesOrder>();
             this.SalesReturns = new HashSet<SalesReturn>();
-            this.FinishedHandovers = new HashSet<FinishedHandover>();
-            this.FinishedHandovers1 = new HashSet<FinishedHandover>();
             this.MaterialIssues = new HashSet<MaterialIssue>();
             this.MaterialIssues1 = new HashSet<MaterialIssue>();
             this.SemifinishedProducts = new HashSet<SemifinishedProduct>();
@@ -36,6 +34,8 @@ namespace TotalModel.Models
             this.WarehouseTransfers = new HashSet<WarehouseTransfer>();
             this.SemifinishedHandovers = new HashSet<SemifinishedHandover>();
             this.SemifinishedHandovers1 = new HashSet<SemifinishedHandover>();
+            this.FinishedHandovers = new HashSet<FinishedHandover>();
+            this.FinishedHandovers1 = new HashSet<FinishedHandover>();
         }
     
         public int EmployeeID { get; set; }
@@ -71,10 +71,6 @@ namespace TotalModel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SalesReturn> SalesReturns { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FinishedHandover> FinishedHandovers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FinishedHandover> FinishedHandovers1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MaterialIssue> MaterialIssues { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MaterialIssue> MaterialIssues1 { get; set; }
@@ -88,5 +84,9 @@ namespace TotalModel.Models
         public virtual ICollection<SemifinishedHandover> SemifinishedHandovers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemifinishedHandover> SemifinishedHandovers1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FinishedHandover> FinishedHandovers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FinishedHandover> FinishedHandovers1 { get; set; }
     }
 }

@@ -247,7 +247,7 @@
         <div class="right-botton-panel">
             @if (Model.Editable)
             {
-                <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "CreditNotes")"> <img src="~/Content/Images/New/save-icon.png" /> Lưu phiếu </button>
+                <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "CreditNotes")"> <img src="~/Content/Images/New/save-icon.png" /> Lưu </button>
             }
 
             @if (Model.CreditNoteID > 0 && !Model.Approvable && !Model.UnApprovable)

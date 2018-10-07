@@ -243,8 +243,8 @@
         <div class="right-botton-panel">
             @if (Model.Editable)
             {
-                <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "ProductionOrders")"> <img src="~/Content/Images/New/save-icon.png" /> Lưu phiếu </button>
-                <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "ProductionOrders")" onclick="$('#Approved').val(true);"> <img src="~/Content/Images/New/save-verify-icon.png" /> Lưu và duyệt phiếu </button>
+                <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "ProductionOrders")"> <img src="~/Content/Images/New/save-icon.png" /> Lưu </button>
+                <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "ProductionOrders")" onclick="$('#Approved').val(true);"> <img src="~/Content/Images/New/save-verify-icon.png" /> Lưu và duyệt </button>
             }
             else
             {
@@ -256,7 +256,7 @@
 
             @if (Model.ProductionOrderID > 0 && !Model.Approvable && !Model.UnApprovable)
             {
-                <button type="button" class="k-button custom-button" onclick="location.href='@Url.Action("Approve", "ProductionOrders", new {id = @Model.ProductionOrderID })'"> <img src="~/Content/Images/Mains/@(!@Model.Approved ? "Actions-ok-icon32.png" : "Cross-icon-cancel32.png")" /> @(!Model.Approved ? "Duyệt đơn hàng" : "Hủy duyệt đơn hàng này") </button>
+                <button type="button" class="k-button custom-button" onclick="location.href='@Url.Action("Approve", "ProductionOrders", new {id = @Model.ProductionOrderID })'"> <img src="~/Content/Images/Mains/@(!@Model.Approved ? "Actions-ok-icon32.png" : "Cross-icon-cancel32.png")" /> @(!Model.Approved ? "Duyệt" : "Hủy duyệt") </button>
             }
         </div>
 

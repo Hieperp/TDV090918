@@ -238,12 +238,12 @@
 
             @if (Model.Editable)
             {
-                <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "PurchaseRequisitions")"> <img src="~/Content/Images/New/save-icon.png" /> Lưu phiếu </button>
+                <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "PurchaseRequisitions")"> <img src="~/Content/Images/New/save-icon.png" /> Lưu </button>
             }
 
             @if (Model.PurchaseRequisitionID > 0 && !Model.Approvable && !Model.UnApprovable)
             {
-                <button type="button" class="k-button custom-button" onclick="location.href='@Url.Action("Approve", "PurchaseRequisitions", new {id = @Model.PurchaseRequisitionID })'"> <img src="~/Content/Images/Mains/@(!@Model.Approved ? "Actions-ok-icon32.png" : "Cross-icon-cancel32.png")" /> @(!Model.Approved ? "Duyệt đơn hàng" : "Hủy duyệt đơn hàng này") </button>
+                <button type="button" class="k-button custom-button" onclick="location.href='@Url.Action("Approve", "PurchaseRequisitions", new {id = @Model.PurchaseRequisitionID })'"> <img src="~/Content/Images/Mains/@(!@Model.Approved ? "Actions-ok-icon32.png" : "Cross-icon-cancel32.png")" /> @(!Model.Approved ? "Duyệt" : "Hủy duyệt") </button>
             }
 
         </div>

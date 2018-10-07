@@ -363,19 +363,17 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "       DECLARE     @LocalFinishedHandoverID int      SET @LocalFinishedHandoverID = @FinishedHandoverID" + "\r\n";
 
-            queryString = queryString + "       SELECT      FinishedHandovers.FinishedHandoverID, FinishedHandoverDetails.FinishedHandoverDetailID, FinishedHandovers.EntryDate, FinishedHandovers.Reference, Vehicles.Name AS VehicleName, Drivers.Name AS DriverName, Collectors.Name AS CollectorName, FinishedProductPackages.CustomerID, Customers.Name AS CustomerName, FinishedProductPackages.CustomerID, Customers.Name AS CustomerName, IIF(FinishedProductPackages.Addressee <> '', FinishedProductPackages.Addressee, Customers.Name) AS Addressee, FinishedProductPackages.ShippingAddress, MINFinishedHandoverDetails.MINFinishedHandoverDetailID, " + "\r\n";
-            queryString = queryString + "                   FinishedProductPackages.Code, FinishedProductPackages.GoodsIssueReferences, FinishedProductPackages.PackingMaterialID, FinishedProductPackages.TotalQuantity AS Quantity, FinishedProductPackages.TotalWeight AS Weight, FinishedProductPackages.RealWeight " + "\r\n";
+            queryString = queryString + "       SELECT      FinishedHandovers.FinishedHandoverID, FinishedHandoverDetails.FinishedHandoverDetailID, FinishedHandovers.EntryDate, FinishedHandovers.Reference, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FirmOrders.EntryDate AS FirmOrderEntryDate, Customers.Name AS CustomerName, " + "\r\n";
+            queryString = queryString + "                   Commodities.Code, Commodities.Name, FinishedProductPackages.PiecePerPack, FinishedProductPackages.Quantity, FinishedProductPackages.Packages, FinishedProductPackages.OddPackages, FinishedLeaders.Name AS FinishedLeaderName, Storekeepers.Name AS StorekeeperName, FinishedHandovers.Description " + "\r\n";
 
             queryString = queryString + "       FROM        FinishedHandovers " + "\r\n";
             queryString = queryString + "                   INNER JOIN FinishedHandoverDetails ON FinishedHandovers.FinishedHandoverID = @LocalFinishedHandoverID AND FinishedHandovers.FinishedHandoverID = FinishedHandoverDetails.FinishedHandoverID " + "\r\n";
-            queryString = queryString + "                   INNER JOIN FinishedProductPackages ON FinishedHandoverDetails.FinishedProductID = FinishedProductPackages.FinishedProductID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN FinishedProductPackages ON FinishedHandoverDetails.FinishedProductPackageID = FinishedProductPackages.FinishedProductPackageID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN FirmOrders ON FinishedProductPackages.FirmOrderID = FirmOrders.FirmOrderID " + "\r\n";
             queryString = queryString + "                   INNER JOIN Customers ON FinishedProductPackages.CustomerID = Customers.CustomerID " + "\r\n";
-            queryString = queryString + "                   INNER JOIN Customers AS Customers ON FinishedProductPackages.CustomerID = Customers.CustomerID " + "\r\n";
-            queryString = queryString + "                   INNER JOIN Vehicles ON FinishedHandovers.VehicleID = Vehicles.VehicleID " + "\r\n";
-            queryString = queryString + "                   INNER JOIN Employees AS Drivers ON FinishedHandovers.DriverID = Drivers.EmployeeID " + "\r\n";
-            queryString = queryString + "                   INNER JOIN Employees AS Collectors ON FinishedHandovers.CollectorID = Collectors.EmployeeID " + "\r\n";
-
-            queryString = queryString + "                   LEFT JOIN (SELECT MIN(FinishedHandoverDetails.FinishedHandoverDetailID) AS MINFinishedHandoverDetailID, FinishedProductPackages.ShippingAddress FROM FinishedHandoverDetails INNER JOIN FinishedProductPackages ON FinishedHandoverDetails.FinishedHandoverID = @LocalFinishedHandoverID AND FinishedHandoverDetails.FinishedProductID = FinishedProductPackages.FinishedProductID GROUP BY FinishedProductPackages.ShippingAddress) MINFinishedHandoverDetails ON FinishedProductPackages.ShippingAddress = MINFinishedHandoverDetails.ShippingAddress " + "\r\n"; //FOR SORT PURPOSE ONLY. MUST USE 'LEFT JOIN' BECAUSE: IF FinishedProductPackages.ShippingAddress IS NULL, CAN NOT RUN 'INNER JOIN'             
+            queryString = queryString + "                   INNER JOIN Commodities ON FinishedProductPackages.CommodityID = Commodities.CommodityID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN Employees AS FinishedLeaders ON FinishedHandovers.FinishedLeaderID = FinishedLeaders.EmployeeID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN Employees AS Storekeepers ON FinishedHandovers.StorekeeperID = Storekeepers.EmployeeID " + "\r\n";
 
             queryString = queryString + "       ORDER BY    FinishedHandoverDetails.FinishedHandoverDetailID " + "\r\n";
 
@@ -383,7 +381,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "    END " + "\r\n";
 
-            //this.totalSmartPortalEntities.CreateStoredProcedure("FinishedHandoverSheet", queryString);
+            this.totalSmartPortalEntities.CreateStoredProcedure("FinishedHandoverSheet", queryString);
         }
 
     }

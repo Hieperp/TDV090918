@@ -1365,7 +1365,6 @@
     <Content Include="Areas\Productions\Views\SemifinishedHandovers\_GetWorkshift.cshtml" />
     <Content Include="Areas\Productions\Views\SemifinishedHandovers\_SemifinishedHandover.cshtml" />
     <Content Include="Areas\Productions\Views\SemifinishedHandovers\GetPendingDetails.cshtml" />
-    <Content Include="Areas\Productions\Views\SemifinishedHandovers\Void.cshtml" />
     <Content Include="Areas\Productions\Views\FinishedProducts\Approve.cshtml" />
     <Content Include="Areas\Productions\Views\FinishedProducts\CreateWizard.cshtml" />
     <Content Include="Areas\Productions\Views\FinishedProducts\Delete.cshtml" />
@@ -1768,7 +1767,6 @@
     <Content Include="Scripts\Controllers\Productions\SemifinishedHandovers\Index.js" />
     <Content Include="Scripts\Controllers\Productions\SemifinishedHandovers\Open.js" />
     <Content Include="Scripts\Controllers\Productions\SemifinishedHandovers\Print.js" />
-    <Content Include="Scripts\Controllers\Productions\SemifinishedHandovers\Void.js" />
     <Content Include="Scripts\Controllers\Productions\SemifinishedProducts\AddPendingMaterialIssueDetail.js" />
     <Content Include="Scripts\Controllers\Productions\SemifinishedProducts\Approve.js" />
     <Content Include="Scripts\Controllers\Productions\SemifinishedProducts\CreateWizard.js" />
