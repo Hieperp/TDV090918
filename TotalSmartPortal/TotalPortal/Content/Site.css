@@ -531,7 +531,7 @@ tr:hover {
 
 #grouplist > li {
     height: 71px;
-    width: 71px;
+    width: 72px;
     margin-top: 1px;
     margin-bottom: 1px;
 }
@@ -553,6 +553,23 @@ tr:hover {
     width: 32px;
     margin: 0px 0px 0px 0px;
     padding: 2px 10px 2px 10px;
+}
+
+#grouplist > .k-item.menuSeparation {
+    height: 36px;
+    color: yellow;
+    background: radial-gradient(#428bca, #3980bd);
+    margin-top: 3px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+#grouplist > .k-item.menuHome {
+    color: yellow;
+    background: radial-gradient(#428bca, #3980bd);
+    margin-top: 3px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 }
 
 /***************End Menu********************/

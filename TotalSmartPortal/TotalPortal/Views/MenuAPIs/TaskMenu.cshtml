@@ -9,30 +9,45 @@
       {
           foreach (var item in Model)
           {
-              if (item.SoftDescription.Substring(0, 3) == "___")
+              if (item.Actions == "-")
               {
                   items.Add()
                     .Text(item.SoftDescription)
-                    .HtmlAttributes(new { @class = "separation", @itemmenu = "item" });
+                    .Content(item.Description)
+                      //.Separator(true)
+                      //.ImageUrl(item.ImageIndex)
+                    .HtmlAttributes(new { @class = "menuSeparation", @itemmenu = "item" });
               }
               else
-                  //if (item.ModuleDetailID == ViewBag.ModuleDetailID)
-                  //{
-                  //    items.Add()
-                  //        .Text(item.SoftDescription)
-                  //        .Content(item.Description)
-                  //        .ImageUrl(item.ImageIndex)
-                  //        .HtmlAttributes(new { @class = "menuModuleDetailItems", @ModuleDetailID = item.ModuleDetailID, @taskName = item.Description, @itemmenu = "item", @taskActions = item.Actions, @taskController = item.Controller, @highlight = "highlight" });
+                  if (item.Actions == "Home")
+                  {
+                      items.Add()
+                        .Text(item.SoftDescription)
+                        .Content(item.Description)
+                          //.Separator(true)
+                        .ImageUrl(item.ImageIndex)
+                        .HtmlAttributes(new { @class = "menuHome", @itemmenu = "item" });
+                  }
+                  else
+                  {
+                      //if (item.ModuleDetailID == ViewBag.ModuleDetailID)
+                      //{
+                      //    items.Add()
+                      //        .Text(item.SoftDescription)
+                      //        .Content(item.Description)
+                      //        .ImageUrl(item.ImageIndex)
+                      //        .HtmlAttributes(new { @class = "menuModuleDetailItems", @ModuleDetailID = item.ModuleDetailID, @taskName = item.Description, @itemmenu = "item", @taskActions = item.Actions, @taskController = item.Controller, @highlight = "highlight" });
 
-                  //}
-                  //else
-                  //{
+                      //}
+                      //else
+                      //{
                       items.Add()
                           .Text(item.SoftDescription)
                           .Content(item.Description)
                           .ImageUrl(item.ImageIndex)
                           .HtmlAttributes(new { @class = "menuModuleDetailItems", @ModuleDetailID = item.ModuleDetailID, @taskName = item.Description, @itemmenu = "item", @taskActions = item.Actions, @taskController = item.Controller });
-                  //}
+                      //}
+                  }
           }
       })
         .Events(e => e.Select("selectTask"))
@@ -43,6 +58,9 @@
 
 <script>
     function selectTask(e) {
+
+        if ($(e.item).attr("taskController") == undefined)
+            return;
 
         $("#grouplist").find(".k-state-selected").removeClass("k-state-selected");
         $(e.item).addClass("k-state-selected");
@@ -63,11 +81,11 @@
                 dataType: 'json',
                 success: function (result) {
                     if (result.SetResult == "Successfully") {
-                        
+
                         var url = '@Url.Action("taskActions", "taskController")';
                         url = url.replace("taskActions", taskActions);
                         url = url.replace("taskController", taskController);
-                        
+
                         window.open(url, "_self");
 
                     }
