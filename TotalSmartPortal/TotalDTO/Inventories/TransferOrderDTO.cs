@@ -56,7 +56,7 @@ namespace TotalDTO.Inventories
         {
             base.PerformPresaveRule();
 
-            this.DtoDetails().ToList().ForEach(e => { e.TransferOrderTypeID = this.TransferOrderTypeID; e.NMVNTaskID = this.NMVNTaskID; e.WarehouseID = (int)this.WarehouseID; e.WarehouseReceiptID = this.WarehouseReceiptID; });
+            this.DtoDetails().ToList().ForEach(e => { e.TransferOrderTypeID = this.TransferOrderTypeID; e.NMVNTaskID = this.NMVNTaskID; e.WarehouseID = (int)this.WarehouseID; e.WarehouseReceiptID = this.WarehouseReceiptID; e.LocationReceiptID = this.LocationReceiptID; });
         }
 
     }

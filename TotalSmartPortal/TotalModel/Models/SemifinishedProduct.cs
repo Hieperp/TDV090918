@@ -56,6 +56,7 @@ namespace TotalModel.Models
         public Nullable<System.DateTime> ApprovedDate { get; set; }
         public Nullable<int> SemifinishedHandoverID { get; set; }
         public bool HandoverApproved { get; set; }
+        public string Caption { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Employee Employee { get; set; }

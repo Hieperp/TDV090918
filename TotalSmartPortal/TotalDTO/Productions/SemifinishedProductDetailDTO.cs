@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 using TotalModel;
 using TotalDTO.Helpers;
+using TotalBase.Enums;
 
 namespace TotalDTO.Productions
 {
@@ -45,6 +46,7 @@ namespace TotalDTO.Productions
         [UIHint("QuantityReadonly")]
         public override decimal Quantity { get; set; }
 
+        public string GetCaption(int count) { return this.CommodityCode + (count > 1 ? " [" + this.Quantity.ToString("N" + GlobalEnums.rndQuantity.ToString()) + "] " : ""); }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

@@ -21,6 +21,8 @@ namespace TotalModel
 
         Nullable<int> VoidTypeID { get; set; }
 
+        [Display(Name = "Mô tả")]
+        string Caption { get; set; }
         [Display(Name = "Ghi chú")]
         string Remarks { get; set; }
     }
@@ -37,6 +39,8 @@ namespace TotalModel
 
         public int LocationID { get; set; }
 
+        [Display(Name = "Mô tả")]
+        public virtual string Caption { get; set; }
         [Display(Name = "Ghi chú")]
         public virtual string Remarks { get; set; }
 

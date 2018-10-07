@@ -19,6 +19,7 @@ namespace TotalDTO.Inventories
 
         public int WarehouseID { get; set; }
         public Nullable<int> WarehouseReceiptID { get; set; }
+        public Nullable<int> LocationReceiptID { get; set; }
 
         [UIHint("AutoCompletes/CommodityBase")]
         public override string CommodityCode { get; set; }
