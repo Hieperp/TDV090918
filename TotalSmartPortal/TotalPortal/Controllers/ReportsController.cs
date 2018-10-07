@@ -36,7 +36,7 @@ namespace TotalPortal.Controllers
             MenuSession.SetModuleID(this.HttpContext, 9);
 
             //RequireJsOptions.Add("LocationID", this.baseService.LocationID, RequireJsOptionsScope.Page);
-            RequireJsOptions.Add("NmvnModuleID", 9, RequireJsOptionsScope.Page);
+            RequireJsOptions.Add("ModuleID", 9, RequireJsOptionsScope.Page);
             RequireJsOptions.Add("NmvnTaskID", 0, RequireJsOptionsScope.Page);
 
             return View(this.reportRepository.GetEntityIndexes<Report>(User.Identity.GetUserId(), HomeSession.GetGlobalFromDate(this.HttpContext), HomeSession.GetGlobalToDate(this.HttpContext)));

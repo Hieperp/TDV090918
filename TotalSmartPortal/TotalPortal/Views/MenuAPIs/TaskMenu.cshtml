@@ -83,9 +83,9 @@
 
     $(document).ready(function () {
 
-        if (requireConfig != undefined && requireConfig.pageOptions.NmvnModuleID != undefined) {
+        if (requireConfig != undefined && requireConfig.pageOptions.ModuleID != undefined) {
             $('.menuModuleItems').each(function (i, obj) {
-                if ($(obj).attr("NmvnModuleID") == requireConfig.pageOptions.NmvnModuleID) {
+                if ($(obj).attr("ModuleID") == requireConfig.pageOptions.ModuleID) {
 
                     if ($(obj).hasClass("k-state-selected_1"))
                         $(obj).removeClass("k-state-selected_1");

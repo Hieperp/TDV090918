@@ -61,7 +61,7 @@
                             items.Add()
                                 .Text(item.Description)
                                 .ImageUrl(item.ImageIndex)
-                                .HtmlAttributes(new { @class = "menuModuleItems", @NmvnModuleID = item.ModuleID, @modulename = item.Description });
+                                .HtmlAttributes(new { @class = "menuModuleItems", @ModuleID = item.ModuleID, @modulename = item.Description });
                         }
                     })
             .Events(e => e.Select("selectModule"))
@@ -101,14 +101,14 @@
         $("#MainMenu").find(".k-state-selected_1").removeClass("k-state-selected_1");
         $(e.item).addClass("k-state-selected_1");
 
-        var NmvnModuleID = $(e.item).attr("NmvnModuleID");
+        var moduleID = $(e.item).attr("ModuleID");
 
-        if (NmvnModuleID === "9") {
+        if (moduleID === "9") {
             window.open('@Url.Action("Index", "Reports")', "_self");
         }
         else {
             var url = '@Url.Action("TaskMenu", "MenuAPIs", new { moduleID = "module-id" })';
-            url = url.replace("module-id", $(e.item).attr("NmvnModuleID"));
+            url = url.replace("module-id", $(e.item).attr("moduleID"));
 
             $('#left-side-navigation').load(url);
         }
