@@ -26,7 +26,6 @@
         <EntityTypeShape EntityType="TotalSmartPortalModel.HandlingUnitDetail" Width="1.5" PointX="29" PointY="27.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.HandlingUnit" Width="1.5" PointX="20.75" PointY="21.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.Location" Width="1.5" PointX="0.5" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TotalSmartPortalModel.ModuleDetail" Width="1.5" PointX="39.5" PointY="19.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.Module" Width="1.5" PointX="35.5" PointY="20.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.MonetaryAccount" Width="1.5" PointX="8" PointY="37.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.OrganizationalUnit" Width="1.5" PointX="28.375" PointY="8" IsExpanded="true" />
@@ -348,6 +347,8 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseAdjustmentDetails_GoodsReceiptDetails" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransferDetails_GoodsReceiptDetails" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProductDetails_FinishedProductPackages" />
+        <EntityTypeShape EntityType="TotalSmartPortalModel.ModuleDetail" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TotalSmartPortalModel.ModuleDefault" Width="1.5" PointX="5.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

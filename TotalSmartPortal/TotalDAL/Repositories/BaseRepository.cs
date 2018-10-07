@@ -34,11 +34,35 @@ namespace TotalDAL.Repositories
         public TotalSmartPortalEntities TotalSmartPortalEntities { get { return this.totalSmartPortalEntities; } }
 
 
-        public int GetModuleID(GlobalEnums.NmvnTaskID nmvnTaskID)
+        #region Menu
+        public int GetModuleID(GlobalEnums.NmvnTaskID nmvnTaskID, int userID, ref int moduleDetailID)
         {
-            var moduleDetail = this.totalSmartPortalEntities.ModuleDetails.Where(w => w.TaskID == (int)nmvnTaskID).FirstOrDefault();
+            int localModuleDetailID = moduleDetailID;
+            if (localModuleDetailID == 0) localModuleDetailID = this.GetDefaultModuleDetailID(nmvnTaskID, userID);
+
+            var moduleDetail = this.totalSmartPortalEntities.ModuleDetails.Where(w => w.TaskID == (int)nmvnTaskID && w.ModuleDetailID == localModuleDetailID).FirstOrDefault();
+            if (moduleDetail == null)
+            {
+                localModuleDetailID = this.GetDefaultModuleDetailID(nmvnTaskID, userID);
+                moduleDetail = this.totalSmartPortalEntities.ModuleDetails.Where(w => w.TaskID == (int)nmvnTaskID && w.ModuleDetailID == localModuleDetailID).FirstOrDefault();
+            }
+
+            moduleDetailID = localModuleDetailID;
             return moduleDetail != null ? moduleDetail.ModuleID : 0;
         }
+
+        private int GetDefaultModuleDetailID(GlobalEnums.NmvnTaskID nmvnTaskID, int userID)
+        {
+            var moduleDefault = this.totalSmartPortalEntities.ModuleDefaults.Where(w => w.TaskID == (int)nmvnTaskID && w.UserID == (int)userID).FirstOrDefault();
+
+            if (moduleDefault != null)
+                return moduleDefault.ModuleDetailID;
+            {
+                var moduleDetail = this.totalSmartPortalEntities.ModuleDetails.Where(w => w.TaskID == (int)nmvnTaskID).FirstOrDefault();
+                return moduleDetail != null ? moduleDetail.ModuleDetailID : 0;
+            }
+        }
+        #endregion Menu
 
         /// <summary>
         ///     Detect whether the context is dirty (i.e., there are changes in entities in memory that have
@@ -274,7 +298,7 @@ namespace TotalDAL.Repositories
             {
                 if (commodity.CodePartB.IndexOf("[") > 0 || commodity.CodePartC.IndexOf("[") > 0 || (commodity.CodePartD != null && commodity.CodePartD.IndexOf("[") > 0)) throw new Exception("[9999999999999");
 
-                string newCode = ((!String.IsNullOrWhiteSpace(commodity.CodePartA) ? commodity.CodePartA + " " : "") + (!String.IsNullOrWhiteSpace(commodity.CodePartB) ? commodity.CodePartB + " " : "") + (!String.IsNullOrWhiteSpace(commodity.CodePartC) ? commodity.CodePartC + " " : "") + (!String.IsNullOrWhiteSpace(commodity.CodePartD) ? commodity.CodePartD + " " : "") + (!String.IsNullOrWhiteSpace(commodity.CodePartE) ? commodity.CodePartE + " x " : "") + (!String.IsNullOrWhiteSpace(commodity.CodePartF) ? commodity.CodePartF : "")).Trim(); 
+                string newCode = ((!String.IsNullOrWhiteSpace(commodity.CodePartA) ? commodity.CodePartA + " " : "") + (!String.IsNullOrWhiteSpace(commodity.CodePartB) ? commodity.CodePartB + " " : "") + (!String.IsNullOrWhiteSpace(commodity.CodePartC) ? commodity.CodePartC + " " : "") + (!String.IsNullOrWhiteSpace(commodity.CodePartD) ? commodity.CodePartD + " " : "") + (!String.IsNullOrWhiteSpace(commodity.CodePartE) ? commodity.CodePartE + " x " : "") + (!String.IsNullOrWhiteSpace(commodity.CodePartF) ? commodity.CodePartF : "")).Trim();
                 this.ExecuteStoreCommand("UPDATE Commodities SET Code = N'" + newCode + "', OfficialCode = N'" + TotalBase.CommonExpressions.AlphaNumericString(newCode) + "' WHERE CommodityID = " + commodity.CommodityID, new ObjectParameter[] { });
             }
 
@@ -319,7 +343,7 @@ namespace TotalDAL.Repositories
             Helpers.SqlProgrammability.Inventories.MaterialIssue materialIssue = new Helpers.SqlProgrammability.Inventories.MaterialIssue(totalSmartPortalEntities);
             materialIssue.RestoreProcedure();
 
-            
+
             //return;
 
             Helpers.SqlProgrammability.Commons.Commodity commodity = new Helpers.SqlProgrammability.Commons.Commodity(totalSmartPortalEntities);
@@ -363,12 +387,12 @@ namespace TotalDAL.Repositories
 
             Helpers.SqlProgrammability.Commons.Mold mold = new Helpers.SqlProgrammability.Commons.Mold(totalSmartPortalEntities);
             mold.RestoreProcedure();
-            
+
             //return;
 
             Helpers.SqlProgrammability.Commons.Workshift workshift = new Helpers.SqlProgrammability.Commons.Workshift(totalSmartPortalEntities);
             workshift.RestoreProcedure();
-            
+
 
 
 
@@ -417,7 +441,7 @@ namespace TotalDAL.Repositories
             Helpers.SqlProgrammability.Generals.UserReference userReference = new Helpers.SqlProgrammability.Generals.UserReference(totalSmartPortalEntities);
             userReference.RestoreProcedure();
 
-            
+
 
             //return;
 
@@ -521,8 +545,8 @@ namespace TotalDAL.Repositories
 
             //return;
             Helpers.SqlProgrammability.Inventories.GoodsDelivery goodsDelivery = new Helpers.SqlProgrammability.Inventories.GoodsDelivery(totalSmartPortalEntities);
-            goodsDelivery.RestoreProcedure();          
-            
+            goodsDelivery.RestoreProcedure();
+
 
         }
 

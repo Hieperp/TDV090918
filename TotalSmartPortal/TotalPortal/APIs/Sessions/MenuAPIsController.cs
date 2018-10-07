@@ -44,10 +44,7 @@ namespace TotalPortal.APIs.Sessions
             }
 
 
-            int taskID = MenuSession.GetTaskID(this.HttpContext);
-
-
-            ViewBag.TaskID = taskID;
+            ViewBag.ModuleDetailID = MenuSession.GetModuleDetailID(this.HttpContext);
 
 
             //var moduleDetail = moduleDetailRepository.GetModuleDetailByID((int)moduleID);
@@ -97,6 +94,21 @@ namespace TotalPortal.APIs.Sessions
 
                 MenuSession.SetUserLocked(this.HttpContext, 1);
                 return PartialView(new List<Module>());
+            }
+        }
+
+
+        [HttpPost]
+        public JsonResult SetModuleDetailID(int moduleDetailID)
+        {
+            try
+            {
+                MenuSession.SetModuleDetailID(this.HttpContext, moduleDetailID);     
+                return Json(new { SetResult = "Successfully" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { SetResult = ex.Message }, JsonRequestBehavior.AllowGet);
             }
         }
 

@@ -48,7 +48,6 @@ namespace TotalModel.Models
         public virtual DbSet<HandlingUnitDetail> HandlingUnitDetails { get; set; }
         public virtual DbSet<HandlingUnit> HandlingUnits { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
-        public virtual DbSet<ModuleDetail> ModuleDetails { get; set; }
         public virtual DbSet<Module> Modules { get; set; }
         public virtual DbSet<MonetaryAccount> MonetaryAccounts { get; set; }
         public virtual DbSet<OrganizationalUnit> OrganizationalUnits { get; set; }
@@ -111,6 +110,8 @@ namespace TotalModel.Models
         public virtual DbSet<FinishedProductPackage> FinishedProductPackages { get; set; }
         public virtual DbSet<FinishedHandoverDetail> FinishedHandoverDetails { get; set; }
         public virtual DbSet<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
+        public virtual DbSet<ModuleDetail> ModuleDetails { get; set; }
+        public virtual DbSet<ModuleDefault> ModuleDefaults { get; set; }
     
         public virtual ObjectResult<string> AccountInvoicePostSaveValidate(Nullable<int> entityID)
         {

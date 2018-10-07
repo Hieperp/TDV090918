@@ -1102,10 +1102,21 @@
           <Property Name="Approved" Type="bit" Nullable="false" />
           <Property Name="ApprovedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="ModuleDefaults">
+          <Key>
+            <PropertyRef Name="ModuleDetailID" />
+            <PropertyRef Name="TaskID" />
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="ModuleDetailID" Type="int" Nullable="false" />
+          <Property Name="TaskID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="ModuleDetails">
           <Key>
-            <PropertyRef Name="TaskID" />
+            <PropertyRef Name="ModuleDetailID" />
           </Key>
+          <Property Name="ModuleDetailID" Type="int" Nullable="false" />
           <Property Name="TaskID" Type="int" Nullable="false" />
           <Property Name="ModuleID" Type="int" Nullable="false" />
           <Property Name="SoftDescription" Type="nvarchar" MaxLength="20" Nullable="false" />
@@ -6556,6 +6567,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MaterialIssueDetails" EntityType="Self.MaterialIssueDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MaterialIssues" EntityType="Self.MaterialIssues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleDefaults" EntityType="Self.ModuleDefaults" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ModuleDetails" EntityType="Self.ModuleDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Molds" EntityType="Self.Molds" Schema="dbo" store:Type="Tables" />
@@ -8425,23 +8437,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <NavigationProperty Name="GoodsReceipts" Relationship="TotalSmartPortalModel.FK_GoodsReceipts_Locations" FromRole="Location" ToRole="GoodsReceipt" />
           <NavigationProperty Name="SemifinishedHandovers" Relationship="TotalSmartPortalModel.FK_SemifinishedHandovers_Locations" FromRole="Location" ToRole="SemifinishedHandover" />
         </EntityType>
-        <EntityType Name="ModuleDetail">
-          <Key>
-            <PropertyRef Name="TaskID" />
-          </Key>
-          <Property Name="TaskID" Type="Int32" Nullable="false" />
-          <Property Name="ModuleID" Type="Int32" Nullable="false" />
-          <Property Name="SoftDescription" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="DescriptionEN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Actions" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Controller" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastOpen" Type="Double" Nullable="false" />
-          <Property Name="SerialID" Type="Double" Nullable="false" />
-          <Property Name="ImageIndex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="InActive" Type="Double" Nullable="false" />
-          <Property Name="Enabled" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="Module">
           <Key>
             <PropertyRef Name="ModuleID" />
@@ -10086,7 +10081,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <EntitySet Name="HandlingUnitDetails" EntityType="Self.HandlingUnitDetail" />
           <EntitySet Name="HandlingUnits" EntityType="Self.HandlingUnit" />
           <EntitySet Name="Locations" EntityType="Self.Location" />
-          <EntitySet Name="ModuleDetails" EntityType="Self.ModuleDetail" />
           <EntitySet Name="Modules" EntityType="Self.Module" />
           <EntitySet Name="MonetaryAccounts" EntityType="Self.MonetaryAccount" />
           <EntitySet Name="OrganizationalUnits" EntityType="Self.OrganizationalUnit" />
@@ -12343,6 +12337,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
             <End Role="FinishedProductPackage" EntitySet="FinishedProductPackages" />
             <End Role="FinishedProductDetail" EntitySet="FinishedProductDetails" />
           </AssociationSet>
+          <EntitySet Name="ModuleDetails" EntityType="TotalSmartPortalModel.ModuleDetail" />
+          <EntitySet Name="ModuleDefaults" EntityType="TotalSmartPortalModel.ModuleDefault" />
           </EntityContainer>
         <ComplexType Name="AccountInvoiceIndex">
           <Property Type="Int32" Name="AccountInvoiceID" Nullable="false" />
@@ -17658,6 +17654,34 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ModuleDetail">
+          <Key>
+            <PropertyRef Name="ModuleDetailID" />
+          </Key>
+          <Property Name="ModuleDetailID" Type="Int32" Nullable="false" />
+          <Property Name="TaskID" Type="Int32" Nullable="false" />
+          <Property Name="ModuleID" Type="Int32" Nullable="false" />
+          <Property Name="SoftDescription" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionEN" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Actions" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Controller" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastOpen" Type="Double" Nullable="false" />
+          <Property Name="SerialID" Type="Double" Nullable="false" />
+          <Property Name="ImageIndex" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="InActive" Type="Double" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModuleDefault">
+          <Key>
+            <PropertyRef Name="ModuleDetailID" />
+            <PropertyRef Name="TaskID" />
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="ModuleDetailID" Type="Int32" Nullable="false" />
+          <Property Name="TaskID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -18304,24 +18328,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="LockedDate" ColumnName="LockedDate" />
                 <ScalarProperty Name="AspUserID" ColumnName="AspUserID" />
                 <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ModuleDetails">
-            <EntityTypeMapping TypeName="TotalSmartPortalModel.ModuleDetail">
-              <MappingFragment StoreEntitySet="ModuleDetails">
-                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
-                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
-                <ScalarProperty Name="SoftDescription" ColumnName="SoftDescription" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="DescriptionEN" ColumnName="DescriptionEN" />
-                <ScalarProperty Name="Actions" ColumnName="Actions" />
-                <ScalarProperty Name="Controller" ColumnName="Controller" />
-                <ScalarProperty Name="LastOpen" ColumnName="LastOpen" />
-                <ScalarProperty Name="SerialID" ColumnName="SerialID" />
-                <ScalarProperty Name="ImageIndex" ColumnName="ImageIndex" />
-                <ScalarProperty Name="InActive" ColumnName="InActive" />
-                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -22476,6 +22482,34 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="ModuleDetails">
+            <EntityTypeMapping TypeName="TotalSmartPortalModel.ModuleDetail">
+              <MappingFragment StoreEntitySet="ModuleDetails">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="InActive" ColumnName="InActive" />
+                <ScalarProperty Name="ImageIndex" ColumnName="ImageIndex" />
+                <ScalarProperty Name="SerialID" ColumnName="SerialID" />
+                <ScalarProperty Name="LastOpen" ColumnName="LastOpen" />
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
+                <ScalarProperty Name="Actions" ColumnName="Actions" />
+                <ScalarProperty Name="DescriptionEN" ColumnName="DescriptionEN" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SoftDescription" ColumnName="SoftDescription" />
+                <ScalarProperty Name="ModuleID" ColumnName="ModuleID" />
+                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+                <ScalarProperty Name="ModuleDetailID" ColumnName="ModuleDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuleDefaults">
+            <EntityTypeMapping TypeName="TotalSmartPortalModel.ModuleDefault">
+              <MappingFragment StoreEntitySet="ModuleDefaults">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+                <ScalarProperty Name="ModuleDetailID" ColumnName="ModuleDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

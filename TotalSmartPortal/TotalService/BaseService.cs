@@ -37,7 +37,7 @@ namespace TotalService
         }
 
         public virtual GlobalEnums.NmvnTaskID NmvnTaskID { get { return GlobalEnums.NmvnTaskID.UnKnown; } }
-        public int NmvnModuleID { get { return this.baseRepository.GetModuleID(this.NmvnTaskID); } }
+        public int GetModuleID(ref int moduleDetailID) { return this.baseRepository.GetModuleID(this.NmvnTaskID, this.userID, ref moduleDetailID); }
 
 
         public virtual GlobalEnums.AccessLevel GetAccessLevel()

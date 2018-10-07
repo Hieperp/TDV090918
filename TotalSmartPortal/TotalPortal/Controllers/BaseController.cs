@@ -10,20 +10,24 @@ namespace TotalPortal.Controllers
     {
         private readonly IBaseService baseService;
         public BaseController(IBaseService baseService)
-        { this.baseService = baseService;}
+        { this.baseService = baseService; }
 
 
         public IBaseService BaseService { get { return this.baseService; } }
 
 
-        
+
         public virtual void AddRequireJsOptions()
         {
-            int nmvnModuleID = this.baseService.NmvnModuleID;
-            MenuSession.SetModuleID(this.HttpContext, nmvnModuleID);                
+            int moduleDetailID = MenuSession.GetModuleDetailID(this.HttpContext);
+            int moduleID = this.baseService.GetModuleID(ref moduleDetailID);
+
+            MenuSession.SetModuleID(this.HttpContext, moduleID);
+            MenuSession.SetModuleDetailID(this.HttpContext, moduleDetailID);
 
             RequireJsOptions.Add("LocationID", this.baseService.LocationID, RequireJsOptionsScope.Page);
-            RequireJsOptions.Add("NmvnModuleID", nmvnModuleID, RequireJsOptionsScope.Page);
+            RequireJsOptions.Add("NmvnModuleID", moduleID, RequireJsOptionsScope.Page);
+            RequireJsOptions.Add("ModuleDetailID", moduleDetailID, RequireJsOptionsScope.Page);
             RequireJsOptions.Add("NmvnTaskID", this.baseService.NmvnTaskID, RequireJsOptionsScope.Page);
         }
 

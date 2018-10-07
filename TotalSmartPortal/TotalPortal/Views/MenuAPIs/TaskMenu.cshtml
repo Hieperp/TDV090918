@@ -16,23 +16,23 @@
                     .HtmlAttributes(new { @class = "separation", @itemmenu = "item" });
               }
               else
-                  if (item.TaskID == ViewBag.TaskID)
-                  {
-                      items.Add()
-                          .Text(item.SoftDescription)
-                          .Content(item.Description)
-                          .ImageUrl(item.ImageIndex)
-                          .HtmlAttributes(new { @class = "menuModuleDetailItems", @NmvnTaskID = item.TaskID, @taskName = item.Description, @itemmenu = "item", @taskActions = item.Actions, @taskController = item.Controller, @highlight = "highlight" });
+                  //if (item.ModuleDetailID == ViewBag.ModuleDetailID)
+                  //{
+                  //    items.Add()
+                  //        .Text(item.SoftDescription)
+                  //        .Content(item.Description)
+                  //        .ImageUrl(item.ImageIndex)
+                  //        .HtmlAttributes(new { @class = "menuModuleDetailItems", @ModuleDetailID = item.ModuleDetailID, @taskName = item.Description, @itemmenu = "item", @taskActions = item.Actions, @taskController = item.Controller, @highlight = "highlight" });
 
-                  }
-                  else
-                  {
+                  //}
+                  //else
+                  //{
                       items.Add()
                           .Text(item.SoftDescription)
                           .Content(item.Description)
                           .ImageUrl(item.ImageIndex)
-                          .HtmlAttributes(new { @class = "menuModuleDetailItems", @NmvnTaskID = item.TaskID, @taskName = item.Description, @itemmenu = "item", @taskActions = item.Actions, @taskController = item.Controller });
-                  }
+                          .HtmlAttributes(new { @class = "menuModuleDetailItems", @ModuleDetailID = item.ModuleDetailID, @taskName = item.Description, @itemmenu = "item", @taskActions = item.Actions, @taskController = item.Controller });
+                  //}
           }
       })
         .Events(e => e.Select("selectTask"))
@@ -47,17 +47,37 @@
         $("#grouplist").find(".k-state-selected").removeClass("k-state-selected");
         $(e.item).addClass("k-state-selected");
 
-        taskID = $(e.item).attr("taskID");
+        moduleDetailID = $(e.item).attr("ModuleDetailID");
         taskName = $(e.item).attr("taskName");
         taskController = $(e.item).attr("taskController");
         taskActions = $(e.item).attr("taskActions");
 
         if (taskController != "") {
-            var url = '@Url.Action("taskActions", "taskController")';
-            url = url.replace("taskActions", taskActions);
-            url = url.replace("taskController", taskController);
 
-            window.open(url, "_self");
+            return $.ajax({
+                url: '@Url.Action("SetModuleDetailID", "MenuAPIs")',
+                data: JSON.stringify({ "ModuleDetailID": moduleDetailID }),
+
+                type: 'POST',
+                contentType: 'application/json;',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.SetResult == "Successfully") {
+                        
+                        var url = '@Url.Action("taskActions", "taskController")';
+                        url = url.replace("taskActions", taskActions);
+                        url = url.replace("taskController", taskController);
+                        
+                        window.open(url, "_self");
+
+                    }
+                    else
+                        alert(result.SetResult);
+                },
+                error: function (jqXHR, textStatus) {
+                    alert(textStatus);
+                }
+            });
         }
     }
 
@@ -75,9 +95,9 @@
             });
         }
 
-        if (requireConfig != undefined && requireConfig.pageOptions.NmvnTaskID != undefined) {
+        if (requireConfig != undefined && requireConfig.pageOptions.ModuleDetailID != undefined) {
             $('.menuModuleDetailItems').each(function (i, obj) {
-                if ($(obj).attr("NmvnTaskID") == requireConfig.pageOptions.NmvnTaskID) {
+                if ($(obj).attr("ModuleDetailID") == requireConfig.pageOptions.ModuleDetailID) {
                     $(obj).addClass("k-state-selected");
                 }
             });

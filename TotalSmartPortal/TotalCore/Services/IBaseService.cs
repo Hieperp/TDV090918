@@ -7,8 +7,8 @@ namespace TotalCore.Services
         int UserID { get; set; }
         int LocationID { get; }
 
-        int NmvnModuleID { get; }
         GlobalEnums.NmvnTaskID NmvnTaskID { get; }
+        int GetModuleID(ref int moduleDetailID);
 
         GlobalEnums.AccessLevel GetAccessLevel();
         GlobalEnums.AccessLevel GetAccessLevel(int? organizationalUnitID);
