@@ -115,7 +115,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "       SELECT          Customers.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName " + "\r\n";
             queryString = queryString + "       FROM            Customers " + "\r\n";
             queryString = queryString + "       WHERE           CustomerID IN (SELECT DISTINCT CustomerID FROM FinishedProductPackages WHERE FinishedHandoverID IS NULL AND Approved = 1 GROUP BY CustomerID) " + "\r\n";
-            
+
             this.totalSmartPortalEntities.CreateStoredProcedure("GetFinishedHandoverPendingCustomers", queryString);
         }
 
@@ -142,7 +142,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         {
             string queryString = "";
             queryString = queryString + "   BEGIN " + "\r\n";
-            queryString = queryString + "       IF  (@FinishedProductPackageIDs <> '') " + "\r\n";
+            queryString = queryString + "       IF  (@CustomerID <> 0) " + "\r\n";
             queryString = queryString + "           " + this.GetPendingBUILDSQL(isPlannedOrderID, true) + "\r\n";
             queryString = queryString + "       ELSE " + "\r\n";
             queryString = queryString + "           " + this.GetPendingBUILDSQL(isPlannedOrderID, false) + "\r\n";
@@ -151,30 +151,43 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             return queryString;
         }
 
-        private string GetPendingBUILDSQL(bool isPlannedOrderID, bool isFinishedProductPackageIDs)
+        private string GetPendingBUILDSQL(bool isPlannedOrderID, bool isCustomerID)
+        {
+            string queryString = "";
+            queryString = queryString + "   BEGIN " + "\r\n";
+            queryString = queryString + "       IF  (@FinishedProductPackageIDs <> '') " + "\r\n";
+            queryString = queryString + "           " + this.GetPendingBUILDSQL(isPlannedOrderID, isCustomerID, true) + "\r\n";
+            queryString = queryString + "       ELSE " + "\r\n";
+            queryString = queryString + "           " + this.GetPendingBUILDSQL(isPlannedOrderID, isCustomerID, false) + "\r\n";
+            queryString = queryString + "   END " + "\r\n";
+
+            return queryString;
+        }
+
+        private string GetPendingBUILDSQL(bool isPlannedOrderID, bool isCustomerID, bool isFinishedProductPackageIDs)
         {
             string queryString = "";
             queryString = queryString + "   BEGIN " + "\r\n";
 
             queryString = queryString + "       IF (@FinishedHandoverID <= 0) " + "\r\n";
             queryString = queryString + "               BEGIN " + "\r\n";
-            queryString = queryString + "                   " + this.GetPendingBUILDSQLNew(isPlannedOrderID, isFinishedProductPackageIDs) + "\r\n";
+            queryString = queryString + "                   " + this.GetPendingBUILDSQLNew(isPlannedOrderID, isCustomerID, isFinishedProductPackageIDs) + "\r\n";
             queryString = queryString + "                   ORDER BY Customers.Name, Customers.Code, Commodities.Code, FinishedProductPackages.EntryDate " + "\r\n";
             queryString = queryString + "               END " + "\r\n";
             queryString = queryString + "       ELSE " + "\r\n";
 
             queryString = queryString + "               IF (@IsReadonly = 1) " + "\r\n";
             queryString = queryString + "                   BEGIN " + "\r\n";
-            queryString = queryString + "                       " + this.GetPendingBUILDSQLEdit(isPlannedOrderID, isFinishedProductPackageIDs) + "\r\n";
+            queryString = queryString + "                       " + this.GetPendingBUILDSQLEdit(isPlannedOrderID, isCustomerID, isFinishedProductPackageIDs) + "\r\n";
             queryString = queryString + "                       ORDER BY Customers.Name, Customers.Code, Commodities.Code, FinishedProductPackages.EntryDate " + "\r\n";
             queryString = queryString + "                   END " + "\r\n";
 
             queryString = queryString + "               ELSE " + "\r\n"; //FULL SELECT FOR EDIT MODE
 
             queryString = queryString + "                   BEGIN " + "\r\n";
-            queryString = queryString + "                       " + this.GetPendingBUILDSQLNew(isPlannedOrderID, isFinishedProductPackageIDs) + "\r\n";
+            queryString = queryString + "                       " + this.GetPendingBUILDSQLNew(isPlannedOrderID, isCustomerID, isFinishedProductPackageIDs) + "\r\n";
             queryString = queryString + "                       UNION ALL " + "\r\n";
-            queryString = queryString + "                       " + this.GetPendingBUILDSQLEdit(isPlannedOrderID, isFinishedProductPackageIDs) + "\r\n";
+            queryString = queryString + "                       " + this.GetPendingBUILDSQLEdit(isPlannedOrderID, isCustomerID, isFinishedProductPackageIDs) + "\r\n";
             queryString = queryString + "                       ORDER BY Customers.Name, Customers.Code, Commodities.Code, FinishedProductPackages.EntryDate " + "\r\n";
             queryString = queryString + "                   END " + "\r\n";
 
@@ -183,7 +196,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             return queryString;
         }
 
-        private string GetPendingBUILDSQLNew(bool isPlannedOrderID, bool isFinishedProductPackageIDs)
+        private string GetPendingBUILDSQLNew(bool isPlannedOrderID, bool isCustomerID, bool isFinishedProductPackageIDs)
         {
             string queryString = "";
 
@@ -191,13 +204,13 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "                   FinishedProductPackages.CommodityID, Commodities.Code AS CommodityCode, Commodities.CommodityTypeID, FinishedProductPackages.Quantity, CAST(1 AS bit) AS IsSelected " + "\r\n";
 
             queryString = queryString + "       FROM        FinishedProductPackages " + "\r\n";
-            queryString = queryString + "                   INNER JOIN Customers ON FinishedProductPackages.CustomerID = @CustomerID AND FinishedProductPackages.Approved = 1 " + (isPlannedOrderID ? " AND FinishedProductPackages.PlannedOrderID = @PlannedOrderID " : "") + " AND FinishedProductPackages.FinishedHandoverID IS NULL AND FinishedProductPackages.CustomerID = Customers.CustomerID " + (isFinishedProductPackageIDs ? " AND FinishedProductPackages.FinishedProductPackageID NOT IN (SELECT Id FROM dbo.SplitToIntList (@FinishedProductPackageIDs))" : "") + "\r\n";
+            queryString = queryString + "                   INNER JOIN Customers ON FinishedProductPackages.Approved = 1 " + (isCustomerID ? " AND FinishedProductPackages.CustomerID = @CustomerID " : "") + (isPlannedOrderID ? " AND FinishedProductPackages.PlannedOrderID = @PlannedOrderID " : "") + " AND FinishedProductPackages.FinishedHandoverID IS NULL AND FinishedProductPackages.CustomerID = Customers.CustomerID " + (isFinishedProductPackageIDs ? " AND FinishedProductPackages.FinishedProductPackageID NOT IN (SELECT Id FROM dbo.SplitToIntList (@FinishedProductPackageIDs))" : "") + "\r\n";
             queryString = queryString + "                   INNER JOIN Commodities ON FinishedProductPackages.CommodityID = Commodities.CommodityID " + "\r\n";
 
             return queryString;
         }
 
-        private string GetPendingBUILDSQLEdit(bool isPlannedOrderID, bool isFinishedProductPackageIDs)
+        private string GetPendingBUILDSQLEdit(bool isPlannedOrderID, bool isCustomerID, bool isFinishedProductPackageIDs)
         {
             string queryString = "";
 
