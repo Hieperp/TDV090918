@@ -349,6 +349,7 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_Warehouses1" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransferDetails_TransferOrders" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_TransferOrders" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_Locations1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

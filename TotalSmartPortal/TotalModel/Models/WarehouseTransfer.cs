@@ -43,6 +43,7 @@ namespace TotalModel.Models
         public bool Approved { get; set; }
         public Nullable<System.DateTime> ApprovedDate { get; set; }
         public bool HasTransferOrder { get; set; }
+        public int LocationReceiptID { get; set; }
     
         public virtual Employee Employee { get; set; }
         public virtual Location Location { get; set; }
@@ -53,5 +54,6 @@ namespace TotalModel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GoodsReceipt> GoodsReceipts { get; set; }
         public virtual TransferOrder TransferOrder { get; set; }
+        public virtual Location Location1 { get; set; }
     }
 }

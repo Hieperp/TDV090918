@@ -2026,6 +2026,7 @@
           <Property Name="TransferOrderDetailID" Type="int" />
           <Property Name="WarehouseID" Type="int" Nullable="false" />
           <Property Name="WarehouseReceiptID" Type="int" Nullable="false" />
+          <Property Name="LocationReceiptID" Type="int" Nullable="false" />
           <Property Name="GoodsReceiptID" Type="int" Nullable="false" />
           <Property Name="GoodsReceiptDetailID" Type="int" Nullable="false" />
           <Property Name="CommodityID" Type="int" Nullable="false" />
@@ -2049,6 +2050,7 @@
           <Property Name="TransferOrderID" Type="int" />
           <Property Name="WarehouseID" Type="int" Nullable="false" />
           <Property Name="WarehouseReceiptID" Type="int" Nullable="false" />
+          <Property Name="LocationReceiptID" Type="int" Nullable="false" />
           <Property Name="StorekeeperID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="PreparedPersonID" Type="int" Nullable="false" />
@@ -5307,6 +5309,18 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WarehouseTransfers_Locations1">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+          <End Role="WarehouseTransfers" Type="Self.WarehouseTransfers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="WarehouseTransfers">
+              <PropertyRef Name="LocationReceiptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_WarehouseTransfers_TransferOrders">
           <End Role="TransferOrders" Type="Self.TransferOrders" Multiplicity="0..1" />
           <End Role="WarehouseTransfers" Type="Self.WarehouseTransfers" Multiplicity="*" />
@@ -7632,6 +7646,10 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
             <End Role="Locations" EntitySet="Locations" />
             <End Role="WarehouseTransfers" EntitySet="WarehouseTransfers" />
           </AssociationSet>
+          <AssociationSet Name="FK_WarehouseTransfers_Locations1" Association="Self.FK_WarehouseTransfers_Locations1">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="WarehouseTransfers" EntitySet="WarehouseTransfers" />
+          </AssociationSet>
           <AssociationSet Name="FK_WarehouseTransfers_TransferOrders" Association="Self.FK_WarehouseTransfers_TransferOrders">
             <End Role="TransferOrders" EntitySet="TransferOrders" />
             <End Role="WarehouseTransfers" EntitySet="WarehouseTransfers" />
@@ -8437,6 +8455,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <NavigationProperty Name="FinishedHandovers" Relationship="TotalSmartPortalModel.FK_FinishedHandovers_Locations" FromRole="Location" ToRole="FinishedHandover" />
           <NavigationProperty Name="TransferOrders" Relationship="TotalSmartPortalModel.FK_TransferOrders_Locations" FromRole="Location" ToRole="TransferOrder" />
           <NavigationProperty Name="TransferOrders1" Relationship="TotalSmartPortalModel.FK_TransferOrders_Locations1" FromRole="Location" ToRole="TransferOrder" />
+          <NavigationProperty Name="WarehouseTransfers1" Relationship="TotalSmartPortalModel.FK_WarehouseTransfers_Locations1" FromRole="Location" ToRole="WarehouseTransfer" />
         </EntityType>
         <EntityType Name="Module">
           <Key>
@@ -12338,6 +12357,10 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           </AssociationSet>
           <AssociationSet Name="FK_WarehouseTransfers_TransferOrders" Association="TotalSmartPortalModel.FK_WarehouseTransfers_TransferOrders">
             <End Role="TransferOrder" EntitySet="TransferOrders" />
+            <End Role="WarehouseTransfer" EntitySet="WarehouseTransfers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarehouseTransfers_Locations1" Association="TotalSmartPortalModel.FK_WarehouseTransfers_Locations1">
+            <End Role="Location" EntitySet="Locations" />
             <End Role="WarehouseTransfer" EntitySet="WarehouseTransfers" />
           </AssociationSet>
           </EntityContainer>
@@ -16541,6 +16564,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <NavigationProperty Name="GoodsReceiptDetail" Relationship="TotalSmartPortalModel.FK_WarehouseTransferDetails_GoodsReceiptDetails" FromRole="WarehouseTransferDetail" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="TransferOrderDetail" Relationship="TotalSmartPortalModel.FK_WarehouseTransferDetails_TransferOrderDetails" FromRole="WarehouseTransferDetail" ToRole="TransferOrderDetail" />
           <NavigationProperty Name="TransferOrder" Relationship="TotalSmartPortalModel.FK_WarehouseTransferDetails_TransferOrders" FromRole="WarehouseTransferDetail" ToRole="TransferOrder" />
+          <Property Name="LocationReceiptID" Type="Int32" Nullable="false" />
           </EntityType>
         <EntityType Name="WarehouseTransfer">
           <Key>
@@ -16575,6 +16599,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Name="HasTransferOrder" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="GoodsReceipts" Relationship="TotalSmartPortalModel.FK_GoodsReceipts_WarehouseTransfers" FromRole="WarehouseTransfer" ToRole="GoodsReceipt" />
           <NavigationProperty Name="TransferOrder" Relationship="TotalSmartPortalModel.FK_WarehouseTransfers_TransferOrders" FromRole="WarehouseTransfer" ToRole="TransferOrder" />
+          <Property Name="LocationReceiptID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Location1" Relationship="TotalSmartPortalModel.FK_WarehouseTransfers_Locations1" FromRole="WarehouseTransfer" ToRole="Location" />
         </EntityType>
         <Association Name="FK_WarehouseTransferDetails_Commodities">
           <End Type="TotalSmartPortalModel.Commodity" Role="Commodity" Multiplicity="1" />
@@ -16695,6 +16721,9 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="String" Name="WarehouseReceiptCode" Nullable="false" MaxLength="10" />
           <Property Type="String" Name="WarehouseName" Nullable="false" MaxLength="60" />
           <Property Type="Boolean" Name="HasTransferOrder" Nullable="true" />
+          <Property Type="Int32" Name="LocationID" Nullable="false" />
+          <Property Type="String" Name="WarehouseReceiptName" Nullable="false" MaxLength="60" />
+          <Property Type="Int32" Name="LocationReceiptID" Nullable="false" />
         </ComplexType>
         <ComplexType Name="WarehouseTransferPendingTransferOrder">
           <Property Type="Int32" Name="TransferOrderID" Nullable="false" />
@@ -16707,6 +16736,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="String" Name="WarehouseName" Nullable="false" MaxLength="60" />
           <Property Type="String" Name="WarehouseReceiptName" Nullable="false" MaxLength="60" />
           <Property Type="Boolean" Name="HasTransferOrder" Nullable="true" />
+          <Property Type="Int32" Name="LocationID" Nullable="false" />
+          <Property Type="Int32" Name="LocationReceiptID" Nullable="false" />
         </ComplexType>
         <ComplexType Name="WarehouseTransferViewDetail">
           <Property Type="Int32" Name="WarehouseTransferDetailID" Nullable="false" />
@@ -17677,6 +17708,18 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
             </Principal>
             <Dependent Role="WarehouseTransfer">
               <PropertyRef Name="TransferOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WarehouseTransfers_Locations1">
+          <End Type="TotalSmartPortalModel.Location" Role="Location" Multiplicity="1" />
+          <End Type="TotalSmartPortalModel.WarehouseTransfer" Role="WarehouseTransfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="WarehouseTransfer">
+              <PropertyRef Name="LocationReceiptID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -21989,6 +22032,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <EntitySetMapping Name="WarehouseTransferDetails">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.WarehouseTransferDetail">
               <MappingFragment StoreEntitySet="WarehouseTransferDetails">
+                <ScalarProperty Name="LocationReceiptID" ColumnName="LocationReceiptID" />
                 <ScalarProperty Name="HasTransferOrder" ColumnName="HasTransferOrder" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
@@ -22015,6 +22059,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <EntitySetMapping Name="WarehouseTransfers">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.WarehouseTransfer">
               <MappingFragment StoreEntitySet="WarehouseTransfers">
+                <ScalarProperty Name="LocationReceiptID" ColumnName="LocationReceiptID" />
                 <ScalarProperty Name="HasTransferOrder" ColumnName="HasTransferOrder" />
                 <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
@@ -22101,6 +22146,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
                 <ScalarProperty Name="WarehouseReceiptName" ColumnName="WarehouseReceiptName" />
                 <ScalarProperty Name="HasTransferOrder" ColumnName="HasTransferOrder" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="LocationReceiptID" ColumnName="LocationReceiptID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -22143,6 +22190,9 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="WarehouseReceiptCode" ColumnName="WarehouseReceiptCode" />
                 <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
                 <ScalarProperty Name="HasTransferOrder" ColumnName="HasTransferOrder" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="WarehouseReceiptName" ColumnName="WarehouseReceiptName" />
+                <ScalarProperty Name="LocationReceiptID" ColumnName="LocationReceiptID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

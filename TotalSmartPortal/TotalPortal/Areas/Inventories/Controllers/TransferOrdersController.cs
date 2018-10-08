@@ -30,6 +30,16 @@ namespace TotalPortal.Areas.Inventories.Controllers
         {
         }
 
+        protected override TViewDetailViewModel InitViewModelByDefault(TViewDetailViewModel simpleViewModel)
+        {
+            simpleViewModel = base.InitViewModelByDefault(simpleViewModel);
+
+            simpleViewModel.Warehouse = new TotalDTO.Commons.WarehouseBaseDTO() { WarehouseID = 2, Code = "KM片", Name = "KM", LocationID = 1 };
+            simpleViewModel.WarehouseReceipt = new TotalDTO.Commons.WarehouseBaseDTO() { WarehouseID = 6, Code = "ĐHCK", Name = "ĐHCK", LocationID = 2 };
+
+            return simpleViewModel;
+        }
+
         public override void AddRequireJsOptions()
         {
             base.AddRequireJsOptions();

@@ -22,21 +22,6 @@
     @Html.HiddenFor(model => model.Storekeeper.EmployeeID);
     @Html.HiddenFor(model => model.Storekeeper.Name);
 
-    @Html.HiddenFor(model => (model as IWarehouseTransferPrimitiveDTO).CustomerID)
-
-    @Html.HiddenFor(model => model.Customer.CustomerID)
-    @Html.HiddenFor(model => model.Customer.Code)
-    @Html.HiddenFor(model => model.Customer.Name)
-    @Html.HiddenFor(model => model.Customer.VATCode)
-    @Html.HiddenFor(model => model.Customer.Telephone)
-    @Html.HiddenFor(model => model.Customer.BillingAddress)
-    @Html.HiddenFor(model => model.Customer.EntireTerritoryEntireName)
-    @Html.HiddenFor(model => model.Customer.SalespersonID)
-    @Html.HiddenFor(model => model.Customer.SalespersonName)
-    @Html.HiddenFor(model => model.Customer.PaymentTermID)
-    @Html.HiddenFor(model => model.Customer.PriceCategoryID)
-    @Html.HiddenFor(model => model.Customer.PriceCategoryCode)
-
     @Html.HiddenFor(model => (model as IWarehouseTransferPrimitiveDTO).HasTransferOrder)
     
     @Html.HiddenFor(model => (model as IWarehouseTransferPrimitiveDTO).TransferOrderID)
@@ -61,9 +46,6 @@
                 .Selected(true)
                 .Content(@<text>
                     <div style="margin-top: 39px; margin-right: 18px;">
-
-                        @Html.EditorFor(d => (d as IWarehouseTransferDTO).Customer, "AutoCompletes/CustomerBase", new { CustomerDescriptionHidden = "false", CustomerDisplayName = @Model.Customer.GetDisplayName(m => m.CustomerID) })
-
                         @Html.EditorFor(d => (d as IWarehouseTransferDTO).Warehouse, new { WarehouseDisplayName = @Model.Warehouse.GetDisplayName(m => m.WarehouseID) })
 
                         @Html.EditorFor(d => (d as IWarehouseTransferDTO).WarehouseReceipt, new { WarehouseDisplayName = @Model.WarehouseReceipt.GetDisplayName(m => m.WarehouseID) })
@@ -147,23 +129,6 @@
 
 
         function _setModelInput(selectedDataItem) {
-            $("#Customer_CustomerID").val(selectedDataItem === undefined || selectedDataItem.CustomerID === undefined ? null : selectedDataItem.CustomerID);
-            $("#Customer_Code").val(selectedDataItem === undefined || selectedDataItem.CustomerCode === undefined ? null : selectedDataItem.CustomerCode);
-            $("#Customer_Name").val(selectedDataItem === undefined || selectedDataItem.CustomerName === undefined ? null : selectedDataItem.CustomerName);
-            $("#Customer_OfficialName").val(selectedDataItem === undefined || selectedDataItem.CustomerOfficialName === undefined ? null : selectedDataItem.CustomerOfficialName);
-            $("#Customer_Birthday").val(selectedDataItem === undefined || selectedDataItem.CustomerBirthday === undefined ? null : kendo.toString(selectedDataItem.CustomerBirthday, Settings.DateFormat));
-            $("#Customer_VATCode").val(selectedDataItem === undefined || selectedDataItem.CustomerVATCode === undefined ? null : selectedDataItem.CustomerVATCode);
-            $("#Customer_Telephone").val(selectedDataItem === undefined || selectedDataItem.CustomerTelephone === undefined ? null : selectedDataItem.CustomerTelephone);
-            $("#Customer_BillingAddress").val(selectedDataItem === undefined || selectedDataItem.CustomerBillingAddress === undefined ? null : selectedDataItem.CustomerBillingAddress);
-            $("#Customer_ShippingAddress").val(selectedDataItem === undefined || selectedDataItem.CustomerShippingAddress === undefined ? null : selectedDataItem.CustomerShippingAddress);
-            $("#Customer_TerritoryID").val(selectedDataItem === undefined || selectedDataItem.CustomerTerritoryID === undefined ? null : selectedDataItem.CustomerTerritoryID);
-            $("#Customer_EntireTerritoryEntireName").val(selectedDataItem === undefined || selectedDataItem.CustomerEntireTerritoryEntireName === undefined ? null : selectedDataItem.CustomerEntireTerritoryEntireName);
-            $("#Customer_SalespersonID").val(selectedDataItem === undefined || selectedDataItem.CustomerSalespersonID === undefined ? null : selectedDataItem.CustomerSalespersonID);
-            $("#Customer_SalespersonName").val(selectedDataItem === undefined || selectedDataItem.CustomerSalespersonName === undefined ? null : selectedDataItem.CustomerSalespersonName);
-            $("#Customer_PaymentTermID").val(selectedDataItem === undefined || selectedDataItem.PaymentTermID === undefined ? null : selectedDataItem.PaymentTermID);
-            $("#Customer_PriceCategoryID").val(selectedDataItem === undefined || selectedDataItem.CustomerPriceCategoryID === undefined ? null : selectedDataItem.CustomerPriceCategoryID);
-            $("#Customer_PriceCategoryCode").val(selectedDataItem === undefined || selectedDataItem.CustomerPriceCategoryCode === undefined ? null : selectedDataItem.CustomerPriceCategoryCode);
-
             $("#HasTransferOrder").val(selectedDataItem === undefined || selectedDataItem.HasTransferOrder === undefined ? false : selectedDataItem.HasTransferOrder);
 
             $("#TransferOrderID").val(selectedDataItem === undefined || selectedDataItem.TransferOrderID === undefined ? null : selectedDataItem.TransferOrderID);
@@ -173,50 +138,13 @@
             $("#Warehouse_WarehouseID").val(selectedDataItem === undefined || selectedDataItem.WarehouseID === undefined ? null : selectedDataItem.WarehouseID);
             $("#Warehouse_Code").val(selectedDataItem === undefined || selectedDataItem.WarehouseCode === undefined ? null : selectedDataItem.WarehouseCode);
             $("#Warehouse_Name").val(selectedDataItem === undefined || selectedDataItem.WarehouseName === undefined ? null : selectedDataItem.WarehouseName);
+            $("#Warehouse_LocationID").val(selectedDataItem === undefined || selectedDataItem.LocationID === undefined ? null : selectedDataItem.LocationID);
             $("#WarehouseReceipt_WarehouseID").val(selectedDataItem === undefined || selectedDataItem.WarehouseReceiptID === undefined ? null : selectedDataItem.WarehouseReceiptID);
             $("#WarehouseReceipt_Code").val(selectedDataItem === undefined || selectedDataItem.WarehouseReceiptCode === undefined ? null : selectedDataItem.WarehouseReceiptCode);
             $("#WarehouseReceipt_Name").val(selectedDataItem === undefined || selectedDataItem.WarehouseReceiptName === undefined ? null : selectedDataItem.WarehouseReceiptName);
+            $("#WarehouseReceipt_LocationID").val(selectedDataItem === undefined || selectedDataItem.LocationReceiptID === undefined ? null : selectedDataItem.LocationReceiptID);
         }
     }
-
-    $("#Customer_CustomerID").change(function (e) {
-        $("#Warehouse_WarehouseID").val($("#Customer_WarehouseID").val());
-        $("#Warehouse_Code").val($("#Customer_WarehouseCode").val());
-        $("#Warehouse_Name").val($("#Customer_WarehouseName").val());
-
-        $("#WarehouseReceipt_WarehouseID").val($("#Customer_WarehouseID").val());
-        $("#WarehouseReceipt_Code").val($("#Customer_WarehouseCode").val());
-        $("#WarehouseReceipt_Name").val($("#Customer_WarehouseName").val());
-
-        //Also remember last AutoComplete value for Warehouse
-        $("#Warehouse_TempName").val($("#Warehouse_Name").val());
-        //Also remember last AutoComplete value for Warehouse
-        $("#WarehouseReceipt_TempName").val($("#WarehouseReceipt_Name").val());
-    })
-
-
-
-    $("#Warehouse_WarehouseID").change(function (e) {
-        if ($("#NegativeOnly").val() == "True") {
-            $("#WarehouseReceipt_WarehouseID").val($("#Warehouse_WarehouseID").val());
-            $("#WarehouseReceipt_Code").val($("#Warehouse_Code").val());
-            $('#WarehouseReceipt_Name').val($("#Warehouse_Name").val());
-            //Also remember last AutoComplete value for Warehouse
-            $("#WarehouseReceipt_TempName").val($("#WarehouseReceipt_Name").val());
-        }
-    })
-
-    $("#WarehouseReceipt_WarehouseID").change(function (e) {
-        if ($("#PositiveOnly").val() == "True") {
-            $("#Warehouse_WarehouseID").val($("#WarehouseReceipt_WarehouseID").val());
-            $("#Warehouse_Code").val($("#WarehouseReceipt_Code").val());
-            $('#Warehouse_Name').val($("#WarehouseReceipt_Name").val());
-            //Also remember last AutoComplete value for Warehouse
-            $("#Warehouse_TempName").val($("#Warehouse_Name").val());
-        }
-    })   
-
-
 </script>
 
 
