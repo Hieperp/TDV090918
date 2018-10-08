@@ -38,13 +38,13 @@ namespace TotalDAL.Helpers.SqlProgrammability.Generals
             string queryString;
 
             queryString = " " + "\r\n";
-            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            //queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
-            queryString = queryString + "       SELECT      ModuleDetails.TaskID, Modules.SerialID AS ModuleSerialID, Modules.Description AS ModuleName, ModuleDetails.Description AS TaskName, ModuleDetails.SoftDescription AS SoftTaskName " + "\r\n";
-            queryString = queryString + "       FROM        Modules INNER JOIN ModuleDetails ON Modules.ModuleID = ModuleDetails.ModuleID " + "\r\n";
-            queryString = queryString + "       WHERE       Modules.InActive = 0 AND ModuleDetails.Enabled = 1 " + "\r\n";
+            queryString = queryString + "       SELECT      ModuleDetails.TaskID, Modules.SerialID AS ModuleSerialID, Modules.Description AS ModuleName, ModuleDetails.TaskName, ModuleDetails.SoftTaskName " + "\r\n";
+            queryString = queryString + "       FROM        Modules INNER JOIN (SELECT TaskID, MIN(ModuleID) AS ModuleID, MIN(SerialID) AS SerialID, MIN(Description) AS TaskName, MIN(SoftDescription) AS SoftTaskName FROM ModuleDetails WHERE Enabled = 1 GROUP BY TaskID) AS ModuleDetails ON Modules.ModuleID = ModuleDetails.ModuleID " + "\r\n";
+            queryString = queryString + "       WHERE       Modules.InActive = 0 " + "\r\n";
             queryString = queryString + "       ORDER BY    Modules.SerialID, ModuleDetails.SerialID " + "\r\n";
 
             queryString = queryString + "    END " + "\r\n";
