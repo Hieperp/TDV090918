@@ -41,6 +41,7 @@ namespace TotalModel.Models
         public bool Approved { get; set; }
         public bool HasTransferOrder { get; set; }
         public int LocationReceiptID { get; set; }
+        public int LocationIssuedID { get; set; }
     
         public virtual Commodity Commodity { get; set; }
         public virtual WarehouseTransfer WarehouseTransfer { get; set; }

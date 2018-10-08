@@ -28,6 +28,7 @@ namespace TotalDTO.Inventories
         bool HasTransferOrder { get; set; }
 
         Nullable<int> WarehouseID { get; set; }
+        Nullable<int> LocationIssuedID { get; set; }
         Nullable<int> WarehouseReceiptID { get; set; }
         Nullable<int> LocationReceiptID { get; set; }
         Nullable<int> TransferOrderID { get; set; }
@@ -52,6 +53,7 @@ namespace TotalDTO.Inventories
         public bool HasTransferOrder { get; set; }
 
         public virtual Nullable<int> WarehouseID { get; set; }
+        public virtual Nullable<int> LocationIssuedID { get; set; }
         public virtual Nullable<int> WarehouseReceiptID { get; set; }
         public virtual Nullable<int> LocationReceiptID { get; set; }
         public virtual Nullable<int> TransferOrderID { get; set; }
@@ -64,7 +66,7 @@ namespace TotalDTO.Inventories
         {
             base.PerformPresaveRule();
 
-            this.DtoDetails().ToList().ForEach(e => { e.WarehouseTransferTypeID = this.WarehouseTransferTypeID; e.NMVNTaskID = this.NMVNTaskID; e.WarehouseID = (int)this.WarehouseID; e.WarehouseReceiptID = this.WarehouseReceiptID; e.LocationReceiptID = this.LocationReceiptID; });
+            this.DtoDetails().ToList().ForEach(e => { e.WarehouseTransferTypeID = this.WarehouseTransferTypeID; e.NMVNTaskID = this.NMVNTaskID; e.WarehouseID = (int)this.WarehouseID; e.WarehouseReceiptID = this.WarehouseReceiptID; e.LocationIssuedID = this.LocationIssuedID; e.LocationReceiptID = this.LocationReceiptID; });
         }
 
     }
@@ -99,6 +101,7 @@ namespace TotalDTO.Inventories
         }
 
         public override Nullable<int> WarehouseID { get { return (this.Warehouse != null ? this.Warehouse.WarehouseID : null); } }
+        public override Nullable<int> LocationIssuedID { get { return (this.Warehouse != null ? (Nullable<int>)this.Warehouse.LocationID : null); } }
         public WarehouseBaseDTO Warehouse { get; set; }
 
         public override Nullable<int> WarehouseReceiptID { get { return (this.WarehouseReceipt != null ? this.WarehouseReceipt.WarehouseID : null); } }

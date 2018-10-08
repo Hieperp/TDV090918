@@ -44,6 +44,7 @@ namespace TotalModel.Models
         public Nullable<System.DateTime> ApprovedDate { get; set; }
         public bool HasTransferOrder { get; set; }
         public int LocationReceiptID { get; set; }
+        public int LocationIssuedID { get; set; }
     
         public virtual Employee Employee { get; set; }
         public virtual Location Location { get; set; }
@@ -55,5 +56,6 @@ namespace TotalModel.Models
         public virtual ICollection<GoodsReceipt> GoodsReceipts { get; set; }
         public virtual TransferOrder TransferOrder { get; set; }
         public virtual Location Location1 { get; set; }
+        public virtual Location Location2 { get; set; }
     }
 }

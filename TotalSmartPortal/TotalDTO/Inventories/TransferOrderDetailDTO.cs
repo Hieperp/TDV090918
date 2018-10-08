@@ -18,6 +18,7 @@ namespace TotalDTO.Inventories
         public GlobalEnums.NmvnTaskID NMVNTaskID { get; set; }
 
         public int WarehouseID { get; set; }
+        public Nullable<int> LocationIssuedID { get; set; }
         public Nullable<int> WarehouseReceiptID { get; set; }
         public Nullable<int> LocationReceiptID { get; set; }
 

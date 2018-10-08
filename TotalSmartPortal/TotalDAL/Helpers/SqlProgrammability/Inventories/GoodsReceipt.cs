@@ -65,7 +65,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
 
             queryString = queryString + "       SELECT      GoodsReceipts.GoodsReceiptID, CAST(GoodsReceipts.EntryDate AS DATE) AS EntryDate, GoodsReceipts.Reference, Locations.Code AS LocationCode, Customers.Name AS CustomerName, GoodsReceipts.Description, GoodsReceipts.TotalQuantity, GoodsReceipts.Approved " + "\r\n";
             queryString = queryString + "       FROM        GoodsReceipts " + "\r\n";
-            queryString = queryString + "                   INNER JOIN Locations ON GoodsReceipts.NMVNTaskID = @NMVNTaskID AND GoodsReceipts.EntryDate >= @FromDate AND GoodsReceipts.EntryDate <= @ToDate AND GoodsReceipts.OrganizationalUnitID IN (SELECT AccessControls.OrganizationalUnitID FROM AccessControls INNER JOIN AspNetUsers ON AccessControls.UserID = AspNetUsers.UserID WHERE AspNetUsers.Id = @AspUserID AND AccessControls.NMVNTaskID = @NMVNTaskID AND AccessControls.AccessLevel > 0) AND Locations.LocationID = GoodsReceipts.LocationID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN Locations ON GoodsReceipts.GoodsReceiptTypeID = 9 AND GoodsReceipts.NMVNTaskID = @NMVNTaskID AND GoodsReceipts.EntryDate >= @FromDate AND GoodsReceipts.EntryDate <= @ToDate AND GoodsReceipts.OrganizationalUnitID IN (SELECT AccessControls.OrganizationalUnitID FROM AccessControls INNER JOIN AspNetUsers ON AccessControls.UserID = AspNetUsers.UserID WHERE AspNetUsers.Id = @AspUserID AND AccessControls.NMVNTaskID = @NMVNTaskID AND AccessControls.AccessLevel > 0) AND Locations.LocationID = GoodsReceipts.LocationID " + "\r\n";
             queryString = queryString + "                   LEFT JOIN Customers ON GoodsReceipts.CustomerID = Customers.CustomerID " + "\r\n";
 
             queryString = queryString + "    END " + "\r\n";
@@ -264,7 +264,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + "                       Warehouses.WarehouseID, Warehouses.Code AS WarehouseCode, Warehouses.Name AS WarehouseName, WarehouseIssues.WarehouseID AS WarehouseIssueID, WarehouseIssues.Code AS WarehouseIssueCode, WarehouseIssues.Name AS WarehouseIssueName " + "\r\n";
 
             queryString = queryString + "       FROM            WarehouseTransfers " + "\r\n";
-            queryString = queryString + "                       INNER JOIN Warehouses ON WarehouseTransfers.WarehouseTransferID IN (SELECT WarehouseTransferID FROM WarehouseTransferDetails WHERE LocationID = @LocationID AND NMVNTaskID = @NMVNTaskID - 1000000 AND Approved = 1 AND ROUND(Quantity - QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") > 0) AND WarehouseTransfers.WarehouseReceiptID = Warehouses.WarehouseID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN Warehouses ON WarehouseTransfers.WarehouseTransferID IN (SELECT WarehouseTransferID FROM WarehouseTransferDetails WHERE LocationReceiptID = @LocationID AND NMVNTaskID = @NMVNTaskID - 1000000 AND Approved = 1 AND ROUND(Quantity - QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") > 0) AND WarehouseTransfers.WarehouseReceiptID = Warehouses.WarehouseID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Warehouses WarehouseIssues ON WarehouseTransfers.WarehouseID = WarehouseIssues.WarehouseID " + "\r\n";
 
             this.totalSmartPortalEntities.CreateStoredProcedure("GetGoodsReceiptPendingWarehouseTransfers", queryString);
@@ -278,7 +278,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
 
             queryString = queryString + "       SELECT          " + (int)@GlobalEnums.GoodsReceiptTypeID.WarehouseTransfer + " AS GoodsReceiptTypeID, Warehouses.WarehouseID, Warehouses.Code AS WarehouseCode, Warehouses.Name AS WarehouseName, WarehouseIssues.WarehouseID AS WarehouseIssueID, WarehouseIssues.Code AS WarehouseIssueCode, WarehouseIssues.Name AS WarehouseIssueName " + "\r\n";
 
-            queryString = queryString + "       FROM           (SELECT WarehouseReceiptID, WarehouseID FROM WarehouseTransfers WHERE WarehouseTransferID IN (SELECT WarehouseTransferID FROM WarehouseTransferDetails WHERE LocationID = @LocationID AND NMVNTaskID = @NMVNTaskID - 1000000 AND Approved = 1 AND ROUND(Quantity - QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") > 0) GROUP BY WarehouseReceiptID, WarehouseID) WarehousePENDING " + "\r\n";
+            queryString = queryString + "       FROM           (SELECT WarehouseReceiptID, WarehouseID FROM WarehouseTransfers WHERE WarehouseTransferID IN (SELECT WarehouseTransferID FROM WarehouseTransferDetails WHERE LocationReceiptID = @LocationID AND NMVNTaskID = @NMVNTaskID - 1000000 AND Approved = 1 AND ROUND(Quantity - QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") > 0) GROUP BY WarehouseReceiptID, WarehouseID) WarehousePENDING " + "\r\n";
             queryString = queryString + "                       INNER JOIN Warehouses ON WarehousePENDING.WarehouseReceiptID = Warehouses.WarehouseID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Warehouses WarehouseIssues ON WarehousePENDING.WarehouseID = WarehouseIssues.WarehouseID " + "\r\n";
 

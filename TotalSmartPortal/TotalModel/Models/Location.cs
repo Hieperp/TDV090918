@@ -41,6 +41,8 @@ namespace TotalModel.Models
             this.TransferOrders = new HashSet<TransferOrder>();
             this.TransferOrders1 = new HashSet<TransferOrder>();
             this.WarehouseTransfers1 = new HashSet<WarehouseTransfer>();
+            this.TransferOrders2 = new HashSet<TransferOrder>();
+            this.WarehouseTransfers2 = new HashSet<WarehouseTransfer>();
         }
     
         public int LocationID { get; set; }
@@ -103,5 +105,9 @@ namespace TotalModel.Models
         public virtual ICollection<TransferOrder> TransferOrders1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WarehouseTransfer> WarehouseTransfers1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TransferOrder> TransferOrders2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WarehouseTransfer> WarehouseTransfers2 { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace TotalModel.Models
         public string WarehouseName { get; set; }
         public string WarehouseReceiptName { get; set; }
         public Nullable<bool> HasTransferOrder { get; set; }
-        public int LocationID { get; set; }
         public int LocationReceiptID { get; set; }
+        public int LocationIssuedID { get; set; }
     }
 }

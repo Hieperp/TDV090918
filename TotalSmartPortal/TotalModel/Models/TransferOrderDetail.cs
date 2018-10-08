@@ -42,6 +42,7 @@ namespace TotalModel.Models
         public bool InActive { get; set; }
         public bool InActivePartial { get; set; }
         public Nullable<System.DateTime> InActivePartialDate { get; set; }
+        public int LocationIssuedID { get; set; }
     
         public virtual Commodity Commodity { get; set; }
         public virtual TransferOrder TransferOrder { get; set; }
