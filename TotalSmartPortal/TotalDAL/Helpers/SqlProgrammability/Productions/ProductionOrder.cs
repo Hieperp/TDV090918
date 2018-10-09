@@ -77,7 +77,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "       SELECT      ProductionOrderDetails.ProductionOrderDetailID, ProductionOrderDetails.ProductionOrderID, ProductionOrderDetails.PlannedOrderID, ProductionOrderDetails.FirmOrderID, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FirmOrders.EntryDate AS FirmOrderEntryDate, " + "\r\n";
             queryString = queryString + "                   ProductionOrderDetails.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, ProductionOrderDetails.BomID, Boms.Code AS BomCode, " + "\r\n";
-            queryString = queryString + "                   FirmOrders.Specification, VoidTypes.VoidTypeID, VoidTypes.Code AS VoidTypeCode, VoidTypes.Name AS VoidTypeName, VoidTypes.VoidClassID, " + "\r\n";
+            queryString = queryString + "                   FirmOrders.Specs, FirmOrders.Specification, VoidTypes.VoidTypeID, VoidTypes.Code AS VoidTypeCode, VoidTypes.Name AS VoidTypeName, VoidTypes.VoidClassID, " + "\r\n";
             queryString = queryString + "                   ROUND(FirmOrderDetails.QuantityRemains, " + (int)GlobalEnums.rndQuantity + ") AS QuantityRemains, " + "\r\n";
             queryString = queryString + "                   ProductionOrderDetails.InActivePartial, ProductionOrderDetails.InActivePartialDate, ProductionOrderDetails.Remarks " + "\r\n";
             queryString = queryString + "       FROM        ProductionOrderDetails " + "\r\n";
@@ -211,7 +211,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             string queryString = "";
 
             queryString = queryString + "       SELECT      FirmOrders.PlannedOrderID, FirmOrders.FirmOrderID, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FirmOrders.EntryDate AS FirmOrderEntryDate, " + "\r\n";
-            queryString = queryString + "                   FirmOrders.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, FirmOrders.Specification, FirmOrders.BomID, Boms.Code AS BomCode, " + "\r\n";
+            queryString = queryString + "                   FirmOrders.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, FirmOrders.Specs, FirmOrders.Specification, FirmOrders.BomID, Boms.Code AS BomCode, " + "\r\n";
 
             queryString = queryString + "                   ROUND(FirmOrderDetails.QuantityRemains, " + (int)GlobalEnums.rndQuantity + ") AS QuantityRemains, " + "\r\n";
             queryString = queryString + "                   FirmOrders.Description, FirmOrders.Remarks, CAST(1 AS bit) AS IsSelected " + "\r\n";
@@ -229,7 +229,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             string queryString = "";
 
             queryString = queryString + "       SELECT      FirmOrders.PlannedOrderID, FirmOrders.FirmOrderID, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FirmOrders.EntryDate AS FirmOrderEntryDate, " + "\r\n";
-            queryString = queryString + "                   FirmOrders.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, FirmOrders.Specification, FirmOrders.BomID, Boms.Code AS BomCode, " + "\r\n";
+            queryString = queryString + "                   FirmOrders.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, FirmOrders.Specs, FirmOrders.Specification, FirmOrders.BomID, Boms.Code AS BomCode, " + "\r\n";
 
             queryString = queryString + "                   ROUND(FirmOrderDetails.QuantityRemains, " + (int)GlobalEnums.rndQuantity + ") AS QuantityRemains, " + "\r\n";
             queryString = queryString + "                   FirmOrders.Description, FirmOrders.Remarks, CAST(1 AS bit) AS IsSelected " + "\r\n";

@@ -1463,6 +1463,7 @@
     <Content Include="Areas\Inventories\Views\ItemReceipts\Edit.cshtml" />
     <Content Include="Areas\Inventories\Views\ItemReceipts\Index.cshtml" />
     <Content Include="Areas\Inventories\Views\ItemReceipts\Print.cshtml" />
+    <Content Include="Areas\Inventories\Views\GoodsReceipts\Approve.cshtml" />
     <None Include="Properties\PublishProfiles\TDV.pubxml" />
     <None Include="Properties\PublishProfiles\VCP.pubxml">
       <SubType>Designer</SubType>

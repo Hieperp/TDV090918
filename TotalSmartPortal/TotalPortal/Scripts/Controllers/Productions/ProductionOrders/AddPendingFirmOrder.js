@@ -56,6 +56,7 @@ function handleOKEvent(productionOrderGridDataSource, pendingFirmOrderGridDataSo
         dataRow.CustomerName = plannedOrderGridDataItem.CustomerName;
         dataRow.CustomerCode = plannedOrderGridDataItem.CustomerCode;
 
+        dataRow.Specs = plannedOrderGridDataItem.Specs;
         dataRow.Specification = plannedOrderGridDataItem.Specification;
 
         dataRow.BomID = plannedOrderGridDataItem.BomID;

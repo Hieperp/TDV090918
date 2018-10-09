@@ -21,5 +21,8 @@ namespace TotalModel.Models
         public string CustomerName { get; set; }
         public System.DateTime PlannedOrderEntryDate { get; set; }
         public string PlannedOrderReference { get; set; }
+        public int WarehouseID { get; set; }
+        public string WarehouseCode { get; set; }
+        public string WarehouseName { get; set; }
     }
 }

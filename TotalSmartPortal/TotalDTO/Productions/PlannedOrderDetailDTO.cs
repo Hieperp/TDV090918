@@ -64,5 +64,6 @@ namespace TotalDTO.Productions
         public string Description { get; set; }
 
         public string GetDescription() { return this.CommodityCode + (this.CombineIndex != null ? " [" + this.Quantity.ToString("N" + GlobalEnums.rndQuantity.ToString()) + "] " : ""); }
+        public string GetRemarks() { return this.CommodityName + (this.CombineIndex != null ? " [" + this.Quantity.ToString("N" + GlobalEnums.rndQuantity.ToString()) + "] " : ""); }
     }
 }

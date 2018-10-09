@@ -24,5 +24,8 @@ namespace TotalModel.Models
         public string CustomerName { get; set; }
         public string CustomerOfficialName { get; set; }
         public int GoodsReceiptTypeID { get; set; }
+        public int WarehouseID { get; set; }
+        public string WarehouseCode { get; set; }
+        public string WarehouseName { get; set; }
     }
 }

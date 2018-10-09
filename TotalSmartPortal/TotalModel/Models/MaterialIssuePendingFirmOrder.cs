@@ -30,5 +30,6 @@ namespace TotalModel.Models
         public string WarehouseName { get; set; }
         public decimal TotalQuantity { get; set; }
         public decimal TotalQuantitySemifinished { get; set; }
+        public string FirmOrderSpecs { get; set; }
     }
 }

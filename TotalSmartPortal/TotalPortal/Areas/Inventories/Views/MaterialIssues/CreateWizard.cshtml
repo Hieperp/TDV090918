@@ -24,6 +24,7 @@
     @Html.HiddenFor(model => model.FirmOrderCode)
     @Html.HiddenFor(model => model.FirmOrderReference)
     @Html.HiddenFor(model => model.FirmOrderEntryDate)
+    @Html.HiddenFor(model => model.FirmOrderSpecs)
     @Html.HiddenFor(model => model.FirmOrderSpecification)
 
 
@@ -64,8 +65,9 @@
             columns.Bound(c => c.FirmOrderReference).Title("KHSX").Width(28);
             columns.Bound(c => c.FirmOrderCode).Title("Mã CT").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(25);
             columns.Bound(c => c.FirmOrderEntryDate).Title("Ngày KHSX").Format("{0:dd/MM/yyyy}").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(38);
-            columns.Bound(c => c.CustomerName).Title("Khách hàng").Width(68);
+            columns.Bound(c => c.CustomerName).Title("Khách hàng").Width(50);
             columns.Bound(c => c.FirmOrderSpecification).Title("Mã thành phẩm").Width(92);
+            columns.Bound(c => c.FirmOrderSpecs).Title("Tên thành phẩm").Width(92);
             columns.Bound(p => p.TotalQuantity).Title("SL ĐH").Format(Settings.kfmQuantity).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(32);
             columns.Bound(p => p.TotalQuantitySemifinished).Title("Đã ĐHCK").Format(Settings.kfmQuantity).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(32);
         })
@@ -142,6 +144,7 @@
             $("#FirmOrderCode").val(selectedDataItem === undefined || selectedDataItem.FirmOrderCode === undefined ? null : selectedDataItem.FirmOrderCode);
             $("#FirmOrderReference").val(selectedDataItem === undefined || selectedDataItem.FirmOrderReference === undefined ? null : selectedDataItem.FirmOrderReference);
             $("#FirmOrderEntryDate").val(selectedDataItem === undefined || selectedDataItem.FirmOrderEntryDate === undefined ? null : kendo.toString(selectedDataItem.FirmOrderEntryDate, Settings.DateTimeFormat));
+            $("#FirmOrderSpecs").val(selectedDataItem === undefined || selectedDataItem.FirmOrderSpecs === undefined ? null : selectedDataItem.FirmOrderSpecs);
             $("#FirmOrderSpecification").val(selectedDataItem === undefined || selectedDataItem.FirmOrderSpecification === undefined ? null : selectedDataItem.FirmOrderSpecification);
 
             $("#Customer_CustomerID").val(selectedDataItem === undefined || selectedDataItem.CustomerID === undefined ? null : selectedDataItem.CustomerID);
@@ -181,6 +184,7 @@
                     { field: "FirmOrderCode", operator: "contains", value: materialIssuePendingFirmOrderFilter },
                     { field: "FirmOrderReference", operator: "contains", value: materialIssuePendingFirmOrderFilter },
                     { field: "CustomerName", operator: "contains", value: materialIssuePendingFirmOrderFilter },
+                    { field: "FirmOrderSpecs", operator: "contains", value: materialIssuePendingFirmOrderFilter },
                     { field: "FirmOrderSpecification", operator: "contains", value: materialIssuePendingFirmOrderFilter }
                 ]
             });

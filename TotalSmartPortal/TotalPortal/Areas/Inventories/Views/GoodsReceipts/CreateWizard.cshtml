@@ -35,7 +35,10 @@
     @Html.HiddenFor(model => model.WarehouseIssue.WarehouseID);
     @Html.HiddenFor(model => model.WarehouseIssue.Code);
     @Html.HiddenFor(model => model.WarehouseIssue.Name);
-    
+
+    @Html.HiddenFor(model => model.Warehouse.WarehouseID);
+    @Html.HiddenFor(model => model.Warehouse.Code);
+    @Html.HiddenFor(model => model.Warehouse.Name);
     
     
     @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).PlannedOrderID)
@@ -104,7 +107,7 @@
 
 
     <div class="background-bar" style="height: 45px;">
-        <div style="width:40%;height:10px;float: left; margin-top:-3px"> @Html.EditorFor(model => (model as IGoodsReceiptDTO).Warehouse, new { WarehouseDisplayName = @Model.Warehouse.GetDisplayName(m => m.WarehouseID) })           </div>
+        @*<div style="width:40%;height:10px;float: left; margin-top:-3px"> @Html.EditorFor(model => (model as IGoodsReceiptDTO).Warehouse, new { WarehouseDisplayName = @Model.Warehouse.GetDisplayName(m => m.WarehouseID) })           </div>*@
         <div class="popup-button-bar" style="clear:none">
 
             <input id="submitCreateWizard" type="submit" formaction="@Url.Action("CreateWizard", Model.ControllerName)" formtarget="_top" style="display:none" />
@@ -219,6 +222,11 @@
                 //    $("#Customer_SalespersonID").val(selectedDataItem === undefined || selectedDataItem.CustomerSalespersonID === undefined ? null : selectedDataItem.CustomerSalespersonID);
                 //    $("#Customer_SalespersonName").val(selectedDataItem === undefined || selectedDataItem.CustomerSalespersonName === undefined ? null : selectedDataItem.CustomerSalespersonName);
                 //}
+
+                $("#Warehouse_WarehouseID").val(selectedDataItem === undefined || selectedDataItem.WarehouseID === undefined ? null : selectedDataItem.WarehouseID);
+                $("#Warehouse_Code").val(selectedDataItem === undefined || selectedDataItem.WarehouseCode === undefined ? null : selectedDataItem.WarehouseCode);
+                $("#Warehouse_Name").val(selectedDataItem === undefined || selectedDataItem.WarehouseName === undefined ? null : selectedDataItem.WarehouseName);
+
 
                 $("#PlannedOrderID").val(selectedDataItem === undefined || selectedDataItem.PlannedOrderID === undefined ? null : selectedDataItem.PlannedOrderID);
                 $("#PlannedOrderCode").val(selectedDataItem === undefined || selectedDataItem.PlannedOrderCode === undefined ? null : selectedDataItem.PlannedOrderCode);

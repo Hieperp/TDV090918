@@ -27,5 +27,7 @@ namespace TotalModel.Models
         public string FirmOrdersCode { get; set; }
         public System.DateTime FirmOrderEntryDate { get; set; }
         public string FirmOrderSpecification { get; set; }
+        public string FirmOrderSpecs { get; set; }
+        public string CustomerName { get; set; }
     }
 }

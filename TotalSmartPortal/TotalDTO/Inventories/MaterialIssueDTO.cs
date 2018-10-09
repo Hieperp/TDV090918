@@ -38,9 +38,11 @@ namespace TotalDTO.Inventories
         public string FirmOrderCode { get; set; }
         [Display(Name = "Ngày KHSX")]
         public DateTime FirmOrderEntryDate { get; set; }
+        [Display(Name = "Tên thành phẩm")]
+        public string FirmOrderSpecs { get; set; }
         [Display(Name = "Mã thành phẩm")]
         public string FirmOrderSpecification { get; set; }
-
+        public string FirmOrderSpecificationSpecs { get { return this.FirmOrderSpecs + " (" + this.FirmOrderSpecification + ")"; } }
 
         [Display(Name = "Số chứng từ")]
         [UIHint("Commons/SOCode")]

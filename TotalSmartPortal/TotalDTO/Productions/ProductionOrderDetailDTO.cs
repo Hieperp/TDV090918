@@ -36,7 +36,11 @@ namespace TotalDTO.Productions
         [UIHint("StringReadonly")]
         public virtual string CustomerName { get; set; }
 
-        [Display(Name = "Mặt hàng")]
+        [Display(Name = "Tên hàng")]
+        [UIHint("StringReadonly")]
+        public virtual string Specs { get; set; }
+
+        [Display(Name = "Mã hàng")]
         [UIHint("StringReadonly")]
         public virtual string Specification { get; set; }
 

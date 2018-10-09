@@ -34,5 +34,6 @@ namespace TotalModel.Models
         public bool InActivePartial { get; set; }
         public Nullable<System.DateTime> InActivePartialDate { get; set; }
         public string Remarks { get; set; }
+        public string Specs { get; set; }
     }
 }
