@@ -97,13 +97,14 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         {
             string queryString = "";
 
-            queryString = queryString + "       SELECT      0 AS FinishedProductDetailID, 0 AS FinishedProductID, SemifinishedProductDetails.FirmOrderID, SemifinishedProductDetails.FirmOrderDetailID, SemifinishedProductDetails.PlannedOrderID, SemifinishedProductDetails.PlannedOrderDetailID, SemifinishedProductDetails.SemifinishedProductID, SemifinishedProductDetails.SemifinishedProductDetailID, SemifinishedProductDetails.SemifinishedHandoverID, SemifinishedProductDetails.EntryDate AS SemifinishedProductEntryDate, Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, SemifinishedProductDetails.PiecePerPack, N'' AS Remarks, " + "\r\n";
+            queryString = queryString + "       SELECT      0 AS FinishedProductDetailID, 0 AS FinishedProductID, SemifinishedProductDetails.FirmOrderID, SemifinishedProductDetails.FirmOrderDetailID, SemifinishedProductDetails.PlannedOrderID, SemifinishedProductDetails.PlannedOrderDetailID, SemifinishedProductDetails.SemifinishedProductID, SemifinishedProductDetails.SemifinishedProductDetailID, SemifinishedProductDetails.SemifinishedHandoverID, SemifinishedProductDetails.EntryDate AS SemifinishedProductEntryDate, SemifinishedProducts.Reference AS SemifinishedProductReference, Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, SemifinishedProductDetails.PiecePerPack, N'' AS Remarks, " + "\r\n";
             queryString = queryString + "                   SemifinishedProductDetails.WorkshiftID, Workshifts.EntryDate AS WorkshiftEntryDate, Workshifts.Code AS WorkshiftCode, GoodsReceiptDetails.Reference AS GoodsReceiptReference, GoodsReceiptDetails.Code AS GoodsReceiptCode, GoodsReceiptDetails.BatchEntryDate, ROUND(SemifinishedProductDetails.Quantity - SemifinishedProductDetails.QuantityFinished, " + (int)GlobalEnums.rndQuantity + ") AS QuantityRemains, 0.0 AS Quantity, 0.0 AS QuantityFailure, 0.0 AS Swarfs " + "\r\n";
 
-            queryString = queryString + "       FROM        SemifinishedProductDetails " + "\r\n";
-            queryString = queryString + "                   INNER JOIN Commodities ON SemifinishedProductDetails.FirmOrderID = @FirmOrderID AND SemifinishedProductDetails.LocationID = @LocationID AND SemifinishedProductDetails.Approved = 1 AND SemifinishedProductDetails.HandoverApproved = 1 AND ROUND(SemifinishedProductDetails.Quantity - SemifinishedProductDetails.QuantityFinished, " + (int)GlobalEnums.rndQuantity + ") > 0 AND SemifinishedProductDetails.CommodityID = Commodities.CommodityID " + "\r\n";
+            queryString = queryString + "       FROM        SemifinishedProductDetails " + "\r\n"; //AND SemifinishedProductDetails.LocationID = @LocationID 
+            queryString = queryString + "                   INNER JOIN Commodities ON SemifinishedProductDetails.FirmOrderID = @FirmOrderID AND SemifinishedProductDetails.Approved = 1 AND SemifinishedProductDetails.HandoverApproved = 1 AND ROUND(SemifinishedProductDetails.Quantity - SemifinishedProductDetails.QuantityFinished, " + (int)GlobalEnums.rndQuantity + ") > 0 AND SemifinishedProductDetails.CommodityID = Commodities.CommodityID " + "\r\n";
             queryString = queryString + "                   INNER JOIN Workshifts ON SemifinishedProductDetails.WorkshiftID = Workshifts.WorkshiftID " + "\r\n";
             queryString = queryString + "                   INNER JOIN GoodsReceiptDetails ON SemifinishedProductDetails.GoodsReceiptDetailID = GoodsReceiptDetails.GoodsReceiptDetailID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN SemifinishedProducts ON SemifinishedProductDetails.SemifinishedProductID = SemifinishedProducts.SemifinishedProductID " + "\r\n";
 
             return queryString;
         }
@@ -112,7 +113,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         {
             string queryString = "";
 
-            queryString = queryString + "       SELECT      FinishedProductDetails.FinishedProductDetailID, FinishedProductDetails.FinishedProductID, SemifinishedProductDetails.FirmOrderID, SemifinishedProductDetails.FirmOrderDetailID, SemifinishedProductDetails.PlannedOrderID, SemifinishedProductDetails.PlannedOrderDetailID, SemifinishedProductDetails.SemifinishedProductID, SemifinishedProductDetails.SemifinishedProductDetailID, SemifinishedProductDetails.SemifinishedHandoverID, SemifinishedProductDetails.EntryDate AS SemifinishedProductEntryDate, Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, FinishedProductDetails.PiecePerPack, FinishedProductDetails.Remarks, " + "\r\n";
+            queryString = queryString + "       SELECT      FinishedProductDetails.FinishedProductDetailID, FinishedProductDetails.FinishedProductID, SemifinishedProductDetails.FirmOrderID, SemifinishedProductDetails.FirmOrderDetailID, SemifinishedProductDetails.PlannedOrderID, SemifinishedProductDetails.PlannedOrderDetailID, SemifinishedProductDetails.SemifinishedProductID, SemifinishedProductDetails.SemifinishedProductDetailID, SemifinishedProductDetails.SemifinishedHandoverID, SemifinishedProductDetails.EntryDate AS SemifinishedProductEntryDate, SemifinishedProducts.Reference AS SemifinishedProductReference, Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, FinishedProductDetails.PiecePerPack, FinishedProductDetails.Remarks, " + "\r\n";
             queryString = queryString + "                   SemifinishedProductDetails.WorkshiftID, Workshifts.EntryDate AS WorkshiftEntryDate, Workshifts.Code AS WorkshiftCode, GoodsReceiptDetails.Reference AS GoodsReceiptReference, GoodsReceiptDetails.Code AS GoodsReceiptCode, GoodsReceiptDetails.BatchEntryDate, ROUND(SemifinishedProductDetails.Quantity - SemifinishedProductDetails.QuantityFinished + FinishedProductDetails.Quantity + FinishedProductDetails.QuantityFailure, " + (int)GlobalEnums.rndQuantity + ") AS QuantityRemains, FinishedProductDetails.Quantity, FinishedProductDetails.QuantityFailure, FinishedProductDetails.Swarfs " + "\r\n";
 
             queryString = queryString + "       FROM        FinishedProductDetails " + "\r\n";
@@ -120,6 +121,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "                   INNER JOIN Commodities ON SemifinishedProductDetails.CommodityID = Commodities.CommodityID " + "\r\n";
             queryString = queryString + "                   INNER JOIN Workshifts ON SemifinishedProductDetails.WorkshiftID = Workshifts.WorkshiftID " + "\r\n";
             queryString = queryString + "                   INNER JOIN GoodsReceiptDetails ON SemifinishedProductDetails.GoodsReceiptDetailID = GoodsReceiptDetails.GoodsReceiptDetailID " + "\r\n";
+            queryString = queryString + "                   INNER JOIN SemifinishedProducts ON SemifinishedProductDetails.SemifinishedProductID = SemifinishedProducts.SemifinishedProductID " + "\r\n";
 
             return queryString;
         }
@@ -133,8 +135,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " AS " + "\r\n";
 
             queryString = queryString + "       SELECT          FirmOrders.FirmOrderID, FirmOrders.EntryDate AS FirmOrderEntryDate, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FirmOrders.Specification AS FirmOrderSpecification, FirmOrders.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName " + "\r\n";
-            queryString = queryString + "       FROM            FirmOrders " + "\r\n";
-            queryString = queryString + "                       INNER JOIN Customers ON FirmOrders.FirmOrderID IN (SELECT DISTINCT FirmOrderID FROM SemifinishedProductDetails WHERE LocationID = @LocationID AND Approved = 1 AND HandoverApproved = 1 AND ROUND(Quantity - QuantityFinished, " + (int)GlobalEnums.rndQuantity + ") > 0) AND FirmOrders.CustomerID = Customers.CustomerID " + "\r\n";
+            queryString = queryString + "       FROM            FirmOrders " + "\r\n";//LocationID = @LocationID AND 
+            queryString = queryString + "                       INNER JOIN Customers ON FirmOrders.FirmOrderID IN (SELECT DISTINCT FirmOrderID FROM SemifinishedProductDetails WHERE Approved = 1 AND HandoverApproved = 1 AND ROUND(Quantity - QuantityFinished, " + (int)GlobalEnums.rndQuantity + ") > 0) AND FirmOrders.CustomerID = Customers.CustomerID " + "\r\n";
 
             this.totalSmartPortalEntities.CreateStoredProcedure("GetFinishedProductPendingFirmOrders", queryString);
         }

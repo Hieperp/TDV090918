@@ -15484,6 +15484,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="Int32" Name="PiecePerPack" Nullable="false" />
           <Property Type="Decimal" Name="QuantityFailure" Nullable="false" Precision="1" Scale="1" />
           <Property Type="Decimal" Name="Swarfs" Nullable="false" Precision="1" Scale="1" />
+          <Property Type="String" Name="SemifinishedProductReference" Nullable="true" MaxLength="10" />
         </ComplexType>
         <ComplexType Name="FinishedProductPendingFirmOrder">
           <Property Type="Int32" Name="FirmOrderID" Nullable="false" />
@@ -21658,6 +21659,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="PiecePerPack" ColumnName="PiecePerPack" />
                 <ScalarProperty Name="QuantityFailure" ColumnName="QuantityFailure" />
                 <ScalarProperty Name="Swarfs" ColumnName="Swarfs" />
+                <ScalarProperty Name="SemifinishedProductReference" ColumnName="SemifinishedProductReference" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

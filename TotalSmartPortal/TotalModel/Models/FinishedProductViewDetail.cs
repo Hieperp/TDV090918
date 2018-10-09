@@ -39,5 +39,6 @@ namespace TotalModel.Models
         public int PiecePerPack { get; set; }
         public decimal QuantityFailure { get; set; }
         public decimal Swarfs { get; set; }
+        public string SemifinishedProductReference { get; set; }
     }
 }

@@ -35,6 +35,9 @@ namespace TotalDTO.Productions
         [Display(Name = "Ngày SX")]
         [UIHint("DateTimeReadonly")]
         public DateTime WorkshiftEntryDate { get; set; }
+        [Display(Name = "Số pallet")]
+        [UIHint("StringReadonly")]
+        public string SemifinishedProductReference { get; set; }
 
         [Display(Name = "Lô SX")]
         [UIHint("StringReadonly")]
@@ -46,7 +49,7 @@ namespace TotalDTO.Productions
         [UIHint("DateTimeReadonly")]
         public Nullable<System.DateTime> GoodsReceiptEntryDate { get; set; }
 
-        [Display(Name = "Lô hàng")]
+        [Display(Name = "Lô màng")]
         [UIHint("DateTimeReadonly")]
         public System.DateTime BatchEntryDate { get; set; }
 

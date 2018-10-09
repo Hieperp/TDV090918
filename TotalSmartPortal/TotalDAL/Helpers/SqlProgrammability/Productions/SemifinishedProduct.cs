@@ -181,7 +181,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             string[] queryArray = new string[3];
 
             queryArray[0] = " SELECT TOP 1 @FoundEntity = N'Ngày xuất nguyên liệu: ' + CAST(MaterialIssues.EntryDate AS nvarchar) FROM SemifinishedProductDetails INNER JOIN MaterialIssues ON SemifinishedProductDetails.SemifinishedProductID = @EntityID AND SemifinishedProductDetails.MaterialIssueID = MaterialIssues.MaterialIssueID AND SemifinishedProductDetails.EntryDate < MaterialIssues.EntryDate ";
-            queryArray[1] = " SELECT TOP 1 @FoundEntity = N'Số lượng xuất vượt quá số lượng đặt hàng: ' + CAST(ROUND(Quantity - QuantitySemifinished, " + (int)GlobalEnums.rndQuantity + ") AS nvarchar) FROM FirmOrderDetails WHERE (ROUND(Quantity - QuantitySemifinished, " + (int)GlobalEnums.rndQuantity + ") < 0) ";
+            queryArray[1] = " SELECT TOP 1 @FoundEntity = N'Số lượng xuất vượt quá số lượng đặt hàng: ' + CAST(ROUND(Quantity - QuantitySemifinished, " + (int)GlobalEnums.rndQuantity + ") AS nvarchar) FROM FirmOrderDetails WHERE 1 = 0 AND (ROUND(Quantity - QuantitySemifinished, " + (int)GlobalEnums.rndQuantity + ") < 0) ";
 
             queryArray[2] = " SELECT TOP 1 @FoundEntity = N'Số lượng NVL sử dụng vượt quá số lượng đã xuất kho cho sản xuất: ' + CAST(ROUND(Quantity - QuantitySemifinished - QuantityFailure - QuantityReceipted - QuantityLoss, " + (int)GlobalEnums.rndQuantity + ") AS nvarchar) FROM MaterialIssueDetails WHERE (ROUND(Quantity - QuantitySemifinished - QuantityFailure - QuantityReceipted - QuantityLoss, " + (int)GlobalEnums.rndQuantity + ") < 0) ";
 
