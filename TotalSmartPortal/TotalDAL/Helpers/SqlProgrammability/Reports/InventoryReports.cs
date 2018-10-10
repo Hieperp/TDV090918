@@ -19,7 +19,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Reports
         public void RestoreProcedure()
         {
             this.WarehouseJournals();
-            //this.WarehouseCards();
+            this.WarehouseCards();
         }
 
 
@@ -28,7 +28,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Reports
         {
             string queryString = " @WarehouseID int, @FromDate DateTime, @ToDate DateTime " + "\r\n"; //Filter by @LocalWarehouseID to make this stored procedure run faster, but it may be removed without any effect the algorithm
 
-            //queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
@@ -393,19 +393,38 @@ namespace TotalDAL.Helpers.SqlProgrammability.Reports
 
             //2.1.INTPUT.PurchaseRequisition
             queryString = queryString + "                   UNION ALL " + "\r\n";
-            queryString = queryString + "                   SELECT     'GoodsReceipts' AS ControllerName, GoodsReceiptDetails.GoodsReceiptID AS EntityID, 'HH TẠI KHO' AS GroupName, CONVERT(VARCHAR, @LocalFromDate, 103) + ' -> ' + CONVERT(VARCHAR, @LocalToDate, 103) AS SubGroupName, GoodsReceiptDetails.EntryDate, GoodsReceiptDetails.CommodityID, GoodsReceiptDetails.Reference, GoodsReceiptDetails.Code AS ReceiptCode, GoodsReceiptDetails.WarehouseID, Suppliers.Name + ', HĐ [' + ISNULL(PurchaseRequisitions.VATInvoiceNo, '') + ' Ngày: ' + CONVERT(VARCHAR, PurchaseRequisitions.EntryDate, 103) + ']' AS Description, GoodsReceiptDetails.Quantity AS QuantityDebit, 0 AS QuantityCredit " + "\r\n";
+            queryString = queryString + "                   SELECT     'GoodsReceipts' AS ControllerName, GoodsReceiptDetails.GoodsReceiptID AS EntityID, 'HH TẠI KHO' AS GroupName, CONVERT(VARCHAR, @LocalFromDate, 103) + ' -> ' + CONVERT(VARCHAR, @LocalToDate, 103) AS SubGroupName, GoodsReceiptDetails.EntryDate, GoodsReceiptDetails.CommodityID, GoodsReceiptDetails.Reference, GoodsReceiptDetails.Code AS ReceiptCode, GoodsReceiptDetails.WarehouseID, Customers.Name + ', SCT [' + ISNULL(PurchaseRequisitions.Code, '') + ' Ngày: ' + CAST(PurchaseRequisitions.EntryDate AS VARCHAR) + ']' + ISNULL(PurchaseRequisitions.Purposes, '') AS Description, GoodsReceiptDetails.Quantity AS QuantityDebit, 0 AS QuantityCredit " + "\r\n";
             queryString = queryString + "                   FROM        GoodsReceiptDetails INNER JOIN " + "\r\n";
             queryString = queryString + "                               PurchaseRequisitions ON GoodsReceiptDetails.WarehouseID = @LocalWarehouseID AND GoodsReceiptDetails.PurchaseRequisitionID = PurchaseRequisitions.PurchaseRequisitionID AND GoodsReceiptDetails.EntryDate >= @LocalFromDate AND GoodsReceiptDetails.EntryDate <= @LocalToDate INNER JOIN " + "\r\n";
-            queryString = queryString + "                               Customers Suppliers ON PurchaseRequisitions.CustomerID = Suppliers.CustomerID " + "\r\n";
+            queryString = queryString + "                               Customers ON PurchaseRequisitions.CustomerID = Customers.CustomerID " + "\r\n";
 
-            //2.2.INTPUT.WarehouseTransfer
+            //2.2.INTPUT.FinishedProduct
             queryString = queryString + "                   UNION ALL " + "\r\n";
-            queryString = queryString + "                   SELECT     'GoodsReceipts' AS ControllerName, GoodsReceiptDetails.GoodsReceiptID AS EntityID, 'HH TẠI KHO' AS GroupName, CONVERT(VARCHAR, @LocalFromDate, 103) + ' -> ' + CONVERT(VARCHAR, @LocalToDate, 103) AS SubGroupName, GoodsReceiptDetails.EntryDate, GoodsReceiptDetails.CommodityID, GoodsReceiptDetails.Reference, GoodsReceiptDetails.Code AS ReceiptCode, GoodsReceiptDetails.WarehouseID, 'NHAP VCNB: ' + Locations.Name + ', PX [' + WarehouseTransfers.Reference + ' Ngày: ' + CONVERT(VARCHAR, WarehouseTransfers.EntryDate, 103) + ']' AS Description, GoodsReceiptDetails.Quantity AS QuantityDebit, 0 AS QuantityCredit " + "\r\n";
+            queryString = queryString + "                   SELECT     'GoodsReceipts' AS ControllerName, GoodsReceiptDetails.GoodsReceiptID AS EntityID, 'HH TẠI KHO' AS GroupName, CONVERT(VARCHAR, @LocalFromDate, 103) + ' -> ' + CONVERT(VARCHAR, @LocalToDate, 103) AS SubGroupName, GoodsReceiptDetails.EntryDate, GoodsReceiptDetails.CommodityID, GoodsReceiptDetails.Reference, GoodsReceiptDetails.Code AS ReceiptCode, GoodsReceiptDetails.WarehouseID, Customers.Name + ', KHSX: ' + FirmOrders.Reference + ' SCT [' + ISNULL(FirmOrders.Code, '') + ' Ngày: ' + CAST(FirmOrders.EntryDate AS VARCHAR) + ']' AS Description, GoodsReceiptDetails.Quantity AS QuantityDebit, 0 AS QuantityCredit " + "\r\n";
+            queryString = queryString + "                   FROM        GoodsReceiptDetails INNER JOIN " + "\r\n";
+            queryString = queryString + "                               FinishedProducts ON GoodsReceiptDetails.WarehouseID = @LocalWarehouseID AND GoodsReceiptDetails.FinishedProductID = FinishedProducts.FinishedProductID AND GoodsReceiptDetails.EntryDate >= @LocalFromDate AND GoodsReceiptDetails.EntryDate <= @LocalToDate INNER JOIN " + "\r\n";
+            queryString = queryString + "                               Customers ON FinishedProducts.CustomerID = Customers.CustomerID INNER JOIN " + "\r\n";
+            queryString = queryString + "                               FirmOrders ON FinishedProducts.FirmOrderID = FirmOrders.FirmOrderID " + "\r\n";
+
+            //2.3.INTPUT.MaterialIssue
+            queryString = queryString + "                   UNION ALL " + "\r\n";
+            queryString = queryString + "                   SELECT     'GoodsReceipts' AS ControllerName, GoodsReceiptDetails.GoodsReceiptID AS EntityID, 'HH TẠI KHO' AS GroupName, CONVERT(VARCHAR, @LocalFromDate, 103) + ' -> ' + CONVERT(VARCHAR, @LocalToDate, 103) AS SubGroupName, GoodsReceiptDetails.EntryDate, GoodsReceiptDetails.CommodityID, GoodsReceiptDetails.Reference, GoodsReceiptDetails.Code AS ReceiptCode, GoodsReceiptDetails.WarehouseID, N'MÁY ' + ProductionLines.Code + ' ' + Workshifts.Code + ' [' + CAST(MaterialIssues.EntryDate AS VARCHAR) + ']' +  ', KH: ' + Customers.Name AS Description, GoodsReceiptDetails.Quantity AS QuantityDebit, 0 AS QuantityCredit " + "\r\n";
+            queryString = queryString + "                   FROM        GoodsReceiptDetails INNER JOIN " + "\r\n";
+            queryString = queryString + "                               MaterialIssues ON GoodsReceiptDetails.WarehouseID = @LocalWarehouseID AND GoodsReceiptDetails.MaterialIssueID = MaterialIssues.MaterialIssueID AND GoodsReceiptDetails.EntryDate >= @LocalFromDate AND GoodsReceiptDetails.EntryDate <= @LocalToDate INNER JOIN " + "\r\n";
+            queryString = queryString + "                               Customers ON MaterialIssues.CustomerID = Customers.CustomerID INNER JOIN " + "\r\n";
+            queryString = queryString + "                               Workshifts ON MaterialIssues.WorkshiftID = Workshifts.WorkshiftID INNER JOIN " + "\r\n";
+            queryString = queryString + "                               ProductionLines ON MaterialIssues.ProductionLineID = ProductionLines.ProductionLineID " + "\r\n";
+
+            //2.4.INTPUT.GoodsReturn
+
+            //2.5.INTPUT.WarehouseTransfer
+            queryString = queryString + "                   UNION ALL " + "\r\n";
+            queryString = queryString + "                   SELECT     'GoodsReceipts' AS ControllerName, GoodsReceiptDetails.GoodsReceiptID AS EntityID, 'HH TẠI KHO' AS GroupName, CONVERT(VARCHAR, @LocalFromDate, 103) + ' -> ' + CONVERT(VARCHAR, @LocalToDate, 103) AS SubGroupName, GoodsReceiptDetails.EntryDate, GoodsReceiptDetails.CommodityID, GoodsReceiptDetails.Reference, GoodsReceiptDetails.Code AS ReceiptCode, GoodsReceiptDetails.WarehouseID, 'NHAP VCNB: ' + Warehouses.Name + ', PX [' + WarehouseTransfers.Reference + ' Ngày: ' + CAST(WarehouseTransfers.EntryDate AS VARCHAR) + ']' AS Description, GoodsReceiptDetails.Quantity AS QuantityDebit, 0 AS QuantityCredit " + "\r\n";
             queryString = queryString + "                   FROM        GoodsReceiptDetails INNER JOIN " + "\r\n";
             queryString = queryString + "                               WarehouseTransfers ON GoodsReceiptDetails.WarehouseID = @LocalWarehouseID AND GoodsReceiptDetails.WarehouseTransferID = WarehouseTransfers.WarehouseTransferID AND GoodsReceiptDetails.EntryDate >= @LocalFromDate AND GoodsReceiptDetails.EntryDate <= @LocalToDate INNER JOIN " + "\r\n";
-            queryString = queryString + "                               Locations ON WarehouseTransfers.LocationID = Locations.LocationID " + "\r\n";
-            
-            //2.3.INTPUT.PurchaseInvoice
+            queryString = queryString + "                               Warehouses ON WarehouseTransfers.WarehouseID = Warehouses.WarehouseID " + "\r\n";
+
+            //2.6.INTPUT.WarehouseAdjustments
             queryString = queryString + "                   UNION ALL " + "\r\n";
             queryString = queryString + "                   SELECT      CASE WarehouseAdjustments.NMVNTaskID " + warehouseAdjustmentController + " AS ControllerName, WarehouseAdjustments.WarehouseAdjustmentID AS EntityID, N'HH TẠI KHO' AS GroupName, CONVERT(VARCHAR, @LocalFromDate, 103) + ' -> ' + CONVERT(VARCHAR, @LocalToDate, 103) AS SubGroupName, GoodsReceiptDetails.EntryDate, GoodsReceiptDetails.CommodityID, WarehouseAdjustments.Reference, GoodsReceiptDetails.Code AS ReceiptCode, GoodsReceiptDetails.WarehouseID, Customers.Name + ' ' + WarehouseAdjustments.AdjustmentJobs AS Description, GoodsReceiptDetails.Quantity AS QuantityDebit, 0 AS QuantityCredit " + "\r\n";
             queryString = queryString + "                   FROM        GoodsReceiptDetails INNER JOIN " + "\r\n";
@@ -419,10 +438,12 @@ namespace TotalDAL.Helpers.SqlProgrammability.Reports
 
             queryString = queryString + "                   UNION ALL " + "\r\n";
             //3.1.MaterialIssueDetails + "\r\n";
-            queryString = queryString + "                   SELECT     'MaterialIssues' AS ControllerName, MaterialIssueDetails.MaterialIssueID AS EntityID, 'HH TẠI KHO' AS GroupName, CONVERT(VARCHAR, @LocalFromDate, 103) + ' -> ' + CONVERT(VARCHAR, @LocalToDate, 103) AS SubGroupName, MaterialIssueDetails.EntryDate, GoodsReceiptDetails.CommodityID, GoodsReceiptDetails.Reference, GoodsReceiptDetails.Code AS ReceiptCode, GoodsReceiptDetails.WarehouseID, Customers.Name + ', Đ/C: ' + Customers.AddressNo AS Description, 0 AS QuantityDebit, MaterialIssueDetails.Quantity AS QuantityCredit " + "\r\n";
+            queryString = queryString + "                   SELECT     'MaterialIssues' AS ControllerName, MaterialIssueDetails.MaterialIssueID AS EntityID, 'HH TẠI KHO' AS GroupName, CONVERT(VARCHAR, @LocalFromDate, 103) + ' -> ' + CONVERT(VARCHAR, @LocalToDate, 103) AS SubGroupName, MaterialIssueDetails.EntryDate, GoodsReceiptDetails.CommodityID, GoodsReceiptDetails.Reference, GoodsReceiptDetails.Code AS ReceiptCode, GoodsReceiptDetails.WarehouseID, N'MÁY ' + ProductionLines.Code + ' ' + Workshifts.Code + ' [' + CAST(MaterialIssueDetails.EntryDate AS VARCHAR) + ']' +  ', KH: ' + Customers.Name AS Description, 0 AS QuantityDebit, MaterialIssueDetails.Quantity AS QuantityCredit " + "\r\n";
             queryString = queryString + "                   FROM        MaterialIssueDetails INNER JOIN " + "\r\n";
             queryString = queryString + "                               GoodsReceiptDetails ON MaterialIssueDetails.WarehouseID = @LocalWarehouseID AND MaterialIssueDetails.GoodsReceiptDetailID = GoodsReceiptDetails.GoodsReceiptDetailID AND MaterialIssueDetails.EntryDate >= @LocalFromDate AND MaterialIssueDetails.EntryDate <= @LocalToDate INNER JOIN " + "\r\n";
-            queryString = queryString + "                               Customers ON MaterialIssueDetails.CustomerID = Customers.CustomerID " + "\r\n";
+            queryString = queryString + "                               Customers ON MaterialIssueDetails.CustomerID = Customers.CustomerID INNER JOIN " + "\r\n";
+            queryString = queryString + "                               Workshifts ON MaterialIssueDetails.WorkshiftID = Workshifts.WorkshiftID INNER JOIN " + "\r\n";
+            queryString = queryString + "                               ProductionLines ON MaterialIssueDetails.ProductionLineID = ProductionLines.ProductionLineID " + "\r\n";
 
             queryString = queryString + "                   UNION ALL " + "\r\n";
             //3.2.WarehouseTransferDetails
