@@ -17,7 +17,7 @@ namespace TotalDTO.Productions
         public int CustomerID { get; set; }
 
         public int MoldID { get; set; }
-        [Display(Name = "Mã khuôn")]
+        [Display(Name = "Khuôn")]
         [Required(ErrorMessage = "Vui lòng chọn mã khuôn")]
         [UIHint("AutoCompletes/MoldBase")]
         public string MoldCode { get; set; }
@@ -26,7 +26,7 @@ namespace TotalDTO.Productions
         public decimal MoldQuantity { get; set; }
 
         public int BomID { get; set; }
-        [Display(Name = "Nguyên liệu")]
+        [Display(Name = "NVL")]
         [Required(ErrorMessage = "Vui lòng chọn nguyên liệu")]
         [UIHint("AutoCompletes/BomBase")]
         public string BomCode { get; set; }

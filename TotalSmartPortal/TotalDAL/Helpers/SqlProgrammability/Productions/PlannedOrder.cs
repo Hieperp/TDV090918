@@ -231,7 +231,10 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
 
             queryString = queryString + "       IF @@ROWCOUNT = 1 " + "\r\n";
             queryString = queryString + "           BEGIN " + "\r\n";
-            queryString = queryString + "               UPDATE          PlannedOrderMaterials   SET InActive = @InActive WHERE PlannedOrderID = @EntityID ; " + "\r\n";
+            queryString = queryString + "               UPDATE          FirmOrders              SET InActive = @InActive WHERE PlannedOrderID = @EntityID ; " + "\r\n";
+            queryString = queryString + "               UPDATE          FirmOrderDetails        SET InActive = @InActive WHERE PlannedOrderID = @EntityID ; " + "\r\n";
+            queryString = queryString + "               UPDATE          FirmOrderMaterials      SET InActive = @InActive WHERE PlannedOrderID = @EntityID ; " + "\r\n";
+
             queryString = queryString + "               UPDATE          PlannedOrderDetails     SET InActive = @InActive WHERE PlannedOrderID = @EntityID ; " + "\r\n";            
             queryString = queryString + "           END " + "\r\n";
             queryString = queryString + "       ELSE " + "\r\n";
@@ -250,7 +253,9 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
-            queryString = queryString + "       UPDATE      PlannedOrderMaterials   SET InActivePartial = @InActivePartial, InActivePartialDate = GetDate(), VoidTypeID = IIF(@InActivePartial = 1, @VoidTypeID, NULL) WHERE PlannedOrderID = @EntityID AND PlannedOrderDetailID = @EntityDetailID AND InActivePartial = ~@InActivePartial ; " + "\r\n";
+            queryString = queryString + "       UPDATE      FirmOrderDetails        SET InActivePartial = @InActivePartial, InActivePartialDate = GetDate(), VoidTypeID = IIF(@InActivePartial = 1, @VoidTypeID, NULL) WHERE PlannedOrderID = @EntityID AND PlannedOrderDetailID = @EntityDetailID AND InActivePartial = ~@InActivePartial ; " + "\r\n";
+            queryString = queryString + "       UPDATE      FirmOrderMaterials      SET InActivePartial = @InActivePartial, InActivePartialDate = GetDate(), VoidTypeID = IIF(@InActivePartial = 1, @VoidTypeID, NULL) WHERE FirmOrderID = (SELECT FirmOrderID FROM FirmOrderDetails WHERE PlannedOrderID = @EntityID AND PlannedOrderDetailID = @EntityDetailID) AND InActivePartial = ~@InActivePartial ; " + "\r\n";
+
             queryString = queryString + "       UPDATE      PlannedOrderDetails     SET InActivePartial = @InActivePartial, InActivePartialDate = GetDate(), VoidTypeID = IIF(@InActivePartial = 1, @VoidTypeID, NULL) WHERE PlannedOrderID = @EntityID AND PlannedOrderDetailID = @EntityDetailID AND InActivePartial = ~@InActivePartial ; " + "\r\n";            
 
             queryString = queryString + "       IF @@ROWCOUNT = 1 " + "\r\n";
