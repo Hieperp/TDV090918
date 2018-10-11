@@ -32,6 +32,7 @@ namespace TotalDTO.Productions
 
         [Display(Name = "Mục đích")]
         public string Purposes { get; set; }
+        public string Specs { get; set; }
 
         public virtual int CustomerID { get; set; }
 
@@ -47,7 +48,9 @@ namespace TotalDTO.Productions
         {
             base.PerformPresaveRule();
 
-            this.DtoDetails().ToList().ForEach(e => { e.CustomerID = this.CustomerID; e.Description = e.CombineIndex == null ? e.GetDescription() : string.Join(", ", this.DtoDetails().Where(w => w.CombineIndex == e.CombineIndex).Select(o => o.GetDescription())); e.Remarks = e.CombineIndex == null ? e.GetRemarks() : string.Join(", ", this.DtoDetails().Where(w => w.CombineIndex == e.CombineIndex).Select(o => o.GetRemarks())); });
+            string specs = "";
+            this.DtoDetails().ToList().ForEach(e => { e.CustomerID = this.CustomerID; e.Description = e.CombineIndex == null ? e.GetDescription() : string.Join(", ", this.DtoDetails().Where(w => w.CombineIndex == e.CombineIndex).Select(o => o.GetDescription())); e.Remarks = e.CombineIndex == null ? e.GetRemarks() : string.Join(", ", this.DtoDetails().Where(w => w.CombineIndex == e.CombineIndex).Select(o => o.GetRemarks())); if (specs.IndexOf(e.GetRemarks()) < 0) specs = specs + (specs != "" ? ", " : "") + e.GetRemarks(); });
+            this.Specs = specs != "" ? (specs.Length > 98 ? specs.Substring(0, 95) : specs) : null;
         }
     }
 

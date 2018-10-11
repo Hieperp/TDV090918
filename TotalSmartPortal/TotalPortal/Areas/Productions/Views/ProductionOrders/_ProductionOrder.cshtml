@@ -104,7 +104,9 @@
                         .ClientTemplate("#= CustomerCode #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].CustomerCode' value='#= CustomerCode #' />");
                     columns.Bound(p => p.CustomerName).DisplayNameTitle().Width(96)
                         .ClientTemplate("#= CustomerName #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].CustomerName' value='#= CustomerName #' />");
-                    
+
+                    columns.Bound(p => p.Specs).DisplayNameTitle().Width(100)
+                        .ClientTemplate("#= Specs #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].Specs' value='#= Specs #' />");                    
                     columns.Bound(p => p.Specification).DisplayNameTitle().Width(200)
                         .ClientFooterTemplate("TC (#= kendo.format('{0:n0}', count) # dòng)")
                         .ClientTemplate("#= (Specification == null)? '' : Specification #" +

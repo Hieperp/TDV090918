@@ -1264,6 +1264,7 @@
           <Property Name="ApproverID" Type="int" Nullable="false" />
           <Property Name="TotalQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="TotalQuantitySemifinished" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Specs" Type="nvarchar" MaxLength="100" />
           <Property Name="Description" Type="nvarchar" MaxLength="100" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -1335,6 +1336,7 @@
           <Property Name="OrganizationalUnitID" Type="int" Nullable="false" />
           <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="ApproverID" Type="int" Nullable="false" />
+          <Property Name="Specs" Type="nvarchar" MaxLength="100" />
           <Property Name="Description" Type="nvarchar" MaxLength="100" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -13651,6 +13653,12 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="Boolean" Name="Approved" Nullable="false" />
           <Property Type="Boolean" Name="InActive" Nullable="false" />
           <Property Type="Boolean" Name="InActivePartial" Nullable="false" />
+          <Property Type="String" Name="Specs" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PlannedOrderReference" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="PlannedOrderCode" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="PlannedOrderVoucherDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="PlannedOrderDeliveryDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="MoldBase">
           <Property Type="Int32" Name="MoldID" Nullable="false" />
@@ -13746,6 +13754,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="Boolean" Name="InActivePartial" Nullable="false" />
           <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="100" />
           <Property Type="DateTime" Name="DeliveryDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Specs" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="TotalQuantity" Nullable="false" Precision="18" Scale="2" />
         </ComplexType>
         <ComplexType Name="PlannedOrderViewDetail">
           <Property Type="Int32" Name="PlannedOrderDetailID" Nullable="false" />
@@ -14866,6 +14876,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <NavigationProperty Name="ProductionOrderDetails" Relationship="TotalSmartPortalModel.FK_ProductionOrderDetails_PlannedOrders" FromRole="PlannedOrder" ToRole="ProductionOrderDetail" />
           <NavigationProperty Name="ProductionOrders" Relationship="TotalSmartPortalModel.FK_ProductionOrders_PlannedOrders" FromRole="PlannedOrder" ToRole="ProductionOrder" />
           <NavigationProperty Name="MaterialIssues" Relationship="TotalSmartPortalModel.FK_MaterialIssues_PlannedOrders" FromRole="PlannedOrder" ToRole="MaterialIssue" />
+          <Property Name="Specs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_FirmOrderDetails_Commodities">
           <End Type="TotalSmartPortalModel.Commodity" Role="Commodity" Multiplicity="1" />
@@ -15556,6 +15567,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <NavigationProperty Name="ProductionOrderDetails" Relationship="TotalSmartPortalModel.FK_ProductionOrderDetails_ProductionOrders" FromRole="ProductionOrder" ToRole="ProductionOrderDetail" />
           <NavigationProperty Name="VoidType" Relationship="TotalSmartPortalModel.FK_ProductionOrders_VoidTypes" FromRole="ProductionOrder" ToRole="VoidType" />
           <NavigationProperty Name="MaterialIssues" Relationship="TotalSmartPortalModel.FK_MaterialIssues_ProductionOrders" FromRole="ProductionOrder" ToRole="MaterialIssue" />
+          <Property Name="Specs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_ProductionOrderDetails_Boms">
           <End Type="TotalSmartPortalModel.Bom" Role="Bom" Multiplicity="1" />
@@ -20467,6 +20479,12 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="InActive" ColumnName="InActive" />
                 <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
+                <ScalarProperty Name="Specs" ColumnName="Specs" />
+                <ScalarProperty Name="PlannedOrderReference" ColumnName="PlannedOrderReference" />
+                <ScalarProperty Name="PlannedOrderCode" ColumnName="PlannedOrderCode" />
+                <ScalarProperty Name="PlannedOrderVoucherDate" ColumnName="PlannedOrderVoucherDate" />
+                <ScalarProperty Name="PlannedOrderDeliveryDate" ColumnName="PlannedOrderDeliveryDate" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -20590,6 +20608,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
                 <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="Specs" ColumnName="Specs" />
+                <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -21234,6 +21254,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <EntitySetMapping Name="PlannedOrders">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.PlannedOrder">
               <MappingFragment StoreEntitySet="PlannedOrders">
+                <ScalarProperty Name="Specs" ColumnName="Specs" />
                 <ScalarProperty Name="InActiveDate" ColumnName="InActiveDate" />
                 <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
                 <ScalarProperty Name="InActive" ColumnName="InActive" />
@@ -21689,6 +21710,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <EntitySetMapping Name="ProductionOrders">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.ProductionOrder">
               <MappingFragment StoreEntitySet="ProductionOrders">
+                <ScalarProperty Name="Specs" ColumnName="Specs" />
                 <ScalarProperty Name="InActiveDate" ColumnName="InActiveDate" />
                 <ScalarProperty Name="InActivePartial" ColumnName="InActivePartial" />
                 <ScalarProperty Name="InActive" ColumnName="InActive" />

@@ -155,7 +155,7 @@ namespace TotalDTO.Inventories
         [UIHint("AutoCompletes/WarehouseBase")]
         WarehouseBaseDTO Warehouse { get; set; }
 
-        [Display(Name = "Kho hàng")]
+        [Display(Name = "Kho xuất VCNB")]
         [UIHint("AutoCompletes/WarehouseBase")]
         WarehouseBaseDTO WarehouseIssue { get; set; }
 

@@ -48,6 +48,7 @@ namespace TotalModel.Models
         public bool InActive { get; set; }
         public bool InActivePartial { get; set; }
         public Nullable<System.DateTime> InActiveDate { get; set; }
+        public string Specs { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual Location Location { get; set; }

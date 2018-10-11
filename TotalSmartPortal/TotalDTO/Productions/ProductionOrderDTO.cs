@@ -23,7 +23,7 @@ namespace TotalDTO.Productions
         public int ProductionOrderID { get; set; }
 
         public virtual Nullable<int> CustomerID { get; set; }
-        
+
         public Nullable<int> PlannedOrderID { get; set; }
         public string PlannedOrderReference { get; set; }
         public string PlannedOrderReferences { get; set; }
@@ -38,14 +38,15 @@ namespace TotalDTO.Productions
 
         [Display(Name = "Chứng")]
         public string Code { get; set; }
+        public string Specs { get; set; }
 
         public override void PerformPresaveRule()
         {
             base.PerformPresaveRule();
 
-            string plannedOrderReferences = ""; string plannedOrderCodes = "";
-            this.DtoDetails().ToList().ForEach(e => { if (plannedOrderReferences.IndexOf(e.FirmOrderReference) < 0) plannedOrderReferences = plannedOrderReferences + (plannedOrderReferences != "" ? ", " : "") + e.FirmOrderReference; if (e.FirmOrderCode != null && plannedOrderCodes.IndexOf(e.FirmOrderCode) < 0) plannedOrderCodes = plannedOrderCodes + (plannedOrderCodes != "" ? ", " : "") + e.FirmOrderCode; });
-            this.PlannedOrderReferences = plannedOrderReferences; this.PlannedOrderCodes = plannedOrderCodes != "" ? plannedOrderCodes : null; 
+            string plannedOrderReferences = ""; string plannedOrderCodes = ""; string specs = "";
+            this.DtoDetails().ToList().ForEach(e => { if (plannedOrderReferences.IndexOf(e.FirmOrderReference) < 0) plannedOrderReferences = plannedOrderReferences + (plannedOrderReferences != "" ? ", " : "") + e.FirmOrderReference; if (e.FirmOrderCode != null && plannedOrderCodes.IndexOf(e.FirmOrderCode) < 0) plannedOrderCodes = plannedOrderCodes + (plannedOrderCodes != "" ? ", " : "") + e.FirmOrderCode; if (e.Specs != null && specs.IndexOf(e.Specs) < 0) specs = specs + (specs != "" ? ", " : "") + e.Specs; });
+            this.PlannedOrderReferences = plannedOrderReferences; this.PlannedOrderCodes = plannedOrderCodes != "" ? plannedOrderCodes : null; this.Specs = specs != "" ? (specs.Length > 98 ? specs.Substring(0, 95) : specs) : null;
         }
     }
 
@@ -64,7 +65,7 @@ namespace TotalDTO.Productions
 
         public override Nullable<int> VoidTypeID { get { return (this.VoidType != null ? this.VoidType.VoidTypeID : null); } }
         [UIHint("AutoCompletes/VoidType")]
-        public VoidTypeBaseDTO VoidType { get; set; }    
+        public VoidTypeBaseDTO VoidType { get; set; }
 
         public List<ProductionOrderDetailDTO> ProductionOrderViewDetails { get; set; }
         public List<ProductionOrderDetailDTO> ViewDetails { get { return this.ProductionOrderViewDetails; } set { this.ProductionOrderViewDetails = value; } }
