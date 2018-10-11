@@ -62,5 +62,6 @@ namespace TotalModel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
         public virtual WarehouseTransfer WarehouseTransfer { get; set; }
+        public virtual PlannedOrder PlannedOrder { get; set; }
     }
 }

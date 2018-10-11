@@ -60,7 +60,7 @@ namespace TotalDTO.Inventories
         [Display(Name = "Số CT")]
         string PlannedOrderCode { get; set; }
         [Display(Name = "Ngày KHSX")]
-        System.DateTime PlannedOrderEntryDate { get; set; }
+        Nullable<System.DateTime> PlannedOrderEntryDate { get; set; }
 
         Nullable<int> WarehouseAdjustmentID { get; set; }
 
@@ -121,7 +121,7 @@ namespace TotalDTO.Inventories
         public string PlannedOrderReference { get; set; }
         public string PlannedOrderCode { get; set; }
         [Display(Name = "Ngày đóng gói")]
-        public System.DateTime PlannedOrderEntryDate { get; set; }
+        public Nullable<System.DateTime> PlannedOrderEntryDate { get; set; }
 
         public Nullable<int> WarehouseAdjustmentID { get; set; }
 

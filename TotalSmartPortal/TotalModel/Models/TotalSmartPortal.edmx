@@ -3444,6 +3444,18 @@ warning 6035: The relationship 'FK_GoodsReceipts_AspNetUsers2' has columns that 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_GoodsReceipts_PlannedOrders">
+          <End Role="PlannedOrders" Type="Self.PlannedOrders" Multiplicity="0..1" />
+          <End Role="GoodsReceipts" Type="Self.GoodsReceipts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlannedOrders">
+              <PropertyRef Name="PlannedOrderID" />
+            </Principal>
+            <Dependent Role="GoodsReceipts">
+              <PropertyRef Name="PlannedOrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_GoodsReceipts_PurchaseRequisitions">
           <End Role="PurchaseRequisitions" Type="Self.PurchaseRequisitions" Multiplicity="0..1" />
           <End Role="GoodsReceipts" Type="Self.GoodsReceipts" Multiplicity="*" />
@@ -7083,6 +7095,10 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           </AssociationSet>
           <AssociationSet Name="FK_GoodsReceipts_Locations" Association="Self.FK_GoodsReceipts_Locations">
             <End Role="Locations" EntitySet="Locations" />
+            <End Role="GoodsReceipts" EntitySet="GoodsReceipts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GoodsReceipts_PlannedOrders" Association="Self.FK_GoodsReceipts_PlannedOrders">
+            <End Role="PlannedOrders" EntitySet="PlannedOrders" />
             <End Role="GoodsReceipts" EntitySet="GoodsReceipts" />
           </AssociationSet>
           <AssociationSet Name="FK_GoodsReceipts_PurchaseRequisitions" Association="Self.FK_GoodsReceipts_PurchaseRequisitions">
@@ -12412,6 +12428,10 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
             <End Role="WarehouseTransfer" EntitySet="WarehouseTransfers" />
             <End Role="WarehouseTransferDetail" EntitySet="WarehouseTransferDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK_GoodsReceipts_PlannedOrders" Association="TotalSmartPortalModel.FK_GoodsReceipts_PlannedOrders">
+            <End Role="PlannedOrder" EntitySet="PlannedOrders" />
+            <End Role="GoodsReceipt" EntitySet="GoodsReceipts" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="AccountInvoiceIndex">
           <Property Type="Int32" Name="AccountInvoiceID" Nullable="false" />
@@ -14878,6 +14898,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <NavigationProperty Name="ProductionOrders" Relationship="TotalSmartPortalModel.FK_ProductionOrders_PlannedOrders" FromRole="PlannedOrder" ToRole="ProductionOrder" />
           <NavigationProperty Name="MaterialIssues" Relationship="TotalSmartPortalModel.FK_MaterialIssues_PlannedOrders" FromRole="PlannedOrder" ToRole="MaterialIssue" />
           <Property Name="Specs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GoodsReceipts" Relationship="TotalSmartPortalModel.FK_GoodsReceipts_PlannedOrders" FromRole="PlannedOrder" ToRole="GoodsReceipt" />
         </EntityType>
         <Association Name="FK_FirmOrderDetails_Commodities">
           <End Type="TotalSmartPortalModel.Commodity" Role="Commodity" Multiplicity="1" />
@@ -16823,6 +16844,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <NavigationProperty Name="SemifinishedProducts" Relationship="TotalSmartPortalModel.FK_SemifinishedProducts_GoodsReceipts" FromRole="GoodsReceipt" ToRole="SemifinishedProduct" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartPortalModel.FK_GoodsReceiptDetails_GoodsReceipts" FromRole="GoodsReceipt" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="WarehouseTransfer" Relationship="TotalSmartPortalModel.FK_GoodsReceipts_WarehouseTransfers" FromRole="GoodsReceipt" ToRole="WarehouseTransfer" />
+          <NavigationProperty Name="PlannedOrder" Relationship="TotalSmartPortalModel.FK_GoodsReceipts_PlannedOrders" FromRole="GoodsReceipt" ToRole="PlannedOrder" />
         </EntityType>
         <Association Name="FK_GoodsReceipts_Customers">
           <End Type="TotalSmartPortalModel.Customer" Role="Customer" Multiplicity="0..1" />
@@ -17831,6 +17853,18 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
             </Principal>
             <Dependent Role="WarehouseTransferDetail">
               <PropertyRef Name="WarehouseTransferID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GoodsReceipts_PlannedOrders">
+          <End Type="TotalSmartPortalModel.PlannedOrder" Role="PlannedOrder" Multiplicity="0..1" />
+          <End Type="TotalSmartPortalModel.GoodsReceipt" Role="GoodsReceipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlannedOrder">
+              <PropertyRef Name="PlannedOrderID" />
+            </Principal>
+            <Dependent Role="GoodsReceipt">
+              <PropertyRef Name="PlannedOrderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
