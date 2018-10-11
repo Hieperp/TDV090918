@@ -49,9 +49,9 @@ function handleOKEvent(goodsReceiptGridDataSource, pendingMaterialIssueDetailGri
 
         dataRow.MaterialIssueID = materialIssueGridDataItem.MaterialIssueID;
         dataRow.MaterialIssueDetailID = materialIssueGridDataItem.MaterialIssueDetailID;
-        dataRow.MaterialIssueCode = materialIssueGridDataItem.MaterialIssueCode;
-        dataRow.MaterialIssueReference = materialIssueGridDataItem.MaterialIssueReference;
         dataRow.MaterialIssueEntryDate = materialIssueGridDataItem.MaterialIssueEntryDate;
+        dataRow.PlannedOrderCode = materialIssueGridDataItem.PlannedOrderCode;
+        dataRow.PlannedOrderReference = materialIssueGridDataItem.PlannedOrderReference;        
         dataRow.ProductionLinesCode = materialIssueGridDataItem.ProductionLinesCode;
 
         dataRow.WorkshiftName = materialIssueGridDataItem.WorkshiftName;

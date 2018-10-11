@@ -49,9 +49,9 @@ function handleOKEvent(goodsReceiptGridDataSource, pendingWarehouseTransferDetai
 
         dataRow.MaterialIssueID = null;
         dataRow.MaterialIssueDetailID = null;
-        dataRow.MaterialIssueCode = null;
-        dataRow.MaterialIssueReference = null;
         dataRow.MaterialIssueEntryDate = null;
+        dataRow.PlannedOrderCode = null;
+        dataRow.PlannedOrderReference = null;        
         dataRow.ProductionLinesCode = null;
 
         dataRow.WorkshiftName = null;

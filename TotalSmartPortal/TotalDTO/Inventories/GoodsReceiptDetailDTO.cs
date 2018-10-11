@@ -63,22 +63,19 @@ namespace TotalDTO.Inventories
         public Nullable<int> MaterialIssueID { get; set; }
         public Nullable<int> MaterialIssueDetailID { get; set; }
 
-        [Display(Name = "Phiếu XK")]
+        [Display(Name = "KHSX")]
         [UIHint("StringReadonly")]
-        public string MaterialIssueReference { get; set; }
-        [Display(Name = "Số XK")]
+        public string PlannedOrderReference { get; set; }
+        [Display(Name = "Số CT")]
         [UIHint("StringReadonly")]
-        public string MaterialIssueCode { get; set; }
+        public string PlannedOrderCode { get; set; }
         [Display(Name = "Ngày XK")]
         [UIHint("DateTimeReadonly")]
         public Nullable<System.DateTime> MaterialIssueEntryDate { get; set; }
 
-        [Display(Name = "Ca sx")]
+        [Display(Name = "Ca SX")]
         [UIHint("StringReadonly")]
         public string WorkshiftName { get; set; }
-        [Display(Name = "Ngày sx")]
-        [UIHint("DateTimeReadonly")]
-        public Nullable<System.DateTime> WorkshiftEntryDate { get; set; }
         [Display(Name = "Số máy")]
         [UIHint("StringReadonly")]
         public string ProductionLinesCode { get; set; }
