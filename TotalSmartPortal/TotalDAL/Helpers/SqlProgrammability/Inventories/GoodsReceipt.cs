@@ -562,14 +562,14 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + "       IF (@GoodsReceiptID <= 0) " + "\r\n";
             queryString = queryString + "               BEGIN " + "\r\n";
             queryString = queryString + "                   " + this.BuildSQLMaterialIssueNew(isMaterialIssueDetailIDs) + "\r\n";
-            queryString = queryString + "                   ORDER BY MaterialIssues.EntryDate, MaterialIssues.MaterialIssueID, MaterialIssueDetails.MaterialIssueDetailID " + "\r\n";
+            queryString = queryString + "                   ORDER BY MaterialIssueDetails.EntryDate, MaterialIssueDetails.MaterialIssueID, MaterialIssueDetails.MaterialIssueDetailID " + "\r\n";
             queryString = queryString + "               END " + "\r\n";
             queryString = queryString + "       ELSE " + "\r\n";
 
             queryString = queryString + "               IF (@IsReadonly = 1) " + "\r\n";
             queryString = queryString + "                   BEGIN " + "\r\n";
             queryString = queryString + "                       " + this.BuildSQLMaterialIssueEdit(isMaterialIssueDetailIDs) + "\r\n";
-            queryString = queryString + "                       ORDER BY MaterialIssues.EntryDate, MaterialIssues.MaterialIssueID, MaterialIssueDetails.MaterialIssueDetailID " + "\r\n";
+            queryString = queryString + "                       ORDER BY MaterialIssueDetails.EntryDate, MaterialIssueDetails.MaterialIssueID, MaterialIssueDetails.MaterialIssueDetailID " + "\r\n";
             queryString = queryString + "                   END " + "\r\n";
 
             queryString = queryString + "               ELSE " + "\r\n"; //FULL SELECT FOR EDIT MODE
@@ -578,7 +578,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + "                       " + this.BuildSQLMaterialIssueNew(isMaterialIssueDetailIDs) + " WHERE MaterialIssueDetails.MaterialIssueDetailID NOT IN (SELECT MaterialIssueDetailID FROM GoodsReceiptDetails WHERE GoodsReceiptID = @GoodsReceiptID) " + "\r\n";
             queryString = queryString + "                       UNION ALL " + "\r\n";
             queryString = queryString + "                       " + this.BuildSQLMaterialIssueEdit(isMaterialIssueDetailIDs) + "\r\n";
-            queryString = queryString + "                       ORDER BY MaterialIssues.EntryDate, MaterialIssues.MaterialIssueID, MaterialIssueDetails.MaterialIssueDetailID " + "\r\n";
+            queryString = queryString + "                       ORDER BY MaterialIssueDetails.EntryDate, MaterialIssueDetails.MaterialIssueID, MaterialIssueDetails.MaterialIssueDetailID " + "\r\n";
             queryString = queryString + "                   END " + "\r\n";
 
             queryString = queryString + "   END " + "\r\n";

@@ -38,8 +38,6 @@ namespace TotalModel.Models
         public string Remarks { get; set; }
         public Nullable<int> MaterialIssueDetailID { get; set; }
         public Nullable<int> MaterialIssueID { get; set; }
-        public string MaterialIssueReference { get; set; }
-        public string MaterialIssueCode { get; set; }
         public Nullable<System.DateTime> MaterialIssueEntryDate { get; set; }
         public string WorkshiftName { get; set; }
         public Nullable<System.DateTime> WorkshiftEntryDate { get; set; }
@@ -49,5 +47,7 @@ namespace TotalModel.Models
         public Nullable<System.DateTime> FinishedProductEntryDate { get; set; }
         public string FirmOrderReference { get; set; }
         public string FirmOrderCode { get; set; }
+        public string PlannedOrderReference { get; set; }
+        public string PlannedOrderCode { get; set; }
     }
 }

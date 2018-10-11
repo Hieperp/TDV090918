@@ -15,8 +15,6 @@ namespace TotalModel.Models
     {
         public int MaterialIssueID { get; set; }
         public int MaterialIssueDetailID { get; set; }
-        public string MaterialIssueReference { get; set; }
-        public string MaterialIssueCode { get; set; }
         public System.DateTime MaterialIssueEntryDate { get; set; }
         public int CommodityID { get; set; }
         public string CommodityCode { get; set; }
@@ -24,11 +22,12 @@ namespace TotalModel.Models
         public int CommodityTypeID { get; set; }
         public Nullable<decimal> QuantityRemains { get; set; }
         public decimal Quantity { get; set; }
-        public string Description { get; set; }
         public string Remarks { get; set; }
         public Nullable<bool> IsSelected { get; set; }
         public string WorkshiftName { get; set; }
         public System.DateTime WorkshiftEntryDate { get; set; }
         public string ProductionLinesCode { get; set; }
+        public string PlannedOrderReference { get; set; }
+        public string PlannedOrderCode { get; set; }
     }
 }

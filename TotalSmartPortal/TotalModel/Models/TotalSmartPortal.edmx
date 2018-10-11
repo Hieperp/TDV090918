@@ -15693,8 +15693,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
         <ComplexType Name="GoodsReceiptPendingMaterialIssueDetail">
           <Property Type="Int32" Name="MaterialIssueID" Nullable="false" />
           <Property Type="Int32" Name="MaterialIssueDetailID" Nullable="false" />
-          <Property Type="String" Name="MaterialIssueReference" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="MaterialIssueCode" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="MaterialIssueEntryDate" Nullable="false" Precision="23" />
           <Property Type="Int32" Name="CommodityID" Nullable="false" />
           <Property Type="String" Name="CommodityCode" Nullable="false" MaxLength="50" />
@@ -15702,12 +15700,13 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="Int32" Name="CommodityTypeID" Nullable="false" />
           <Property Type="Decimal" Name="QuantityRemains" Nullable="true" Precision="22" Scale="2" />
           <Property Type="Decimal" Name="Quantity" Nullable="false" Precision="1" Scale="1" />
-          <Property Type="String" Name="Description" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
           <Property Type="Boolean" Name="IsSelected" Nullable="true" />
           <Property Type="String" Name="WorkshiftName" Nullable="false" MaxLength="50" />
           <Property Type="DateTime" Name="WorkshiftEntryDate" Nullable="false" Precision="23" />
           <Property Type="String" Name="ProductionLinesCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PlannedOrderReference" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="PlannedOrderCode" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="PlannedOrderLog">
           <Property Type="Int32" Name="MaterialIssueDetailID" Nullable="false" />
@@ -17317,8 +17316,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="MaterialIssueDetailID" Nullable="true" />
           <Property Type="Int32" Name="MaterialIssueID" Nullable="true" />
-          <Property Type="String" Name="MaterialIssueReference" Nullable="false" MaxLength="1" />
-          <Property Type="String" Name="MaterialIssueCode" Nullable="false" MaxLength="2" />
           <Property Type="DateTime" Name="MaterialIssueEntryDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="WorkshiftName" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="WorkshiftEntryDate" Nullable="true" Precision="23" />
@@ -17328,6 +17325,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="DateTime" Name="FinishedProductEntryDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="FirmOrderReference" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="FirmOrderCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PlannedOrderReference" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="PlannedOrderCode" Nullable="true" MaxLength="50" />
         </ComplexType>
         <Association Name="FK_FinishedProductDetails_FinishedProductPackages">
           <End Type="TotalSmartPortalModel.FinishedProductPackage" Role="FinishedProductPackage" Multiplicity="0..1" />
@@ -21747,8 +21746,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
               <ComplexTypeMapping TypeName="TotalSmartPortalModel.GoodsReceiptPendingMaterialIssueDetail">
                 <ScalarProperty Name="MaterialIssueID" ColumnName="MaterialIssueID" />
                 <ScalarProperty Name="MaterialIssueDetailID" ColumnName="MaterialIssueDetailID" />
-                <ScalarProperty Name="MaterialIssueReference" ColumnName="MaterialIssueReference" />
-                <ScalarProperty Name="MaterialIssueCode" ColumnName="MaterialIssueCode" />
                 <ScalarProperty Name="MaterialIssueEntryDate" ColumnName="MaterialIssueEntryDate" />
                 <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
                 <ScalarProperty Name="CommodityCode" ColumnName="CommodityCode" />
@@ -21756,12 +21753,13 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="CommodityTypeID" ColumnName="CommodityTypeID" />
                 <ScalarProperty Name="QuantityRemains" ColumnName="QuantityRemains" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
                 <ScalarProperty Name="WorkshiftName" ColumnName="WorkshiftName" />
                 <ScalarProperty Name="WorkshiftEntryDate" ColumnName="WorkshiftEntryDate" />
                 <ScalarProperty Name="ProductionLinesCode" ColumnName="ProductionLinesCode" />
+                <ScalarProperty Name="PlannedOrderReference" ColumnName="PlannedOrderReference" />
+                <ScalarProperty Name="PlannedOrderCode" ColumnName="PlannedOrderCode" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -22545,8 +22543,6 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="MaterialIssueDetailID" ColumnName="MaterialIssueDetailID" />
                 <ScalarProperty Name="MaterialIssueID" ColumnName="MaterialIssueID" />
-                <ScalarProperty Name="MaterialIssueReference" ColumnName="MaterialIssueReference" />
-                <ScalarProperty Name="MaterialIssueCode" ColumnName="MaterialIssueCode" />
                 <ScalarProperty Name="MaterialIssueEntryDate" ColumnName="MaterialIssueEntryDate" />
                 <ScalarProperty Name="WorkshiftName" ColumnName="WorkshiftName" />
                 <ScalarProperty Name="WorkshiftEntryDate" ColumnName="WorkshiftEntryDate" />
@@ -22556,6 +22552,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="FinishedProductEntryDate" ColumnName="FinishedProductEntryDate" />
                 <ScalarProperty Name="FirmOrderReference" ColumnName="FirmOrderReference" />
                 <ScalarProperty Name="FirmOrderCode" ColumnName="FirmOrderCode" />
+                <ScalarProperty Name="PlannedOrderReference" ColumnName="PlannedOrderReference" />
+                <ScalarProperty Name="PlannedOrderCode" ColumnName="PlannedOrderCode" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
