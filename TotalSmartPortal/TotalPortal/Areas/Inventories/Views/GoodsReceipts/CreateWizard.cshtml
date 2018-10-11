@@ -27,7 +27,7 @@
     @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).PurchaseRequisitionEntryDate)
 
 
-    
+
     @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).WarehouseTransferID)
     @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).WarehouseTransferReference)
     @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).WarehouseTransferEntryDate)
@@ -39,14 +39,14 @@
     @Html.HiddenFor(model => model.Warehouse.WarehouseID);
     @Html.HiddenFor(model => model.Warehouse.Code);
     @Html.HiddenFor(model => model.Warehouse.Name);
-    
-    
+
+
     @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).PlannedOrderID)
     @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).PlannedOrderCode)
     @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).PlannedOrderReference)
     @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).PlannedOrderEntryDate)
 
-    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).WarehouseAdjustmentID)       
+    @Html.HiddenFor(model => (model as IGoodsReceiptPrimitiveDTO).WarehouseAdjustmentID)
 
     @Html.HiddenFor(model => model.Customer.CustomerID);
     @Html.HiddenFor(model => model.Customer.Code);
@@ -66,55 +66,72 @@
         .Items(tabStrip =>
         {
             tabStrip.Add().Text("Khách hàng không có đơn hàng")
+                .Visible(false)
                 .Content(@<text>
                     @*@Html.Partial("~/Views/Helpers/Commons/_SearchCustomer.cshtml")*@
                 </text>);
 
-            tabStrip.Add().Text("Đơn đặt hàng")
-                .Selected(true)
+
+            tabStrip.Add().Text("Phiếu mua hàng")
+                .Visible(false)
                 .Content(@<text>
                     @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetPurchaseRequisition.cshtml")
                 </text>);
             tabStrip.Add().Text("Nhà cung cấp")
+                .Visible(false)
                 .Content(@<text>
-                @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetCustomer.cshtml")
+                    @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetCustomer.cshtml")
                 </text>);
 
 
-        
-            tabStrip.Add().Text("Phiếu CK")
+
+            tabStrip.Add().Text("Phiếu VCNB")
+                .Visible(Model.IsItem)
+                .Selected(Model.IsItem)
                 .Content(@<text>
                     @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetWarehouseTransfer.cshtml")
                 </text>);
-            tabStrip.Add().Text("VCNB")
+            tabStrip.Add().Text("Tổng hợp VCNB")
+                .Visible(Model.IsItem)
                 .Content(@<text>
-                @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetWarehouse.cshtml")
+                    @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetWarehouse.cshtml")
                 </text>);
 
-        
-            
-            tabStrip.Add().Text("Kế hoạch sản xuất")
-              .Content(@<text>
+
+
+            tabStrip.Add().Text("Số KHSX")
+                .Visible(Model.IsProduct)
+                .Selected(Model.IsProduct)
+                .Content(@<text>
                     @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetPlannedOrder.cshtml")
-            </text>);
-            tabStrip.Add().Text("Tổ đóng gói")
-                    .Content(@<text>
+                </text>);
+            tabStrip.Add().Text("Tổng hợp theo KH")
+                .Visible(Model.IsProduct)
+                .Content(@<text>
                     @Html.Partial("~/Areas/Inventories/Views/GoodsReceipts/_GetPlannedOrderCustomer.cshtml")
-                    </text>);
+                </text>);
         })
-)
+    )
 
 
 
     <div class="background-bar" style="height: 45px;">
         @*<div style="width:40%;height:10px;float: left; margin-top:-3px"> @Html.EditorFor(model => (model as IGoodsReceiptDTO).Warehouse, new { WarehouseDisplayName = @Model.Warehouse.GetDisplayName(m => m.WarehouseID) })           </div>*@
+
+        @if (Model.IsItem)
+        {
+            <div class="popup-button-bar" style="float: left; clear:none; margin-left: 6px;">
+                <button type="button" class="k-button" onclick="okMaterialIssueButton_Click()"> <img src="~/Content/Images/Mains/Size24/Accept-Total.png" /> Thu hồi màng đã cấp </button>
+            </div>
+        }
+
         <div class="popup-button-bar" style="clear:none">
 
             <input id="submitCreateWizard" type="submit" formaction="@Url.Action("CreateWizard", Model.ControllerName)" formtarget="_top" style="display:none" />
 
             @*<button type="button" class="k-button" onclick="okButton_Click()"> <img src="~/Content/Images/Mains/Size24/Ok-1.png" /> Áp dụng CTKM đang chọn </button>   //At VCP DON'T ALLOW SELECT BY SINGLE PROMOTION *@
-            <button type="button" class="k-button" onclick="okMaterialIssueButton_Click()"> <img src="~/Content/Images/Mains/Size24/Accept-Total.png" /> Nhập từ SX trả về </button>
-            <button type="button" class="k-button" onclick="okWOSelectButton_Click()"> <img src="~/Content/Images/Mains/Size24/Accept-Total.png" /> Áp dụng KH/CT đang chọn </button>
+
+            <button type="button" class="k-button" onclick="okWOSelectButton_Click()"> <img src="~/Content/Images/Mains/Size24/Accept-Total.png" /> Tiếp tục </button>
             <button type="button" class="k-button" onclick="window.parent.$('#myWindow').data('kendoWindow').close()"> <img src="~/Content/Images/Mains/Size24/Users-Exit-icon-24.png" /> Thoát </button>
         </div>
     </div>
@@ -137,13 +154,18 @@
 
     function okMaterialIssueButton_Click() {
         $("#GoodsReceiptTypeID").val("@((int)GlobalEnums.GoodsReceiptTypeID.MaterialIssue)");
-        
+
+
+        $("#Warehouse_WarehouseID").val(6);
+        $("#Warehouse_Code").val("KDH");
+        $("#Warehouse_Name").val("KDH");
+
         $("#submitCreateWizard").trigger("click");
     }
-   
 
-    function handleOKEvent(promotionGrid) { //This javascript is now used only here. Later, if it is used somewhere else, it should be break into a standalone js file, and then just only add a link here        
-        var hasPurchaseRequisition = $("#tabStrip").data("kendoTabStrip").select().index() === 0 ? false : true;        
+
+    function handleOKEvent(promotionGrid) { //This javascript is now used only here. Later, if it is used somewhere else, it should be break into a standalone js file, and then just only add a link here
+        var hasPurchaseRequisition =  true;// $("#tabStrip").data("kendoTabStrip").select().index() === 0 ? false : true;
 
         if (hasPurchaseRequisition == false) {
             if ($("#Customer_CustomerID").val() === null || $("#Customer_CustomerID").val() === "")
@@ -158,31 +180,30 @@
             _setModelInput();
         }
         else {
-            //var selectedGrid = $($("#tabStrip").data("kendoTabStrip").select().index() === 1 ? "goodsReceiptPendingPurchaseRequisitionGrid" : "#goodsReceiptPendingCustomerGrid").data("kendoGrid");
-
-            switch($("#tabStrip").data("kendoTabStrip").select().index()) {
-                case 1:
+            switch ($("#tabStrip").data("kendoTabStrip").select().text()) {
+                case "Phiếu mua hàng":
                     selectedGrid = $("#goodsReceiptPendingPurchaseRequisitionGrid").data("kendoGrid");
                     break;
-                case 2:
+                case "Nhà cung cấp":
                     selectedGrid = $("#goodsReceiptPendingCustomerGrid").data("kendoGrid");
                     break;
 
 
 
-                case 3:
+
+                case "Phiếu VCNB":
                     selectedGrid = $("#goodsReceiptPendingWarehouseTransferGrid").data("kendoGrid");
                     break;
-                case 4:
+                case "Tổng hợp VCNB":
                     selectedGrid = $("#goodsReceiptPendingWarehouseGrid").data("kendoGrid");
                     break;
 
 
 
-                case 5:
+                case "Số KHSX":
                     selectedGrid = $("#goodsReceiptPendingPlannedOrderGrid").data("kendoGrid");
                     break;
-                case 6:
+                case "Tổng hợp KH":
                     selectedGrid = $("#goodsReceiptPendingPlannedOrderCustomerGrid").data("kendoGrid");
                     break;
                 default:
@@ -201,7 +222,7 @@
 
 
         function _setModelInput(selectedDataItem) {
-            
+
             if (hasPurchaseRequisition == false) {
                 $("#CustomerID").val(-1); //FOR TEMP ONLY
 
@@ -222,6 +243,12 @@
                 //    $("#Customer_SalespersonID").val(selectedDataItem === undefined || selectedDataItem.CustomerSalespersonID === undefined ? null : selectedDataItem.CustomerSalespersonID);
                 //    $("#Customer_SalespersonName").val(selectedDataItem === undefined || selectedDataItem.CustomerSalespersonName === undefined ? null : selectedDataItem.CustomerSalespersonName);
                 //}
+
+                $("#Customer_CustomerID").val(selectedDataItem === undefined || selectedDataItem.CustomerID === undefined ? null : selectedDataItem.CustomerID);
+                $("#Customer_Code").val(selectedDataItem === undefined || selectedDataItem.CustomerCode === undefined ? null : selectedDataItem.CustomerCode);
+                $("#Customer_Name").val(selectedDataItem === undefined || selectedDataItem.CustomerName === undefined ? null : selectedDataItem.CustomerName);
+
+
 
                 $("#Warehouse_WarehouseID").val(selectedDataItem === undefined || selectedDataItem.WarehouseID === undefined ? null : selectedDataItem.WarehouseID);
                 $("#Warehouse_Code").val(selectedDataItem === undefined || selectedDataItem.WarehouseCode === undefined ? null : selectedDataItem.WarehouseCode);
@@ -255,11 +282,11 @@
                 //$("#Warehouse_Code").val(selectedDataItem === undefined || selectedDataItem.WarehouseCode === undefined ? null : selectedDataItem.WarehouseCode);
                 //$("#Warehouse_Name").val(selectedDataItem === undefined || selectedDataItem.WarehouseName === undefined ? null : selectedDataItem.WarehouseName);
 
-                $("#Description").val(selectedDataItem === undefined || selectedDataItem.Description === undefined ? null : selectedDataItem.Description);                
+                $("#Description").val(selectedDataItem === undefined || selectedDataItem.Description === undefined ? null : selectedDataItem.Description);
 
             }
         }
-     
+
     }
 
 </script>
