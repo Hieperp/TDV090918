@@ -14,7 +14,6 @@ namespace TotalModel.Models
     public partial class GoodsReceiptPendingPlannedOrderDetail
     {
         public int FinishedProductID { get; set; }
-        public string FinishedProductReference { get; set; }
         public System.DateTime FinishedProductEntryDate { get; set; }
         public int CommodityID { get; set; }
         public string CommodityCode { get; set; }
@@ -22,9 +21,10 @@ namespace TotalModel.Models
         public int CommodityTypeID { get; set; }
         public Nullable<decimal> QuantityRemains { get; set; }
         public decimal Quantity { get; set; }
-        public string Description { get; set; }
         public string Remarks { get; set; }
         public Nullable<bool> IsSelected { get; set; }
         public int FinishedProductPackageID { get; set; }
+        public string FirmOrderReference { get; set; }
+        public string FirmOrderCode { get; set; }
     }
 }

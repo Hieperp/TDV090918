@@ -47,9 +47,9 @@ namespace TotalDTO.Inventories
         Nullable<int> WarehouseTransferID { get; set; }
         string WarehouseTransferReference { get; set; }
         string WarehouseTransferReferences { get; set; }
-        [Display(Name = "Phiếu đặt hàng")]
+        [Display(Name = "Phiếu VCNB")]
         string WarehouseTransferReferenceNote { get; }
-        [Display(Name = "Ngày đặt hàng")]
+        [Display(Name = "Ngày VCNB")]
         Nullable<System.DateTime> WarehouseTransferEntryDate { get; set; }
 
 

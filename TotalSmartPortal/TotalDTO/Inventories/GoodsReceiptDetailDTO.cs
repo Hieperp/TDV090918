@@ -49,10 +49,13 @@ namespace TotalDTO.Inventories
         public Nullable<int> FinishedProductID { get; set; }
         public Nullable<int> FinishedProductPackageID { get; set; }
 
+        [Display(Name = "KHSX")]
+        [UIHint("StringReadonly")]
+        public string FirmOrderReference { get; set; }
         [Display(Name = "Số CT")]
         [UIHint("StringReadonly")]
-        public string FinishedProductReference { get; set; }        
-        [Display(Name = "Ngày CT")]
+        public string FirmOrderCode { get; set; }        
+        [Display(Name = "Ngày ĐG")]
         [UIHint("DateTimeReadonly")]
         public Nullable<System.DateTime> FinishedProductEntryDate { get; set; }
 

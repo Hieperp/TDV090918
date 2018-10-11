@@ -46,5 +46,8 @@ namespace TotalModel.Models
         public string ProductionLinesCode { get; set; }
         public Nullable<int> FinishedProductPackageID { get; set; }
         public Nullable<int> FinishedProductID { get; set; }
+        public Nullable<System.DateTime> FinishedProductEntryDate { get; set; }
+        public string FirmOrderReference { get; set; }
+        public string FirmOrderCode { get; set; }
     }
 }

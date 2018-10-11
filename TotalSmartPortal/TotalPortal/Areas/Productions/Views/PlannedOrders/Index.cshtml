@@ -58,6 +58,7 @@
                                 model.Field(m => m.PlannedOrderID).DefaultValue(0);
                             })
                             .ServerOperation(true)
+                            .Aggregates(a => a.Add(x => x.TotalQuantity).Sum())
                             )
                         .HtmlAttributes(new { @class = "grid-class" }))
 </div>
