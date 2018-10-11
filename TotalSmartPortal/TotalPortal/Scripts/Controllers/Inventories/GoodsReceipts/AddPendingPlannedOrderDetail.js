@@ -60,8 +60,9 @@ function handleOKEvent(goodsReceiptGridDataSource, pendingPlannedOrderDetailGrid
 
         dataRow.FinishedProductID = plannedOrderGridDataItem.FinishedProductID;
         dataRow.FinishedProductPackageID = plannedOrderGridDataItem.FinishedProductPackageID;
-        dataRow.FinishedProductReference = plannedOrderGridDataItem.FinishedProductReference;
         dataRow.FinishedProductEntryDate = plannedOrderGridDataItem.FinishedProductEntryDate;
+        dataRow.FirmOrderReference = plannedOrderGridDataItem.FirmOrderReference;
+        dataRow.FirmOrderCode = plannedOrderGridDataItem.FirmOrderCode;
 
 
         dataRow.PurchaseRequisitionID = null;

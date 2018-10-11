@@ -8,8 +8,9 @@
     .Name("gridPendingPlannedOrderDetails")
     .Columns(columns =>
     {
-        columns.Bound(c => c.FinishedProductReference).Title("Số phiếu").Width(30);        
-        columns.Bound(c => c.FinishedProductEntryDate).Title("Ngày").Width(50).Format("{0:" + Settings.DateTimeFormat + "}");
+        columns.Bound(c => c.FirmOrderReference).Title("KHSX").Width(30);
+        columns.Bound(c => c.FirmOrderCode).Title("Số CT").Width(30);        
+        columns.Bound(c => c.FinishedProductEntryDate).Title("Ngày ĐG").Width(50).Format("{0:" + Settings.DateTimeFormat + "}");
         columns.Bound(c => c.CommodityCode).Title("Mã hàng").Width(68);
         columns.Bound(c => c.CommodityName).Title("Tên hàng").Width(96);
         columns.Bound(c => c.QuantityRemains).Title("SL").Format(Settings.kfmQuantity).Width(25).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" });
@@ -48,7 +49,7 @@
 
 <div class="background-bar" style="height: 45px;">
     <div class="popup-button-bar">
-        <button type="button" class="k-button" onclick="okButton_Click()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Thêm măt hàng đang chọn vào HĐ</button>
+        <button type="button" class="k-button" onclick="okButton_Click()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Thêm vào phiếu nhập kho </button>
         <button type="button" class="k-button" onclick="cancelButton_Click()"> <img src="~/Content/Images/Mains/Size24/Users-Exit-icon-24.png" /> Thoát </button>
     </div>
 </div>
@@ -78,7 +79,7 @@
             gridDetails.dataSource.filter({
                 logic: "or",
                 filters: [                    
-                    { field: "FinishedProductReference", operator: "contains", value: filterText },
+                    { field: "FirmOrderReference", operator: "contains", value: filterText },
 
                     { field: "CommodityCode", operator: "contains", value: filterText },
                     { field: "CommodityName", operator: "contains", value: filterText }

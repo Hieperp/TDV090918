@@ -101,8 +101,9 @@
                         </div>
                     </div>
                 }
-
-                @Html.EditorFor(model => (model as IGoodsReceiptDTO).WarehouseIssue, new { WarehouseDisplayName = @Model.WarehouseIssue.GetDisplayName(m => m.WarehouseID), LeftPanelInput = "left-panel-input" })
+                <div class="SBT-Hidden">
+                    @Html.EditorFor(model => (model as IGoodsReceiptDTO).WarehouseIssue, new { WarehouseDisplayName = @Model.WarehouseIssue.GetDisplayName(m => m.WarehouseID), LeftPanelInput = "left-panel-input" })
+                </div>
                 break;
 
             case (int)GlobalEnums.GoodsReceiptTypeID.FinishedProduct:
@@ -162,7 +163,7 @@
         <div class="right-top-panel right-top-panel-H2">
             @if (Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.WarehouseTransfer || Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.MaterialIssue)
             {
-                @Html.EditorFor(model => (model as IGoodsReceiptDTO).Customer, new { CustomerDisplayName = @Model.Customer.GetDisplayName(m => m.CustomerID), CustomerIcon = "Customer Red 24.png", NullCustomer = (Model.CustomerID > 0 ? null : (Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.WarehouseTransfer ? "Nhập VCNB" : "Thu hồi màng đã cấp")), CustomerInfo = (Model.CustomerID > 0 ? null : "#") })
+                @Html.EditorFor(model => (model as IGoodsReceiptDTO).Customer, new { CustomerDisplayName = @Model.Customer.GetDisplayName(m => m.CustomerID), CustomerIcon = "Customer Red 24.png", NullCustomer = (Model.CustomerID > 0 ? null : (Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.WarehouseTransfer ? "Nhập VCNB từ " + @Model.WarehouseIssue.Code : "Thu hồi màng đã cấp")), CustomerInfo = (Model.CustomerID > 0 ? null : "#") })
             }
             else
             {
@@ -246,19 +247,14 @@
                     columns.Bound(p => p.MaterialIssueDetailID).DisplayNameTitle().Filterable(false).Hidden()
                         .ClientTemplate("#= (MaterialIssueDetailID == null)? '' : MaterialIssueDetailID #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].MaterialIssueDetailID' value='#= (MaterialIssueDetailID == null) ? '' : MaterialIssueDetailID #' />");
 
-                    columns.Bound(p => p.MaterialIssueCode).DisplayNameTitle().Filterable(false).Width(60).Hidden()
-                        .ClientTemplate("#= (MaterialIssueCode == null)? '' : MaterialIssueCode #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].MaterialIssueCode' value='#= (MaterialIssueCode == null) ? '' : MaterialIssueCode #' />");
                     columns.Bound(p => p.MaterialIssueReference).DisplayNameTitle().Filterable(false).Width(60).Hidden(Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.MaterialIssue ? false : true)
                         .ClientTemplate("#= (MaterialIssueReference == null)? '' : MaterialIssueReference #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].MaterialIssueReference' value='#= (MaterialIssueReference == null) ? '' : MaterialIssueReference #' />");
-                    columns.Bound(p => p.MaterialIssueEntryDate).DisplayNameTitle().Filterable(false).Width(80).Hidden(Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.MaterialIssue ? false : true)
-                        .Format("{0:" + @Settings.DateFormat + "}")
-                        .ClientTemplate("#= (MaterialIssueEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', MaterialIssueEntryDate) #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].MaterialIssueEntryDate' value='#= (MaterialIssueEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', MaterialIssueEntryDate) #' />");
+                    columns.Bound(p => p.MaterialIssueEntryDate).DisplayNameTitle().Filterable(false).Width(128).Hidden(Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.MaterialIssue ? false : true)
+                        .Format("{0:" + @Settings.DateTimeFormat + "}")
+                        .ClientTemplate("#= (MaterialIssueEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateTimeFormat + "}', MaterialIssueEntryDate) #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].MaterialIssueEntryDate' value='#= (MaterialIssueEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateTimeFormat + "}', MaterialIssueEntryDate) #' />");
 
                     columns.Bound(p => p.WorkshiftName).DisplayNameTitle().Filterable(false).Width(80).Hidden(Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.MaterialIssue ? false : true)
                        .ClientTemplate("#= (WorkshiftName == null)? '' : WorkshiftName #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].WorkshiftName' value='#= (WorkshiftName == null) ? '' : WorkshiftName #' />");
-                    columns.Bound(p => p.WorkshiftEntryDate).DisplayNameTitle().Filterable(false).Width(80).Hidden(Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.MaterialIssue ? false : true)
-                       .Format("{0:" + @Settings.DateFormat + "}")
-                       .ClientTemplate("#= (WorkshiftEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', WorkshiftEntryDate) #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].WorkshiftEntryDate' value='#= (WorkshiftEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', WorkshiftEntryDate) #' />");
                     columns.Bound(p => p.ProductionLinesCode).DisplayNameTitle().Filterable(false).Width(60).Hidden(Model.GoodsReceiptTypeID == (int)GlobalEnums.GoodsReceiptTypeID.MaterialIssue ? false : true)
                         .ClientTemplate("#= (ProductionLinesCode == null)? '' : ProductionLinesCode #" + "<input type='hidden' name='GoodsReceiptViewDetails[#= index(data) #].ProductionLinesCode' value='#= (ProductionLinesCode == null) ? '' : ProductionLinesCode #' />");
 
@@ -306,7 +302,7 @@
                                 case (int)GlobalEnums.GoodsReceiptTypeID.PurchaseRequisition:
                                     toolbar.Template(@<text>
                                         <button type="button" class="k-button" onclick="GetPendingPurchaseRequisitionDetails()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Chọn mặt hàng </button>
-                                        <button type="button" class="k-button" onclick="copyRemainsToQuantity()"> <img src="~/Content/Images/Mains/Size24/Borderlands-Select-icon-24.png" /> Nhập toàn bộ mặt hàng </button>
+                                        <button type="button" class="k-button" onclick="copyRemainsToQuantity()"> <img src="~/Content/Images/Mains/Size24/Borderlands-Select-icon-24.png" /> Nhập kho toàn bộ </button>
                                     </text>);
                                     break;
 
@@ -315,7 +311,7 @@
                                 case (int)GlobalEnums.GoodsReceiptTypeID.WarehouseTransfer:
                                     toolbar.Template(@<text>
                                         <button type="button" class="k-button" onclick="GetPendingWarehouseTransferDetails()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Chọn mặt hàng </button>
-                                        <button type="button" class="k-button" onclick="copyRemainsToQuantity()"> <img src="~/Content/Images/Mains/Size24/Borderlands-Select-icon-24.png" /> Nhập toàn bộ mặt hàng </button>
+                                        <button type="button" class="k-button" onclick="copyRemainsToQuantity()"> <img src="~/Content/Images/Mains/Size24/Borderlands-Select-icon-24.png" /> Nhập kho toàn bộ </button>
                                     </text>);
                                     break;
 
@@ -324,13 +320,13 @@
                                 case (int)GlobalEnums.GoodsReceiptTypeID.MaterialIssue:
                                     toolbar.Template(@<text>
                                         <button type="button" class="k-button" onclick="GetPendingMaterialIssueDetails()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Chọn mặt hàng </button>
-                                        <button type="button" class="k-button" onclick="copyRemainsToQuantity()"> <img src="~/Content/Images/Mains/Size24/Borderlands-Select-icon-24.png" /> Nhập toàn bộ mặt hàng </button>
+                                        <button type="button" class="k-button" onclick="copyRemainsToQuantity()"> <img src="~/Content/Images/Mains/Size24/Borderlands-Select-icon-24.png" /> Nhập kho toàn bộ </button>
                                     </text>);
                                     break;
                                 case (int)GlobalEnums.GoodsReceiptTypeID.FinishedProduct:
                                     toolbar.Template(@<text>
                                         <button type="button" class="k-button" onclick="GetPendingPlannedOrderDetails()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Chọn mặt hàng </button>
-                                        <button type="button" class="k-button" onclick="copyRemainsToQuantity()"> <img src="~/Content/Images/Mains/Size24/Borderlands-Select-icon-24.png" /> Nhập toàn bộ mặt hàng </button>
+                                        <button type="button" class="k-button" onclick="copyRemainsToQuantity()"> <img src="~/Content/Images/Mains/Size24/Borderlands-Select-icon-24.png" /> Nhập kho toàn bộ </button>
                                     </text>);
                                     break;
                                 default:
