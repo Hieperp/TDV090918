@@ -17,17 +17,20 @@ namespace TotalModel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public WarehouseTransfer()
         {
-            this.WarehouseTransferDetails = new HashSet<WarehouseTransferDetail>();
             this.GoodsReceipts = new HashSet<GoodsReceipt>();
+            this.WarehouseTransferDetails = new HashSet<WarehouseTransferDetail>();
         }
     
         public int WarehouseTransferID { get; set; }
         public System.DateTime EntryDate { get; set; }
         public string Reference { get; set; }
         public int NMVNTaskID { get; set; }
+        public bool HasTransferOrder { get; set; }
         public Nullable<int> TransferOrderID { get; set; }
         public int WarehouseID { get; set; }
+        public int LocationIssuedID { get; set; }
         public int WarehouseReceiptID { get; set; }
+        public int LocationReceiptID { get; set; }
         public int StorekeeperID { get; set; }
         public int UserID { get; set; }
         public int PreparedPersonID { get; set; }
@@ -42,20 +45,17 @@ namespace TotalModel.Models
         public System.DateTime EditedDate { get; set; }
         public bool Approved { get; set; }
         public Nullable<System.DateTime> ApprovedDate { get; set; }
-        public bool HasTransferOrder { get; set; }
-        public int LocationReceiptID { get; set; }
-        public int LocationIssuedID { get; set; }
     
         public virtual Employee Employee { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GoodsReceipt> GoodsReceipts { get; set; }
         public virtual Location Location { get; set; }
+        public virtual Location Location1 { get; set; }
+        public virtual Location Location2 { get; set; }
+        public virtual TransferOrder TransferOrder { get; set; }
         public virtual Warehouse Warehouse { get; set; }
         public virtual Warehouse Warehouse1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WarehouseTransferDetail> WarehouseTransferDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GoodsReceipt> GoodsReceipts { get; set; }
-        public virtual TransferOrder TransferOrder { get; set; }
-        public virtual Location Location1 { get; set; }
-        public virtual Location Location2 { get; set; }
     }
 }

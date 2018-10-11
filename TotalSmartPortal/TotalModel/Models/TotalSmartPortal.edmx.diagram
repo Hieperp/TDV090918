@@ -284,13 +284,7 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProductDetails_FinishedProducts" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.TransferOrderType" Width="1.5" PointX="40.375" PointY="40.25" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.WarehouseTransferDetail" Width="1.5" PointX="55.375" PointY="25.75" />
-        <EntityTypeShape EntityType="TotalSmartPortalModel.WarehouseTransfer" Width="1.5" PointX="49.875" PointY="29.875" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransferDetails_Commodities" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_Employees" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_Locations" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_WarehouseReceipts" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_Warehouses" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransferDetails_WarehouseTransfers" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.GoodsReceipt" Width="1.5" PointX="52.125" PointY="32" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceipts_Customers" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceipts_Locations" />
@@ -298,7 +292,6 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceipts_WarehouseAdjustments" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceipts_Warehouses" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceipts_Warehouses1" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceipts_WarehouseTransfers" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_SemifinishedProducts_GoodsReceipts" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.SemifinishedHandover" Width="1.5" PointX="18.375" PointY="11.75" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_SemifinishedHandovers_Employees" />
@@ -348,10 +341,17 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_Warehouses" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_Warehouses1" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransferDetails_TransferOrders" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_TransferOrders" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_Locations1" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_TransferOrders_Locations2" />
+        <EntityTypeShape EntityType="TotalSmartPortalModel.WarehouseTransfer" Width="1.5" PointX="49.875" PointY="29.375" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_Employees" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceipts_WarehouseTransfers" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_Locations" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_Locations1" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_Locations2" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_TransferOrders" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_Warehouses" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_Warehouses1" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransferDetails_WarehouseTransfers" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
