@@ -25,7 +25,7 @@ namespace TotalModel.Models
         public bool InActivePartial { get; set; }
         public string CustomerName { get; set; }
         public Nullable<System.DateTime> DeliveryDate { get; set; }
-        public string Specs { get; set; }
         public decimal TotalQuantity { get; set; }
+        public string Caption { get; set; }
     }
 }

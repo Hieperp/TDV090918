@@ -23,11 +23,11 @@ namespace TotalModel.Models
         public bool Approved { get; set; }
         public bool InActive { get; set; }
         public bool InActivePartial { get; set; }
-        public string Specs { get; set; }
         public string PlannedOrderReference { get; set; }
         public string PlannedOrderCode { get; set; }
         public Nullable<System.DateTime> PlannedOrderVoucherDate { get; set; }
         public Nullable<System.DateTime> PlannedOrderDeliveryDate { get; set; }
         public string CustomerName { get; set; }
+        public string Caption { get; set; }
     }
 }

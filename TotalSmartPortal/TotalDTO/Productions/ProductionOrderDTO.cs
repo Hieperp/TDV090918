@@ -36,17 +36,16 @@ namespace TotalDTO.Productions
         [Display(Name = "Ngày đặt hàng")]
         public Nullable<System.DateTime> PlannedOrderEntryDate { get; set; }
 
-        [Display(Name = "Chứng")]
+        [Display(Name = "Chứng từ")]
         public string Code { get; set; }
-        public string Specs { get; set; }
 
         public override void PerformPresaveRule()
         {
             base.PerformPresaveRule();
 
-            string plannedOrderReferences = ""; string plannedOrderCodes = ""; string specs = "";
-            this.DtoDetails().ToList().ForEach(e => { if (plannedOrderReferences.IndexOf(e.FirmOrderReference) < 0) plannedOrderReferences = plannedOrderReferences + (plannedOrderReferences != "" ? ", " : "") + e.FirmOrderReference; if (e.FirmOrderCode != null && plannedOrderCodes.IndexOf(e.FirmOrderCode) < 0) plannedOrderCodes = plannedOrderCodes + (plannedOrderCodes != "" ? ", " : "") + e.FirmOrderCode; if (e.Specs != null && specs.IndexOf(e.Specs) < 0) specs = specs + (specs != "" ? ", " : "") + e.Specs; });
-            this.PlannedOrderReferences = plannedOrderReferences; this.PlannedOrderCodes = plannedOrderCodes != "" ? plannedOrderCodes : null; this.Specs = specs != "" ? (specs.Length > 98 ? specs.Substring(0, 95) : specs) : null;
+            string plannedOrderReferences = ""; string plannedOrderCodes = ""; string caption = "";
+            this.DtoDetails().ToList().ForEach(e => { if (plannedOrderReferences.IndexOf(e.FirmOrderReference) < 0) plannedOrderReferences = plannedOrderReferences + (plannedOrderReferences != "" ? ", " : "") + e.FirmOrderReference; if (e.FirmOrderCode != null && plannedOrderCodes.IndexOf(e.FirmOrderCode) < 0) plannedOrderCodes = plannedOrderCodes + (plannedOrderCodes != "" ? ", " : "") + e.FirmOrderCode; if (e.Specs != null && caption.IndexOf(e.Specs) < 0) caption = caption + (caption != "" ? ", " : "") + e.Specs; });
+            this.PlannedOrderReferences = plannedOrderReferences; this.PlannedOrderCodes = plannedOrderCodes != "" ? plannedOrderCodes : null; this.Caption = caption != "" ? (caption.Length > 98 ? caption.Substring(0, 95) : caption) : null;
         }
     }
 

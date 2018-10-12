@@ -61,14 +61,14 @@ namespace TotalModel.Models
         public virtual Location Location { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MaterialIssueDetail> MaterialIssueDetails { get; set; }
-        public virtual PlannedOrder PlannedOrder { get; set; }
         public virtual ProductionLine ProductionLine { get; set; }
         public virtual ProductionOrderDetail ProductionOrderDetail { get; set; }
-        public virtual ProductionOrder ProductionOrder { get; set; }
         public virtual Shift Shift { get; set; }
         public virtual Warehouse Warehouse { get; set; }
         public virtual Workshift Workshift { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SemifinishedProductDetail> SemifinishedProductDetails { get; set; }
+        public virtual PlannedOrder PlannedOrder { get; set; }
+        public virtual ProductionOrder ProductionOrder { get; set; }
     }
 }

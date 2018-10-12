@@ -54,7 +54,7 @@ namespace TotalDTO.Inventories
         public virtual int ProductionLineID { get; set; }        
 
         [Display(Name = "Mã số máy, ca sx")]
-        public string Caption { get { return ""; } }
+        public override string Caption { get { return ""; } }
 
         public virtual Nullable<int> WarehouseID { get; set; }
         public virtual int StorekeeperID { get; set; }
