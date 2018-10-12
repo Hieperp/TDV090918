@@ -24,6 +24,8 @@ namespace TotalModel.Models
         public decimal TotalQuantity { get; set; }
         public decimal TotalQuantityFailure { get; set; }
         public decimal TotalSwarfs { get; set; }
-        public string Specs { get; set; }
+        public string FirmOrderReference { get; set; }
+        public string FirmOrderCode { get; set; }
+        public string FirmOrderSpecs { get; set; }
     }
 }

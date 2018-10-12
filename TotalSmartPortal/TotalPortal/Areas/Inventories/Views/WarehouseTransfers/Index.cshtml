@@ -19,8 +19,8 @@
                 columns.Bound(p => p.WarehouseCode).Title("Kho").Width(80);
                 columns.Bound(p => p.WorkshiftName).Title("Tên kho").Width(120);
                 columns.Bound(p => p.WarehouseReceiptCode).Title("Kho nhập").Width(80);
-                columns.Bound(p => p.Caption).Title("Mặt hàng").Width(96); 
-                columns.Bound(p => p.Description).Title("Diễn giải").Width(88);                
+                columns.Bound(p => p.Caption).Title("Mặt hàng").Width(138); 
+                columns.Bound(p => p.Description).Title("Diễn giải").Width(50);                
                 
                 columns.Bound(p => p.TotalQuantity).Title("SL").Format(Settings.kfmQuantity).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(10).ClientFooterTemplate("#= kendo.format('" + Settings.kfmQuantity + "', sum) #").FooterHtmlAttributes(new { @class = "grid-number-column" });
                 

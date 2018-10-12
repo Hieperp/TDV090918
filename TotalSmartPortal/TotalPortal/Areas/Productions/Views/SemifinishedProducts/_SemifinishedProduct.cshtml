@@ -211,7 +211,7 @@
                         .ClientTemplate("#= CommodityID #" + "<input type='hidden' name='SemifinishedProductViewDetails[#= index(data) #].CommodityID' value='#= CommodityID #' />");
                     columns.Bound(p => p.CommodityCode).DisplayNameTitle().Width(120).EditorTemplateName("StringReadonly")
                         .ClientTemplate("#= CommodityCode #" + "<input type='hidden' name='SemifinishedProductViewDetails[#= index(data) #].CommodityCode' value='#= CommodityCode #' />")
-                        .ClientFooterTemplate("Tổng cộng (#= kendo.format('{0:n0}', count) # dòng)");
+                        .ClientFooterTemplate("TC (#= kendo.format('{0:n0}', count) # dòng)");
                     columns.Bound(p => p.CommodityName).DisplayNameTitle().Width(150).HtmlAttributes(new { style = "" })
                         .ClientTemplate("#= CommodityName #" + "<input type='hidden' name='SemifinishedProductViewDetails[#= index(data) #].CommodityName' value='#= CommodityName #' />");
 

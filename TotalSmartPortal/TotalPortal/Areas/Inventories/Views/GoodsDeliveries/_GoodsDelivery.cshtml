@@ -67,7 +67,7 @@
                         .ClientTemplate("#= ShippingAddress #" + "<input type='hidden' name='GoodsDeliveryViewDetails[#= index(data) #].ShippingAddress' value='#= ShippingAddress #' />");
 
                     columns.Bound(p => p.ReceiverDescription).DisplayNameTitle().Filterable(false).Width(232)
-                        .ClientFooterTemplate("Tổng cộng (#= kendo.format('{0:n0}', count) # dòng)")
+                        .ClientFooterTemplate("TC (#= kendo.format('{0:n0}', count) # dòng)")
                         .ClientTemplate("#= ReceiverDescription #" + "<input type='hidden' name='GoodsDeliveryViewDetails[#= index(data) #].ReceiverDescription' value='#= ReceiverDescription #' />");
                     
                     columns.Bound(p => p.GoodsIssueReferences).DisplayNameTitle().Filterable(false).Width(100)

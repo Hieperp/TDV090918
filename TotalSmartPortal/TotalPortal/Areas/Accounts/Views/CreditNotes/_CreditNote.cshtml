@@ -94,7 +94,7 @@
 
 
                     columns.Bound(p => p.Remarks).DisplayNameTitle().Filterable(false).Width(180)
-                        .ClientFooterTemplate("Tổng cộng (#= kendo.format('{0:n0}', count) # dòng)")
+                        .ClientFooterTemplate("TC (#= kendo.format('{0:n0}', count) # dòng)")
                         .ClientTemplate("#= (Remarks == null)? '' : Remarks #" + "<input type='hidden' name='CreditNoteDetails[#= index(data) #].Remarks' value='#= (Remarks == null) ? '' : Remarks #' />");
 
                     columns.Bound(p => p.CalculatingTypeID).DisplayNameTitle().Filterable(false).Hidden()
