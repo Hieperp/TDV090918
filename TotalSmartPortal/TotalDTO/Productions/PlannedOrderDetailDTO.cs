@@ -61,9 +61,10 @@ namespace TotalDTO.Productions
         [UIHint("Integer")]
         public int? CombineIndex { get; set; }
 
+        public string Specs { get; set; }
         public string Description { get; set; }
 
-        public string GetDescription() { return this.CommodityCode + (this.CombineIndex != null ? " [" + this.Quantity.ToString("N" + GlobalEnums.rndQuantity.ToString()) + "] " : ""); }
-        public string GetRemarks() { return this.CommodityName + (this.CombineIndex != null ? " [" + this.Quantity.ToString("N" + GlobalEnums.rndQuantity.ToString()) + "] " : ""); }
+        public string GetSpecs() { return this.CommodityName + (this.CombineIndex != null ? " [" + this.Quantity.ToString("N" + GlobalEnums.rndQuantity.ToString()) + "] " : ""); }
+        public string GetDescription() { return this.CommodityCode + (this.CombineIndex != null ? " [" + this.Quantity.ToString("N" + GlobalEnums.rndQuantity.ToString()) + "] " : ""); }        
     }
 }

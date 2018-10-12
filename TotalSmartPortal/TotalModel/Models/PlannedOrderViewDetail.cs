@@ -39,5 +39,6 @@ namespace TotalModel.Models
         public int PiecePerPack { get; set; }
         public decimal QuantityRequested { get; set; }
         public decimal QuantityOnhand { get; set; }
+        public string Specs { get; set; }
     }
 }

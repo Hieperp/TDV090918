@@ -676,6 +676,7 @@
           <Property Name="QuantityOnhand" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="QuantitySemifinished" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Specs" Type="nvarchar" MaxLength="800" />
           <Property Name="Description" Type="nvarchar" MaxLength="800" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="800" />
           <Property Name="VoidTypeID" Type="int" />
@@ -1238,6 +1239,7 @@
           <Property Name="QuantityOnhand" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="QuantitySemifinished" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Specs" Type="nvarchar" MaxLength="800" />
           <Property Name="Description" Type="nvarchar" MaxLength="800" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="800" />
           <Property Name="VoidTypeID" Type="int" />
@@ -13794,7 +13796,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="Int32" Name="VoidClassID" Nullable="true" />
           <Property Type="Boolean" Name="InActivePartial" Nullable="false" />
           <Property Type="DateTime" Name="InActivePartialDate" Nullable="true" Precision="23" />
-          <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Remarks" Nullable="true" MaxLength="800" />
           <Property Type="Decimal" Name="Quantity" Nullable="false" Precision="18" Scale="2" />
           <Property Type="Int32" Name="BomID" Nullable="false" />
           <Property Type="String" Name="BomCode" Nullable="false" MaxLength="50" />
@@ -13806,6 +13808,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="Int32" Name="PiecePerPack" Nullable="false" />
           <Property Type="Decimal" Name="QuantityRequested" Nullable="false" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="QuantityOnhand" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="String" Name="Specs" Nullable="true" MaxLength="800" />
         </ComplexType>
         <ComplexType Name="ProductionOrderPendingCustomer">
           <Property Type="Int32" Name="CustomerID" Nullable="false" />
@@ -14775,6 +14778,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Name="PiecePerPack" Type="Int32" Nullable="false" />
           <Property Name="QuantityRequested" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="QuantityOnhand" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Specs" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="FirmOrder">
           <Key>
@@ -14861,6 +14865,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Name="PiecePerPack" Type="Int32" Nullable="false" />
           <Property Name="QuantityRequested" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="QuantityOnhand" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Specs" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PlannedOrder">
           <Key>
@@ -20690,6 +20695,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="PiecePerPack" ColumnName="PiecePerPack" />
                 <ScalarProperty Name="QuantityRequested" ColumnName="QuantityRequested" />
                 <ScalarProperty Name="QuantityOnhand" ColumnName="QuantityOnhand" />
+                <ScalarProperty Name="Specs" ColumnName="Specs" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -21200,6 +21206,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <EntitySetMapping Name="FirmOrderDetails">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.FirmOrderDetail">
               <MappingFragment StoreEntitySet="FirmOrderDetails">
+                <ScalarProperty Name="Specs" ColumnName="Specs" />
                 <ScalarProperty Name="QuantityOnhand" ColumnName="QuantityOnhand" />
                 <ScalarProperty Name="QuantityRequested" ColumnName="QuantityRequested" />
                 <ScalarProperty Name="PiecePerPack" ColumnName="PiecePerPack" />
@@ -21270,6 +21277,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <EntitySetMapping Name="PlannedOrderDetails">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.PlannedOrderDetail">
               <MappingFragment StoreEntitySet="PlannedOrderDetails">
+                <ScalarProperty Name="Specs" ColumnName="Specs" />
                 <ScalarProperty Name="QuantityOnhand" ColumnName="QuantityOnhand" />
                 <ScalarProperty Name="QuantityRequested" ColumnName="QuantityRequested" />
                 <ScalarProperty Name="PiecePerPack" ColumnName="PiecePerPack" />

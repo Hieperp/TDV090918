@@ -49,7 +49,7 @@ namespace TotalDTO.Productions
             base.PerformPresaveRule();
 
             string specs = "";
-            this.DtoDetails().ToList().ForEach(e => { e.CustomerID = this.CustomerID; e.Description = e.CombineIndex == null ? e.GetDescription() : string.Join(", ", this.DtoDetails().Where(w => w.CombineIndex == e.CombineIndex).Select(o => o.GetDescription())); e.Remarks = e.CombineIndex == null ? e.GetRemarks() : string.Join(", ", this.DtoDetails().Where(w => w.CombineIndex == e.CombineIndex).Select(o => o.GetRemarks())); if (specs.IndexOf(e.GetRemarks()) < 0) specs = specs + (specs != "" ? ", " : "") + e.GetRemarks(); });
+            this.DtoDetails().ToList().ForEach(e => { e.CustomerID = this.CustomerID; e.Description = e.CombineIndex == null ? e.GetDescription() : string.Join(", ", this.DtoDetails().Where(w => w.CombineIndex == e.CombineIndex).Select(o => o.GetDescription())); e.Specs = e.CombineIndex == null ? e.GetSpecs() : string.Join(", ", this.DtoDetails().Where(w => w.CombineIndex == e.CombineIndex).Select(o => o.GetSpecs())); if (specs.IndexOf(e.GetSpecs()) < 0) specs = specs + (specs != "" ? ", " : "") + e.GetSpecs(); });
             this.Specs = specs != "" ? (specs.Length > 98 ? specs.Substring(0, 95) : specs) : null;
         }
     }
