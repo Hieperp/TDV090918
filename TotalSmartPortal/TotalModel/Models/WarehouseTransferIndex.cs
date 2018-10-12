@@ -17,7 +17,6 @@ namespace TotalModel.Models
         public Nullable<System.DateTime> EntryDate { get; set; }
         public string Reference { get; set; }
         public string LocationCode { get; set; }
-        public string WorkshiftName { get; set; }
         public string Description { get; set; }
         public decimal TotalQuantity { get; set; }
         public bool Approved { get; set; }
