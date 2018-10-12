@@ -52,6 +52,8 @@
                     columns.Bound(p => p.FinishedProductPackageID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= (FinishedProductPackageID == null)? '' : FinishedProductPackageID #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].FinishedProductPackageID' value='#= (FinishedProductPackageID == null) ? '' : FinishedProductPackageID #' />");
 
+                    columns.Bound(p => p.SemifinishedProductReferences).DisplayNameTitle().Width(30)
+                        .ClientTemplate("#= SemifinishedProductReferences #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].SemifinishedProductReferences' value='#= SemifinishedProductReferences #' />");
                     columns.Bound(p => p.FinishedProductEntryDate).DisplayNameTitle().Width(80)
                         .Format("{0:" + @Settings.DateFormat + "}")
                         .ClientTemplate("#= (FinishedProductEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', FinishedProductEntryDate) #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].FinishedProductEntryDate' value='#= (FinishedProductEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', FinishedProductEntryDate) #' />");

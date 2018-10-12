@@ -50,6 +50,8 @@ function handleOKEvent(finishedHandoverGridDataSource, pendingDetailGridDataSour
         dataRow.FinishedProductPackageID = finishedHandoverGridDataItem.FinishedProductPackageID;
         dataRow.FinishedProductEntryDate = finishedHandoverGridDataItem.FinishedProductEntryDate;
 
+        dataRow.SemifinishedProductReferences = finishedHandoverGridDataItem.SemifinishedProductReferences;
+
         dataRow.CustomerID = finishedHandoverGridDataItem.CustomerID;
         dataRow.CustomerName = finishedHandoverGridDataItem.CustomerName;
         dataRow.CustomerCode = finishedHandoverGridDataItem.CustomerCode;

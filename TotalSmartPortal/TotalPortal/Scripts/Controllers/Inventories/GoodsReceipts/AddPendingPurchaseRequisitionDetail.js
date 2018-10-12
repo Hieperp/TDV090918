@@ -63,6 +63,7 @@ function handleOKEvent(goodsReceiptGridDataSource, pendingPurchaseRequisitionDet
         dataRow.FinishedProductEntryDate = null;
         dataRow.FirmOrderReference = null;
         dataRow.FirmOrderCode = null;
+        dataRow.SemifinishedProductReferences = null;
 
 
         dataRow.PurchaseRequisitionID = purchaseRequisitionGridDataItem.PurchaseRequisitionID;
