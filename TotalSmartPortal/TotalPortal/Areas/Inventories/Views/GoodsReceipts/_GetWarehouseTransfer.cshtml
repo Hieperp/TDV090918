@@ -7,8 +7,8 @@
     {
         columns.Bound(c => c.WarehouseTransferReference).Title("Số ĐH").Width(50);
         columns.Bound(c => c.WarehouseTransferEntryDate).Title("Ngày ĐH").Width(55).Format("{0:" + Settings.DateFormat + "}");
-        columns.Bound(c => c.WarehouseCode).Title("Kho xuất").Width(80);
-        columns.Bound(c => c.WarehouseIssueCode).Title("Kho nhập").Width(80);
+        columns.Bound(c => c.WarehouseIssueCode).Title("Kho xuất").Width(80);
+        columns.Bound(c => c.WarehouseCode).Title("Kho nhập").Width(80);
         columns.Bound(c => c.Description).Title("Diễn giải").Width(80);
     })
     .ToolBar(toolbar =>

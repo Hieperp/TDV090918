@@ -283,7 +283,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
         {
             string[] queryArray = new string[3];
 
-            queryArray[0] = " SELECT TOP 1 @FoundEntity = N'Ngày nhập kho: ' + CAST(GoodsReceipts.EntryDate AS nvarchar) FROM WarehouseTransferDetails INNER JOIN GoodsReceipts ON WarehouseTransferDetails.WarehouseTransferID = @EntityID AND WarehouseTransferDetails.GoodsReceiptID = GoodsReceipts.GoodsReceiptID AND WarehouseTransferDetails.EntryDate < GoodsReceipts.EntryDate ";
+            queryArray[0] = " SELECT TOP 1 @FoundEntity = N'Ngày nhập kho: ' + CAST(GoodsReceipts.EntryDate AS nvarchar) + N', hoặc chọn kho nhập không đúng.' FROM WarehouseTransferDetails INNER JOIN GoodsReceipts ON WarehouseTransferDetails.WarehouseTransferID = @EntityID AND WarehouseTransferDetails.GoodsReceiptID = GoodsReceipts.GoodsReceiptID AND (WarehouseTransferDetails.EntryDate < GoodsReceipts.EntryDate OR WarehouseTransferDetails.LocationID <> WarehouseTransferDetails.LocationIssuedID OR WarehouseTransferDetails.WarehouseID = WarehouseTransferDetails.WarehouseReceiptID) ";
             queryArray[1] = " SELECT TOP 1 @FoundEntity = N'Lệnh điều hàng: ' + CAST(TransferOrders.EntryDate AS nvarchar) FROM WarehouseTransferDetails INNER JOIN TransferOrders ON WarehouseTransferDetails.WarehouseTransferID = @EntityID AND WarehouseTransferDetails.TransferOrderID = TransferOrders.TransferOrderID AND WarehouseTransferDetails.EntryDate < TransferOrders.EntryDate ";
             queryArray[2] = " SELECT TOP 1 @FoundEntity = N'Số lượng xuất vượt quá số lượng tồn kho: ' + CAST(ROUND(Quantity - QuantityIssued, " + (int)GlobalEnums.rndQuantity + ") AS nvarchar) FROM GoodsReceiptDetails WHERE (ROUND(Quantity - QuantityIssued, " + (int)GlobalEnums.rndQuantity + ") < 0) ";
 
@@ -305,9 +305,9 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
 
         private void WarehouseTransferEditable()
         {
-            string[] queryArray = new string[0];
+            string[] queryArray = new string[1];
 
-            //queryArray[0] = " SELECT TOP 1 @FoundEntity = WarehouseTransferID FROM WarehouseTransferDetails WHERE WarehouseTransferID = @EntityID ";
+            queryArray[0] = " SELECT TOP 1 @FoundEntity = WarehouseTransferID FROM GoodsReceiptDetails WHERE WarehouseTransferID = @EntityID ";
 
             this.totalSmartPortalEntities.CreateProcedureToCheckExisting("WarehouseTransferEditable", queryArray);
         }

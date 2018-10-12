@@ -27,22 +27,13 @@
     @Html.HiddenFor(model => (model as IWarehouseTransferPrimitiveDTO).TransferOrderID)
     @*@Html.HiddenFor(model => model.TransferOrderReference)
         @Html.HiddenFor(model => model.TransferOrderEntryDate)*@
-    @Html.HiddenFor(model => (model as IWarehouseTransferPrimitiveDTO).WarehouseID)
-    @Html.HiddenFor(model => model.Warehouse.WarehouseID)
-    @Html.HiddenFor(model => model.Warehouse.Code)
-
-    @Html.HiddenFor(model => (model as IWarehouseTransferPrimitiveDTO).WarehouseReceiptID)
-    @Html.HiddenFor(model => model.WarehouseReceipt.WarehouseID)
-    @Html.HiddenFor(model => model.WarehouseReceipt.Code)
-
-
-
+    
     @(Html.Kendo().TabStrip()
         .HtmlAttributes(new { @style = "height: 468px; margin-left: 0px; margin-right: 0px;" })
         .Name("tabStrip")
         .Items(tabStrip =>
         {
-            tabStrip.Add().Text("Khách hàng không có lệnh đặt hàng")
+            tabStrip.Add().Text("Xuất không có lệnh VCNB")
                 .Selected(true)
                 .Content(@<text>
                     <div style="margin-top: 39px; margin-right: 18px;">
@@ -52,11 +43,11 @@
 
                     </div>
                 </text>);
-            tabStrip.Add().Text("Giao hàng theo lệnh đặt hàng")
+            tabStrip.Add().Text("Xuất theo lệnh VCNB")
                 .Content(@<text>
                     @Html.Partial("~/Areas/Inventories/Views/WarehouseTransfers/_GetTransferOrder.cshtml")
                 </text>);
-            tabStrip.Add().Text("Giao hàng tổng hợp của nhiều lệnh đặt hàng")
+            tabStrip.Add().Text("Xuất tổng hợp của nhiều lệnh")
                     .Content(@<text>
                     @Html.Partial("~/Areas/Inventories/Views/WarehouseTransfers/_GetWarehouse.cshtml")
                     </text>);

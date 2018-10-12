@@ -351,9 +351,9 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
 
         private void MaterialIssueEditable()
         {
-            string[] queryArray = new string[0];
+            string[] queryArray = new string[1];
 
-            //queryArray[0] = " SELECT TOP 1 @FoundEntity = MaterialIssueID FROM MaterialIssueDetails WHERE MaterialIssueID = @EntityID ";
+            queryArray[0] = " SELECT TOP 1 @FoundEntity = MaterialIssueID FROM GoodsReceiptDetails WHERE MaterialIssueID = @EntityID ";
 
             this.totalSmartPortalEntities.CreateProcedureToCheckExisting("MaterialIssueEditable", queryArray);
         }

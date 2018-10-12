@@ -24,7 +24,7 @@ namespace TotalPortal.Areas.Commons.APIs
 
         public JsonResult GetWarehouses(int customerID, string searchText, string warehouseTaskIDList)
         {
-            var result = warehouseRepository.GetWarehouses(customerID, searchText, warehouseTaskIDList).Select(s => new { s.WarehouseID, s.Code, s.Name });
+            var result = warehouseRepository.GetWarehouses(customerID, searchText, warehouseTaskIDList).Select(s => new { s.WarehouseID, s.Code, s.Name, s.LocationID });
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
