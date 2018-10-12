@@ -88,44 +88,45 @@
                     columns.Bound(p => p.FirmOrderID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= (FirmOrderID == null)? '' : FirmOrderID #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].FirmOrderID' value='#= (FirmOrderID == null) ? '' : FirmOrderID #' />");
 
-                    columns.Bound(p => p.FirmOrderCode).DisplayNameTitle().Width(42).Hidden()
-                        .ClientTemplate("#= (FirmOrderCode == null)? '' : FirmOrderCode #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].FirmOrderCode' value='#= (FirmOrderCode == null) ? '' : FirmOrderCode #' />");
-                    columns.Bound(p => p.FirmOrderReference).DisplayNameTitle().Width(42).Hidden(@Model.PlannedOrderID == null ? false : true)
+
+                    columns.Bound(p => p.FirmOrderReference).DisplayNameTitle().Width(30).Hidden(@Model.PlannedOrderID == null ? false : true)
                         .ClientTemplate("#= (FirmOrderReference == null)? '' : FirmOrderReference #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].FirmOrderReference' value='#= (FirmOrderReference == null) ? '' : FirmOrderReference #' />");
-                    
-                    columns.Bound(p => p.FirmOrderEntryDate).DisplayNameTitle().Width(39).Hidden(@Model.PlannedOrderID == null ? false : true)
+                    columns.Bound(p => p.FirmOrderCode).DisplayNameTitle().Width(30).Hidden(@Model.PlannedOrderID == null ? false : true)
+                        .ClientTemplate("#= (FirmOrderCode == null)? '' : FirmOrderCode #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].FirmOrderCode' value='#= (FirmOrderCode == null) ? '' : FirmOrderCode #' />");                    
+                    columns.Bound(p => p.FirmOrderEntryDate).DisplayNameTitle().Width(30).Hidden()
                         .Format("{0:" + @Settings.DateFormat + "}")
                         .ClientTemplate("#= (FirmOrderEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', FirmOrderEntryDate) #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].FirmOrderEntryDate' value='#= (FirmOrderEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', FirmOrderEntryDate) #' />");
 
 
                     columns.Bound(p => p.CustomerID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= CustomerID #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].CustomerID' value='#= CustomerID #' />");
-                    columns.Bound(p => p.CustomerCode).DisplayNameTitle().Width(88)
+                    columns.Bound(p => p.CustomerCode).DisplayNameTitle().Width(36)
                         .ClientTemplate("#= CustomerCode #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].CustomerCode' value='#= CustomerCode #' />");
-                    columns.Bound(p => p.CustomerName).DisplayNameTitle().Width(96)
+                    columns.Bound(p => p.CustomerName).DisplayNameTitle().Width(68)
                         .ClientTemplate("#= CustomerName #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].CustomerName' value='#= CustomerName #' />");
 
-                    columns.Bound(p => p.Specs).DisplayNameTitle().Width(100)
-                        .ClientTemplate("#= Specs #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].Specs' value='#= Specs #' />");                    
-                    columns.Bound(p => p.Specification).DisplayNameTitle().Width(200)
+
+                    columns.Bound(p => p.Specification).DisplayNameTitle().Width(96)
                         .ClientFooterTemplate("TC (#= kendo.format('{0:n0}', count) # dòng)")
                         .ClientTemplate("#= (Specification == null)? '' : Specification #" +
                                 "<div> #= (VoidTypeName == null)? '' : VoidTypeName #</div>" +
                                 "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].Specification' value='#= (Specification == null) ? '' : Specification #' />");
-
+                    columns.Bound(p => p.Specs).DisplayNameTitle().Width(88)
+                        .ClientTemplate("#= Specs #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].Specs' value='#= Specs #' />");                    
+                    
                     
                     columns.Bound(p => p.BomID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= BomID #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].BomID' value='#= BomID #' />");
-                    columns.Bound(p => p.BomCode).DisplayNameTitle().Width(100)
+                    columns.Bound(p => p.BomCode).DisplayNameTitle().Width(96)
                         .ClientTemplate("#= BomCode #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].BomCode' value='#= BomCode #' />");
 
                     
-                    columns.Bound(p => p.QuantityRemains).DisplayNameTitle().Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" })
+                    columns.Bound(p => p.QuantityRemains).DisplayNameTitle().Width(20).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" })
                         .Format(Settings.kfmQuantity)
                         .ClientFooterTemplate("#= kendo.format('" + Settings.kfmQuantity + "', sum) #")
                         .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', QuantityRemains) #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].QuantityRemains' value='#= QuantityRemains #' />");
 
-                    columns.Bound(p => p.Quantity).DisplayNameTitle().HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(39).Hidden(true)
+                    columns.Bound(p => p.Quantity).DisplayNameTitle().HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(20).Hidden(true)
                         .Format(Settings.kfmQuantity)
                         .ClientFooterTemplate("#= kendo.format('" + Settings.kfmQuantity + "', sum) #")
                         .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', Quantity) #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].Quantity' value='#= Quantity #' />");
@@ -137,9 +138,9 @@
                     columns.Bound(p => p.InActivePartial).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= (InActivePartial == null)? '' : InActivePartial #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].InActivePartial' value='#= (InActivePartial == null) ? '' : InActivePartial #' />");
 
-                    columns.Command(command => { command.Destroy().Text("<span class='command' ></span>"); }).Width(50).Hidden(!@Model.Editable).HtmlAttributes(new { @class = "grid-column-center" });
+                    columns.Command(command => { command.Destroy().Text("<span class='command' ></span>"); }).Width(10).Hidden(!@Model.Editable).HtmlAttributes(new { @class = "grid-column-center" });
 
-                    columns.Template(model => null).HtmlAttributes(new { @class = "grid-column-center" }).Width(50).Hidden(!@Model.Voidable && !@Model.UnVoidable)
+                    columns.Template(model => null).HtmlAttributes(new { @class = "grid-column-center" }).Width(10).Hidden(!@Model.Voidable && !@Model.UnVoidable)
                         .ClientTemplate("<a class='k-button' style='padding:0px;' onclick='callVoidDetail(#= ProductionOrderDetailID #)'><span class='k-icon k-edit'></span></a>");
                 })
                     .Filterable(f => f.Enabled(false))

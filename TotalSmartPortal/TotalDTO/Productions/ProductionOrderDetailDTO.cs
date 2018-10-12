@@ -27,12 +27,11 @@ namespace TotalDTO.Productions
         public Nullable<System.DateTime> FirmOrderEntryDate { get; set; }
 
         public int CustomerID { get; set; }
-        [Display(Name = "Mã khách hàng")]
-        [Required(ErrorMessage = "Vui lòng chọn khách hàng")]
-        [UIHint("AutoCompletes/CustomerBasic")]
+        [Display(Name = "Mã KH")]
+        [UIHint("StringReadonly")]
         public virtual string CustomerCode { get; set; }
 
-        [Display(Name = "Tên khách hàng")]
+        [Display(Name = "Tên KH")]
         [UIHint("StringReadonly")]
         public virtual string CustomerName { get; set; }
 
@@ -45,8 +44,7 @@ namespace TotalDTO.Productions
         public virtual string Specification { get; set; }
 
         public int BomID { get; set; }
-        [Display(Name = "Mã khuôn")]
-        [Required(ErrorMessage = "Vui lòng chọn mã nguyên liệu")]
+        [Display(Name = "Mã màng")]
         [UIHint("StringReadonly")]
         public virtual string BomCode { get; set; }
 
