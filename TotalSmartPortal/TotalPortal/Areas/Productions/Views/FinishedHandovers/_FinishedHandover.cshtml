@@ -52,23 +52,28 @@
                     columns.Bound(p => p.FinishedProductPackageID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= (FinishedProductPackageID == null)? '' : FinishedProductPackageID #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].FinishedProductPackageID' value='#= (FinishedProductPackageID == null) ? '' : FinishedProductPackageID #' />");
 
-                    columns.Bound(p => p.SemifinishedProductReferences).DisplayNameTitle().Width(30)
+                    columns.Bound(p => p.FirmOrderReference).DisplayNameTitle().Width(20)
+                        .ClientTemplate("#= FirmOrderReference #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].FirmOrderReference' value='#= FirmOrderReference #' />");
+                    columns.Bound(p => p.FirmOrderCode).DisplayNameTitle().Width(20)
+                        .ClientTemplate("#= FirmOrderCode #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].FirmOrderCode' value='#= FirmOrderCode #' />");
+                                        
+                    columns.Bound(p => p.SemifinishedProductReferences).DisplayNameTitle().Width(20)
                         .ClientTemplate("#= SemifinishedProductReferences #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].SemifinishedProductReferences' value='#= SemifinishedProductReferences #' />");
-                    columns.Bound(p => p.FinishedProductEntryDate).DisplayNameTitle().Width(80)
+                    columns.Bound(p => p.FinishedProductEntryDate).DisplayNameTitle().Width(30)
                         .Format("{0:" + @Settings.DateFormat + "}")
                         .ClientTemplate("#= (FinishedProductEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', FinishedProductEntryDate) #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].FinishedProductEntryDate' value='#= (FinishedProductEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', FinishedProductEntryDate) #' />");
 
 
                     columns.Bound(p => p.CustomerID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= CustomerID #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].CustomerID' value='#= CustomerID #' />");
-                    columns.Bound(p => p.CustomerName).DisplayNameTitle().Width(80)
+                    columns.Bound(p => p.CustomerName).DisplayNameTitle().Width(68)
                         .ClientTemplate("#= CustomerName #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].CustomerName' value='#= CustomerName #' />");
 
                     columns.Bound(p => p.CommodityID).DisplayNameTitle().Hidden()
                       .ClientTemplate("#= CommodityID #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].CommodityID' value='#= CommodityID #' />");
-                    columns.Bound(p => p.CommodityCode).DisplayNameTitle().Width(108)
+                    columns.Bound(p => p.CommodityCode).DisplayNameTitle().Width(96)
                         .ClientTemplate("#= CommodityCode #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].CommodityCode' value='#= CommodityCode #' />");
-                    columns.Bound(p => p.CommodityName).DisplayNameTitle().Width(90)
+                    columns.Bound(p => p.CommodityName).DisplayNameTitle().Width(128)
                         .ClientTemplate("#= CommodityName #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].CommodityName' value='#= CommodityName #' />");
                     columns.Bound(p => p.CommodityTypeID).DisplayNameTitle().Hidden()
                      .ClientTemplate("#= CommodityTypeID #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].CommodityTypeID' value='#= CommodityTypeID #' />");                               
@@ -78,10 +83,7 @@
                         .ClientFooterTemplate("#= kendo.format('" + Settings.kfmQuantity + "', sum) #")
                         .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', Quantity) #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].Quantity' value='#= Quantity #' />");              
                     
-                    columns.Bound(p => p.Remarks).DisplayNameTitle().Width(60)
-                        .ClientTemplate("#= (Remarks == null)? '' : Remarks #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].Remarks' value='#= (Remarks == null) ? '' : Remarks #' />");
-
-                    columns.Command(command => { command.Destroy().Text("<span class='command' ></span>"); }).Width(20).Hidden(!@Model.Editable).HtmlAttributes(new { @class = "grid-column-center" });                   
+                    columns.Command(command => { command.Destroy().Text("<span class='command' ></span>"); }).Width(10).Hidden(!@Model.Editable).HtmlAttributes(new { @class = "grid-column-center" });                   
                 })
                     .Filterable(f => f.Enabled(false))
                     .Navigatable()
@@ -92,7 +94,7 @@
                         {
                             //toolbar.Create().HtmlAttributes(new { @class = "fa fa-map-marker" }).Text("Add new aa le ea1");
                             toolbar.Template(@<text>
-                                <button type="button" class="k-button" onclick="GetPendingDetails()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Chọn mặt hàng từ BTP chưa giao </button>
+                                <button type="button" class="k-button" onclick="GetPendingDetails()"> <img src="~/Content/Images/Mains/Size24/Actions-bookmark-add-icon-24.png" /> Chọn mặt hàng </button>
                             </text>);
                         }
                         else

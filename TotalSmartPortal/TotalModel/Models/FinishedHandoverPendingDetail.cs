@@ -28,5 +28,6 @@ namespace TotalModel.Models
         public string FirmOrderReference { get; set; }
         public string FirmOrderCode { get; set; }
         public System.DateTime FirmOrderEntryDate { get; set; }
+        public string CommodityName { get; set; }
     }
 }

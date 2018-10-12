@@ -19,11 +19,11 @@ namespace TotalModel.Models
         public string LocationCode { get; set; }
         public string CustomerCode { get; set; }
         public string CustomerName { get; set; }
-        public string Specification { get; set; }
         public string Description { get; set; }
         public bool Approved { get; set; }
         public decimal TotalQuantity { get; set; }
         public decimal TotalQuantityFailure { get; set; }
         public decimal TotalSwarfs { get; set; }
+        public string Specs { get; set; }
     }
 }

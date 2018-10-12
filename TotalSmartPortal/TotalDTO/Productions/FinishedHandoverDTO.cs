@@ -27,7 +27,16 @@ namespace TotalDTO.Productions
         public virtual Nullable<int> CustomerID { get; set; }
 
         public virtual int FinishedLeaderID { get; set; }
-        public virtual int StorekeeperID { get; set; }        
+        public virtual int StorekeeperID { get; set; }
+
+        public override void PerformPresaveRule()
+        {
+            base.PerformPresaveRule();
+
+            string caption = "";
+            this.DtoDetails().ToList().ForEach(e => { if (caption.IndexOf(e.CommodityName) < 0) caption = caption + (caption != "" ? ", " : "") + e.CommodityName; });
+            this.Caption = caption != "" ? (caption.Length > 98 ? caption.Substring(0, 95) + "..." : caption) : null;
+        }
     }
 
     public class FinishedHandoverDTO : FinishedHandoverPrimitiveDTO, IBaseDetailEntity<FinishedHandoverDetailDTO>

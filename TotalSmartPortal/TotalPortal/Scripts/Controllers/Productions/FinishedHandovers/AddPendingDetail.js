@@ -50,14 +50,17 @@ function handleOKEvent(finishedHandoverGridDataSource, pendingDetailGridDataSour
         dataRow.FinishedProductPackageID = finishedHandoverGridDataItem.FinishedProductPackageID;
         dataRow.FinishedProductEntryDate = finishedHandoverGridDataItem.FinishedProductEntryDate;
 
+        dataRow.FirmOrderReference = finishedHandoverGridDataItem.FirmOrderReference;
+        dataRow.FirmOrderCode = finishedHandoverGridDataItem.FirmOrderCode;
+
         dataRow.SemifinishedProductReferences = finishedHandoverGridDataItem.SemifinishedProductReferences;
 
         dataRow.CustomerID = finishedHandoverGridDataItem.CustomerID;
         dataRow.CustomerName = finishedHandoverGridDataItem.CustomerName;
-        dataRow.CustomerCode = finishedHandoverGridDataItem.CustomerCode;
 
         dataRow.CommodityID = finishedHandoverGridDataItem.CommodityID;
         dataRow.CommodityCode = finishedHandoverGridDataItem.CommodityCode;
+        dataRow.CommodityName = finishedHandoverGridDataItem.CommodityName;
         dataRow.CommodityTypeID = finishedHandoverGridDataItem.CommodityTypeID;
 
         dataRow.Quantity = finishedHandoverGridDataItem.Quantity;                        
