@@ -61,27 +61,27 @@
 
                     columns.Bound(p => p.CustomerID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= CustomerID #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].CustomerID' value='#= CustomerID #' />");
-                    columns.Bound(p => p.CustomerCode).DisplayNameTitle().Width(80)
-                        .ClientTemplate("#= CustomerCode #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].CustomerCode' value='#= CustomerCode #' />");
                     columns.Bound(p => p.CustomerName).DisplayNameTitle().Width(80)
                         .ClientTemplate("#= CustomerName #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].CustomerName' value='#= CustomerName #' />");
 
                     columns.Bound(p => p.CommodityID).DisplayNameTitle().Hidden()
                       .ClientTemplate("#= CommodityID #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].CommodityID' value='#= CommodityID #' />");
-                    columns.Bound(p => p.CommodityCode).DisplayNameTitle().Width(120)
+                    columns.Bound(p => p.CommodityCode).DisplayNameTitle().Width(108)
                         .ClientTemplate("#= CommodityCode #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].CommodityCode' value='#= CommodityCode #' />");
+                    columns.Bound(p => p.CommodityName).DisplayNameTitle().Width(90)
+                        .ClientTemplate("#= CommodityName #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].CommodityName' value='#= CommodityName #' />");
                     columns.Bound(p => p.CommodityTypeID).DisplayNameTitle().Hidden()
                      .ClientTemplate("#= CommodityTypeID #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].CommodityTypeID' value='#= CommodityTypeID #' />");                               
 
-                    columns.Bound(p => p.Quantity).DisplayNameTitle().HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(50)
+                    columns.Bound(p => p.Quantity).DisplayNameTitle().HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(30)
                         .Format(Settings.kfmQuantity)
                         .ClientFooterTemplate("#= kendo.format('" + Settings.kfmQuantity + "', sum) #")
                         .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', Quantity) #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].Quantity' value='#= Quantity #' />");              
                     
-                    columns.Bound(p => p.Remarks).DisplayNameTitle().Width(120)
+                    columns.Bound(p => p.Remarks).DisplayNameTitle().Width(60)
                         .ClientTemplate("#= (Remarks == null)? '' : Remarks #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].Remarks' value='#= (Remarks == null) ? '' : Remarks #' />");
 
-                    columns.Command(command => { command.Destroy().Text("<span class='command' ></span>"); }).Width(50).Hidden(!@Model.Editable).HtmlAttributes(new { @class = "grid-column-center" });                   
+                    columns.Command(command => { command.Destroy().Text("<span class='command' ></span>"); }).Width(20).Hidden(!@Model.Editable).HtmlAttributes(new { @class = "grid-column-center" });                   
                 })
                     .Filterable(f => f.Enabled(false))
                     .Navigatable()

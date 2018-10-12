@@ -22,5 +22,6 @@ namespace TotalModel.Models
         public decimal TotalQuantity { get; set; }
         public bool Approved { get; set; }
         public string Caption { get; set; }
+        public string GoodsReceiptTypeCaption { get; set; }
     }
 }

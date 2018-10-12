@@ -2,7 +2,7 @@
 @using TotalModel.Models;
 
 @(Html.Kendo().Grid<FinishedHandoverPendingPlannedOrder>()
-    .Name("finishedHandoverPendingWorkshiftGrid")
+    .Name("finishedHandoverPendingPlannedOrderGrid")
     .Columns(columns =>
     {
         columns.Bound(c => c.EntryDate).Title("Ngày").Format("{0:dd/MM/yyyy}").Width(80);
@@ -35,7 +35,7 @@
     }
 
     function finishedHandoverPendingPlannedOrderFilter_KeyUp() {
-        var finishedHandoverPendingPlannedOrderFilter = $("#finishedHandoverPendingWorkshiftFilter").val(), gridDetails = $("#finishedHandoverPendingWorkshiftGrid").data("kendoGrid");
+        var finishedHandoverPendingPlannedOrderFilter = $("#finishedHandoverPendingWorkshiftFilter").val(), gridDetails = $("#finishedHandoverPendingPlannedOrderGrid").data("kendoGrid");
 
         if (finishedHandoverPendingPlannedOrderFilter && finishedHandoverPendingPlannedOrderFilter.length >= "@Settings.AutoCompleteMinLenght") {
             gridDetails.dataSource.filter({

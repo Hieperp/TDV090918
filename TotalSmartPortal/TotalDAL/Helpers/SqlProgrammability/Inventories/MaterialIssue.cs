@@ -389,7 +389,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
         private void MaterialIssueSheet()
         {
             string queryString = " @MaterialIssueID int " + "\r\n";
-            //queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 

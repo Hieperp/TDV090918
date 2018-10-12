@@ -26,5 +26,6 @@ namespace TotalModel.Models
         public string VoidTypeName { get; set; }
         public bool InActive { get; set; }
         public bool InActivePartial { get; set; }
+        public string Caption { get; set; }
     }
 }
