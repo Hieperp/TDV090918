@@ -17,6 +17,9 @@ namespace TotalDTO.Productions
         public Nullable<int> FinishedProductID { get; set; }
         public Nullable<int> FinishedProductPackageID { get; set; }
 
+        [Display(Name = "Pallet")]
+        [UIHint("DateTimeReadonly")]
+        public string SemifinishedProductReferences { get; set; }
         [Display(Name = "Ngày ĐG")]
         [UIHint("DateTimeReadonly")]
         public Nullable<System.DateTime> FinishedProductEntryDate { get; set; }

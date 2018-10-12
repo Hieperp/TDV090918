@@ -18,8 +18,8 @@ namespace TotalModel.Models
         public FinishedProductPackage()
         {
             this.FinishedHandoverDetails = new HashSet<FinishedHandoverDetail>();
-            this.GoodsReceiptDetails = new HashSet<GoodsReceiptDetail>();
             this.FinishedProductDetails = new HashSet<FinishedProductDetail>();
+            this.GoodsReceiptDetails = new HashSet<GoodsReceiptDetail>();
         }
     
         public int FinishedProductPackageID { get; set; }
@@ -29,6 +29,7 @@ namespace TotalModel.Models
         public int CustomerID { get; set; }
         public int FirmOrderID { get; set; }
         public int PlannedOrderID { get; set; }
+        public string SemifinishedProductReferences { get; set; }
         public Nullable<int> FinishedHandoverID { get; set; }
         public int CommodityID { get; set; }
         public int CommodityTypeID { get; set; }
@@ -44,13 +45,12 @@ namespace TotalModel.Models
         public string Remarks { get; set; }
         public bool Approved { get; set; }
         public bool HandoverApproved { get; set; }
-        public string Caption { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FinishedHandoverDetail> FinishedHandoverDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FinishedProductDetail> FinishedProductDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
     }
 }

@@ -54,7 +54,10 @@ namespace TotalDTO.Inventories
         public string FirmOrderReference { get; set; }
         [Display(Name = "Số CT")]
         [UIHint("StringReadonly")]
-        public string FirmOrderCode { get; set; }        
+        public string FirmOrderCode { get; set; }
+        [Display(Name = "Pallet")]
+        [UIHint("DateTimeReadonly")]
+        public string SemifinishedProductReferences { get; set; }
         [Display(Name = "Ngày ĐG")]
         [UIHint("DateTimeReadonly")]
         public Nullable<System.DateTime> FinishedProductEntryDate { get; set; }

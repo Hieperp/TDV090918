@@ -301,13 +301,10 @@
         <EntityTypeShape EntityType="TotalSmartPortalModel.SemifinishedHandoverDetail" Width="1.5" PointX="61.875" PointY="18.625" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_SemifinishedHandoverDetails_SemifinishedHandovers" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_SemifinishedHandoverDetails_SemifinishedProducts" />
-        <EntityTypeShape EntityType="TotalSmartPortalModel.FinishedProductPackage" Width="1.5" PointX="55.375" PointY="33" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.FinishedHandoverDetail" Width="1.5" PointX="57.625" PointY="29.75" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.GoodsReceiptDetail" Width="1.5" PointX="64.625" PointY="24.125" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandoverDetails_Commodities" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceiptDetails_Commodities" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandoverDetails_FinishedProductPackages" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceiptDetails_FinishedProductPackages" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceiptDetails_GoodsReceipts" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceiptDetails_MaterialIssueDetails" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceiptDetails_PurchaseRequisitionDetails" />
@@ -318,7 +315,6 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_SemifinishedProducts_GoodsReceiptDetails" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseAdjustmentDetails_GoodsReceiptDetails" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransferDetails_GoodsReceiptDetails" />
-        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProductDetails_FinishedProductPackages" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.ModuleDetail" Width="1.5" PointX="10.375" PointY="0.75" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.ModuleDefault" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="TotalSmartPortalModel.FinishedHandover" Width="1.5" PointX="13.25" PointY="34.375" />
@@ -353,6 +349,10 @@
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransfers_Warehouses1" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_WarehouseTransferDetails_WarehouseTransfers" />
         <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceipts_PlannedOrders" />
+        <EntityTypeShape EntityType="TotalSmartPortalModel.FinishedProductPackage" Width="1.5" PointX="16.375" PointY="1.125" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedHandoverDetails_FinishedProductPackages" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_FinishedProductDetails_FinishedProductPackages" />
+        <AssociationConnector Association="TotalSmartPortalModel.FK_GoodsReceiptDetails_FinishedProductPackages" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

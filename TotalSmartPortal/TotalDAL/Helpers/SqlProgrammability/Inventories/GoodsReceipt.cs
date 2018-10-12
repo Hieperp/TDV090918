@@ -90,7 +90,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + "                   ROUND(ISNULL(IIF(PurchaseRequisitionDetails.Approved = 1 AND PurchaseRequisitionDetails.InActive = 0 AND PurchaseRequisitionDetails.InActivePartial = 0, PurchaseRequisitionDetails.Quantity - PurchaseRequisitionDetails.QuantityReceipted, 0), 0) + ISNULL(WarehouseTransferDetails.Quantity - WarehouseTransferDetails.QuantityReceipted, 0) + ISNULL(MaterialIssueDetails.Quantity - MaterialIssueDetails.QuantitySemifinished - MaterialIssueDetails.QuantityFailure - MaterialIssueDetails.QuantityReceipted - MaterialIssueDetails.QuantityLoss, 0) + ISNULL(WarehouseAdjustmentDetails.Quantity - WarehouseAdjustmentDetails.QuantityReceipted, 0) + ISNULL(FinishedProductPackages.Quantity - FinishedProductPackages.QuantityReceipted, 0) + GoodsReceiptDetails.Quantity, " + (int)GlobalEnums.rndQuantity + ") AS QuantityRemains, GoodsReceiptDetails.Quantity, GoodsReceiptDetails.Remarks, " + "\r\n";
             queryString = queryString + "                   GoodsReceiptDetails.MaterialIssueDetailID, MaterialIssueDetails.MaterialIssueID, PlannedOrders.Reference AS PlannedOrderReference, PlannedOrders.Code AS PlannedOrderCode, MaterialIssueDetails.EntryDate AS MaterialIssueEntryDate, Workshifts.Name AS WorkshiftName, Workshifts.EntryDate AS WorkshiftEntryDate, ProductionLines.Code AS ProductionLinesCode, " + "\r\n";
 
-            queryString = queryString + "                   GoodsReceiptDetails.FinishedProductPackageID, FinishedProductPackages.FinishedProductID, FinishedProductPackages.EntryDate AS FinishedProductEntryDate, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FinishedProductPackages.Caption " + "\r\n";
+            queryString = queryString + "                   GoodsReceiptDetails.FinishedProductPackageID, FinishedProductPackages.FinishedProductID, FinishedProductPackages.EntryDate AS FinishedProductEntryDate, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FinishedProductPackages.SemifinishedProductReferences " + "\r\n";
 
             queryString = queryString + "       FROM        GoodsReceiptDetails " + "\r\n";
             queryString = queryString + "                   INNER JOIN Commodities ON GoodsReceiptDetails.GoodsReceiptID = @GoodsReceiptID AND GoodsReceiptDetails.CommodityID = Commodities.CommodityID " + "\r\n";
@@ -499,7 +499,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
         {
             string queryString = "";
 
-            queryString = queryString + "       SELECT      FinishedProductPackages.FinishedProductID, FinishedProductPackages.FinishedProductPackageID, FinishedProductPackages.EntryDate AS FinishedProductEntryDate, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FinishedProductPackages.Caption, " + "\r\n";
+            queryString = queryString + "       SELECT      FinishedProductPackages.FinishedProductID, FinishedProductPackages.FinishedProductPackageID, FinishedProductPackages.EntryDate AS FinishedProductEntryDate, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FinishedProductPackages.SemifinishedProductReferences, " + "\r\n";
             queryString = queryString + "                   Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, " + "\r\n";
             queryString = queryString + "                   ROUND(FinishedProductPackages.Quantity - FinishedProductPackages.QuantityReceipted, " + (int)GlobalEnums.rndQuantity + ") AS QuantityRemains, " + "\r\n";
             queryString = queryString + "                   0.0 AS Quantity, FinishedProductPackages.Remarks, CAST(1 AS bit) AS IsSelected " + "\r\n";
@@ -515,7 +515,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
         {
             string queryString = "";
 
-            queryString = queryString + "       SELECT      FinishedProductPackages.FinishedProductID, FinishedProductPackages.FinishedProductPackageID, FinishedProductPackages.EntryDate AS FinishedProductEntryDate, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FinishedProductPackages.Caption, " + "\r\n";
+            queryString = queryString + "       SELECT      FinishedProductPackages.FinishedProductID, FinishedProductPackages.FinishedProductPackageID, FinishedProductPackages.EntryDate AS FinishedProductEntryDate, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FinishedProductPackages.SemifinishedProductReferences, " + "\r\n";
             queryString = queryString + "                   Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.Name AS CommodityName, Commodities.CommodityTypeID, " + "\r\n";
             queryString = queryString + "                   ROUND(FinishedProductPackages.Quantity - FinishedProductPackages.QuantityReceipted + GoodsReceiptDetails.Quantity, " + (int)GlobalEnums.rndQuantity + ") AS QuantityRemains, " + "\r\n";
             queryString = queryString + "                   0.0 AS Quantity, FinishedProductPackages.Remarks, CAST(1 AS bit) AS IsSelected " + "\r\n";

@@ -103,7 +103,6 @@ namespace TotalModel.Models
         public virtual DbSet<GoodsReceipt> GoodsReceipts { get; set; }
         public virtual DbSet<SemifinishedHandover> SemifinishedHandovers { get; set; }
         public virtual DbSet<SemifinishedHandoverDetail> SemifinishedHandoverDetails { get; set; }
-        public virtual DbSet<FinishedProductPackage> FinishedProductPackages { get; set; }
         public virtual DbSet<FinishedHandoverDetail> FinishedHandoverDetails { get; set; }
         public virtual DbSet<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
         public virtual DbSet<ModuleDetail> ModuleDetails { get; set; }
@@ -112,6 +111,7 @@ namespace TotalModel.Models
         public virtual DbSet<TransferOrderDetail> TransferOrderDetails { get; set; }
         public virtual DbSet<TransferOrder> TransferOrders { get; set; }
         public virtual DbSet<WarehouseTransfer> WarehouseTransfers { get; set; }
+        public virtual DbSet<FinishedProductPackage> FinishedProductPackages { get; set; }
     
         public virtual ObjectResult<string> AccountInvoicePostSaveValidate(Nullable<int> entityID)
         {
