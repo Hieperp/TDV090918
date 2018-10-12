@@ -561,6 +561,7 @@
           <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="ApproverID" Type="int" Nullable="false" />
           <Property Name="TotalQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="100" />
           <Property Name="Description" Type="nvarchar" MaxLength="100" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -15569,10 +15570,11 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="DateTime" Name="EntryDate" Nullable="true" />
           <Property Type="String" Name="Reference" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="LocationCode" Nullable="false" MaxLength="10" />
-          <Property Type="String" Name="CustomerDescription" Nullable="false" MaxLength="305" />
+          <Property Type="String" Name="CustomerDescription" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Description" Nullable="true" MaxLength="100" />
           <Property Type="Decimal" Name="TotalQuantity" Nullable="false" Precision="18" Scale="2" />
           <Property Type="Boolean" Name="Approved" Nullable="false" />
+          <Property Type="String" Name="Caption" Nullable="true" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="FinishedHandoverPendingCustomer">
           <Property Type="Int32" Name="CustomerID" Nullable="false" />
@@ -15592,6 +15594,9 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="Int32" Name="FinishedProductPackageID" Nullable="false" />
           <Property Type="DateTime" Name="FinishedProductEntryDate" Nullable="false" Precision="23" />
           <Property Type="String" Name="SemifinishedProductReferences" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="FirmOrderReference" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FirmOrderCode" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FirmOrderEntryDate" Nullable="false" Precision="23" />
         </ComplexType>
         <ComplexType Name="FinishedHandoverPendingPlannedOrder">
           <Property Type="Int32" Name="PlannedOrderID" Nullable="false" />
@@ -15617,6 +15622,9 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="Int32" Name="FinishedProductPackageID" Nullable="false" />
           <Property Type="DateTime" Name="FinishedProductEntryDate" Nullable="false" Precision="23" />
           <Property Type="String" Name="SemifinishedProductReferences" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="FirmOrderReference" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FirmOrderCode" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FirmOrderEntryDate" Nullable="false" Precision="23" />
         </ComplexType>
         <ComplexType Name="GoodsReceiptPendingPlannedOrderCustomer">
           <Property Type="Int32" Name="GoodsReceiptTypeID" Nullable="false" />
@@ -17155,6 +17163,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <NavigationProperty Name="Employee1" Relationship="TotalSmartPortalModel.FK_FinishedHandovers_Employees1" FromRole="FinishedHandover" ToRole="Employee" />
           <NavigationProperty Name="FinishedHandoverDetails" Relationship="TotalSmartPortalModel.FK_FinishedHandoverDetails_FinishedHandovers" FromRole="FinishedHandover" ToRole="FinishedHandoverDetail" />
           <NavigationProperty Name="Location" Relationship="TotalSmartPortalModel.FK_FinishedHandovers_Locations" FromRole="FinishedHandover" ToRole="Location" />
+          <Property Name="Caption" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_FinishedHandovers_Customers">
           <End Type="TotalSmartPortalModel.Customer" Role="Customer" Multiplicity="0..1" />
@@ -21797,6 +21806,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="TotalQuantity" ColumnName="TotalQuantity" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -21824,6 +21834,9 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="FinishedProductPackageID" ColumnName="FinishedProductPackageID" />
                 <ScalarProperty Name="FinishedProductEntryDate" ColumnName="FinishedProductEntryDate" />
                 <ScalarProperty Name="SemifinishedProductReferences" ColumnName="SemifinishedProductReferences" />
+                <ScalarProperty Name="FirmOrderReference" ColumnName="FirmOrderReference" />
+                <ScalarProperty Name="FirmOrderCode" ColumnName="FirmOrderCode" />
+                <ScalarProperty Name="FirmOrderEntryDate" ColumnName="FirmOrderEntryDate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -21857,6 +21870,9 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="FinishedProductPackageID" ColumnName="FinishedProductPackageID" />
                 <ScalarProperty Name="FinishedProductEntryDate" ColumnName="FinishedProductEntryDate" />
                 <ScalarProperty Name="SemifinishedProductReferences" ColumnName="SemifinishedProductReferences" />
+                <ScalarProperty Name="FirmOrderReference" ColumnName="FirmOrderReference" />
+                <ScalarProperty Name="FirmOrderCode" ColumnName="FirmOrderCode" />
+                <ScalarProperty Name="FirmOrderEntryDate" ColumnName="FirmOrderEntryDate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -22571,6 +22587,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <EntitySetMapping Name="FinishedHandovers">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.FinishedHandover">
               <MappingFragment StoreEntitySet="FinishedHandovers">
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
                 <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />

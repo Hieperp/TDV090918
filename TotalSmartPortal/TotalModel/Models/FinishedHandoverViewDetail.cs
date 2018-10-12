@@ -28,5 +28,8 @@ namespace TotalModel.Models
         public int FinishedProductPackageID { get; set; }
         public System.DateTime FinishedProductEntryDate { get; set; }
         public string SemifinishedProductReferences { get; set; }
+        public string FirmOrderReference { get; set; }
+        public string FirmOrderCode { get; set; }
+        public System.DateTime FirmOrderEntryDate { get; set; }
     }
 }
