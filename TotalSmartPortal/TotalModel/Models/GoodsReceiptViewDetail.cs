@@ -49,5 +49,6 @@ namespace TotalModel.Models
         public string FirmOrderCode { get; set; }
         public string PlannedOrderReference { get; set; }
         public string PlannedOrderCode { get; set; }
+        public string Caption { get; set; }
     }
 }

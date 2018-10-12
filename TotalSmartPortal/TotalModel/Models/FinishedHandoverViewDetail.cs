@@ -27,5 +27,6 @@ namespace TotalModel.Models
         public string Remarks { get; set; }
         public int FinishedProductPackageID { get; set; }
         public System.DateTime FinishedProductEntryDate { get; set; }
+        public string Caption { get; set; }
     }
 }

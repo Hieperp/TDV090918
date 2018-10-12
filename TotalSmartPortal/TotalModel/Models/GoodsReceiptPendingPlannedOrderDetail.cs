@@ -26,5 +26,6 @@ namespace TotalModel.Models
         public int FinishedProductPackageID { get; set; }
         public string FirmOrderReference { get; set; }
         public string FirmOrderCode { get; set; }
+        public string Caption { get; set; }
     }
 }
