@@ -15,7 +15,7 @@
 
             columns.Bound(p => p.Reference).Title("#").Width(10).Filterable(false).ClientTemplate("<a href='" + Url.RouteUrl("Default", new { controller = "Inventories/" + Model.ControllerName, action = "Edit" }) + "/#= GoodsReceiptID #'>#=Reference#</a>");
             columns.Bound(p => p.CustomerName).Title("Khách hàng").Width(96);
-            columns.Bound(p => p.Captions).Title("Nguồn hàng").Width(88);
+            columns.Bound(p => p.Caption).Title("Nguồn hàng").Width(88);
             columns.Bound(p => p.Description).Title("Diễn giải").Width(108);
             columns.Bound(p => p.TotalQuantity).Title("Đặt hàng").Format(Settings.kfmQuantity).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Filterable(false).Width(60).ClientFooterTemplate("#= kendo.format('" + Settings.kfmQuantity + "', sum) #").FooterHtmlAttributes(new { @class = "grid-number-column" });
 
