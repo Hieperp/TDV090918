@@ -27,7 +27,8 @@ namespace TotalModel.Models
         public string WorkshiftName { get; set; }
         public System.DateTime WorkshiftEntryDate { get; set; }
         public string ProductionLinesCode { get; set; }
-        public string PlannedOrderReference { get; set; }
-        public string PlannedOrderCode { get; set; }
+        public string FirmOrderReference { get; set; }
+        public string FirmOrderCode { get; set; }
+        public string FirmOrderSpecs { get; set; }
     }
 }

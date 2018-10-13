@@ -15549,9 +15549,10 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="String" Name="WorkshiftName" Nullable="false" MaxLength="50" />
           <Property Type="DateTime" Name="WorkshiftEntryDate" Nullable="false" Precision="23" />
           <Property Type="String" Name="ProductionLinesCode" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="PlannedOrderReference" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="PlannedOrderCode" Nullable="true" MaxLength="50" />
-        </ComplexType>
+          <Property Type="String" Name="FirmOrderReference" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="FirmOrderCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FirmOrderSpecs" Nullable="true" MaxLength="800" />
+          </ComplexType>
         <ComplexType Name="PlannedOrderLog">
           <Property Type="Int32" Name="MaterialIssueDetailID" Nullable="false" />
           <Property Type="DateTime" Name="EntryDate" Nullable="false" Precision="23" />
@@ -21776,9 +21777,10 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="WorkshiftName" ColumnName="WorkshiftName" />
                 <ScalarProperty Name="WorkshiftEntryDate" ColumnName="WorkshiftEntryDate" />
                 <ScalarProperty Name="ProductionLinesCode" ColumnName="ProductionLinesCode" />
-                <ScalarProperty Name="PlannedOrderReference" ColumnName="PlannedOrderReference" />
-                <ScalarProperty Name="PlannedOrderCode" ColumnName="PlannedOrderCode" />
-              </ComplexTypeMapping>
+                <ScalarProperty Name="FirmOrderReference" ColumnName="FirmOrderReference" />
+                <ScalarProperty Name="FirmOrderCode" ColumnName="FirmOrderCode" />
+                <ScalarProperty Name="FirmOrderSpecs" ColumnName="FirmOrderSpecs" />
+                </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetPlannedOrderLogs" FunctionName="TotalSmartPortalModel.Store.GetPlannedOrderLogs">

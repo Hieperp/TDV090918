@@ -10,7 +10,7 @@
                 columns.Bound(p => p.PlannedOrderID).DisplayNameTitle().Hidden();
                 columns.Bound(p => p.LocationCode).Title("CN").Hidden().Width(1);
                 columns.Bound(p => p.EntryDate).Title("Ngày").Format("{0:dd/MM/yyyy}").Width(10);
-                columns.Bound(p => p.Reference).Title("#").Width(10).ClientTemplate("<a href='" + Url.RouteUrl("Default", new { controller = "Productions/PlannedOrders", action = "Edit" }) + "/#= PlannedOrderID #'>#=Reference#</a>");
+                columns.Bound(p => p.Reference).Title("KHSX").Width(10).ClientTemplate("<a href='" + Url.RouteUrl("Default", new { controller = "Productions/PlannedOrders", action = "Edit" }) + "/#= PlannedOrderID #'>#=Reference#</a>");
                 
                 columns.Bound(p => p.DeliveryDate).Title("Ngày giao").Format("{0:dd/MM/yyyy}").Width(10);
                 columns.Bound(p => p.CustomerName).Title("Tên KH").Width(68);
@@ -19,9 +19,9 @@
                 columns.Bound(p => p.Description).Title("Diễn giải").Width(96);
                 columns.Bound(p => p.VoidTypeName).Title("Hủy đh").Width(30);
 
-                columns.Bound(p => p.TotalQuantity).Title("SL").Format(Settings.kfmQuantity).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(10).ClientFooterTemplate("#= kendo.format('" + Settings.kfmQuantity + "', sum) #").FooterHtmlAttributes(new { @class = "grid-number-column" });
+                columns.Bound(p => p.TotalQuantity).Title("SL").Format(Settings.kfmQuantity).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(30).ClientFooterTemplate("#= kendo.format('" + Settings.kfmQuantity + "', sum) #").FooterHtmlAttributes(new { @class = "grid-number-column" });
                 
-                columns.Template(model => null).HtmlAttributes(new { @class = "grid-column-center" }).Width(80)
+                columns.Template(model => null).HtmlAttributes(new { @class = "grid-column-center" }).Width(68)
                     .ClientTemplate("<a class='k-button' title='Duyệt/Hủy duyệt' style='padding-left:5px; min-width:28px; width:28px' href='" + Url.RouteUrl("Default", new { controller = "Productions/PlannedOrders", action = "Void" }) + "/#= PlannedOrderID #'><span class='k-icon k-edit'></span></a> <a class='k-button' title='Xóa chứng từ' style='padding-left:0px; padding-right:0px; min-width:28px; width:28px' href='" + Url.RouteUrl("Default", new { controller = "Productions/PlannedOrders", action = "Delete" }) + "/#= PlannedOrderID #'><span class='k-icon k-delete'></span></a>");
             })
             .ToolBar(toolbar =>
