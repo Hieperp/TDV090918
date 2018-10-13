@@ -25,5 +25,6 @@ namespace TotalModel.Models
         public int WarehouseIssueID { get; set; }
         public string WarehouseIssueCode { get; set; }
         public string WarehouseIssueName { get; set; }
+        public string Caption { get; set; }
     }
 }

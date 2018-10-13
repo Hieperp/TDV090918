@@ -16612,6 +16612,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="Int32" Name="WarehouseIssueID" Nullable="false" />
           <Property Type="String" Name="WarehouseIssueCode" Nullable="false" MaxLength="10" />
           <Property Type="String" Name="WarehouseIssueName" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="Caption" Nullable="true" MaxLength="100" />
         </ComplexType>
         <EntityType Name="GoodsReceipt">
           <Key>
@@ -22384,6 +22385,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="WarehouseIssueID" ColumnName="WarehouseIssueID" />
                 <ScalarProperty Name="WarehouseIssueCode" ColumnName="WarehouseIssueCode" />
                 <ScalarProperty Name="WarehouseIssueName" ColumnName="WarehouseIssueName" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

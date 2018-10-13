@@ -270,7 +270,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
-            queryString = queryString + "       SELECT          " + (int)@GlobalEnums.GoodsReceiptTypeID.WarehouseTransfer + " AS GoodsReceiptTypeID, WarehouseTransfers.WarehouseTransferID, WarehouseTransfers.Reference AS WarehouseTransferReference, WarehouseTransfers.EntryDate AS WarehouseTransferEntryDate, WarehouseTransfers.Description, WarehouseTransfers.Remarks, " + "\r\n";
+            queryString = queryString + "       SELECT          " + (int)@GlobalEnums.GoodsReceiptTypeID.WarehouseTransfer + " AS GoodsReceiptTypeID, WarehouseTransfers.WarehouseTransferID, WarehouseTransfers.Reference AS WarehouseTransferReference, WarehouseTransfers.EntryDate AS WarehouseTransferEntryDate, WarehouseTransfers.Caption, WarehouseTransfers.Description, WarehouseTransfers.Remarks, " + "\r\n";
             queryString = queryString + "                       Warehouses.WarehouseID, Warehouses.Code AS WarehouseCode, Warehouses.Name AS WarehouseName, WarehouseIssues.WarehouseID AS WarehouseIssueID, WarehouseIssues.Code AS WarehouseIssueCode, WarehouseIssues.Name AS WarehouseIssueName " + "\r\n";
 
             queryString = queryString + "       FROM            WarehouseTransfers " + "\r\n";
