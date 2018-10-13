@@ -47,8 +47,7 @@ namespace TotalModel.Models
         public Nullable<System.DateTime> FinishedProductEntryDate { get; set; }
         public string FirmOrderReference { get; set; }
         public string FirmOrderCode { get; set; }
-        public string PlannedOrderReference { get; set; }
-        public string PlannedOrderCode { get; set; }
         public string SemifinishedProductReferences { get; set; }
+        public string FirmOrderSpecs { get; set; }
     }
 }

@@ -15667,6 +15667,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="Int32" Name="WarehouseID" Nullable="false" />
           <Property Type="String" Name="WarehouseCode" Nullable="false" MaxLength="10" />
           <Property Type="String" Name="WarehouseName" Nullable="false" MaxLength="60" />
+          <Property Type="String" Name="PlannedOrderCaption" Nullable="true" MaxLength="100" />
         </ComplexType>
         <EntityType Name="MaterialIssueDetail">
           <Key>
@@ -17107,9 +17108,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="DateTime" Name="FinishedProductEntryDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="FirmOrderReference" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="FirmOrderCode" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="PlannedOrderReference" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="PlannedOrderCode" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="SemifinishedProductReferences" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FirmOrderSpecs" Nullable="true" MaxLength="800" />
         </ComplexType>
         <EntityType Name="ModuleDetail">
           <Key>
@@ -21936,6 +21936,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
                 <ScalarProperty Name="WarehouseCode" ColumnName="WarehouseCode" />
                 <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
+                <ScalarProperty Name="PlannedOrderCaption" ColumnName="PlannedOrderCaption" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -22558,9 +22559,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="FinishedProductEntryDate" ColumnName="FinishedProductEntryDate" />
                 <ScalarProperty Name="FirmOrderReference" ColumnName="FirmOrderReference" />
                 <ScalarProperty Name="FirmOrderCode" ColumnName="FirmOrderCode" />
-                <ScalarProperty Name="PlannedOrderReference" ColumnName="PlannedOrderReference" />
-                <ScalarProperty Name="PlannedOrderCode" ColumnName="PlannedOrderCode" />
                 <ScalarProperty Name="SemifinishedProductReferences" ColumnName="SemifinishedProductReferences" />
+                <ScalarProperty Name="FirmOrderSpecs" ColumnName="FirmOrderSpecs" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -50,8 +50,6 @@ function handleOKEvent(goodsReceiptGridDataSource, pendingPlannedOrderDetailGrid
         dataRow.MaterialIssueID = null;
         dataRow.MaterialIssueDetailID = null;
         dataRow.MaterialIssueEntryDate = null;
-        dataRow.PlannedOrderCode = null;
-        dataRow.PlannedOrderReference = null;        
         dataRow.ProductionLinesCode = null;
 
         dataRow.WorkshiftName = null;
@@ -63,6 +61,7 @@ function handleOKEvent(goodsReceiptGridDataSource, pendingPlannedOrderDetailGrid
         dataRow.FinishedProductEntryDate = plannedOrderGridDataItem.FinishedProductEntryDate;
         dataRow.FirmOrderReference = plannedOrderGridDataItem.FirmOrderReference;
         dataRow.FirmOrderCode = plannedOrderGridDataItem.FirmOrderCode;
+        dataRow.FirmOrderSpecs = null;
         dataRow.SemifinishedProductReferences = plannedOrderGridDataItem.SemifinishedProductReferences;
 
 

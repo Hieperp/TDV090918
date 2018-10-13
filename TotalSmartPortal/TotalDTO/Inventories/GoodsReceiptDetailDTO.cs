@@ -55,6 +55,9 @@ namespace TotalDTO.Inventories
         [Display(Name = "Số CT")]
         [UIHint("StringReadonly")]
         public string FirmOrderCode { get; set; }
+        [Display(Name = "TP")]
+        [UIHint("StringReadonly")]
+        public string FirmOrderSpecs { get; set; }
         [Display(Name = "Pallet")]
         [UIHint("DateTimeReadonly")]
         public string SemifinishedProductReferences { get; set; }
@@ -66,12 +69,6 @@ namespace TotalDTO.Inventories
         public Nullable<int> MaterialIssueID { get; set; }
         public Nullable<int> MaterialIssueDetailID { get; set; }
 
-        [Display(Name = "KHSX")]
-        [UIHint("StringReadonly")]
-        public string PlannedOrderReference { get; set; }
-        [Display(Name = "Số CT")]
-        [UIHint("StringReadonly")]
-        public string PlannedOrderCode { get; set; }
         [Display(Name = "Ngày XK")]
         [UIHint("DateTimeReadonly")]
         public Nullable<System.DateTime> MaterialIssueEntryDate { get; set; }
