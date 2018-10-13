@@ -37,13 +37,21 @@ namespace TotalDTO.Inventories
         public Nullable<int> WarehouseTransferID { get; set; }
         public Nullable<int> WarehouseTransferDetailID { get; set; }
 
-        [Display(Name = "Phiếu CK")]
+        [Display(Name = "VCNB")]
         [UIHint("StringReadonly")]
         public string WarehouseTransferReference { get; set; }
-        [Display(Name = "Ngày CK")]
-        [UIHint("DateTimeReadonly")]        
+        [Display(Name = "Ngày VCNB")]
+        [UIHint("DateTimeReadonly")]
         public Nullable<System.DateTime> WarehouseTransferEntryDate { get; set; }
-
+        [Display(Name = "Lô hàng")]
+        [UIHint("StringReadonly")]
+        public string GoodsReceiptReference { get; set; }
+        [Display(Name = "Ngày NK")]
+        [UIHint("DateTimeReadonly")]
+        public Nullable<System.DateTime> GoodsReceiptEntryDate { get; set; }
+        [Display(Name = "Ngày lô hàng")]
+        [UIHint("DateTimeReadonly")]
+        public Nullable<System.DateTime> BatchEntryDate { get; set; }
 
 
         public Nullable<int> FinishedProductID { get; set; }
@@ -76,7 +84,7 @@ namespace TotalDTO.Inventories
         [Display(Name = "Ca SX")]
         [UIHint("StringReadonly")]
         public string WorkshiftName { get; set; }
-        [Display(Name = "Số máy")]
+        [Display(Name = "Máy")]
         [UIHint("StringReadonly")]
         public string ProductionLinesCode { get; set; }
 
@@ -97,7 +105,6 @@ namespace TotalDTO.Inventories
 
 
         public int BatchID { get; set; }
-        public System.DateTime BatchEntryDate { get { return DateTime.Now; } set { } }
 
 
         public string Code { get; set; }
@@ -114,7 +121,7 @@ namespace TotalDTO.Inventories
         [UIHint("AutoCompletes/CommodityAvailable")]
         public override string CommodityCode { get; set; }
 
-        [Display(Name = "Tồn đơn")]
+        [Display(Name = "SL Tồn")]
         [UIHint("QuantityReadonly")]
         public decimal QuantityRemains { get; set; }
 

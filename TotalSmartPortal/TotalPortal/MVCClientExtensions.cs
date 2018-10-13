@@ -53,7 +53,7 @@ namespace TotalPortal
 
                 // Create the appropriate HtmlHelper and use it to get the display name
                 HtmlHelper<TModel> helper = HtmlHelpers.For<TModel>(boundColumn.Grid.ViewContext, boundColumn.Grid.ViewData, new RouteCollection());
-                return helper.DisplayNameFor(boundColumn.Expression).ToString();
+                return helper.DisplayNameFor(boundColumn.Expression).ToString().Trim();
             }
         }
     }

@@ -58,7 +58,7 @@ namespace TotalPortal.APIs.Sessions
         public static DateTime GetGlobalFromDate(HttpContextBase context)
         {
             if (context.Session["GlobalFromDate"] == null)
-                return DateTime.Today.AddDays(-30);
+                return DateTime.Today.AddDays(-10);
             else
                 return (DateTime)context.Session["GlobalFromDate"];
         }
@@ -73,7 +73,7 @@ namespace TotalPortal.APIs.Sessions
         public static DateTime GetGlobalToDate(HttpContextBase context)
         {
             if (context.Session["GlobalToDate"] == null)
-                return DateTime.Today.AddDays(2).AddHours(23).AddMinutes(59).AddSeconds(59);
+                return DateTime.Today.AddDays(60).AddHours(23).AddMinutes(59).AddSeconds(59);
             else
                 return (DateTime)context.Session["GlobalToDate"];
         }

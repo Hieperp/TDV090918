@@ -49,5 +49,8 @@ namespace TotalModel.Models
         public string FirmOrderCode { get; set; }
         public string SemifinishedProductReferences { get; set; }
         public string FirmOrderSpecs { get; set; }
+        public string GoodsReceiptReference { get; set; }
+        public Nullable<System.DateTime> GoodsReceiptEntryDate { get; set; }
+        public Nullable<System.DateTime> BatchEntryDate { get; set; }
     }
 }

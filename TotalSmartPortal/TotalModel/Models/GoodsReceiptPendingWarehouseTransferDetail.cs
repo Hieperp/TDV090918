@@ -26,5 +26,8 @@ namespace TotalModel.Models
         public string Description { get; set; }
         public string Remarks { get; set; }
         public Nullable<bool> IsSelected { get; set; }
+        public string GoodsReceiptReference { get; set; }
+        public System.DateTime GoodsReceiptEntryDate { get; set; }
+        public System.DateTime BatchEntryDate { get; set; }
     }
 }

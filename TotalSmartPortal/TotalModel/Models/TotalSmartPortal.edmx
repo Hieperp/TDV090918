@@ -13654,6 +13654,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="String" Name="Description" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
           <Property Type="Boolean" Name="IsSelected" Nullable="true" />
+          <Property Type="DateTime" Name="BatchEntryDate" Nullable="false" Precision="23" />
         </ComplexType>
         <ComplexType Name="GoodsReceiptPendingPurchaseRequisition">
           <Property Type="Int32" Name="PurchaseRequisitionID" Nullable="false" />
@@ -15552,6 +15553,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="String" Name="FirmOrderReference" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="FirmOrderCode" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="FirmOrderSpecs" Nullable="true" MaxLength="800" />
+          <Property Type="DateTime" Name="BatchEntryDate" Nullable="false" Precision="23" />
           </ComplexType>
         <ComplexType Name="PlannedOrderLog">
           <Property Type="Int32" Name="MaterialIssueDetailID" Nullable="false" />
@@ -16600,6 +16602,9 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="String" Name="Description" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
           <Property Type="Boolean" Name="IsSelected" Nullable="true" />
+          <Property Type="String" Name="GoodsReceiptReference" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="GoodsReceiptEntryDate" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="BatchEntryDate" Nullable="false" Precision="23" />
         </ComplexType>
         <ComplexType Name="GoodsReceiptPendingWarehouseTransfer">
           <Property Type="Int32" Name="GoodsReceiptTypeID" Nullable="false" />
@@ -17110,6 +17115,9 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="String" Name="FirmOrderCode" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="SemifinishedProductReferences" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="FirmOrderSpecs" Nullable="true" MaxLength="800" />
+          <Property Type="String" Name="GoodsReceiptReference" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="GoodsReceiptEntryDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="BatchEntryDate" Nullable="true" Precision="23" />
         </ComplexType>
         <EntityType Name="ModuleDetail">
           <Key>
@@ -20514,6 +20522,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
+                <ScalarProperty Name="BatchEntryDate" ColumnName="BatchEntryDate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -21780,6 +21789,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="FirmOrderReference" ColumnName="FirmOrderReference" />
                 <ScalarProperty Name="FirmOrderCode" ColumnName="FirmOrderCode" />
                 <ScalarProperty Name="FirmOrderSpecs" ColumnName="FirmOrderSpecs" />
+                <ScalarProperty Name="BatchEntryDate" ColumnName="BatchEntryDate" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -22370,6 +22380,9 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
+                <ScalarProperty Name="GoodsReceiptReference" ColumnName="GoodsReceiptReference" />
+                <ScalarProperty Name="GoodsReceiptEntryDate" ColumnName="GoodsReceiptEntryDate" />
+                <ScalarProperty Name="BatchEntryDate" ColumnName="BatchEntryDate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -22561,6 +22574,9 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="FirmOrderCode" ColumnName="FirmOrderCode" />
                 <ScalarProperty Name="SemifinishedProductReferences" ColumnName="SemifinishedProductReferences" />
                 <ScalarProperty Name="FirmOrderSpecs" ColumnName="FirmOrderSpecs" />
+                <ScalarProperty Name="GoodsReceiptReference" ColumnName="GoodsReceiptReference" />
+                <ScalarProperty Name="GoodsReceiptEntryDate" ColumnName="GoodsReceiptEntryDate" />
+                <ScalarProperty Name="BatchEntryDate" ColumnName="BatchEntryDate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
