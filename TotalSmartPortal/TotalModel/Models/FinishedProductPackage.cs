@@ -45,6 +45,10 @@ namespace TotalModel.Models
         public string Remarks { get; set; }
         public bool Approved { get; set; }
         public bool HandoverApproved { get; set; }
+        public decimal QuantityExcess { get; set; }
+        public decimal QuantityShortage { get; set; }
+        public decimal QuantityExcessWeights { get; set; }
+        public decimal QuantityShortageWeights { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FinishedHandoverDetail> FinishedHandoverDetails { get; set; }

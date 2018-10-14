@@ -39,6 +39,8 @@ namespace TotalModel.Models
         public bool Approved { get; set; }
         public bool HandoverApproved { get; set; }
         public Nullable<int> FinishedProductPackageID { get; set; }
+        public decimal QuantityExcess { get; set; }
+        public decimal QuantityShortage { get; set; }
     
         public virtual Commodity Commodity { get; set; }
         public virtual FinishedProduct FinishedProduct { get; set; }

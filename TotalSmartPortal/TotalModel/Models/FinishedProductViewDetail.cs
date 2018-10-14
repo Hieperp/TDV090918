@@ -40,5 +40,7 @@ namespace TotalModel.Models
         public decimal QuantityFailure { get; set; }
         public decimal Swarfs { get; set; }
         public string SemifinishedProductReference { get; set; }
+        public decimal QuantityExcess { get; set; }
+        public decimal QuantityShortage { get; set; }
     }
 }

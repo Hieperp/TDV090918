@@ -593,6 +593,8 @@
           <Property Name="PiecePerPack" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="QuantityFailure" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="QuantityExcess" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="QuantityShortage" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Swarfs" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="QuantityReceipted" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
@@ -617,12 +619,16 @@
           <Property Name="PiecePerPack" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="QuantityFailure" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="QuantityExcess" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="QuantityShortage" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Swarfs" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="QuantityReceipted" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Packages" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="OddPackages" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="QuantityWeights" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="QuantityFailureWeights" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="QuantityExcessWeights" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="QuantityShortageWeights" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
           <Property Name="Approved" Type="bit" Nullable="false" />
           <Property Name="HandoverApproved" Type="bit" Nullable="false" />
@@ -644,6 +650,8 @@
           <Property Name="ApproverID" Type="int" Nullable="false" />
           <Property Name="TotalQuantity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="TotalQuantityFailure" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TotalQuantityExcess" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TotalQuantityShortage" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="TotalSwarfs" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="TotalQuantityReceipted" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="100" />
@@ -15420,6 +15428,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="String" Name="FirmOrderReference" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="FirmOrderCode" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="FirmOrderSpecs" Nullable="true" MaxLength="800" />
+          <Property Type="Decimal" Name="TotalQuantityExcess" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalQuantityShortage" Nullable="false" Precision="18" Scale="2" />
         </ComplexType>
         <ComplexType Name="FinishedProductViewDetail">
           <Property Type="Int32" Name="FinishedProductDetailID" Nullable="false" />
@@ -15449,6 +15459,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="Decimal" Name="QuantityFailure" Nullable="false" Precision="1" Scale="1" />
           <Property Type="Decimal" Name="Swarfs" Nullable="false" Precision="1" Scale="1" />
           <Property Type="String" Name="SemifinishedProductReference" Nullable="true" MaxLength="10" />
+          <Property Type="Decimal" Name="QuantityExcess" Nullable="false" Precision="1" Scale="1" />
+          <Property Type="Decimal" Name="QuantityShortage" Nullable="false" Precision="1" Scale="1" />
         </ComplexType>
         <ComplexType Name="FinishedProductPendingFirmOrder">
           <Property Type="Int32" Name="FirmOrderID" Nullable="false" />
@@ -16288,6 +16300,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <NavigationProperty Name="FirmOrder" Relationship="TotalSmartPortalModel.FK_FinishedProducts_FirmOrders" FromRole="FinishedProduct" ToRole="FirmOrder" />
           <NavigationProperty Name="Location" Relationship="TotalSmartPortalModel.FK_FinishedProducts_Locations" FromRole="FinishedProduct" ToRole="Location" />
           <NavigationProperty Name="FinishedProductDetails" Relationship="TotalSmartPortalModel.FK_FinishedProductDetails_FinishedProducts" FromRole="FinishedProduct" ToRole="FinishedProductDetail" />
+          <Property Name="TotalQuantityExcess" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TotalQuantityShortage" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
         <Association Name="FK_FinishedProducts_Customers">
           <End Type="TotalSmartPortalModel.Customer" Role="Customer" Multiplicity="1" />
@@ -16381,6 +16395,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <NavigationProperty Name="FinishedProduct" Relationship="TotalSmartPortalModel.FK_FinishedProductDetails_FinishedProducts" FromRole="FinishedProductDetail" ToRole="FinishedProduct" />
           <Property Name="FinishedProductPackageID" Type="Int32" />
           <NavigationProperty Name="FinishedProductPackage" Relationship="TotalSmartPortalModel.FK_FinishedProductDetails_FinishedProductPackages" FromRole="FinishedProductDetail" ToRole="FinishedProductPackage" />
+          <Property Name="QuantityExcess" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="QuantityShortage" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
         <Association Name="FK_FinishedProductDetails_Commodities">
           <End Type="TotalSmartPortalModel.Commodity" Role="Commodity" Multiplicity="1" />
@@ -17646,6 +17662,10 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <NavigationProperty Name="FinishedHandoverDetails" Relationship="TotalSmartPortalModel.FK_FinishedHandoverDetails_FinishedProductPackages" FromRole="FinishedProductPackage" ToRole="FinishedHandoverDetail" />
           <NavigationProperty Name="FinishedProductDetails" Relationship="TotalSmartPortalModel.FK_FinishedProductDetails_FinishedProductPackages" FromRole="FinishedProductPackage" ToRole="FinishedProductDetail" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartPortalModel.FK_GoodsReceiptDetails_FinishedProductPackages" FromRole="FinishedProductPackage" ToRole="GoodsReceiptDetail" />
+          <Property Name="QuantityExcess" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="QuantityShortage" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="QuantityExcessWeights" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="QuantityShortageWeights" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
         <Association Name="FK_FinishedHandoverDetails_FinishedProductPackages">
           <End Type="TotalSmartPortalModel.FinishedProductPackage" Role="FinishedProductPackage" Multiplicity="1" />
@@ -21696,6 +21716,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="FirmOrderReference" ColumnName="FirmOrderReference" />
                 <ScalarProperty Name="FirmOrderCode" ColumnName="FirmOrderCode" />
                 <ScalarProperty Name="FirmOrderSpecs" ColumnName="FirmOrderSpecs" />
+                <ScalarProperty Name="TotalQuantityExcess" ColumnName="TotalQuantityExcess" />
+                <ScalarProperty Name="TotalQuantityShortage" ColumnName="TotalQuantityShortage" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -21743,6 +21765,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="QuantityFailure" ColumnName="QuantityFailure" />
                 <ScalarProperty Name="Swarfs" ColumnName="Swarfs" />
                 <ScalarProperty Name="SemifinishedProductReference" ColumnName="SemifinishedProductReference" />
+                <ScalarProperty Name="QuantityExcess" ColumnName="QuantityExcess" />
+                <ScalarProperty Name="QuantityShortage" ColumnName="QuantityShortage" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -22101,6 +22125,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <EntitySetMapping Name="FinishedProducts">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.FinishedProduct">
               <MappingFragment StoreEntitySet="FinishedProducts">
+                <ScalarProperty Name="TotalQuantityShortage" ColumnName="TotalQuantityShortage" />
+                <ScalarProperty Name="TotalQuantityExcess" ColumnName="TotalQuantityExcess" />
                 <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="EditedDate" ColumnName="EditedDate" />
@@ -22128,6 +22154,8 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <EntitySetMapping Name="FinishedProductDetails">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.FinishedProductDetail">
               <MappingFragment StoreEntitySet="FinishedProductDetails">
+                <ScalarProperty Name="QuantityShortage" ColumnName="QuantityShortage" />
+                <ScalarProperty Name="QuantityExcess" ColumnName="QuantityExcess" />
                 <ScalarProperty Name="FinishedProductPackageID" ColumnName="FinishedProductPackageID" />
                 <ScalarProperty Name="HandoverApproved" ColumnName="HandoverApproved" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
@@ -22731,6 +22759,10 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <EntitySetMapping Name="FinishedProductPackages">
             <EntityTypeMapping TypeName="TotalSmartPortalModel.FinishedProductPackage">
               <MappingFragment StoreEntitySet="FinishedProductPackages">
+                <ScalarProperty Name="QuantityShortageWeights" ColumnName="QuantityShortageWeights" />
+                <ScalarProperty Name="QuantityExcessWeights" ColumnName="QuantityExcessWeights" />
+                <ScalarProperty Name="QuantityShortage" ColumnName="QuantityShortage" />
+                <ScalarProperty Name="QuantityExcess" ColumnName="QuantityExcess" />
                 <ScalarProperty Name="HandoverApproved" ColumnName="HandoverApproved" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />

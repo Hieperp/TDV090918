@@ -27,5 +27,7 @@ namespace TotalModel.Models
         public string FirmOrderReference { get; set; }
         public string FirmOrderCode { get; set; }
         public string FirmOrderSpecs { get; set; }
+        public decimal TotalQuantityExcess { get; set; }
+        public decimal TotalQuantityShortage { get; set; }
     }
 }
