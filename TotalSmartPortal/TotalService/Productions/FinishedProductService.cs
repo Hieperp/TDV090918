@@ -29,7 +29,7 @@ namespace TotalService.Productions
 
         public override bool Save(FinishedProductDTO finishedProductDTO)
         {
-            finishedProductDTO.FinishedProductViewDetails.RemoveAll(x => (x.Quantity == 0 && x.QuantityFailure == 0 && x.Swarfs == 0));
+            finishedProductDTO.FinishedProductViewDetails.RemoveAll(x => (x.Quantity == 0 && x.QuantityFailure == 0 && x.QuantityExcess == 0 && x.QuantityShortage == 0 && x.Swarfs == 0));
             return base.Save(finishedProductDTO);
         }
     }

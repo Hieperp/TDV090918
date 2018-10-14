@@ -103,8 +103,8 @@ namespace TotalDTO.Productions
         public string CommodityName { get; set; }
 
         [Display(Name = "Cái/ kiện")]
-        [UIHint("IntegerReadonly")]
-        public decimal PiecePerPack { get; set; }
+        [UIHint("Integer")]
+        public int PiecePerPack { get; set; }
 
         [UIHint("QuantityReadonly")]
         public decimal FoilUnitCounts { get; set; }
@@ -132,7 +132,7 @@ namespace TotalDTO.Productions
         [UIHint("QuantityReadonly")]
         public decimal QuantityWeights { get { return this.FoilUnitCounts > 0 ? this.Quantity * this.FoilUnitWeights / this.FoilUnitCounts : 0; } set { } }
 
-        [Display(Name = "Phế phẩm")]
+        [Display(Name = "P-Phẩm")]
         [UIHint("QuantityReadonly")]
         public decimal QuantityFailure { get; set; }
         [Display(Name = "PP (kg)")]
