@@ -119,7 +119,7 @@
                     columns.Bound(p => p.CommodityTypeID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= CommodityTypeID #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].CommodityTypeID' value='#= CommodityTypeID #' />");
 
-                    columns.Bound(p => p.PiecePerPack).DisplayNameTitle().HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(50)
+                    columns.Bound(p => p.PiecePerPack).DisplayNameTitle().HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Hidden()
                         .ClientTemplate("#= (PiecePerPack == null)? '' : PiecePerPack #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].PiecePerPack' value='#= (PiecePerPack == null) ? '' : PiecePerPack #' />");
 
                     columns.Bound(p => p.SemifinishedProductReference).DisplayNameTitle().HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(10)
@@ -128,7 +128,7 @@
                     columns.Bound(p => p.WorkshiftEntryDate).DisplayNameTitle().HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(25)
                         .Format("{0:" + @Settings.DateFormat + "}")
                         .ClientTemplate("#= (WorkshiftEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', WorkshiftEntryDate) #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].WorkshiftEntryDate' value='#= (WorkshiftEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', WorkshiftEntryDate) #' />");
-                    columns.Bound(p => p.WorkshiftCode).DisplayNameTitle().HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(60)
+                    columns.Bound(p => p.WorkshiftCode).DisplayNameTitle().HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" }).Width(62)
                         .ClientTemplate("#= (WorkshiftCode == null)? '' : WorkshiftCode #" + "<input type='hidden' name='FinishedProductViewDetails[#= index(data) #].WorkshiftCode' value='#= (WorkshiftCode == null) ? '' : WorkshiftCode #' />");
 
                     columns.Bound(p => p.GoodsReceiptCode).DisplayNameTitle().Width(60).Hidden()
@@ -329,10 +329,10 @@
             {
                 columns.Bound(p => p.CommodityID).DisplayNameTitle().Hidden()
                     .ClientTemplate("#= CommodityID #" + "<input type='hidden' name='FinishedProductSummaryViewDetails[#= index(data) #].CommodityID' value='#= CommodityID #' />");
-                columns.Bound(p => p.CommodityCode).DisplayNameTitle().Width(120).EditorTemplateName("StringReadonly")
+                columns.Bound(p => p.CommodityCode).DisplayNameTitle().Width(110).EditorTemplateName("StringReadonly")
                     .ClientTemplate("#= CommodityCode #" + "<input type='hidden' name='FinishedProductSummaryViewDetails[#= index(data) #].CommodityCode' value='#= CommodityCode #' />")
                     .ClientFooterTemplate("TC (#= kendo.format('{0:n0}', count) # dòng)");
-                columns.Bound(p => p.CommodityName).DisplayNameTitle().Width(150).HtmlAttributes(new { style = "" })
+                columns.Bound(p => p.CommodityName).DisplayNameTitle().Width(160).HtmlAttributes(new { style = "" })
                     .ClientTemplate("#= CommodityName #" + "<input type='hidden' name='FinishedProductSummaryViewDetails[#= index(data) #].CommodityName' value='#= CommodityName #' />");
 
 

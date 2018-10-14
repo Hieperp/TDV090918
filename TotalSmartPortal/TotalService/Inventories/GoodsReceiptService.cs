@@ -21,6 +21,12 @@ namespace TotalService.Inventories
         {
         }
 
+        public override bool Save(TDto dto)
+        {
+            dto.GoodsReceiptViewDetails.RemoveAll(x => x.Quantity == 0);
+            return base.Save(dto);
+        }
+
         public override bool Approvable(TDto dto)
         {
             return (dto.WarehouseAdjustmentID == null) && base.Approvable(dto);

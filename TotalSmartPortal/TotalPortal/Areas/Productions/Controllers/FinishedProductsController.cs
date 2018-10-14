@@ -7,6 +7,7 @@ using System.Collections;
 using AutoMapper;
 using RequireJsNet;
 
+using TotalBase;
 using TotalBase.Enums;
 
 using TotalModel.Models;
@@ -22,7 +23,7 @@ using TotalPortal.Areas.Productions.Builders;
 using System.Collections.Generic;
 
 namespace TotalPortal.Areas.Productions.Controllers
-{ 
+{
     public class FinishedProductsController : GenericViewDetailController<FinishedProduct, FinishedProductDetail, FinishedProductViewDetail, FinishedProductDTO, FinishedProductPrimitiveDTO, FinishedProductDetailDTO, FinishedProductViewModel>
     {
         private readonly IFinishedProductService finishedProductService;
@@ -42,6 +43,17 @@ namespace TotalPortal.Areas.Productions.Controllers
 
         protected override FinishedProductViewModel TailorViewModel(FinishedProductViewModel finishedProductViewModel, bool forDelete, bool forAlter, bool forOpen)
         {
+            if (finishedProductViewModel.ViewDetails != null && finishedProductViewModel.ViewDetails.Count > 0)
+                for (int i = 0; i <= finishedProductViewModel.ViewDetails.Count - 1; i++)
+                {
+                    if (finishedProductViewModel.ViewDetails[i].FinishedProductDetailID > 0)
+                        finishedProductViewModel.GetDetails().Each(detailDTO =>
+                        {
+                            if (detailDTO.CommodityID == finishedProductViewModel.ViewDetails[i].CommodityID)
+                                detailDTO.PiecePerPack = finishedProductViewModel.ViewDetails[i].PiecePerPack;
+                        });
+                }
+
             var finishedProductSummaries = finishedProductViewModel.ViewDetails
                                             .GroupBy(g => g.CommodityID)
                                             .Select(sl => new FinishedProductSummaryDTO
