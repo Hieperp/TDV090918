@@ -14,7 +14,7 @@ namespace TotalService.Commons
         where TPrimitiveDto : BaseDTO, IPrimitiveEntity, IPrimitiveDTO, new()
     {
         public CommodityService(ICommodityRepository commodityRepository)
-            : base(commodityRepository)
+            : base(commodityRepository, null, "CommoditySaveRelative")
         {
         }
 

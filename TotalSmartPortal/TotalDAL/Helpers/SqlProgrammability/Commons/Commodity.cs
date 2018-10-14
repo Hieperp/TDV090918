@@ -20,7 +20,10 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
         {
             this.GetCommodityIndexes();
 
+            this.CommoditySaveRelative();
+
             this.CommodityEditable();
+            this.CommodityDeletable();
 
             this.GetCommodityBases();
         }
@@ -47,6 +50,34 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             this.totalSmartPortalEntities.CreateStoredProcedure("GetCommodityIndexes", queryString);
         }
 
+
+        private void CommoditySaveRelative()
+        {
+            string queryString = " @EntityID int, @SaveRelativeOption int " + "\r\n"; //SaveRelativeOption: 1: Update, -1:Undo
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+            //Boms: SHOULD CHECK AND MODIFY TO MEET REQUIRELEMENT
+            queryString = queryString + "   IF (SELECT COUNT(*) FROM Commodities WHERE CommodityID = @EntityID AND CommodityTypeID = " + (int)GlobalEnums.CommodityTypeID.Items + ") = 1 " + "\r\n";
+            queryString = queryString + "       BEGIN " + "\r\n";
+            queryString = queryString + "           IF (SELECT COUNT(*) FROM Boms WHERE CustomerID = @EntityID) = 0  " + "\r\n";
+            queryString = queryString + "               BEGIN " + "\r\n";
+            queryString = queryString + "                   INSERT INTO     Boms (EntryDate, Reference, Code, Name, OfficialCode, CommodityCategoryID, CommodityClassID, CommodityLineID, CustomerID, Remarks, InActive) " + "\r\n";
+            queryString = queryString + "                   SELECT          GetDate() AS  EntryDate, '####000', Code, Name, OfficialCode, CommodityCategoryID, CommodityClassID, CommodityLineID, CommodityID AS CustomerID, Remarks, 0 AS InActive " + "\r\n";
+            queryString = queryString + "                   FROM            Commodities WHERE CommodityID = @EntityID " + "\r\n";
+
+            queryString = queryString + "                   INSERT INTO     BomDetails (BomID, MaterialID, BlockUnit, BlockQuantity, Remarks, InActive) " + "\r\n";
+            queryString = queryString + "                   SELECT          BomID, CustomerID AS MaterialID, 1 AS BlockUnit, 1 AS BlockQuantity, Remarks, InActive " + "\r\n";
+            queryString = queryString + "                   FROM            Boms WHERE BomID = SCOPE_IDENTITY() " + "\r\n";
+            queryString = queryString + "               END " + "\r\n";
+            queryString = queryString + "           ELSE " + "\r\n";
+            queryString = queryString + "                   UPDATE          Boms " + "\r\n"; //Boms.BomID = 1: DEFAULT NULL Boms: FOR INIT SOME WHERE ONLY
+            queryString = queryString + "                   SET             Boms.Code = Commodities.Code, Boms.OfficialCode = Commodities.OfficialCode, Boms.Name = Commodities.Name " + "\r\n";
+            queryString = queryString + "                   FROM            Boms INNER JOIN Commodities ON Boms.BomID <> 1 AND Boms.CustomerID = @EntityID AND Boms.CustomerID = Commodities.CommodityID " + "\r\n";
+            queryString = queryString + "       END " + "\r\n";
+
+            this.totalSmartPortalEntities.CreateStoredProcedure("CommoditySaveRelative", queryString);
+        }
+
         private void CommodityEditable()
         {
             string[] queryArray = new string[1];
@@ -57,6 +88,14 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             //queryArray[1] = " SELECT TOP 1 @FoundEntity = CommodityID FROM GoodsIssueDetails WHERE CommodityID = @EntityID ";
 
             this.totalSmartPortalEntities.CreateProcedureToCheckExisting("CommodityEditable", queryArray);
+        }
+
+        private void CommodityDeletable()
+        {
+            string[] queryArray = new string[1];
+            queryArray[0] = " SELECT TOP 1 @FoundEntity = CommodityID FROM Commodities WHERE CommodityID = @EntityID "; //DON'T ALLOW TO DELETE 
+
+            this.totalSmartPortalEntities.CreateProcedureToCheckExisting("CommodityDeletable", queryArray);
         }
 
         private void GetCommodityBases()
