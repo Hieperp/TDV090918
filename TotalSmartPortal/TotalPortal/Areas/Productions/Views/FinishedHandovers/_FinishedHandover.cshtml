@@ -59,21 +59,21 @@
                                         
                     columns.Bound(p => p.SemifinishedProductReferences).DisplayNameTitle().Width(20)
                         .ClientTemplate("#= SemifinishedProductReferences #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].SemifinishedProductReferences' value='#= SemifinishedProductReferences #' />");
-                    columns.Bound(p => p.FinishedProductEntryDate).DisplayNameTitle().Width(30)
+                    columns.Bound(p => p.FinishedProductEntryDate).DisplayNameTitle().Width(20)
                         .Format("{0:" + @Settings.DateFormat + "}")
                         .ClientTemplate("#= (FinishedProductEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', FinishedProductEntryDate) #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].FinishedProductEntryDate' value='#= (FinishedProductEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', FinishedProductEntryDate) #' />");
 
 
                     columns.Bound(p => p.CustomerID).DisplayNameTitle().Hidden()
                         .ClientTemplate("#= CustomerID #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].CustomerID' value='#= CustomerID #' />");
-                    columns.Bound(p => p.CustomerName).DisplayNameTitle().Width(68)
+                    columns.Bound(p => p.CustomerName).DisplayNameTitle().Width(106)
                         .ClientTemplate("#= CustomerName #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].CustomerName' value='#= CustomerName #' />");
 
                     columns.Bound(p => p.CommodityID).DisplayNameTitle().Hidden()
                       .ClientTemplate("#= CommodityID #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].CommodityID' value='#= CommodityID #' />");
                     columns.Bound(p => p.CommodityCode).DisplayNameTitle().Width(96)
                         .ClientTemplate("#= CommodityCode #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].CommodityCode' value='#= CommodityCode #' />");
-                    columns.Bound(p => p.CommodityName).DisplayNameTitle().Width(128)
+                    columns.Bound(p => p.CommodityName).DisplayNameTitle().Width(126)
                         .ClientTemplate("#= CommodityName #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].CommodityName' value='#= CommodityName #' />");
                     columns.Bound(p => p.CommodityTypeID).DisplayNameTitle().Hidden()
                      .ClientTemplate("#= CommodityTypeID #" + "<input type='hidden' name='FinishedHandoverViewDetails[#= index(data) #].CommodityTypeID' value='#= CommodityTypeID #' />");                               

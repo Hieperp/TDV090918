@@ -32,7 +32,6 @@ namespace TotalDTO.Helpers
         public virtual int CommodityTypeID { get; set; }
 
         [Display(Name = "P/P")]
-        [Range(1, 3000, ErrorMessage = "Vui lòng kiểm tra số cái/ kiện [P/P]")]
         public virtual int PiecePerPack { get; set; }
 
         [Display(Name = "SL")]                

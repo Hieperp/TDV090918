@@ -38,6 +38,7 @@ namespace TotalDTO.Productions
         [UIHint("AutoCompletes/CommodityBase")]
         public override string CommodityCode { get; set; }
         [UIHint("Integer")]
+        [Range(1, 3000, ErrorMessage = "Vui lòng kiểm tra số cái/ kiện [P/P]")]
         public override int PiecePerPack { get; set; }
 
         public string VoidTypeCode { get; set; }

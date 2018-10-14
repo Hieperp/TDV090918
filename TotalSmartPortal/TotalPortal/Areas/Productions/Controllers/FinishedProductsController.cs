@@ -51,11 +51,11 @@ namespace TotalPortal.Areas.Productions.Controllers
                                                 CommodityName = sl.First().CommodityName,
                                                 PiecePerPack = sl.First().PiecePerPack,
 
-                                                FoilUnitCounts = 4,
-                                                FoilUnitWeights = 78,
+                                                FoilUnitCounts = 1,
+                                                FoilUnitWeights = 1,
 
                                                 QuantityRemains = sl.Sum(s => s.QuantityRemains),
-                                                Quantity = sl.Sum(s => s.Quantity),
+                                                Quantity = sl.Sum(s => (s.Quantity + s.QuantityExcess - s.QuantityShortage)),
                                                 QuantityFailure = sl.Sum(s => s.QuantityFailure),
                                                 Swarfs = sl.Sum(s => s.Swarfs),
                                             });
