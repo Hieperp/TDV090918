@@ -70,7 +70,7 @@ namespace TotalPortal.Areas.Inventories.Controllers
             TViewDetailViewModel viewDetailViewModel = this.GetViewModel(id, GlobalEnums.AccessLevel.Readable, true); if (viewDetailViewModel == null) printViewModel.Id = 0;
 
             printViewModel.PrintOptionID = viewDetailViewModel.Approved ? 1 : 0;
-            printViewModel.ReportPath = viewDetailViewModel.IsMaterial ? "MaterialAdjustmentSheet" : (viewDetailViewModel.IsItem ? "ItemAdjustmentSheet" : (viewDetailViewModel.IsProduct ? "ProductAdjustmentSheet" : ""));
+            printViewModel.ReportPath = viewDetailViewModel.IsMaterial ? "MaterialTransferSheet" : (viewDetailViewModel.IsItem ? "ItemTransferSheet" : (viewDetailViewModel.IsProduct ? "ProductTransferSheet" : ""));
 
             return printViewModel;
         }

@@ -190,7 +190,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
         private void WarehouseAdjustmentSheet()
         {
             string queryString = " @WarehouseAdjustmentID int " + "\r\n";
-            //queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 

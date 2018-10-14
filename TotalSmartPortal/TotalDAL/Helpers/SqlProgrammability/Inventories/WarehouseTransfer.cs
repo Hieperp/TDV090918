@@ -35,6 +35,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             this.WarehouseTransferToggleApproved();
 
             this.WarehouseTransferInitReference();
+
+            this.WarehouseTransferSheet();
         }
 
 
@@ -338,6 +340,35 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
         {
             SimpleInitReference simpleInitReference = new SimpleInitReference("WarehouseTransfers", "WarehouseTransferID", "Reference", ModelSettingManager.ReferenceLength, ModelSettingManager.ReferencePrefix(GlobalEnums.NmvnTaskID.WarehouseTransfer));
             this.totalSmartPortalEntities.CreateTrigger("WarehouseTransferInitReference", simpleInitReference.CreateQuery());
+        }
+
+
+
+        private void WarehouseTransferSheet()
+        {
+            string queryString = " @WarehouseTransferID int " + "\r\n";
+            //queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+            queryString = queryString + "    BEGIN " + "\r\n";
+
+            queryString = queryString + "       DECLARE         @LocalWarehouseTransferID int    SET @LocalWarehouseTransferID = @WarehouseTransferID" + "\r\n";
+
+            queryString = queryString + "       SELECT          WarehouseTransfers.WarehouseTransferID, WarehouseTransfers.EntryDate, WarehouseTransfers.Reference, WarehouseTransfers.NMVNTaskID, Warehouses.Name AS WarehouseName, WarehouseReceipts.Name AS WarehouseReceiptName, WarehouseTransfers.Description, " + "\r\n";
+            queryString = queryString + "                       WarehouseTransferDetails.CommodityID, WarehouseTransferDetails.CommodityTypeID, Commodities.Code, Commodities.CodePartA, Commodities.CodePartB, Commodities.CodePartC, Commodities.CodePartD, Commodities.CodePartE, Commodities.CodePartF, Commodities.Name AS CommodityName, Commodities.SalesUnit, WarehouseTransferDetails.BatchEntryDate, WarehouseTransferDetails.Quantity, WarehouseTransferDetails.Remarks " + "\r\n";
+
+            queryString = queryString + "       FROM            WarehouseTransfers " + "\r\n";
+            queryString = queryString + "                       INNER JOIN WarehouseTransferDetails ON WarehouseTransfers.WarehouseTransferID = @LocalWarehouseTransferID AND WarehouseTransfers.WarehouseTransferID = WarehouseTransferDetails.WarehouseTransferID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN Commodities ON WarehouseTransferDetails.CommodityID = Commodities.CommodityID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN Warehouses ON WarehouseTransfers.WarehouseID = Warehouses.WarehouseID " + "\r\n";
+            queryString = queryString + "                       INNER JOIN Warehouses AS WarehouseReceipts ON WarehouseTransfers.WarehouseReceiptID = WarehouseReceipts.WarehouseID " + "\r\n";
+
+            queryString = queryString + "       ORDER BY        WarehouseTransferDetails.WarehouseTransferDetailID " + "\r\n";
+
+
+            queryString = queryString + "    END " + "\r\n";
+
+            this.totalSmartPortalEntities.CreateStoredProcedure("WarehouseTransferSheet", queryString);
+
         }
     }
 }

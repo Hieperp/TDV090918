@@ -77,25 +77,25 @@
 
                     columns.Bound(p => p.CommodityID).DisplayNameTitle().Filterable(false).Hidden()
                         .ClientTemplate("#= CommodityID #" + "<input type='hidden' name='TransferOrderViewDetails[#= index(data) #].CommodityID' value='#= CommodityID #' />");
-                    columns.Bound(p => p.CommodityCode).DisplayNameTitle().Filterable(false).Width(168)
+                    columns.Bound(p => p.CommodityCode).DisplayNameTitle().Filterable(false).Width(207)
                         .ClientFooterTemplate("TC (#= kendo.format('{0:n0}', count) # dòng)")
                         .ClientTemplate("<div> #= CommodityCode #</div>" +
                             "<div> #= (VoidTypeName == null)? '' : VoidTypeName #</div>" +
                             "<input type='hidden' name='TransferOrderViewDetails[#= index(data) #].CommodityCode' value='#= CommodityCode #' />");
 
-                    columns.Bound(p => p.CommodityName).DisplayNameTitle().Filterable(false).Width(168).HtmlAttributes(new { style = "" })
+                    columns.Bound(p => p.CommodityName).DisplayNameTitle().Filterable(false).Width(196).HtmlAttributes(new { style = "" })
                         .ClientTemplate("#= CommodityName #" + "<input type='hidden' name='TransferOrderViewDetails[#= index(data) #].CommodityName' value='#= CommodityName #' />");
 
                     columns.Bound(p => p.CommodityTypeID).DisplayNameTitle().Filterable(false).Hidden()
                         .ClientTemplate("#= CommodityTypeID #" + "<input type='hidden' name='TransferOrderViewDetails[#= index(data) #].CommodityTypeID' value='#= CommodityTypeID #' />");                  
 
 
-                    columns.Bound(p => p.QuantityAvailables).DisplayNameTitle().Filterable(false).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" })
+                    columns.Bound(p => p.QuantityAvailables).DisplayNameTitle().Filterable(false).Width(88).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" })
                      .Format(Settings.kfmQuantity)
                      .ClientFooterTemplate("#= kendo.format('" + Settings.kfmQuantity + "', sum) #")
                      .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', QuantityAvailables) #" + "<input type='hidden' name='TransferOrderViewDetails[#= index(data) #].QuantityAvailables' value='#= QuantityAvailables #' />");
 
-                    columns.Bound(p => p.Quantity).DisplayNameTitle().Filterable(false).Width(50).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" })
+                    columns.Bound(p => p.Quantity).DisplayNameTitle().Filterable(false).Width(88).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" })
                         .Format(Settings.kfmQuantity)
                         .ClientFooterTemplate("#= kendo.format('" + Settings.kfmQuantity + "', sum) #")
                         .ClientTemplate("#= kendo.format('" + Settings.kfmQuantity + "', Quantity) #" + "<input type='hidden' name='TransferOrderViewDetails[#= index(data) #].Quantity' value='#= Quantity #' />");                
