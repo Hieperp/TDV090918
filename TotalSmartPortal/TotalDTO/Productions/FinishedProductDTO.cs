@@ -38,6 +38,10 @@ namespace TotalDTO.Productions
 
         public virtual decimal TotalQuantityFailure { get; set; }
         public virtual decimal GetTotalQuantityFailure() { return this.DtoDetails().Select(o => o.QuantityFailure).Sum(); }
+        public virtual decimal TotalQuantityExcess { get; set; }
+        public virtual decimal GetTotalQuantityExcess() { return this.DtoDetails().Select(o => o.QuantityExcess).Sum(); }
+        public virtual decimal TotalQuantityShortage { get; set; }
+        public virtual decimal GetTotalQuantityShortage() { return this.DtoDetails().Select(o => o.QuantityShortage).Sum(); }
         public virtual decimal TotalSwarfs { get; set; }
         public virtual decimal GetTotalSwarfs() { return this.DtoDetails().Select(o => o.Swarfs).Sum(); }
 
@@ -48,6 +52,8 @@ namespace TotalDTO.Productions
 
             if (this.TotalSwarfs != this.GetTotalSwarfs()) yield return new ValidationResult("Lỗi tổng số lượng biên", new[] { "TotalSwarfs" });
             if (this.TotalQuantityFailure != this.GetTotalQuantityFailure()) yield return new ValidationResult("Lỗi tổng số lượng phế phẩm sx", new[] { "TotalQuantityFailure" });
+            if (this.TotalQuantityExcess != this.GetTotalQuantityExcess()) yield return new ValidationResult("Lỗi tổng số lượng phế phẩm sx", new[] { "TotalQuantityExcess" });
+            if (this.TotalQuantityShortage != this.GetTotalQuantityShortage()) yield return new ValidationResult("Lỗi tổng số lượng phế phẩm sx", new[] { "TotalQuantityShortage" });
         }
 
         public override void PerformPresaveRule()

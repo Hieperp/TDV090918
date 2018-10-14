@@ -71,6 +71,14 @@ namespace TotalDTO.Productions
         [UIHint("Quantity")]
         public decimal QuantityFailure { get; set; }
 
+        [Display(Name = "SLPP")]
+        [UIHint("Quantity")]
+        public decimal QuantityExcess { get; set; }
+
+        [Display(Name = "SLPP")]
+        [UIHint("Quantity")]
+        public decimal QuantityShortage { get; set; }
+
         [Display(Name = "Biên (kg)")]
         [UIHint("Quantity")]
         public decimal Swarfs { get; set; }
@@ -79,7 +87,7 @@ namespace TotalDTO.Productions
         {
             foreach (var result in base.Validate(validationContext)) { yield return result; }
 
-            if (this.Quantity + this.QuantityFailure > this.QuantityRemains) yield return new ValidationResult("Số lượng đóng gói không được lớn hơn số lượng tồn phôi [" + this.CommodityName + "]", new[] { "Quantity" });
+            if (this.Quantity + this.QuantityFailure + this.QuantityShortage > this.QuantityRemains) yield return new ValidationResult("Số lượng đóng gói không được lớn hơn số lượng tồn phôi [" + this.CommodityName + "]", new[] { "Quantity" });
         }
     }
 
@@ -130,6 +138,20 @@ namespace TotalDTO.Productions
         [Display(Name = "PP (kg)")]
         [UIHint("QuantityReadonly")]
         public decimal QuantityFailureWeights { get { return this.FoilUnitCounts > 0 ? this.QuantityFailure * this.FoilUnitWeights / this.FoilUnitCounts : 0; } set { } }
+
+        [Display(Name = "Phế phẩm")]
+        [UIHint("QuantityReadonly")]
+        public decimal QuantityExcess { get; set; }
+        [Display(Name = "PP (kg)")]
+        [UIHint("QuantityReadonly")]
+        public decimal QuantityExcessWeights { get { return this.FoilUnitCounts > 0 ? this.QuantityExcess * this.FoilUnitWeights / this.FoilUnitCounts : 0; } set { } }
+
+        [Display(Name = "Phế phẩm")]
+        [UIHint("QuantityReadonly")]
+        public decimal QuantityShortage { get; set; }
+        [Display(Name = "PP (kg)")]
+        [UIHint("QuantityReadonly")]
+        public decimal QuantityShortageWeights { get { return this.FoilUnitCounts > 0 ? this.QuantityShortage * this.FoilUnitWeights / this.FoilUnitCounts : 0; } set { } }
 
         [Display(Name = "Biên (kg)")]
         [UIHint("QuantityReadonly")]
