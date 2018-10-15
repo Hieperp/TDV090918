@@ -108,6 +108,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
             queryString = queryString + "       FROM            TransferOrders " + "\r\n";
             queryString = queryString + "                       INNER JOIN Warehouses ON TransferOrders.TransferOrderID IN (SELECT DISTINCT TransferOrderID FROM TransferOrderDetails WHERE LocationIssuedID = @LocationID AND NMVNTaskID = @NMVNTaskID - 1000000 AND Approved = 1 AND InActive = 0 AND InActivePartial = 0 AND ROUND(Quantity - QuantityIssued, " + (int)GlobalEnums.rndQuantity + ") > 0) AND TransferOrders.WarehouseID = Warehouses.WarehouseID " + "\r\n";
             queryString = queryString + "                       INNER JOIN Warehouses WarehouseReceipts ON TransferOrders.WarehouseReceiptID = WarehouseReceipts.WarehouseID " + "\r\n";
+            queryString = queryString + "       ORDER BY        TransferOrders.EntryDate DESC " + "\r\n";
 
             this.totalSmartPortalEntities.CreateStoredProcedure("GetWarehouseTransferPendingTransferOrders", queryString);
         }
@@ -347,7 +348,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Inventories
         private void WarehouseTransferSheet()
         {
             string queryString = " @WarehouseTransferID int " + "\r\n";
-            //queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
