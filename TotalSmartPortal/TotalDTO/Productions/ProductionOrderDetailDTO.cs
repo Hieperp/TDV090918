@@ -25,7 +25,7 @@ namespace TotalDTO.Productions
         [Display(Name = "Ngày KH")]
         [UIHint("DateTimeReadonly")]
         public Nullable<System.DateTime> FirmOrderEntryDate { get; set; }
-        [Display(Name = "Giao hàng")]
+        [Display(Name = "GH")]
         [UIHint("DateTimeReadonly")]
         public Nullable<System.DateTime> FirmOrderDeliveryDate { get; set; }
 

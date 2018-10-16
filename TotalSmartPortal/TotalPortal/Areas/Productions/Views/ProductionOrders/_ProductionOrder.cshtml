@@ -102,14 +102,14 @@
                         .ClientTemplate("#= (FirmOrderID == null)? '' : FirmOrderID #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].FirmOrderID' value='#= (FirmOrderID == null) ? '' : FirmOrderID #' />");
 
 
-                    columns.Bound(p => p.FirmOrderReference).DisplayNameTitle().Width(30).Hidden(@Model.PlannedOrderID == null ? false : true)
+                    columns.Bound(p => p.FirmOrderReference).DisplayNameTitle().Width(20).Hidden(@Model.PlannedOrderID == null ? false : true)
                         .ClientTemplate("#= (FirmOrderReference == null)? '' : FirmOrderReference #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].FirmOrderReference' value='#= (FirmOrderReference == null) ? '' : FirmOrderReference #' />");
-                    columns.Bound(p => p.FirmOrderCode).DisplayNameTitle().Width(30).Hidden(@Model.PlannedOrderID == null ? false : true)
+                    columns.Bound(p => p.FirmOrderCode).DisplayNameTitle().Width(20).Hidden(@Model.PlannedOrderID == null ? false : true)
                         .ClientTemplate("#= (FirmOrderCode == null)? '' : FirmOrderCode #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].FirmOrderCode' value='#= (FirmOrderCode == null) ? '' : FirmOrderCode #' />");                    
-                    columns.Bound(p => p.FirmOrderEntryDate).DisplayNameTitle().Width(30).Hidden()
+                    columns.Bound(p => p.FirmOrderEntryDate).DisplayNameTitle().Width(20).Hidden()
                         .Format("{0:" + @Settings.DateFormat + "}")
                         .ClientTemplate("#= (FirmOrderEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', FirmOrderEntryDate) #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].FirmOrderEntryDate' value='#= (FirmOrderEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', FirmOrderEntryDate) #' />");
-                    columns.Bound(p => p.FirmOrderDeliveryDate).DisplayNameTitle().Width(30).Hidden(@Model.PlannedOrderID == null ? false : true)
+                    columns.Bound(p => p.FirmOrderDeliveryDate).DisplayNameTitle().Width(20).Hidden(@Model.PlannedOrderID == null ? false : true)
                         .Format("{0:" + @Settings.DateFormat + "}")
                         .ClientTemplate("#= (FirmOrderDeliveryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', FirmOrderDeliveryDate) #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].FirmOrderDeliveryDate' value='#= (FirmOrderDeliveryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', FirmOrderDeliveryDate) #' />");
 
@@ -127,7 +127,7 @@
                         .ClientTemplate("#= (Specification == null)? '' : Specification #" +
                                 "<div> #= (VoidTypeName == null)? '' : VoidTypeName #</div>" +
                                 "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].Specification' value='#= (Specification == null) ? '' : Specification #' />");
-                    columns.Bound(p => p.Specs).DisplayNameTitle().Width(88)
+                    columns.Bound(p => p.Specs).DisplayNameTitle().Width(88).Hidden(@Model.PlannedOrderID == null ? true : false)
                         .ClientTemplate("#= Specs #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].Specs' value='#= Specs #' />");                    
                     
                     
