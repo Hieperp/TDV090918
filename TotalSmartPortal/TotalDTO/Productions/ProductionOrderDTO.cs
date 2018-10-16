@@ -35,6 +35,8 @@ namespace TotalDTO.Productions
         public string PlannedOrderCodeNote { get { return this.PlannedOrderID != null ? this.PlannedOrderCode : (this.PlannedOrderCodes != "" ? this.PlannedOrderCodes : ""); } }
         [Display(Name = "Ngày đặt hàng")]
         public Nullable<System.DateTime> PlannedOrderEntryDate { get; set; }
+        [Display(Name = "Ngày giao hàng")]
+        public Nullable<System.DateTime> PlannedOrderDeliveryDate { get; set; }
 
         [Display(Name = "Chứng từ")]
         public string Code { get; set; }

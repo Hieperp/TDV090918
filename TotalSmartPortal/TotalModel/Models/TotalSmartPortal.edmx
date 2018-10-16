@@ -13863,6 +13863,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="String" Name="CustomerAttentionName" Nullable="true" MaxLength="60" />
           <Property Type="Int32" Name="CustomerTerritoryID" Nullable="false" />
           <Property Type="String" Name="CustomerEntireTerritoryEntireName" Nullable="false" MaxLength="508" />
+          <Property Type="DateTime" Name="PlannedOrderDeliveryDate" Nullable="true" Precision="23" />
         </ComplexType>
         <EntityType Name="PurchaseRequisitionDetail">
           <Key>
@@ -14712,6 +14713,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
           <Property Type="Boolean" Name="IsSelected" Nullable="true" />
           <Property Type="String" Name="Specs" Nullable="true" MaxLength="800" />
+          <Property Type="DateTime" Name="FirmOrderDeliveryDate" Nullable="true" Precision="23" />
         </ComplexType>
         <ComplexType Name="ProductionOrderViewDetail">
           <Property Type="Int32" Name="ProductionOrderDetailID" Nullable="false" />
@@ -14736,6 +14738,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <Property Type="DateTime" Name="InActivePartialDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="Remarks" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Specs" Nullable="true" MaxLength="800" />
+          <Property Type="DateTime" Name="FirmOrderDeliveryDate" Nullable="true" Precision="23" />
         </ComplexType>
         <ComplexType Name="WorkshiftBase">
           <Property Type="Int32" Name="WorkshiftID" Nullable="false" />
@@ -20804,6 +20807,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="CustomerAttentionName" ColumnName="CustomerAttentionName" />
                 <ScalarProperty Name="CustomerTerritoryID" ColumnName="CustomerTerritoryID" />
                 <ScalarProperty Name="CustomerEntireTerritoryEntireName" ColumnName="CustomerEntireTerritoryEntireName" />
+                <ScalarProperty Name="PlannedOrderDeliveryDate" ColumnName="PlannedOrderDeliveryDate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -21218,6 +21222,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
                 <ScalarProperty Name="Specs" ColumnName="Specs" />
+                <ScalarProperty Name="FirmOrderDeliveryDate" ColumnName="FirmOrderDeliveryDate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -21246,6 +21251,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
                 <ScalarProperty Name="InActivePartialDate" ColumnName="InActivePartialDate" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="Specs" ColumnName="Specs" />
+                <ScalarProperty Name="FirmOrderDeliveryDate" ColumnName="FirmOrderDeliveryDate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

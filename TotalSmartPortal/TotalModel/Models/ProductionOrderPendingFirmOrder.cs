@@ -29,5 +29,6 @@ namespace TotalModel.Models
         public string Remarks { get; set; }
         public Nullable<bool> IsSelected { get; set; }
         public string Specs { get; set; }
+        public Nullable<System.DateTime> FirmOrderDeliveryDate { get; set; }
     }
 }

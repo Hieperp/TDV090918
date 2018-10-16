@@ -77,7 +77,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "    BEGIN " + "\r\n";
 
-            queryString = queryString + "       SELECT      ProductionOrderDetails.ProductionOrderDetailID, ProductionOrderDetails.ProductionOrderID, ProductionOrderDetails.PlannedOrderID, ProductionOrderDetails.FirmOrderID, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FirmOrders.EntryDate AS FirmOrderEntryDate, " + "\r\n";
+            queryString = queryString + "       SELECT      ProductionOrderDetails.ProductionOrderDetailID, ProductionOrderDetails.ProductionOrderID, ProductionOrderDetails.PlannedOrderID, ProductionOrderDetails.FirmOrderID, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FirmOrders.EntryDate AS FirmOrderEntryDate, FirmOrders.DeliveryDate AS FirmOrderDeliveryDate, " + "\r\n";
             queryString = queryString + "                   ProductionOrderDetails.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, ProductionOrderDetails.BomID, Boms.Code AS BomCode, " + "\r\n";
             queryString = queryString + "                   FirmOrders.Specs, FirmOrders.Specification, VoidTypes.VoidTypeID, VoidTypes.Code AS VoidTypeCode, VoidTypes.Name AS VoidTypeName, VoidTypes.VoidClassID, " + "\r\n";
             queryString = queryString + "                   ROUND(FirmOrderDetails.QuantityRemains, " + (int)GlobalEnums.rndQuantity + ") AS QuantityRemains, " + "\r\n";
@@ -100,7 +100,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
 
-            queryString = queryString + "       SELECT          PlannedOrders.PlannedOrderID, PlannedOrders.Reference AS PlannedOrderReference, PlannedOrders.Code AS PlannedOrderCode, PlannedOrders.EntryDate AS PlannedOrderEntryDate, PlannedOrders.Description, PlannedOrders.Remarks, " + "\r\n";
+            queryString = queryString + "       SELECT          PlannedOrders.PlannedOrderID, PlannedOrders.Reference AS PlannedOrderReference, PlannedOrders.Code AS PlannedOrderCode, PlannedOrders.EntryDate AS PlannedOrderEntryDate, PlannedOrders.DeliveryDate AS PlannedOrderDeliveryDate, PlannedOrders.Description, PlannedOrders.Remarks, " + "\r\n";
             queryString = queryString + "                       PlannedOrders.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, Customers.OfficialName AS CustomerOfficialName, Customers.VATCode AS CustomerVATCode, Customers.AttentionName AS CustomerAttentionName, Customers.TerritoryID AS CustomerTerritoryID, CustomerEntireTerritories.EntireName AS CustomerEntireTerritoryEntireName " + "\r\n";
 
             queryString = queryString + "       FROM            PlannedOrders " + "\r\n";
@@ -212,7 +212,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         {
             string queryString = "";
 
-            queryString = queryString + "       SELECT      FirmOrders.PlannedOrderID, FirmOrders.FirmOrderID, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FirmOrders.EntryDate AS FirmOrderEntryDate, " + "\r\n";
+            queryString = queryString + "       SELECT      FirmOrders.PlannedOrderID, FirmOrders.FirmOrderID, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FirmOrders.EntryDate AS FirmOrderEntryDate, FirmOrders.DeliveryDate AS FirmOrderDeliveryDate, " + "\r\n";
             queryString = queryString + "                   FirmOrders.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, FirmOrders.Specs, FirmOrders.Specification, FirmOrders.BomID, Boms.Code AS BomCode, " + "\r\n";
 
             queryString = queryString + "                   ROUND(FirmOrderDetails.QuantityRemains, " + (int)GlobalEnums.rndQuantity + ") AS QuantityRemains, " + "\r\n";
@@ -230,7 +230,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         {
             string queryString = "";
 
-            queryString = queryString + "       SELECT      FirmOrders.PlannedOrderID, FirmOrders.FirmOrderID, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FirmOrders.EntryDate AS FirmOrderEntryDate, " + "\r\n";
+            queryString = queryString + "       SELECT      FirmOrders.PlannedOrderID, FirmOrders.FirmOrderID, FirmOrders.Reference AS FirmOrderReference, FirmOrders.Code AS FirmOrderCode, FirmOrders.EntryDate AS FirmOrderEntryDate, FirmOrders.DeliveryDate AS FirmOrderDeliveryDate, " + "\r\n";
             queryString = queryString + "                   FirmOrders.CustomerID, Customers.Code AS CustomerCode, Customers.Name AS CustomerName, FirmOrders.Specs, FirmOrders.Specification, FirmOrders.BomID, Boms.Code AS BomCode, " + "\r\n";
 
             queryString = queryString + "                   ROUND(FirmOrderDetails.QuantityRemains, " + (int)GlobalEnums.rndQuantity + ") AS QuantityRemains, " + "\r\n";

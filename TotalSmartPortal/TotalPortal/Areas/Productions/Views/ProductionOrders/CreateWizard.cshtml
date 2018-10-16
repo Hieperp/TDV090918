@@ -15,6 +15,7 @@
     @Html.HiddenFor(model => model.PlannedOrderCode)
     @Html.HiddenFor(model => model.PlannedOrderReference)
     @Html.HiddenFor(model => model.PlannedOrderEntryDate)
+    @Html.HiddenFor(model => model.PlannedOrderDeliveryDate)
 
     @Html.HiddenFor(model => model.CustomerID)
     
@@ -112,6 +113,7 @@
             $("#PlannedOrderCode").val(selectedDataItem === undefined || selectedDataItem.PlannedOrderCode === undefined ? null : selectedDataItem.PlannedOrderCode);
             $("#PlannedOrderReference").val(selectedDataItem === undefined || selectedDataItem.PlannedOrderReference === undefined ? null : selectedDataItem.PlannedOrderReference);
             $("#PlannedOrderEntryDate").val(selectedDataItem === undefined || selectedDataItem.PlannedOrderEntryDate === undefined ? null : kendo.toString(selectedDataItem.PlannedOrderEntryDate, Settings.DateTimeFormat));
+            $("#PlannedOrderDeliveryDate").val(selectedDataItem === undefined || selectedDataItem.PlannedOrderDeliveryDate === undefined ? null : kendo.toString(selectedDataItem.PlannedOrderDeliveryDate, Settings.DateTimeFormat));
 
             $("#Description").val(selectedDataItem === undefined || selectedDataItem.Description === undefined ? null : selectedDataItem.Description);        
         }

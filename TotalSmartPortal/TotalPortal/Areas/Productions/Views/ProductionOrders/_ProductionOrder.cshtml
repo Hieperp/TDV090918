@@ -56,6 +56,19 @@
             </div>
         }
 
+        @if (Model.PlannedOrderDeliveryDate != null)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.PlannedOrderDeliveryDate)
+                <div class="div-input">
+                    @Html.Kendo().DateTimePickerFor(model => model.PlannedOrderDeliveryDate).HtmlAttributes(new { @class = "left-panel-input", @readonly = "readonly" })
+                </div>
+                <div class="div-validation-message">
+                    @Html.ValidationMessageFor(model => model.PlannedOrderDeliveryDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        
 
         @if (@Model.Voidable || @Model.UnVoidable || @Model.VoidTypeID > 0)
         { //Don't render when in Edit Mode, so: do not add VoidType.VoidTypeID [Required] DataAnnotations to the view to submit to controller when edit
@@ -96,6 +109,9 @@
                     columns.Bound(p => p.FirmOrderEntryDate).DisplayNameTitle().Width(30).Hidden()
                         .Format("{0:" + @Settings.DateFormat + "}")
                         .ClientTemplate("#= (FirmOrderEntryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', FirmOrderEntryDate) #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].FirmOrderEntryDate' value='#= (FirmOrderEntryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', FirmOrderEntryDate) #' />");
+                    columns.Bound(p => p.FirmOrderDeliveryDate).DisplayNameTitle().Width(30).Hidden(@Model.PlannedOrderID == null ? false : true)
+                        .Format("{0:" + @Settings.DateFormat + "}")
+                        .ClientTemplate("#= (FirmOrderDeliveryDate == null)? '' : kendo.format('{0:" + @Settings.DateFormat + "}', FirmOrderDeliveryDate) #" + "<input type='hidden' name='ProductionOrderViewDetails[#= index(data) #].FirmOrderDeliveryDate' value='#= (FirmOrderDeliveryDate == null) ? '' : kendo.format('{0:" + @Settings.DateFormat + "}', FirmOrderDeliveryDate) #' />");
 
 
                     columns.Bound(p => p.CustomerID).DisplayNameTitle().Hidden()

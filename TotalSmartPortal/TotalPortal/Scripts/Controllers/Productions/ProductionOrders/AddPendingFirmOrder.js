@@ -51,6 +51,7 @@ function handleOKEvent(productionOrderGridDataSource, pendingFirmOrderGridDataSo
         dataRow.FirmOrderCode = plannedOrderGridDataItem.FirmOrderCode;
         dataRow.FirmOrderReference = plannedOrderGridDataItem.FirmOrderReference;
         dataRow.FirmOrderEntryDate = plannedOrderGridDataItem.FirmOrderEntryDate;
+        dataRow.FirmOrderDeliveryDate = plannedOrderGridDataItem.FirmOrderDeliveryDate;
 
         dataRow.CustomerID = plannedOrderGridDataItem.CustomerID;
         dataRow.CustomerName = plannedOrderGridDataItem.CustomerName;
