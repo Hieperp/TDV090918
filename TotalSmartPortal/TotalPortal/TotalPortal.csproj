@@ -298,6 +298,7 @@
     <Compile Include="Areas\Inventories\Controllers\Sessions\GoodsDeliverySession.cs" />
     <Compile Include="Areas\Inventories\Controllers\Sessions\GoodsIssueSession.cs" />
     <Compile Include="Areas\Inventories\Controllers\Sessions\HandlingUnitSession.cs" />
+    <Compile Include="Areas\Inventories\Controllers\Sessions\MaterialIssueSession.cs" />
     <Compile Include="Areas\Inventories\Controllers\TransferOrdersController.cs" />
     <Compile Include="Areas\Inventories\Controllers\WarehouseAdjustmentsController.cs" />
     <Compile Include="Areas\Inventories\Controllers\WarehouseTransfersController.cs" />
@@ -328,6 +329,7 @@
     <Compile Include="Areas\Productions\Controllers\ProductionOrdersController.cs" />
     <Compile Include="Areas\Productions\Controllers\SemifinishedHandoversController.cs" />
     <Compile Include="Areas\Productions\Controllers\SemifinishedProductsController.cs" />
+    <Compile Include="Areas\Productions\Controllers\Sessions\FinishedProductSession.cs" />
     <Compile Include="Areas\Productions\ProductionsAreaRegistration.cs" />
     <Compile Include="Areas\Productions\ViewModels\FinishedHandoverViewModel.cs" />
     <Compile Include="Areas\Productions\ViewModels\FinishedProductViewModel.cs" />
@@ -837,6 +839,7 @@
     <Content Include="Content\Images\New\Sale2-32.png" />
     <Content Include="Content\Images\New\Save-icon-blue.png" />
     <Content Include="Content\Images\New\save-icon.png" />
+    <Content Include="Content\Images\New\Save-print.png" />
     <Content Include="Content\Images\New\save-verify-icon.png" />
     <Content Include="Content\Images\New\sprite.png" />
     <Content Include="Content\Images\New\supplier_div_bg.png" />

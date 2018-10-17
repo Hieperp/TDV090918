@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using System.Text;
 using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
 
 using AutoMapper;
 using RequireJsNet;
@@ -17,10 +18,12 @@ using TotalCore.Repositories.Commons;
 
 using TotalDTO.Productions;
 
+using TotalPortal.APIs.Sessions;
+
 using TotalPortal.Controllers;
 using TotalPortal.Areas.Productions.ViewModels;
 using TotalPortal.Areas.Productions.Builders;
-using System.Collections.Generic;
+using TotalPortal.Areas.Productions.Controllers.Sessions;
 
 namespace TotalPortal.Areas.Productions.Controllers
 {
@@ -93,6 +96,31 @@ namespace TotalPortal.Areas.Productions.Controllers
 
             ViewBag.WarehouseTaskID = (int)GlobalEnums.WarehouseTaskID.DeliveryAdvice;
             ViewBag.WarehouseTaskIDList = warehouseTaskIDList.ToString();
+        }
+
+        protected override FinishedProductViewModel InitViewModelByDefault(FinishedProductViewModel simpleViewModel)
+        {
+            simpleViewModel = base.InitViewModelByDefault(simpleViewModel);
+
+            if (simpleViewModel.CrucialWorker == null)
+            {
+                string storekeeperSession = FinishedProductSession.GetCrucialWorker(this.HttpContext);
+
+                if (HomeSession.TryParseID(storekeeperSession) > 0)
+                {
+                    simpleViewModel.CrucialWorker = new TotalDTO.Commons.EmployeeBaseDTO();
+                    simpleViewModel.CrucialWorker.EmployeeID = (int)HomeSession.TryParseID(storekeeperSession);
+                    simpleViewModel.CrucialWorker.Name = HomeSession.TryParseName(storekeeperSession);
+                }
+            }
+
+            return simpleViewModel;
+        }
+
+        protected override void BackupViewModelToSession(FinishedProductViewModel simpleViewModel)
+        {
+            base.BackupViewModelToSession(simpleViewModel);
+            FinishedProductSession.SetCrucialWorker(this.HttpContext, simpleViewModel.CrucialWorker.EmployeeID, simpleViewModel.CrucialWorker.Name);
         }
 
         public virtual ActionResult GetPendingFirmOrderMaterials()

@@ -17,6 +17,8 @@ using TotalDTO.Inventories;
 using TotalPortal.Controllers;
 using TotalPortal.Areas.Inventories.ViewModels;
 using TotalPortal.Areas.Inventories.Builders;
+using TotalPortal.Areas.Inventories.Controllers.Sessions;
+using TotalPortal.APIs.Sessions;
 
 namespace TotalPortal.Areas.Inventories.Controllers
 {
@@ -49,6 +51,44 @@ namespace TotalPortal.Areas.Inventories.Controllers
         {
             this.AddRequireJsOptions();
             return View();
+        }
+
+        protected override MaterialIssueViewModel InitViewModelByDefault(MaterialIssueViewModel simpleViewModel)
+        {
+            simpleViewModel = base.InitViewModelByDefault(simpleViewModel);
+
+            if (simpleViewModel.Storekeeper == null)
+            {
+                string storekeeperSession = MaterialIssueSession.GetStorekeeper(this.HttpContext);
+
+                if (HomeSession.TryParseID(storekeeperSession) > 0)
+                {
+                    simpleViewModel.Storekeeper = new TotalDTO.Commons.EmployeeBaseDTO();
+                    simpleViewModel.Storekeeper.EmployeeID = (int)HomeSession.TryParseID(storekeeperSession);
+                    simpleViewModel.Storekeeper.Name = HomeSession.TryParseName(storekeeperSession);
+                }
+            }
+
+            if (simpleViewModel.CrucialWorker == null)
+            {
+                string storekeeperSession = MaterialIssueSession.GetCrucialWorker(this.HttpContext);
+
+                if (HomeSession.TryParseID(storekeeperSession) > 0)
+                {
+                    simpleViewModel.CrucialWorker = new TotalDTO.Commons.EmployeeBaseDTO();
+                    simpleViewModel.CrucialWorker.EmployeeID = (int)HomeSession.TryParseID(storekeeperSession);
+                    simpleViewModel.CrucialWorker.Name = HomeSession.TryParseName(storekeeperSession);
+                }
+            }
+
+            return simpleViewModel;
+        }
+
+        protected override void BackupViewModelToSession(MaterialIssueViewModel simpleViewModel)
+        {
+            base.BackupViewModelToSession(simpleViewModel);
+            MaterialIssueSession.SetStorekeeper(this.HttpContext, simpleViewModel.Storekeeper.EmployeeID, simpleViewModel.Storekeeper.Name);
+            MaterialIssueSession.SetCrucialWorker(this.HttpContext, simpleViewModel.CrucialWorker.EmployeeID, simpleViewModel.CrucialWorker.Name);
         }
     }
 
