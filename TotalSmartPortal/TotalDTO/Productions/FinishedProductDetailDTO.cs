@@ -63,8 +63,8 @@ namespace TotalDTO.Productions
         [UIHint("QuantityReadonly")]
         public decimal QuantityRemains { get; set; }
 
-        [Display(Name = "T-Phẩm")]
-        [UIHint("Quantity")]
+        [Display(Name = "Trừ phôi")]
+        [UIHint("QuantityReadonly")]
         public override decimal Quantity { get; set; }
 
         [Display(Name = "P-Phẩm")]
@@ -72,12 +72,16 @@ namespace TotalDTO.Productions
         public decimal QuantityFailure { get; set; }
 
         [Display(Name = "Thừa")]
-        [UIHint("Quantity")]
+        [UIHint("QuantityReadonly")]
         public decimal QuantityExcess { get; set; }
 
         [Display(Name = "Thiếu")]
         [UIHint("Quantity")]
         public decimal QuantityShortage { get; set; }
+
+        [Display(Name = "T-Phẩm")]
+        [UIHint("Quantity")]
+        public decimal QuantityAndExcess { get { return this.Quantity + this.QuantityExcess; } set { } }
 
         [Display(Name = "Biên kg")]
         [UIHint("Quantity")]
