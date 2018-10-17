@@ -38,22 +38,45 @@ namespace TotalPortal.Areas.Productions.Controllers
             return semifinishedProductViewDetails;
         }
 
-        public override void AddRequireJsOptions()
+        protected override SemifinishedProductViewModel InitViewModelByCopy(SemifinishedProductViewModel simpleViewModel)
         {
-            base.AddRequireJsOptions();
+            return new SemifinishedProductViewModel()
+            {
+                MaterialIssueID = simpleViewModel.MaterialIssueID,
+                MaterialIssueDetailID = simpleViewModel.MaterialIssueDetailID,
+                
+                GoodsReceiptID = simpleViewModel.GoodsReceiptID,
+                GoodsReceiptDetailID = simpleViewModel.GoodsReceiptDetailID,
+                GoodsReceiptReference = simpleViewModel.GoodsReceiptReference,
+                GoodsReceiptEntryDate = simpleViewModel.GoodsReceiptEntryDate,
+                
+                FirmOrderID = simpleViewModel.FirmOrderID,
+                FirmOrderCode = simpleViewModel.FirmOrderCode,
+                FirmOrderReference = simpleViewModel.FirmOrderReference,
+                FirmOrderEntryDate = simpleViewModel.FirmOrderEntryDate,
+                FirmOrderSpecification = simpleViewModel.FirmOrderSpecification,
+                
+                MaterialIssueDetailWorkshiftID = simpleViewModel.MaterialIssueDetailWorkshiftID,
+                MaterialIssueDetailWorkshiftCode = simpleViewModel.MaterialIssueDetailWorkshiftCode,
+                MaterialIssueDetailWorkshiftEntryDate = simpleViewModel.MaterialIssueDetailWorkshiftEntryDate,
 
-            StringBuilder commodityTypeIDList = new StringBuilder();
-            commodityTypeIDList.Append((int)GlobalEnums.CommodityTypeID.Items);
-            commodityTypeIDList.Append(","); commodityTypeIDList.Append((int)GlobalEnums.CommodityTypeID.Consumables);
+                ProductionLineID = simpleViewModel.ProductionLineID,
+                ProductionLineCode = simpleViewModel.ProductionLineCode,
 
-            RequireJsOptions.Add("commodityTypeIDList", commodityTypeIDList.ToString(), RequireJsOptionsScope.Page);
+                MaterialCode = simpleViewModel.MaterialCode,
+                MaterialName = simpleViewModel.MaterialName,
+                MaterialQuantity = simpleViewModel.MaterialQuantity,
+                MaterialQuantityRemains = this.semifinishedProductService.GetMaterialQuantityRemains(simpleViewModel.MaterialIssueDetailID),
+                
+                Customer = simpleViewModel.Customer,
 
+                ShiftID = simpleViewModel.ShiftID,
+                StartSequenceNo = simpleViewModel.StopSequenceNo + 1,
+                FoilUnitCounts = simpleViewModel.FoilUnitCounts,
+                FoilUnitWeights = simpleViewModel.FoilUnitWeights,
 
-            StringBuilder warehouseTaskIDList = new StringBuilder();
-            warehouseTaskIDList.Append((int)GlobalEnums.WarehouseTaskID.DeliveryAdvice);
-
-            ViewBag.WarehouseTaskID = (int)GlobalEnums.WarehouseTaskID.DeliveryAdvice;
-            ViewBag.WarehouseTaskIDList = warehouseTaskIDList.ToString();
+                CrucialWorker = simpleViewModel.CrucialWorker
+            };
         }
 
         public virtual ActionResult GetPendingFirmOrderMaterials()

@@ -67,7 +67,7 @@ namespace TotalPortal.Areas.Productions.Controllers
                                                 FoilUnitWeights = 1,
 
                                                 QuantityRemains = sl.Sum(s => s.QuantityRemains),
-                                                Quantity = sl.Sum(s => (s.Quantity + s.QuantityExcess - s.QuantityShortage)),
+                                                Quantity = sl.Sum(s => (s.Quantity + s.QuantityExcess)),
                                                 QuantityFailure = sl.Sum(s => s.QuantityFailure),
                                                 Swarfs = sl.Sum(s => s.Swarfs),
                                             });

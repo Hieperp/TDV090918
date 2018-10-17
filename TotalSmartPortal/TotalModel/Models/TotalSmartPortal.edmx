@@ -6084,6 +6084,9 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
         <Function Name="GetSemifinishedProductPendingMaterialIssueDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="LocationID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetSemifinishedProductPendingMaterialQuantityRemains" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaterialIssueDetailID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetSemifinishedProductViewDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SemifinishedProductID" Type="int" Mode="In" />
           <Parameter Name="FirmOrderID" Type="int" Mode="In" />
@@ -12460,6 +12463,9 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           <FunctionImport Name="CommoditySaveRelative">
             <Parameter Name="EntityID" Mode="In" Type="Int32" />
             <Parameter Name="SaveRelativeOption" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetSemifinishedProductPendingMaterialQuantityRemains" ReturnType="Collection(Decimal)">
+            <Parameter Name="MaterialIssueDetailID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="AccountInvoiceIndex">
@@ -22877,6 +22883,7 @@ warning 6035: The relationship 'FK_WarehouseTransfers_AspNetUsers2' has columns 
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="CommodityDeletable" FunctionName="TotalSmartPortalModel.Store.CommodityDeletable" />
           <FunctionImportMapping FunctionImportName="CommoditySaveRelative" FunctionName="TotalSmartPortalModel.Store.CommoditySaveRelative" />
+          <FunctionImportMapping FunctionImportName="GetSemifinishedProductPendingMaterialQuantityRemains" FunctionName="TotalSmartPortalModel.Store.GetSemifinishedProductPendingMaterialQuantityRemains" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

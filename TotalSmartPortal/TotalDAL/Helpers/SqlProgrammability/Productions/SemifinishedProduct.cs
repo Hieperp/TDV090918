@@ -21,6 +21,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.GetSemifinishedProductIndexes();
 
             this.GetSemifinishedProductPendingMaterialIssueDetails();
+            this.GetSemifinishedProductPendingMaterialQuantityRemains();
 
             this.GetSemifinishedProductViewDetails();
 
@@ -106,6 +107,17 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.totalSmartPortalEntities.CreateStoredProcedure("GetSemifinishedProductPendingMaterialIssueDetails", queryString);
         }
 
+        private void GetSemifinishedProductPendingMaterialQuantityRemains()
+        {
+            string queryString = " @MaterialIssueDetailID int " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "       SELECT          ROUND(Quantity - QuantitySemifinished - QuantityFailure - QuantityReceipted - QuantityLoss, " + (int)GlobalEnums.rndQuantity + ") AS MaterialQuantityRemains " + "\r\n";
+            queryString = queryString + "       FROM            MaterialIssueDetails WHERE MaterialIssueDetailID = @MaterialIssueDetailID " + "\r\n";
+
+            this.totalSmartPortalEntities.CreateStoredProcedure("GetSemifinishedProductPendingMaterialQuantityRemains", queryString);
+        }
 
         private void SemifinishedProductSaveRelative()
         {

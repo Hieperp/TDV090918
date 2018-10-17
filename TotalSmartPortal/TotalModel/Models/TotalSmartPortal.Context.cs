@@ -4015,5 +4015,14 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CommoditySaveRelative", entityIDParameter, saveRelativeOptionParameter);
         }
+    
+        public virtual ObjectResult<Nullable<decimal>> GetSemifinishedProductPendingMaterialQuantityRemains(Nullable<int> materialIssueDetailID)
+        {
+            var materialIssueDetailIDParameter = materialIssueDetailID.HasValue ?
+                new ObjectParameter("MaterialIssueDetailID", materialIssueDetailID) :
+                new ObjectParameter("MaterialIssueDetailID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("GetSemifinishedProductPendingMaterialQuantityRemains", materialIssueDetailIDParameter);
+        }
     }
 }

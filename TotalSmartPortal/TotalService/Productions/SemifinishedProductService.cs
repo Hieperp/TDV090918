@@ -11,9 +11,11 @@ namespace TotalService.Productions
 {
     public class SemifinishedProductService : GenericWithViewDetailService<SemifinishedProduct, SemifinishedProductDetail, SemifinishedProductViewDetail, SemifinishedProductDTO, SemifinishedProductPrimitiveDTO, SemifinishedProductDetailDTO>, ISemifinishedProductService
     {
+        ISemifinishedProductRepository semifinishedProductRepository;
         public SemifinishedProductService(ISemifinishedProductRepository semifinishedProductRepository)
             : base(semifinishedProductRepository, "SemifinishedProductPostSaveValidate", "SemifinishedProductSaveRelative", "SemifinishedProductToggleApproved", null, null, "GetSemifinishedProductViewDetails")
         {
+            this.semifinishedProductRepository = semifinishedProductRepository;
         }
 
         public override ICollection<SemifinishedProductViewDetail> GetViewDetails(int semifinishedProductID)
@@ -32,5 +34,8 @@ namespace TotalService.Productions
             semifinishedProductDTO.SemifinishedProductViewDetails.RemoveAll(x => x.Quantity == 0);
             return base.Save(semifinishedProductDTO);
         }
+
+
+        public decimal GetMaterialQuantityRemains(int? materialIssueDetailID) { return this.semifinishedProductRepository.GetMaterialQuantityRemains(materialIssueDetailID); }
     }
 }

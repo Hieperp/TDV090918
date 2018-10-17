@@ -449,7 +449,7 @@
 
             detailDataRows.forEach(function (detailDataItem) {
                 if (detailDataItem["CommodityID"] === commodityID) {
-                    quantity = quantity + detailDataItem["Quantity"] + detailDataItem["QuantityExcess"] - detailDataItem["QuantityShortage"];
+                    quantity = quantity + detailDataItem["Quantity"] + detailDataItem["QuantityExcess"];
                     quantityFailure = quantityFailure + detailDataItem["QuantityFailure"];
                     swarfs = swarfs + detailDataItem["Swarfs"];
                 }

@@ -12,9 +12,6 @@
     @Html.Partial("~/Views/Helpers/Bases/_BaseSectionTop.cshtml")
     @Html.Partial("~/Views/Helpers/Bases/_BaseSectionTopB.cshtml")
 
-    @Html.Hidden("WarehouseTaskID", (int)@ViewBag.WarehouseTaskID);
-    @Html.Hidden("WarehouseTaskIDList", (string)@ViewBag.WarehouseTaskIDList);
-
     @Html.HiddenFor(model => model.SemifinishedProductID)
 
     @Html.HiddenFor(model => model.MaterialIssueID)
@@ -353,6 +350,7 @@
             {
                 <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "SemifinishedProducts")" onclick="$('#Approved').val(false);"> <img src="~/Content/Images/New/save-icon.png" /> Lưu </button>
                 <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "SemifinishedProducts")" onclick="$('#Approved').val(true);"> <img src="~/Content/Images/New/save-verify-icon.png" /> Lưu và duyệt </button>
+                <button type="submit" class="k-button custom-button SubmitTypeOption-Create" formaction="@Url.Action("Edit", "SemifinishedProducts")" onclick="$('#Approved').val(true);"> <img src="~/Content/Images/New/save-verify-icon.png" /> Lưu, duyệt và lập phiếu </button>
                 <button type="submit" class="k-button custom-button SubmitTypeOption-Closed" formaction="@Url.Action("Edit", "SemifinishedProducts")" onclick="$('#Approved').val(true); $('#PrintAfterClosedSubmit').val(true);"> <img src="~/Content/Images/New/Actions-document-print-icon.png" /> Lưu, duyệt và in </button>
             }
             else

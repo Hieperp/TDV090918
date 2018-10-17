@@ -17,7 +17,9 @@
 
     @Html.HiddenFor(model => model.GoodsReceiptID)
     @Html.HiddenFor(model => model.GoodsReceiptDetailID)
-
+    @Html.HiddenFor(model => model.GoodsReceiptReference)
+    @Html.HiddenFor(model => model.GoodsReceiptEntryDate)
+    
     @Html.HiddenFor(model => model.FirmOrderID)
     @Html.HiddenFor(model => model.FirmOrderCode)
     @Html.HiddenFor(model => model.FirmOrderReference)
@@ -52,8 +54,6 @@
     @Html.HiddenFor(model => model.MaterialQuantity)
     @Html.HiddenFor(model => model.MaterialQuantityRemains)
 
-    @Html.HiddenFor(model => model.GoodsReceiptReference)
-    @Html.HiddenFor(model => model.GoodsReceiptEntryDate)
 
     @Html.HiddenFor(model => model.CrucialWorker.EmployeeID);
     @Html.HiddenFor(model => model.CrucialWorker.Name);

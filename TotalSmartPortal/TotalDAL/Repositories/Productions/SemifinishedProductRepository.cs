@@ -16,6 +16,12 @@ namespace TotalDAL.Repositories.Productions
             : base(totalSmartPortalEntities, "SemifinishedProductEditable", "SemifinishedProductApproved")
         {
         }
+
+        public decimal GetMaterialQuantityRemains(int? materialIssueDetailID)
+        {
+            decimal? materialQuantityRemains = base.TotalSmartPortalEntities.GetSemifinishedProductPendingMaterialQuantityRemains(materialIssueDetailID).FirstOrDefault();
+            return materialQuantityRemains == null ? 0 : (decimal)materialQuantityRemains;
+        }
     }
 
     public class SemifinishedProductAPIRepository : GenericAPIRepository, ISemifinishedProductAPIRepository
@@ -32,7 +38,7 @@ namespace TotalDAL.Repositories.Productions
             this.TotalSmartPortalEntities.Configuration.ProxyCreationEnabled = true;
 
             return pendingMaterialIssueDetail;
-        }     
+        }
 
     }
 }
