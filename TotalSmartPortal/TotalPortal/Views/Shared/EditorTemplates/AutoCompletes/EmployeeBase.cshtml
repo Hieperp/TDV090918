@@ -13,7 +13,7 @@
     @(Html.Kendo().AutoCompleteFor(model => model.Name)
         .DataTextField("Name")
         .Filter("contains")
-        .MinLength(Settings.AutoCompleteMinLenght)
+        .MinLength(1)
         .Placeholder("Chọn nhân viên...")
         .DataSource(source =>
         {

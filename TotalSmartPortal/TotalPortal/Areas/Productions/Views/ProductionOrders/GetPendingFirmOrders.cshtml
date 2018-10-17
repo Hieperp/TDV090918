@@ -11,6 +11,7 @@
         columns.Bound(c => c.FirmOrderReference).Title("KHSX").Width(25).HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" });
         columns.Bound(c => c.FirmOrderCode).Title("Số CT").Width(25).HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" });
         columns.Bound(c => c.FirmOrderEntryDate).Title("Ngày KHSX").Width(39).Format("{0:" + Settings.DateFormat + "}").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" });
+        columns.Bound(c => c.FirmOrderDeliveryDate).Title("Giao hàng").Width(39).Format("{0:" + Settings.DateFormat + "}").HtmlAttributes(new { @class = "grid-column-center" }).HeaderHtmlAttributes(new { @style = "text-align: center" });
         columns.Bound(c => c.CustomerName).Title("Khách hàng").Width(60);
         columns.Bound(c => c.Specification).Title("Mã hàng").Width(68);        
         columns.Bound(c => c.Specs).Title("Tên hàng").Width(96);        

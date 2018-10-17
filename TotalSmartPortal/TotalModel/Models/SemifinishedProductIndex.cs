@@ -26,5 +26,7 @@ namespace TotalModel.Models
         public System.DateTime WorkshiftEntryDate { get; set; }
         public string WorkshiftCode { get; set; }
         public decimal TotalQuantity { get; set; }
+        public string FirmOrdersReference { get; set; }
+        public string FirmOrdersCode { get; set; }
     }
 }
