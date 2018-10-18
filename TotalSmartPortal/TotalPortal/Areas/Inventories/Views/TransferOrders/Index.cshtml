@@ -16,9 +16,9 @@
 
                 columns.Bound(p => p.Reference).Title("Số phiếu").Width(10).ClientTemplate("<a href='" + Url.RouteUrl("Default", new { controller = "Inventories/" + Model.ControllerName, action = "Edit" }) + "/#= TransferOrderID #'>#=Reference#</a>");
                 columns.Bound(p => p.TransferOrderTypeName).Title("PL").Width(10);
-                columns.Bound(p => p.AdjustmentJobs).Title("Mục đích").Width(108);
-                columns.Bound(p => p.Caption).Title("Mặt hàng").Width(138);
-                columns.Bound(p => p.Description).Title("Diễn giải").Width(50);
+                columns.Bound(p => p.Caption).Title("Mặt hàng").Width(190);
+                
+                columns.Bound(p => p.TransferOrderJobs).Title("Mục đích").Width(118);
                 columns.Bound(p => p.VoidTypeName).Title("Hủy lệnh").Width(30);
                 
                 columns.Bound(p => p.TotalQuantity).Title("SL").Format(Settings.kfmQuantity).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(10);                

@@ -25,5 +25,6 @@ namespace TotalModel.Models
         public Nullable<bool> HasTransferOrder { get; set; }
         public int LocationReceiptID { get; set; }
         public int LocationIssuedID { get; set; }
+        public string TransferOrderJobs { get; set; }
     }
 }

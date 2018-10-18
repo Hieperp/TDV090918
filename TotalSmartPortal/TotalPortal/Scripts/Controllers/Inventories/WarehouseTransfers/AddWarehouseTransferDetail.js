@@ -75,7 +75,7 @@ function handleOKEvent(warehouseTransferGridDataSource, goodsReceiptDetailAvaila
         dataRow.QuantityAvailables = warehouseTransferGridDataItem.QuantityAvailables;
         dataRow.Quantity = warehouseTransferGridDataItem.QuantityAvailables; //INIT BY THE WHOLE QuantityAvailables
 
-        dataRow.Remarks = null;
+        dataRow.Remarks = warehouseTransferGridDataItem.Remarks;
 
         warehouseTransferJSON.push(dataRow);
     }

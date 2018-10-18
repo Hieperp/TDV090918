@@ -39,13 +39,14 @@ namespace TotalModel.Models
         public int ApproverID { get; set; }
         public decimal TotalQuantity { get; set; }
         public decimal TotalQuantityReceipted { get; set; }
+        public string WarehouseTransferJobs { get; set; }
+        public string Caption { get; set; }
         public string Description { get; set; }
         public string Remarks { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime EditedDate { get; set; }
         public bool Approved { get; set; }
         public Nullable<System.DateTime> ApprovedDate { get; set; }
-        public string Caption { get; set; }
     
         public virtual Employee Employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

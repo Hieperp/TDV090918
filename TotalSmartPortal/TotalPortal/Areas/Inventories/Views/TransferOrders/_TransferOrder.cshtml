@@ -46,13 +46,13 @@
         <div class="right-top-panel right-top-panel-H2">
             <div class="form-group">
                 <div class="right-panel-label right-panel-label-whole-width">
-                    @Html.LabelFor(model => (model as ITransferOrderPrimitiveDTO).AdjustmentJobs)
+                    @Html.LabelFor(model => (model as ITransferOrderPrimitiveDTO).TransferOrderJobs)
                 </div>
                 <div class="div-input">
-                    @Html.Kendo().MaskedTextBoxFor(model => (model as ITransferOrderPrimitiveDTO).AdjustmentJobs).HtmlAttributes(new { @class = "right-panel-input" })
+                    @Html.Kendo().MaskedTextBoxFor(model => (model as ITransferOrderPrimitiveDTO).TransferOrderJobs).HtmlAttributes(new { @class = "right-panel-input" })
                 </div>
                 <div class="div-validation-message">
-                    @Html.ValidationMessageFor(model => (model as ITransferOrderPrimitiveDTO).AdjustmentJobs, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => (model as ITransferOrderPrimitiveDTO).TransferOrderJobs, "", new { @class = "text-danger" })
                 </div>
             </div>            
 

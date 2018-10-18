@@ -27,17 +27,19 @@ namespace TotalModel.Models
         public string Reference { get; set; }
         public int NMVNTaskID { get; set; }
         public int WarehouseID { get; set; }
+        public int LocationIssuedID { get; set; }
         public int WarehouseReceiptID { get; set; }
         public int LocationReceiptID { get; set; }
         public int TransferOrderTypeID { get; set; }
         public int StorekeeperID { get; set; }
         public bool HasPositiveLine { get; set; }
-        public string AdjustmentJobs { get; set; }
+        public string TransferOrderJobs { get; set; }
         public int UserID { get; set; }
         public int PreparedPersonID { get; set; }
         public int OrganizationalUnitID { get; set; }
         public int LocationID { get; set; }
         public decimal TotalQuantity { get; set; }
+        public string Caption { get; set; }
         public string Description { get; set; }
         public string Remarks { get; set; }
         public System.DateTime CreatedDate { get; set; }
@@ -48,11 +50,10 @@ namespace TotalModel.Models
         public bool InActive { get; set; }
         public bool InActivePartial { get; set; }
         public Nullable<System.DateTime> InActiveDate { get; set; }
-        public int LocationIssuedID { get; set; }
-        public string Caption { get; set; }
     
         public virtual Location Location { get; set; }
         public virtual Location Location1 { get; set; }
+        public virtual Location Location2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransferOrderDetail> TransferOrderDetails { get; set; }
         public virtual TransferOrderType TransferOrderType { get; set; }
@@ -61,7 +62,6 @@ namespace TotalModel.Models
         public virtual Warehouse Warehouse1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WarehouseTransferDetail> WarehouseTransferDetails { get; set; }
-        public virtual Location Location2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WarehouseTransfer> WarehouseTransfers { get; set; }
     }

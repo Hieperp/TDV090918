@@ -107,11 +107,11 @@ namespace TotalModel.Models
         public virtual DbSet<ModuleDefault> ModuleDefaults { get; set; }
         public virtual DbSet<FinishedHandover> FinishedHandovers { get; set; }
         public virtual DbSet<TransferOrderDetail> TransferOrderDetails { get; set; }
-        public virtual DbSet<TransferOrder> TransferOrders { get; set; }
-        public virtual DbSet<WarehouseTransfer> WarehouseTransfers { get; set; }
         public virtual DbSet<FinishedProductPackage> FinishedProductPackages { get; set; }
         public virtual DbSet<PlannedOrder> PlannedOrders { get; set; }
         public virtual DbSet<ProductionOrder> ProductionOrders { get; set; }
+        public virtual DbSet<TransferOrder> TransferOrders { get; set; }
+        public virtual DbSet<WarehouseTransfer> WarehouseTransfers { get; set; }
     
         public virtual ObjectResult<string> AccountInvoicePostSaveValidate(Nullable<int> entityID)
         {

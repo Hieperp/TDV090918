@@ -29,7 +29,7 @@ namespace TotalDTO.Inventories
         Nullable<int> LocationReceiptID { get; set; }
 
         [Display(Name = "Mục đích")]
-        string AdjustmentJobs { get; set; }
+        string TransferOrderJobs { get; set; }
         int StorekeeperID { get; set; }
     }
 
@@ -50,7 +50,7 @@ namespace TotalDTO.Inventories
         public virtual Nullable<int> WarehouseReceiptID { get; set; }
         public virtual Nullable<int> LocationReceiptID { get; set; }
 
-        public string AdjustmentJobs { get; set; }
+        public string TransferOrderJobs { get; set; }
 
         public virtual int StorekeeperID { get; set; }
 

@@ -37,5 +37,6 @@ namespace TotalModel.Models
         public int Quantity { get; set; }
         public Nullable<bool> IsSelected { get; set; }
         public Nullable<decimal> TransferOrderRemains { get; set; }
+        public string Remarks { get; set; }
     }
 }

@@ -32,9 +32,13 @@ namespace TotalDTO.Inventories
         Nullable<int> WarehouseReceiptID { get; set; }
         Nullable<int> LocationReceiptID { get; set; }
         Nullable<int> TransferOrderID { get; set; }
+        [Display(Name = "Lệnh VCNB")]
+        string TransferOrderReference { get; set; }
+        [Display(Name = "Ngày lệnh VCNB")]
+        Nullable<System.DateTime> TransferOrderEntryDate { get; set; }
 
         [Display(Name = "Mục đích")]
-        string AdjustmentJobs { get; set; }
+        string WarehouseTransferJobs { get; set; }
         int StorekeeperID { get; set; }
     }
 
@@ -56,9 +60,14 @@ namespace TotalDTO.Inventories
         public virtual Nullable<int> LocationIssuedID { get; set; }
         public virtual Nullable<int> WarehouseReceiptID { get; set; }
         public virtual Nullable<int> LocationReceiptID { get; set; }
+        
         public virtual Nullable<int> TransferOrderID { get; set; }
+        [Display(Name = "Lệnh VCNB")]
+        public string TransferOrderReference { get; set; }
+        [Display(Name = "Ngày lệnh VCNB")]
+        public Nullable<System.DateTime> TransferOrderEntryDate { get; set; }
 
-        public string AdjustmentJobs { get; set; }
+        public string WarehouseTransferJobs { get; set; }
 
         public virtual int StorekeeperID { get; set; }
 

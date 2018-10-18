@@ -19,7 +19,6 @@ namespace TotalModel.Models
         public string LocationCode { get; set; }
         public int TransferOrderTypeID { get; set; }
         public string TransferOrderTypeName { get; set; }
-        public string AdjustmentJobs { get; set; }
         public string Description { get; set; }
         public decimal TotalQuantity { get; set; }
         public bool Approved { get; set; }
@@ -27,5 +26,6 @@ namespace TotalModel.Models
         public bool InActive { get; set; }
         public bool InActivePartial { get; set; }
         public string Caption { get; set; }
+        public string TransferOrderJobs { get; set; }
     }
 }

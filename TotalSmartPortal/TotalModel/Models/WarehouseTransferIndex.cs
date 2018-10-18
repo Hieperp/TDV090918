@@ -25,5 +25,6 @@ namespace TotalModel.Models
         public string TransferOrdersReference { get; set; }
         public Nullable<System.DateTime> TransferOrderEntryDate { get; set; }
         public string Caption { get; set; }
+        public string WarehouseTransferJobs { get; set; }
     }
 }

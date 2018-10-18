@@ -5,10 +5,11 @@
     .Name("warehouseTransferPendingTransferOrderGrid")
     .Columns(columns =>
     {
-        columns.Bound(c => c.TransferOrderReference).Title("Số phiếu").Width(50);        
-        columns.Bound(c => c.TransferOrderEntryDate).Title("Ngày ĐH").Width(55).Format("{0:" + Settings.DateFormat + "}");        
-        columns.Bound(c => c.WarehouseCode).Title("Kho xuất").Width(90);
-        columns.Bound(c => c.WarehouseReceiptCode).Title("Kho nhập").Width(90);
+        columns.Bound(c => c.TransferOrderReference).Title("Số phiếu").Width(30);        
+        columns.Bound(c => c.TransferOrderEntryDate).Title("Ngày ĐH").Width(35).Format("{0:" + Settings.DateFormat + "}");        
+        columns.Bound(c => c.WarehouseCode).Title("Kho xuất").Width(30);
+        columns.Bound(c => c.WarehouseReceiptCode).Title("Kho nhập").Width(30);
+        columns.Bound(c => c.TransferOrderJobs).Title("Mục đích").Width(168);
     })    
     .ToolBar(toolbar =>
     {

@@ -31,6 +31,6 @@ namespace TotalModel.Models
         public Nullable<decimal> QuantityAvailables { get; set; }
         public decimal Quantity { get; set; }
         public string Remarks { get; set; }
-        public Nullable<decimal> TransferOrderRemains { get; set; }
+        public decimal TransferOrderRemains { get; set; }
     }
 }
