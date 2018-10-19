@@ -11,7 +11,7 @@
                 columns.Bound(p => p.EntryDate).Title("Ngày").Format("{0:dd/MM/yyyy}").Hidden();
                 columns.Bound(p => p.Reference).Title("KHSX").Width(10).ClientTemplate("<a href='" + Url.RouteUrl("Default", new { controller = "Productions/PlannedOrders", action = "Edit" }) + "/#= PlannedOrderID #'>#=Reference#</a>");
                 
-                columns.Bound(p => p.DeliveryDate).Title("H/H").Format("{0:dd/MM/yyyy}").Width(10);
+                columns.Bound(p => p.DeliveryDate).Title("G/H").Format("{0:dd/MM/yyyy}").Width(10);
                 columns.Bound(p => p.CustomerName).Title("Tên KH").Width(68);
                 columns.Bound(p => p.Code).Title("Số CT").Width(10);
                 columns.Bound(p => p.Caption).Title("Mặt hàng").Width(108);
