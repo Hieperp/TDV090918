@@ -7,16 +7,16 @@
             .Name("kendoGridIndex")
             .Columns(columns =>
             {
-                columns.Bound(p => p.FinishedHandoverID).DisplayNameTitle().Hidden();
-                columns.Bound(p => p.LocationCode).Title("CN").Hidden().Width(1);
-                columns.Bound(p => p.EntryDate).Title("Ngày").Format("{0:dd/MM/yyyy}").Width(10);
-                columns.Bound(p => p.Reference).Title("Số phiếu").Width(10).ClientTemplate("<a href='" + Url.RouteUrl("Default", new { controller = "Productions/FinishedHandovers", action = "Edit" }) + "/#= FinishedHandoverID #'>#=Reference#</a>");                
+                columns.Bound(p => p.FinishedHandoverID).DisplayNameTitle().Hidden();                
+                columns.Bound(p => p.EntryDate).Title("Ngày").Format("{0:dd/MM/yyyy}").Hidden();
+                
+                columns.Bound(p => p.Reference).Title("Phiếu").Width(10).ClientTemplate("<a href='" + Url.RouteUrl("Default", new { controller = "Productions/FinishedHandovers", action = "Edit" }) + "/#= FinishedHandoverID #'>#=Reference#</a>");                
                 columns.Bound(p => p.CustomerDescription).Title("Khách hàng").Width(88);
-                columns.Bound(p => p.Caption).Title("Mặt hàng").Width(196);
+                columns.Bound(p => p.Caption).Title("Mặt hàng").Width(298);
                 columns.Bound(p => p.Description).Title("Diễn giải").Width(80);
                 columns.Bound(p => p.TotalQuantity).Title("SL").HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(10).Format(Settings.kfmQuantity);
                 
-                columns.Template(model => null).HtmlAttributes(new { @class = "grid-column-center" }).Width(50)
+                columns.Template(model => null).HtmlAttributes(new { @class = "grid-column-center" }).Width(60)
                     .ClientTemplate("<a class='k-button' style='padding-left:5px; min-width:28px; width:28px' href='" + Url.RouteUrl("Default", new { controller = "Productions/FinishedHandovers", action = "Print" }) + "/#= FinishedHandoverID #' target='_blank'><span class='k-icon k-i-folder-add'></span></a> <a class='k-button' style='padding-left:0px; padding-right:0px; min-width:28px; width:28px' href='" + Url.RouteUrl("Default", new { controller = "Productions/FinishedHandovers", action = "Delete" }) + "/#= FinishedHandoverID #'><span class='k-icon k-delete'></span></a>");
             })
             .ToolBar(toolbar =>
@@ -40,7 +40,8 @@
             })
             .DataSource(dataSource => dataSource
                 .Ajax()
-                        .Read(read => read.Action("GetFinishedHandoverIndexes", "FinishedHandoverAPIs", new { area = "Productions" }))
+                .Group(group => group.AddDescending(p => p.EntryDate))
+                .Read(read => read.Action("GetFinishedHandoverIndexes", "FinishedHandoverAPIs", new { area = "Productions" }))
                 .Sort(sort =>
                     {
                         sort.Add(p => p.EntryDate).Descending();

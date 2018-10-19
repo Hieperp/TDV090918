@@ -7,8 +7,7 @@
             .Name("kendoGridIndex")
             .Columns(columns =>
             {
-                columns.Bound(p => p.SalesReturnID).DisplayNameTitle().Hidden();
-                columns.Bound(p => p.LocationCode).Title("CN").Hidden().Width(1);
+                columns.Bound(p => p.SalesReturnID).DisplayNameTitle().Hidden();                
                 columns.Bound(p => p.EntryDate).Title("Ngày").Format("{0:dd/MM/yyyy}").Width(10).Filterable(false);
 
                 columns.Bound(p => p.Reference).Title("#").Width(10).Filterable(false).ClientTemplate("<a href='" + Url.RouteUrl("Default", new { controller = "Sales/SalesReturns", action = "Edit" }) + "/#= SalesReturnID #'>#=Reference#</a>");

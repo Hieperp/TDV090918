@@ -10,16 +10,15 @@
             .Name("kendoGridIndex")
             .Columns(columns =>
             {
-                columns.Bound(p => p.TransferOrderID).DisplayNameTitle().Hidden();
-                columns.Bound(p => p.LocationCode).Title("CN").Hidden().Width(1);
-                columns.Bound(p => p.EntryDate).Title("Ngày").Format("{0:dd/MM/yyyy}").Width(90);
+                columns.Bound(p => p.TransferOrderID).DisplayNameTitle().Hidden();                
+                columns.Bound(p => p.EntryDate).Title("Ngày").Format("{0:dd/MM/yyyy}").Hidden();
 
-                columns.Bound(p => p.Reference).Title("Số phiếu").Width(10).ClientTemplate("<a href='" + Url.RouteUrl("Default", new { controller = "Inventories/" + Model.ControllerName, action = "Edit" }) + "/#= TransferOrderID #'>#=Reference#</a>");
+                columns.Bound(p => p.Reference).Title("Phiếu").Width(1).ClientTemplate("<a href='" + Url.RouteUrl("Default", new { controller = "Inventories/" + Model.ControllerName, action = "Edit" }) + "/#= TransferOrderID #'>#=Reference#</a>");
                 columns.Bound(p => p.TransferOrderTypeName).Title("PL").Width(10);
-                columns.Bound(p => p.Caption).Title("Mặt hàng").Width(190);
+                columns.Bound(p => p.Caption).Title("Mặt hàng").Width(290);
                 
-                columns.Bound(p => p.TransferOrderJobs).Title("Mục đích").Width(118);
-                columns.Bound(p => p.VoidTypeName).Title("Hủy lệnh").Width(30);
+                columns.Bound(p => p.TransferOrderJobs).Title("Mục đích").Width(107);
+                columns.Bound(p => p.VoidTypeName).Title("Hủy lệnh").Width(20);
                 
                 columns.Bound(p => p.TotalQuantity).Title("SL").Format(Settings.kfmQuantity).HtmlAttributes(new { @class = "grid-number-column" }).HeaderHtmlAttributes(new { @style = "text-align: right" }).Width(10);                
                 
@@ -47,6 +46,7 @@
             })
             .DataSource(dataSource => dataSource
                 .Ajax()
+                .Group(group => group.AddDescending(p => p.EntryDate))
                 .Read(read => read.Action("GetTransferOrderIndexes", "TransferOrderAPIs", new { area = "Inventories" }).Data("onTransferOrderIndexes"))
                 .Sort(sort =>
                     {
