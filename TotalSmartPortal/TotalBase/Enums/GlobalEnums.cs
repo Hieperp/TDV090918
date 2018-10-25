@@ -93,7 +93,7 @@ namespace TotalBase.Enums
             CreditNote = 8060,
 
 
-            
+
             InventoryAdjustment = 8078,
             VehicleAdjustment = 8078008,
             PartAdjustment = 8078009,
@@ -101,7 +101,7 @@ namespace TotalBase.Enums
             HandlingUnit = 9010,
             GoodsDelivery = 9012,
 
-            
+
             VehicleTransferOrder = 8071008,
             PartTransferOrder = 8071009,
 
@@ -166,7 +166,32 @@ namespace TotalBase.Enums
 
         public enum WarehouseAdjustmentTypeID
         {
-            AllMaterialIssue = 999,
+            ALL = 0,
+            
+            ReceiptPRO = 10,
+            ReceiptSAM = 11, //Sample
+            ReceiptRTN = 12, //Return
+            ReceiptADJ = 13, //Adjustment
+            ReceiptPUR = 14, //Purchasing
+            ReceiptREG = 15, //Regenerate
+            ReceiptOSS = 16, //Outsourcing services
+            ReceiptBOR = 17, //Borrow
+            ReceiptOTH = 18, //Other
+            ReceiptFOI = 19, //Foil
+            ReceiptTXF = 25, //Transfer
+
+            IssueINV = 60, //Invoicing (Sales)
+            IssueOFS = 61, //Offset //Xuất bù
+            IssueADJ = 62, //Adjustment
+            IssueSAM = 63, //Sample
+            IssueDST = 64, //Destroy
+            IssuePRO = 65, //Production
+            IssueREG = 66, //Regenerate
+            IssueRTN = 67, //Return
+            IssueOSS = 68, //Outsourcing services
+            IssueOTH = 69, //Other
+            IssueTXF = 75, //Transfer
+
             OtherIssues = 90
         };
 
@@ -211,7 +236,7 @@ namespace TotalBase.Enums
             Consumables = 3333,
             Services = 6,
             CreditNote = 8,
-            
+
             Unknown = 99
         };
 
