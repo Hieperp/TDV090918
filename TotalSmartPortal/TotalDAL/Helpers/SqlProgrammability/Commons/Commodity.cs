@@ -71,7 +71,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Commons
             queryString = queryString + "               END " + "\r\n";
             queryString = queryString + "           ELSE " + "\r\n";
             queryString = queryString + "                   UPDATE          Boms " + "\r\n"; //Boms.BomID = 1: DEFAULT NULL Boms: FOR INIT SOME WHERE ONLY
-            queryString = queryString + "                   SET             Boms.Code = Commodities.Code, Boms.OfficialCode = Commodities.OfficialCode, Boms.Name = Commodities.Name " + "\r\n";
+            queryString = queryString + "                   SET             Boms.Code = Commodities.Code, Boms.OfficialCode = Commodities.OfficialCode, Boms.Name = Commodities.Name, Boms.CommodityCategoryID = Commodities.CommodityCategoryID, Boms.CommodityClassID = Commodities.CommodityClassID, Boms.CommodityLineID = Commodities.CommodityLineID " + "\r\n";
             queryString = queryString + "                   FROM            Boms INNER JOIN Commodities ON Boms.BomID <> 1 AND Boms.CustomerID = @EntityID AND Boms.CustomerID = Commodities.CommodityID " + "\r\n";
             queryString = queryString + "       END " + "\r\n";
 
